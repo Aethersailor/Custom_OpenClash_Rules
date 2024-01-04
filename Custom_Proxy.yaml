@@ -1,5 +1,5 @@
 payload:
-  # > 战网国际服登录
+# 战网国际服登录
   - DOMAIN-SUFFIX,pf-cdn-content-prod.azureedge.net
   - DOMAIN-SUFFIX,eu.battle.net
   - DOMAIN-SUFFIX,us.battle.net
