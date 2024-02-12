@@ -7,5 +7,3 @@ payload:
   - DOMAIN-SUFFIX,tw.battle.net
   - DOMAIN-SUFFIX,www.battle.net
   - DOMAIN-SUFFIX,account.battle.net
-# Copilot
-  - DOMAIN-SUFFIX,bing.com
