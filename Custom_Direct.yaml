@@ -1,4 +1,8 @@
 payload:
+# 订阅转换
+  - DOMAIN-SUFFIX,dler.io
+# 追觅扫地机器人
+  - DOMAIN-SUFFIX,dreame.tech
 # 猫眼浏览器
   - DOMAIN-SUFFIX,catsxp.com
 # IPv6测试
@@ -6,6 +10,7 @@ payload:
 # 机场节点
   - DOMAIN-SUFFIX,ap-hostdog.club
   - DOMAIN-SUFFIX,com-cn-htt.site
+  - DOMAIN-SUFFIX,wwwgovcomr.shop
 # 推送加
   - DOMAIN-SUFFIX,pushplus.plus
 # Github CDN
