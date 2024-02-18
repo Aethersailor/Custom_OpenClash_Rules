@@ -15,8 +15,6 @@ payload:
   - DOMAIN-SUFFIX,pushplus.plus
 # Github CDN
   - DOMAIN-SUFFIX,jsdelivr.net
-# 订阅转换
-  - DOMAIN-SUFFIX,dler.io
 # 个人域名
   - DOMAIN-SUFFIX,kit327.com
 # 微软服务
