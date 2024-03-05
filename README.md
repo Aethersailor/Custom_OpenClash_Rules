@@ -1,4 +1,4 @@
-个人自用Clash规则，用于主流分流规则的补充
+个人自用OpenClash规则，用于主流分流规则的补充
 
 Custom_Direct.yaml：强制直连域名
 
