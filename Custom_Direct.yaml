@@ -33,3 +33,5 @@ payload:
   - IP-CIDR,137.221.64.0/24
   - IP-CIDR,8.251.135.126/32
   - IP-CIDR,8.251.246.126/32
+# 互动游戏对战平台
+  - DOMAIN-SUFFIX,fxt365.com
