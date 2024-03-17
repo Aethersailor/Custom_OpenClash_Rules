@@ -7,10 +7,11 @@ payload:
   - DOMAIN-SUFFIX,catsxp.com
 # IPv6测试
   - DOMAIN-SUFFIX,test-ipv6.com
-# 机场节点
+# SSRDOG机场节点
   - DOMAIN-SUFFIX,ap-hostdog.club
   - DOMAIN-SUFFIX,com-cn-htt.site
   - DOMAIN-SUFFIX,wwwgovcomr.shop
+  - DOMAIN-SUFFIX,dogsvip.site
 # 推送加
   - DOMAIN-SUFFIX,pushplus.plus
 # Github CDN
