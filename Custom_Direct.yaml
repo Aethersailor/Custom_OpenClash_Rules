@@ -36,3 +36,5 @@ payload:
   - IP-CIDR,8.251.246.126/32
 # 互动游戏对战平台
   - DOMAIN-SUFFIX,fxt365.com
+# 微软飞行模拟2020下载CDN
+  - DOMAIN,pf-cdn-content-prod.azureedge.net
