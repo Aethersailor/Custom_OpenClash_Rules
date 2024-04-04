@@ -3,6 +3,7 @@ Custom_Clash.ini
 个人自用OpenClash规则，修改自ACL4SSR规则，部分规则替换成blackmatrix7的规则文件
 
 添加：小米服务、战网国际服，Steam中国CDN，Anti-AD，以及部分个人常用的域名规则
+
 增加更多的节点区域选项
 
 个人自用OpenClash规则，用于主流分流规则的补充
