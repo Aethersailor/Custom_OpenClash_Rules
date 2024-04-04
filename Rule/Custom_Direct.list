@@ -1,0 +1,37 @@
+# 订阅转换
+DOMAIN-SUFFIX,dler.io
+# 追觅扫地机器人
+DOMAIN-SUFFIX,dreame.tech
+# 猫眼浏览器
+DOMAIN-SUFFIX,catsxp.com
+# IPv6测试
+DOMAIN-SUFFIX,test-ipv6.com
+# SSRDOG机场节点
+DOMAIN-SUFFIX,ap-hostdog.club
+DOMAIN-SUFFIX,com-cn-htt.site
+DOMAIN-SUFFIX,wwwgovcomr.shop
+DOMAIN-SUFFIX,dogsvip.site
+# 推送加
+DOMAIN-SUFFIX,pushplus.plus
+# Github CDN
+DOMAIN-SUFFIX,jsdelivr.net
+# 个人域名
+DOMAIN-SUFFIX,kit327.com
+# 微软服务
+DOMAIN-SUFFIX,msftconnecttest.com
+DOMAIN-SUFFIX,msftncsi.com
+# OpenWrt站点
+DOMAIN-SUFFIX,openwrt.ai
+# 暴雪战网国际服下载节点
+DOMAIN-SUFFIX,blizzard.gcdn.cloudn.co.kr
+DOMAIN-SUFFIX,level3.blizzard.com
+DOMAIN-SUFFIX,kr.cdn.blizzard.com
+DOMAIN-SUFFIX,us.cdn.blizzard.com
+DOMAIN-SUFFIX,eu.cdn.blizzard.com
+IP-CIDR,137.221.64.0/24,no-resolve
+IP-CIDR,8.251.135.126/32,no-resolve
+IP-CIDR,8.251.246.126/32,no-resolve
+# 互动游戏对战平台
+DOMAIN-SUFFIX,fxt365.com
+# 微软飞行模拟2020下载CDN
+#DOMAIN,pf-cdn-content-prod.azureedge.net
