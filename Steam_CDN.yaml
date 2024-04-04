@@ -1,8 +1,5 @@
 # 解决Steam下载CDN被定位到国外CDN的问题
 payload:
-  - DOMAIN-SUFFIX,steamserver.net
-  - DOMAIN-SUFFIX,api.steampowered.com
-  - DOMAIN-SUFFIX,cm.steampowered.com
   - IP-CIDR,103.10.124.0/24
   - IP-CIDR,103.10.125.0/24
   - IP-CIDR,103.28.54.0/24
