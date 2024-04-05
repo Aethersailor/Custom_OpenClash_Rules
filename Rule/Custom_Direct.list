@@ -2,6 +2,8 @@
 DOMAIN-SUFFIX,todesk.com
 # 订阅转换
 DOMAIN-SUFFIX,dler.io
+# VPS
+IP-CIDR,43.228.126.43/32,no-resolve
 # 追觅扫地机器人
 DOMAIN-SUFFIX,dreame.tech
 # 猫眼浏览器
