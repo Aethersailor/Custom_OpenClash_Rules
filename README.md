@@ -11,7 +11,8 @@
 9.海外域名自动使用远端 DNS 解析，无需套娃其他工具即可避免 DNS 泄露，。 
 
 
-## 食用方法  
+## 使用方法  
+需在 OpenClash 下配合 Clash.Meta 使用  
 OpenClash > 配置订阅 > 编辑配置文件订阅信息  
 订阅转换服务地址填写：  
 https://apiurl.v1.mk/sub  
@@ -23,11 +24,11 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 OpenClash 设置建议配合恩山大神的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html
 
 ## 关于 IPv6  
-正确设置 OpenWRT 和 OpenClash，可完美容 IPv4 和 IPv6  
+正确设置 OpenWRT 和 OpenClash，可完美兼容 IPv4 和 IPv6  
 请首先确认你的节点支持 IPv6 出站，有 IPv6 地址，然后按照以下步骤操作：  
 
 1.设置 OpenWRT IPv6  
-严格按照以下教程步骤打开IPv6功能  
+严格按照以下教程，正确设置 OpenWRT 的 IPv6 功能  
 OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/  
 
 2.OpenCLash 设置：  
