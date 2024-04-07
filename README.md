@@ -1,4 +1,4 @@
-# 个人自用OpenClash订阅转换模板
+# 个人自用 OpenClash 订阅转换模板
 
 1.修改自 ACL4SSR 规则；  
 2.部分规则文件替换成 blackmatrix7 的规则文件；  
@@ -8,16 +8,16 @@
 6.海外域名自动使用远端 DNS 解析，避免 DNS 泄露；  
 
 
-##食用方法：  
+## 食用方法：  
 OpenClash > 配置订阅 > 编辑配置文件订阅信息  
 订阅转换服务地址填写 https://apiurl.v1.mk/sub  
 订阅转换模板选择自定义模板，填入 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
 
-##关于DNS泄露
+## 关于 DNS 泄露  
 正确设置可以避免 DNS 泄露  
 OpenClash 设置建议配合恩山大神的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html
 
-##关于IPv6
+## 关于 IPv6  
 正确设置 OpenWRT 和 OpenClash，可完美容 IPv4 和 IPv6  
 请首先确认你的节点支持 IPv6 出站，有 IPv6 地址，然后按照以下步骤操作  
 1.设置 OpenWRT IPv6  
