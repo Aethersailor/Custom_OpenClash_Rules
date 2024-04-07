@@ -38,7 +38,12 @@ OpenClash 设置建议配合恩山论坛大佬的教程贴使用：https://www.r
 OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/  
 
 2.OpenCLash 设置：  
-先按照上面恩山帖子完成 OpenClash 的设置，然后打开 OpenClash 的 IPv6 设置，勾选“IPv6 流量代理”，IPv6 代理模式选择“TUN 模式”，勾选“允许 IPv6 类型 DNS 解析”和“实验性：绕过中国大陆 IPv6”，最后应用设置即可。  
+先按照上面恩山帖子完成 OpenClash 的设置，然后打开 OpenClash 的 IPv6 设置，勾选“IPv6 流量代理”，IPv6 代理模式选择“TUN 模式”，勾选“允许 IPv6 类型 DNS 解析”和“实验性：绕过中国大陆 IPv6”，最后应用设置即可。
+
+## 机场推荐 
+### SSRDOG  
+本人常年使用的机场，稳定流畅，流媒体/ChatGPT全解锁，高峰时期油管8K无压力  
+https://dog1.ssrdog111.com/#/register?code=FnSb4oWM  
 
 ## 感谢  
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
