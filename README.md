@@ -42,7 +42,8 @@ OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/
 
 ## 机场推荐 
 ### SSRDOG  
-本人常年使用的机场，稳定流畅，流媒体/ChatGPT全解锁，高峰时期油管8K无压力  
+本人常年使用的机场，价格和流量都比较适中  
+全IEPL线路，稳定流畅，流媒体/ChatGPT全解锁，高峰时期油管8K无压力，支持游戏加速  
 https://dog1.ssrdog111.com/#/register?code=FnSb4oWM  
 
 ## 感谢  
