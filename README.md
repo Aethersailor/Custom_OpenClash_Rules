@@ -31,11 +31,10 @@ OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/
 2.OpenCLash 设置：  
 先按照上面恩山帖子完成 OpenClash 的设置，然后打开 OpenClash 的 IPv6 设置，勾选“IPv6 流量代理”，IPv6 代理模式选择“TUN 模式”，勾选“允许 IPv6 类型 DNS 解析”和“实验性：绕过中国大陆 IPv6”，最后应用设置即可。  
 
-##感谢  
-
+## 感谢  
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 - [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
-- [dogfight360/UsbEAm]https://github.com/dogfight360/UsbEAm
+- [dogfight360/UsbEAm](https://github.com/dogfight360/UsbEAm)
