@@ -11,8 +11,7 @@
 7.增加更多的节点区域分组（英国、加拿大等）；  
 8.调整节点优先顺序。媒体服务优先新加坡节点，Copilt 优先美国节点，其余服务优先香港节点；  
 9.增加个人常用的一些冷门域名规则（互动对战平台、猫眼浏览器等若干小众网站，绝无副作用。具体信息见 Rule\Custom_Direct.list 文件）;  
-10.设置大陆域名白名单机制，大陆域名使用国内DNS，海外域名自动走节点默认DNS解析，均为最佳解析结果。无污染，无泄露，无需套娃其他工具。  
-11.纯IP连接按照GEOIP分流，国内IP不经过内核提高性能。  
+10.采用大陆白名单机制分流（包括域名和IP）；   
 
 
 ## 使用方法  
@@ -24,7 +23,7 @@ https://apiurl.v1.mk/sub
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
 
 ## 关于 DNS 泄露  
-配合以上订阅转换模板，并正确设置 OpenClash 可以避免 DNS 泄露，无需套娃其他工具（如mosdns）  
+配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内DNS（默认运营商DNS）解析，国外域名自动走节点远端默认DNS解析，确保均为最快最佳解析结果，且无污染，无泄露，无需套娃其他工具    
 OpenClash 设置建议配合恩山大神的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html
 
 ## 关于 IPv6  
