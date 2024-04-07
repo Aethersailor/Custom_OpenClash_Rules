@@ -2,10 +2,11 @@
 
 1.修改自 ACL4SSR 规则；  
 2.部分规则文件替换成 blackmatrix7 的规则文件；  
-3.广告拦截规则替换成 Anti-AD 规则；  
-4.增加 TikTok、Steam 国区、小米服务等分流规则；  
-5.增加更多的节点区域分组，调整节点优先顺序；  
-6.海外域名自动使用远端 DNS 解析，避免 DNS 泄露；  
+3.广告拦截规则替换成 Anti-AD 规则； 
+4.游戏平台规则增加战网国际服；   
+5.增加 TikTok、Steam 国区、小米服务等分流规则；  
+6.增加更多的节点区域分组，调整节点优先顺序；  
+7.海外域名自动使用远端 DNS 解析，避免 DNS 泄露；  
 
 
 ## 食用方法  
@@ -28,4 +29,13 @@ OpenClash 设置建议配合恩山大神的教程贴使用：https://www.right.c
 OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/  
 
 2.OpenCLash 设置：  
-先按照上面恩山帖子完成 OpenClash 的设置，然后打开 OpenClash 的 IPv6 设置，勾选“IPv6 流量代理”，IPv6 代理模式选择“TUN 模式”，勾选“允许 IPv6 类型 DNS 解析”和“实验性：绕过中国大陆 IPv6”，最后应用设置即可。
+先按照上面恩山帖子完成 OpenClash 的设置，然后打开 OpenClash 的 IPv6 设置，勾选“IPv6 流量代理”，IPv6 代理模式选择“TUN 模式”，勾选“允许 IPv6 类型 DNS 解析”和“实验性：绕过中国大陆 IPv6”，最后应用设置即可。  
+
+##感谢  
+
+- [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
+- [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
+- [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
+- [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
+- [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
+- [dogfight360/UsbEAm]https://github.com/dogfight360/UsbEAm
