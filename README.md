@@ -3,15 +3,15 @@
 
 ## 介绍  
 1.基于 ACL4SSR_Online_Full 规则修改；  
-2.部分规则文件替换成 blackmatrix7 的规则文件，更加全面；  
-3.广告拦截规则替换成 Anti-AD 规则；  
+2.将部分规则文件替换成 blackmatrix7 的规则文件，更加全面；  
+3.将广告拦截规则替换成 Anti-AD 规则；  
 4.游戏平台增加战网国际服规则（战网国际服登录走代理，下载走直连）;  
 5.单独列出 Steam 规则并增加 Steam 下载 CDN 的 IP 信息，解决 Steam 下载 CDN 定位到国外以及 Steam 下载流量走代理的问题；     
 6.增加 TikTok、小米服务等分流规则；  
 7.增加更多的节点区域分组（英国、加拿大等）；  
 8.调整节点优先顺序。媒体服务优先新加坡节点，Copilt 优先美国节点，其余服务优先香港节点；  
-9.增加个人常用的一些冷门域名规则（互动对战平台、猫眼浏览器等若干小众网站，绝无副作用。具体信息见 Rule\Custom_Direct.list 文件）;  
-10.采用大陆白名单机制分流（包括域名和IP）；   
+9.增加个人常用的一些冷门域名规则（互动对战平台、猫眼浏览器等若干小众网站，绝无副作用。具体内容详见 Rule\Custom_Direct.list 文件）;  
+10.采用大陆白名单机制分流（包括域名、IPv4 地址和 IPv6 地址）；   
 
 
 ## 使用方法  
@@ -27,7 +27,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_NoBlockAD.ini  
 
 ## 关于 DNS 泄露  
-配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内DNS（默认运营商DNS）解析，国外域名自动走节点远端默认DNS解析，确保均为最快最佳解析结果，且无污染，无泄露，无需套娃其他工具    
+配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内DNS解析（默认为运营商DNS，可自行设置其他国内DNS），国外域名自动走节点远端默认DNS解析，理论上取得的均为最快最佳的解析结果，且无污染，无泄露，无需套娃其他工具    
 
 ## 关于 IPv6  
 正确设置 OpenWRT 和 OpenClash，可完美兼容 IPv4 和 IPv6  
