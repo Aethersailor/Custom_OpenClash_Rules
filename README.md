@@ -5,8 +5,8 @@
 3.广告拦截规则替换成 Anti-AD 规则；  
 4.游戏平台规则增加战网国际服；     
 5.增加 TikTok、Steam 国区、小米服务等分流规则；  
-6.增加更多的节点区域分组，调整节点优先顺序；  
-7.海外域名自动使用远端 DNS 解析，避免 DNS 泄露；  
+6.增加更多的节点区域分组，调整节点优先顺序。媒体服务优先新加坡节点，Copilt优先美国节点，其余服务优先香港节点；  
+7.海外域名自动使用远端 DNS 解析，避免 DNS 泄露。 
 
 
 ## 食用方法  
@@ -37,4 +37,5 @@ OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 - [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
+- [youshandefeiyang/sub-web-modify](https://github.com/youshandefeiyang/sub-web-modify)
 - [dogfight360/UsbEAm](https://github.com/dogfight360/UsbEAm)
