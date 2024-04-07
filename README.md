@@ -24,7 +24,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 
 ## 关于 DNS 泄露  
 配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内DNS（默认运营商DNS）解析，国外域名自动走节点远端默认DNS解析，确保均为最快最佳解析结果，且无污染，无泄露，无需套娃其他工具    
-OpenClash 设置建议配合恩山大神的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html
+OpenClash 设置建议配合恩山论坛大佬的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html
 
 ## 关于 IPv6  
 正确设置 OpenWRT 和 OpenClash，可完美兼容 IPv4 和 IPv6  
@@ -43,5 +43,6 @@ OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 - [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
+- [TraderWukong/demo](https://github.com/TraderWukong/demo)
 - [youshandefeiyang/sub-web-modify](https://github.com/youshandefeiyang/sub-web-modify)
 - [dogfight360/UsbEAm](https://github.com/dogfight360/UsbEAm)
