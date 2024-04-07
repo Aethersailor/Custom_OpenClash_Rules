@@ -1,25 +1,19 @@
-Custom_Clash.ini
+# 个人自用OpenClash订阅转换模板
 
-个人自用OpenClash配置，修改自ACL4SSR规则，部分规则文件替换成blackmatrix7的规则文件，广告拦截规则替换成AntiAD规则。。
+1.修改自ACL4SSR规则；
+2.部分规则文件替换成blackmatrix7的规则文件；
+3.广告拦截规则替换成Anti-AD规则；
+4.增加TikTok、Steam国区、小米服务等分流规则；
+5.增加更多的节点区域分组，调整节点优先顺序；  
+6.海外域名自动使用远端DNS解析，避免DNS泄露；  
 
-配合恩山大神的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html
 
-国外域名自动远端解析，无DNS泄露问题。
+食用方法：  
+OpenClash > 配置订阅 > 编辑配置文件订阅信息  
 
-添加：小米服务、战网国际服，Steam中国CDN，Anti-AD，以及部分个人常用的域名规则
+订阅转换服务地址填写 https://apiurl.v1.mk/sub  
+订阅转换模板选择自定义模板，填入 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
 
-增加更多的节点区域选项
-
-个人自用OpenClash规则，用于主流分流规则的补充
-
-Custom_Direct.yaml：强制直连域名
-规则类型:Classial
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/Custom_Direct.yaml
-
-Custom_Proxy.yaml：强制代理域名
-规则类型:Classial
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/Custom_Proxy.yaml
-
-Steam_CDN.yaml：Steam登录规则，强制Steam登录CN区域（和账号区域无关），解决Steam下载CDN被定向到国外的问题
-规则类型:Classial
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/Steam_CDN.yaml
+正确设置可以避免DNS泄露，完美兼容IPv4和IPv6  
+IPv6设置教程：https://post.smzdm.com/p/awzodmpp/  
+OpenClash设置建议配合恩山大神的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html
