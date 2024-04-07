@@ -17,10 +17,13 @@
 ## 使用方法  
 需在 OpenClash 下配合 Clash.Meta 使用  
 OpenClash > 配置订阅 > 编辑配置文件订阅信息  
-订阅转换服务地址填写：  
+订阅转换服务地址填写肥羊大佬的订阅转换地址：  
 https://apiurl.v1.mk/sub  
-订阅转换模板选择自定义模板，填写：  
+订阅转换模板选择自定义模板，填写我的订阅转换模板地址  
+若需要广告屏蔽功能，填写：    
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
+若不需要广告屏蔽功能，填写：  
+https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_NoBlockAD.ini  
 
 ## 关于 DNS 泄露  
 配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内DNS（默认运营商DNS）解析，国外域名自动走节点远端默认DNS解析，确保均为最快最佳解析结果，且无污染，无泄露，无需套娃其他工具    
