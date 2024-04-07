@@ -16,10 +16,11 @@
 
 ## 使用方法  
 需在 OpenClash 下配合 Clash.Meta 使用  
-OpenClash > 配置订阅 > 编辑配置文件订阅信息  
+OpenClash 设置参考恩山论坛大佬的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html  
+其中，OpenClash > 配置订阅 > 编辑配置文件订阅信息  
 订阅转换服务地址填写肥羊大佬的订阅转换地址：  
 https://apiurl.v1.mk/sub  
-订阅转换模板选择自定义模板，填写我的订阅转换模板地址  
+订阅转换模板选择自定义模板，填写本项目订阅转换模板地址  
 若需要广告屏蔽功能，填写：    
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
 若不需要广告屏蔽功能，填写：  
@@ -27,18 +28,17 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 
 ## 关于 DNS 泄露  
 配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内DNS（默认运营商DNS）解析，国外域名自动走节点远端默认DNS解析，确保均为最快最佳解析结果，且无污染，无泄露，无需套娃其他工具    
-OpenClash 设置建议配合恩山论坛大佬的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html
 
 ## 关于 IPv6  
 正确设置 OpenWRT 和 OpenClash，可完美兼容 IPv4 和 IPv6  
-请首先确认你的节点支持 IPv6 出站，有 IPv6 地址，然后按照以下步骤操作：  
+请首先确认你的节点具备 IPv6 出站能力，然后按照以下步骤操作：  
 
 1.设置 OpenWRT IPv6  
 严格按照以下教程，正确设置 OpenWRT 的 IPv6 功能，并在关闭 OpenClash 的情况下通过 IPv6 测试  
 OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/  
 
 2.OpenCLash 设置：  
-先按照上面恩山帖子完成 OpenClash 的设置，然后打开 OpenClash 的 IPv6 设置，勾选“IPv6 流量代理”，IPv6 代理模式选择“TUN 模式”，勾选“允许 IPv6 类型 DNS 解析”和“实验性：绕过中国大陆 IPv6”，最后应用设置即可。
+先按照上面恩山论坛的帖子完成 OpenClash 的设置，然后打开 OpenClash 的 IPv6 设置，勾选“IPv6 流量代理”，IPv6 代理模式选择“TUN 模式”，勾选“允许 IPv6 类型 DNS 解析”和“实验性：绕过中国大陆 IPv6”，最后应用设置即可。
 
 ## 机场推荐 
 ### SSRDOG  
