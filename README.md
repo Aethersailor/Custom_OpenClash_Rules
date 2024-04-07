@@ -1,5 +1,7 @@
 # 个人自用 OpenClash 订阅转换模板
+在 ACL4SSR 规则订阅模板的基础上进行了个性化修改，并避免DNS泄露  
 
+## 介绍  
 1.基于 ACL4SSR_Online_Full 规则修改；  
 2.部分规则文件替换成 blackmatrix7 的规则文件；  
 3.广告拦截规则替换成 Anti-AD 规则；  
