@@ -1,6 +1,6 @@
 Custom_Clash.ini
 
-个人自用OpenClash配置，修改自ACL4SSR规则，部分规则替换成blackmatrix7的规则文件。
+个人自用OpenClash配置，修改自ACL4SSR规则，部分规则文件替换成blackmatrix7的规则文件，广告拦截规则替换成AntiAD规则。。
 
 配合恩山大神的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html
 
