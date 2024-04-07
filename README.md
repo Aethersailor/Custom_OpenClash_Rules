@@ -20,7 +20,7 @@ https://apiurl.v1.mk/sub
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
 
 ## 关于 DNS 泄露  
-正确设置可以避免 DNS 泄露  
+配合以上订阅转换模板，并正确设置 OpenClash 可以避免 DNS 泄露，无需套娃其他工具（如mosdns）  
 OpenClash 设置建议配合恩山大神的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html
 
 ## 关于 IPv6  
@@ -28,7 +28,7 @@ OpenClash 设置建议配合恩山大神的教程贴使用：https://www.right.c
 请首先确认你的节点支持 IPv6 出站，有 IPv6 地址，然后按照以下步骤操作：  
 
 1.设置 OpenWRT IPv6  
-严格按照以下教程，正确设置 OpenWRT 的 IPv6 功能  
+严格按照以下教程，正确设置 OpenWRT 的 IPv6 功能，并在关闭OpenClash的情况下通过IPv6测试  
 OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/  
 
 2.OpenCLash 设置：  
