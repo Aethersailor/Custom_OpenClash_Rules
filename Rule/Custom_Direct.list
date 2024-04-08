@@ -12,8 +12,6 @@ DOMAIN-SUFFIX,test-ipv6.com
 DOMAIN-SUFFIX,dogsvip.site
 # 推送加
 DOMAIN-SUFFIX,pushplus.plus
-# Github CDN
-DOMAIN-SUFFIX,jsdelivr.net
 # 个人域名
 DOMAIN-SUFFIX,kit327.com
 # 微软服务
