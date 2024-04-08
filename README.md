@@ -4,7 +4,7 @@
 
 ## 介绍  
 1.基于 ACL4SSR_Online_Full 规则修改，模板中引用的上游规则碎片均为第三方规则，即使本模板常年不更新，也不会出现规则更新不及时的情况；  
-2.将部分规则文件替换成 blackmatrix7 的规则文件，更加全面；  
+2.将部分分流规则文件替换成 blackmatrix7 的规则文件，广告拦截规则替换成 AdRules 规则，内容更加全面；  
 3.游戏平台规则增加 Battle.net 战网国际服规则（登录走代理，下载走直连）;  
 4.单独列出 Steam 规则并增加 Steam 下载 CDN 的 IP 分流信息，解决 Steam 下载 CDN 定位到国外以及 Steam 下载流量走代理的问题；     
 5.增加 TikTok、小米服务等分流规则；  
@@ -50,6 +50,7 @@ https://dog1.ssrdog111.com/#/register?code=FnSb4oWM
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
+- [Cats-Team/AdRules](https://github.com/Cats-Team/AdRules)
 - [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
 - [youshandefeiyang/sub-web-modify](https://github.com/youshandefeiyang/sub-web-modify)
