@@ -1,3 +1,5 @@
+# ImmortalWrt 在线更新服务器
+DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
 # Todesk
 DOMAIN-SUFFIX,todesk.com
 # 订阅转换
