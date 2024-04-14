@@ -22,7 +22,7 @@ https://apiurl.v1.mk/sub
 订阅转换模板选择自定义模板，填写本项目订阅转换模板地址  
 若需要广告屏蔽功能，填写：    
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
-若不需要广告屏蔽功能，填写：  
+若不需要广告屏蔽功能，或者配合其他广告拦截工具（如AdGuardHome），请填写  
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_NoBlockAD.ini  
 
 ## 关于 DNS 泄露  
