@@ -1,6 +1,9 @@
 # 个人自用 OpenClash 订阅转换模板
-在 [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板的基础上进行了个性化修改  
+在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板的基础上进行了个性化修改  
 采用大陆白名单模式，在配合正确的 OpenClash 设置的情况下，无需套娃其他工具即可实现快速且无污染、无泄漏的DNS解析以及多样的分流功能  
+
+# 个人使用需求  
+媒体服务（Youtube、Netflix、Disney+等）走指定节点，特定网站（电报、ChatGPT 等）走指定节点，特定网站（苹果服务、微软服务以及国内域名IP等）走直连，其他国外网站走指定节点，节点需要按照区域自动测速选优，并需要广告拦截  
 
 ## 介绍  
 1.基于 ACL4SSR_Online_Full 规则修改，模板中引用的上游规则碎片均为第三方规则，即使本模板常年不更新，也不会出现规则更新不及时的情况；  
