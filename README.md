@@ -1,5 +1,5 @@
 # 个人自用 OpenClash 订阅转换模板
-在 ACL4SSR 规则订阅模板的基础上进行了个性化修改  
+在 [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板的基础上进行了个性化修改  
 采用大陆白名单模式，在配合正确的 OpenClash 设置的情况下，无需套娃其他工具即可实现快速且无污染、无泄漏的DNS解析以及多样的分流功能  
 
 ## 介绍  
