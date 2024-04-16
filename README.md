@@ -51,7 +51,6 @@ https://dog1.ssrdog111.com/#/register?code=FnSb4oWM
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 - [Cats-Team/AdRules](https://github.com/Cats-Team/AdRules)
-- [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
 - [youshandefeiyang/sub-web-modify](https://github.com/youshandefeiyang/sub-web-modify)
 - [dogfight360/UsbEAm](https://github.com/dogfight360/UsbEAm)
