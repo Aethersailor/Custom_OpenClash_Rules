@@ -3,16 +3,16 @@
 采用大陆白名单模式，在配合正确的 OpenClash 设置的情况下，无需套娃其他工具即可实现快速且无污染、无泄漏的DNS解析以及多样的分流功能  
 
 # 个人使用需求  
-媒体服务（Youtube、Netflix、Disney+等）走指定节点，特定网站（电报、ChatGPT 等）走指定节点，特定网站（苹果服务、微软服务以及国内域名IP等）走直连，其他国外网站走指定节点，节点需要按照区域自动测速选优，并需要广告拦截  
+媒体服务（Youtube、Netflix、Disney+ 等）走指定节点，特定网站（电报、ChatGPT 等）走指定节点，特定网站（苹果服务、微软服务以及国内域名 IP 等）走直连，其他国外网站走指定节点，节点需要按照区域自动测速选优，并需要广告拦截  
 
 ## 介绍  
-1.基于 ACL4SSR_Online_Full 规则修改，模板中引用的上游规则碎片均为第三方规则，即使本模板常年不更新，也不会出现规则更新不及时的情况；  
+1.基于 ACL4SSR_Online_Full 全分组规则修改，模板中引用的上游规则碎片均为第三方规则，即使本模板常年不更新，也不会出现规则更新不及时的情况；  
 2.将部分分流规则文件替换成 blackmatrix7 的规则文件，广告拦截规则替换成 AdRules 规则，内容更加全面；  
 3.游戏平台规则增加 Battle.net 战网国际服规则（登录走代理，下载走直连）;  
-4.单独列出 Steam 规则并增加 Steam 下载 CDN 的 IP 分流信息，解决 Steam 下载 CDN 定位到国外以及 Steam 下载流量走代理的问题；     
+4.单独列出 Steam 规则并增加 Steam 下载 CDN 的 IP 分流信息，解决 Steam 下载 CDN 定位到国外的问题，确保 Steam 下载流量不走代理；     
 5.增加 TikTok、小米服务等分流规则；  
 6.增加更多的节点区域分组（英国、加拿大等）；  
-7.调整节点优先顺序。媒体服务优先新加坡节点，Copilt 优先美国节点，其余服务优先香港节点；  
+7.调整节点默认优先顺序。媒体服务默认优先新加坡节点，Copilot 默认优先美国节点，其余服务默认优先香港节点，请在控制面板中按照自己的需要进行选择；  
 8.增加个人自用的若干冷门域名规则（互动对战平台、猫眼浏览器等若干小众网站，绝无副作用。具体内容详见 Rule\Custom_Direct.list 文件）;  
 9.采用大陆白名单机制分流（包括域名、IPv4 地址和 IPv6 地址）；   
 
@@ -29,7 +29,9 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_NoBlockAD.ini  
 
 ## 关于 DNS 泄露  
-配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内DNS解析（默认为运营商DNS，可自行设置其他国内DNS），国外域名自动走节点远端默认DNS解析，理论上取得的均为最快最佳的解析结果，且无污染，无泄露，无需套娃其他工具    
+配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内DNS解析，默认为运营商DNS，可自行设置其他国内 DNS  
+国外域名自动走节点远端默认 DNS 解析，一般为机场默认的 DNS 或者你的 VPS 中设置的 DNS  
+理论上取得的均为最快最佳的解析结果，且无污染，无泄露，无需套娃其他工具    
 
 ## 关于 IPv6  
 正确设置 OpenWRT 和 OpenClash，可完美兼容 IPv4 和 IPv6  
@@ -45,7 +47,7 @@ OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/
 ## 机场推荐 
 ### SSRDOG  
 本人常年使用的一家机场，价格和流量都比较适中  
-节点覆盖地区全面，全IEPL线路，稳定流畅，流媒体/ChatGPT全解锁，高峰时期油管8K无压力，支持游戏加速，工单可用中文沟通且客服反应迅速  
+节点覆盖地区全面，全 IEPL 线路，稳定流畅，流媒体/ChatGPT 全解锁，高峰时期油管8K无压力，支持游戏加速，工单可用中文沟通且客服反应迅速  
 https://dog1.ssrdog111.com/#/register?code=FnSb4oWM  
 
 ## 感谢  
