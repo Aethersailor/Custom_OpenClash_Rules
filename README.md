@@ -37,7 +37,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 正确设置 OpenWRT 和 OpenClash，可完美兼容 IPv4 和 IPv6  
 请首先确认你的节点具备 IPv6 出站能力，然后按照以下步骤操作：  
 
-1.设置 OpenWRT IPv6  
+1.设置 OpenWRT 的 IPv6  
 严格按照以下教程，正确设置 OpenWRT 的 IPv6 功能，并在关闭 OpenClash 的情况下通过 IPv6 测试  
 OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/  
 
@@ -49,6 +49,7 @@ OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/
 本人常年使用的一家机场，价格和流量都比较适中  
 节点覆盖地区全面，全 IEPL 线路，稳定流畅，流媒体/ChatGPT 全解锁，高峰时期油管8K无压力，支持游戏加速，工单可用中文沟通且客服反应迅速  
 https://dog1.ssrdog111.com/#/register?code=FnSb4oWM  
+本仓库配置的节点地区分类即是参考该机场的节点地区而分类  
 
 ## 感谢  
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
