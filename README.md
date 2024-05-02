@@ -20,13 +20,13 @@
 需在 OpenClash 下配合 Clash.Meta 使用  
 OpenClash 设置参考恩山论坛大佬的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html  
 其中，OpenClash > 配置订阅 > 编辑配置文件订阅信息  
-订阅转换服务地址填写肥羊大佬的订阅转换地址：  
-https://apiurl.v1.mk/sub  
+订阅转换服务地址选择默认的 api.dler.io 
 订阅转换模板选择自定义模板，填写本项目订阅转换模板地址  
-若需要广告屏蔽功能，填写：    
+若需要广告屏蔽功能（不可勾选大陆域名绕过内核，否则国内广告域名无法拦截），填写：    
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
 若不需要广告屏蔽功能，或者配合其他广告拦截工具（如AdGuardHome），请填写  
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_NoBlockAD.ini  
+若使用不带广告拦截的转换模板，请放弃去广告功能，或者借助其他插件实现 DNS 广告拦截  
 
 ## 关于 DNS 泄露  
 配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内DNS解析，默认为运营商DNS，可自行设置其他国内 DNS  
