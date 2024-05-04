@@ -3,7 +3,7 @@
 采用大陆白名单模式，在配合正确的 OpenClash 设置的情况下，无需套娃其他工具即可实现快速且无污染、无泄漏的DNS解析以及多样的分流功能  
 
 # 个人使用需求  
-媒体服务（Youtube、Netflix、Disney+ 等）走指定节点，特定网站（电报、ChatGPT 等）走指定节点，特定网站（苹果服务、微软服务以及国内域名 IP 等）走直连，其他国外网站走指定节点，节点需要按照区域自动测速选优，并需要广告拦截  
+媒体服务（Youtube、Netflix、Disney+ 等）走指定节点，特定网站（电报、ChatGPT 等）走指定节点，特定网站（苹果服务、微软服务以及国内域名 IP 等）走直连，其他国外网站走指定节点，节点需要按照区域自动测速选优，无 DNS 泄露   
 
 ## 介绍  
 1.基于 ACL4SSR_Online_Full 全分组规则修改，模板中引用的上游规则碎片均为第三方规则，即使本模板常年不更新，也不会出现规则更新不及时的情况；  
@@ -23,12 +23,12 @@ OpenClash 设置参考恩山论坛大佬的教程贴使用：https://www.right.c
 教程贴中使用的是肥羊大佬的订阅转换地址，实际测试中使用肥羊订阅转换会附加 Google 和 Cloudflare 的 DNS 服务器作为 Fallback 服务器  
 实际使用过程中，理论上的最佳选择是直接使用机场节点的 DNS 服务器或者你的 VPS 的 DNS 服务器，所以我们并不需要设置 OpenClash 的 Fallback 服务器  
 因此，订阅转换服务地址选择默认的 api.dler.io  
-订阅转换模板选择自定义模板，填写本项目订阅转换模板地址  
-若需要广告屏蔽功能（不可勾选大陆域名绕过内核，否则国内广告域名无法拦截），填写：    
+订阅转换模板选择自定义模板，填写本项目订阅转换模板地址：  
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
-若不需要广告屏蔽功能，或者配合其他广告拦截工具（如AdGuardHome），请填写  
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_NoBlockAD.ini  
-若使用不带广告拦截的转换模板，请放弃去广告功能，或者借助其他插件实现 DNS 广告拦截  
+
+## 关于去广告  
+由于放弃了套娃其他工具，且大陆域名绕过了 OpenClash 内核，因此去广告功能只能由 Dnsmasq 的 hosts文件来实现  
+已编写一键脚本用于实现自动更新去广告 hosts 文件并重启 OpenClash/Dnsmasq 稍后我会上传脚本安装方式  
 
 ## 关于 DNS 泄露  
 配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内DNS解析，默认为运营商DNS，可自行设置其他国内 DNS  
