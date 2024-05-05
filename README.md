@@ -7,7 +7,7 @@
 
 ## 介绍  
 1.基于 ACL4SSR_Online_Full 全分组规则修改，模板中引用的上游规则碎片均为第三方规则，即使本模板常年不更新，也不会出现规则更新不及时的情况；  
-2.将部分分流规则文件替换成 blackmatrix7 的规则文件，广告拦截规则替换成 AdRules 规则，内容更加全面；  
+2.将部分分流规则文件替换成 blackmatrix7 的规则文件，内容更加全面；  
 3.游戏平台规则增加 Battle.net 战网国际服规则（登录走代理，下载走直连）;  
 4.单独列出 Steam 规则并增加 Steam 下载 CDN 的 IP 分流信息，解决 Steam 下载 CDN 定位到国外的问题，确保 Steam 下载流量不走代理；     
 5.增加 TikTok、小米服务等分流规则；  
@@ -26,8 +26,8 @@ OpenClash 设置参考恩山论坛大佬的教程贴使用：https://www.right.c
 订阅转换模板选择自定义模板，填写本项目订阅转换模板地址：  
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
 
-## 关于去广告  
-由于放弃了套娃其他工具，且大陆域名绕过了 OpenClash 内核，因此去广告功能只能由 Dnsmasq 的 hosts文件来实现  
+## 关于广告拦截  
+由于放弃了套娃其他工具，且大陆域名绕过了 OpenClash 内核，因此去广告功能只能由 Dnsmasq 的 hosts 文件来实现  
 已编写一键脚本用于实现自动更新去广告 hosts 文件并重启 OpenClash/Dnsmasq 稍后我会上传脚本安装方式  
 
 ## 关于 DNS 泄露  
