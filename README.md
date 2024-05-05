@@ -28,7 +28,8 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 
 ## 关于广告拦截  
 由于放弃了套娃其他工具，且大陆域名绕过了 OpenClash 内核，因此去广告功能只能由 Dnsmasq 的 hosts 文件来实现  
-已编写一键脚本用于实现自动更新去广告 hosts 文件并重启 OpenClash/Dnsmasq 稍后我会上传脚本安装方式  
+利用系统计划任务，运行一键脚本用于实现定时自动更新合并去广告 hosts 文件以及 Github DNS 加速文件，并重启 OpenClash/Dnsmasq  
+详情见本人另一个项目 [AutoUpdateHosts](AutoUpdateHosts) 可和本项目搭配使用  
 
 ## 关于 DNS 泄露  
 配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内 DNS 解析，默认为运营商DNS，可自行设置其他国内 DNS  
