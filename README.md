@@ -22,7 +22,7 @@
 OpenClash 设置参考恩山论坛大佬的教程贴使用：https://www.right.com.cn/forum/thread-8360227-1-1.html  
 其中，OpenClash > 配置订阅 > 编辑配置文件订阅信息  
 教程贴中使用的是肥羊大佬的订阅转换地址，实际测试中使用肥羊订阅转换会附加 Google 和 Cloudflare 的 DNS 服务器作为 Fallback 服务器，个人认为这并不是最佳设置  
-实际使用过程中，理论上的最佳选择是直接使用机场节点的 DNS 服务器或者你的 VPS 的 DNS 服务器，所以我们并不需要设置 OpenClash 的 Fallback 服务器  
+实际使用过程中，理论上的最佳选择是直接使用机场节点的 DNS 服务器或者你的 VPS 的 DNS 服务器，所以我们并不需要设置 OpenClash 的 Fallback 服务器，让 OprnClash 将 DNS 请求交给节点服务器进行解析即可  
 因此，订阅转换服务地址选择默认的 api.dler.io  
 订阅转换模板选择自定义模板，填写本项目订阅转换模板地址：  
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
