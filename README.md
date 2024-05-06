@@ -2,6 +2,7 @@
 绝对全网最强的 OpenClash 图文教程，秒杀一切教程贴！终结所有错误设置！让稀奇古怪的套娃设置见鬼去吧！  
 手把手嘴对嘴教你把 OpenClash 设置为效率、安全、便利三者兼顾的完美状态，零基础小白也能看懂；  
 按照本项目 Wiki 中的教程对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套完其他工具即可实现快速且无污染、无泄漏的 DNS 解析以及多样的分流功能，同时配合 Dnsmasq 实现无第三方插件的广告拦截，并且完美兼容 IPv6      
+欢迎批评指正  
 
 ## 个人使用需求  
 * 媒体服务（Youtube、Netflix、Disney+ 等）走指定节点，特定网站（电报、ChatGPT 等）走指定区域节点测速选优或特定节点  
@@ -26,6 +27,9 @@
 设置教程详见本项目的 Wiki，其中包括了本项目订阅转换模板的地址：  
 https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教程  
 感谢恩山各路大神的教程贴，让我学习了很多  
+此处也提供单独的订阅模板链接：  
+https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
+不搭配本项目教程使用的话，不保证最终效果完美  
 
 ## 关于广告拦截  
 由于放弃了套娃其他工具，且大陆域名绕过了 OpenClash 内核，因此去广告功能只能由 Dnsmasq 的 hosts 文件来实现  
