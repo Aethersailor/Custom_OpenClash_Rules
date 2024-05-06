@@ -24,13 +24,13 @@
 ## 使用方法  
 需在 OpenClash 下配合 Clash.Meta 使用  
 设置教程详见本项目的 Wiki，其中包括了本项目订阅转换模板的地址：  
-https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教程
+https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教程  
 感谢恩山各路大神的教程贴，让我学习了很多  
 
 ## 关于广告拦截  
 由于放弃了套娃其他工具，且大陆域名绕过了 OpenClash 内核，因此去广告功能只能由 Dnsmasq 的 hosts 文件来实现  
 详情见本人另一个项目 [AutoUpdateHosts](https://github.com/Aethersailor/OpenWrt-AutoUpdateHosts)   
-内有一键安装脚本，可实现每日自动下载去广告 hosts 文件并合并至本机 hosts 文件的功能 
+内有一键安装脚本，可实现每日自动下载去广告 hosts 文件并合并至本机 hosts 文件的功能  
 
 ## 关于 DNS 泄露  
 配合以上订阅转换模板和教程正确设置 OpenClash 后，大陆域名将使用国内 DNS 解析，默认为运营商DNS，可自行设置其他国内 DNS，且大陆域名绕过 Clash 内核，可以返回真实 IP 
