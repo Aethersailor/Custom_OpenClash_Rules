@@ -29,8 +29,8 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 
 ## 关于广告拦截  
 由于放弃了套娃其他工具，且大陆域名绕过了 OpenClash 内核，因此去广告功能只能由 Dnsmasq 的 hosts 文件来实现  
-利用系统计划任务，运行一键脚本用于实现定时自动更新合并去广告 hosts 文件以及 Github DNS 加速文件，并重启 OpenClash/Dnsmasq  
-详情见本人另一个项目 [AutoUpdateHosts](https://github.com/Aethersailor/OpenWrt-AutoUpdateHosts) 可和本项目搭配使用  
+详情见本人另一个仓库 [AutoUpdateHosts](https://github.com/Aethersailor/OpenWrt-AutoUpdateHosts)   
+内有一键安装脚本，可实现每日自动下载去广告 hosts 文件并合并至本机 hosts 文件的功能 
 
 ## 关于 DNS 泄露  
 配合以上订阅转换模板，并正确设置 OpenClash 后，大陆域名将使用国内 DNS 解析，默认为运营商DNS，可自行设置其他国内 DNS，且大陆域名绕过 Clash 内核，可以返回真实 IP 
@@ -39,14 +39,14 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 
 ## 关于 IPv6  
 正确设置 OpenWRT 和 OpenClash，可完美兼容 IPv4 和 IPv6  
-请首先确认你的节点具备 IPv6 出站能力，然后按照以下步骤操作：  
+请首先确认你的节点具备 IPv6 出站能力（机场请发工单询问客服），然后按照以下步骤操作：  
 
 1.设置 OpenWRT 的 IPv6  
-严格本项目的 Wiki 中的设置教程，正确设置 OpenWRT 的 IPv6 功能，并在关闭 OpenClash 的情况下通过 IPv6 测试  
+严格本项目的 Wiki 中的设置教程，正确设置 OpenWRT 的 IPv6 功能  
 OpenWRT IPv6 设置教程：https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置教程  
 
 2.OpenCLash 设置：  
-先按照上面恩山论坛的帖子完成 OpenClash 的设置，然后打开 OpenClash 的 IPv6 设置，勾选“IPv6 流量代理”，IPv6 代理模式选择“TUN 模式”，勾选“允许 IPv6 类型 DNS 解析”和“实验性：绕过中国大陆 IPv6”，最后应用设置即可。
+先按照上面恩山论坛的帖子完成 OpenClash 的设置，然后打开 OpenClash 的 IPv6 设置，勾选“IPv6 流量代理”，IPv6 代理模式选择“Tproxy”或“TUN 模式”，勾选“允许 IPv6 类型 DNS 解析”和“实验性：绕过中国大陆 IPv6”，最后应用设置即可。
 
 ## 机场推荐 
 ### SSRDOG  
