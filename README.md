@@ -42,8 +42,8 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 请首先确认你的节点具备 IPv6 出站能力，然后按照以下步骤操作：  
 
 1.设置 OpenWRT 的 IPv6  
-严格按照以下教程，正确设置 OpenWRT 的 IPv6 功能，并在关闭 OpenClash 的情况下通过 IPv6 测试  
-OpenWRT IPv6 设置教程：https://post.smzdm.com/p/awzodmpp/  
+严格本项目的 Wiki 中的设置教程，正确设置 OpenWRT 的 IPv6 功能，并在关闭 OpenClash 的情况下通过 IPv6 测试  
+OpenWRT IPv6 设置教程：https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置教程  
 
 2.OpenCLash 设置：  
 先按照上面恩山论坛的帖子完成 OpenClash 的设置，然后打开 OpenClash 的 IPv6 设置，勾选“IPv6 流量代理”，IPv6 代理模式选择“TUN 模式”，勾选“允许 IPv6 类型 DNS 解析”和“实验性：绕过中国大陆 IPv6”，最后应用设置即可。
