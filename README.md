@@ -22,8 +22,7 @@
 * 采用大陆白名单机制分流（包括域名、IPv4 地址和 IPv6 地址），杜绝 DNS 污染和泄漏；   
 
 ## 使用方法  
-需在 OpenClash 下配合 Clash.Meta 使用  
-设置教程详见本项目的 Wiki，其中包括了本项目订阅转换模板的地址：  
+设置教程详见本项目的 Wiki，只要按照图文进行设置即可。其中已包括了本项目订阅转换模板的地址：  
 https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教程  
 感谢恩山各路大神的教程贴，让我学习了很多  
 此处也提供单独的订阅模板链接：  
@@ -42,8 +41,8 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 
 ## 关于 IPv6  
 谁说 OpenClash 不能和 IPv6 同时工作？  
-正确设置 OpenWRT 和 OpenClash，可正常实现 IPv6 功能以及 IPv6 的国内外分流代理，同时通过 IPv6-Test 国内和国外镜像站点测试   
-教程见本仓库的 Wiki：  
+正确设置 OpenWRT 的 IPv6 功能以及 OpenClash，即可实现 IPv6 和 OpenWrt 完美兼容。在实现 IPv6 国内外分流代理的同时通过 IPv6-Test 国内和国外镜像站点测试   
+IPv6 设置教程见本仓库的 Wiki：  
 https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置教程  
 
 ## 控制面板效果截图  
