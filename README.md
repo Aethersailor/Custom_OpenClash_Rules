@@ -42,7 +42,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 理论上，以上取得的均为最快最佳的解析结果，且无污染，无泄露，无需套娃其他工具    
 
 ## 关于 IPv6  
-正确设置 OpenWRT 和 OpenClash，可完美 IPv6 并实现 IPv6 的国内外分流代理   
+正确设置 OpenWRT 和 OpenClash，可正常实现 IPv6 功能以及 IPv6 的国内外分流代理，完美同时通过 IPv6-Test 国内外镜像站点测试   
 请首先确认你的节点具备 IPv6 出站能力（机场请发工单询问客服），然后按照以下步骤操作：  
 
 1.参考本人教程贴设置 OpenWRT 的 IPv6：
@@ -50,6 +50,8 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置�
 2.参考本人教程贴设置 OpenCLash：  
 启用 OpenClash 中的 IPv6 功能，具体见本项目的 Wiki 中的教程  
 
+## 控制面板效果截图  
+![](https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
 ## 机场推荐 
 ### SSRDOG  
 本人常年使用的一家机场，价格和流量都比较适中  
