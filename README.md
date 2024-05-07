@@ -1,5 +1,6 @@
-# OpenClash 设置教程和个人自用 OpenClash 订阅转换模板  
-可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 图文教程，秒杀一切教程贴！终结所有错误设置！让稀奇古怪的套娃设置见鬼去吧！  
+# OpenClash 保姆级设置教程和个人自用 OpenClash 订阅转换模板  
+可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文教程，秒杀一切教程贴！  
+终结所有错误设置！让稀奇古怪的套娃设置见鬼去吧！  
 手把手嘴对嘴教你把 OpenClash 设置为效率、安全、便利三者兼顾的完美状态，零基础小白也能看懂；  
 按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程，搭配本仓库的[订阅模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套娃其他工具即可实现快速且无污染、无泄漏的 DNS 解析以及多样的分流功能，同时配合 Dnsmasq 实现无第三方插件的广告拦截，并且完美兼容 IPv6      
 欢迎批评指正  
