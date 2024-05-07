@@ -6,15 +6,15 @@
 
 ## 个人使用需求  
 * 媒体服务（Youtube、Netflix、Disney+ 等）走指定节点，特定网站（电报、ChatGPT 等）走指定区域节点测速选优或特定节点  
-* 特定网站（苹果服务、微软服务以及国内域名 IP 等）走直连，其他国外网站走指定节点，节点需要按照区域自动测速选优，无 DNS 泄露   
-* 大陆域名和IP绕过内核提升性能  
-* 兼容 IPv6，且 IPv6 完美分流  
+* 特定网站（苹果服务、微软服务以及国内域名 IP 等）走直连，其他国外网站走指定节点，节点需要按照区域自动测速选优     
+* 杜绝 DNS 泄露，且大陆域名和 IP 绕过 OpenClash 内核提升访问速度和下载性能  
+* 兼容 IPv6，实现 IPv6 完美分流  
 * 广告拦截  
 * 定时自动更新上游规则，无人值守
 
 ## 订阅转换模板介绍
-本项目订阅转换模板是在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板的基础上进行了魔改 
-* 基于 ACL4SSR_Online_Full 全分组规则魔改，将部分分流规则碎片替换成 blackmatrix7 的规则文件，增加更多策略组；  
+本项目的订阅转换模板是在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板的基础上进行了魔改 
+* 基于 ACL4SSR_Online_Full 全分组规则魔改，将部分规则碎片替换成 [blackmatrix7](https://github.com/blackmatrix7/ios_rule_script) 的规则文件，增加更多策略组；  
 * 单独列出 Steam 规则并强制 Steam 下载 CDN 走直连，解决 Steam 下载 CDN 定位到国外的问题，确保 Steam 下载流量不走代理；     
 * 增加更多的节点区域分组（英国、加拿大等）；  
 * 调整节点默认优先顺序；  
@@ -51,7 +51,7 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置�
 ## 机场推荐 
 ### SSRDOG  
 本人常年使用的一家机场，价格和流量都比较适中  
-节点覆盖地区全面，全 IEPL 线路，稳定流畅，流媒体/ChatGPT 全解锁，高峰时期油管8K无压力，支持游戏加速，工单可用中文沟通且客服反应迅速  
+节点覆盖地区全面，全 IEPL 线路不过墙，低延迟稳定流畅，流媒体/ChatGPT 全解锁，高峰时期油管8K秒开无压力，支持游戏加速，工单可用中文沟通且客服反应迅速  
 https://dog1.ssrdog111.com/#/register?code=FnSb4oWM  
 本项目订阅模板的节点地区分类即是参考该机场的节点地区而分类  
 
