@@ -24,8 +24,9 @@
 ## 使用方法  
 设置教程详见本项目的 Wiki，只要按照图文进行设置即可。其中已包括了本项目订阅转换模板的地址：  
 https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教程  
-感谢恩山各路大神的教程贴，让我学习了很多  
-此处也提供单独的订阅模板链接：  
+感谢恩山论坛各路大神特别是[悟★空](https://github.com/WukongMaster)大佬的教程贴，让我学习了很多
+
+此处也提供本仓库订阅模板的单独下载地址：  
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
 不搭配本项目教程使用的话，不保证最终效果完美  
 
