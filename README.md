@@ -1,7 +1,7 @@
 # OpenClash 设置教程和个人自用 OpenClash 订阅转换模板  
 可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 图文教程，秒杀一切教程贴！终结所有错误设置！让稀奇古怪的套娃设置见鬼去吧！  
 手把手嘴对嘴教你把 OpenClash 设置为效率、安全、便利三者兼顾的完美状态，零基础小白也能看懂；  
-按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程，搭配本项目的[订阅模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套娃其他工具即可实现快速且无污染、无泄漏的 DNS 解析以及多样的分流功能，同时配合 Dnsmasq 实现无第三方插件的广告拦截，并且完美兼容 IPv6      
+按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程，搭配本仓库的[订阅模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套娃其他工具即可实现快速且无污染、无泄漏的 DNS 解析以及多样的分流功能，同时配合 Dnsmasq 实现无第三方插件的广告拦截，并且完美兼容 IPv6      
 欢迎批评指正  
 
 ## 个人使用需求  
@@ -13,7 +13,7 @@
 * 定时自动更新上游规则，无人值守
 
 ## 订阅转换模板介绍
-本项目的订阅转换模板是在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板的基础上进行了魔改 
+本仓库的订阅转换模板是在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板的基础上进行了魔改 
 * 基于 ACL4SSR_Online_Full 全分组规则魔改，将部分规则碎片替换成 [blackmatrix7](https://github.com/blackmatrix7/ios_rule_script) 的规则文件，增加更多策略组；  
 * 单独列出 Steam 规则并强制 Steam 下载 CDN 走直连，解决 Steam 下载 CDN 定位到国外的问题，确保 Steam 下载流量不走代理；     
 * 增加更多的节点区域分组（英国、加拿大等）；  
@@ -22,17 +22,17 @@
 * 采用大陆白名单机制分流（包括域名、IPv4 地址和 IPv6 地址），杜绝 DNS 污染和泄漏；   
 
 ## 使用方法  
-设置教程详见本项目的 Wiki，只要按照图文进行设置即可。其中已包括了本项目订阅转换模板的地址：  
+设置教程详见本仓库的 Wiki，只要按照图文进行设置即可。其中已包括了本仓库订阅转换模板的地址：  
 https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教程  
 感谢恩山论坛各路大神特别是[悟★空](https://github.com/WukongMaster)大佬的教程贴，让我学习了很多
 
 此处也提供本仓库订阅模板的单独下载地址：  
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
-不搭配本项目教程使用的话，不保证最终效果完美  
+不搭配本仓库教程使用的话，不保证最终效果完美  
 
 ## 关于广告拦截  
 由于放弃了套娃其他工具，且大陆域名绕过了 OpenClash 内核，因此去广告功能只能由 Dnsmasq 的 hosts 文件来实现  
-详情见本人另一个项目 [AutoUpdateHosts](https://github.com/Aethersailor/OpenWrt-AutoUpdateHosts)   
+详情见本人另一个仓库 [AutoUpdateHosts](https://github.com/Aethersailor/OpenWrt-AutoUpdateHosts)   
 内有一键安装脚本，可实现每日自动下载去广告 hosts 文件并合并至本机 hosts 文件的功能  
 
 ## 关于 DNS 泄露  
@@ -53,7 +53,7 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置�
 本人常年使用的一家机场，价格和流量都比较适中  
 节点覆盖地区全面，全 IEPL 线路不过墙，低延迟稳定流畅，流媒体/ChatGPT 全解锁，高峰时期油管8K秒开无压力，支持游戏加速，工单可用中文沟通且客服反应迅速  
 https://dog1.ssrdog111.com/#/register?code=FnSb4oWM  
-本项目订阅模板的节点地区分类即是参考该机场的节点地区而分类  
+本仓库订阅模板的节点地区分类即是参考该机场的节点地区而分类  
 
 ## 感谢  
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
