@@ -8,7 +8,7 @@ DOMAIN-SUFFIX,todesk.com
 # 订阅转换
 DOMAIN-SUFFIX,apiurl.v1.mk
 # dogfight360
-DOMAIN,dogfight360.com
+DOMAIN-SUFFIX,dogfight360.com
 # 追觅扫地机器人
 DOMAIN-SUFFIX,dreame.tech
 # 猫眼浏览器
