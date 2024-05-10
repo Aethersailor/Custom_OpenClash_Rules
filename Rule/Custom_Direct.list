@@ -13,10 +13,8 @@ DOMAIN-SUFFIX,dogfight360.com
 DOMAIN-SUFFIX,dreame.tech
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
-# IPv6测试
+# IPv6 测试
 DOMAIN-SUFFIX,test-ipv6.com
-# SSRDOG机场节点
-DOMAIN-SUFFIX,dogsvip.site
 # 推送加
 DOMAIN-SUFFIX,pushplus.plus
 # 个人域名
@@ -24,7 +22,7 @@ DOMAIN-SUFFIX,kit327.com
 # 微软服务
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
-# OpenWrt站点
+# OpenWrt 站点
 DOMAIN-SUFFIX,openwrt.ai
 # 暴雪战网国际服下载节点
 DOMAIN-SUFFIX,blizzard.gcdn.cloudn.co.kr
