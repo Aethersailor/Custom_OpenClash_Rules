@@ -41,3 +41,5 @@ DOMAIN,pf-cdn-content-prod.azureedge.net
 DOMAIN-SUFFIX,landiannews.com
 # 5E 对战平台
 DOMAIN-SUFFIX,5eplay.com
+# 松下智能家居
+DOMAIN-SUFFIX,psmartcloud.com
