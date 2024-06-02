@@ -35,7 +35,7 @@ IP-CIDR,8.251.135.126/32,no-resolve
 IP-CIDR,8.251.246.126/32,no-resolve
 # 互动游戏对战平台
 DOMAIN-SUFFIX,fxt365.com
-# 微软飞行模拟2020下载CDN
+# 微软飞行模拟2020下载 CDN
 DOMAIN,pf-cdn-content-prod.azureedge.net
 # 蓝点网
 DOMAIN-SUFFIX,landiannews.com
