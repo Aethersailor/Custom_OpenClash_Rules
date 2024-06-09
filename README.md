@@ -12,15 +12,16 @@
 * 兼容 IPv6，实现 IPv6 完美分流  
 * 广告拦截  
 * 定时自动更新上游规则，无人值守
+* 国内域名返回真实 IP，国外域名返回 Fake-IP  
 
 ## 订阅转换模板介绍
 本仓库的订阅转换模板是在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板的基础上进行了魔改 
-* 基于 ACL4SSR_Online_Full 全分组规则魔改，将部分规则碎片替换成 [blackmatrix7](https://github.com/blackmatrix7/ios_rule_script) 的规则文件，增加更多策略组；  
+* 基于 ACL4SSR_Online_Full 全分组规则魔改，将部分规则碎片替换成 [blackmatrix7](https://github.com/blackmatrix7/ios_rule_script) 的规则文件，域名分流信息全面到极致，增加更多策略组；  
 * 单独列出 Steam 规则并强制 Steam 下载 CDN 走直连，解决 Steam 下载 CDN 定位到国外的问题，确保 Steam 下载流量不走代理；     
 * 增加更多的节点区域分组（英国、加拿大等）；  
 * 调整节点默认优先顺序；  
-* 增加个人自用的若干冷门域名规则（互动对战平台、猫眼浏览器等若干小众网站，绝无副作用。具体内容详见 Rule\Custom_Direct.list 文件）;  
-* 采用大陆白名单机制分流（包括域名、IPv4 地址和 IPv6 地址），杜绝 DNS 污染和泄漏；   
+* 增加个人自用的若干冷门域名规则（互动对战平台、猫眼浏览器等若干小众网站），绝无副作用。具体内容详见 Rule\Custom_Direct.list 文件）;  
+* 采用大陆白名单机制分流（包括域名、IPv4 地址和 IPv6 地址），杜绝 DNS 污染和泄漏；  
 
 ## 使用方法  
 设置教程详见本仓库的 Wiki，只要按照图文进行设置即可。其中已包括了本仓库订阅转换模板的地址：  
