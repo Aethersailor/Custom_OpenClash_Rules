@@ -43,8 +43,10 @@ DOMAIN-SUFFIX,landiannews.com
 DOMAIN-SUFFIX,5eplay.com
 # 松下智能家居
 DOMAIN-SUFFIX,psmartcloud.com
-# 麦瑞克健身设备 & MERIT 超燃脂 APP
+# 麦瑞克健身设备
 DOMAIN-SUFFIX,merach.com
 # 暴雪战网国服相关
 DOMAIN-SUFFIX,netease.com
 DOMAIN-SUFFIX,leihuo.netease.com
+# 太川门禁系统
+DOMAIN-SUFFIX,taichuan.com
