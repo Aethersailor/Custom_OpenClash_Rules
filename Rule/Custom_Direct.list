@@ -22,7 +22,7 @@ DOMAIN-SUFFIX,kit327.com
 # 微软服务
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
-# OpenWrt 站点
+# OpenWrt AI 站点
 DOMAIN-SUFFIX,openwrt.ai
 # 暴雪战网国际服下载节点
 DOMAIN-SUFFIX,blizzard.gcdn.cloudn.co.kr
@@ -45,3 +45,6 @@ DOMAIN-SUFFIX,5eplay.com
 DOMAIN-SUFFIX,psmartcloud.com
 # 麦瑞克健身设备 & MERIT 超燃脂 APP
 DOMAIN-SUFFIX,merach.com
+# 暴雪战网国服相关
+DOMAIN-SUFFIX,netease.com
+DOMAIN-SUFFIX,leihuo.netease.com
