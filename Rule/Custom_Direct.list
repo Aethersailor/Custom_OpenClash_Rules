@@ -50,3 +50,6 @@ DOMAIN-SUFFIX,netease.com
 DOMAIN-SUFFIX,leihuo.netease.com
 # 太川门禁系统
 DOMAIN-SUFFIX,taichuan.com
+# NVIDIA 相关域名
+DOMAIN-SUFFIX,nvidia.com
+DOMAIN-SUFFIX,geforce.com
