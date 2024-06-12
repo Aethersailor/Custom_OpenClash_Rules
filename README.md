@@ -49,6 +49,9 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 IPv6 设置教程见本仓库的 Wiki：  
 https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置教程  
 
+## 已知问题  
+目前本仓库订阅模板对 BT 和 PT 流量暂时无特定处理，后期会想办法改善  
+
 ## 控制面板效果截图  
 ![](https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
 ## 机场推荐 
