@@ -53,7 +53,7 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置�
 ## 机场推荐 
 ### SSRDOG  
 本人常年使用的一家机场，价格和流量都比较适中  
-节点覆盖地区全面，全 IEPL 线路不过墙，低延迟稳定流畅，流媒体/ChatGPT 全解锁，高峰时期油管8K秒开无压力，支持游戏加速，工单可用中文沟通且客服反应迅速  
+节点覆盖地区全面，全 IEPL 线路不过墙，低延迟稳定流畅，流媒体/ChatGPT 全解锁，高峰时期油管 8K 秒开无压力，支持游戏加速，支持 IPv6 出站。工单可用简体中文沟通且客服反应迅速  
 https://dog1.ssrdog111.com/#/register?code=FnSb4oWM  
 本仓库订阅模板的节点地区分类即是参考该机场的节点地区而分类  
 
