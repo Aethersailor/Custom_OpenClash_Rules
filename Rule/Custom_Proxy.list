@@ -1,7 +1,9 @@
-#战网国际服登录
+# 战网国际服登录
 DOMAIN-SUFFIX,eu.battle.net
 DOMAIN-SUFFIX,us.battle.net
 DOMAIN-SUFFIX,kr.battle.net
 DOMAIN-SUFFIX,tw.battle.net
 DOMAIN-SUFFIX,www.battle.net
 DOMAIN-SUFFIX,account.battle.net
+# EA Desktop 云同步
+DOMAIN-SUFFIX,cloudsync-prod.s3.us-east-1.amazonaws.com
