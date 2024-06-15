@@ -14,7 +14,7 @@
 * 采用大陆白名单机制分流（包括域名、IPv4 地址和 IPv6 地址），杜绝 DNS 污染和泄漏；  
 * 大陆域名和 IP 绕过 OpenClash 内核提升访问速度和下载性能（需要按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程对 OpenClash 进行设置）；    
 * 增加更多的节点区域分组（英国、加拿大等）；    
-* 增加个人自用的若干冷门域名规则（互动对战平台、猫眼浏览器等若干小众网站，绝无副作用。具体内容详见 Rule\Custom_Direct.list 文件）;  
+* 增加若干冷门域名规则（互动对战平台、猫眼浏览器、蓝点网等若干小众域名），补全一些漏网域名（EA Desktop 下载 CDN 等）绝无副作用。具体内容详见 Rule\Custom_Direct.list 文件）;  
 * 定时自动更新上游规则，无人值守（需要按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程对 OpenClash 进行设置）；  
 * 国内域名返回真实 IP，国外域名返回 Fake-IP（需要按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程对 OpenClash 进行设置）；  
 * 尽力实现海外下载流量强制直连（相关规则完善中）；  
