@@ -56,3 +56,5 @@ DOMAIN-SUFFIX,geforce.com
 DOMAIN-SUFFIX,nvidiagrid.net
 # BT/PT 下载相关
 DOMAIN-KEYWORD,tracker
+# EA Desktop 下载节点
+DOMAIN-SUFFIX,akamaihd.net
