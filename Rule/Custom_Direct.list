@@ -54,3 +54,5 @@ DOMAIN-SUFFIX,taichuan.com
 DOMAIN-SUFFIX,nvidia.com
 DOMAIN-SUFFIX,geforce.com
 DOMAIN-SUFFIX,nvidiagrid.net
+# BT/PT 下载相关
+DOMAIN-KEYWORD,tracker
