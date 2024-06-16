@@ -1,4 +1,4 @@
-# ImmortalWrt 在线更新服务器
+# ImmortalWrt 在线更新
 DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
 # ImmortalWrt 软件仓库
 DOMAIN-SUFFIX,immortalwrt.org
@@ -14,12 +14,12 @@ DOMAIN-SUFFIX,dreame.tech
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
 # IPv6 测试
-DOMAIN-SUFFIX,test-ipv6.com
+#DOMAIN-SUFFIX,test-ipv6.com
 # 推送加
 DOMAIN-SUFFIX,pushplus.plus
 # 个人域名
 DOMAIN-SUFFIX,kit327.com
-# 微软服务
+# Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
 # OpenWrt AI 站点
@@ -35,7 +35,7 @@ IP-CIDR,8.251.135.126/32,no-resolve
 IP-CIDR,8.251.246.126/32,no-resolve
 # 互动游戏对战平台
 DOMAIN-SUFFIX,fxt365.com
-# 微软飞行模拟2020下载 CDN
+# 微软飞行模拟 2020 游戏内下载 CDN
 DOMAIN,pf-cdn-content-prod.azureedge.net
 # 蓝点网
 DOMAIN-SUFFIX,landiannews.com
@@ -44,7 +44,7 @@ DOMAIN-SUFFIX,lancdn.com
 DOMAIN-SUFFIX,5eplay.com
 # 松下智能家居
 DOMAIN-SUFFIX,psmartcloud.com
-# 麦瑞克健身设备
+# 麦瑞克健身设备和超燃脂APP
 DOMAIN-SUFFIX,merach.com
 # 暴雪战网国服相关
 DOMAIN-SUFFIX,netease.com
@@ -55,7 +55,7 @@ DOMAIN-SUFFIX,taichuan.com
 DOMAIN-SUFFIX,nvidia.com
 DOMAIN-SUFFIX,geforce.com
 DOMAIN-SUFFIX,nvidiagrid.net
-# BT/PT 下载相关
+# PT 下载相关
 DOMAIN-KEYWORD,tracker
 # EA Desktop 下载节点
 DOMAIN-SUFFIX,akamaihd.net
