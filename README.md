@@ -67,4 +67,8 @@ https://dog1.ssrdog111.com/#/register?code=FnSb4oWM
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
-- [dogfight360/UsbEAm](https://github.com/dogfight360/UsbEAm)
+- [dogfight360/UsbEAm](https://github.com/dogfight360/UsbEAm)  
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Aethersailor/Custom_OpenClash_Rules&type=Date)](https://star-history.com/#Aethersailor/Custom_OpenClash_Rules&Date)
