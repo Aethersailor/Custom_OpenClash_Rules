@@ -7,16 +7,17 @@
 
 ## 个人自用全分组订阅转换模板介绍
 本仓库的订阅转换模板是在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板的基础上进行了魔改和完善   
+以下特性涉及的设置，需要按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程对 OpenClash 进行设置才可以实现
 * 基于 ACL4SSR_Online_Full 全分组规则魔改，将部分规则碎片替换成 [blackmatrix7](https://github.com/blackmatrix7/ios_rule_script) 的规则文件，域名分流信息全面到极致，增加更多策略组，覆盖大多数日常使用环境无需自己折腾；  
 * 支持节点地区分类测速优选；  
 * 媒体服务（Youtube、Netflix、Disney+ 等）走指定区域测速选优或指定节点，特定网站（电报、ChatGPT 等）走指定区域节点测速选优或指定节点；  
 * 单独列出 Steam 规则并强制 Steam 下载 CDN 走直连，解决 Steam 下载 CDN 定位到国外的问题，确保 Steam 下载流量不走代理；  
-* 采用大陆白名单机制分流（包括域名、IPv4 地址和 IPv6 地址），杜绝 DNS 污染和泄漏；  
-* 国内域名和 IP 绕过 OpenClash 内核提升访问速度和下载性能，并采用运营商 DNS 解析取得最佳解析结果（需要按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程对 OpenClash 进行设置）；
-* 国外域名和 IP 使用远端节点服务器的 DNS 进行解析，取得最佳解析结果（需要按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程对 OpenClash 进行设置）；  
-* 国内域名返回真实 IP，国外域名返回 Fake-IP（需要按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程对 OpenClash 进行设置）；
+* 采用大陆白名单机制分流（包括域名、IPv4 地址和 IPv6 地址），无需配合其他工具即可杜绝 DNS 污染和泄漏；  
+* 国内域名和 IP 绕过 OpenClash 内核提升访问速度和下载性能，并采用运营商 DNS 解析取得最佳解析结果；
+* 国外域名和 IP 使用远端节点服务器的 DNS 进行解析，取得最佳解析结果；  
+* 国内域名返回真实 IP，国外域名返回 Fake-IP；
 * 增加若干冷门域名规则（互动对战平台、猫眼浏览器、蓝点网、EA Desktop 下载 CDN 等），绝无副作用。具体内容详见 Rule\Custom_Direct.list 文件）;  
-* 每日定时自动更新上游规则，一次设置即可长期无人值守，无需反复折腾（需要按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程对 OpenClash 进行设置）；  
+* 每日定时自动更新上游规则，一次设置即可长期无人值守，无需反复折腾；  
 * 增加更多的节点区域分组（英国、加拿大等）；    
 * 尽力实现海外下载流量强制直连（相关规则完善中）；  
 
@@ -39,7 +40,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 ## 关于广告拦截  
 由于放弃了套娃其他工具，且大陆域名绕过了 OpenClash 内核，因此去广告功能只能由 Dnsmasq 的 hosts 文件来实现  
 详情见本人另一个仓库 [AutoUpdateHosts](https://github.com/Aethersailor/OpenWrt-AutoUpdateHosts)   
-内有一键安装脚本，可实现每日自动下载去广告 hosts 文件并合并至本机 hosts 文件的功能  
+内有一键安装脚本，实现每日自动下载去广告 hosts 文件并合并至本机 hosts 文件的功能，可搭配使用  
 
 ## 关于 IPv6  
 谁说 OpenClash 不能和 IPv6 同时工作？  
