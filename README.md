@@ -5,7 +5,7 @@
 按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程，搭配本仓库的[订阅模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套娃其他工具即可实现快速且无污染、无泄漏的 DNS 解析以及完善多样的分流功能，同时配合 Dnsmasq 实现无第三方插件的广告拦截，并且完美兼容 IPv6      
 欢迎 star 和批评指正  
 
-## 个人自用全分组订阅转换模板介绍
+## 本仓库教程及订阅转换模板介绍
 本仓库的订阅转换模板是在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板的基础上进行了魔改和完善   
 以下特性涉及的设置，需要按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程对 OpenClash 进行设置才可以实现
 * 基于 ACL4SSR_Online_Full 全分组规则魔改，将部分规则碎片替换成 [blackmatrix7](https://github.com/blackmatrix7/ios_rule_script) 的规则文件，域名分流信息全面到极致，增加更多策略组，覆盖大多数日常使用环境无需自己折腾；  
