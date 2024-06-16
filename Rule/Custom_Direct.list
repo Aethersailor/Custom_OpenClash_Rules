@@ -59,4 +59,5 @@ DOMAIN-SUFFIX,nvidiagrid.net
 DOMAIN-KEYWORD,tracker
 # EA Desktop 下载节点
 DOMAIN-SUFFIX,akamaihd.net
-# 其他国内网站
+# FinalShell
+IP-CIDR,5.5.5.5/32,no-resolve
