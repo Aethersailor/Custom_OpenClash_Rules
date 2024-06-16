@@ -69,6 +69,10 @@ https://dog1.ssrdog111.com/#/register?code=FnSb4oWM
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
 - [dogfight360/UsbEAm](https://github.com/dogfight360/UsbEAm)  
 
+# License		
+[![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
+* CC-BY-SA-4.0  
+
 ## Star History
 
 <a href="https://star-history.com/#Aethersailor/Custom_OpenClash_Rules&Date">
