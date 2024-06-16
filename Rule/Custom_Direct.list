@@ -39,6 +39,7 @@ DOMAIN-SUFFIX,fxt365.com
 DOMAIN,pf-cdn-content-prod.azureedge.net
 # 蓝点网
 DOMAIN-SUFFIX,landiannews.com
+DOMAIN-SUFFIX,lancdn.com
 # 5E 对战平台
 DOMAIN-SUFFIX,5eplay.com
 # 松下智能家居
@@ -58,3 +59,4 @@ DOMAIN-SUFFIX,nvidiagrid.net
 DOMAIN-KEYWORD,tracker
 # EA Desktop 下载节点
 DOMAIN-SUFFIX,akamaihd.net
+# 其他国内网站
