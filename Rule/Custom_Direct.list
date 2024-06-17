@@ -61,3 +61,5 @@ DOMAIN-KEYWORD,tracker
 DOMAIN-SUFFIX,akamaihd.net
 # FinalShell
 IP-CIDR,5.5.5.5/32,no-resolve
+# 支付宝小程序
+DOMAIN-SUFFIX,95504test.com
