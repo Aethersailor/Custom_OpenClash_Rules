@@ -9,7 +9,7 @@ DOMAIN-SUFFIX,todesk.com
 DOMAIN-SUFFIX,apiurl.v1.mk
 # dogfight360
 DOMAIN-SUFFIX,dogfight360.com
-# 追觅扫地机器人
+# 追觅科技
 DOMAIN-SUFFIX,dreame.tech
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
@@ -17,7 +17,7 @@ DOMAIN-SUFFIX,catsxp.com
 #DOMAIN-SUFFIX,test-ipv6.com
 # 推送加
 DOMAIN-SUFFIX,pushplus.plus
-# 个人域名
+# 其他域名
 DOMAIN-SUFFIX,kit327.com
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
@@ -57,9 +57,11 @@ DOMAIN-SUFFIX,geforce.com
 DOMAIN-SUFFIX,nvidiagrid.net
 # PT 下载相关
 DOMAIN-KEYWORD,tracker
-# EA Desktop 下载节点
+# Akamai CDN
 DOMAIN-SUFFIX,akamaihd.net
 # FinalShell
 IP-CIDR,5.5.5.5/32,no-resolve
 # 支付宝小程序
 DOMAIN-SUFFIX,95504test.com
+# 小众软件论坛
+DOMAIN-SUFFIX,appinn.net
