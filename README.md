@@ -62,6 +62,7 @@ https://dog1.ssrdog111.com/#/register?code=FnSb4oWM
 本仓库订阅模板的节点地区分类即是参考该机场的节点地区而分类  
 
 ## 感谢  
+以下排名不分先后  
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
