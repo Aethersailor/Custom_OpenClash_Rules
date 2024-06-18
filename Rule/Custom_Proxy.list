@@ -1,3 +1,8 @@
+# NAME: Custom_Proxy
+# AUTHOR: Aethersailor
+# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# 强制代理列表
+
 # 战网国际服登录
 DOMAIN-SUFFIX,eu.battle.net
 DOMAIN-SUFFIX,us.battle.net
