@@ -30,7 +30,7 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教�
 
 此处也提供本仓库订阅模板的单独下载地址：  
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
-不搭配本仓库教程使用的话，无法保证最终完美效果，不建议单独使，仅供熟知 OpenClash 设置的人士使用  
+如果不搭配本仓库教程使用，无法保证最终完美效果，不建议单独使用订阅模板  
 
 ## 关于 DNS 泄露  
 配合以上订阅转换模板和教程正确设置 OpenClash 后，大陆域名将使用国内 DNS 解析，默认为运营商DNS，亦可自行设置其他国内 DNS，且大陆域名绕过 Clash 内核，可以返回真实 IP 
