@@ -70,3 +70,6 @@ IP-CIDR,5.5.5.5/32,no-resolve
 DOMAIN-SUFFIX,95504test.com
 # 小众软件论坛
 DOMAIN-SUFFIX,appinn.net
+# Emby 小雅全家桶 相关
+DOMAIN-SUFFIX,ddsrem.com
+DOMAIN-SUFFIX,resilio.com
