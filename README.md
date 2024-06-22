@@ -1,10 +1,11 @@
 <h1 align="center">OpenClash 保姆级设置教程<br>&<br>个人自用全分组 OpenClash 订阅转换模板</h1>
-<p></p>
+
 <p align="center">
    <img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
 </p>
-<hr>
 
+
+## 关于本仓库 
 可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文教程和订阅转换模板，秒杀一切教程贴！  
 终结所有错误设置！让稀奇古怪的套娃设置见鬼去吧！  
 手把手嘴对嘴教你把 OpenClash 设置为效率、安全、便利三者兼顾的完美状态，零基础小白也能看懂；  
