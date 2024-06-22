@@ -4,8 +4,11 @@
   &<br>
   个人自用全分组 OpenClash 订阅转换模板
   </h1>
-
 </div>
+
+<p align="center">
+   <img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
+</p>
 
 可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文教程和订阅转换模板，秒杀一切教程贴！  
 终结所有错误设置！让稀奇古怪的套娃设置见鬼去吧！  
