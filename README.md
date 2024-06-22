@@ -68,6 +68,9 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置�
 ![](https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
 ## 机场推荐 
 ### SSRDOG  
+
+本人常年使用的一家机场，价格和流量都比较适中，搭配本仓库的订阅模板使用，体验保证拉满。
+
 - 节点覆盖地区全面，全 IEPL 线路不过墙，低延迟稳定流畅。
 - 流媒体和 ChatGPT 全解锁，高峰时期油管 8K 视频秒开无压力。
 - 支持游戏加速和 IPv6 出站。
