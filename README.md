@@ -7,9 +7,6 @@
 
 </div>
 
-
-
-# OpenClash 保姆级设置教程和个人自用全分组 OpenClash 订阅转换模板  
 可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文教程和订阅转换模板，秒杀一切教程贴！  
 终结所有错误设置！让稀奇古怪的套娃设置见鬼去吧！  
 手把手嘴对嘴教你把 OpenClash 设置为效率、安全、便利三者兼顾的完美状态，零基础小白也能看懂；  
