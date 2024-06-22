@@ -1,7 +1,7 @@
 <div align="center">
-  <h1>OpenClash 保姆级设置教程  
-  &  
-  个人自用全分组 OpenClash 订阅转换模板</h1>
+  <h1>OpenClash 保姆级设置教程</h1>
+  <h1>&</h1>
+  <h1>个人自用全分组 OpenClash 订阅转换模板</h1>
 
 </div>
 
