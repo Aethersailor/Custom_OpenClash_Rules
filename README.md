@@ -1,8 +1,4 @@
-<h1 align="center">
-OpenClash 保姆级设置教程<br>
-&<br>
-个人自用全分组 OpenClash 订阅转换模板
-</h1>
+<h1 align="center">OpenClash 保姆级设置教程<br>&<br>个人自用全分组 OpenClash 订阅转换模板</h1>
 
 <p align="center">
    <img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
