@@ -39,7 +39,6 @@
 准备好你的订阅链接，然后按照本仓库 [Wiki 中的图文教程](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教程)对 OpenClash 进行设置程，教程中已包括了本仓库订阅转换模板的使用方法：  
 https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教程  
 教程非常详尽，只需按部就班设置即可，有手就行！  
-感谢恩山论坛各路大神，特别是[悟★空](https://github.com/WukongMaster)大佬的教程贴，让我学习到了很多
 
 此处也提供本仓库订阅模板的单独下载地址：  
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
