@@ -8,6 +8,8 @@ DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
 # ImmortalWrt 软件仓库
 DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,vsean.net
+# 机场域名
+DOMAIN-SUFFIX,dogsvip.site
 # Todesk
 DOMAIN-SUFFIX,todesk.com
 # 订阅转换
