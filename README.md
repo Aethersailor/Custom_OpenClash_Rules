@@ -5,7 +5,7 @@
    <a href="https://t.me/+eRGER-HeYO01ODJl">
   <img src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&colorA=DAE9FC&colorB=056DE8&label=%E9%A2%91%E9%81%93&logo=telegram&query=%24.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3DCustom_OpenClash_Rule" alt="Telegram">
 </a>
-<a href="https://t.me/CustomOpenClashRules">
+<a href="https://t.me/+tu6zrSwwGt83NDQ1">
   <img src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&colorA=DAE9FC&colorB=056DE8&label=%E7%BE%A4%E8%81%8A&logo=telegram&query=%24.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3DCustom_OpenClash_Rules" alt="Telegram">
 </a>
 
