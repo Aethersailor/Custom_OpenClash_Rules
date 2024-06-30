@@ -3,6 +3,7 @@
 <p align="center">
    <img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
 </p>
+![访问量](https://visitor-badge.glitch.me/badge?page_id=Aethersailor.Custom_OpenClash_Rules)
 
 
 ## 关于本仓库 
