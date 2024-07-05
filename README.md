@@ -48,7 +48,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 配合上述订阅转换模板和教程正确设置 OpenClash 后，大陆域名将使用国内 DNS 进行解析，默认为运营商DNS，亦可自行设置其他国内 DNS，且大陆域名绕过 Clash 内核，可以返回真实 IP  
 国外域名自动通过节点远端默认 DNS 解析，一般为机场默认的 DNS 或者你在 VPS 中设置的 DNS。  
 
-理论上，以上设置可以取得最快、最佳的解析结果，且无污染、无泄露，无需借助其他工具。  
+理论上，以上设置可以取得最快、最佳的解析结果，且无污染、无泄露，DNS 完美分流，无需借助其他工具。  
 
 ## 关于广告拦截  
 由于放弃了套娃其他工具，且大陆域名绕过了 Clash 内核，因此去广告功能只能通过 Dnsmasq 的 hosts 文件来实现。详情参见本人另一个仓库 [AutoUpdateHosts](https://github.com/Aethersailor/OpenWrt-AutoUpdateHosts)  
