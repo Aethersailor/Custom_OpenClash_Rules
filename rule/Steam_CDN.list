@@ -3,7 +3,7 @@
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # Steam 下载 CDN 地址
 
-# 解决Steam下载CDN被定位到国外CDN的问题
+# 解决 Steam 下载 CDN 被定位到国外 CDN 的问题
 IP-CIDR,103.10.124.0/24,no-resolve
 IP-CIDR,103.10.125.0/24,no-resolve
 IP-CIDR,103.28.54.0/24,no-resolve
