@@ -80,4 +80,5 @@ DOMAIN-SUFFIX,xhofe.top
 DOMAIN-SUFFIX,jsehealth.com
 # 国内 CDN
 DOMAIN-SUFFIX,cjjd19.com
-
+# UniGetUI
+DOMAIN-SUFFIX,powershellgallery.com
