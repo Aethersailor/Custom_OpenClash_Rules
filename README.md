@@ -48,6 +48,12 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教�
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
 请注意，如果不按照本仓库教程使用，无法保证最终效果，不建议单独使用订阅模板。  
 
+## 关于个性化需求  
+如果你需要个性化的模板需求，有两用办法可以实现。  
+1. fork 本项目后自行修改添加  
+2. 用 OpenClash 的“规则附加”功能进行附加  
+具体的规则碎片可以在 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 中自行寻找  
+
 ## 关于 DNS 泄露  
 配合上述订阅转换模板和教程正确设置 OpenClash 后，大陆域名将使用国内 DNS 进行解析，默认为运营商DNS，亦可自行设置其他国内 DNS，且大陆域名绕过 Clash 内核，可以返回真实 IP  
 国外域名自动通过节点远端默认 DNS 解析，一般为机场默认的 DNS 或者你在 VPS 中设置的 DNS。  
