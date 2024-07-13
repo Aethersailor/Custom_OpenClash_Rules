@@ -50,8 +50,8 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 
 ## 关于个性化需求  
 如果你需要个性化的模板需求，有两用办法可以实现。  
-1. fork 本项目后自行修改添加  
-2. 用 OpenClash 的“规则附加”功能进行附加  
+* fork 本仓库后自行修改添加  
+* 用 OpenClash 的“规则附加”功能进行附加  
 具体的规则碎片可以在 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 中自行寻找  
 
 ## 关于 DNS 泄露  
