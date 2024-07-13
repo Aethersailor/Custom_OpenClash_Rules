@@ -15,3 +15,6 @@ DOMAIN-SUFFIX,account.battle.net
 # GooglePlay 相关
 DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 DOMAIN-SUFFIX,services.googleapis.cn
+# PS5 STUN
+DOMAIN-SUFFIX,stun.playstation.net
+

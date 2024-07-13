@@ -35,7 +35,7 @@
 * 国外域名和 IP 使用远端节点服务器的 DNS 进行解析，取得最佳解析结果；  
 * 国内域名返回真实 IP，国外域名返回 Fake-IP；
 * 增加若干冷门域名规则（互动对战平台、猫眼浏览器、蓝点网、EA Desktop 下载 CDN 等），绝无副作用。具体内容详见 Rule\Custom_Direct.list 文件）;  
-* 每日定时自动更新上游规则，一次设置即可长期无人值守，无需反复折腾；  
+* 无需手搓配置，每日定时自动更新上游规则，一次设置即可长期无人值守，无需反复折腾；  
 * 增加更多的节点区域分组（英国、加拿大等）；    
 * 尽力实现海外下载流量强制直连（相关规则完善中）；  
 
@@ -47,6 +47,12 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教�
 此处也提供本仓库订阅模板的单独下载地址：  
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
 请注意，如果不按照本仓库教程使用，无法保证最终效果，不建议单独使用订阅模板。  
+
+## 关于个性化需求  
+如果你需要个性化的模板需求，有两用办法可以实现。  
+* fork 本仓库后自行修改添加  
+* 用 OpenClash 的“规则附加”功能进行附加  
+具体的规则碎片可以在 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 中自行寻找  
 
 ## 关于 DNS 泄露  
 配合上述订阅转换模板和教程正确设置 OpenClash 后，大陆域名将使用国内 DNS 进行解析，默认为运营商DNS，亦可自行设置其他国内 DNS，且大陆域名绕过 Clash 内核，可以返回真实 IP  
