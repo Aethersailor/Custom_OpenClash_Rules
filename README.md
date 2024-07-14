@@ -76,6 +76,7 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置�
 有其他问题请发 Issue  
 
 ## 控制面板效果截图  
+历史截图，可能和当前版本不一致，仅供示意  
 ![](https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
 ## 机场推荐 
 ### SSRDOG  
