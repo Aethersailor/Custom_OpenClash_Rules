@@ -61,8 +61,16 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 理论上，以上设置可以取得最快、最佳的解析结果，且无污染、无泄露，DNS 完美分流，无需借助其他工具。  
 
 ## 关于广告拦截  
-由于放弃了套娃其他工具，且大陆域名绕过了 Clash 内核，因此去广告功能只能通过 Dnsmasq 的 hosts 文件来实现。详情参见本人另一个仓库 [AutoUpdateHosts](https://github.com/Aethersailor/OpenWrt-AutoUpdateHosts)  
-该仓库内提供了一键安装脚本，实现每日自动下载去广告 hosts 文件并合并至本机 hosts 文件的功能，可与本仓库搭配使用。  
+由于放弃了套娃其他工具，且大陆域名绕过了 Clash 内核，因此无法依靠 OpenClash 的规则来完成广告拦截，去广告功能只能通过 Dnsmasq 来实现。
+推荐使用 Dnsmasq 的 conf 格式的广告规则，来利用 Dnsmasq 实现广告屏蔽功能。  
+以 [Anti-AD](https://github.com/privacy-protection-tools/anti-AD) 广告规则为例，只要将 anti-ad-for-dnsmasq.conf 文件放置于 /tmp/dnsmasq.d/ 目录下，即可在 Dnsmasq 启动时加载，从而实现广告屏蔽功能。  
+所以我们要做的就是在计划任务中添加对应的命令，让 OpenWrt 每天定时拉取广告规则到对应的目录下即可。  
+复制以下命令到 SSH 中执行，即可在计划任务中添加每天凌晨4点30分自动拉取广告规则到对应的目录下。  
+```bash
+echo "30 4 * * * mkdir -p /tmp/dnsmasq.d && curl -s https://anti-ad.net/anti-ad-for-dnsmasq.conf -o /tmp/dnsmasq.d/anti-ad-for-dnsmasq.conf" >> /etc/crontabs/root
+```
+你也可以自己修改计划任务中对应的时间，关于 cron 对应的时间语法，请自行百度。  
+建议拉取规则的时间设置在 OpenClash 每日更新订阅时间之前，这样 OpenClash 在更新订阅的时候会重启 Dnsmasq 让广告拦截规则生效。
 
 ## 关于 IPv6  
 谁说 OpenClash 不能和 IPv6 同时工作？  
