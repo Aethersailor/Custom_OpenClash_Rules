@@ -64,7 +64,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 理论上，以上设置可以取得最快、最佳的解析结果，且无污染、无泄露，DNS 完美分流，无需借助其他工具。  
 
 ## 关于广告拦截  
-由于放弃了套娃其他工具，且大陆域名绕过了 Clash 内核，因此无法依靠 OpenClash 的规则来完成广告拦截，去广告功能只能通过 Dnsmasq 来实现。
+由于放弃了套娃其他工具，且大陆域名绕过了 Clash 内核，因此无法依靠 OpenClash 的规则来完成广告拦截，去广告功能只能通过 Dnsmasq 来实现。  
 推荐使用 Dnsmasq 的 conf 格式的广告规则，来利用 Dnsmasq 实现广告屏蔽功能。  
 以 [Anti-AD](https://github.com/privacy-protection-tools/anti-AD) 广告规则为例，只要将 anti-ad-for-dnsmasq.conf 文件放置于 /tmp/dnsmasq.d/ 目录下，即可在 Dnsmasq 启动时加载，从而实现广告屏蔽功能。  
 所以我们要做的就是在计划任务中添加对应的命令，让 OpenWrt 每天定时拉取广告规则到对应的目录下即可。  
