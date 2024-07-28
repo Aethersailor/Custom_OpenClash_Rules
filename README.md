@@ -6,7 +6,7 @@
 
 
 ## 关于本仓库 
-可能是目前全网最强的 [OpenClash][(https://github.com/vernesong/OpenClash) 保姆级图文教程和订阅转换模板，秒杀一切教程贴！  
+可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文教程和订阅转换模板，秒杀一切教程贴！  
 终结所有错误设置！让稀奇古怪的套娃设置方法见鬼去吧！  
 
 手把手嘴对嘴指导你将 OpenClash 设置为效率、安全和便利三者兼顾的完美状态，零基础小白也能轻松看懂。  
