@@ -26,18 +26,18 @@ main() {
     # 询问用户选择的广告过滤规则
     while true; do
         echo "请选择要添加的广告过滤规则："
-        echo "1：Anti-AD"
+        echo "1：anti-AD"
         echo "2：秋风广告规则"
         read -p "请输入选项并回车：" OPTION
 
         case "$OPTION" in
             1)
-                # 添加 Anti-AD 广告过滤规则
+                # 添加 anti-AD 广告过滤规则
                 echo "# 以下是广告过滤规则拉取脚本" >> "$TARGET_FILE"
-                echo "LOG_OUT \"拉取 Anti-AD 广告过滤规则…\"" >> "$TARGET_FILE"
+                echo "LOG_OUT \"拉取 anti-AD 广告过滤规则…\"" >> "$TARGET_FILE"
                 echo "curl -s https://anti-ad.net/anti-ad-for-dnsmasq.conf -o /tmp/dnsmasq.d/anti-ad-for-dnsmasq.conf" >> "$TARGET_FILE"
                 echo "# 广告过滤规则拉取脚本结束" >> "$TARGET_FILE"
-                echo "已添加 Anti-AD 广告过滤规则！"
+                echo "已添加 anti-AD 广告过滤规则！"
                 break
                 ;;
             2)
@@ -86,8 +86,11 @@ main() {
         esac
     done
 
-    # 在文件末尾添加空行和 exit 0
+    # 在文件末尾添加空行
     echo "" >> "$TARGET_FILE"
+
+    # 添加 exit 0 前延迟 5 秒
+    echo "sleep 5" >> "$TARGET_FILE"
     echo "exit 0" >> "$TARGET_FILE"
 
     # 提示用户所有规则将在 OpenClash 下次启动时生效
