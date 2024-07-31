@@ -96,6 +96,11 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置�
 注册链接：[SSRDOG 注册](https://dog1.ssrdog111.com/#/register?code=FnSb4oWM)  
 
 本仓库订阅模板的节点地区分类即参考了该机场的节点地区进行分类。  
+PS：该机场 Hong Kong 11-15 节点不支持 IPv6 出站，如果需要 IPv6 出站功能，建议在 订阅设置 > 排除节点中排除如下关键词：  
+Traffic、GB、Expire、11、12、13、14、15  
+若不使用 IPv6 功能，只需屏蔽如下节点关键词：  
+Traffic、GB、Expire  
+不屏蔽不影响使用，只是会让节点列表看着更整洁一些  
 
 ## 感谢  
 以下排名不分先后  
