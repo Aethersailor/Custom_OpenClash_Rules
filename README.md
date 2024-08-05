@@ -68,6 +68,8 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 
 理论上，以上设置可以取得最快、最佳的解析结果，且无污染、无泄露，DNS 完美分流，无需借助其他工具。  
 
+PS：如果在控制面板中为“漏网之鱼”策略组选择了“全球直连”策略，则不能通过防泄露测试。  
+
 ## 关于广告过滤  
 由于放弃了套娃其他工具，且大陆域名绕过了 Clash 内核，因此无法依靠 OpenClash 的规则来完成广告过滤，广告过滤功能只能通过 Dnsmasq 来实现。  
 借助 OpenClash 的“开发者选项”功能，让 OpenClash 每次启动时为 Dnsmasq 拉取相应的广告过滤规则文件，同时利用 OpenClash 启动时会重启 Dnsmasq 的特性使广告过滤规则生效。  
