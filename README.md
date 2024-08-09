@@ -1,4 +1,4 @@
-<h1 align="center">OpenClash<br>保姆级设置教程<br>&<br>全分组订阅转换模板</h1>
+<h1 align="center">OpenClash 保姆级设置教程<br>&<br>全分组订阅转换模板</h1>
 
 <p align="center">
    <img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
@@ -15,7 +15,10 @@
 欢迎 star ！  
 
 ## 更新  
-本仓库模板包含的规则均为引用的上游规则碎片，上游规则更新与本仓库模板的更新没有直接关系  
+本仓库模板包含的规则均为引用的上游规则碎片，上游规则更新与本仓库模板的更新没有直接关系，只需设置每日更新订阅即可获取最新规则。  
+
+2024.8.9  
+更新 Steam 下载 CDN 规则。  
 
 2024.7.28  
 换用新的广告拦截设置方法，现在使用 OpenClash 的开发者选项来实现广告屏蔽功能，大幅提升便利性。  
