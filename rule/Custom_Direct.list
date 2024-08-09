@@ -1,27 +1,26 @@
 # NAME: Custom_Direct
 # AUTHOR: Aethersailor
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
-# 强制直连列表
+# 强制直连域名列表，来自个人收集
+# 部分域名可能和大陆域名列表存在重叠
 
-# ImmortalWrt 在线更新
+# ImmortalWrt 在线更新服务
 DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
 # ImmortalWrt 软件仓库
 DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,vsean.net
+# OpenWrt AI 站点
+DOMAIN-SUFFIX,openwrt.ai
+# 订阅转换
+DOMAIN-SUFFIX,apiurl.v1.mk
 # 机场域名
 DOMAIN-SUFFIX,dogsvip.site
 # Todesk
 DOMAIN-SUFFIX,todesk.com
-# 订阅转换
-DOMAIN-SUFFIX,apiurl.v1.mk
-# dogfight360
-DOMAIN-SUFFIX,dogfight360.com
 # 追觅科技
 DOMAIN-SUFFIX,dreame.tech
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
-# IPv6 测试
-#DOMAIN-SUFFIX,test-ipv6.com
 # 推送加
 DOMAIN-SUFFIX,pushplus.plus
 # 其他域名
@@ -29,8 +28,6 @@ DOMAIN-SUFFIX,kit327.com
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
-# OpenWrt AI 站点
-DOMAIN-SUFFIX,openwrt.ai
 # 暴雪战网国际服下载节点
 DOMAIN-SUFFIX,blizzard.gcdn.cloudn.co.kr
 DOMAIN-SUFFIX,level3.blizzard.com
@@ -83,6 +80,6 @@ DOMAIN-SUFFIX,jsehealth.com
 DOMAIN-SUFFIX,cjjd19.com
 # UniGetUI
 DOMAIN-SUFFIX,powershellgallery.com
-# 魔兽世界新手盒子
+# 魔兽世界 新手盒子
 DOMAIN-SUFFIX,newbeebox.com
 DOMAIN-SUFFIX,wclbox.com
