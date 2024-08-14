@@ -48,14 +48,13 @@ DOMAIN-SUFFIX,lancdn.com
 DOMAIN-SUFFIX,5eplay.com
 # 松下智能家居
 DOMAIN-SUFFIX,psmartcloud.com
-# 麦瑞克健身设备和超燃脂APP
+# 麦瑞克健身设备 & 超燃脂APP
 DOMAIN-SUFFIX,merach.com
 # 暴雪战网国服相关
 DOMAIN-SUFFIX,netease.com
 DOMAIN-SUFFIX,leihuo.netease.com
 # 太川门禁系统
 DOMAIN-SUFFIX,taichuan.com
-# 海纳物联
 DOMAIN-SUFFIX,taichuan.net
 # PT 下载相关
 DOMAIN-KEYWORD,tracker
@@ -84,3 +83,5 @@ DOMAIN-SUFFIX,powershellgallery.com
 # 魔兽世界 新手盒子
 DOMAIN-SUFFIX,newbeebox.com
 DOMAIN-SUFFIX,wclbox.com
+# NTP Pool Project
+DOMAIN-SUFFIX,pool.ntp.org
