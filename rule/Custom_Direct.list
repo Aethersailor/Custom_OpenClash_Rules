@@ -85,3 +85,5 @@ DOMAIN-SUFFIX,newbeebox.com
 DOMAIN-SUFFIX,wclbox.com
 # NTP Pool Project
 DOMAIN-SUFFIX,pool.ntp.org
+# 明经 CAD 社区
+DOMAIN-SUFFIX,mjtd.com
