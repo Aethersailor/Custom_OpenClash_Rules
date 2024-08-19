@@ -87,3 +87,5 @@ DOMAIN-SUFFIX,wclbox.com
 DOMAIN-SUFFIX,pool.ntp.org
 # 明经 CAD 社区
 DOMAIN-SUFFIX,mjtd.com
+# Dell
+DOMAIN-SUFFIX,dell.com
