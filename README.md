@@ -99,28 +99,7 @@ OpenClash 设置以及订阅转换模板具有普适性，按照教程设置后�
 ## 控制面板效果截图  
 历史截图，可能和当前版本不一致，仅供示意  
 ![](https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
-## 机场推荐 
-### SSRDOG  
 
-该机场 IPV6 支持出现问题，暂不推荐了！
-
-本人常年使用的一家机场，价格和流量都比较适中，搭配本仓库的订阅模板使用，体验保证拉满。
-
-- 节点覆盖地区全面，全 IEPL 线路不过墙，低延迟稳定流畅。
-- 流媒体和 ChatGPT 全解锁，高峰期油管 8K 视频秒开无压力。
-- 支持游戏加速和 IPv6 出站。
-- 工单支持简体中文沟通且客服反应迅速。  
-
-注册链接：[SSRDOG 注册](https://dog1.ssrdog111.com/#/register?code=FnSb4oWM)（包含 aff 信息，感谢支持！）  
-
-本仓库订阅模板的节点地区分类即参考了该机场的节点地区进行分类。  
-
-PS：该机场 Hong Kong 11-15 节点不支持 IPv6 出站，如果需要 IPv6 出站功能，建议在 订阅设置 > 排除节点中排除如下关键词：  
-Traffic、GB、Expire、11、12、13、14、15  
-
-若不使用 IPv6 功能，只需屏蔽如下节点关键词：  
-Traffic、GB、Expire  
-不屏蔽不影响使用，只是会让节点列表看着更整洁一些  
 
 ## 感谢  
 以下排名不分先后  
