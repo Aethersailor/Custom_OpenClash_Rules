@@ -1,27 +1,26 @@
 # NAME: Custom_Direct
 # AUTHOR: Aethersailor
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
-# 强制直连列表
+# 强制直连域名列表，来自个人收集
+# 部分域名可能和大陆域名列表存在重叠
 
-# ImmortalWrt 在线更新
+# ImmortalWrt 在线更新服务
 DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
 # ImmortalWrt 软件仓库
 DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,vsean.net
+# OpenWrt AI 站点
+DOMAIN-SUFFIX,openwrt.ai
+# 订阅转换
+DOMAIN-SUFFIX,apiurl.v1.mk
 # 机场域名
 DOMAIN-SUFFIX,dogsvip.site
 # Todesk
 DOMAIN-SUFFIX,todesk.com
-# 订阅转换
-DOMAIN-SUFFIX,apiurl.v1.mk
-# dogfight360
-DOMAIN-SUFFIX,dogfight360.com
 # 追觅科技
 DOMAIN-SUFFIX,dreame.tech
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
-# IPv6 测试
-#DOMAIN-SUFFIX,test-ipv6.com
 # 推送加
 DOMAIN-SUFFIX,pushplus.plus
 # 其他域名
@@ -29,8 +28,6 @@ DOMAIN-SUFFIX,kit327.com
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
-# OpenWrt AI 站点
-DOMAIN-SUFFIX,openwrt.ai
 # 暴雪战网国际服下载节点
 DOMAIN-SUFFIX,blizzard.gcdn.cloudn.co.kr
 DOMAIN-SUFFIX,level3.blizzard.com
@@ -51,14 +48,13 @@ DOMAIN-SUFFIX,lancdn.com
 DOMAIN-SUFFIX,5eplay.com
 # 松下智能家居
 DOMAIN-SUFFIX,psmartcloud.com
-# 麦瑞克健身设备和超燃脂APP
+# 麦瑞克健身设备 & 超燃脂APP
 DOMAIN-SUFFIX,merach.com
 # 暴雪战网国服相关
 DOMAIN-SUFFIX,netease.com
 DOMAIN-SUFFIX,leihuo.netease.com
 # 太川门禁系统
 DOMAIN-SUFFIX,taichuan.com
-# 海纳物联
 DOMAIN-SUFFIX,taichuan.net
 # PT 下载相关
 DOMAIN-KEYWORD,tracker
@@ -76,6 +72,20 @@ DOMAIN-SUFFIX,ipinfo.io
 DOMAIN-SUFFIX,ggbond.org
 DOMAIN-SUFFIX,nn.ci
 DOMAIN-SUFFIX,xhofe.top
+DOMAIN-SUFFIX,xiaoyakeeper.u.1996999.xyz
+DOMAIN-SUFFIX,wwwh.eu.org
 # 江苏健康通
 DOMAIN-SUFFIX,jsehealth.com
-
+# 国内 CDN
+DOMAIN-SUFFIX,cjjd19.com
+# UniGetUI
+DOMAIN-SUFFIX,powershellgallery.com
+# 魔兽世界 新手盒子
+DOMAIN-SUFFIX,newbeebox.com
+DOMAIN-SUFFIX,wclbox.com
+# NTP Pool Project
+DOMAIN-SUFFIX,pool.ntp.org
+# 明经 CAD 社区
+DOMAIN-SUFFIX,mjtd.com
+# Dell
+DOMAIN-SUFFIX,dell.com

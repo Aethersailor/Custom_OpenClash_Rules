@@ -1,14 +1,13 @@
 # NAME: Custom_Proxy
 # AUTHOR: Aethersailor
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
-# 强制代理列表
+# 强制代理列表，来自个人收集
 
-# 战网国际服登录
-DOMAIN-SUFFIX,eu.battle.net
-DOMAIN-SUFFIX,us.battle.net
-DOMAIN-SUFFIX,kr.battle.net
-DOMAIN-SUFFIX,tw.battle.net
-DOMAIN-SUFFIX,www.battle.net
-DOMAIN-SUFFIX,account.battle.net
 # EA Desktop 云同步
 #DOMAIN-SUFFIX,cloudsync-prod.s3.us-east-1.amazonaws.com
+# GooglePlay 相关
+DOMAIN-SUFFIX,xn--ngstr-lra8j.com
+DOMAIN-SUFFIX,services.googleapis.cn
+# PS5 STUN
+DOMAIN-SUFFIX,stun.playstation.net
+
