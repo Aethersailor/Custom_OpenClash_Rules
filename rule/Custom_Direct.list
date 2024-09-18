@@ -89,3 +89,5 @@ DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,mjtd.com
 # Dell
 DOMAIN-SUFFIX,dell.com
+# 魔兽工坊
+DOMAIN-SUFFIX,miaoyanai.com
