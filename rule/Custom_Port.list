@@ -1,0 +1,16 @@
+# NAME: Custom_Proxy
+# AUTHOR: SeesoN
+# REPO: https://github.com/seeson/Custom_OpenClash_Rules
+# 强制代理端口，避免BT,PT走流量
+
+DST-PORT,22
+DST-PORT,25
+DST-PORT,53
+DST-PORT,143
+DST-PORT,465
+DST-PORT,587
+DST-PORT,853
+DST-PORT,993
+DST-PORT,995
+DST-PORT,80
+DST-PORT,443
