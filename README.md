@@ -64,7 +64,7 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教�
 教程非常详尽，只需按部就班设置即可。全部设置内容均基于 OpenClash 的 luci 设置页面，有手就行！  
 
 此处也提供本仓库订阅模板的单独下载地址：  
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
+https://raw.githubusercontent.com/seeson/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash.ini
 请注意，如果不按照本仓库教程使用，无法保证最终效果，不建议单独使用订阅模板。  
 
 ## 关于个性化需求  
