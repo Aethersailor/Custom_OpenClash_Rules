@@ -66,7 +66,11 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教�
 此处也提供本仓库订阅模板的单独下载地址：  
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 https://raw.githubusercontent.com/seeson/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini
+=======
+https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
+>>>>>>> parent of f49fd13 (Update README.md)
 =======
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
 >>>>>>> parent of f49fd13 (Update README.md)
