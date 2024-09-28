@@ -1,0 +1,6 @@
+# NAME: Custom_Unlock
+# AUTHOR: SeesoN
+# REPO: https://github.com/seeson/Custom_OpenClash_Rules
+# 需要使用已解锁的节点连接的网站
+
+DOMAIN-SUFFIX,rateyourmusic.com
