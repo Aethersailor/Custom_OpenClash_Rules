@@ -5,17 +5,25 @@
 </p>
 
 
-## 关于本仓库 
+## 关于本项目 
 可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文教程和订阅转换模板，秒杀一切教程贴！  
 终结所有错误设置！让稀奇古怪的套娃设置方法见鬼去吧！  
 
-手把手嘴对嘴指导你将 OpenClash 设置为效率、安全和便利三者兼顾的完美状态，零基础小白也能轻松看懂。  
-按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程，搭配本仓库的[订阅模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套娃其他工具，即可实现快速、无污染、无泄漏的 DNS 解析以及完善多样的分流功能，同时配合 Dnsmasq 可实现无第三方插件的广告拦截，并且完美兼容 IPv6。  
+研究如何将 OpenClash 设置为效率、安全和便利三者兼顾的完美状态，零基础小白也能轻松看懂。  
+按照本项目的 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程，搭配本项目的[订阅模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套娃其他工具，即可实现快速、无污染、无泄漏的 DNS 解析以及完善多样的分流功能，同时配合 Dnsmasq 可实现无第三方插件的广告拦截，并且完美兼容 IPv6。  
 
 欢迎 star ！转载请注明出处，感谢！
 
+## 特别声明  
+1. 本项目的主要目的是探索与学习 OpenWrt 系统插件 OpenClash，因此无法确保所有内容的合法性、完整性、准确性或有效性。
+2. 项目中的内容仅用于学习与研究目的，不得将其用于任何可能违反国家、地区或组织法律法规的用途。
+3. 任何直接或间接使用本项目的个人或组织，应在24小时内完成学习与研究，随后删除所有相关内容。
+4. 使用本项目内容进行的任何更改，均为其他个人或组织的行为，与本项目及其维护者无关，因其修改导致的任何后果由相关责任方承担。
+5. 本项目禁止任何个人或组织将本项目相关内容转载于 Github 网站之外的区域。
+6. 本项目保留随时补充或修改免责声明的权利，凡使用本项目内容的个人或组织，均视为已接受此声明。
+
 ## 更新  
-本仓库模板包含的规则均为引用的上游规则碎片，上游规则更新与本仓库模板的更新没有直接关系，只需根据教程设置每日更新订阅即可每日自动获取最新规则。  
+本项目模板包含的规则均为引用的上游规则碎片，上游规则更新与本项目模板的更新没有直接关系，只需根据教程设置每日更新订阅即可每日自动获取最新规则。  
 
 2024.9.29  
 完善教程中广告拦截设置的部分。  
@@ -44,9 +52,9 @@
 教程中上传了一处错误图片，已修正。  
 配置订阅 > 配置文件订阅信息中，请务必停用“使用规则集”功能！  
 
-## 本仓库教程及订阅转换模板介绍
-本仓库的订阅转换模板是在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板基础上进行了魔改和完善。
-以下特性涉及的设置需要按照本仓库 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程对 OpenClash 进行配置才可以实现：  
+## 本项目教程及订阅转换模板介绍
+本项目的订阅转换模板是在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板基础上进行了魔改和完善。
+以下特性涉及的设置需要按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的教程对 OpenClash 进行配置才可以实现：  
 * 无需搭配其他插件，实现 DNS 防泄露；  
 * 基于 ACL4SSR_Online_Full 全分组规则魔改，将大部分规则碎片替换成 [blackmatrix7](https://github.com/blackmatrix7/ios_rule_script) 的规则文件，域名分流信息极为全面，增加更多策略组，覆盖大多数日常使用环境，无需自己折腾；  
 * 支持节点按地区分类测速优选；  
@@ -62,18 +70,18 @@
 * 广告屏蔽功能（可选）  
 
 ## 使用方法  
-准备好你的订阅链接，然后按照本仓库 [Wiki 中的图文教程](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教程)对 OpenClash 进行设置程，教程中已包括了本仓库订阅转换模板的使用方法：  
+准备好你的订阅链接，然后按照本项目 [Wiki 中的图文教程](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教程)对 OpenClash 进行设置程，教程中已包括了本项目订阅转换模板的使用方法：  
 https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置教程  
 教程非常详尽，只需按部就班设置即可。全部设置内容均基于 OpenClash 的 luci 设置页面，有手就行！  
 
-此处也提供本仓库订阅模板的单独下载地址：  
+此处也提供本项目订阅模板的单独下载地址：  
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini  
-请注意，如果不按照本仓库教程使用，无法保证最终效果，不建议单独使用订阅模板。  
+请注意，如果不按照本项目教程使用，无法保证最终效果，不建议单独使用订阅模板。  
 
 ## 关于个性化需求  
-由于本仓库为自用目的，且个人时间有限，因此不提供个性化修改服务。  
+由于本项目为自用目的，且个人时间有限，因此不提供个性化修改服务。  
 如果你需要个性化的模板需求，有以下两用办法可以实现：  
-* fork 本仓库后自行修改添加  
+* fork 本项目后自行修改添加  
 * 使用 OpenClash 的“规则附加”功能附加你需要的规则  
 具体的规则碎片可以在 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 中自行寻找。  
 
@@ -94,11 +102,11 @@ PS：如果在控制面板中为“漏网之鱼”策略组选择了“全球直
 谁说 OpenClash 不能和 IPv6 同时工作？  
 通过正确设置 OpenWrt 的 IPv6 功能以及 OpenClash，即可实现 IPv6 和 OpenClash 的完美兼容。在实现 IPv6 国内外分流代理的同时，还能通过 IPv6-Test 的国内和国外镜像站点测试。  
 
-OpenWrt 的 IPv6 设置教程见本仓库的 Wiki：  
+OpenWrt 的 IPv6 设置教程见本项目的 Wiki：  
 https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置教程  
 
 ## 已知问题  
-目前本仓库订阅模板对 BT 和 PT 流量的处理依托上游规则碎片和关键词完成，可能有不足之处，逐渐完善中。  
+目前本项目订阅模板对 BT 和 PT 流量的处理依托上游规则碎片和关键词完成，可能有不足之处，逐渐完善中。  
 如果觉得当前的 BT/PT 分流状态不能满足需要，请指定“漏网之鱼”策略组直连，可以解决相关流量走节点的问题。  
 
 ## 不能上网？分流不正常？  
@@ -107,17 +115,17 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置�
 重要的事情说三遍，一定要更新，否则 OpenClash 自带的绕过大陆功能会出现问题  
 
 订阅模板只是一个对上游第三方规则的集中引用，模板自身并不会导致分流这个问题。大陆域名和 IP 的分流也是依托引用的大陆白名单和 GEOIP 数据库完成的。  
-上游规则、大陆白名单、GEOIP 数据库这些内容和本仓库没有关系，它们导致的分流异常情况请不要向我反馈，我也无法解决。有需要请去上游规则的仓库进行反馈。  
+上游规则、大陆白名单、GEOIP 数据库这些内容和本项目没有关系，它们导致的分流异常情况请不要向我反馈，我也无法解决。有需要请去上游规则的仓库进行反馈。  
 如果百度之类的热门网站出现分流不正常，说明你的 OpenClash 工作不正常，请先更新 GEOIP 数据库和大陆白名单，必要时请还原设置重新配置。  
 如果你认为规则出现了分流不正常，自行检索规则相关策略组引用的规则，然后至对应项目的仓库反馈。  
 
-本仓库提供的仅仅是订阅转换模板以及 OpenClash 有关的设置教程，且所有设置操作均基于 OpenClash 的图形界面，没有任何超出常规范围的设置和修改，因此不会导致 OpenWrt 以及 OpenClash 工作异常。  
-本人使用的固件是 ImmortalWrt SNAPSHOT 官方编译版本，主路由 PPPOE 拨号环境，本仓库仅能保证在同样固件同样网络条件的情况下正常工作。  
+本项目提供的仅仅是订阅转换模板以及 OpenClash 有关的设置教程，且所有设置操作均基于 OpenClash 的图形界面，没有任何超出常规范围的设置和修改，因此不会导致 OpenWrt 以及 OpenClash 工作异常。  
+本人使用的固件是 ImmortalWrt SNAPSHOT 官方编译版本，主路由 PPPOE 拨号环境，本项目仅能保证在同样固件同样网络条件的情况下正常工作。  
 旁路由/二级路由相关设置基于本人对 OpenWrt 以及 OpenClash 的理解而形成，理论上不会导致问题，请自己根据实际情况调整。  
 
 OpenClash 设置以及订阅转换模板具有普适性，按照教程设置后如果有异常，请从教程和模板以外的因素自行查找原因。  
 故障原因包括但不限于 OpenClash 自身、Clash 内核自身、订阅转换服务亦或是搭配其他插件、他人编译的固件、老旧的固件版本、OpenWrt 设置错误，以及某些设备内置 DNS 等原因。
-以上原因均与本仓库内容无关，请自行排查故障。相关 issue 将被直接关闭，不再予以解答。  
+以上原因均与本项目内容无关，请自行排查故障。相关 issue 将被直接关闭，不再予以解答。  
 
 ## 机场推荐  
 ### 求推荐机场  
@@ -127,7 +135,7 @@ OpenClash 设置以及订阅转换模板具有普适性，按照教程设置后�
 现在欢迎大家推荐一个机场，需要满足以下功能和特性：  
 
 - 节点覆盖地区全面，至少要包含香港、新加坡、美国等主要国家和地区；
-- 必须是 IEPL/IPLC 或 BGP 等不过墙线路，敏感时期时期服务稳定的；
+- 必须是 IEPL/IPLC 或 BGP 等不过墙线路，特殊时期时期服务稳定的；
 - 速度稳定，至少高峰时期油管可播放 8K 视频；
 - 支持流媒体（至少包含 Netflix 和 Disney+）的新加坡区解锁
 - 支持 ChatGPT 解锁；
@@ -139,7 +147,7 @@ OpenClash 设置以及订阅转换模板具有普适性，按照教程设置后�
 - 设备数量限制6台以上或无限制；
 - 月费用一百元以下；
 
-如有符合以上要求的机场，欢迎推荐。可以将你的推广链接发送到本仓库的讨论区中。  
+如有符合以上要求的机场，欢迎推荐。可以将你的推广链接发送到本项目的讨论区中。  
 使用体验不错的话我会把你的推荐链接在 README 此处位置放置三个月。  
 
 ## 控制面板效果截图  
