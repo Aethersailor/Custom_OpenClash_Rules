@@ -52,7 +52,7 @@
 配置订阅 > 配置文件订阅信息中，请务必停用“使用规则集”功能！  
 
 ## 本项目方案及订阅转换模板介绍
-本项目的订阅转换模板是在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) 规则的订阅模板基础上进行了魔改和完善。
+本项目的订阅转换模板是在 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master) 规则的订阅模板基础上进行了魔改和完善。
 以下特性涉及的设置需要按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的方案对 OpenClash 进行配置才可以实现：  
 * 无需搭配其他插件，实现 DNS 防泄露；  
 * 基于 ACL4SSR_Online_Full 全分组规则魔改，将大部分规则碎片替换成 [blackmatrix7](https://github.com/blackmatrix7/ios_rule_script) 的规则文件，域名分流信息极为全面，增加更多策略组，覆盖大多数日常使用环境，无需自己折腾；  
@@ -158,7 +158,7 @@ OpenClash 设置以及订阅转换模板具有普适性，按照方案设置后�
 以下排名不分先后  
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
-- [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
+- [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master)
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
 - [dogfight360/UsbEAm](https://github.com/dogfight360/UsbEAm)  
