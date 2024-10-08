@@ -58,6 +58,8 @@ DOMAIN-SUFFIX,taichuan.com
 DOMAIN-SUFFIX,taichuan.net
 # PT 下载相关
 DOMAIN-KEYWORD,tracker
+DOMAIN-SUFFIX,hdkyl.in
+DOMAIN-SUFFIX,hdkylin.top
 # Akamai CDN
 DOMAIN-SUFFIX,akamaihd.net
 # FinalShell
