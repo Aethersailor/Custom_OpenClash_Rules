@@ -130,7 +130,7 @@ Traffic、GB、Expire
 以下排名不分先后  
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
-- [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master)
+- [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
 - [dogfight360/UsbEAm](https://github.com/dogfight360/UsbEAm)  
