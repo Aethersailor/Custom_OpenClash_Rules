@@ -3,9 +3,10 @@
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # Steam 下载 CDN 地址
 # 来源：https://www.dogfight360.com/blog/knowledge-base/fix_steamdl_region/
-# Update 2024/8/9
-
+# 更新日期 2024/8/9
 # 解决 Steam 下载 CDN 被定位到国外 CDN 的问题
+
+# Steam 下载 CDN 地址
 IP-CIDR,45.121.184.0/24,no-resolve
 IP-CIDR,103.10.124.0/23,no-resolve
 IP-CIDR,103.28.54.0/24,no-resolve
