@@ -2,6 +2,8 @@
 
 <p align="center">
    <img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
+  
+   
 </p>
 
 
@@ -130,6 +132,10 @@ Traffic、GB、Expire
 历史截图，可能和当前版本不一致，仅供示意  
 ![](https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
 
+## 贡献者  
+<a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Aethersailor/Custom_OpenClash_Rules" />
+</a>  
 
 ## 感谢  
 以下排名不分先后  
