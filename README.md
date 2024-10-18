@@ -3,13 +3,7 @@
 <p align="center">
    <img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
    
-    <a href="https://t.me/custom_openclash_rules">
-    <img src="
-        https://img.shields.io/badge/dynamic/json?style=for-the-badge&label=频道&logo=telegram&query=$.data.totalSubs&url=https://api.spencerwoo.com/substats/?source=telegram&queryKey=custom_openclash_rules" alt="Telegram">
-  </a>
-  <a href="https://t.me/custom_openclash_rules_group">
-    <img src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&label=群聊&logo=telegram&query=$.data.totalSubs&url=https://api.spencerwoo.com/substats/?source=telegram&queryKey=custom_openclash_rules_group" alt="Telegram">
-  </a>
+
    
 </p>
 
