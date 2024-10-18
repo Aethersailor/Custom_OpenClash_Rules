@@ -67,14 +67,13 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 具体的规则碎片可以在 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 中自行寻找。  
 
 ## 关于广告过滤  
-由于放弃了套娃其他工具，且大陆域名绕过了 Clash 内核，因此无法依靠 OpenClash 的规则来完成广告过滤。  
 本项目借助 OpenClash 的“开发者选项”功能，实现不依赖第三方插件的广告过滤功能。  
 具体设置见 Wiki 中的方案：[广告拦截设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%97%A0%E6%8F%92%E4%BB%B6%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)  
 其中提供了 Dnsmasq 格式和 hosts 格式的两种设置方法的示例，可以照抄，亦可自由设置其他任何符合格式要求的广告规则。
 
 ## 关于 IPv6  
 谁说 OpenClash 不能和 IPv6 同时工作？  
-通过正确设置 OpenWrt 的 IPv6 功能以及 OpenClash，即可实现 IPv6 和 OpenClash 的完美兼容。在实现 IPv6 国内外分流代理的同时，还能通过 IPv6-Test 的国内和国外镜像站点测试。  
+通过正确设置 OpenWrt 的 IPv6 功能以及 OpenClash，即可实现 IPv6 和 OpenClash 的完美兼容。在实现 IPv6 国内外分流代理的同时，还能完美通过 IPv6-Test 的国内和国外镜像站点测试。  
 
 OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案)  
 
