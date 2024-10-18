@@ -52,8 +52,8 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 * **增加若干冷门域名规则**  增加了一些小众网站的直连规则。  
 
 ## 使用方法  
-准备好你的订阅链接，然后按照本项目 [Wiki 中的图文方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)对 OpenClash 进行设置程，方案中已包括了本项目订阅转换模板的使用方法：  
-https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案  
+准备好你的订阅链接，然后按照本项目 Wiki 中的对应部分对 OpenClash 进行设置：[OpenClash-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)  
+方案中已包括了本项目订阅转换模板的使用方法。 
 以上方案非常详尽，只需按部就班设置即可。全部设置内容均基于 OpenClash 的 luci 设置页面，有手就行！  
 设置方案文字较多，务必逐字逐句认真阅读，不要忽略以防漏掉关键部分导致故障。且方案内含多处设置的讲解便于理解相关设置原理，有助于小白学习。  
 
@@ -76,15 +76,14 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方�
 谁说 OpenClash 不能和 IPv6 同时工作？  
 通过正确设置 OpenWrt 的 IPv6 功能以及 OpenClash，即可实现 IPv6 和 OpenClash 的完美兼容。在实现 IPv6 国内外分流代理的同时，还能通过 IPv6-Test 的国内和国外镜像站点测试。  
 
-OpenWrt 的 IPv6 设置方案见本项目的 Wiki：  
-https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案  
+OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案)  
 
 ## 已知问题  
-目前本项目订阅模板对 BT 和 PT 流量的处理依托上游规则碎片和关键词以及 OpenClash 自带的功能完成，可能有不足之处，逐渐完善中。  
-如果觉得当前的 BT/PT 分流状态不能满足需要，请指定“漏网之鱼”策略组直连，可以解决相关流量走节点的问题。该操作会导致 DNS 泄露检测网站的测试无法通过，但并不会导致泄露。  
+目前本项目订阅模板对 BT 和 PT 流量的处理依托上游规则碎片和关键词以及 OpenClash 自带的功能完成，仍然有不足之处，逐渐完善中。  
+具体解释见 [Wiki 对应内容](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4#5-bt-%E5%92%8C-pt-%E7%AD%89%E4%B8%8B%E8%BD%BD%E6%B5%81%E9%87%8F%E5%88%86%E6%B5%81%E4%B8%8D%E5%AE%8C%E5%96%84)。
 
 ## 不能上网？分流不正常？OpenClash 不能启动？
-出现故障请参考 Wiki 中的《[故障排除](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4)》部分。
+出现故障请参考 [Wiki 中的故障排除部分](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4)。  
 项目维护者可以确定，本项目的设置方案完美无瑕，建议不要从本项目的内容上找原因，以免浪费时间。  
 
 ## 机场推荐 
