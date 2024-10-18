@@ -12,9 +12,9 @@
 本项以中国大陆境内的网络环境为参考，探讨如何将 OpenClash 设置为效率、安全和省心三者兼顾的完美状态，零基础小白也能轻松看懂。  
 按照本项目的 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，搭配本项目的[订阅转换模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套娃其他工具，即可实现快速、无污染、无泄漏的 DNS 解析以及完善多样的分流功能，同时配合 Dnsmasq 可实现无第三方插件的广告拦截，并且完美兼容 IPv6。  
 
-欢迎 star ！转载请注明出处，感谢！
+欢迎 star ！
 
-本项目编写于2024年4月，为非盈利项目，Youtube 上已有多个 UP 主搬运了本项目的内容，请注明本项目的仓库地址，感谢合作！
+本项目编写于2024年4月，为非盈利项目，转载内容请注明本项目的仓库地址，感谢合作！
 
 ## 特别声明  
 1. 本项目的主要目的是探索与学习 OpenWrt 系统插件 OpenClash，因此无法确保所有内容的合法性、完整性、准确性或有效性。
