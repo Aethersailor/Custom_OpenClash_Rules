@@ -1,18 +1,31 @@
 <h1 align="center">OpenClash 保姆级设置方案<br>&<br>全分组防泄漏订阅转换模板</h1>
 
 <p align="center">
-   <img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
+	<img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
+	&nbsp;&nbsp;
+	<a href="https://t.me/custom_openclash_rules">
+		<img src="http://img.shields.io/badge/dynamic/json?style=for-the-badge&label=%E9%A2%91%E9%81%93&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules" alt="Telegram">
+	</a>
+	&nbsp;&nbsp;
+	<a href="https://t.me/custom_openclash_rules_group">
+		<img src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&label=%E7%BE%A4%E8%81%8A&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules_group" alt="Telegram">
+	</a>
 </p>
 
 
 ## 关于本项目 
-可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文设置方案和订阅转换模板！  
+本项目可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文设置方案和订阅转换模板！  
 终结所有错误设置！让稀奇古怪的套娃设置方法见鬼去吧！  
 
-本项以中国大陆境内的网络环境为参考，探讨如何将 OpenClash 设置为效率、安全和省心三者兼顾的完美状态，零基础小白也能轻松看懂。  
+OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现最完美的透明代理效果。
+
+本项以中国大陆境内的网络环境为参考，示例如何将 OpenClash 设置为无感、快速、安全和省心三者兼顾的完美状态，从而达到极致优雅的科学上网体验。
+彻底告别手搓配置和多个插件套娃的设置方法，保证零基础小白也能轻松看懂。  
 按照本项目的 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，搭配本项目的[订阅转换模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套娃其他工具，即可实现快速、无污染、无泄漏的 DNS 解析以及完善多样的分流功能，同时配合 Dnsmasq 可实现无第三方插件的广告拦截，并且完美兼容 IPv6。  
 
-欢迎 star ！转载请注明出处，感谢！
+欢迎 star ！
+
+本项目编写于2024年4月，为非盈利项目，转载内容请注明本项目的仓库地址，感谢合作！
 
 ## 特别声明  
 1. 本项目的主要目的是探索与学习 OpenWrt 系统插件 OpenClash，因此无法确保所有内容的合法性、完整性、准确性或有效性。
@@ -65,9 +78,10 @@ https://raw.githubusercontent.com/seeson/Custom_OpenClash_Rules/main/cfg/Custom_
 PS：如果在控制面板中为“漏网之鱼”策略组选择了“全球直连”策略，则不能通过防泄露测试。  
 
 ## 关于广告过滤  
-由于放弃了套娃其他工具，且大陆域名绕过了 Clash 内核，因此无法依靠 OpenClash 的规则来完成广告过滤，广告过滤功能只能通过 Dnsmasq 来实现。  
-借助 OpenClash 的“开发者选项”功能，让 OpenClash 每次启动时为 Dnsmasq 拉取相应的广告过滤规则文件，同时利用 OpenClash 启动时会重启 Dnsmasq 的特性使广告过滤规则生效。  
-具体设置见 Wiki 中的方案：[广告拦截设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%97%A0%E6%8F%92%E4%BB%B6%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)
+由于放弃了套娃其他工具，且大陆域名绕过了 Clash 内核，因此无法依靠 OpenClash 的规则来完成广告过滤。  
+本项目借助 OpenClash 的“开发者选项”功能，让 OpenClash 每次启动时为 Dnsmasq 拉取相应的广告过滤规则文件，从而实现广告过滤功能而不依赖第三方插件。  
+具体设置见 Wiki 中的方案：[广告拦截设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%97%A0%E6%8F%92%E4%BB%B6%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)  
+其中提供了 Dnsmasq 格式和 hosts 格式的两种设置方法的示例，可以照抄，亦可自由设置其他任何符合格式要求的广告规则。
 
 ## 关于 IPv6  
 谁说 OpenClash 不能和 IPv6 同时工作？  
@@ -77,7 +91,7 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：
 https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案  
 
 ## 已知问题  
-目前本项目订阅模板对 BT 和 PT 流量的处理依托上游规则碎片和关键词完成，可能有不足之处，逐渐完善中。  
+目前本项目订阅模板对 BT 和 PT 流量的处理依托上游规则碎片和关键词以及 OpenClash 自带的功能完成，可能有不足之处，逐渐完善中。  
 如果觉得当前的 BT/PT 分流状态不能满足需要，请指定“漏网之鱼”策略组直连，可以解决相关流量走节点的问题。  
 
 ## 不能上网？分流不正常？  
@@ -127,6 +141,10 @@ Traffic、GB、Expire
 历史截图，可能和当前版本不一致，仅供示意  
 ![](https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
 
+## 贡献者  
+<a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Aethersailor/Custom_OpenClash_Rules" />
+</a>  
 
 ## 感谢  
 以下排名不分先后  
