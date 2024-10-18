@@ -2,7 +2,14 @@
 
 <p align="center">
    <img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
-  
+   
+    <a href="https://t.me/custom_openclash_rules">
+    <img src="
+        https://img.shields.io/badge/dynamic/json?style=for-the-badge&label=频道&logo=telegram&query=$.data.totalSubs&url=https://api.spencerwoo.com/substats/?source=telegram&queryKey=custom_openclash_rules" alt="Telegram">
+  </a>
+  <a href="https://t.me/custom_openclash_rules_group">
+    <img src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&label=群聊&logo=telegram&query=$.data.totalSubs&url=https://api.spencerwoo.com/substats/?source=telegram&queryKey=custom_openclash_rules_group" alt="Telegram">
+  </a>
    
 </p>
 
@@ -85,7 +92,7 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：
 https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案  
 
 ## 已知问题  
-目前本项目订阅模板对 BT 和 PT 流量的处理依托上游规则碎片和关键词完成，可能有不足之处，逐渐完善中。  
+目前本项目订阅模板对 BT 和 PT 流量的处理依托上游规则碎片和关键词以及 OpenClash 自带的功能完成，可能有不足之处，逐渐完善中。  
 如果觉得当前的 BT/PT 分流状态不能满足需要，请指定“漏网之鱼”策略组直连，可以解决相关流量走节点的问题。  
 
 ## 不能上网？分流不正常？  
