@@ -38,7 +38,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 ## 本项目设置方案及订阅转换模板介绍
 本项目的订阅转换模板是参考 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master) 等规则的订阅模板进行了魔改和完善而来。  
 
-**按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案对 OpenClash 进行配置即可实现以下特性，更优雅的使用你的 OpenClash：** 
+**按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，配合本项目的订阅转换模板对 OpenClash 进行配置，即可实现以下特性，更优雅的使用你的 OpenClash：** 
 * **优化的 DNS 设置，闪电般的国内访问速度。**  国内域名采用运营商 DNS 解析，域名和 IP 均绕过 OpenClash 内核并返回真实 IP，让 OpenClash 对国内访问的影响降低到几乎为零。
 * **杜绝 DNS 污染和泄露，无需搭配其他插件。**  海外域名采用使用远端节点服务器的 DNS 进行解析并访问，确保隐私的同时取得最佳解析结果。
 * **彻底告别套娃设置。**  免去各种插件和他们带来的搭配烦恼，且保证 OpenClash 即使挂了也不影响访问国内网站。  
