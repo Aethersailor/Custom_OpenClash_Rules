@@ -85,31 +85,6 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 出现故障请参考 [Wiki 中的故障排除部分](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4)。  
 项目维护者可以确定，本项目的设置方案完美无瑕，建议不要从本项目的内容上找原因，以免浪费时间。  
 
-## 机场推荐 
-### SSRDOG  
-
-本人常年使用的一家机场，价格和流量都比较适中，搭配本项目的设置方案以及订阅模板使用，体验保证拉满。
-
-- 节点覆盖地区全面，包含港台美日新欧等主流地区
-- 低延迟大带宽，高峰时期油管 8K 视频秒开无压力
-- 全 IEPL 线路不过墙，特殊时期服务稳定
-- 解锁 Netflix、Disney+、YouTube、TikTok、Spotify 等主流流媒体服务
-- 解锁 ChatGPT 
-- 支持 UDP 转发和游戏加速
-- 支持 IPv6 出站。
-- 工单支持简体中文沟通且客服反应迅速
-
-注册链接：[SSRDOG 注册](https://dog1.ssrdog111.com/#/register?code=FnSb4oWM)  (链接包含 aff 信息)
-
-本项目订阅模板的节点地区分类即参考了该机场的节点地区进行分类。  
-
-PS：该机场 Hong Kong 11-15 节点不支持 IPv6 出站，如果需要 IPv6 出站功能，建议在 订阅设置 > 排除节点中排除如下关键词：  
-Traffic、GB、Expire、11、12、13、14、15  
-
-若不使用 IPv6 功能，只需屏蔽如下节点关键词：  
-Traffic、GB、Expire  
-不屏蔽不影响使用，只是会让节点列表看着更整洁一些  
-
 ## 控制面板效果截图  
 历史截图，可能和当前版本不一致，仅供示意  
 ![](https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
