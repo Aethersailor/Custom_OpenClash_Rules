@@ -70,7 +70,7 @@ IP-CIDR,5.5.5.5/32,no-resolve
 # 支付宝小程序
 DOMAIN-SUFFIX,95504test.com
 # 小众软件论坛
-DOMAIN-SUFFIX,appinn.net
+DOMAIN-SUFFIX,appinn.com
 # Emby 小雅 相关
 DOMAIN-SUFFIX,ddsrem.com
 DOMAIN-SUFFIX,ipinfo.io
@@ -96,3 +96,5 @@ DOMAIN-SUFFIX,mjtd.com
 DOMAIN-SUFFIX,dell.com
 # 魔兽工坊
 DOMAIN-SUFFIX,miaoyanai.com
+# 拓竹 3D 打印
+DOMAIN-SUFFIX,bambulab.com
