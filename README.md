@@ -57,12 +57,11 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ## 关于个性化需求  
 由于本项目为自用目的，且个人时间有限，只能随缘更新，因此不提供个性化修改服务。  
-如果你需要个性化的模板需求，有以下三种办法可以实现：  
-* fork 本项目后自行修改添加。  
-* 使用 OpenClash 的“规则附加”功能附加你需要的规则。  
-* 使用 OpenClash 的“自定义规则”功能添加你需要的规则。  
-根据自身需求，以上方式任选其一，亦可搭配使用。  
-具体的规则碎片可以在 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 中自行寻找。  
+具体个性化实现方式，请参考 Wiki 中的对应章节：[个性化需求](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82)
+
+## 关于冷门国内域名收录问题
+如果遇到缺失的冷门国内域名，建议向上游 GeoSite 数据库项目提交 PR 进行添加  
+具体参考 Wiki 对应章节：[关于国内冷门域名的收录](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E5%86%B7%E9%97%A8%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D%E7%9A%84%E6%94%B6%E5%BD%95)
 
 ## 关于广告过滤  
 本项目借助 OpenClash 的“开发者选项”功能，实现不依赖第三方插件的广告过滤功能。  
