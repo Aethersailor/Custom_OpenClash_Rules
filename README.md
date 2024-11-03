@@ -19,11 +19,12 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 本项以中国大陆境内的网络环境为参考，示例如何将 OpenClash 设置为无感、快速、安全和省心三者兼顾的完美状态，从而达到极致优雅的科学上网体验。
 彻底告别手搓配置和多个插件套娃的繁琐设置方法，保证零基础小白也能轻松看懂。  
-按照本项目的 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，搭配本项目的[订阅转换模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套娃其他工具，即可实现快速、无污染、无泄漏的 DNS 解析以及完善多样的分流功能，同时配合 Dnsmasq 可实现无第三方插件的广告拦截，并且完美兼容 IPv6。  
+按照本项目的 [Wiki](https://github.com/seeson/Custom_OpenClash_Rules/wiki) 中的设置方案，搭配本项目的[订阅转换模板](https://raw.githubusercontent.com/seeson/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套娃其他工具，即可实现快速、无污染、无泄漏的 DNS 解析以及完善多样的分流功能，同时配合 Dnsmasq 可实现无第三方插件的广告拦截，并且完美兼容 IPv6。  
 
 欢迎 star ！
 
-本项目编写于2024年4月，为非盈利项目，转载内容请注明本项目的仓库地址，感谢合作！
+本项目编写于2024年4月，为非盈利项目。  
+某些 Youtube 作者转载本项目内容请注明本项目的仓库地址，感谢合作！
 
 ## 特别声明  
 1. 本项目的主要目的是探索与学习 OpenWrt 系统插件 OpenClash，因此无法确保所有内容的合法性、完整性、准确性或有效性。
@@ -36,54 +37,54 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 ## 本项目设置方案及订阅转换模板介绍
 本项目的订阅转换模板是参考 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master) 等规则的订阅模板进行了魔改和完善而来。  
 
-**按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，配合本项目的订阅转换模板对 OpenClash 进行配置，即可实现以下特性，更优雅的使用你的 OpenClash：** 
+**按照本项目 [Wiki](https://github.com/seeson/Custom_OpenClash_Rules/wiki) 中的设置方案，配合本项目的订阅转换模板对 OpenClash 进行配置，即可实现以下特性，更优雅的使用你的 OpenClash：** 
 * **优化的 DNS 设置，闪电般的国内访问速度。**  国内域名采用运营商 DNS 解析，域名和 IP 均绕过 OpenClash 内核并返回真实 IP，让 OpenClash 对国内访问的影响降低到几乎为零。
 * **杜绝 DNS 污染和泄露，无需搭配其他插件。**  海外域名采用使用远端节点服务器的 DNS 进行解析并访问，确保隐私的同时取得最佳解析结果。
-* **彻底告别套娃设置。**  免去各种 DNS 插件带来的搭配烦恼，且保证 OpenClash 即使挂了也不影响访问国内网站。  
-* **丰富的分流策略组。**  包含流媒体、AI 工具在内的大量常见的分流策略组。 
-* **支持节点按地区分类测速优选。**  不用自己折腾切换节点。  
+* **彻底告别套娃设置。**  免去各种 DNS 插件带来的搭配烦恼，全部特性依靠 OpenClash 一个插件实现，且保证 OpenClash 即使挂了也不影响访问国内网站。  
+* **丰富的分流策略组。**  包含流媒体服务、AI 工具等在内的大量常见的分流策略组。 
+* **支持节点按地区分类测速优选。**  自动优选最快节点，不用自己折腾切换。  
 * **Steam 访问优化。**  单独列出 Steam 规则并强制 Steam 下载 CDN 走直连，解决 Steam 下载 CDN 定位到海外的问题，确保 Steam 下载流量不走代理。  
 * **一次设置，长期无人值守。**  每日定时自动更新上游规则和 GEO 数据库、大陆白名单，无需自己动手。    
 * **海外下载流量优化。**  尽力避免海外下载流量走节点，节约节点流量。（尚不完善）。  
-* **广告屏蔽功能。**  依靠 OpenClash 配合系统自带 Dnsmasq 实现广告过滤并每日自动更新，支持添加多个规则。（可选）
-* **增加更多的节点区域分组**  增加包括英国、加拿大等国家的节点分组。
-* **增加若干冷门域名规则**  增加了一些小众网站的直连规则。  
+* **支持广告屏蔽功能和hosts加速。**  依靠 OpenClash 配合系统自带 Dnsmasq 实现广告过滤和 hosts 加速功能，并实现每日自动更新，支持添加多个规则。（可选）
+* **增加更多的节点区域分组。**  增加包括英国、加拿大等国家的节点分组。
+* **增加若干冷门域名规则。**  增加了一些小众网站的直连规则，可以自己 PR 提交域名参与完善规则。  
 
 ## 使用方法  
-准备好你的订阅链接，然后按照本项目 Wiki 中的对应部分对 OpenClash 进行设置：[OpenClash-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)  
+准备好你的订阅链接，然后按照本项目 Wiki 中的对应部分对 OpenClash 进行设置：[OpenClash-设置方案](https://github.com/seeson/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)  
 方案中已包括了本项目订阅转换模板的使用方法。  
 以上方案非常详尽，只需按部就班设置即可。全部设置内容均基于 OpenClash 的 luci 设置页面，有手就行！  
 设置方案文字较多，务必逐字逐句认真阅读，不要忽略以防漏掉关键部分导致故障。且方案内含多处设置的讲解便于理解相关设置原理，有助于小白学习。  
 
 ## 关于个性化需求  
 由于本项目为自用目的，且个人时间有限，只能随缘更新，因此不提供个性化修改服务。  
-具体个性化实现方式，请参考 Wiki 中的对应章节：[个性化需求](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82)
+具体个性化实现方式，请参考 Wiki 中的对应章节：[个性化需求](https://github.com/seeson/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82)
 
 ## 关于冷门国内域名收录问题
-如果遇到缺失的冷门国内域名，参考 Wiki 对应章节：[关于国内冷门域名的收录](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E5%86%B7%E9%97%A8%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D%E7%9A%84%E6%94%B6%E5%BD%95)
+如果遇到缺失的冷门国内域名，参考 Wiki 对应章节：[关于国内冷门域名的收录](https://github.com/seeson/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E5%86%B7%E9%97%A8%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D%E7%9A%84%E6%94%B6%E5%BD%95)
 
 ## 关于广告过滤  
 本项目借助 OpenClash 的“开发者选项”功能，实现不依赖第三方插件的广告过滤功能。  
-具体设置见 Wiki 中的方案：[广告拦截设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%97%A0%E6%8F%92%E4%BB%B6%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)  
+具体设置见 Wiki 中的方案：[广告拦截设置方案](https://github.com/seeson/Custom_OpenClash_Rules/wiki/%E6%97%A0%E6%8F%92%E4%BB%B6%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)  
 其中提供了 Dnsmasq 格式和 hosts 格式的两种设置方法的示例，可以照抄，亦可自由设置其他任何符合格式要求的广告规则。
 
 ## 关于 IPv6  
 谁说 OpenClash 不能和 IPv6 同时工作？  
 通过正确设置 OpenWrt 的 IPv6 功能以及 OpenClash，即可实现 IPv6 和 OpenClash 的完美兼容。在实现 IPv6 国内外分流代理的同时，还能完美通过 IPv6-Test 的国内和国外镜像站点测试。  
 
-OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案)  
+OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](https://github.com/seeson/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案)  
 
 ## 已知问题  
 目前本项目订阅模板对 BT 和 PT 流量的处理依托上游规则碎片和关键词以及 OpenClash 自带的功能完成，仍然有不足之处，逐渐完善中。  
-具体解释见 [Wiki 对应内容](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4#5-bt-%E5%92%8C-pt-%E7%AD%89%E4%B8%8B%E8%BD%BD%E6%B5%81%E9%87%8F%E5%88%86%E6%B5%81%E4%B8%8D%E5%AE%8C%E5%96%84)。
+具体解释见 [Wiki 对应内容](https://github.com/seeson/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4#5-bt-%E5%92%8C-pt-%E7%AD%89%E4%B8%8B%E8%BD%BD%E6%B5%81%E9%87%8F%E5%88%86%E6%B5%81%E4%B8%8D%E5%AE%8C%E5%96%84)。
 
 ## 不能上网？分流不正常？OpenClash 不能启动？
-出现故障请参考 [Wiki 中的故障排除部分](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4)。  
+出现故障请参考 [Wiki 中的故障排除部分](https://github.com/seeson/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4)。  
 项目维护者可以确定，本项目的设置方案完美无瑕，建议不要从本项目的内容上找原因，以免浪费时间。  
 
 ## 控制面板效果截图  
 历史截图，可能和当前版本不一致，仅供示意  
-![](https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
+![](https://github.com/seeson/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
 
 ## 贡献者  
 <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/graphs/contributors">
@@ -102,6 +103,7 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 ## 许可		
 [![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
 * CC-BY-SA-4.0  
+**谴责所有不遵循 LICENSE 的搬运行为。** 
 
 ## 星标记录
 
