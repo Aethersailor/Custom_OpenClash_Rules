@@ -18,6 +18,7 @@ DOMAIN-SUFFIX,lemonhd.club
 DOMAIN-SUFFIX,badasstorrents.com
 DOMAIN-SUFFIX,torrentdownloads.pro
 DOMAIN-SUFFIX,qbittorrent.org
+DOMAIN-SUFFIX,ds1.m-team.co
 DOMAIN-KEYWORD,torrentqq
 # Cloudflare DNS
 IP-CIDR,1.1.1.1/32,no-resolve
