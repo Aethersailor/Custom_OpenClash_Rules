@@ -6,8 +6,8 @@
 # EA Desktop 云同步
 #DOMAIN-SUFFIX,cloudsync-prod.s3.us-east-1.amazonaws.com
 # GooglePlay 相关
-DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 DOMAIN-SUFFIX,services.googleapis.cn
+DOMAIN-SUFFIX,clientservices.googleapis.com
 # PS5 STUN
 DOMAIN-SUFFIX,stun.playstation.net
 # Cloudflare DNS
