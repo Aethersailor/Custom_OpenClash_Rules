@@ -84,6 +84,9 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 出现故障请参考 [Wiki 中的故障排除部分](https://github.com/seeson/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4)。  
 项目维护者可以确定，本项目的设置方案完美无瑕，建议不要从本项目的内容上找原因，以免浪费时间。  
 
+## 在 OpenClash 之外的其他软件中是否可用？  
+理论上本项目的订阅转换模板是通用的，但是不建议在移动端设备上使用。由于规则过于复杂会导致移动设备耗电急剧增加，甚至影响上网体验。 
+
 ## 控制面板效果截图  
 历史截图，可能和当前版本不一致，仅供示意  
 ![](https://github.com/seeson/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  

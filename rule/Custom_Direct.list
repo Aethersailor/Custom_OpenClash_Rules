@@ -16,14 +16,8 @@ DOMAIN-SUFFIX,openwrt.ai
 DOMAIN-SUFFIX,apiurl.v1.mk
 # 机场域名
 DOMAIN-SUFFIX,dogsvip.site
-# Todesk
-DOMAIN-SUFFIX,todesk.com
-# 追觅科技
-DOMAIN-SUFFIX,dreame.tech
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
-# 推送加
-DOMAIN-SUFFIX,pushplus.plus
 # 其他域名
 DOMAIN-SUFFIX,kit327.com
 # Windows 网络连接探测
@@ -38,25 +32,13 @@ DOMAIN-SUFFIX,eu.cdn.blizzard.com
 IP-CIDR,137.221.64.0/24,no-resolve
 IP-CIDR,8.251.135.126/32,no-resolve
 IP-CIDR,8.251.246.126/32,no-resolve
-# 互动游戏对战平台
-DOMAIN-SUFFIX,fxt365.com
 # 微软飞行模拟 2020 游戏内下载 CDN
 DOMAIN,pf-cdn-content-prod.azureedge.net
-# 蓝点网
-DOMAIN-SUFFIX,landiannews.com
-DOMAIN-SUFFIX,lancdn.com
-# 5E 对战平台
-DOMAIN-SUFFIX,5eplay.com
 # 松下智能家居
 DOMAIN-SUFFIX,psmartcloud.com
-# 麦瑞克健身设备 & 超燃脂APP
-DOMAIN-SUFFIX,merach.com
 # 暴雪战网国服相关
 DOMAIN-SUFFIX,netease.com
 DOMAIN-SUFFIX,leihuo.netease.com
-# 太川门禁系统
-DOMAIN-SUFFIX,taichuan.com
-DOMAIN-SUFFIX,taichuan.net
 # PT 下载相关
 DOMAIN-KEYWORD,tracker
 DOMAIN-SUFFIX,hdkyl.in
@@ -66,10 +48,6 @@ DOMAIN-SUFFIX,ilovelemonhd.me
 DOMAIN-SUFFIX,akamaihd.net
 # FinalShell
 IP-CIDR,5.5.5.5/32,no-resolve
-# 支付宝小程序
-DOMAIN-SUFFIX,95504test.com
-# 小众软件论坛
-DOMAIN-SUFFIX,appinn.com
 # Emby 小雅 相关
 DOMAIN-SUFFIX,ddsrem.com
 DOMAIN-SUFFIX,ipinfo.io
@@ -78,23 +56,15 @@ DOMAIN-SUFFIX,nn.ci
 DOMAIN-SUFFIX,xhofe.top
 DOMAIN-SUFFIX,xiaoyakeeper.u.1996999.xyz
 DOMAIN-SUFFIX,wwwh.eu.org
-# 江苏健康通
-DOMAIN-SUFFIX,jsehealth.com
 # 国内 CDN
 DOMAIN-SUFFIX,cjjd19.com
 # UniGetUI
 DOMAIN-SUFFIX,powershellgallery.com
-# 魔兽世界 新手盒子
-DOMAIN-SUFFIX,newbeebox.com
-DOMAIN-SUFFIX,wclbox.com
 # NTP Pool Project
 DOMAIN-SUFFIX,pool.ntp.org
-# 明经 CAD 社区
-DOMAIN-SUFFIX,mjtd.com
 # Dell
 DOMAIN-SUFFIX,dell.com
-# 魔兽工坊
-DOMAIN-SUFFIX,miaoyanai.com
-# 拓竹 3D 打印
-DOMAIN-SUFFIX,bambulab.com
-DOMAIN-SUFFIX,bblmw.com
+# Google Play
+DOMAIN-SUFFIX,xn--ngstr-lra8j.com
+# 中国石油支付宝小程序
+DOMAIN-SUFFIX,95504test.com
