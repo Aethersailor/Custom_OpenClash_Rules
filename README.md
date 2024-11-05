@@ -82,6 +82,9 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 出现故障请参考 [Wiki 中的故障排除部分](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4)。  
 项目维护者可以确定，本项目的设置方案完美无瑕，建议不要从本项目的内容上找原因，以免浪费时间。  
 
+## 在 OpenClash 之外的其他软件中是否可用？  
+理论上本项目的订阅转换模板是通用的，但是不建议在移动端设备上使用。由于规则过于复杂会导致移动设备耗电急剧增加，甚至影响上网体验。  
+
 ## 机场推荐 
 ### SSRDOG  
 
@@ -94,6 +97,7 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 - 解锁 ChatGPT 
 - 支持 UDP 转发和游戏加速，部分节点支持 FullCone 全锥形 NAT
 - 支持 IPv6 出站
+- 支持试用
 - 工单支持简体中文沟通且客服反应迅速
 
 注册链接：[SSRDOG 注册](https://dog1.ssrdog111.com/#/register?code=FnSb4oWM)  (链接包含 aff 信息)
