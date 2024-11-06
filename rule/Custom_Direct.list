@@ -12,6 +12,9 @@ DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,vsean.net
 # OpenWrt AI 站点
 DOMAIN-SUFFIX,openwrt.ai
+#班小二
+DOMAIN-SUFFIX,banxiaoer.com
+DOMAIN-SUFFIX,banxiaoer.net
 # 订阅转换
 DOMAIN-SUFFIX,apiurl.v1.mk
 # 机场域名
