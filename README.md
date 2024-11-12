@@ -3,6 +3,7 @@
 - https://github.com/Aethersailor/Custom_OpenClash_Rules
 - https://github.com/ACL4SSR/ACL4SSR/tree/master
 - https://github.com/sataniczack/Custom_Clash_Rules/tree/main
+- https://github.com/Nitmi/shellclash-/blob/master/rules/ShellClash_Full.ini
 > the third is forked from the first.
 
 
