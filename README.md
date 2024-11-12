@@ -1,3 +1,12 @@
+## own description
+### 参考项目
+- https://github.com/Aethersailor/Custom_OpenClash_Rules
+- https://github.com/ACL4SSR/ACL4SSR/tree/master
+- https://github.com/sataniczack/Custom_Clash_Rules/tree/main
+> the third is forked from the first.
+
+
+
 <h1 align="center">OpenClash 保姆级设置方案<br>&<br>全分组防泄漏订阅转换模板</h1>
 
 <p align="center">
