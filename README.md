@@ -12,7 +12,7 @@
 <p align="center"><b>让你更优雅的使用 OpenClash </b></p>
 
 ## 关于本项目 
-> 本项目Fork自[Aethersailor](https://github.com/Aethersailor/Custom_OpenClash_Rules)，在原项目基础上采用增加常用增加常用端口，可依据情况自行选择代理方式，如代理常用端口，后续漏网规则可选择直连，防止BT/PT 走节点流量，并增加自定义解锁规则，可根据情况将被封锁网站放入规则内交由可解锁节点打开，增加了灵活性。
+> 本项目Fork自[Aethersailor](https://github.com/Aethersailor/Custom_OpenClash_Rules)，在原项目基础上增加自定义常用代理端口列表，可依据情况自行选择代理方式，如代理常用端口，后续漏网规则可选择直连，防止BT/PT 走节点流量，并增加自定义解锁规则，可根据情况将被封锁网站放入规则内交由可解锁节点打开，增加了灵活性。
 
 本项目可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文设置方案和订阅转换模板！  
 终结所有错误设置！让稀奇古怪的套娃设置方法见鬼去吧！  
