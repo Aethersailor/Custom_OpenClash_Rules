@@ -55,8 +55,6 @@ DOMAIN-SUFFIX,xiaoyakeeper.u.1996999.xyz
 DOMAIN-SUFFIX,wwwh.eu.org
 # 国内 CDN
 DOMAIN-SUFFIX,cjjd19.com
-# UniGetUI
-DOMAIN-SUFFIX,powershellgallery.com
 # NTP Pool Project
 DOMAIN-SUFFIX,pool.ntp.org
 # Dell
