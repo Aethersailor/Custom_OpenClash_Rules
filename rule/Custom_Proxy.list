@@ -15,4 +15,4 @@ IP-CIDR,1.1.1.1/32,no-resolve
 IP-CIDR,1.0.0.1/32,no-resolve
 # 嵌入式相关
 DOMAIN-SUFFIX,platformio.org
-DOMAIN_SUFFIX,arduino.cc
+DOMAIN-SUFFIX,arduino.cc
