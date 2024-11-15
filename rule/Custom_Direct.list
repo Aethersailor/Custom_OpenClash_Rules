@@ -65,7 +65,7 @@ DOMAIN-SUFFIX,95504test.com
 DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 # 嵌入式相关
 DOMAIN-SUFFIX,jlc.com
-DOMAIN_SUFFIX,jlcpcb.com
-DOMAIN_SUFFIX,lceda.cn
+DOMAIN-SUFFIX,jlcpcb.com
+DOMAIN-SUFFIX,lceda.cn
 DOMAIN-SUFFIX,szlcsc.com
 DOMAIN-SUFFIX,oshwhub.com
