@@ -65,3 +65,9 @@ DOMAIN-SUFFIX,dell.com
 DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 # 中国石油支付宝小程序
 DOMAIN-SUFFIX,95504test.com
+# 嵌入式相关
+DOMAIN-SUFFIX,jlc.com
+DOMAIN-SUFFIX,jlcpcb.com
+DOMAIN-SUFFIX,lceda.cn
+DOMAIN-SUFFIX,szlcsc.com
+DOMAIN-SUFFIX,oshwhub.com
