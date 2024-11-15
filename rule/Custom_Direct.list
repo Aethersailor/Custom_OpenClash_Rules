@@ -61,3 +61,5 @@ DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,dell.com
 # 中国石油支付宝小程序
 DOMAIN-SUFFIX,95504test.com
+# Google Play
+DOMAIN-SUFFIX,xn--ngstr-lra8j.com
