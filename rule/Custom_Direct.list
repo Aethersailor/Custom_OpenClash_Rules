@@ -61,8 +61,6 @@ DOMAIN-SUFFIX,powershellgallery.com
 DOMAIN-SUFFIX,pool.ntp.org
 # Dell
 DOMAIN-SUFFIX,dell.com
-# Google Play
-DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 # 中国石油支付宝小程序
 DOMAIN-SUFFIX,95504test.com
 # 嵌入式相关
