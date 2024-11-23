@@ -6,12 +6,10 @@
 # 规则内容较少，不会影响性能，请放心使用
 
 # ImmortalWrt 在线更新服务
-DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
+#DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
 # ImmortalWrt 软件仓库
 DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,vsean.net
-# OpenWrt AI 站点
-DOMAIN-SUFFIX,openwrt.ai
 # 订阅转换
 DOMAIN-SUFFIX,apiurl.v1.mk
 # 机场域名
@@ -59,14 +57,6 @@ DOMAIN-SUFFIX,cjjd19.com
 DOMAIN-SUFFIX,pool.ntp.org
 # Dell
 DOMAIN-SUFFIX,dell.com
-# 中国石油支付宝小程序
-DOMAIN-SUFFIX,95504test.com
-# Google Play
-DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 # 嵌入式相关
-DOMAIN-SUFFIX,jlc.com
 DOMAIN-SUFFIX,jlcpcb.com
-DOMAIN-SUFFIX,lceda.cn
-DOMAIN-SUFFIX,szlcsc.com
-DOMAIN-SUFFIX,oshwhub.com
-DOMAIN-SUFFIX,jiepei.com
+
