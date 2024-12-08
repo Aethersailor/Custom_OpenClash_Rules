@@ -61,4 +61,7 @@ DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,dell.com
 # 嵌入式相关
 DOMAIN-SUFFIX,jlcpcb.com
-
+# 捷顺科技
+DOMAIN-SUFFIX,jslife.net
+# 南海控股有限公司
+DOMAIN-SUFFIX,nanhaicorp.com
