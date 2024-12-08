@@ -1,0 +1,8 @@
+# NAME: Ozon
+# AUTHOR: Aethersailor
+# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# Ozon 域名规则
+
+DOMAIN-SUFFIX,ozon.ru
+DOMAIN-SUFFIX,ozone.ru
+DOMAIN-SUFFIX,ozonusercontent.com

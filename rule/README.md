@@ -17,3 +17,7 @@
 ### Steam_CDN.list  
 **Steam 国内下载 CDN 地址集合**，优先级高于所有上游规则碎片  
 强制 Steam 下载流量不走代理  
+
+### Ozon.list  
+**国外电商网站 Ozon 规则**  
+
