@@ -19,15 +19,14 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 本项目以中华人民共和国境内的网络环境为参考，示例如何将 OpenClash 插件设置为无感、快速、安全和省心三者兼顾的完美状态，从而达到极致优雅的科学上网体验。
 彻底告别手搓配置和多个插件套娃的繁琐设置方法，保证零基础小白也能轻松看懂。  
-按照本项目的 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，搭配本项目的[订阅转换模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，仅依靠 OpenClash 自身，无需套娃其他工具，即可实现快速、无污染、无泄漏的 DNS 解析以及完善多样的分流功能，同时配合 Dnsmasq 可实现无需第三方插件的广告拦截，并且完美兼容 IPv6。  
+按照本项目的 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，搭配本项目的[订阅转换模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，无需套娃其他工具，仅依靠 OpenClash 自身即可实现快速、无污染、无泄漏的 DNS 解析以及完善多样的分流功能，同时配合 Dnsmasq 可实现无需第三方插件的广告拦截，并且完美兼容 IPv6。  
 
 欢迎 star ！
 
 Telegram 通知频道：https://t.me/custom_openclash_rules  
 Telegram 讨论群组：https://t.me/custom_openclash_rules_group  
 
-本项目编写于2024年4月，为非盈利项目。  
-某些 Youtube 作者转载本项目内容请注明本项目的仓库地址，感谢合作！
+本项目编写于2024年4月，为非盈利项目。转载本项目内容请注明本项目的仓库地址，感谢合作！  
 
 ## 特别声明  
 1. 本项目的主要目的是探索与学习 OpenWrt 系统插件 OpenClash，因此无法确保所有内容的合法性、完整性、准确性或有效性。
@@ -48,7 +47,7 @@ Telegram 讨论群组：https://t.me/custom_openclash_rules_group
 * **丰富的分流策略组。**  包含流媒体服务、AI 工具、电商、游戏平台等在内的大量常见的分流策略组。 
 * **支持节点按地区分类测速优选。**  自动优选最快节点，不用自己折腾切换。  
 * **Steam 访问优化。**  单独列出 Steam 规则并强制 Steam 下载 CDN 走直连，解决 Steam 下载 CDN 定位到海外的问题，确保 Steam 下载流量不走代理。  
-* **一次设置，长期无人值守。**  每日定时自动更新上游规则和 GEO 数据库、大陆白名单等具有时效性要求的数据，无需自己动手。    
+* **自动更新，长期无人值守。**  设置完成后即可长期无人值守，每日定时自动更新上游规则 GEO 数据库和大陆白名单等具有时效性要求的数据，无需自己动手。    
 * **海外下载流量优化。**  尽力避免海外下载流量走节点，节约节点流量。（尚不完善）。  
 * **支持广告屏蔽功能和 hosts 加速。**  依靠 OpenClash 配合系统自带 Dnsmasq 实现广告过滤和 hosts 加速功能，并实现每日自动更新，支持添加多个规则。（可选）
 * **增加更多的节点区域分组。**  增加包括英国、加拿大等国家的节点分组。
