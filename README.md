@@ -136,6 +136,10 @@ Traffic、GB、Expire
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
 - [dogfight360/UsbEAm](https://github.com/dogfight360/UsbEAm)  
+- [ddgksf2013/ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)  
+- [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
+- [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)  
+- [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520)  
 
 ## 许可		
 [![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
