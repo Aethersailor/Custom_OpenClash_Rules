@@ -1,5 +1,5 @@
 <h1 align="center">OpenClash 保姆级设置方案<br>&<br>全分组防泄漏订阅转换模板</h1>
-<p align="center"><b>让你更优雅的使用 OpenClash </b></p>
+
 <p align="center">
 	<img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
 	<a href="https://t.me/custom_openclash_rules">
@@ -9,7 +9,7 @@
 		<img src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&label=%E7%BE%A4%E8%81%8A&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules_group" alt="Telegram">
 	</a>
 </p>
-
+<p align="center"><b>让你更优雅的使用 OpenClash </b></p>
 
 # 关于本项目 
 本项目可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文设置方案和订阅转换模板！  
