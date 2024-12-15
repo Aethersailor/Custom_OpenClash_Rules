@@ -10,6 +10,8 @@
 # ImmortalWrt 软件仓库
 DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,vsean.net
+# GitHub CDN
+DOMAIN-SUFFIX,jsdelivr.net
 # 订阅转换
 DOMAIN-SUFFIX,apiurl.v1.mk
 # 机场域名
@@ -63,6 +65,8 @@ DOMAIN-SUFFIX,nn.ci
 DOMAIN-SUFFIX,xhofe.top
 DOMAIN-SUFFIX,xiaoyakeeper.u.1996999.xyz
 DOMAIN-SUFFIX,wwwh.eu.org
+# IPTV 相关
+DOMAIN-SUFFIX,112114.xyz
 # 国内 CDN
 DOMAIN-SUFFIX,cjjd19.com
 # UniGetUI
@@ -71,9 +75,13 @@ DOMAIN-SUFFIX,powershellgallery.com
 DOMAIN-SUFFIX,pool.ntp.org
 # Dell
 DOMAIN-SUFFIX,dell.com
+
+# 以下是准备向 GeoSite 提交的国内冷门域名，提交后会删除对应内容
 # 嵌入式相关
 DOMAIN-SUFFIX,jlcpcb.com
 # 捷顺科技
 DOMAIN-SUFFIX,jslife.net
 # 南海控股有限公司
 DOMAIN-SUFFIX,nanhaicorp.com
+# 范明明's Blog 蒙ICP备18004194号
+DOMAIN-SUFFIX,fanmingming.com
