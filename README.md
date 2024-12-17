@@ -17,7 +17,7 @@
 
 OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现最完美的透明代理效果。
 
-本项目以中华人民共和国境内的网络环境为参考，示例如何将 OpenClash 插件设置为无感、快速、安全和省心三者兼顾的完美状态，从而达到极致优雅的科学上网体验。
+本项目以中华人民共和国境内的网络环境为参考，示例如何将 OpenClash 插件设置为无感、快速、安全和省心兼顾的完美状态，从而达到极致优雅的透明代理科学上网体验。
 彻底告别手搓配置和多个插件套娃的繁琐设置方法，保证零基础小白也能轻松看懂。  
 按照本项目的 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，搭配本项目的[订阅转换模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)对 OpenClash 进行设置，无需套娃其他工具，仅依靠 OpenClash 自身即可实现快速、无污染、无泄漏的 DNS 解析以及完善多样的分流功能，同时配合 Dnsmasq 可实现无需第三方插件的广告拦截，并且完美兼容 IPv6。  
 
