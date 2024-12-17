@@ -20,7 +20,7 @@ DOMAIN-SUFFIX,dogsvip.site
 DOMAIN-SUFFIX,catsxp.com
 # 其他域名
 DOMAIN-SUFFIX,kit327.com
-## DDNS
+# DDNS
 DOMAIN-KEYWORD,synology
 DOMAIN-KEYWORD,quickconnect
 DOMAIN-SUFFIX,checkip.dyndns.org
@@ -44,6 +44,8 @@ DOMAIN-SUFFIX,eu.cdn.blizzard.com
 IP-CIDR,137.221.64.0/24,no-resolve
 IP-CIDR,8.251.135.126/32,no-resolve
 IP-CIDR,8.251.246.126/32,no-resolve
+# EA-Desktop 下载节点
+DOMAIN-SUFFIX,origin-a.akamaihd.net
 # 微软飞行模拟 2020 游戏内下载 CDN
 DOMAIN,pf-cdn-content-prod.azureedge.net
 # 松下智能家居
