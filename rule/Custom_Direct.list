@@ -80,11 +80,4 @@ DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,dell.com
 
 # 以下是准备向 GeoSite 提交的国内冷门域名，提交后会删除对应内容
-# 嵌入式相关
-DOMAIN-SUFFIX,jlcpcb.com
-# 捷顺科技
-DOMAIN-SUFFIX,jslife.net
-# 南海控股有限公司
-DOMAIN-SUFFIX,nanhaicorp.com
-# 范明明's Blog 蒙ICP备18004194号
-DOMAIN-SUFFIX,fanmingming.com
+
