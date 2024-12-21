@@ -81,4 +81,4 @@ DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,dell.com
 
 # 以下是准备向 GeoSite 提交的国内冷门域名，提交后会删除对应内容
-
+DOMAIN-SUFFIX,cleargrass.com
