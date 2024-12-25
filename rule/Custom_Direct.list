@@ -12,8 +12,6 @@ DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,vsean.net
 # GitHub CDN
 DOMAIN-SUFFIX,jsdelivr.net
-# 订阅转换
-DOMAIN-SUFFIX,apiurl.v1.mk
 # 机场域名
 DOMAIN-SUFFIX,dogsvip.site
 # 猫眼浏览器
@@ -82,4 +80,3 @@ DOMAIN-SUFFIX,dell.com
 # 以下是准备向 GeoSite 提交的国内冷门域名，提交后会删除对应内容
 # 青萍科技
 DOMAIN-SUFFIX,cleargrass.com
-
