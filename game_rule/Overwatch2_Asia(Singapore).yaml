@@ -1,0 +1,28 @@
+# Overwatch 2 Asia (Singapore)  Game Rule
+# 《守望先锋2》  亚服(新加坡) 游戏规则
+# 类型：IPCIDR
+# 作者: Aethersailor
+# 仓库: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# 更新日期 2024/12/14
+
+payload:
+  - 35.201.91.0/24,no-resolve
+  - 34.125.163.0/24,no-resolve
+  - 34.117.122.0/24,no-resolve
+  - 24.105.60.0/24,no-resolve
+  - 3.39.15.0/24,no-resolve
+  - 99.83.136.0/24,no-resolve
+  - 151.101.66.0/24,no-resolve
+  - 24.105.45.0/24,no-resolve
+  - 64.224.25.0/24,no-resolve
+  - 64.224.27.0/24,no-resolve
+  - 35.228.14.0/24,no-resolve
+  - 35.221.64.0/24,no-resolve
+  - 34.151.251.0/24,no-resolve
+  - 117.52.26.0/24,no-resolve
+  - 158.115.196.0/24,no-resolve
+  - 34.166.106.0/24,no-resolve
+  - 34.87.7.0/24,no-resolve
+  - 5.42.160.0/24,no-resolve
+  - 224.0.0.0/24,no-resolve
+  - 34.87.92.0/24,no-resolve
