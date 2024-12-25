@@ -80,3 +80,7 @@ DOMAIN-SUFFIX,dell.com
 # 以下是准备向 GeoSite 提交的国内冷门域名，提交后会删除对应内容
 # 青萍科技
 DOMAIN-SUFFIX,cleargrass.com
+# 蓝熊 OZON 插件官网
+DOMAIN-SUFFIX,ozonabc.com
+# OZON大卖（OZONBIGSELL）官网
+DOMAIN-SUFFIX,ozonbigsell.com
