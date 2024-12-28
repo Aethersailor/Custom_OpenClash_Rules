@@ -18,3 +18,5 @@ IP-CIDR,1.0.0.1/32,no-resolve
 # 嵌入式相关
 DOMAIN-SUFFIX,platformio.org
 DOMAIN-SUFFIX,arduino.cc
+# PT相关
+DOMAIN-SUFFIX,dmhy.org
