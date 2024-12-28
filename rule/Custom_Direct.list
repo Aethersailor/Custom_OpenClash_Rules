@@ -84,3 +84,9 @@ DOMAIN-SUFFIX,cleargrass.com
 DOMAIN-SUFFIX,ozonabc.com
 # OZON大卖（OZONBIGSELL）官网
 DOMAIN-SUFFIX,ozonbigsell.com
+# Cloudflare
+DOMAIN-SUFFIX,cloudflare.com
+DOMAIN-SUFFIX,cloudflarestorage.com
+# Cursor
+DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,cursor.com
