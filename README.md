@@ -113,7 +113,7 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 - 支持试用
 - 工单支持简体中文沟通且客服反应迅速
 
-注册链接：[SSRDOG 注册](https://dog1.ssrdog111.com/#/register?code=FnSb4oWM)  (链接包含 aff 信息，感谢支持！)
+注册链接：[SSRDOG 注册](https://dog1.ssrdog10.com/#/register?code=FnSb4oWM)  (链接包含 aff 信息，感谢支持！)
 
 本项目订阅模板的节点地区分类即参考了该机场的节点地区进行分类。  
 
