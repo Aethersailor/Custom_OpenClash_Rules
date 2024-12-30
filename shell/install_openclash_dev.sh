@@ -5,8 +5,8 @@ REPO_API_URL="https://api.github.com/repos/vernesong/OpenClash/contents/package/
 RAW_FILE_PREFIX="https://raw.githubusercontent.com/vernesong/OpenClash/refs/heads/package/dev"
 TEMP_FILE="openclash.apk"
 
-# 获取 .apk 文件名
-APK_FILE=$(curl -s $REPO_API_URL | grep '"name":' | grep '.apk"' | sed 's/.*"name": "//;s/".*//')
+# 获取 .apk 文件名（使用 awk 和 sed 解析）
+APK_FILE=$(curl -s $REPO_API_URL | awk -F'"' '/"name":/ && /.apk"/ {print $4}' | head -n 1)
 
 # 检查是否成功获取文件名
 if [ -z "$APK_FILE" ]; then
