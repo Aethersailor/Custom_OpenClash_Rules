@@ -4,7 +4,7 @@
 TARGET_FILE="/etc/openclash/custom/openclash_custom_firewall_rules.sh"
 
 # 要插入的内容
-INSERT_CONTENT=$(cat << 'EOF'
+INSERT_CONTENT=$(cat << EOF
 # ==============以下是广告过滤规则拉取脚本=================
 LOG_OUT "拉取 anti-AD 广告过滤规则…"
 # 注意自行核实 /tmp 下的 dnsmasq.d 文件夹名称，并修改对应代码  
@@ -30,11 +30,17 @@ if [ ! -f "$TARGET_FILE" ]; then
   exit 1
 fi
 
-# 确保目标文件的换行符正确
+# 确保目标文件以换行符结尾
 sed -i -e '$a\' "$TARGET_FILE"
 
-# 在指定位置插入内容
-sed -i "/LOG_OUT \"Tip: Start Add Custom Firewall Rules...\"/a\\
-$INSERT_CONTENT" "$TARGET_FILE"
+# 插入内容（兼容 OpenWrt sed）
+awk -v content="$INSERT_CONTENT" '
+/LOG_OUT "Tip: Start Add Custom Firewall Rules..."/ {
+    print;
+    print content;
+    next;
+}
+1
+' "$TARGET_FILE" > "${TARGET_FILE}.tmp" && mv "${TARGET_FILE}.tmp" "$TARGET_FILE"
 
 echo "内容已成功插入到 $TARGET_FILE 中！"
