@@ -6,7 +6,7 @@ RAW_FILE_PREFIX="https://raw.githubusercontent.com/vernesong/OpenClash/refs/head
 TEMP_FILE="openclash.apk"
 
 # 获取 .apk 文件名
-APK_FILE=$(curl -s $REPO_API_URL | grep -oP '"name":\s*"[^"]+\.apk"' | head -n 1 | sed 's/"name": "//;s/"//')
+APK_FILE=$(curl -s $REPO_API_URL | grep '"name":' | grep '.apk"' | sed 's/.*"name": "//;s/".*//')
 
 # 检查是否成功获取文件名
 if [ -z "$APK_FILE" ]; then
