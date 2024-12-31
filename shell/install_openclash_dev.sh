@@ -43,4 +43,4 @@ fi
 
 # 清理临时文件
 rm -f $TEMP_FILE
-echo "安装完成！"
+echo "OpenClash 最新 dev 版本安装完成！"
