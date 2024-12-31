@@ -51,4 +51,4 @@ awk -v content="$INSERT_CONTENT" '
 1
 ' "$TARGET_FILE" > "${TARGET_FILE}.tmp" && mv "${TARGET_FILE}.tmp" "$TARGET_FILE"
 
-echo "内容已成功清除并插入到 $TARGET_FILE 中！"
+echo "广告过滤规则拉取代码已写入到“开发者选项”文件 $TARGET_FILE 中，并将在 OpenClash 下次启动时生效！"
