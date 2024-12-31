@@ -3,7 +3,9 @@
 
 
 install_openclash_dev.sh  
-一键更新 OpenClash 为最新 dev 版本  
+一键更新 OpenClash 为最新 dev 版本。  
+ImmortalWrt 在值守式更新后，会将 OpenClash 还原为 Master 版本，这个脚本可以一键下载 OpenClash 仓库中的最新 dev 版本并安装。  
+适合 dev 版本爱好者。  
 curl -s https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/install_openclash_dev.sh | sh
   
 一键写入“开发者选项”中的去广告命令  
