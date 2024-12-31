@@ -33,7 +33,15 @@ fi
 # 确保目标文件以换行符结尾
 sed -i -e '$a\' "$TARGET_FILE"
 
-# 插入内容（兼容 OpenWrt sed）
+# 清除指定范围内容（LOG_OUT 到 exit 0 之间的内容）
+awk '
+BEGIN {skip=0}
+/LOG_OUT "Tip: Start Add Custom Firewall Rules..."/ {print; skip=1; next}
+/exit 0/ {skip=0}
+!skip
+' "$TARGET_FILE" > "${TARGET_FILE}.tmp" && mv "${TARGET_FILE}.tmp" "$TARGET_FILE"
+
+# 插入新内容
 awk -v content="$INSERT_CONTENT" '
 /LOG_OUT "Tip: Start Add Custom Firewall Rules..."/ {
     print;
@@ -43,4 +51,4 @@ awk -v content="$INSERT_CONTENT" '
 1
 ' "$TARGET_FILE" > "${TARGET_FILE}.tmp" && mv "${TARGET_FILE}.tmp" "$TARGET_FILE"
 
-echo "内容已成功插入到 $TARGET_FILE 中！"
+echo "内容已成功清除并插入到 $TARGET_FILE 中！"
