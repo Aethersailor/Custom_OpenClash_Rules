@@ -3,7 +3,7 @@
 规则文件内有注释说明域名内容  
 
 | 名称 | 内容 |
-|:-|:-|
+|:-:|:-:|
 | Custom_Direct.list | 强制直连域名规则 |
 | Custom_Proxy.list | 强制代理域名规则 |
 | Steam_CDN.list | Steam 国内下载 CDN 地址规则 |
