@@ -6,7 +6,7 @@
 # 规则内容较少，不会影响性能，请放心使用
 
 # ImmortalWrt 在线更新服务
-#DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
+# DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
 # ImmortalWrt 软件仓库
 DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,vsean.net
@@ -76,6 +76,17 @@ DOMAIN-SUFFIX,powershellgallery.com
 DOMAIN-SUFFIX,pool.ntp.org
 # Dell
 DOMAIN-SUFFIX,dell.com
+
+# Emby 直连
+# MeFun
+IP-CIDR,218.78.7.16/32,no-resolve
+IP-CIDR,98.126.27.164/32,no-resolve
+# MeFun VIP Porn 资源
+DOMAIN-SUFFIX,sptv.ii00.cc
+# MeFun VIP General 资源
+DOMAIN-SUFFIX,sgtv.ii00.cc
+# MeFun VIP Music 资源
+DOMAIN-SUFFIX,cn-music.mefun.vip
 
 # 以下是准备向 GeoSite 提交的国内冷门域名，提交后会删除对应内容
 # 青萍科技
