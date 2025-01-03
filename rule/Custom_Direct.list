@@ -88,7 +88,7 @@ DOMAIN-SUFFIX,sgtv.ii00.cc
 # MeFun VIP Music 资源
 DOMAIN-SUFFIX,cn-music.mefun.vip
 
-# 以下是准备向 GeoSite 提交的国内冷门域名，提交后会删除对应内容
+# 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
 # 青萍科技
 DOMAIN-SUFFIX,cleargrass.com
 # Cloudflare
