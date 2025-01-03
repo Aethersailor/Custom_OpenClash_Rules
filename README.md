@@ -150,6 +150,7 @@ Traffic、GB、Expire
 # 许可		
 [![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
 * CC-BY-SA-4.0  
+* 强烈鄙视所有不遵循 LICENSE 的行为。  
 
 # 星标记录
 
