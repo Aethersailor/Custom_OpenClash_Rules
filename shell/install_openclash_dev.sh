@@ -44,3 +44,14 @@ fi
 # 清理临时文件
 rm -f $TEMP_FILE
 echo "OpenClash 最新 dev 版本安装完成！"
+
+# 开始更新 Meta 内核
+echo "开始更新 Meta 内核..."
+/usr/share/openclash/openclash_core.sh
+if [ $? -ne 0 ]; then
+  echo "Meta 内核更新失败，请检查日志。"
+  exit 1
+fi
+
+# 完成更新提示
+echo "Meta 内核更新完成！"
