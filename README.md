@@ -79,6 +79,13 @@ Telegram 讨论群组：https://t.me/custom_openclash_rules_group
 
 OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案)  
 
+## 订阅转换服务  
+本项目提供订阅转换后端服务，便于网络环境奇葩的用户使用。  
+如果 OpenClash 自带的订阅转换服务全部不可用，你可以使用本项目提供的订阅转换服务地址：  
+```
+https://api.asailor.org/sub
+```
+填写进“订阅转换服务地址”中即可生效。 
 ## 已知问题  
 目前本项目订阅模板对 BT 和 PT 流量的处理依托上游规则碎片和关键词以及 OpenClash 自带的功能完成，仍然有不足之处，逐渐完善中。  
 具体解释见 [Wiki 对应内容](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4#5-bt-%E5%92%8C-pt-%E7%AD%89%E4%B8%8B%E8%BD%BD%E6%B5%81%E9%87%8F%E5%88%86%E6%B5%81%E4%B8%8D%E5%AE%8C%E5%96%84)。
