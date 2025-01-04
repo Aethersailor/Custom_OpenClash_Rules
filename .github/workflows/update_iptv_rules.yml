@@ -6,7 +6,7 @@ on:
   workflow_dispatch: # 手动触发
 
 jobs:
-  update-rules:
+  update-rule:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -18,9 +18,9 @@ jobs:
 
       - name: Process Rules
         run: |
-          echo "# 中国大陆地区 IPTV 域名列表" > rules/IPTVMainland_Domain.list
+          echo "# 中国大陆地区 IPTV 域名列表" > rule/IPTVMainland_Domain.list
           echo "# 每隔8小时更新一次，从 blackmatrix7/ios_rule_script 项目拉取，并去除所有 IP 类规则，仅保留域名规则" >> rules/IPTVMainland_Domain.list
-          grep -v "IP-CIDR" IPTVMainland.list >> rules/IPTVMainland_Domain.list
+          grep -v "IP-CIDR" IPTVMainland.list >> rule/IPTVMainland_Domain.list
 
       - name: Commit and Push Changes
         env:
@@ -28,6 +28,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add rules/IPTVMainland_Domain.list
+          git add rule/IPTVMainland_Domain.list
           git commit -m "Update IPTVMainland_Domain.list"
           git push
