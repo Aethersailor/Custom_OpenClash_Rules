@@ -21,9 +21,11 @@ jobs:
       run: python py/generate_mainland.py
 
     - name: Commit and push changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add cfg/Custom_Clash_Mainland.ini
         git commit -m "Update Custom_Clash_Mainland.ini based on Custom_Clash.ini"
-        git push
+        git push origin HEAD
