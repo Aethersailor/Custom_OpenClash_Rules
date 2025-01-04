@@ -20,8 +20,13 @@ jobs:
         run: |
           mkdir -p rule # 确保 rule 文件夹存在
           echo "# 中国大陆地区 IPTV 域名列表" > rule/IPTVMainland_Domain.list
-          echo "# 每隔8小时更新一次，从 blackmatrix7/ios_rule_script 项目拉取，并去除所有 IP 类规则，仅保留域名规则" >> rule/IPTVMainland_Domain.list
-          grep -v "IP-CIDR" IPTVMainland.list >> rule/IPTVMainland_Domain.list
+          echo "# 从 blackmatrix7/ios_rule_script 项目拉取，并去除所有 IP 类规则和 cn 域名，仅保留非 cn 域名规则" >> rule/IPTVMainland_Domain.list
+          echo "# 每8小时更新一次" >> rule/IPTVMainland_Domain.list
+          echo "# 必须搭配 OpenClash 的“绕过大陆”功能使用" >> rule/IPTVMainland_Domain.list
+          # 去除包含 "IP-CIDR" 的行
+          grep -v "IP-CIDR" IPTVMainland.list | \
+          # 去除以 ".cn" 结尾的行
+          grep -v "\.cn$" >> rule/IPTVMainland_Domain.list
 
       - name: Commit and Push Changes
         env:
