@@ -12,6 +12,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Install ipcalc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ipcalc
+
       - name: Fetch IPTVMainland Rules and Chinese IP Databases
         run: |
           # 下载 IPTVMainland.list 文件
