@@ -33,6 +33,11 @@ jobs:
 
           # 处理 IPTVMainland.list 中的 IP-CIDR 规则
           while read -r line; do
+            # 剔除以 .cn 结尾的行
+            if [[ "$line" =~ \.cn$ ]]; then
+              continue
+            fi
+
             # 判断是否包含 IP-CIDR 规则
             if [[ "$line" =~ IP-CIDR ]]; then
               # 提取 CIDR 地址（获取 / 后的部分）
