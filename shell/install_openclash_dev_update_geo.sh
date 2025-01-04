@@ -55,13 +55,13 @@ fi
 echo "Meta 内核更新完成！"
 
 # 开始更新 GeoIP 数据库
-echo "开始更新 GeoIP 数据库..."
+echo "开始更新 GeoIP Dat数据库..."
 /usr/share/openclash/openclash_geoip.sh
 if [ $? -ne 0 ]; then
-  echo "GeoIP 数据库更新失败，请检查日志。"
+  echo "GeoIP Dat数据库更新失败，请检查日志。"
   exit 1
 fi
-echo "GeoIP 数据库更新完成！"
+echo "GeoIP Dat数据库更新完成！"
 
 # 开始更新 GeoSite 数据库
 echo "开始更新 GeoSite 数据库..."
@@ -80,3 +80,21 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 echo "大陆白名单更新完成！"
+
+# 开始更新 IP 数据库
+echo "开始更新 GeoIP MMDB 数据库..."
+/usr/share/openclash/openclash_ipdb.sh
+if [ $? -ne 0 ]; then
+  echo "GeoIP MMDB 数据库更新失败，请检查日志。"
+  exit 1
+fi
+echo "GeoIP MMDB 数据库更新完成！"
+
+# 开始更新订阅
+echo "正在更新订阅..."
+/usr/share/openclash/openclash.sh
+if [ $? -ne 0 ]; then
+  echo "订阅更新失败，请检查日志。"
+  exit 1
+fi
+echo "订阅更新完成！"
