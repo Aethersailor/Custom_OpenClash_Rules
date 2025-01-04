@@ -23,8 +23,6 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/IPTVMainland/IPTVMainland.list -o IPTVMainland.list
           # 下载中国大陆IP地址数据库（CIDR格式）
           curl -sSL https://ispip.clang.cn/all_cn_cidr.txt -o all_cn_cidr.txt
-          # 下载中国大陆IP地址数据库（域名格式）
-          curl -sSL https://ispip.clang.cn/all_cn.txt -o all_cn.txt
 
       - name: Process Rules
         run: |
@@ -40,18 +38,18 @@ jobs:
               # 提取 CIDR 地址（获取 / 后的部分）
               cidr=$(echo "$line" | sed 's/.*IP-CIDR, \([0-9.\/]*\).*/\1/')
               # 判断 CIDR 地址是否在中国大陆IP库中
-              matched=false
+              is_china_ip=false
               while read -r db_cidr; do
-                # 使用 ipcalc 判断 IP 是否在 CIDR 范围内
+                # 使用 ipcalc 判断 CIDR 是否属于中国大陆范围
                 if echo "$cidr" | ipcalc -c "$db_cidr" | grep -q "Network is unreachable"; then
                   continue
                 fi
-                # 如果 CIDR 地址在中国大陆IP库中，则标记为匹配
-                matched=true
+                # 如果 CIDR 地址在中国大陆IP库中，则标记为中国IP
+                is_china_ip=true
                 break
               done < all_cn_cidr.txt
-              if [ "$matched" = false ]; then
-                # 如果 CIDR 地址不在中国大陆IP库中，则保留该行
+              # 如果不属于中国大陆的 IP-CIDR 规则，则保留
+              if [ "$is_china_ip" = false ]; then
                 echo "$line" >> rule/IPTVMainland_Domain.list
               fi
             else
