@@ -23,6 +23,8 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/IPTVMainland/IPTVMainland.list -o IPTVMainland.list
           # 下载中国大陆IP地址数据库（CIDR格式）
           curl -sSL https://ispip.clang.cn/all_cn_cidr.txt -o all_cn_cidr.txt
+          # 打印下载的文件内容，查看是否正确
+          cat all_cn_cidr.txt
 
       - name: Process Rules
         run: |
@@ -33,13 +35,18 @@ jobs:
 
           # 处理 IPTVMainland.list 中的 IP-CIDR 规则
           while read -r line; do
+            # 调试输出行内容
+            echo "Processing line: $line"
             # 判断是否包含 IP-CIDR 规则
             if [[ "$line" =~ IP-CIDR ]]; then
               # 提取 CIDR 地址（获取 / 后的部分）
               cidr=$(echo "$line" | sed 's/.*IP-CIDR, \([0-9.\/]*\).*/\1/')
+              echo "CIDR extracted: $cidr"
               # 判断 CIDR 地址是否在中国大陆IP库中
               is_china_ip=false
               while read -r db_cidr; do
+                # 打印正在比对的 CIDR
+                echo "Comparing $cidr with $db_cidr"
                 # 使用 ipcalc 判断 CIDR 是否属于中国大陆范围
                 if echo "$cidr" | ipcalc -c "$db_cidr" | grep -q "Network is unreachable"; then
                   continue
@@ -48,6 +55,7 @@ jobs:
                 is_china_ip=true
                 break
               done < all_cn_cidr.txt
+              echo "is_china_ip: $is_china_ip"
               # 如果不属于中国大陆的 IP-CIDR 规则，则保留
               if [ "$is_china_ip" = false ]; then
                 echo "$line" >> rule/IPTVMainland_Domain.list
@@ -64,6 +72,9 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          # 添加所有新文件，包括规则文件和数据库文件
           git add rule/IPTVMainland_Domain.list
+          git add IPTVMainland.list
+          git add all_cn_cidr.txt
           git commit -m "Update IPTVMainland_Domain.list"
           git push
