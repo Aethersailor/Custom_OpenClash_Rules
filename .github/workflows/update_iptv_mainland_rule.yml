@@ -12,21 +12,48 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Fetch IPTVMainland Rules
+      - name: Fetch IPTVMainland Rules and Chinese IP Databases
         run: |
+          # 下载 IPTVMainland.list 文件
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/IPTVMainland/IPTVMainland.list -o IPTVMainland.list
+          # 下载中国大陆IP地址数据库（CIDR格式）
+          curl -sSL https://ispip.clang.cn/all_cn_cidr.txt -o all_cn_cidr.txt
+          # 下载中国大陆IP地址数据库（域名格式）
+          curl -sSL https://ispip.clang.cn/all_cn.txt -o all_cn.txt
 
       - name: Process Rules
         run: |
           mkdir -p rule # 确保 rule 文件夹存在
           echo "# 中国大陆地区 IPTV 域名列表" > rule/IPTVMainland_Domain.list
-          echo "# 从 blackmatrix7/ios_rule_script 项目拉取，并去除所有 IP 类规则和 cn 域名，仅保留非 cn 域名规则" >> rule/IPTVMainland_Domain.list
-          echo "# 每8小时更新一次" >> rule/IPTVMainland_Domain.list
+          echo "# 每隔8小时更新一次，从 blackmatrix7/ios_rule_script 项目拉取，并去除所有 IP 类规则，仅保留域名规则" >> rule/IPTVMainland_Domain.list
           echo "# 必须搭配 OpenClash 的“绕过大陆”功能使用" >> rule/IPTVMainland_Domain.list
-          # 去除包含 "IP-CIDR" 的行
-          grep -v "IP-CIDR" IPTVMainland.list | \
-          # 去除以 ".cn" 结尾的行
-          grep -v "\.cn$" >> rule/IPTVMainland_Domain.list
+
+          # 处理 IPTVMainland.list 中的 IP-CIDR 规则
+          while read -r line; do
+            # 判断是否包含 IP-CIDR 规则
+            if [[ "$line" =~ IP-CIDR ]]; then
+              # 提取 CIDR 地址（获取 / 后的部分）
+              cidr=$(echo "$line" | sed 's/.*IP-CIDR, \([0-9.\/]*\).*/\1/')
+              # 判断 CIDR 地址是否在中国大陆IP库中
+              matched=false
+              while read -r db_cidr; do
+                # 使用 ipcalc 判断 IP 是否在 CIDR 范围内
+                if echo "$cidr" | ipcalc -c "$db_cidr" | grep -q "Network is unreachable"; then
+                  continue
+                fi
+                # 如果 CIDR 地址在中国大陆IP库中，则标记为匹配
+                matched=true
+                break
+              done < all_cn_cidr.txt
+              if [ "$matched" = false ]; then
+                # 如果 CIDR 地址不在中国大陆IP库中，则保留该行
+                echo "$line" >> rule/IPTVMainland_Domain.list
+              fi
+            else
+              # 非 IP-CIDR 行直接保留
+              echo "$line" >> rule/IPTVMainland_Domain.list
+            fi
+          done < IPTVMainland.list
 
       - name: Commit and Push Changes
         env:
