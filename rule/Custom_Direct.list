@@ -99,6 +99,8 @@ DOMAIN-SUFFIX,cn-music.mefun.vip
 # IPTV 相关
 DOMAIN-SUFFIX,cmdns.xyz
 DOMAIN-SUFFIX,112114.xyz
+DOMAIN-SUFFIX,epg.v1.mk
+DOMAIN-SUFFIX,epg.aptv.app
 
 # 冷门国内域名
 # 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
