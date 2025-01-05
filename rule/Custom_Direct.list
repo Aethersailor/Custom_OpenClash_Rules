@@ -33,6 +33,30 @@ DOMAIN-SUFFIX,members.3322.org
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
+# 松下智能家居
+DOMAIN-SUFFIX,psmartcloud.com
+# PT 下载相关
+DOMAIN-KEYWORD,tracker
+# Akamai CDN
+DOMAIN-SUFFIX,akamaihd.net
+# FinalShell
+IP-CIDR,5.5.5.5/32,no-resolve
+# 国内 CDN
+DOMAIN-SUFFIX,cjjd19.com
+# UniGetUI
+DOMAIN-SUFFIX,powershellgallery.com
+# NTP Pool Project
+DOMAIN-SUFFIX,pool.ntp.org
+# Dell
+DOMAIN-SUFFIX,dell.com
+# Cloudflare
+DOMAIN-SUFFIX,cloudflare.com
+DOMAIN-SUFFIX,cloudflarestorage.com
+# Cursor
+DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,cursor.com
+
+# 游戏类规则
 # 暴雪战网国际服下载节点
 DOMAIN-SUFFIX,blizzard.gcdn.cloudn.co.kr
 DOMAIN-SUFFIX,level3.blizzard.com
@@ -47,17 +71,11 @@ DOMAIN-SUFFIX,origin-a.akamaihd.net
 IP-CIDR,104.75.169.19/32,no-resolve
 # 微软飞行模拟 2020 游戏内下载 CDN
 DOMAIN,pf-cdn-content-prod.azureedge.net
-# 松下智能家居
-DOMAIN-SUFFIX,psmartcloud.com
 # 暴雪战网国服相关
 DOMAIN-SUFFIX,netease.com
 DOMAIN-SUFFIX,leihuo.netease.com
-# PT 下载相关
-DOMAIN-KEYWORD,tracker
-# Akamai CDN
-DOMAIN-SUFFIX,akamaihd.net
-# FinalShell
-IP-CIDR,5.5.5.5/32,no-resolve
+
+# 媒体类规则
 # Emby 小雅 相关
 DOMAIN-SUFFIX,ddsrem.com
 DOMAIN-SUFFIX,ipinfo.io
@@ -66,17 +84,6 @@ DOMAIN-SUFFIX,nn.ci
 DOMAIN-SUFFIX,xhofe.top
 DOMAIN-SUFFIX,wwwh.eu.org
 DOMAIN-SUFFIX,1996999.xyz
-# IPTV 相关
-DOMAIN-SUFFIX,112114.xyz
-# 国内 CDN
-DOMAIN-SUFFIX,cjjd19.com
-# UniGetUI
-DOMAIN-SUFFIX,powershellgallery.com
-# NTP Pool Project
-DOMAIN-SUFFIX,pool.ntp.org
-# Dell
-DOMAIN-SUFFIX,dell.com
-
 # Emby 直连
 # MeFun
 IP-CIDR,218.78.7.16/32,no-resolve
@@ -87,17 +94,14 @@ DOMAIN-SUFFIX,sptv.ii00.cc
 DOMAIN-SUFFIX,sgtv.ii00.cc
 # MeFun VIP Music 资源
 DOMAIN-SUFFIX,cn-music.mefun.vip
+# IPTV 相关
+DOMAIN-SUFFIX,cmdns.xyz
+DOMAIN-SUFFIX,112114.xyz
 
+# 冷门国内域名
 # 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
 # 青萍科技
 DOMAIN-SUFFIX,cleargrass.com
-# Cloudflare
-DOMAIN-SUFFIX,cloudflare.com
-DOMAIN-SUFFIX,cloudflarestorage.com
-# Cursor
-DOMAIN-SUFFIX,cursor.sh
-DOMAIN-SUFFIX,cursor.com
-
 # 蓝熊 OZON 插件官网
 DOMAIN-SUFFIX,ozonabc.com
 # OZON大卖（OZONBIGSELL）官网
