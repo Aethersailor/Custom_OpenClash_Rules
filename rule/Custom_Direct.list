@@ -74,6 +74,8 @@ DOMAIN,pf-cdn-content-prod.azureedge.net
 # 暴雪战网国服相关
 DOMAIN-SUFFIX,netease.com
 DOMAIN-SUFFIX,leihuo.netease.com
+# FLiNG Trainer
+DOMAIN-SUFFIX,flingtrainer.com
 
 # 媒体类规则
 # Emby 小雅 相关
