@@ -16,8 +16,9 @@ DOMAIN-SUFFIX,jsdelivr.net
 DOMAIN-SUFFIX,dogsvip.site
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
-# 其他域名
+# 订阅转换
 DOMAIN-SUFFIX,kit327.com
+DOMAIN-SUFFIX,asailor.org
 # DDNS
 DOMAIN-KEYWORD,synology
 DOMAIN-KEYWORD,quickconnect
