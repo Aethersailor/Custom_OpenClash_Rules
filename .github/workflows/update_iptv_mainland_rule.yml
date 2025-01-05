@@ -17,7 +17,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ipcalc
 
-      - name: Fetch IPTVMainland Rules 和 Chinese IP Databases
+      - name: Fetch IPTVMainland Rules and Chinese IP Databases
         run: |
           # 下载 IPTVMainland.list 文件
           curl -sSL https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/IPTVMainland/IPTVMainland.list -o IPTVMainland.list
@@ -27,9 +27,8 @@ jobs:
       - name: Process Rules
         run: |
           mkdir -p rule # 确保 rule 文件夹存在
-          echo "# 中国大陆地区 IPTV 规则" > rule/IPTVMainland_Domain.list
-          echo "# 每隔8小时更新一次" >> rule/IPTVMainland_Domain.list
-          echo "# 从 blackmatrix7/ios_rule_script 项目拉取，并去除所有 cn 域名规则和中国大陆 IP 规则，仅保留非 cn 域名规则和非中国大陆 IP 规则" >> rule/IPTVMainland_Domain.list
+          echo "# 中国大陆地区 IPTV 域名列表" > rule/IPTVMainland_Domain.list
+          echo "# 每隔8小时更新一次，从 blackmatrix7/ios_rule_script 项目拉取，并去除所有 IP 类规则，仅保留域名规则" >> rule/IPTVMainland_Domain.list
           echo "# 必须搭配 OpenClash 的“绕过大陆”功能使用" >> rule/IPTVMainland_Domain.list
 
           # 处理 IPTVMainland.list 中的 IP-CIDR 规则
@@ -64,13 +63,16 @@ jobs:
             fi
           done < IPTVMainland.list
 
+          # 清理临时文件
+          rm -f IPTVMainland.list all_cn_cidr.txt
+
       - name: Commit and Push Changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # 添加所有新文件，包括规则文件
+          # 添加修改后的规则文件
           git add rule/IPTVMainland_Domain.list
-          git commit -m "Update IPTVMainland_Domain.list"
+          git commit -m "Update IPTVMainland_Domain.list" || echo "No changes to commit"
           git push
