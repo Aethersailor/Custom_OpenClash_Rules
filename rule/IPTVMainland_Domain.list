@@ -1,6 +1,5 @@
-# 中国大陆地区 IPTV 规则
-# 每隔8小时更新一次
-# 从 blackmatrix7/ios_rule_script 项目拉取，并去除所有 cn 域名规则和中国大陆 IP 规则，仅保留非 cn 域名规则和非中国大陆 IP 规则
+# 中国大陆地区 IPTV 域名列表
+# 每隔8小时更新一次，从 blackmatrix7/ios_rule_script 项目拉取，并去除所有 IP 类规则，仅保留域名规则
 # 必须搭配 OpenClash 的“绕过大陆”功能使用
 # NAME: IPTVMainland
 # AUTHOR: blackmatrix7
