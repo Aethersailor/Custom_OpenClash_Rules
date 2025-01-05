@@ -44,7 +44,6 @@ fi
 # 执行配置命令
 echo "正在更新配置，切换为 Dev 版本..."
 uci set openclash.config.release_branch=dev
-uci set openclash.config.dashboard_type=Meta
 uci commit openclash
 if [ $? -ne 0 ]; then
   echo "配置更新失败，请检查命令和日志。"
