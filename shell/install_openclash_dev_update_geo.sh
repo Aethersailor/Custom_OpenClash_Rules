@@ -6,7 +6,7 @@ RAW_FILE_PREFIX="https://gh-proxy.com/https://raw.githubusercontent.com/verneson
 TEMP_FILE="openclash.apk"
 
 # 获取 JSON 数据并解析 .apk 文件名
-echo "正在获取文件信息..."
+echo "正在获取 dev 版本文件信息..."
 JSON_OUTPUT=$(curl -s $REPO_API_URL)
 APK_FILE=$(echo "$JSON_OUTPUT" | awk -F'"' '/"name":/ && /.apk"/ {print $4}' | head -n 1)
 
@@ -25,7 +25,7 @@ fi
 DOWNLOAD_URL="$RAW_FILE_PREFIX/$APK_FILE"
 
 # 下载 .apk 文件
-echo "正在下载 $APK_FILE..."
+echo "正在下载 dev 版本 $APK_FILE..."
 wget -O $TEMP_FILE $DOWNLOAD_URL
 if [ $? -ne 0 ]; then
   echo "下载失败，请检查网络连接或下载链接：$DOWNLOAD_URL"
@@ -36,10 +36,21 @@ fi
 echo "正在安装 $APK_FILE..."
 apk add $TEMP_FILE --allow-untrusted
 if [ $? -ne 0 ]; then
-  echo "安装失败，请检查系统环境。"
+  echo "OpenClash Dev 安装失败，请检查系统环境。"
   rm -f $TEMP_FILE
   exit 1
 fi
+
+# 执行配置命令
+echo "正在更新配置，切换为 Dev 版本..."
+uci set openclash.config.release_branch=dev
+uci set openclash.config.dashboard_type=Meta
+uci commit openclash
+if [ $? -ne 0 ]; then
+  echo "配置更新失败，请检查命令和日志。"
+  exit 1
+fi
+echo "配置更新完成！"
 
 # 清理临时文件
 rm -f $TEMP_FILE
@@ -55,13 +66,22 @@ fi
 echo "Meta 内核更新完成！"
 
 # 开始更新 GeoIP 数据库
-echo "开始更新 GeoIP Dat数据库..."
+echo "开始更新 GeoIP Dat 数据库..."
 /usr/share/openclash/openclash_geoip.sh
 if [ $? -ne 0 ]; then
-  echo "GeoIP Dat数据库更新失败，请检查日志。"
+  echo "GeoIP Dat 数据库更新失败，请检查日志。"
   exit 1
 fi
-echo "GeoIP Dat数据库更新完成！"
+echo "GeoIP Dat 数据库更新完成！"
+
+# 开始更新 IP 数据库
+echo "开始更新 GeoIP MMDB 数据库..."
+/usr/share/openclash/openclash_ipdb.sh
+if [ $? -ne 0 ]; then
+  echo "GeoIP MMDB 数据库更新失败，请检查日志。"
+  exit 1
+fi
+echo "GeoIP MMDB 数据库更新完成！"
 
 # 开始更新 GeoSite 数据库
 echo "开始更新 GeoSite 数据库..."
@@ -80,15 +100,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 echo "大陆白名单更新完成！"
-
-# 开始更新 IP 数据库
-echo "开始更新 GeoIP MMDB 数据库..."
-/usr/share/openclash/openclash_ipdb.sh
-if [ $? -ne 0 ]; then
-  echo "GeoIP MMDB 数据库更新失败，请检查日志。"
-  exit 1
-fi
-echo "GeoIP MMDB 数据库更新完成！"
 
 # 开始更新订阅
 echo "正在更新订阅..."
