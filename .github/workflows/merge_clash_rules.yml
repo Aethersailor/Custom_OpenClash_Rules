@@ -16,8 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y ipcalc
-          pip install requests
+          pip install requests netaddr
 
       - name: Run Python script
         run: python py/merge_rules.py
