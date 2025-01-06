@@ -1,6 +1,6 @@
 import os
 import requests
-import subprocess
+from netaddr import IPSet
 
 # 定义规则 URL
 RULE_URLS = [
@@ -46,24 +46,8 @@ def classify_rules(rules):
 
 # 优化 IP-CIDR 规则
 def optimize_ip_cidr(ip_cidr_rules):
-    # 将 IP-CIDR 规则写入临时文件
-    temp_file = "temp_cidr.txt"
-    with open(temp_file, "w") as f:
-        f.writelines(f"{cidr}\n" for cidr in ip_cidr_rules)
-
-    # 使用 ipcalc 处理规则并生成合并后的结果
-    optimized_file = "optimized_cidr.txt"
-    with open(optimized_file, "w") as f:
-        subprocess.run(["ipcalc", "--merge", temp_file], stdout=f)
-
-    # 读取优化后的规则
-    with open(optimized_file, "r") as f:
-        optimized_cidrs = set(line.strip() for line in f if line.strip())
-
-    # 清理临时文件
-    os.remove(temp_file)
-    os.remove(optimized_file)
-
+    ip_set = IPSet(ip_cidr_rules)
+    optimized_cidrs = list(ip_set.iter_cidrs())
     return optimized_cidrs
 
 # 输出规则
@@ -77,7 +61,7 @@ def write_output(domain_rules, domain_suffix_rules, domain_keyword_rules, ip_cid
             f.write(f"DOMAIN,{rule}\n")
         for rule in sorted(domain_keyword_rules):
             f.write(f"DOMAIN-KEYWORD,{rule}\n")
-        for cidr in sorted(ip_cidr_rules):
+        for cidr in sorted(ip_cidr_rules, key=lambda x: str(x)):
             f.write(f"IP-CIDR,{cidr}\n")
 
 # 主函数
