@@ -22,4 +22,15 @@ DOMAIN,instant.arubanetworks.com
 DOMAIN,router.asus.com
 DOMAIN,setmeup.arubanetworks.com
 DOMAIN,www.asusrouter.com
-IP-CIDR,Unknown option: --merge
+IP-CIDR,0.0.0.0/8
+IP-CIDR,10.0.0.0/8
+IP-CIDR,100.64.0.0/10
+IP-CIDR,127.0.0.0/8
+IP-CIDR,17.0.0.0/8
+IP-CIDR,172.16.0.0/12
+IP-CIDR,192.168.0.0/16
+IP-CIDR,198.18.0.0/16
+IP-CIDR,224.0.0.0/4
+IP-CIDR,::1/128
+IP-CIDR,fc00::/7
+IP-CIDR,fe80::/10
