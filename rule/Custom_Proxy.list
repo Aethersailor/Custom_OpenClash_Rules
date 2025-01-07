@@ -3,8 +3,6 @@
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 强制代理列表，来自个人收集
 
-# EA Desktop 云同步
-#DOMAIN-SUFFIX,cloudsync-prod.s3.us-east-1.amazonaws.com
 # GooglePlay 相关
 DOMAIN-SUFFIX,services.googleapis.cn
 DOMAIN-SUFFIX,clientservices.googleapis.com
@@ -18,3 +16,7 @@ IP-CIDR,1.0.0.1/32,no-resolve
 # 嵌入式相关
 DOMAIN-SUFFIX,platformio.org
 DOMAIN-SUFFIX,arduino.cc
+# PT 相关
+DOMAIN-SUFFIX,dmhy.org
+# Google 相关
+DOMAIN-SUFFIX,mtalk.google.com
