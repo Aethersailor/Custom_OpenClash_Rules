@@ -103,7 +103,6 @@ DOMAIN-SUFFIX,epg.v1.mk
 DOMAIN-SUFFIX,epg.aptv.app
 DOMAIN-SUFFIX,gdcucc.v1.mk
 
-
 # 冷门国内域名
 # 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
 # 青萍科技
@@ -116,3 +115,7 @@ DOMAIN-SUFFIX,ozonbigsell.com
 DOMAIN-SUFFIX,kuajing84.com
 # 无忧易售
 DOMAIN-SUFFIX,51selling.com
+# Ru-seer 俄罗斯卖家助手 粤ICP备2023020424号
+DOMAIN-SUFFIX,ruseer.com
+# 布丁猫  黑ICP备2024018807号-1
+DOMAIN-SUFFIX,bdmozon.com
