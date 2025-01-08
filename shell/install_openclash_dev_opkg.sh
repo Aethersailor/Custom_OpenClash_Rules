@@ -45,6 +45,15 @@ fi
 rm -f $TEMP_FILE
 echo "OpenClash 最新 dev 版本安装完成！"
 
+echo "正在更新配置，切换为 Dev 版本..."
+uci set openclash.config.release_branch=dev
+uci commit openclash
+if [ $? -ne 0 ]; then
+  echo "配置更新失败，请检查命令和日志。"
+  exit 1
+fi
+echo "配置更新完成！"
+
 # 开始更新 Meta 内核
 echo "开始更新 Meta 内核..."
 /usr/share/openclash/openclash_core.sh
