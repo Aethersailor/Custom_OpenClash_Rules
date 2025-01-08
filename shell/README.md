@@ -11,13 +11,13 @@ curl -s https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Cust
 ```
 
 ### install_openclash_dev_update_geo.sh
-一键更新 OpenClash 和 Meta 内核为最新 dev 版本，并更新 GeoIP 和 GeoSite 数据库、大陆白名单。  
+一键更新 OpenClash 和 Meta 内核为最新 dev 版本，并更新 GeoIP 和 GeoSite 数据库、大陆白名单、订阅链接。  
 ```bash
  curl -s https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/install_openclash_dev_update_geo.sh | sh
  ```
 
 ### edit_custom_firewall_rules.sh
-一键写入“开发者选项”中的去广告命令  
+一键写入“开发者选项”中的去广告命令（anti-AD 广告过滤规则 + Github520 加速规则）  
 ```bash
 curl -s https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules.sh | sh
 ```
