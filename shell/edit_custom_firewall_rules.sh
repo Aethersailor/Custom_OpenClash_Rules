@@ -6,6 +6,8 @@ TARGET_FILE="/etc/openclash/custom/openclash_custom_firewall_rules.sh"
 # 要插入的内容
 INSERT_CONTENT=$(cat << EOF
 # ==============以下是广告过滤规则拉取脚本=================
+# 删除已存在的 anti-AD 规则文件
+rm /tmp/dnsmasq.cfg01411c.d/anti-ad-for-dnsmasq.conf
 LOG_OUT "拉取 anti-AD 广告过滤规则…"
 # 注意自行核实 /tmp 下的 dnsmasq.d 文件夹名称，并修改对应代码  
 curl -s https://anti-ad.net/anti-ad-for-dnsmasq.conf -o /tmp/dnsmasq.cfg01411c.d/anti-ad-for-dnsmasq.conf
