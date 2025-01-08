@@ -8,7 +8,7 @@ TEMP_FILE="openclash.ipk"
 # 获取 JSON 数据并解析 .ipk 文件名
 echo "正在获取文件信息..."
 JSON_OUTPUT=$(curl -s $REPO_API_URL)
-APK_FILE=$(echo "$JSON_OUTPUT" | awk -F'"' '/"name":/ && /.ipk"/ {print $4}' | head -n 1)
+IPK_FILE=$(echo "$JSON_OUTPUT" | awk -F'"' '/"name":/ && /.ipk"/ {print $4}' | head -n 1)
 
 # 打印调试信息
 echo "API 输出内容:"
