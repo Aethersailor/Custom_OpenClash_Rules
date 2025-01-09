@@ -29,13 +29,13 @@ jobs:
           # 对比快照文件
           if ! cmp -s "$CURRENT_SNAPSHOT" "$LAST_SNAPSHOT"; then
             echo "检测到更新！"
-            echo "::set-output name=updated::true"
+            echo "updated=true" >> $GITHUB_ENV
           else
             echo "没有检测到更新。"
-            echo "::set-output name=updated::false"
+            echo "updated=false" >> $GITHUB_ENV
           fi
 
       - name: Save the latest snapshot
-        if: steps.check_update.outputs.updated == 'true'
+        if: env.updated == 'true'
         run: |
           mv $RUNNER_TEMP/current_snapshot.html $RUNNER_TEMP/last_snapshot.html
