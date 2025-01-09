@@ -8,14 +8,34 @@ on:
 jobs:
   monitor:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 检测更新
+      - name: Fetch current snapshot files
         run: |
           URL="https://downloads.immortalwrt.org/snapshots/targets/x86/64/"
-          curl -s $URL | grep -Eo '<a href="[^"]+">' | grep -v "../" > current_files.txt
-          if [ ! -f last_files.txt ] || ! cmp -s current_files.txt last_files.txt; then
-            echo "检测到新更新！"
-            cp current_files.txt last_files.txt
+          curl -s $URL > $RUNNER_TEMP/current_snapshot.html
+
+      - name: Compare with previous snapshot
+        run: |
+          LAST_SNAPSHOT="$RUNNER_TEMP/last_snapshot.html"
+          CURRENT_SNAPSHOT="$RUNNER_TEMP/current_snapshot.html"
+
+          # 如果之前没有保存快照，初始化空文件
+          if [ ! -f "$LAST_SNAPSHOT" ]; then
+            echo "首次运行，创建初始快照文件。"
+            touch "$LAST_SNAPSHOT"
+          fi
+
+          # 对比快照文件
+          if ! cmp -s "$CURRENT_SNAPSHOT" "$LAST_SNAPSHOT"; then
+            echo "检测到更新！"
+            echo "::set-output name=updated::true"
           else
             echo "没有检测到更新。"
+            echo "::set-output name=updated::false"
           fi
+
+      - name: Save the latest snapshot
+        if: steps.check_update.outputs.updated == 'true'
+        run: |
+          mv $RUNNER_TEMP/current_snapshot.html $RUNNER_TEMP/last_snapshot.html
