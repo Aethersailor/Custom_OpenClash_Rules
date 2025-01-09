@@ -1,0 +1,21 @@
+name: Monitor Snapshot Updates
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 每小时运行一次
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检测更新
+        run: |
+          URL="https://downloads.immortalwrt.org/snapshots/targets/x86/64/"
+          curl -s $URL | grep -Eo '<a href="[^"]+">' | grep -v "../" > current_files.txt
+          if [ ! -f last_files.txt ] || ! cmp -s current_files.txt last_files.txt; then
+            echo "检测到新更新！"
+            cp current_files.txt last_files.txt
+          else
+            echo "没有检测到更新。"
+          fi
