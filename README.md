@@ -23,8 +23,8 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 欢迎 star ！
 
-Telegram 通知频道：https://t.me/custom_openclash_rules  
-Telegram 讨论群组：https://t.me/custom_openclash_rules_group  
+欢迎订阅本项目 [Telegram 通知频道](https://t.me/custom_openclash_rules)  
+欢迎加入本项目 [Telegram 讨论群组](https://t.me/+IN-i7q-aAVU0ZTI1)  
 
 本项目编写于2024年4月，为非盈利项目。转载本项目内容请注明本项目的仓库地址，感谢合作！  
 
