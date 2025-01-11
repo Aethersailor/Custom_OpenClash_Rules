@@ -5,7 +5,7 @@
 	<a href="https://t.me/custom_openclash_rules">
 		<img src="http://img.shields.io/badge/dynamic/json?style=for-the-badge&label=%E9%A2%91%E9%81%93&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules" alt="Telegram">
 	</a>
-	<a href="https://t.me/+IN-i7q-aAVU0ZTI1">
+	<a href="https://t.me/custom_openclash_rules_group">
 		<img src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&label=%E7%BE%A4%E8%81%8A&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules_group" alt="Telegram">
 	</a>
 </p>
@@ -23,8 +23,10 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 欢迎 star ！
 
-欢迎订阅本项目 [Telegram 通知频道](https://t.me/custom_openclash_rules)  
-欢迎加入本项目 [Telegram 讨论群组](https://t.me/+IN-i7q-aAVU0ZTI1)  
+\>> Telegram Channel: [Custom_OpenClash_Rules | 通知频道](https://t.me/custom_openclash_rules)  
+
+\>> Telegram Group: [Custom_OpenClash_Rules | 交流群](https://t.me/custom_openclash_rules_group) 
+
 
 本项目编写于2024年4月，为非盈利项目。转载本项目内容请注明本项目的仓库地址，感谢合作！  
 
