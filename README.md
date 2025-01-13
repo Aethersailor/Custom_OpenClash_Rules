@@ -141,17 +141,22 @@ Traffic、GB、Expire
 </a>  
 
 # 感谢  
-以下排名不分先后  
+**本项目项目使用或引用了以下项目的内容**  
+以下排名不分先后
+
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
+- [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community)
+- [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
 - [dogfight360/UsbEAm](https://github.com/dogfight360/UsbEAm)  
 - [ddgksf2013/ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)  
 - [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
 - [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)  
 - [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520)  
+- [ChatGPT/OpenAI](https://chatgpt.com/)
 
 # 许可		
 [![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
