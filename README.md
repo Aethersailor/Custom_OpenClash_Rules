@@ -79,6 +79,12 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 # 使用方法  
 
+> **本项目设置方案使用 Clash 的 Fake-IP 模式，不适用 Redir-Host 模式。**  
+
+> **本项目设置方案使用 OpenClash 的“绕过中国大陆”功能实现，因此配套的订阅转换模板不含任何大陆 IP 和域名的分流规则。**
+
+> **请勿试图在 OpenClash 以外的 Clash 软件中使用本项目的订阅转换模板，非 OpenClash 下使用会引发严重的分流问题。**  
+
 准备好你的订阅链接，然后按照本项目 Wiki 中的对应部分对 OpenClash 进行设置：[OpenClash-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)  
 
 方案中已包括了本项目订阅转换模板的使用方法。  
@@ -86,11 +92,6 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 以上方案非常详尽，只需按部就班设置即可。全部设置内容均基于 OpenClash 的 luci 设置页面，有手就行！  
 
 设置方案文字较多，务必逐字逐句认真阅读，不要忽略以防漏掉关键部分导致故障。且方案内含多处设置的讲解便于理解相关设置原理，有助于小白学习。  
-
-* **本项目设置方案使用 Clash 的 Fake-IP 模式，不适用 Redir-Host 模式。**  
-
-* **本项目设置方案使用 OpenClash 的“绕过中国大陆”功能实现，配套项目订阅模板不含任何大陆 IP 和域名的分流规则。  
-  请勿试图在 OpenClash 以外的 Clash 软件中使用，非 OpenClash 下使用会引发严重的分流问题。**  
 
 # 一些说明  
 
