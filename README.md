@@ -137,9 +137,7 @@ https://api.asailor.org/sub
 
 ## 在 OpenClash 之外的其他软件中是否可用？  
 
-理论上本项目的订阅转换模板是通用的，可以在任何 Clash 客户端下使用（例如 Stash）。  
-
-但是不建议在移动端设备上使用。由于规则过于复杂会导致移动设备耗电急剧增加，甚至影响上网体验。  
+本项目的设置方案依赖于 OpenClash 的“绕过大陆”功能，因此规则不需要也未对国内域名和 IP 进行分流，所以不建议在 OpenClash 之外的客户端上使用。
 
 适用于 iOS 下 Shadowrocket 的规则：https://github.com/Aethersailor/Custom_Shadowrocket_Rules  
 
@@ -204,18 +202,34 @@ Traffic、GB、Expire
 以下排名不分先后
 
 - [vernesong / OpenClash](https://github.com/vernesong/OpenClash)
+
 - [MetaCubeX / mihomo](https://github.com/MetaCubeX/mihomo)
+
 - [ACL4SSR / ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
+
 - [blackmatrix7 / ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
+
 - [v2fly / domain-list-community](https://github.com/v2fly/domain-list-community)
+
 - [Loyalsoldier / v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
+
 - [TraderWukong / demo](https://github.com/TraderWukong/demo)
-- [dogfight360 / UsbEAm](https://github.com/dogfight360/UsbEAm)  
-- [ddgksf2013 / ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)  
-- [privacy-protection-tools / anti-AD](https://github.com/privacy-protection-tools/anti-AD)  
-- [TG-Twilight / AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)  
-- [521xueweihan / GitHub520](https://github.com/521xueweihan/GitHub520)  
+
+- [dogfight360 / UsbEAm](https://github.com/dogfight360/UsbEAm)
+
+- [ddgksf2013 / ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)
+
+- [privacy-protection-tools / anti-AD](https://github.com/privacy-protection-tools/anti-AD)
+
+- [TG-Twilight / AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)
+
+- [521xueweihan / GitHub520](https://github.com/521xueweihan/GitHub520)
+
+- [immortalwrt / user-FAQ](https://github.com/immortalwrt/user-FAQ/)
+
 - [ChatGPT / OpenAI](https://chatgpt.com/)
+
+
 
 # 许可		
 [![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
