@@ -109,29 +109,4 @@ if [ $? -ne 0 ]; then
 fi
 echo "订阅更新完成！"
 
-# 开始下载 Dashboard
-echo "开始下载 Dashboard..."
-/usr/share/openclash/openclash_download_dashboard.sh Dashboard
-if [ $? -ne 0 ]; then
-  echo "Dashboard 下载失败，请检查日志。"
-  exit 1
-fi
-echo "Dashboard 下载完成！"
 
-# 开始下载 Yacd
-echo "开始下载 Yacd..."
-/usr/share/openclash/openclash_download_dashboard.sh Yacd
-if [ $? -ne 0 ]; then
-  echo "Yacd 下载失败，请检查日志。"
-  exit 1
-fi
-echo "Yacd 下载完成！"
-
-# 开始下载 zashboard
-echo "开始下载 zashboard..."
-/usr/share/openclash/openclash_download_dashboard.sh zashboard
-if [ $? -ne 0 ]; then
-  echo "zashboard 下载失败，请检查日志。"
-  exit 1
-fi
-echo "zashboard 下载完成！"
