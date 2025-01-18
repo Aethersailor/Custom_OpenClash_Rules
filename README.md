@@ -143,7 +143,9 @@ https://api.asailor.org/sub
 
 ## 在 OpenClash 之外的其他软件中是否可用？  
 
-本项目的设置方案依赖于 OpenClash 的“绕过大陆”功能，因此规则不需要也未对国内域名和 IP 进行分流，所以不建议在 OpenClash 之外的客户端上使用。
+本项目的设置方案依赖于 OpenClash 的“绕过大陆”功能，因此规则不需要也未对国内域名和 IP 进行分流，所以不建议在 OpenClash 之外的客户端上使用。  
+
+对于 OpenClash 以外的使用环境，可以参考维护者的另一个项目：[Custom_Clash_Rules](https://github.com/Aethersailor/Custom_Clash_Rules)
 
 适用于 iOS 下 Shadowrocket 的规则：https://github.com/Aethersailor/Custom_Shadowrocket_Rules  
 
