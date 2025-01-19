@@ -12,12 +12,8 @@ DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,vsean.net
 # GitHub CDN
 DOMAIN-SUFFIX,jsdelivr.net
-# 机场域名
-DOMAIN-SUFFIX,dogsvip.site
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
-# 订阅转换
-DOMAIN-SUFFIX,kit327.com
 # DDNS
 DOMAIN-KEYWORD,synology
 DOMAIN-KEYWORD,quickconnect
