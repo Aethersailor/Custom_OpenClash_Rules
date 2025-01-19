@@ -34,7 +34,7 @@ jobs:
           cd target-repo
           
           # 删除 [custom] 之前的内容（保留 [custom] 行本身）
-          sed -i '1,/^\[custom\]/ { /^[[]custom[]]/!d }' cfg/Custom_Clash_Full.ini
+          sed -i '1,/^\[custom\]/ { /^\[custom\]$/!d }' cfg/Custom_Clash_Full.ini
           
           # 添加内容到文件开头并加两个空行
           sed -i '1i ;Custom_Clash_Rules\n;全分组防 DNS 泄漏订阅转换模板\n;作者：https://github.com/Aethersailor\n;项目地址：https://github.com/Aethersailor/Custom_Clash_Rules\n;该订阅模板为 Custom_OpenClash_Rules 项目的衍生项目\n;基于 ACL4SSR 模板魔改而来，感谢原作者！\n\n' cfg/Custom_Clash_Full.ini
