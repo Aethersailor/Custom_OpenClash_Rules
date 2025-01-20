@@ -21,7 +21,7 @@ sed -i '/!/d' /etc/hosts
 # GitHub520 加速规则拉取脚本结束
 # 清理 DNS 缓存，v0.46.043 之前版本无需此步骤
 LOG_OUT "清理 DNS 缓存…"
-#/etc/init.d/dnsmasq reload
+/etc/init.d/dnsmasq reload
 # ==============广告过滤规则拉取脚本结束==============
 EOF
 )
