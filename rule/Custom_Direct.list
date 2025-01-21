@@ -15,12 +15,8 @@ DOMAIN-SUFFIX,banxiaoer.com
 DOMAIN-SUFFIX,banxiaoer.net
 # GitHub CDN
 DOMAIN-SUFFIX,jsdelivr.net
-# 机场域名
-DOMAIN-SUFFIX,dogsvip.site
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
-# 订阅转换
-DOMAIN-SUFFIX,kit327.com
 # DDNS
 DOMAIN-KEYWORD,synology
 DOMAIN-KEYWORD,quickconnect
@@ -33,6 +29,7 @@ DOMAIN-SUFFIX,api.myip.com
 DOMAIN-SUFFIX,ipapi.co
 DOMAIN-SUFFIX,ip6.seeip.org
 DOMAIN-SUFFIX,members.3322.org
+DOMAIN-SUFFIX,kit327.com
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
