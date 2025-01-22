@@ -52,7 +52,7 @@ curl -s https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Cust
 ```
 
 
-## edit_custom_firewall_rules.sh  
+## edit_custom_firewall_rules_hosts.sh  
 
 一键写入“开发者选项”中的 Github520 Hosts 拉取指令  
 
