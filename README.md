@@ -83,7 +83,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 > **本项目设置方案使用 OpenClash 的`绕过中国大陆`功能实现，因此配套的订阅转换模板不含任何大陆 IP 和域名的分流规则。**
 
-> **请勿试图在 OpenClash 以外的 Clash 软件中使用本项目的订阅转换模板，非 OpenClash 下使用会引发严重的分流问题。**  
+> **请勿试图在 OpenClash 以外的 Clash 软件中使用本项目的订阅转换模板，非 OpenClash 下使用可能会引起严重的分流问题。**  
 
 准备好你的订阅链接，然后按照本项目 Wiki 中的对应部分对 OpenClash 进行设置：[OpenClash-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)  
 
@@ -142,8 +142,6 @@ https://api.asailor.org/sub
 项目维护者可以确定，本项目的设置方案完美无瑕，建议不要从本项目的内容上找原因，以免浪费时间。某些特殊问题如 Google Play 更新问题涉及诸多原因，和模板本身并无关系。  
 
 ## 在 OpenClash 之外的其他软件中是否可用？  
-
-本项目的设置方案依赖于 OpenClash 的“绕过大陆”功能，因此规则不需要也未对国内域名和 IP 进行分流，所以不建议在 OpenClash 之外的客户端上使用。  
 
 对于 OpenClash 以外的使用环境，可以参考维护者的另一个项目：[Custom_Clash_Rules](https://github.com/Aethersailor/Custom_Clash_Rules)
 
