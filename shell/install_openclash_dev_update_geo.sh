@@ -109,4 +109,15 @@ if [ $? -ne 0 ]; then
 fi
 echo "订阅更新完成！"
 
+# 重启 OoenClash
+echo "正在关闭 OpenClash..."
+etc/init.d/openclash stop 
+
+echo "等待5秒..."
+sleep 5
+
+echo "正在启动 OpenClash..."
+/etc/init.d/openclash start
+
+echo "OpenClash 启动完成！"
 
