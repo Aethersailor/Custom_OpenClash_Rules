@@ -111,7 +111,7 @@ echo "订阅更新完成！"
 
 # 重启 OoenClash
 echo "正在关闭 OpenClash..."
-etc/init.d/openclash stop 
+/etc/init.d/openclash stop 
 
 echo "等待5秒..."
 sleep 5
