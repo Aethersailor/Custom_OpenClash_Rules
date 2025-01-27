@@ -3,5 +3,5 @@
 # REPO: https://github.com/hirinnLH/Custom_OpenClash_Rules
 # 針對naiu的審計規則，無法訪問gov.tw域名，輔以leiting訪問
 
-DOMAIN-REGEX,^.*\.gov\.tw
+DOMAIN-SUFFIX,gov.tw
 
