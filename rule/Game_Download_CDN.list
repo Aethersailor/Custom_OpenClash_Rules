@@ -2,7 +2,9 @@
 # AUTHOR: Aethersailor
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 主流游戏平台外服下载节点规则
-
+# 规则数据来自 UsbEAm Hosts Editor
+# UsbEAm Hosts Editor 下载地址：https://www.dogfight360.com/blog/18627/
+# 感谢原作者 羽翼城 大佬！
 
 # Rockstar Launcher - 客户端更新/游戏更新/下载
 DOMAIN-SUFFIX,gamedownloads-rockstargames-com.akamaized.net
@@ -91,6 +93,7 @@ DOMAIN-SUFFIX,origin-a.akamaihd.net
 IP-CIDR,104.75.169.19/32,no-resolve
 
 # Steam - 游戏下载/社区实况直播(非中国下载区) - Valve
+# 正则匹配可能有误，出现问题请及时反馈
 DOMAIN-REGEX,^cache\d{1,2}-[a-z]{3}\d\.steamcontent\.com$
 
 # Steam - 游戏下载(非中国下载区) - akamai
