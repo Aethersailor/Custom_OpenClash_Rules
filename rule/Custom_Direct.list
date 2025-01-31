@@ -53,16 +53,6 @@ DOMAIN-SUFFIX,cloudflarestorage.com
 DOMAIN-SUFFIX,cursor.sh
 DOMAIN-SUFFIX,cursor.com
 
-# 游戏类规则
-# 暴雪战网国际服下载节点
-DOMAIN-SUFFIX,blizzard.gcdn.cloudn.co.kr
-DOMAIN-SUFFIX,level3.blizzard.com
-DOMAIN-SUFFIX,kr.cdn.blizzard.com
-DOMAIN-SUFFIX,us.cdn.blizzard.com
-DOMAIN-SUFFIX,eu.cdn.blizzard.com
-IP-CIDR,137.221.64.0/24,no-resolve
-IP-CIDR,8.251.135.126/32,no-resolve
-IP-CIDR,8.251.246.126/32,no-resolve
 # EA-Desktop 下载节点
 DOMAIN-SUFFIX,origin-a.akamaihd.net
 IP-CIDR,104.75.169.19/32,no-resolve
