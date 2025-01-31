@@ -224,7 +224,7 @@ Traffic、GB、Expire
 
 - [TraderWukong / demo](https://github.com/TraderWukong/demo)
 
-- [dogfight360 / UsbEAm](https://github.com/dogfight360/UsbEAm)
+- [dogfight360 / UsbEAm](https://www.dogfight360.com/blog/18627/)
 
 - [ddgksf2013 / ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)
 
