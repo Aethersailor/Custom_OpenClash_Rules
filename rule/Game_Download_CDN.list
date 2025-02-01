@@ -67,7 +67,7 @@ DOMAIN-REGEX,^[a-z]{2}\.cdn\.blizzard\.com$
 #DOMAIN-SUFFIX,eu.cdn.blizzard.com
 
 # Battle.net - 战网下载[网易国服]
-DOMAIN-REGEX,^blzdist-[a-z]{2,3}\.necdn\.leihuo\.netease\.com$
+DOMAIN-REGEX,^blzdist-[a-z]{2}([a-z])?\.necdn\.leihuo\.netease\.com$
 
 #DOMAIN-SUFFIX,blzdist-phx.necdn.leihuo.netease.com
 #DOMAIN-SUFFIX,blzdist-wow.necdn.leihuo.netease.com
@@ -115,7 +115,7 @@ IP-CIDR,104.75.169.19/32,no-resolve
 
 # Steam - 游戏下载/社区实况直播(非中国下载区) - Valve
 # 正则匹配可能有误，出现问题请及时反馈
-DOMAIN-REGEX,^cache\d{1,2}-[a-z]{3}\d\.steamcontent\.com$
+DOMAIN-REGEX,^cache\d(\d)?-[a-z]{3}\d\.steamcontent\.com$
 
 # Steam - 游戏下载(非中国下载区) - akamai
 DOMAIN-SUFFIX,steampipe.akamaized.net
