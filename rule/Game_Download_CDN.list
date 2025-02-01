@@ -4,7 +4,9 @@
 # 主流游戏平台外服下载节点规则
 # 规则数据来自 UsbEAm Hosts Editor
 # UsbEAm Hosts Editor 下载地址：https://www.dogfight360.com/blog/18627/
-# 感谢原作者 羽翼城 大佬！
+# 感谢原作者 dogfight360|羽翼城 大佬！
+# 请确保你使用的订阅转换后端以及 Clash 支持正则规则！
+# 规则在本项目中可正常生效，其他使用环境下请自行排障
 
 # Rockstar Launcher - 客户端更新/游戏更新/下载
 DOMAIN-SUFFIX,gamedownloads-rockstargames-com.akamaized.net
