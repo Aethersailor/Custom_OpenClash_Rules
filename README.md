@@ -1,4 +1,4 @@
-<h1 align="center">OpenClash 保姆级设置方案<br>&<br>全分组防泄漏订阅转换模板</h1>
+<h1 align="center">OpenClash 保姆级设置方案<br>&<br>全分组防泄漏订阅转换规则</h1>
 
 <p align="center">
 	<img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
@@ -66,7 +66,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 * **节点地区分类测速优选。**  自动优选最快节点，不用自己折腾切换。
 
-* **Steam 访问优化。**  单独列出 Steam 规则并强制 Steam 下载 CDN 走直连，解决 Steam 下载 CDN 定位到海外的问题，确保 Steam 下载流量不走代理。
+* **Steam 访问优化。**  单独列出 Steam 规则并强制 Steam 下载 CDN 走直连，实现代理 Steam 的商店/社区流量的同时确保 Steam 下载流量不走代理。
 
 * **自动更新，长期无人值守。**  设置完成后即可长期无人值守，每日定时自动更新上游规则 GEO 数据库和大陆白名单等具有时效性要求的数据，无需自己动手。
 
@@ -187,7 +187,7 @@ https://api.asailor.org/sub
 
 - [TraderWukong / demo](https://github.com/TraderWukong/demo)
 
-- [dogfight360 / UsbEAm](https://github.com/dogfight360/UsbEAm)
+- [dogfight360 / UsbEAm](https://www.dogfight360.com/blog/18627/)
 
 - [ddgksf2013 / ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)
 
