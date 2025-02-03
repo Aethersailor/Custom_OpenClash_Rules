@@ -20,3 +20,6 @@ DOMAIN-SUFFIX,arduino.cc
 DOMAIN-SUFFIX,dmhy.org
 # Google 相关
 DOMAIN-SUFFIX,mtalk.google.com
+# EA Desktop 云同步
+DOMAIN-SUFFIX,cloudsync-prod.s3.us-east-1.amazonaws.com
+
