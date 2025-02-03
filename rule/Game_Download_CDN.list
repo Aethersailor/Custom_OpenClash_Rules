@@ -4,7 +4,9 @@
 # 主流游戏平台外服下载节点规则
 # 规则数据来自 UsbEAm Hosts Editor
 # UsbEAm Hosts Editor 下载地址：https://www.dogfight360.com/blog/18627/
-# 感谢原作者 羽翼城 大佬！
+# 感谢原作者 dogfight360|羽翼城 大佬！
+# 请确保你使用的订阅转换后端以及 Clash 支持正则规则！
+# 规则在本项目中可正常生效，其他使用环境下请自行排障
 
 # Rockstar Launcher - 客户端更新/游戏更新/下载
 DOMAIN-SUFFIX,gamedownloads-rockstargames-com.akamaized.net
@@ -67,7 +69,7 @@ DOMAIN-REGEX,^[a-z]{2}\.cdn\.blizzard\.com$
 #DOMAIN-SUFFIX,eu.cdn.blizzard.com
 
 # Battle.net - 战网下载[网易国服]
-DOMAIN-REGEX,^blzdist-[a-z]{2,3}\.necdn\.leihuo\.netease\.com$
+DOMAIN-REGEX,^blzdist-[a-z]{2}([a-z])?\.necdn\.leihuo\.netease\.com$
 
 #DOMAIN-SUFFIX,blzdist-phx.necdn.leihuo.netease.com
 #DOMAIN-SUFFIX,blzdist-wow.necdn.leihuo.netease.com
@@ -115,7 +117,7 @@ IP-CIDR,104.75.169.19/32,no-resolve
 
 # Steam - 游戏下载/社区实况直播(非中国下载区) - Valve
 # 正则匹配可能有误，出现问题请及时反馈
-DOMAIN-REGEX,^cache\d{1,2}-[a-z]{3}\d\.steamcontent\.com$
+DOMAIN-REGEX,^cache\d(\d)?-[a-z]{3}\d\.steamcontent\.com$
 
 # Steam - 游戏下载(非中国下载区) - akamai
 DOMAIN-SUFFIX,steampipe.akamaized.net
