@@ -9,7 +9,7 @@
 
 仅限 APK 软件包管理器使用。  
 
-ImmortalWrt 在值守式更新后，会将 OpenClash 和内核还原为 master 版本，这个脚本可以一键更新 OpenClash 和内核为仓库中的最新 dev 版本，免去在 luci 上操作的麻烦。  
+大多数固件的软件源默认自带的 OpenClash 是 master 版本， 在值守式更新后，会将 OpenClash 和内核还原为 master 版本，这个脚本可以一键将 OpenClash 和内核更新为仓库中的最新 dev 版本，免去在 luci 上操作的麻烦。  
 
 适合 dev 版本爱好者。  
 
@@ -26,7 +26,7 @@ curl -s https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Cust
 
 仅限 OPKG 软件包管理器使用。  
 
-ImmortalWrt 在值守式更新后，会将 OpenClash 和内核还原为 master 版本，这个脚本可以一键更新 OpenClash 和内核为仓库中的最新 dev 版本，免去在 luci 上操作的麻烦。  
+大多数固件的软件源默认自带的 OpenClash 是 master 版本， 在值守式更新后，会将 OpenClash 和内核还原为 master 版本，这个脚本可以一键将 OpenClash 和内核更新为仓库中的最新 dev 版本，免去在 luci 上操作的麻烦。  
 
 适合 dev 版本爱好者，没测试。  
 
@@ -41,7 +41,8 @@ curl -s https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Cust
 
 仅限 APK 软件包管理器使用。 
 
-一键更新 OpenClash 和 Meta 内核为最新 dev 版本，并更新 GeoIP 和 GeoSite 数据库、大陆白名单、订阅链接。  
+大多数固件的软件源默认自带的 OpenClash 是 master 版本， 在值守式更新后，会将 OpenClash 和内核还原为 master 版本，这个脚本可以一键将 OpenClash 和 Meta 内核更新为最新 dev 版本，并更新 GeoIP 和 GeoSite 数据库、大陆白名单、订阅链接，免去在 luci 上操作的麻烦。  
+
 
 适合 dev 版本爱好者。 
 
