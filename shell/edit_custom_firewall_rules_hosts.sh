@@ -6,23 +6,44 @@ TARGET_FILE="/etc/openclash/custom/openclash_custom_firewall_rules.sh"
 # 要插入的内容
 INSERT_CONTENT=$(cat << EOF
 # ==============以下是广告过滤规则拉取脚本=================
-# 删除已存在的 anti-AD 规则文件
-rm /tmp/dnsmasq.cfg01411c.d/anti-ad-for-dnsmasq.conf
-rm /tmp/dnsmasq.d/anti-ad-for-dnsmasq.conf
-#LOG_OUT "拉取 anti-AD 广告过滤规则…"
-# 注意自行核实 /tmp 下的 dnsmasq.d 文件夹名称，并修改对应代码  
-#curl -s https://anti-ad.net/anti-ad-for-dnsmasq.conf -o /tmp/dnsmasq.cfg01411c.d/anti-ad-for-dnsmasq.conf
-# 广告过滤规则拉取脚本结束
-# 以下是 GitHub520 加速规则拉取脚本
-LOG_OUT "拉取 GitHub520 加速规则…"
-sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
-curl https://raw.hellogithub.com/hosts >> /etc/hosts
-sed -i '/^$/d' /etc/hosts
-sed -i '/!/d' /etc/hosts
-# GitHub520 加速规则拉取脚本结束
-# 清理 DNS 缓存，v0.46.043 之前版本无需此步骤
-#LOG_OUT "清理 DNS 缓存…"
-#/etc/init.d/dnsmasq reload
+(
+    MAX_WAIT_TIME=30
+    WAIT_INTERVAL=2
+    elapsed_time=0
+
+    while ! /etc/init.d/openclash status | grep -q "running"; do
+        if [ $elapsed_time -ge $MAX_WAIT_TIME ]; then
+            LOG_OUT "[广告过滤规则拉取脚本] 未能在 30 秒内检测到 OpenClash 运行状态，脚本已停止运行..."
+            exit 1
+        fi
+        LOG_OUT "[广告过滤规则拉取脚本] 正在检查 OpenClash 运行状态，请稍后..."
+        sleep $WAIT_INTERVAL
+        elapsed_time=$((elapsed_time + WAIT_INTERVAL))
+    done
+
+    LOG_OUT "[广告过滤规则拉取脚本] 检测到 OpenClash 正在运行，10秒后开始拉取规则..."
+    sleep 10
+
+    LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 GitHub520 加速规则…"
+    sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
+
+    LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
+    curl -s "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
+
+    if [ $? -eq 0 ]; then
+        LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取成功！"
+    else
+        LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取失败，查看 /tmp/github520-curl.log 获取详细信息。"
+    fi
+
+    sed -i '/^$/d' /etc/hosts
+    sed -i '/!/d' /etc/hosts
+
+    LOG_OUT "[广告过滤规则拉取脚本] 清理 DNS 缓存…"
+    /etc/init.d/dnsmasq reload
+    LOG_OUT "[广告过滤规则拉取脚本] 脚本运行完毕！"
+
+) &
 # ==============广告过滤规则拉取脚本结束==============
 EOF
 )
