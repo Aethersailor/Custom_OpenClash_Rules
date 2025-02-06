@@ -10,6 +10,7 @@ INSERT_CONTENT=$(cat << EOF
     MAX_WAIT_TIME=30
     WAIT_INTERVAL=2
     elapsed_time=0
+
     while ! /etc/init.d/openclash status | grep -q "running"; do
         if [ $elapsed_time -ge $MAX_WAIT_TIME ]; then
             LOG_OUT "[广告过滤规则拉取脚本] 未能在 30 秒内检测到 OpenClash 运行状态，脚本已停止运行..."
@@ -19,32 +20,42 @@ INSERT_CONTENT=$(cat << EOF
         sleep $WAIT_INTERVAL
         elapsed_time=$((elapsed_time + WAIT_INTERVAL))
     done
+
     LOG_OUT "[广告过滤规则拉取脚本] 检测到 OpenClash 正在运行，10秒后开始拉取规则..."
     sleep 10
-    LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 anti-AD 广告过滤规则…"
+	
+	LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 anti-AD 广告过滤规则…"
     rm -f /tmp/dnsmasq.d/anti-ad-for-dnsmasq.conf
     rm -f /tmp/dnsmasq.cfg01411c.d/anti-ad-for-dnsmasq.conf
+
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 anti-AD 广告过滤规则，规则体积较大，请耐心等候…"
     curl -s  "https://gh-proxy.com/https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/adblock-for-dnsmasq.conf" -o /tmp/dnsmasq.cfg01411c.d/anti-ad-for-dnsmasq.conf 2> /tmp/anti-ad-curl.log
+
     if [ $? -eq 0 ]; then
         LOG_OUT "[广告过滤规则拉取脚本] anti-AD 规则拉取成功！"
     else
         LOG_OUT "[广告过滤规则拉取脚本] anti-AD 规则拉取失败，查看 /tmp/anti-ad-curl.log 获取详细信息。"
     fi
+
     LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 GitHub520 加速规则…"
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
+
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
     curl -s "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
+
     if [ $? -eq 0 ]; then
         LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取成功！"
     else
         LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取失败，查看 /tmp/github520-curl.log 获取详细信息。"
     fi
+
     sed -i '/^$/d' /etc/hosts
     sed -i '/!/d' /etc/hosts
+
     LOG_OUT "[广告过滤规则拉取脚本] 清理 DNS 缓存…"
     /etc/init.d/dnsmasq reload
     LOG_OUT "[广告过滤规则拉取脚本] 脚本运行完毕！"
+
 ) &
 # ==============广告过滤规则拉取脚本结束==============
 EOF
