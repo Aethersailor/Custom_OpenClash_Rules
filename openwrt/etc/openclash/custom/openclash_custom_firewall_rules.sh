@@ -69,7 +69,7 @@ LOG_OUT "Tip: Start Add Custom Firewall Rules..."
     # 清理 DNS 缓存
     LOG_OUT "[广告过滤规则拉取脚本] 清理 DNS 缓存…"
     /etc/init.d/dnsmasq reload
-    LOG_OUT "[广告过滤规则拉取脚本] 运行完毕！"
+    LOG_OUT "[广告过滤规则拉取脚本] 脚本运行完毕！"
 
 ) &
 # ==============广告过滤规则拉取脚本结束==============
