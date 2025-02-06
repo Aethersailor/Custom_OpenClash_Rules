@@ -228,6 +228,8 @@ Traffic、GB、Expire
 
 - [ddgksf2013 / ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)
 
+- [217heidai / adblockfilters](https://github.com/217heidai/adblockfilters)
+
 - [privacy-protection-tools / anti-AD](https://github.com/privacy-protection-tools/anti-AD)
 
 - [TG-Twilight / AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)
