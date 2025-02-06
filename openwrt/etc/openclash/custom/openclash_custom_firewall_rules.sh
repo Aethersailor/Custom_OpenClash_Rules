@@ -16,9 +16,13 @@ LOG_OUT "Tip: Start Add Custom Firewall Rules..."
     # 初始化已等待时间
     elapsed_time=0
 
-    # 检查系统中是否存在 OpenClash 的 status 命令
-    if command -v /etc/init.d/openclash status &>/dev/null; then
-        # 如果存在 status 命令，检测 OpenClash 运行状态
+    # 检查 /etc/init.d/openclash status 命令的输出是否包含 "Syntax:"
+    if /etc/init.d/openclash status | grep -q "Syntax:"; then
+        # 如果包含 "Syntax:"，表示没有 status 命令，可能为 LEDE 固件。跳过检测 OpenClash 运行状态，等待 10 秒以确保 OpenClash 已启动
+        LOG_OUT "[广告过滤规则拉取脚本] 等待 10 秒以确保 OpenClash 已启动..."
+        sleep 10
+    else
+        # 如果不包含 "Syntax:"，表示有 status 命令，可能为 OpenWrt/ImmortalWrt 固件，开始检测 OpenClash 运行状态
         while ! /etc/init.d/openclash status | grep -q "running"; do
             if [ $elapsed_time -ge $MAX_WAIT_TIME ]; then
                 # 如果在最大等待时间内未检测到 OpenClash 运行状态，输出日志并退出脚本
@@ -35,10 +39,6 @@ LOG_OUT "Tip: Start Add Custom Firewall Rules..."
         # 输出检测到 OpenClash 正在运行的日志
         LOG_OUT "[广告过滤规则拉取脚本] 检测到 OpenClash 正在运行，10 秒后开始拉取规则..."
         # 等待 10 秒
-        sleep 10
-    else
-        # 如果不存在 status 命令，等待 10 秒以确保 OpenClash 已启动
-        LOG_OUT "[广告过滤规则拉取脚本] 等待 10 秒以确保 OpenClash 已启动..."
         sleep 10
     fi
 
