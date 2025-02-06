@@ -32,8 +32,6 @@ DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
 # 松下智能家居
 DOMAIN-SUFFIX,psmartcloud.com
-# PT 下载相关
-DOMAIN-KEYWORD,tracker
 # Akamai CDN
 DOMAIN-SUFFIX,akamaihd.net
 # FinalShell
@@ -53,14 +51,6 @@ DOMAIN-SUFFIX,cloudflarestorage.com
 DOMAIN-SUFFIX,cursor.sh
 DOMAIN-SUFFIX,cursor.com
 
-# EA-Desktop 下载节点
-DOMAIN-SUFFIX,origin-a.akamaihd.net
-IP-CIDR,104.75.169.19/32,no-resolve
-# 微软飞行模拟 2020 游戏内下载 CDN
-DOMAIN,pf-cdn-content-prod.azureedge.net
-# 暴雪战网国服相关
-DOMAIN-SUFFIX,netease.com
-DOMAIN-SUFFIX,leihuo.netease.com
 # FLiNG Trainer
 DOMAIN-SUFFIX,flingtrainer.com
 
