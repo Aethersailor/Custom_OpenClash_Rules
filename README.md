@@ -35,6 +35,8 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 本项目编写于2024年4月，为非盈利项目。转载本项目内容请注明本项目的仓库地址，感谢合作！  
 
+本项目没有任何 YouTube 频道，也未在 YouTube 上传任何“教学视频”。  
+
 # 特别声明  
 1. 本项目的主要目的是探索与学习 OpenWrt 系统插件 OpenClash，因此无法确保所有内容的合法性、完整性、准确性或有效性。
 
@@ -190,6 +192,8 @@ https://api.asailor.org/sub
 - [dogfight360 / UsbEAm](https://www.dogfight360.com/blog/18627/)
 
 - [ddgksf2013 / ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)
+
+- [217heidai / adblockfilters](https://github.com/217heidai/adblockfilters)
 
 - [privacy-protection-tools / anti-AD](https://github.com/privacy-protection-tools/anti-AD)
 
