@@ -23,8 +23,8 @@ INSERT_CONTENT=$(cat << EOF
 
     LOG_OUT "[广告过滤规则拉取脚本] 检测到 OpenClash 正在运行，10秒后开始拉取规则..."
     sleep 10
-	
-	LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 anti-AD 广告过滤规则…"
+
+    LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 anti-AD 广告过滤规则…"
     rm -f /tmp/dnsmasq.d/anti-ad-for-dnsmasq.conf
     rm -f /tmp/dnsmasq.cfg01411c.d/anti-ad-for-dnsmasq.conf
 
