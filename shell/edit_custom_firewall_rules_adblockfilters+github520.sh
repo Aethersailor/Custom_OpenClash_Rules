@@ -28,12 +28,14 @@ INSERT_CONTENT=$(cat << EOF
         sleep 10
     fi
 
-    LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 adblockfilters 广告过滤规则…"
-    rm -f /tmp/dnsmasq.d/adblockfilters-for-dnsmasq.conf
-    rm -f /tmp/dnsmasq.cfg01411c.d/adblockfilters-dnsmasq.conf
+    LOG_OUT "[广告过滤规则拉取脚本] 清除广告过滤规则…"
+    rm -f /tmp/dnsmasq.d/*ad*.conf
+    rm -f /tmp/dnsmasq.cfg01411c.d/*ad*.conf
+    sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
+
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 adblockfilters 广告过滤规则，规则体积较大，请耐心等候…"
-    curl -s "https://gcore.jsdelivr.net/gh/217heidai/adblockfilters@main/rules/adblockdns.txt" -o /tmp/dnsmasq.cfg01411c.d/adblockfilters-for-dnsmasq.conf 2> /tmp/adblockfilters-curl.log
+    curl -s "https://github.boki.moe/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt" -o /tmp/dnsmasq.cfg01411c.d/adblockfilters-for-dnsmasq.conf 2> /tmp/adblockfilters-curl.log
 
     if [ $? -eq 0 ]; then
         LOG_OUT "[广告过滤规则拉取脚本] adblockfilters 规则拉取成功！"
