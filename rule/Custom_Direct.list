@@ -17,6 +17,7 @@ DOMAIN-SUFFIX,github.boki.moe
 DOMAIN-SUFFIX,catsxp.com
 # DDNS
 DOMAIN-KEYWORD,synology
+DOMAIN-KEYWORD,synology.com
 DOMAIN-KEYWORD,quickconnect
 DOMAIN-SUFFIX,checkip.dyndns.org
 DOMAIN-SUFFIX,checkipv6.dyndns.org
