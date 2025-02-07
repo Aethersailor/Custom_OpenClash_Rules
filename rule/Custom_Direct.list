@@ -12,6 +12,7 @@ DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,vsean.net
 # GitHub CDN
 DOMAIN-SUFFIX,jsdelivr.net
+DOMAIN-SUFFIX,github.boki.moe
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
 # DDNS
