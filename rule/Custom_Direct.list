@@ -15,6 +15,7 @@ DOMAIN-SUFFIX,banxiaoer.com
 DOMAIN-SUFFIX,banxiaoer.net
 # GitHub CDN
 DOMAIN-SUFFIX,jsdelivr.net
+DOMAIN-SUFFIX,github.boki.moe
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
 # DDNS
@@ -22,7 +23,6 @@ DOMAIN-KEYWORD,synology
 DOMAIN-KEYWORD,quickconnect
 DOMAIN-SUFFIX,checkip.dyndns.org
 DOMAIN-SUFFIX,checkipv6.dyndns.org
-DOMAIN-SUFFIX,checkip.synology.com
 DOMAIN-SUFFIX,ifconfig.co
 DOMAIN-SUFFIX,api.myip.com
 # DOMAIN-SUFFIX,ip-api.com 会影响某些 DNS 泄露检测网站的结果，暂时屏蔽
