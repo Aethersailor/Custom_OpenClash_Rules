@@ -30,6 +30,11 @@ INSERT_CONTENT=$(cat << EOF
 
     LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 GitHub520 加速规则…"
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
+    
+    LOG_OUT "[广告过滤规则拉取脚本] 清除广告过滤规则…"
+    rm -f /tmp/dnsmasq.d/*ad*.conf
+    rm -f /tmp/dnsmasq.cfg01411c.d/*ad*.conf
+    sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
     curl -s "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
