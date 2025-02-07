@@ -11,18 +11,22 @@ INSERT_CONTENT=$(cat << EOF
     WAIT_INTERVAL=2
     elapsed_time=0
 
-    while ! /etc/init.d/openclash status | grep -q "running"; do
-        if [ $elapsed_time -ge $MAX_WAIT_TIME ]; then
-            LOG_OUT "[广告过滤规则拉取脚本] 未能在 30 秒内检测到 OpenClash 运行状态，脚本已停止运行..."
-            exit 1
-        fi
-        LOG_OUT "[广告过滤规则拉取脚本] 正在检查 OpenClash 运行状态，请稍后..."
-        sleep $WAIT_INTERVAL
-        elapsed_time=$((elapsed_time + WAIT_INTERVAL))
-    done
-
-    LOG_OUT "[广告过滤规则拉取脚本] 检测到 OpenClash 正在运行，10秒后开始拉取规则..."
-    sleep 10
+    if /etc/init.d/openclash status | grep -q "Syntax:"; then
+        LOG_OUT "[广告过滤规则拉取脚本] 等待 10 秒以确保 OpenClash 已启动..."
+        sleep 10
+    else
+        while ! /etc/init.d/openclash status | grep -q "running"; do
+            if [ $elapsed_time -ge $MAX_WAIT_TIME ]; then
+                LOG_OUT "[广告过滤规则拉取脚本] 未能在 30 秒内检测到 OpenClash 运行状态，脚本已停止运行..."
+                exit 1
+            fi
+            LOG_OUT "[广告过滤规则拉取脚本] 正在检测 OpenClash 运行状态，请稍后..."
+            sleep $WAIT_INTERVAL
+            elapsed_time=$((elapsed_time + WAIT_INTERVAL))
+        done
+        LOG_OUT "[广告过滤规则拉取脚本] 检测到 OpenClash 正在运行，10 秒后开始拉取规则..."
+        sleep 10
+    fi
 
     LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 GitHub520 加速规则…"
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
