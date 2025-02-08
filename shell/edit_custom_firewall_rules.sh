@@ -2,7 +2,12 @@
 # 清空屏幕并显示欢迎信息
 clear
 sleep 1
-echo "Custom_OpenClash_Rules 广告过滤规则设置脚本开始运行..."
+echo "##########################################################"
+echo "#                Custom_OpenClash_Rules                  #"
+echo "# https://github.com/Aethersailor/Custom_OpenClash_Rules #"
+echo "##########################################################"
+sleep 1
+echo "广告过滤规则设置脚本开始运行..."
 sleep 1
 echo "开始修改 OpenClash 开发者选项..."
 sleep 1
@@ -237,13 +242,13 @@ if [ "$adv_choice" = "y" ]; then
     ad_status="${GREEN}已启用${NC}"
     case "$ad_rule" in
         1)
-            rule_name="anti-ad 规则"
+            rule_name="${GREEN}anti-ad 规则${NC}"
             ;;
         2)
-            rule_name="adblockfilters 规则"
+            rule_name="${GREEN}adblockfilters 规则${NC}"
             ;;
         3)
-            rule_name="秋风广告规则"
+            rule_name="${GREEN}秋风广告规则${NC}"
             ;;
     esac
 else
@@ -255,13 +260,15 @@ if [ "$github_choice" = "y" ]; then
 else
     github_status="${RED}未启用${NC}"
 fi
-echo "OpenClash '开发者选项'修改成功！"
+echo "OpenClash 开发者选项修改成功！"
+sleep 1
 echo -e "广告过滤规则：$ad_status"
 if [ "$adv_choice" = "y" ]; then
     echo -e "启用规则：$rule_name"
 fi
-echo -e "Github520 加速规则：$github_status"
+echo -e "Github520 Hosts 加速规则：$github_status"
 
 echo "所有旧规则已清除，新的规则拉取设置将在 OpenClash 下次启动后生效"
+sleep 1
 echo "脚本退出..."
 sleep 1
