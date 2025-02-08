@@ -262,6 +262,6 @@ if [ "$adv_choice" = "y" ]; then
 fi
 echo -e "Github520 加速规则：$github_status"
 
-echo "所有旧规则已清除，规则拉取设置将在 OpenClash 下次启动后生效"
+echo "所有旧规则已清除，新的规则拉取设置将在 OpenClash 下次启动后生效"
 echo "脚本退出..."
 sleep 1
