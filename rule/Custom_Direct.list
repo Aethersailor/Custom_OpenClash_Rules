@@ -13,9 +13,10 @@ DOMAIN-SUFFIX,vsean.net
 #班小二
 DOMAIN-SUFFIX,banxiaoer.com
 DOMAIN-SUFFIX,banxiaoer.net
-# GitHub CDN
+# GitHub 反代 CDN
 DOMAIN-SUFFIX,jsdelivr.net
 DOMAIN-SUFFIX,github.boki.moe
+DOMAIN-SUFFIX,gh-proxy.com
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
 # DDNS

@@ -30,7 +30,11 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 \>> Telegram Channel: [Custom_OpenClash_Rules | 通知频道](https://t.me/custom_openclash_rules)  
 
+本项目的更新内容将通过通知频道进行推送，建议订阅以便了解最新的更新内容。  
+
 \>> Telegram Group: [Custom_OpenClash_Rules | 交流群](https://t.me/custom_openclash_rules_group) 
+
+如遇问题，在群内反映可以更快得到解决。  
 
 
 本项目编写于2024年4月，为非盈利项目。转载本项目内容请注明本项目的仓库地址，感谢合作！  
@@ -115,6 +119,8 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 本项目借助 OpenClash 的“开发者选项”功能，实现不依赖第三方插件的广告过滤功能。  
 
 具体设置见 Wiki 中的方案：[广告拦截设置方案](https://github.com/seeson/Custom_OpenClash_Rules/wiki/%E6%97%A0%E6%8F%92%E4%BB%B6%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)  
+
+内含一键设置脚本和手动添加两种方式。  
 
 其中提供了 Dnsmasq 格式和 hosts 格式的两种设置方法的示例，可以照抄，亦可自由设置其他任何符合格式要求的广告规则。
 
