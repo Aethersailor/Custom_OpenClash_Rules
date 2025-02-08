@@ -36,7 +36,7 @@ INSERT_CONTENT=$(cat << EOF
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 adblockfilters 广告过滤规则，规则体积较大，请耐心等候…"
     mkdir -p /tmp/dnsmasq.cfg01411c.d
-    curl -s "https://github.boki.moe/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt" -o /tmp/dnsmasq.cfg01411c.d/adblockfilters-for-dnsmasq.conf 2> /tmp/adblockfilters-curl.log
+    curl -s "https://gh-proxy.com/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt" -o /tmp/dnsmasq.cfg01411c.d/adblockfilters-for-dnsmasq.conf 2> /tmp/adblockfilters-curl.log
 
     if [ $? -eq 0 ]; then
         LOG_OUT "[广告过滤规则拉取脚本] adblockfilters 规则拉取成功！"
