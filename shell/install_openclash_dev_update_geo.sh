@@ -2,7 +2,7 @@
 
 # 定义变量
 REPO_API_URL="https://api.github.com/repos/vernesong/OpenClash/contents/dev?ref=package"
-RAW_FILE_PREFIX="https://gh-proxy.com/https://raw.githubusercontent.com/vernesong/OpenClash/package/dev"
+RAW_FILE_PREFIX="https://github.boki.moe/https://raw.githubusercontent.com/vernesong/OpenClash/package/dev"
 TEMP_FILE="openclash.apk"
 
 # 获取 JSON 数据并解析 .apk 文件名
