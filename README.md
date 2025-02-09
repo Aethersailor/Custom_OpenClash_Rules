@@ -267,6 +267,6 @@ Traffic、GB、Expire
 
 # 访问记录
 
-![:访问数](https://count.getloli.com/@:Custom_OpenClash_Rules?theme=morden-num)  
+![:访问数](https://count.getloli.com/@:Custom_OpenClash_Rules?theme=sketch-1)  
 
-2024年6月开始统计  
+2025年2月开始统计  
