@@ -264,3 +264,9 @@ Traffic、GB、Expire
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Aethersailor/Custom_OpenClash_Rules&type=Date" />
  </picture>
 </a>
+
+# 访问记录
+
+![:访问数](https://count.getloli.com/@:Custom_OpenClash_Rules?theme=morden-num)  
+
+2024年6月开始统计  
