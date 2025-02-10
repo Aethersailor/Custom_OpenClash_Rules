@@ -95,4 +95,4 @@ awk -v content="$INSERT_CONTENT" '
 1
 ' "$TARGET_FILE" > "${TARGET_FILE}.tmp" && mv "${TARGET_FILE}.tmp" "$TARGET_FILE"
 
-echo "anti-ad 广告过滤规则和 Github520 Hosts 拉取代码已写入到“开发者选项”文件 $TARGET_FILE 中，并将在 OpenClash 下次启动时生效！"
+echo "adblockfilters 广告过滤规则和 Github520 Hosts 拉取代码已写入到“开发者选项”文件 $TARGET_FILE 中，并将在 OpenClash 下次启动时生效！"
