@@ -284,12 +284,14 @@ else
 fi
 echo "OpenClash 开发者选项修改成功！"
 sleep 1
+echo "##########################################################"
 echo -e "广告过滤规则：$ad_status"
 if [ "$adv_choice" = "y" ]; then
     echo -e "启用规则：$rule_name"
 fi
 echo -e "Github520 Hosts 加速规则：$github_status"
-
+echo "##########################################################"
+sleep 1
 echo "所有旧规则已清除，新的规则拉取设置将在 OpenClash 下次启动后生效"
 sleep 1
 echo "脚本退出..."
