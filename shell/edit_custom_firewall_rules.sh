@@ -33,7 +33,7 @@ if [ "$adv_choice" = "y" ]; then
         echo "请选择要启用的广告过滤规则："
         echo "1. anti-ad 规则"
         echo "2. adblockfilters 原版规则"
-        echo "3. adblockfilters modified 规则"
+        echo "3. adblockfilters-modified 规则"
         echo "4. 秋风广告规则"
         read -n 1 -p "请输入(单选): " ad_rule
         echo ""
@@ -149,14 +149,14 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     rm -f /tmp/dnsmasq.cfg01411c.d/*ad*.conf
     sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
 
-    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters modified 广告过滤规则，规则体积较大，请耐心等候...\"
+    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则，规则体积较大，请耐心等候...\"
     mkdir -p /tmp/dnsmasq.cfg01411c.d
     curl -sSL --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters/refs/heads/main/rules/adblockdnsmasq.txt\" -o /tmp/dnsmasq.cfg01411c.d/adblockfilters-modified-for-dnsmasq.conf 2> /tmp/adblockfilters-modified-curl.log
 
     if [ \$? -eq 0 ]; then
-        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters modified 规则拉取成功!\"
+        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters-modified 规则拉取成功!\"
     else
-        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters modified 规则拉取失败，查看 /tmp/adblockfilters-modified-curl.log 获取详细信息.\"
+        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters-modified 规则拉取失败，查看 /tmp/adblockfilters-modified-curl.log 获取详细信息.\"
     fi
 "
                 ;;
@@ -267,7 +267,7 @@ if [ "$adv_choice" = "y" ]; then
             rule_name="${GREEN}adblockfilters 原版规则${NC}"
             ;;
         3)
-            rule_name="${GREEN}adblockfilters modified 规则${NC}"
+            rule_name="${GREEN}adblockfilters-modified 规则${NC}"
             ;;
         4)
             rule_name="${GREEN}秋风广告规则${NC}"
