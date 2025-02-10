@@ -72,6 +72,19 @@ curl -s https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Cust
 curl -s https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters+github520.sh | sh
 ```
 
+
+***
+
+
+## edit_custom_firewall_rules_adblockfilters-modified+github520.sh  
+
+一键写入“开发者选项”中的去广告命令（adblockfilters-modified 广告过滤规则 + Github520 加速规则）  
+
+```bash
+curl -s https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters-modified+github520.sh | sh
+```
+
+
 ***
 
 
