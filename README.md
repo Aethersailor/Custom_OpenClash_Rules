@@ -28,6 +28,8 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 欢迎 star ！
 
+***
+
 \>> Telegram Channel: [Custom_OpenClash_Rules | 通知频道](https://t.me/custom_openclash_rules)  
 
 本项目的更新内容将通过通知频道进行推送，建议订阅以便了解最新的更新内容。  
@@ -36,6 +38,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 如遇问题，在群内反映可以更快得到解决。  
 
+***
 
 本项目编写于2024年4月，为非盈利项目。转载本项目内容请注明本项目的仓库地址，感谢合作！  
 
@@ -126,9 +129,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ## 关于 IPv6  
 
-谁说 OpenClash 不能和 IPv6 同时工作？  
-
-通过正确设置 OpenWrt 的 IPv6 功能以及 OpenClash，即可实现 IPv6 和 OpenClash 的完美兼容。在实现 IPv6 国内外分流代理的同时，还能完美通过 IPv6-Test 的国内和国外镜像站点测试。  
+通过正确设置 OpenWrt 的 IPv6 功能以及 OpenClash，即可实现 OpenWrt 主路由下的 IPv6 和 OpenClash 的完美兼容。在实现 IPv6 国内外分流代理的同时，还能完美通过 IPv6-Test 的国内和国外镜像站点测试。  
 
 OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](https://github.com/seeson/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案)  
 
@@ -161,6 +162,50 @@ https://api.asailor.org/sub
 适用于 iOS 下 Shadowrocket 的规则：https://github.com/Aethersailor/Custom_Shadowrocket_Rules  
 
 测试状态，尚不完善  
+
+# 机场推荐 
+
+## SSRDOG  
+`
+“SSRDOG（SG）是一個追求可靠、安全、高效、且高性價比的互聯網接入方案國際研發團隊，為您提供最安全的網絡加速服務！”
+`  
+
+项目维护者长期使用的一家机场，价格和流量都比较适中，搭配本项目的设置方案以及订阅模板使用，体验保证拉满。
+
+### 机场特性：  
+
+- 全 IEPL 线路不过墙，特殊时期服务稳定
+ 
+- 低延迟大带宽，高峰时期油管 8K 视频秒开无压力
+
+- 节点覆盖地区全面，包含港台美日新欧等主流地区
+
+- 全部节点解锁 Netflix、Disney+、YouTube、TikTok、Spotify 等主流流媒体服务
+
+- 全部节点解锁 ChatGPT
+
+- 部分节点支持 IPv6 出站
+
+- 部分节点支持 FullCone 全锥形 NAT
+
+- 支持 UDP 转发和游戏加速
+
+- 支持试用
+
+- 工单支持简体中文沟通且客服反应迅速
+
+注册链接：[SSRDOG 注册](https://st1.hosbb.com/#/register?code=FnSb4oWM)  (链接包含 aff 信息，感谢支持！)
+
+本项目订阅模板的节点地区分类即参考了该机场的节点地区进行分类。  
+
+PS：该机场 Hong Kong 11-15 节点以及其他部分节点暂不支持 IPv6 出站，如果需要使用 IPv6 出站功能，建议在 订阅设置 > 排除节点中设置排除如下关键词，以避免使用非 IPv6 出站节点：  
+Traffic、GB、Expire、11、12、13、14、15  
+
+若不使用 IPv6 功能，建议只需屏蔽如下节点关键词：  
+
+Traffic、GB、Expire  
+
+不屏蔽不影响使用，只是会让节点列表看着更整洁一些  
 
 # 控制面板效果截图  
 
@@ -227,3 +272,9 @@ https://api.asailor.org/sub
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Aethersailor/Custom_OpenClash_Rules&type=Date" />
  </picture>
 </a>
+
+# 访问记录
+
+![:访问数](https://count.getloli.com/@:Custom_OpenClash_Rules?theme=sketch-1)  
+
+2025年2月开始统计  
