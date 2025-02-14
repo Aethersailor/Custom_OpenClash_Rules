@@ -20,6 +20,7 @@ DOMAIN-SUFFIX,torrentdownloads.pro
 DOMAIN-SUFFIX,qbittorrent.org
 DOMAIN-SUFFIX,ds1.m-team.co
 DOMAIN-SUFFIX,shewang.net
+DOMAIN-SUFFIX,dmhy.org
 DOMAIN-KEYWORD,rutracker
 DOMAIN-KEYWORD,torrentqq
 # Cloudflare DNS
@@ -28,8 +29,8 @@ IP-CIDR,1.0.0.1/32,no-resolve
 # 嵌入式相关
 DOMAIN-SUFFIX,platformio.org
 DOMAIN-SUFFIX,arduino.cc
-# PT 相关
-DOMAIN-SUFFIX,dmhy.org
+# kox 漫画
+DOMAIN-SUFFIX,kox.moe
 # Google 相关
 DOMAIN-SUFFIX,mtalk.google.com
 # EA Desktop 云同步
