@@ -15,7 +15,7 @@
 适合 dev 版本爱好者。  
 
 ```bash
-curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/install_openclash_dev.sh | sh
+curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/install_openclash_dev.sh | sh
 ```
 
 ***
@@ -32,7 +32,7 @@ curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Cu
 适合 dev 版本爱好者，没测试。  
 
 ```bash
-curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/install_openclash_dev_opkg.sh | sh
+curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/install_openclash_dev_opkg.sh | sh
 ```
 
 ***
@@ -48,7 +48,7 @@ curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Cu
 适合 dev 版本爱好者。 
 
 ```bash
-curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/install_openclash_dev_update_geo.sh | sh
+curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/install_openclash_dev_update_geo.sh | sh
 ```
 
 ***
@@ -58,7 +58,7 @@ curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Cu
 **edit_custom_firewall_rules_anti-adn+github520.sh**  
 
 ```bash
-curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_anti-adn+github520.sh | sh
+curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_anti-adn+github520.sh | sh
 ```
 
 ***
@@ -69,7 +69,7 @@ curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Cu
 **edit_custom_firewall_rules_adblockfilters+github520.sh**  
   
 ```bash
-curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters+github520.sh | sh
+curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters+github520.sh | sh
 ```
 
 
@@ -81,7 +81,7 @@ curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Cu
 **edit_custom_firewall_rules_adblockfilters-modified+github520.sh**  
 
 ```bash
-curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters-modified+github520.sh | sh
+curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters-modified+github520.sh | sh
 ```
 
 
@@ -95,5 +95,5 @@ curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Cu
 一键写入“开发者选项”中的 Github520 Hosts 拉取指令  
 
 ```bash
-curl -sSL https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_github520.sh | sh
+curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_github520.sh | sh
 ```
