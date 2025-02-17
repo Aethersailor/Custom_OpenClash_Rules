@@ -35,7 +35,7 @@ INSERT_CONTENT=$(cat << EOF
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 anti-AD 广告过滤规则，规则体积较大，请耐心等候…"
     mkdir -p /tmp/dnsmasq.cfg01411c.d
-    curl -sSL --retry 5 --retry-delay 1  "https://github.boki.moe.com/https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/adblock-for-dnsmasq.conf" -o /tmp/dnsmasq.cfg01411c.d/anti-ad-for-dnsmasq.conf 2> /tmp/anti-ad-curl.log
+    curl -sSL -4 --retry 5 --retry-delay 1  "https://github.boki.moe.com/https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/adblock-for-dnsmasq.conf" -o /tmp/dnsmasq.cfg01411c.d/anti-ad-for-dnsmasq.conf 2> /tmp/anti-ad-curl.log
 
     if [ $? -eq 0 ]; then
         LOG_OUT "[广告过滤规则拉取脚本] anti-AD 规则拉取成功！"
@@ -47,7 +47,7 @@ INSERT_CONTENT=$(cat << EOF
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
-    curl -sSL --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
+    curl -sSL -4 --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
 
     if [ $? -eq 0 ]; then
         LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取成功！"
