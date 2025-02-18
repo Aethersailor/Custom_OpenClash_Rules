@@ -219,11 +219,18 @@ Traffic、GB、Expire
 
 不屏蔽不影响使用，只是会让节点列表看着更整洁一些  
 
-# 控制面板效果截图  
+# Web 控制面板效果截图  
 
 历史截图，可能和当前版本不一致，仅供示意  
 
 ![](https://github.com/seeson/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
+
+# 其他推荐项目  
+本项目维护者在使用的一些值得推荐的其他项目。  
+## Clash Dash 
+Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTProxy 管理工具。  
+点击直达：[Clash-Dash](https://github.com/bin64/Clash-Dash)  
+非常漂亮的APP，可以说是 iOS 下最方便最优雅的 Clash 管理方式。
 
 # 贡献者  
 <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/graphs/contributors">
