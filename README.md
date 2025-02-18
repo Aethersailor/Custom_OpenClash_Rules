@@ -224,7 +224,7 @@ Traffic、GB、Expire
 ## Clash Dash 
 Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTProxy 管理工具。  
 点击直达：[Clash-Dash](https://github.com/bin64/Clash-Dash)  
-非常漂亮！  
+非常漂亮的APP，可以说是 iOS 下最方便最优雅的 Clash 管理方式。
 
 # 贡献者  
 <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/graphs/contributors">
