@@ -47,7 +47,6 @@ DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-SUFFIX,dell.com
 # Cloudflare
 DOMAIN-SUFFIX,cloudflare.com
-DOMAIN-SUFFIX,cloudflarestorage.com
 # Cursor
 DOMAIN-SUFFIX,cursor.sh
 DOMAIN-SUFFIX,cursor.com
