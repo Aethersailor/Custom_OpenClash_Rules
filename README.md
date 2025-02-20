@@ -214,11 +214,6 @@ Traffic、GB、Expire
 
 不屏蔽不影响使用，只是会让节点列表看着更整洁一些  
 
-# Web 控制面板效果截图  
-
-历史截图，可能和当前版本不一致，仅供示意  
-![](https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/doc/openclash/pics/db2.png)  
-
 # 其他推荐项目  
 本项目维护者在使用的一些值得推荐的其他项目。  
 ## Clash Dash 
