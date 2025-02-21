@@ -9,7 +9,6 @@
 # DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
 # ImmortalWrt 软件仓库
 DOMAIN-SUFFIX,immortalwrt.org
-DOMAIN-SUFFIX,vsean.net
 # GitHub 反代 CDN
 DOMAIN-SUFFIX,jsdelivr.net
 DOMAIN-SUFFIX,github.boki.moe
@@ -77,12 +76,12 @@ DOMAIN-SUFFIX,112114.xyz
 DOMAIN-SUFFIX,epg.v1.mk
 DOMAIN-SUFFIX,epg.aptv.app
 DOMAIN-SUFFIX,gdcucc.v1.mk
+# GoLink 加速器
+DOMAIN-SUFFIX,golinkapi.com
 
 # 冷门国内域名
 # 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
-
-# GoLink 加速器
-DOMAIN-SUFFIX,golinkapi.com
+# 以下域名已提交
 # 智慧笑联
 DOMAIN-SUFFIX,xiaolianhb.com
 # 其他
@@ -93,3 +92,5 @@ DOMAIN-SUFFIX,towngasvcc.com
 DOMAIN-SUFFIX,gztowngas.com
 # 115
 DOMAIN-SUFFIX,115vod.com
+DOMAIN-SUFFIX,vsean.net
+# 以下域名待提交
