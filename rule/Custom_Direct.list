@@ -2,8 +2,8 @@
 # AUTHOR: Aethersailor
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 强制直连域名列表，来自个人收集
-# 部分域名可能和中国大陆域名列表存在重叠
-# 规则内容较少，不会影响性能，请放心使用
+# 此规则文件中的域名会定期 PR 至 Geosite 数据库，并删除被 Geosite 收录的域名，因此请在支持 Geosite 的软件（如 OpenClash）中使用。
+
 
 # ImmortalWrt 在线更新服务
 # DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
@@ -60,7 +60,6 @@ DOMAIN-SUFFIX,ddsrem.com
 DOMAIN-SUFFIX,ipinfo.io
 DOMAIN-SUFFIX,ggbond.org
 DOMAIN-SUFFIX,nn.ci
-DOMAIN-SUFFIX,xhofe.top
 DOMAIN-SUFFIX,wwwh.eu.org
 DOMAIN-SUFFIX,1996999.xyz
 # Emby 直连
@@ -74,7 +73,6 @@ DOMAIN-SUFFIX,sgtv.ii00.cc
 # MeFun VIP Music 资源
 DOMAIN-SUFFIX,cn-music.mefun.vip
 # IPTV 相关
-DOMAIN-SUFFIX,cmdns.xyz
 DOMAIN-SUFFIX,112114.xyz
 DOMAIN-SUFFIX,epg.v1.mk
 DOMAIN-SUFFIX,epg.aptv.app
@@ -82,25 +80,7 @@ DOMAIN-SUFFIX,gdcucc.v1.mk
 
 # 冷门国内域名
 # 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
-# 青萍科技
-DOMAIN-SUFFIX,cleargrass.com
-# 蓝熊 OZON 插件官网
-DOMAIN-SUFFIX,ozonabc.com
-# OZON大卖（OZONBIGSELL）官网
-DOMAIN-SUFFIX,ozonbigsell.com
-# 跨境巴士
-DOMAIN-SUFFIX,kuajing84.com
-# 无忧易售
-DOMAIN-SUFFIX,51selling.com
-# Ru-seer 俄罗斯卖家助手 粤ICP备2023020424号
-DOMAIN-SUFFIX,ruseer.com
-# 布丁猫  黑ICP备2024018807号-1
-DOMAIN-SUFFIX,bdmozon.com
-DOMAIN-SUFFIX,bdcat.top
-# 宁停车
-DOMAIN-SUFFIX,ningtingche.com
-# GUOO 物流
-DOMAIN-SUFFIX,guoocang.com
+
 # GoLink 加速器
 DOMAIN-SUFFIX,golinkapi.com
 # 智慧笑联
