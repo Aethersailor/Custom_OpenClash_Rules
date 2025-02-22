@@ -76,8 +76,12 @@ DOMAIN-SUFFIX,112114.xyz
 DOMAIN-SUFFIX,epg.v1.mk
 DOMAIN-SUFFIX,epg.aptv.app
 DOMAIN-SUFFIX,gdcucc.v1.mk
+
+# 游戏类规则
 # GoLink 加速器
 DOMAIN-SUFFIX,golinkapi.com
+# 百炼英雄
+DOMAIN-SUFFIX,forevernine.com
 
 # 冷门国内域名
 # 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
