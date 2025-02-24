@@ -10,11 +10,11 @@ DOMAIN-SUFFIX,googleapis.cn
 DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 # PS5 STUN
 DOMAIN-SUFFIX,stun.playstation.net
-#BT/PT相关
+# BT/PT相关
 DOMAIN-SUFFIX,acg.rip
 DOMAIN-SUFFIX,kickasstorrents.to
 DOMAIN-SUFFIX,kickasstorrents.ws
-DOMAIN-SUFFIX,lemonhd.club
+# DOMAIN-SUFFIX,lemonhd.club
 DOMAIN-SUFFIX,badasstorrents.com
 DOMAIN-SUFFIX,torrentdownloads.pro
 DOMAIN-SUFFIX,qbittorrent.org
