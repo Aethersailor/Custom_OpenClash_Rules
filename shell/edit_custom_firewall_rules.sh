@@ -114,8 +114,8 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
 
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 anti-AD 广告过滤规则，规则体积较大，请耐心等候...\"
-    mkdir -p /tmp/dnsmasq.cfg01411c.d
-    curl -sSL -4 --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/adblock-for-dnsmasq.conf\" -o /tmp/dnsmasq.cfg01411c.d/anti-ad-for-dnsmasq.conf 2> /tmp/anti-ad-curl.log
+    mkdir -p /tmp/dnsmasq.d
+    curl -sSL -4 --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/adblock-for-dnsmasq.conf\" -o /tmp/dnsmasq.d/anti-ad-for-dnsmasq.conf 2> /tmp/anti-ad-curl.log
 
     if [ \$? -eq 0 ]; then
         LOG_OUT \"[广告过滤规则拉取脚本] anti-AD 规则拉取成功!\"
@@ -132,8 +132,8 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
 
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters 广告过滤规则，规则体积较大，请耐心等候...\"
-    mkdir -p /tmp/dnsmasq.cfg01411c.d
-    curl -sSL -4 --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt\" -o /tmp/dnsmasq.cfg01411c.d/adblockfilters-for-dnsmasq.conf 2> /tmp/adblockfilters-curl.log
+    mkdir -p /tmp/dnsmasq.d
+    curl -sSL -4 --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt\" -o /tmp/dnsmasq.d/adblockfilters-for-dnsmasq.conf 2> /tmp/adblockfilters-curl.log
 
     if [ \$? -eq 0 ]; then
         LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters 规则拉取成功!\"
@@ -150,8 +150,8 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
 
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则，规则体积较大，请耐心等候...\"
-    mkdir -p /tmp/dnsmasq.cfg01411c.d
-    curl -sSL -4 --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/refs/heads/main/rules/adblockdnsmasq.txt\" -o /tmp/dnsmasq.cfg01411c.d/adblockfilters-modified-for-dnsmasq.conf 2> /tmp/adblockfilters-modified-curl.log
+    mkdir -p /tmp/dnsmasq.d
+    curl -sSL -4 --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/refs/heads/main/rules/adblockdnsmasq.txt\" -o /tmp/dnsmasq.d/adblockfilters-modified-for-dnsmasq.conf 2> /tmp/adblockfilters-modified-curl.log
 
     if [ \$? -eq 0 ]; then
         LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters-modified 规则拉取成功!\"
