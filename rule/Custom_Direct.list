@@ -86,19 +86,22 @@ DOMAIN-SUFFIX,forevernine.com
 # 冷门国内域名
 # 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
 # 以下域名已提交
-# 智慧笑联
-DOMAIN-SUFFIX,xiaolianhb.com
-# 其他
-DOMAIN-SUFFIX,xzsmartmetro.com
-DOMAIN-SUFFIX,xzscjk.com
-# 南方电网
-DOMAIN-SUFFIX,towngasvcc.com
-DOMAIN-SUFFIX,gztowngas.com
-# 115
-DOMAIN-SUFFIX,115vod.com
-DOMAIN-SUFFIX,vsean.net
-# 以下域名待提交
 DOMAIN-SUFFIX,giecds.com
 DOMAIN-SUFFIX,mashangfangxin.com
 DOMAIN-SUFFIX,cdkeynogap.com
 DOMAIN-SUFFIX,xiaoting.com
+
+# 以下域名待提交
+
+# 以下域名已收录
+# 智慧笑联
+#DOMAIN-SUFFIX,xiaolianhb.com
+# 其他
+#DOMAIN-SUFFIX,xzsmartmetro.com
+#DOMAIN-SUFFIX,xzscjk.com
+# 南方电网
+#DOMAIN-SUFFIX,towngasvcc.com
+#DOMAIN-SUFFIX,gztowngas.com
+# 115
+#DOMAIN-SUFFIX,115vod.com
+# 更多已被收录的域名，此处未做保留
