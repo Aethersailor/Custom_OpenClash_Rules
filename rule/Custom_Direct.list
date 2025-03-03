@@ -2,7 +2,7 @@
 # AUTHOR: Aethersailor
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 强制直连域名列表，来自个人收集
-# 此规则文件中的域名会定期 PR 至 Geosite 数据库，并删除被 Geosite 收录的域名，因此请在支持 Geosite 的软件（如 OpenClash）中使用。
+# 此规则文件中的域名会定期 PR 至 Geosite 数据库，并删除已被 Geosite 收录的域名，因此请在支持 Geosite 的软件（如 OpenClash）中使用。
 
 
 # ImmortalWrt 在线更新服务
@@ -30,8 +30,7 @@ DOMAIN-SUFFIX,kit327.com
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
-# 松下智能家居
-DOMAIN-SUFFIX,psmartcloud.com
+
 # Akamai CDN
 DOMAIN-SUFFIX,akamaihd.net
 # FinalShell
@@ -104,4 +103,6 @@ DOMAIN-SUFFIX,xiaoting.com
 #DOMAIN-SUFFIX,gztowngas.com
 # 115
 #DOMAIN-SUFFIX,115vod.com
+# 松下智能家居
+#DOMAIN-SUFFIX,psmartcloud.com
 # 更多已被收录的域名，此处未做保留
