@@ -59,7 +59,8 @@ INSERT_CONTENT=$(cat << EOF
     sed -i '/!/d' /etc/hosts
 
     LOG_OUT "[广告过滤规则拉取脚本] 清理 DNS 缓存…"
-    /etc/init.d/dnsmasq reload
+    /etc/init.d/dnsmasq stop
+    /etc/init.d/dnsmasq start
     LOG_OUT "[广告过滤规则拉取脚本] 脚本运行完毕！"
 
 ) &
