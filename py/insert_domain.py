@@ -14,6 +14,7 @@ import dns.message
 from datetime import datetime
 from urllib.parse import urlencode
 import urllib3
+from dns import rdatatype  # 添加在文件开头的导入部分
 
 # 禁用SSL警告
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -182,7 +183,8 @@ def parse_dns_wire(data):
     result = {'Answer': [], 'Authority': []}
     
     for rrset in msg.answer:
-        if rrset.rdtype == dns.rdatatype.NS:
+        # 修改为明确的类型获取方式
+        if rrset.rdtype == dns.rdatatype.from_text('NS'):
             for item in rrset:
                 result['Answer'].append({
                     'type': 2,
@@ -433,23 +435,45 @@ def insert_domain():
                 continue
                 
             if validate_ns_records(new_domain, geoip_db_path):
-                with open(config_path, 'r+', encoding='utf-8') as f:
+                # 原子化写入：分离读/写操作，确保文件完整性
+                with open(config_path, 'r', encoding='utf-8') as f:
                     lines = f.readlines()
-                    new_entry = f"server=/{new_domain}/114.114.114.114\n"
-                    
-                    insert_pos = find_insert_position(lines, new_domain)
-                    lines.insert(insert_pos, new_entry)
-                    
-                    f.seek(0)
+                
+                new_entry = f"server=/{new_domain}/114.114.114.114\n"
+                insert_pos = find_insert_position(lines, new_domain)
+                lines.insert(insert_pos, new_entry)
+                
+                # 使用换行符保持文件格式统一
+                with open(config_path, 'w', newline='\n', encoding='utf-8') as f:
                     f.writelines(lines)
-                    f.truncate()
-                    
-                    pyperclip.copy(f"accelerated-domains: {new_domain}")
-                    print_status(STYLES['success'], f"已添加并复制到剪贴板")
-                    
-                    if gw.getWindowsWithTitle('GitHub Desktop'):
-                        gw.getWindowsWithTitle('GitHub Desktop')[0].activate()
-                        print_status(STYLES['info'], "已激活GitHub Desktop窗口")
+                
+                # 新增写入验证
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    written_content = f.read()
+                    if new_entry.strip() not in written_content:
+                        raise RuntimeError(f"文件写入验证失败: {new_entry.strip()}")
+                
+                # 新增git操作
+                target_dir = os.path.dirname(config_path)
+                commit_msg = f"accelerated-domains: {new_domain}"
+                
+                try:
+                    # 执行git命令
+                    subprocess.run(
+                        ['git', 'add', 'accelerated-domains.china.conf'],
+                        cwd=target_dir,
+                        check=True
+                    )
+                    subprocess.run(
+                        ['git', 'commit', '-m', commit_msg],
+                        cwd=target_dir,
+                        check=True
+                    )
+                    print_status(STYLES['success'], "成功提交到Git仓库")
+                except subprocess.CalledProcessError as e:
+                    print_status(STYLES['error'], f"Git操作失败: {str(e)}")
+                except Exception as e:
+                    print_status(STYLES['error'], f"意外错误: {str(e)}")
             else:
                 print_status(STYLES['error'], "域名验证未通过，跳过添加")
                 
