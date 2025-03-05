@@ -236,35 +236,37 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 
 以下排名不分先后
 
-- [vernesong / OpenClash](https://github.com/vernesong/OpenClash)
+- [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
 
-- [MetaCubeX / mihomo](https://github.com/MetaCubeX/mihomo)
+- [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
 
-- [ACL4SSR / ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
+- [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 
-- [blackmatrix7 / ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
+- [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 
-- [v2fly / domain-list-community](https://github.com/v2fly/domain-list-community)
+- [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community)
 
-- [Loyalsoldier / v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
+- [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list)
 
-- [TraderWukong / demo](https://github.com/TraderWukong/demo)
+- [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
 
-- [dogfight360 / UsbEAm](https://www.dogfight360.com/blog/18627/)
+- [TraderWukong/demo](https://github.com/TraderWukong/demo)
 
-- [ddgksf2013 / ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)
+- [dogfight360/UsbEAm](https://www.dogfight360.com/blog/18627/)
 
-- [217heidai / adblockfilters](https://github.com/217heidai/adblockfilters)
+- [ddgksf2013/ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)
 
-- [privacy-protection-tools / anti-AD](https://github.com/privacy-protection-tools/anti-AD)
+- [217heidai/adblockfilters](https://github.com/217heidai/adblockfilters)
 
-- [TG-Twilight / AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)
+- [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
 
-- [521xueweihan / GitHub520](https://github.com/521xueweihan/GitHub520)
+- [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)
 
-- [immortalwrt / user-FAQ](https://github.com/immortalwrt/user-FAQ/)
+- [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520)
 
-- [ChatGPT / OpenAI](https://chatgpt.com/)
+- [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/)
+
+- [ChatGPT/OpenAI](https://chatgpt.com/)
 
 ***
 
