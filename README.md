@@ -164,7 +164,9 @@ https://api.asailor.org/sub
 
 ## 在 OpenClash 之外的其他软件中是否可用？  
 
-对于 OpenClash 以外的使用环境，可以参考维护者的另一个项目：[Custom_Clash_Rules](https://github.com/Aethersailor/Custom_Clash_Rules)
+本项目的订阅模板，理论上适用于任意支持 GeoSite 规则的 Clash 工具，具体使用方法不作指导。    
+
+对于 OpenClash 以外的使用环境，也可以参考维护者的另一个项目：[Custom_Clash_Rules](https://github.com/Aethersailor/Custom_Clash_Rules)
 
 适用于 iOS 下 Shadowrocket 的规则：https://github.com/Aethersailor/Custom_Shadowrocket_Rules  
 
