@@ -108,7 +108,7 @@ DOH_HEADERS = {
     'accept': 'application/dns-json'
 }
 
-GEOIP_DB_URL = 'https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-Country.mmdb'
+GEOIP_DB_URL = 'https://github.boki.moe/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-Country.mmdb'
 
 def resolve_doh_ip(domain):
     """使用223.5.5.5解析DoH服务器地址（强制IPv4）"""
@@ -404,6 +404,9 @@ def get_config_path():
     
     return config_path
 
+# 在文件顶部添加time模块导入
+import time
+
 def insert_domain():
     print_section("dnsmasq-china-list 域名规则管理工具启动")
     print(f"{STYLES['title']}版本: 3.1 | 作者: Aethersailor | 协议: MIT{COLORS['reset']}\n")
@@ -416,66 +419,83 @@ def insert_domain():
     if not geoip_db_path:
         return
 
+    def process_domain(domain):
+        # 原有处理逻辑封装成函数
+        if domain.endswith('.cn'):
+            print_status(STYLES['warning'], ".cn域名自动跳过")
+            return
+        if check_existing_entry(config_path, domain):
+            print_status(STYLES['warning'], "规则已存在，跳过处理")
+            return
+        if validate_ns_records(domain, geoip_db_path):
+            with open(config_path, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+            
+            new_entry = f"server=/{domain}/114.114.114.114\n"
+            insert_pos = find_insert_position(lines, domain)
+            lines.insert(insert_pos, new_entry)
+            
+            with open(config_path, 'w', newline='\n', encoding='utf-8') as f:
+                f.writelines(lines)
+            
+            # 写入验证
+            with open(config_path, 'r', encoding='utf-8') as f:
+                written_content = f.read()
+                if new_entry.strip() not in written_content:
+                    raise RuntimeError(f"文件写入验证失败: {new_entry.strip()}")
+            
+            # Git操作
+            target_dir = os.path.dirname(config_path)
+            commit_msg = f"accelerated-domains: {domain}"
+            
+            try:
+                subprocess.run(
+                    ['git', 'add', 'accelerated-domains.china.conf'],
+                    cwd=target_dir,
+                    check=True
+                )
+                subprocess.run(
+                    ['git', 'commit', '-m', commit_msg],
+                    cwd=target_dir,
+                    check=True
+                )
+                print_status(STYLES['success'], "成功提交到Git仓库")
+            except subprocess.CalledProcessError as e:
+                print_status(STYLES['error'], f"Git操作失败: {str(e)}")
+            except Exception as e:
+                print_status(STYLES['error'], f"意外错误: {str(e)}")
+        else:
+            print_status(STYLES['error'], "域名验证未通过，跳过添加")
+
     while True:
         try:
-            user_input = input(f"\n{COLORS['cyan']}请输入域名/URL（或输入 exit 退出）{COLORS['reset']}: ").strip()
+            user_input = input(f"\n{COLORS['cyan']}请输入域名/URL（或拖入txt文件/输入 exit 退出）{COLORS['reset']}: ").strip()
             
             if user_input.lower() == 'exit':
                 print_section("程序退出")
                 print_status(STYLES['info'], "感谢使用！")
                 break
 
-            new_domain = extract_domain(user_input)
-            if new_domain.endswith('.cn'):
-                print_status(STYLES['warning'], ".cn域名自动跳过")
-                continue
-                
-            if check_existing_entry(config_path, new_domain):
-                print_status(STYLES['warning'], "规则已存在，跳过处理")
-                continue
-                
-            if validate_ns_records(new_domain, geoip_db_path):
-                # 原子化写入：分离读/写操作，确保文件完整性
-                with open(config_path, 'r', encoding='utf-8') as f:
-                    lines = f.readlines()
-                
-                new_entry = f"server=/{new_domain}/114.114.114.114\n"
-                insert_pos = find_insert_position(lines, new_domain)
-                lines.insert(insert_pos, new_entry)
-                
-                # 使用换行符保持文件格式统一
-                with open(config_path, 'w', newline='\n', encoding='utf-8') as f:
-                    f.writelines(lines)
-                
-                # 新增写入验证
-                with open(config_path, 'r', encoding='utf-8') as f:
-                    written_content = f.read()
-                    if new_entry.strip() not in written_content:
-                        raise RuntimeError(f"文件写入验证失败: {new_entry.strip()}")
-                
-                # 新增git操作
-                target_dir = os.path.dirname(config_path)
-                commit_msg = f"accelerated-domains: {new_domain}"
-                
+            # 新增文件处理逻辑
+            if os.path.isfile(user_input) and user_input.endswith('.txt'):
+                print_status(STYLES['info'], f"检测到输入为文件，开始处理: {user_input}")
                 try:
-                    # 执行git命令
-                    subprocess.run(
-                        ['git', 'add', 'accelerated-domains.china.conf'],
-                        cwd=target_dir,
-                        check=True
-                    )
-                    subprocess.run(
-                        ['git', 'commit', '-m', commit_msg],
-                        cwd=target_dir,
-                        check=True
-                    )
-                    print_status(STYLES['success'], "成功提交到Git仓库")
-                except subprocess.CalledProcessError as e:
-                    print_status(STYLES['error'], f"Git操作失败: {str(e)}")
+                    with open(user_input, 'r', encoding='utf-8') as f:
+                        lines = f.readlines()
+                        for line_num, line in enumerate(lines, 1):
+                            line = line.strip()
+                            if not line:
+                                continue
+                            print_status(STYLES['info'], f"处理第{line_num}行内容: {line}")
+                            domain = extract_domain(line)
+                            process_domain(domain)
+                            time.sleep(1)  # 行间间隔1秒
                 except Exception as e:
-                    print_status(STYLES['error'], f"意外错误: {str(e)}")
-            else:
-                print_status(STYLES['error'], "域名验证未通过，跳过添加")
+                    print_status(STYLES['error'], f"文件处理失败: {str(e)}")
+                continue
+
+            new_domain = extract_domain(user_input)
+            process_domain(new_domain)
                 
         except KeyboardInterrupt:
             print_status(STYLES['error'], "操作已中止")
