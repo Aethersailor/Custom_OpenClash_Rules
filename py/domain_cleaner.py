@@ -1,6 +1,9 @@
 import sys
 import os
 import tldextract
+import requests  # 新增requests库导入
+from urllib.parse import urlparse  # 新增URL解析
+import glob
 
 def is_valid_domain(domain):
     """验证域名格式有效性"""
@@ -37,41 +40,137 @@ def extract_main_domain(line):
     # 确保一级域名（如example.com）
     return main_domain if main_domain.count('.') == 1 else None
 
-def process_domain_file(file_path):
+def load_china_domains():
+    """加载国内域名列表"""
+    china_list = set()
+    conf_path = os.path.join(os.path.dirname(__file__), 'dnsmasq-china-list', 'accelerated-domains.china.conf')
+    
+    if os.path.exists(conf_path):
+        with open(conf_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.startswith('server=/'):
+                    # 修复域名解析位置错误（原索引2应改为1）
+                    domain = line.split('/')[1].split('/')[0].lower()  # 正确获取域名部分
+                    china_list.add(domain)
+    else:
+        print("警告：未找到国内域名列表文件")
+    return china_list
+
+def process_domain_file(file_path, output_path=None):
     """核心处理函数"""
     processed = set()
     output_lines = []
-    
+    china_domains = load_china_domains()
+    china_duplicates = 0
+
     with open(file_path, 'r', encoding='utf-8') as f:
-        for line in f:
-            # 过滤关键字行
-            if 'DOMAIN-KEYWORD' in line:
-                continue
-                
-            # 清理前缀
-            clean_line = line.replace('DOMAIN-SUFFIX,', '').replace('DOMAIN,', '').strip()
+        # 第一阶段：文件内部去重
+        raw_lines = [line.strip() for line in f if line.strip() and not line.startswith('#')]
+        
+        # 第二阶段：双重过滤
+        for stripped_line in raw_lines:
+            # 修复：允许处理纯域名格式（无DOMAIN-SUFFIX前缀）
+            if stripped_line.startswith(('DOMAIN-SUFFIX,', 'DOMAIN,')):
+                clean_line = stripped_line.split(',', 1)[-1].strip()
+            else:  # 新增纯域名处理分支
+                clean_line = stripped_line.strip()
             
-            # 提取并验证域名
             main_domain = extract_main_domain(clean_line)
+            
+            # 新增验证顺序调整
             if not main_domain or not is_valid_domain(main_domain):
                 continue
                 
-            # 去重处理
-            if main_domain not in processed:
-                processed.add(main_domain)
-                output_lines.append(main_domain)
+            # 先执行文件内去重
+            if main_domain in processed:
+                continue
+                
+            # 再执行国内域名过滤
+            if main_domain in china_domains:
+                china_duplicates += 1
+                continue
+                
+            processed.add(main_domain)
+            output_lines.append(main_domain)
 
     # 保存结果
-    with open(file_path, 'w', encoding='utf-8') as f:
+    # 修复：当未指定输出路径时自动创建新文件名
+    save_path = output_path or file_path.replace('.txt', '_cleaned.txt')  # 修改处
+    with open(save_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(sorted(output_lines)))
-    print(f"处理完成！有效域名数量：{len(output_lines)}")
+        
+    return len(output_lines), china_duplicates
+
+def download_url(url):  # 新增下载函数
+    """下载URL内容"""
+    try:
+        response = requests.get(url, timeout=10, verify=True)
+        response.raise_for_status()
+        return response.text
+    except Exception as e:
+        print(f"下载失败：{str(e)}")
+        return None
+
+def main_loop():
+    """新增交互式主循环"""
+    print("=== 域名清理工具 ===")
+    while True:
+        # 重构后的主程序逻辑
+        if len(sys.argv) < 2:
+            user_input = input("\n请输入文件路径/URL（直接回车使用domain_cleaner.txt）：").strip()
+            if not user_input:
+                file_path = os.path.join(os.path.dirname(__file__), 'domain_cleaner.txt')
+            else:
+                file_path = user_input
+        else:
+            file_path = sys.argv[1]
+
+        # 修复1：添加文件存在性验证（原代码缩进错误导致逻辑错误）
+        if file_path.startswith(('http://', 'https://')):
+            print(f"开始下载：{file_path}")
+            content = download_url(file_path)
+            if content:
+                # 修复1：添加临时文件路径定义
+                temp_file = os.path.join(os.path.dirname(__file__), 'temp_download.txt')
+                # 修复2：处理下载内容前创建输出文件名
+                url_path = urlparse(file_path).path
+                base_name = os.path.basename(url_path) or 'downloaded'
+                output_name = os.path.splitext(base_name)[0] + '.txt'
+                
+                with open(temp_file, 'w', encoding='utf-8') as f:
+                    f.write(content)
+                
+                # 修复3：确保使用绝对路径保存结果
+                output_path = os.path.join(os.path.dirname(__file__), output_name)
+                valid_count, china_duplicates = process_domain_file(temp_file, output_path)
+                os.remove(temp_file)
+                print(f"\n处理完成！")
+                print(f"过滤国内重复域名：{china_duplicates} 个")
+                print(f"有效域名数量：{valid_count} 个")
+        else:
+            # 修复3：添加本地文件处理的结果接收
+            if os.path.isfile(file_path):
+                # 修复：添加默认输出路径参数
+                output_name = os.path.splitext(file_path)[0] + '_cleaned.txt'
+                valid_count, china_duplicates = process_domain_file(file_path, output_name)  # 修改处
+                print(f"\n处理完成！输出文件：{output_name}")
+                print(f"过滤国内重复域名：{china_duplicates} 个")
+                print(f"有效域名数量：{valid_count} 个")
+            else:
+                print(f"文件 {file_path} 不存在！")
+
+        # 修复4：移除重复的process_domain_file调用
+        sys.argv = [sys.argv[0]]
+        
+        # 新增继续处理提示
+        choice = input("\n是否继续处理其他文件？(y/n) ").lower()
+        if choice != 'y':
+            print("程序退出")
+            break
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        input("请拖放txt文件到本脚本 (按回车退出)...")
-    else:
-        target_file = sys.argv[1]
-        if os.path.isfile(target_file) and target_file.lower().endswith('.txt'):
-            process_domain_file(target_file)
-        else:
-            print("错误：仅支持txt文件")
+    try:
+        main_loop()
+    except Exception as e:
+        print(f"发生未捕获异常：{str(e)}")
+        input("按任意键退出...")
