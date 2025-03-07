@@ -469,14 +469,15 @@ def insert_domain():
 
     while True:
         try:
-            user_input = input(f"\n{COLORS['cyan']}请输入域名/URL（或拖入txt文件/输入 exit 退出）{COLORS['reset']}: ").strip()
+            # 修改输入处理：去除首尾空格和引号
+            user_input = input(f"\n{COLORS['cyan']}请输入域名/URL（或拖入txt文件/输入 exit 退出）{COLORS['reset']}: ").strip(' "\'')  # 新增 strip 参数
             
             if user_input.lower() == 'exit':
                 print_section("程序退出")
                 print_status(STYLES['info'], "感谢使用！")
                 break
 
-            # 新增文件处理逻辑
+            # 修改文件检测逻辑：使用处理后的路径
             if os.path.isfile(user_input) and user_input.endswith('.txt'):
                 print_status(STYLES['info'], f"检测到输入为文件，开始处理: {user_input}")
                 try:
