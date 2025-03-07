@@ -5,6 +5,13 @@ import requests  # 新增requests库导入
 from urllib.parse import urlparse  # 新增URL解析
 import glob
 
+# 在文件开头添加try-except处理导入
+try:
+    import pyperclip
+    clipboard_available = True
+except ImportError:
+    clipboard_available = False
+
 def is_valid_domain(domain):
     """验证域名格式有效性"""
     if not domain or domain.startswith('.') or domain.endswith('.'):
@@ -145,17 +152,31 @@ def main_loop():
                 valid_count, china_duplicates = process_domain_file(temp_file, output_path)
                 os.remove(temp_file)
                 print(f"\n处理完成！")
+                print(f"输出文件路径：{output_path}")
+                if clipboard_available:
+                    pyperclip.copy(output_path)
+                    print("文件路径已复制剪贴板")
+                else:
+                    print("注意：剪贴板功能不可用，请先安装pyperclip库")
                 print(f"过滤国内重复域名：{china_duplicates} 个")
-                print(f"有效域名数量：{valid_count} 个")
+
         else:
-            # 修复3：添加本地文件处理的结果接收
             if os.path.isfile(file_path):
-                # 修复：添加默认输出路径参数
-                output_name = os.path.splitext(file_path)[0] + '_cleaned.txt'
-                valid_count, china_duplicates = process_domain_file(file_path, output_name)  # 修改处
+                output_name = os.path.abspath(  # 获取绝对路径
+                    os.path.splitext(file_path)[0] + '_cleaned.txt'
+                )
+                valid_count, china_duplicates = process_domain_file(file_path, output_name)
+                
                 print(f"\n处理完成！输出文件：{output_name}")
+                print(f"文件路径：{output_name}") 
+                if clipboard_available:
+                    pyperclip.copy(output_name)
+                    print("路径已复制剪贴板")
+                else:
+                    print("注意：剪贴板功能不可用，请先安装pyperclip库")
                 print(f"过滤国内重复域名：{china_duplicates} 个")
                 print(f"有效域名数量：{valid_count} 个")
+                
             else:
                 print(f"文件 {file_path} 不存在！")
 
