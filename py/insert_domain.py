@@ -2,7 +2,6 @@ import sys
 import subprocess
 import pyperclip
 import tldextract
-import pygetwindow as gw
 import socket
 import geoip2.database
 import requests
@@ -15,10 +14,8 @@ from datetime import datetime
 from urllib.parse import urlencode
 import urllib3
 from dns import rdatatype  # 添加在文件开头的导入部分
-
 # 禁用SSL警告
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 # 新增：IPv4地址验证函数
 def is_valid_ipv4(address):
     """严格验证IPv4地址格式"""
@@ -27,19 +24,25 @@ def is_valid_ipv4(address):
         return True
     except (socket.error, OSError):
         return False
-
 # 检查并安装依赖（已修复）
+# 新增元信息声明
+__version__ = "3.1"
+__author__ = "Aethersailor"
+__license__ = "CC BY-NC-SA 4.0"
+__repository__ = "https://github.com/Aethersailor/Custom_OpenClash_Rules"
+
+# 原有依赖检查函数
 def check_dependencies():
     required = {
-        'pyperclip': 'pyperclip',
-        'tldextract': 'tldextract',
-        'pygetwindow': 'pygetwindow',
-        'geoip2': 'geoip2',
-        'requests': 'requests',
-        'pyautogui': 'pyautogui',
-        'dns': 'dnspython'
+        'pyperclip': 'pyperclip', 
+        'tldextract': 'tldextract',  # ✅ 用于域名解析
+        'geoip2': 'geoip2',          # ✅ IP地理定位
+        'requests': 'requests',      # ✅ HTTP请求
+        'dns': 'dnspython'           # ✅ DNS解析
+        # 已移除：
+        # 'pygetwindow': 'pygetwindow', 
+        # 'pyautogui': 'pyautogui'
     }
-    
     missing = []
     for pkg in required:
         try:
@@ -55,9 +58,7 @@ def check_dependencies():
         )
         print("依赖安装完成，请重新运行脚本\n")
         sys.exit(1)
-
 check_dependencies()
-
 # 颜色定义
 COLORS = {
     "reset": "\033[0m",
@@ -68,7 +69,6 @@ COLORS = {
     "bold": "\033[1m",
     "underline": "\033[4m"
 }
-
 STYLES = {
     "info": f"{COLORS['cyan']}ℹ️  INFO{COLORS['reset']}",
     "success": f"{COLORS['green']}✅ SUCCESS{COLORS['reset']}",
@@ -77,7 +77,6 @@ STYLES = {
     "title": f"{COLORS['bold']}{COLORS['cyan']}",
     "divider": f"{COLORS['cyan']}{'='*60}{COLORS['reset']}"
 }
-
 NON_CHINA_PROVIDERS = [
     'cloudflare', 'aws', 'google', 'cloudns.net', 'gandi', 
     'dnsowl', 'domaincontrol', 'he.net', 'name.com', 'azure',
@@ -85,7 +84,6 @@ NON_CHINA_PROVIDERS = [
     'registrar-servers', 'foundationdns.org', 'fastly', 'akamai', 'incapsula',
     'vercel-dns.com'
 ]
-
 DOH_SERVERS = [
     {
         'host': 'dns.alidns.com',
@@ -103,13 +101,14 @@ DOH_SERVERS = [
         'params_type': 'standard'
     }
 ]
-
 DOH_HEADERS = {
     'accept': 'application/dns-json'
 }
-
-GEOIP_DB_URL = 'https://github.boki.moe/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-Country.mmdb'
-
+# 修改GEOIP数据库下载地址配置
+GEOIP_DB_URLS = [
+    'https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-Country.mmdb',
+    'https://github.boki.moe/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-Country.mmdb'
+]
 def resolve_doh_ip(domain):
     """使用223.5.5.5解析DoH服务器地址（强制IPv4）"""
     try:
@@ -131,7 +130,6 @@ def resolve_doh_ip(domain):
     except subprocess.CalledProcessError as e:
         print_status(STYLES['error'], f"解析失败 {domain}: {e.stderr}")
         return None
-
 def query_ns_with_doh(domain):
     """使用DNS-over-HTTPS查询NS记录"""
     for server in DOH_SERVERS:
@@ -176,7 +174,6 @@ def query_ns_with_doh(domain):
             
     print_status(STYLES['error'], "所有DoH服务器查询失败")
     return None
-
 def parse_dns_wire(data):
     """解析DNS wire格式响应"""
     msg = dns.message.from_wire(data)
@@ -200,7 +197,6 @@ def parse_dns_wire(data):
                 })
     
     return result
-
 def query_a_with_doh(domain):
     """严格查询IPv4地址"""
     for server in DOH_SERVERS:
@@ -239,7 +235,6 @@ def query_a_with_doh(domain):
         except Exception:
             continue
     return None
-
 def process_doh_response(data):
     """处理DoH响应并提取NS记录"""
     ns_servers = []
@@ -258,19 +253,15 @@ def process_doh_response(data):
                     ns_servers.append(ns_data.rstrip('.').lower())
     
     return list(set(ns_servers)) if ns_servers else None
-
 def print_section(title):
     print(f"\n{STYLES['divider']}")
     print(f"{STYLES['title']}{title.upper()}{COLORS['reset']}")
     print(f"{STYLES['divider']}\n")
-
 def print_status(style, message):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {style}: {message}")
-
 def extract_domain(url):
     ext = tldextract.extract(url)
     return f"{ext.domain}.{ext.suffix}"
-
 def get_ip_from_ns(ns_domain):
     """双重验证获取IPv4地址"""
     print_status(STYLES['info'], f"开始解析NS服务器: {ns_domain}")
@@ -295,7 +286,6 @@ def get_ip_from_ns(ns_domain):
     
     print_status(STYLES['error'], f"DNS解析失败 [{ns_domain}]")
     return None
-
 def get_geo_info(ip_address, geoip_db_path):
     try:
         with geoip2.database.Reader(geoip_db_path) as reader:
@@ -303,7 +293,6 @@ def get_geo_info(ip_address, geoip_db_path):
     except Exception as e:
         print_status(STYLES['error'], f"归属地查询失败 [{ip_address}]: {e}")
         return None
-
 def download_geoip_db():
     try:
         print_section("初始化地理数据库")
@@ -314,31 +303,41 @@ def download_geoip_db():
             os.remove(geoip_db_path)
             print_status(STYLES['info'], "已清理旧版地理数据库")
 
-        print_status(STYLES['info'], "开始下载最新地理数据库...")
-        response = requests.get(GEOIP_DB_URL, stream=True)
-        response.raise_for_status()
-
-        total_size = int(response.headers.get('content-length', 0))
-        with open(geoip_db_path, 'wb') as f:
-            downloaded = 0
-            for chunk in response.iter_content(chunk_size=8192):
-                f.write(chunk)
-                downloaded += len(chunk)
-                progress = downloaded / total_size * 100 if total_size > 0 else 100
-                print(f"\r下载进度: {progress:.1f}%", end='')
-        print("\n")
-        return geoip_db_path
+        # 新增备用下载逻辑
+        for db_url in GEOIP_DB_URLS:
+            print_status(STYLES['info'], f"尝试下载: {db_url}")
+            try:
+                response = requests.get(db_url, stream=True)
+                response.raise_for_status()
+                
+                total_size = int(response.headers.get('content-length', 0))
+                with open(geoip_db_path, 'wb') as f:
+                    downloaded = 0
+                    for chunk in response.iter_content(chunk_size=8192):
+                        f.write(chunk)
+                        downloaded += len(chunk)
+                        progress = downloaded / total_size * 100 if total_size > 0 else 100
+                        print(f"\r下载进度: {progress:.1f}%", end='')
+                print("\n")
+                return geoip_db_path
+            except Exception as e:
+                print_status(STYLES['warning'], f"下载失败: {str(e)}，尝试备用地址...")
+                continue
+                
+        print_status(STYLES['error'], "所有下载地址均不可用")
+        return None
     except Exception as e:
         print_status(STYLES['error'], f"数据库下载失败: {e}")
         return None
-
 def check_non_china_provider(ns_domain):
     return any(provider in ns_domain.lower() for provider in NON_CHINA_PROVIDERS)
-
 def validate_ns_records(new_domain, geoip_db_path):
+    # 增强章节分隔效果
+    print(f"\n{STYLES['divider']}")
     print_section("域名验证流程")
-    print_status(STYLES['info'], f"开始验证域名: {new_domain}")
+    print(f"{STYLES['divider']}\n")
     
+    print_status(STYLES['info'], f"开始验证域名: {new_domain}")
     ns_servers = query_ns_with_doh(new_domain)
     
     if not ns_servers:
@@ -367,7 +366,6 @@ def validate_ns_records(new_domain, geoip_db_path):
         print_status(STYLES['success'], f"验证通过: {ip_address} ({country})")
     
     return True
-
 def check_existing_entry(file_path, new_domain):
     entry = f"server=/{new_domain}/114.114.114.114"
     try:
@@ -376,7 +374,6 @@ def check_existing_entry(file_path, new_domain):
     except Exception as e:
         print_status(STYLES['error'], f"文件读取失败: {e}")
         return True
-
 def find_insert_position(lines, new_domain):
     new_entry = f"server=/{new_domain}/114.114.114.114"
     for i, line in enumerate(lines):
@@ -386,7 +383,6 @@ def find_insert_position(lines, new_domain):
             if existing_domain > new_domain:
                 return i
     return len(lines)
-
 def get_config_path():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     target_dir = os.path.join(script_dir, "dnsmasq-china-list")
@@ -403,18 +399,18 @@ def get_config_path():
         return None
     
     return config_path
-
 # 在文件顶部添加time模块导入
 import time
-
+# 新增：IPv4地址验证函数
 def insert_domain():
     print_section("dnsmasq-china-list 域名规则管理工具启动")
-    print(f"{STYLES['title']}版本: 3.1 | 作者: Aethersailor | 协议: MIT{COLORS['reset']}\n")
+    print(f"{STYLES['title']}版本: {__version__} | 作者: {__author__} | 协议: {__license__}")
+    print(f"{STYLES['title']}仓库: {__repository__}{COLORS['reset']}\n")
     
     config_path = get_config_path()
     if not config_path:
         return
-
+    
     geoip_db_path = download_geoip_db()
     if not geoip_db_path:
         return
@@ -487,7 +483,11 @@ def insert_domain():
                             line = line.strip()
                             if not line:
                                 continue
-                            print_status(STYLES['info'], f"处理第{line_num}行内容: {line}")
+                            # 新增分隔符和空行
+                            print(f"\n{STYLES['divider']}")
+                            print_status(STYLES['info'], f"开始处理第 {line_num} 行域名")
+                            print(f"{STYLES['divider']}\n")
+                            
                             domain = extract_domain(line)
                             process_domain(domain)
                             time.sleep(1)  # 行间间隔1秒

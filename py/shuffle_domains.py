@@ -3,6 +3,37 @@ import random
 from datetime import datetime
 import os  # 新增导入
 
+# 在文件开头添加元信息
+__version__ = "1.1.0"
+__author__ = "Aethersailor"
+__license__ = "CC BY-NC-SA 4.0"
+__repo__ = "https://github.com/Aethersailor/Custom_OpenClash_Rule"
+
+# 新增颜色常量
+COLOR_TITLE = "\033[1;36m"    # 青色
+COLOR_SUCCESS = "\033[1;32m"  # 绿色
+COLOR_PROMPT = "\033[1;34m"   # 蓝色
+COLOR_WARN = "\033[1;33m"     # 黄色
+COLOR_END = "\033[0m"
+
+def main_menu():
+    """美化后的主菜单界面"""
+    print(f"""
+{COLOR_TITLE}{'★' * 40}
+  域名处理工具 · 版本 {__version__}
+{'★' * 40}{COLOR_END}
+{COLOR_PROMPT}作者：{__author__}
+仓库：{__repo__}
+协议：{__license__} License
+
+【功能特性】
+✓ 域名列表随机乱序排列
+✓ 按指定行数分割列表文件
+✓ 自动生成时间戳文件名
+✓ 支持批量文件处理{COLOR_WARN}
+提示：可直接拖放文件到本窗口{COLOR_END}
+{'-' * 55}""")
+
 def shuffle_domains(file_path):
     # 读取并过滤空行
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -54,11 +85,15 @@ def split_domains(file_path, chunk_size=300):  # 修改默认值为300
     print(f"分割完成：共 {chunk_num} 个文件")
     return output_dir
 
+# 修改主程序部分
 if __name__ == '__main__':
-    print("=== 域名处理工具 ===")
-    print("功能列表：")
-    print("1. 随机排序文件")
-    print("2. 分割文件（默认300行/文件）")  # 修改描述
+    from colorama import init
+    init(autoreset=True)  # 初始化颜色支持
+    
+    main_menu()
+    print(f"{COLOR_PROMPT}功能列表：{COLOR_END}")
+    print(" 1. 随机排序文件（洗牌模式）")
+    print(" 2. 智能分割文件（可定制行数）")
     
     while True:
         try:
@@ -90,7 +125,8 @@ if __name__ == '__main__':
             # 执行功能
             if choice == '1':
                 shuffle_domains(file_path)
-                print(f"\n处理成功！新文件保存在：{os.path.dirname(file_path)}")
+                print(f"\n{COLOR_SUCCESS}✓ 洗牌完成！{COLOR_END}")
+                print(f"{COLOR_PROMPT}文件路径：{os.path.dirname(file_path)}{COLOR_END}")
             else:
                 # 新增行数输入逻辑
                 while True:
@@ -107,9 +143,10 @@ if __name__ == '__main__':
                         print("错误：请输入正整数")
                 
                 output_dir = split_domains(file_path, chunk_size)  # 传递用户输入值
-                print(f"分割文件保存在：{output_dir}")
+                print(f"\n{COLOR_SUCCESS}✓ 分割完成！{COLOR_END}")
+                print(f"{COLOR_PROMPT}保存目录：{output_dir}{COLOR_END}")
             
-            print("-" * 50)
+            print(f"{COLOR_TITLE}{'-' * 55}{COLOR_END}")
             
         except Exception as e:
             print(f"\n错误：{str(e)}")
