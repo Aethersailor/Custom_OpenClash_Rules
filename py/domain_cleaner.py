@@ -118,46 +118,19 @@ def download_url(url):  # 新增下载函数
         print(f"下载失败：{str(e)}")
         return None
 
-# 在文件顶部添加版本和元信息
-__version__ = "1.0.0"
-__author__ = "Aethersailor"
-__license__ = "CC BY-NC-SA 4.0"
-__repo__ = "https://github.com/Aethersailor/Custom_OpenClash_Rules"
-__license__ = "MIT"
-__repo__ = "https://github.com/Aethersailor/Custom_OpenClash_Rules"
-
 def main_loop():
     """新增交互式主循环"""
-    # 美化后的欢迎信息
-    print(f"""
-    \033[1;36m{'*' * 40}
-    域名清理工具 · 版本 {__version__}
-    {'*' * 40}
-    \033[0m作者：{__author__}
-    仓库：{__repo__}
-    协议：{__license__} License
-    
-    \033[1;34m【功能描述】\033[0m
-    将本地/在线规则文件转换纯域名列表格式
-    自动执行以下处理流程：
-    ✓ 解析DOMAIN/DOMAIN-SUFFIX格式输入
-    ✓ 提取有效主域名（排除.cn结尾域名）
-    ✓ 文件内去重 + 过滤geosite@cn域名
-    ✓ 生成标准化域名列表文件
-    \033[33m提示：支持拖放文件到窗口操作\033[0m
-    """)
+    print("=== 域名清理工具 ===")
     while True:
-        print("=== 域名清理工具 ===")
-        while True:
-            # 重构后的主程序逻辑
-            if len(sys.argv) < 2:
-                user_input = input("\n请输入文件路径/URL（直接回车使用domain_cleaner.txt）：").strip()
-                if not user_input:
-                    file_path = os.path.join(os.path.dirname(__file__), 'domain_cleaner.txt')
-                else:
-                    file_path = user_input
+        # 重构后的主程序逻辑
+        if len(sys.argv) < 2:
+            user_input = input("\n请输入文件路径/URL（直接回车使用domain_cleaner.txt）：").strip()
+            if not user_input:
+                file_path = os.path.join(os.path.dirname(__file__), 'domain_cleaner.txt')
             else:
-                file_path = sys.argv[1]
+                file_path = user_input
+        else:
+            file_path = sys.argv[1]
 
         # 修复1：添加文件存在性验证（原代码缩进错误导致逻辑错误）
         if file_path.startswith(('http://', 'https://')):
@@ -178,15 +151,7 @@ def main_loop():
                 output_path = os.path.join(os.path.dirname(__file__), output_name)
                 valid_count, china_duplicates = process_domain_file(temp_file, output_path)
                 os.remove(temp_file)
-                # 美化处理结果输出
-                print(f"\n\033[32m✓ 处理完成！\033[0m")
-                print(f"════════════════════════════")
-                print(f"有效域名数量\t{valid_count} 个")
-                print(f"国内域名过滤\t{china_duplicates} 个")
-                print(f"输出文件路径\t{output_path}")
-                if clipboard_available:
-                    print(f"\033[33m提示：文件路径已复制到剪贴板\033[0m")
-                
+                print(f"\n处理完成！")
                 print(f"输出文件路径：{output_path}")
                 if clipboard_available:
                     pyperclip.copy(output_path)
