@@ -121,6 +121,8 @@ def download_url(url):  # 新增下载函数
 # 在文件顶部添加版本和元信息
 __version__ = "1.0.0"
 __author__ = "Aethersailor"
+__license__ = "CC BY-NC-SA 4.0"
+__repo__ = "https://github.com/Aethersailor/Custom_OpenClash_Rules"
 __license__ = "MIT"
 __repo__ = "https://github.com/Aethersailor/Custom_OpenClash_Rules"
 
