@@ -1,0 +1,15 @@
+# NAME: Custom_Direct
+# AUTHOR: Aethersailor
+# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# 强制直连域名列表，来自个人收集
+# 此规则文件中的域名会定期 PR 至 Geosite 数据库，并删除已被 Geosite 收录的域名，因此请在支持 Geosite 的软件（如 OpenClash）中使用。
+
+
+DOMAIN-SUFFIX,micu.hk
+DOMAIN-SUFFIX,hxd.as174.de
+DOMAIN-SUFFIX,emby.69yun69.com
+DOMAIN-SUFFIX,meoof-pet.com
+
+
+
+# 更多已被收录的域名，此处未做保留
