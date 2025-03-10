@@ -1,0 +1,7 @@
+# NAME: Custom_Proxy
+# AUTHOR: Aethersailor
+# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# 强制代理列表，来自个人收集
+
+
+# DOMAIN-SUFFIX,services.googleapis.cn
