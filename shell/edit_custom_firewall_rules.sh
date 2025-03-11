@@ -116,7 +116,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
         TARGET_DIR=\"/tmp/dnsmasq.\${HASH_ID}.d\"
         LOG_OUT \"[广告过滤规则拉取脚本] 当前 dnsmasq 规则目录: \$TARGET_DIR\"
     # 检测旧版固件（数字索引模式）
-    elif echo "$UCI_OUTPUT" | grep -qE '@dnsmasq\[[0-9]+\]'; then  # 修正正则表达式转义
+    elif echo \"\$UCI_OUTPUT\" | grep -qE '@dnsmasq\\[[0-9]+\\]'; then
         TARGET_DIR=\"/tmp/dnsmasq.d\"
         LOG_OUT \"[广告过滤规则拉取脚本] 当前dnsmasq 规则目录: \$TARGET_DIR\"
     # 兼容性回退
@@ -138,10 +138,6 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     LOG_OUT \"[广告过滤规则拉取脚本] 清除已有规则…\"
     # 仅删除当前目标目录的广告规则文件
     rm -f \"\$TARGET_DIR\"/*ad*.conf
-    # 清理其他历史目录中的广告规则文件（不删除目录）
-    find /tmp -maxdepth 2 -type f \( -path \"*/dnsmasq.d/*ad*.conf\" -o -path \"*/dnsmasq.*.d/*ad*.conf\" \) \\  # 转义括号
-    \! -path \"\$TARGET_DIR/*\" \\  # 转义!
-    -exec rm -f {} +
     sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 "  # 注意保留原有结尾双引号
