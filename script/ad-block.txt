@@ -106,5 +106,3 @@ LOG_OUT "Tip: Start Add Custom Firewall Rules..."
 # ==============广告过滤规则拉取脚本结束==============
 
 exit 0
-
-
