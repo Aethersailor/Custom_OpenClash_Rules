@@ -62,13 +62,14 @@ INSERT_CONTENT=$(cat << EOF
     # 输出清除已有的广告过滤规则的日志
     LOG_OUT "[广告过滤规则拉取脚本] 清除已有规则…"
     # 删除 dnsmasq 格式的广告过滤规则
-    rm -f "$TARGET_DIR"/*ad*.conf 
-    # 删除 hosts 格式的广告过滤规则
+    rm -f "$TARGET_DIR"/*ad*.conf
+    # 删除 hosts 格式的广告过滤规则（修正行尾空格）
     sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 
-    # 确保目录存在
+    # 确保目录存在（添加空行分隔代码块）
     mkdir -p "$TARGET_DIR"
+    
     # 输出拉取最新的 adblockfilters-modified 广告过滤规则的日志
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则，规则体积较大，请耐心等候…"
     # 下载 adblockfilters-modified 规则到动态选择的目录
@@ -85,7 +86,7 @@ INSERT_CONTENT=$(cat << EOF
     fi
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
-    curl -sS -4 -L --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts >/dev/null 2>/tmp/github520-curl.log
+    curl -sSL -4 --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
     CURL_EXIT_GH=$?
 
     if [ $CURL_EXIT_GH -eq 0 ]; then
