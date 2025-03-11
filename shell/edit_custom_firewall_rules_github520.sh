@@ -7,20 +7,22 @@ TARGET_FILE="/etc/openclash/custom/openclash_custom_firewall_rules.sh"
 INSERT_CONTENT=$(cat << EOF
 # ==============以下是广告过滤规则拉取脚本=================
 (
+    VERSION="1.3"
     MAX_WAIT_TIME=30
     WAIT_INTERVAL=2
     elapsed_time=0
 
     if /etc/init.d/openclash status | grep -q "Syntax:"; then
+        LOG_OUT "[广告过滤规则拉取脚本] 当前版本 $VERSION，正在检测 OpenClash 运行状态..."
         LOG_OUT "[广告过滤规则拉取脚本] 等待 10 秒以确保 OpenClash 已启动..."
         sleep 10
     else
+        LOG_OUT "[广告过滤规则拉取脚本] 当前版本 $VERSION，正在检测 OpenClash 运行状态..."
         while ! /etc/init.d/openclash status | grep -q "running"; do
             if [ $elapsed_time -ge $MAX_WAIT_TIME ]; then
                 LOG_OUT "[广告过滤规则拉取脚本] 未能在 30 秒内检测到 OpenClash 运行状态，脚本已停止运行..."
                 exit 1
             fi
-            LOG_OUT "[广告过滤规则拉取脚本] 正在检测 OpenClash 运行状态，请稍后..."
             sleep $WAIT_INTERVAL
             elapsed_time=$((elapsed_time + WAIT_INTERVAL))
         done
@@ -28,28 +30,60 @@ INSERT_CONTENT=$(cat << EOF
         sleep 10
     fi
 
-    LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 GitHub520 加速规则…"
-    sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
+     # 动态选择 dnsmasq 目录
+    LOG_OUT "[广告过滤规则拉取脚本] 开始检测 dnsmasq 规则目录..."
+    # 通过 uci 命令获取配置标识符
+    UCI_OUTPUT=$(uci show dhcp.@dnsmasq[0] 2>/dev/null)
     
-    LOG_OUT "[广告过滤规则拉取脚本] 清除广告过滤规则…"
-    rm -f /tmp/dnsmasq.d/*ad*.conf
-    rm -f /tmp/dnsmasq.cfg01411c.d/*ad*.conf
+    # 检测新版固件（哈希值模式）
+    if echo "$UCI_OUTPUT" | grep -qE 'cfg[0-9a-f]{6}'; then
+        HASH_ID=$(echo "$UCI_OUTPUT" | grep -oE 'cfg[0-9a-f]{6}' | head -1) 
+        TARGET_DIR="/tmp/dnsmasq.${HASH_ID}.d"
+        LOG_OUT "[广告过滤规则拉取脚本] 当前 dnsmasq 规则目录: $TARGET_DIR"
+    # 检测旧版固件（数字索引模式）
+    elif echo "$UCI_OUTPUT" | grep -qE '@dnsmasq\[[0-9]+\]'; then
+        TARGET_DIR="/tmp/dnsmasq.d"
+        LOG_OUT "[广告过滤规则拉取脚本] 当前dnsmasq 规则目录: $TARGET_DIR"
+    # 兼容性回退
+    else
+        TARGET_DIR=$(find /tmp -maxdepth 1 -type d -name "dnsmasq.*.d" | head -n 1)
+        if [ -z "$TARGET_DIR" ]; then
+            LOG_OUT "[广告过滤规则拉取脚本] 错误：未找到有效的 dnsmasq 规则目录，脚本已停止！"
+            exit 1
+        fi
+        LOG_OUT "[广告过滤规则拉取脚本] 检测失败，使用已存在的 dnsmasq 规则目录: $TARGET_DIR"
+    fi
+    
+    # 验证目录存在性
+    if [ ! -d "$TARGET_DIR" ]; then
+        mkdir -p "$TARGET_DIR"
+    fi
+
+    # 输出清除已有的广告过滤规则的日志
+    LOG_OUT "[广告过滤规则拉取脚本] 清除已有规则…"
+    # 删除 dnsmasq 格式的广告过滤规则
+    rm -f "$TARGET_DIR"/*ad*.conf 
+    # 删除 hosts 格式的广告过滤规则
     sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
+    sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
     curl -sSL -4 --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
+    CURL_EXIT_GH=$?
 
-    if [ $? -eq 0 ]; then
-        LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取成功！"
+    if [ $CURL_EXIT_GH -eq 0 ]; then
+        LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取成功！已追加到 /etc/hosts 文件中。"
     else
-        LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取失败，查看 /tmp/github520-curl.log 获取详细信息。"
+        LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取失败 (错误码:$CURL_EXIT_GH)，查看 /tmp/github520-curl.log 获取详细信息。"
+        echo "CURL Exit Code: $CURL_EXIT_GH" >> /tmp/github520-curl.log
     fi
 
     sed -i '/^$/d' /etc/hosts
     sed -i '/!/d' /etc/hosts
 
-    LOG_OUT "[广告过滤规则拉取脚本] 清理 DNS 缓存…"
-    /etc/init.d/dnsmasq reload
+    LOG_OUT "[广告过滤规则拉取脚本] 重新加载 dnsmasq 服务以应用规则…"
+    /etc/init.d/dnsmasq stop
+    /etc/init.d/dnsmasq start
     LOG_OUT "[广告过滤规则拉取脚本] 脚本运行完毕！"
 
 ) &
