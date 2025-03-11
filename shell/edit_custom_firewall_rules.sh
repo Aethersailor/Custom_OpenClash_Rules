@@ -83,90 +83,114 @@ NEW_INSERT_CONTENT=""
 if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     NEW_INSERT_CONTENT="# ==============以下是广告过滤规则拉取脚本=================
 (
+    VERSION=\"1.3\"
     MAX_WAIT_TIME=30
     WAIT_INTERVAL=2
     elapsed_time=0
 
     if /etc/init.d/openclash status | grep -q \"Syntax:\"; then
+        LOG_OUT \"[广告过滤规则拉取脚本] 当前版本 \$VERSION，正在检测 OpenClash 运行状态...\"
         LOG_OUT \"[广告过滤规则拉取脚本] 等待 10 秒以确保 OpenClash 已启动...\"
         sleep 10
     else
+        LOG_OUT \"[广告过滤规则拉取脚本] 当前版本 \$VERSION，正在检测 OpenClash 运行状态...\"
         while ! /etc/init.d/openclash status | grep -q \"running\"; do
             if [ \$elapsed_time -ge \$MAX_WAIT_TIME ]; then
                 LOG_OUT \"[广告过滤规则拉取脚本] 未能在 30 秒内检测到 OpenClash 运行状态，脚本已停止运行...\"
                 exit 1
             fi
-            LOG_OUT \"[广告过滤规则拉取脚本] 正在检测 OpenClash 运行状态，请稍后...\"
             sleep \$WAIT_INTERVAL
             elapsed_time=\$((elapsed_time + WAIT_INTERVAL))
         done
         LOG_OUT \"[广告过滤规则拉取脚本] 检测到 OpenClash 正在运行，10 秒后开始拉取规则...\"
         sleep 10
     fi
-"
+
+    # 动态选择 dnsmasq 目录
+    LOG_OUT \"[广告过滤规则拉取脚本] 开始检测 dnsmasq 规则目录...\"
+    UCI_OUTPUT=\$(uci show dhcp.@dnsmasq[0] 2>/dev/null)
+    
+    # 检测新版固件（哈希值模式）
+    if echo \"\$UCI_OUTPUT\" | grep -qE 'cfg[0-9a-f]{6}'; then
+        HASH_ID=\$(echo \"\$UCI_OUTPUT\" | grep -oE 'cfg[0-9a-f]{6}' | head -1)
+        TARGET_DIR=\"/tmp/dnsmasq.\${HASH_ID}.d\"
+        LOG_OUT \"[广告过滤规则拉取脚本] 当前 dnsmasq 规则目录: \$TARGET_DIR\"
+    # 检测旧版固件（数字索引模式）
+    elif echo \"\$UCI_OUTPUT\" | grep -qE '@dnsmasq\[[0-9]+\]'; then
+        TARGET_DIR=\"/tmp/dnsmasq.d\"
+        LOG_OUT \"[广告过滤规则拉取脚本] 当前dnsmasq 规则目录: \$TARGET_DIR\"
+    # 兼容性回退
+    else
+        TARGET_DIR=\$(find /tmp -maxdepth 1 -type d -name \"dnsmasq.*.d\" | head -n 1)
+        if [ -z \"\$TARGET_DIR\" ]; then
+            LOG_OUT \"[广告过滤规则拉取脚本] 错误：未找到有效的 dnsmasq 规则目录，脚本已停止！\"
+            exit 1
+        fi
+        LOG_OUT \"[广告过滤规则拉取脚本] 检测失败，使用已存在的 dnsmasq 规则目录: \$TARGET_DIR\"
+    fi
+    
+    # 验证目录存在性
+    if [ ! -d \"\$TARGET_DIR\" ]; then
+        mkdir -p \"\$TARGET_DIR\"
+    fi
+
+    # 输出清除已有的广告过滤规则的日志
+    LOG_OUT \"[广告过滤规则拉取脚本] 清除已有规则…\"
+    # 仅删除当前目标目录的广告规则文件
+    rm -f \"\$TARGET_DIR\"/*ad*.conf
+    # 清理其他历史目录中的广告规则文件（不删除目录）
+    find /tmp -maxdepth 2 -type f \( -path \"*/dnsmasq.d/*ad*.conf\" -o -path \"*/dnsmasq.*.d/*ad*.conf\" \) \\
+        ! -path \"\$TARGET_DIR/*\" \\
+        -exec rm -f {} +
+    sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
+    sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
+"  # 注意保留原有结尾双引号
     if [ "$adv_choice" = "y" ]; then
         case "$ad_rule" in
             1)
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
-    LOG_OUT \"[广告过滤规则拉取脚本] 清除广告过滤规则...\"
-    rm -f /tmp/dnsmasq.d/*ad*.conf
-    rm -f /tmp/dnsmasq.cfg01411c.d/*ad*.conf
-    sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
+    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 anti-AD 广告过滤规则，规则体积较大，请耐心等候…\"
+    curl -sS -L -4 --retry 5 --retry-delay 1 \"https://gh-proxy.com/https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/adblock-for-dnsmasq.conf\" -o \"\$TARGET_DIR/anti-ad-for-dnsmasq.conf\" >/dev/null 2>/tmp/anti-ad-curl.log
+    CURL_EXIT=\$?
 
-    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 anti-AD 广告过滤规则，规则体积较大，请耐心等候...\"
-    mkdir -p /tmp/dnsmasq.d
-    curl -sSL -4 --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/adblock-for-dnsmasq.conf\" -o /tmp/dnsmasq.d/anti-ad-for-dnsmasq.conf 2> /tmp/anti-ad-curl.log
-
-    if [ \$? -eq 0 ]; then
-        LOG_OUT \"[广告过滤规则拉取脚本] anti-AD 规则拉取成功!\"
+    if [ \$CURL_EXIT -eq 0 ]; then
+        LOG_OUT \"[广告过滤规则拉取脚本] anti-AD 规则拉取成功！保存路径：\${TARGET_DIR}/anti-ad-for-dnsmasq.conf\"
     else
-        LOG_OUT \"[广告过滤规则拉取脚本] anti-AD 规则拉取失败，查看 /tmp/anti-ad-curl.log 获取详细信息.\"
+        LOG_OUT \"[广告过滤规则拉取脚本] anti-AD 规则拉取失败 (错误码:\$CURL_EXIT)，查看 /tmp/anti-ad-curl.log 获取详细信息。\"
+        echo \"CURL Exit Code: \$CURL_EXIT\" >> /tmp/anti-ad-curl.log
     fi
 "
                 ;;
             2)
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
-    LOG_OUT \"[广告过滤规则拉取脚本] 清除广告过滤规则...\"
-    rm -f /tmp/dnsmasq.d/*ad*.conf
-    rm -f /tmp/dnsmasq.cfg01411c.d/*ad*.conf
-    sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
+    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters 广告过滤规则，规则体积较大，请耐心等候…\"
+    curl -sS -L -4 --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnsmasq.txt\" -o \"\$TARGET_DIR/adblockfilters-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-curl.log
+    CURL_EXIT=\$?
 
-    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters 广告过滤规则，规则体积较大，请耐心等候...\"
-    mkdir -p /tmp/dnsmasq.d
-    curl -sSL -4 --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdns.txt\" -o /tmp/dnsmasq.d/adblockfilters-for-dnsmasq.conf 2> /tmp/adblockfilters-curl.log
-
-    if [ \$? -eq 0 ]; then
-        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters 规则拉取成功!\"
+    if [ \$CURL_EXIT -eq 0 ]; then
+        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters 规则拉取成功！保存路径：\${TARGET_DIR}/adblockfilters-for-dnsmasq.conf\"
     else
-        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters 规则拉取失败，查看 /tmp/adblockfilters-curl.log 获取详细信息.\"
+        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters 规则拉取失败 (错误码:\$CURL_EXIT)，查看 /tmp/adblockfilters-curl.log 获取详细信息。\"
+        echo \"CURL Exit Code: \$CURL_EXIT\" >> /tmp/adblockfilters-curl.log
     fi
 "
                 ;;
             3)
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
-    LOG_OUT \"[广告过滤规则拉取脚本] 清除广告过滤规则...\"
-    rm -f /tmp/dnsmasq.d/*ad*.conf
-    rm -f /tmp/dnsmasq.cfg01411c.d/*ad*.conf
-    sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
+    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则，规则体积较大，请耐心等候…\"
+    curl -sS -4 -L --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/refs/heads/main/rules/adblockdnsmasq.txt\" -o \"\$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
+    CURL_EXIT=\$?
 
-    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则，规则体积较大，请耐心等候...\"
-    mkdir -p /tmp/dnsmasq.d
-    curl -sSL -4 --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/refs/heads/main/rules/adblockdnsmasq.txt\" -o /tmp/dnsmasq.d/adblockfilters-modified-for-dnsmasq.conf 2> /tmp/adblockfilters-modified-curl.log
-
-    if [ \$? -eq 0 ]; then
-        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters-modified 规则拉取成功!\"
+    if [ \$CURL_EXIT -eq 0 ]; then
+        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters-modified 规则拉取成功！保存路径：\${TARGET_DIR}/adblockfilters-modified-for-dnsmasq.conf\"
     else
-        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters-modified 规则拉取失败，查看 /tmp/adblockfilters-modified-curl.log 获取详细信息.\"
+        LOG_OUT \"[广告过滤规则拉取脚本] adblockfilters-modified 规则拉取失败 (错误码:\$CURL_EXIT)，查看 /tmp/adblockfilters-modified-curl.log 获取详细信息。\"
+        echo \"CURL Exit Code: \$CURL_EXIT\" >> /tmp/adblockfilters-modified-curl.log
     fi
 "
                 ;;
             4)
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
-    LOG_OUT \"[广告过滤规则拉取脚本] 清除广告过滤规则...\"
-    rm -f /tmp/dnsmasq.d/*ad*.conf
-    rm -f /tmp/dnsmasq.cfg01411c.d/*ad*.conf
-    sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
-
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 秋风广告规则...\"
     curl -sSL -4 --retry 5 --retry-delay 1 https://github.boki.moe/https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-hosts.txt | \\
     sed '/127.0.0.1 localhost/d; /::1 localhost/d; 1s/^/# AWAvenue-Ads-Rule Start\\n/; \$s/\$/\\n# AWAvenue-Ads-Rule End/' >> /etc/hosts
@@ -176,16 +200,15 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     fi
     if [ "$github_choice" = "y" ]; then
         NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
-    LOG_OUT \"[广告过滤规则拉取脚本] 清除已有的 GitHub520 加速规则...\"
-    sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
+    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…\"
+    curl -sS -4 -L --retry 5 --retry-delay 1 \"https://raw.hellogithub.com/hosts\" >> /etc/hosts >/dev/null 2>/tmp/github520-curl.log
+    CURL_EXIT_GH=\$?
 
-    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则...\"
-    curl -sSL -4 --retry 5 --retry-delay 1 \"https://raw.hellogithub.com/hosts\" >> /etc/hosts 2> /tmp/github520-curl.log
-
-    if [ \$? -eq 0 ]; then
-        LOG_OUT \"[广告过滤规则拉取脚本] GitHub520 加速规则拉取成功!\"
+    if [ \$CURL_EXIT_GH -eq 0 ]; then
+        LOG_OUT \"[广告过滤规则拉取脚本] GitHub520 加速规则拉取成功！已追加到 /etc/hosts 文件中。\"
     else
-        LOG_OUT \"[广告过滤规则拉取脚本] GitHub520 加速规则拉取失败，查看 /tmp/github520-curl.log 获取详细信息.\"
+        LOG_OUT \"[广告过滤规则拉取脚本] GitHub520 加速规则拉取失败 (错误码:\$CURL_EXIT_GH)，查看 /tmp/github520-curl.log 获取详细信息。\"
+        echo \"CURL Exit Code: \$CURL_EXIT_GH\" >> /tmp/github520-curl.log
     fi
 "
     fi
