@@ -30,7 +30,7 @@ INSERT_CONTENT=$(cat << 'EOF'
         sleep 10
     fi
 
-     # 动态选择 dnsmasq 目录
+    # 动态选择 dnsmasq 目录
     LOG_OUT "[广告过滤规则拉取脚本] 开始检测 dnsmasq 规则目录..."
     # 通过 uci 命令获取配置标识符
     UCI_OUTPUT=$(uci show dhcp.@dnsmasq[0] 2>/dev/null)
@@ -67,9 +67,6 @@ INSERT_CONTENT=$(cat << 'EOF'
     sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 
-    # 确保目录存在（添加空行分隔代码块）
-    mkdir -p "$TARGET_DIR"
-    
     # 输出拉取最新的 adblockfilters-modified 广告过滤规则的日志
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则，规则体积较大，请耐心等候…"
     # 下载 adblockfilters-modified 规则到动态选择的目录
