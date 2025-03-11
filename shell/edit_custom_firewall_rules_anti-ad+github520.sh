@@ -4,7 +4,7 @@
 TARGET_FILE="/etc/openclash/custom/openclash_custom_firewall_rules.sh"
 
 # 要插入的内容
-INSERT_CONTENT=$(cat << EOF
+INSERT_CONTENT=$(cat << 'EOF'
 # ==============以下是广告过滤规则拉取脚本=================
 (
     VERSION="1.4"

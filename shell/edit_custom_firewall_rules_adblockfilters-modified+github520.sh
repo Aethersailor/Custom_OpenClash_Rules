@@ -4,7 +4,7 @@
 TARGET_FILE="/etc/openclash/custom/openclash_custom_firewall_rules.sh"
 
 # 要插入的内容
-INSERT_CONTENT=$(cat << EOF
+INSERT_CONTENT=$(cat << 'EOF'  # 在 heredoc 开始标记前添加单引号
 # ==============以下是广告过滤规则拉取脚本=================
 (
     VERSION="1.3"
@@ -106,7 +106,7 @@ INSERT_CONTENT=$(cat << EOF
 
 ) &
 # ==============广告过滤规则拉取脚本结束==============
-EOF
+EOF  # 结束标记保持原样
 )
 
 # 检查目标文件是否存在
