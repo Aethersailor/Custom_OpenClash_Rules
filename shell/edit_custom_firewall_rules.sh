@@ -174,8 +174,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
             3)
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则...\"
-    curl -sS -4 -L --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/main/rules/adblockdnsmasq.txt\" \\  # 移除多余路径段
-        -o \"\$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
+    curl -sS -4 -L --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/main/rules/adblockdnsmasq.txt\" -o \"\$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
     CURL_EXIT=\$?
 
     if [ \$CURL_EXIT -eq 0 ]; then
