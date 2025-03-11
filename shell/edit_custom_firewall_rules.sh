@@ -116,7 +116,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
         TARGET_DIR=\"/tmp/dnsmasq.\${HASH_ID}.d\"
         LOG_OUT \"[广告过滤规则拉取脚本] 当前 dnsmasq 规则目录: \$TARGET_DIR\"
     # 检测旧版固件（数字索引模式）
-    elif echo \"\$UCI_OUTPUT\" | grep -qE '@dnsmasq\[[0-9]+\]'; then
+    elif echo "$UCI_OUTPUT" | grep -qE '@dnsmasq\[[0-9]+\]'; then  # 修正正则表达式转义
         TARGET_DIR=\"/tmp/dnsmasq.d\"
         LOG_OUT \"[广告过滤规则拉取脚本] 当前dnsmasq 规则目录: \$TARGET_DIR\"
     # 兼容性回退
@@ -139,9 +139,9 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     # 仅删除当前目标目录的广告规则文件
     rm -f \"\$TARGET_DIR\"/*ad*.conf
     # 清理其他历史目录中的广告规则文件（不删除目录）
-    find /tmp -maxdepth 2 -type f \( -path \"*/dnsmasq.d/*ad*.conf\" -o -path \"*/dnsmasq.*.d/*ad*.conf\" \) \\
-        ! -path \"\$TARGET_DIR/*\" \\
-        -exec rm -f {} +
+    find /tmp -maxdepth 2 -type f \( -path \"*/dnsmasq.d/*ad*.conf\" -o -path \"*/dnsmasq.*.d/*ad*.conf\" \) \\  # 转义括号
+    \! -path \"\$TARGET_DIR/*\" \\  # 转义!
+    -exec rm -f {} +
     sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 "  # 注意保留原有结尾双引号
@@ -177,8 +177,9 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
                 ;;
             3)
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
-    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则，规则体积较大，请耐心等候…\"
-    curl -sS -4 -L --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/refs/heads/main/rules/adblockdnsmasq.txt\" -o \"\$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
+    LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则...\"
+    curl -sS -4 -L --retry 5 --retry-delay 1 \"https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/main/rules/adblockdnsmasq.txt\" \\  # 移除多余路径段
+        -o \"\$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
     CURL_EXIT=\$?
 
     if [ \$CURL_EXIT -eq 0 ]; then
