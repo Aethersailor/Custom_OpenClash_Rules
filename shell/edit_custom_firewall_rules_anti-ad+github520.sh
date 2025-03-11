@@ -85,7 +85,7 @@ INSERT_CONTENT=$(cat << EOF
     fi
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
-    curl -sS -L -4 --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts >/dev/null 2>/tmp/github520-curl.log
+    curl -sSL -4 --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
     CURL_EXIT_GH=$?
 
     if [ $CURL_EXIT_GH -eq 0 ]; then
