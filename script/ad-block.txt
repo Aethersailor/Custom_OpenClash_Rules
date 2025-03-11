@@ -1,14 +1,6 @@
-#!/bin/sh
-. /usr/share/openclash/log.sh
-. /lib/functions.sh
-
-# This script is called by /etc/init.d/openclash
-# Add your custom firewall rules here, they will be added after the end of the OpenClash iptables rules
-
-LOG_OUT "Tip: Start Add Custom Firewall Rules..."
 # ==============以下是广告过滤规则拉取脚本=================
 (
-    VERSION="1.3"
+    VERSION="1.4"
     MAX_WAIT_TIME=30
     WAIT_INTERVAL=2
     elapsed_time=0
@@ -38,7 +30,7 @@ LOG_OUT "Tip: Start Add Custom Firewall Rules..."
     
     # 检测新版固件（哈希值模式）
     if echo "$UCI_OUTPUT" | grep -qE 'cfg[0-9a-f]{6}'; then
-        HASH_ID=$(echo "$UCI_OUTPUT" | grep -oE 'cfg[0-9a-f]{6}' | head -1)  # 添加 head -1 确保只获取第一个匹配项
+        HASH_ID=$(echo "$UCI_OUTPUT" | grep -oE 'cfg[0-9a-f]{6}' | head -1) 
         TARGET_DIR="/tmp/dnsmasq.${HASH_ID}.d"
         LOG_OUT "[广告过滤规则拉取脚本] 当前 dnsmasq 规则目录: $TARGET_DIR"
     # 检测旧版固件（数字索引模式）
@@ -87,11 +79,13 @@ LOG_OUT "Tip: Start Add Custom Firewall Rules..."
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
     curl -sSL -4 --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
+    CURL_EXIT_GH=$?
 
-    if [ $? -eq 0 ]; then
+    if [ $CURL_EXIT_GH -eq 0 ]; then
         LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取成功！已追加到 /etc/hosts 文件中。"
     else
-        LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取失败，查看 /tmp/github520-curl.log 获取详细信息。"
+        LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取失败 (错误码:$CURL_EXIT_GH)，查看 /tmp/github520-curl.log 获取详细信息。"
+        echo "CURL Exit Code: $CURL_EXIT_GH" >> /tmp/github520-curl.log
     fi
 
     sed -i '/^$/d' /etc/hosts
@@ -104,5 +98,3 @@ LOG_OUT "Tip: Start Add Custom Firewall Rules..."
 
 ) &
 # ==============广告过滤规则拉取脚本结束==============
-
-exit 0
