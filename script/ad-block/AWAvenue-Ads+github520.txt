@@ -52,8 +52,8 @@
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 秋风广告规则…"
-    curl -sSL -4 --retry 5 --retry-delay 1 https://github.boki.moe/https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-hosts.txt | \
-    sed '/127.0.0.1 localhost/d; /::1 localhost/d; 1s/^/# AWAvenue-Ads-Rule Start\n/; $s/$/\n# AWAvenue-Ads-Rule End/' >> /etc/hosts
+    curl -sSL -4 --retry 5 --retry-delay 1 "https://github.boki.moe/https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-hosts.txt" \
+      | sed '/127.0.0.1 localhost/d; /::1 localhost/d; 1s/^/# AWAvenue-Ads-Rule Start\n/; $s/$/\n# AWAvenue-Ads-Rule End/' >> /etc/hosts
 
     LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 GitHub520 加速规则…"
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
