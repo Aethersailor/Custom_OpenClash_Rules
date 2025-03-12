@@ -70,7 +70,8 @@ INSERT_CONTENT=$(cat << 'EOF'
     # 输出拉取最新的 adblockfilters-modified 广告过滤规则的日志
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则，规则体积较大，请耐心等候…"
     # 下载 adblockfilters-modified 规则到动态选择的目录
-    curl -sS -4 -L --retry 5 --retry-delay 1 "https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/refs/heads/main/rules/adblockdnsmasq.txt" -o "$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
+    curl -sS -4 -L --retry 5 --retry-delay 1 "https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/refs/heads/main/rules/adblockdnsmasq.txt" \
+         -o "$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
     CURL_EXIT=$?
 
     # 检查 curl 命令是否成功
@@ -83,7 +84,7 @@ INSERT_CONTENT=$(cat << 'EOF'
     fi
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
-    curl -sSL -4 --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
+    curl -4 -sSL --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
     CURL_EXIT_GH=$?
 
     if [ $CURL_EXIT_GH -eq 0 ]; then
