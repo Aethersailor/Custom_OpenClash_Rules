@@ -68,7 +68,9 @@ INSERT_CONTENT=$(cat << 'EOF'  # 添加单引号禁用变量扩展
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
-    curl -sSL -4 --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
+    curl -4 -sSL --retry 5 --retry-delay 1 \
+        "https://raw.hellogithub.com/hosts" >> /etc/hosts 2>/tmp/github520-curl.log
+
     CURL_EXIT_GH=$?
 
     if [ $CURL_EXIT_GH -eq 0 ]; then
