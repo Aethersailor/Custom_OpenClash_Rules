@@ -1,10 +1,3 @@
-#!/bin/sh
-
-# 目标文件路径
-TARGET_FILE="/etc/openclash/custom/openclash_custom_firewall_rules.sh"
-
-# 要插入的内容
-INSERT_CONTENT=$(cat << 'EOF'
 # ==============以下是广告过滤规则拉取脚本=================
 (
     VERSION="1.4"
@@ -67,21 +60,21 @@ INSERT_CONTENT=$(cat << 'EOF'
     sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 
-    # 输出拉取最新的 adblockfilters 广告过滤规则的日志
-    LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 adblockfilters 广告过滤规则，规则体积较大，请耐心等候…"
-    # 下载 adblockfilters 规则到动态选择的目录
+    # 输出拉取最新的 anti-AD 广告过滤规则的日志
+    LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 anti-AD 广告过滤规则，规则体积较大，请耐心等候…"
+    # 下载 anti-AD 规则到动态选择的目录
     curl -sS -4 -L --retry 5 --retry-delay 1 \
-        "https://github.boki.moe/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnsmasq.txt" \
-        -o "$TARGET_DIR/adblockfilters-for-dnsmasq.conf" >/dev/null 2>/tmp/adblockfilters-curl.log
-
+        "https://gh-proxy.com/https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/master/adblock-for-dnsmasq.conf" \
+        -o "$TARGET_DIR/anti-ad-for-dnsmasq.conf" >/dev/null 2>/tmp/anti-ad-curl.log
     CURL_EXIT=$?
 
     # 检查 curl 命令是否成功
     if [ $CURL_EXIT -eq 0 ]; then
-        LOG_OUT "[广告过滤规则拉取脚本] adblockfilters 规则拉取成功！保存路径：${TARGET_DIR}/adblockfilters-for-dnsmasq.conf"
+        LOG_OUT "[广告过滤规则拉取脚本] anti-AD 规则拉取成功！保存路径：${TARGET_DIR}/anti-ad-for-dnsmasq.conf"
     else
-        LOG_OUT "[广告过滤规则拉取脚本] adblockfilters 规则拉取失败 (错误码:$CURL_EXIT)，查看 /tmp/adblockfilters-curl.log 获取详细信息。"
-        echo "CURL Exit Code: $CURL_EXIT" >> /tmp/adblockfilters-curl.log
+        # 如果失败，输出拉取失败的日志，并提示查看日志文件获取详细信息
+        LOG_OUT "[广告过滤规则拉取脚本] anti-AD 规则拉取失败 (错误码:$CURL_EXIT)，查看 /tmp/anti-ad-curl.log 获取详细信息。"
+        echo "CURL Exit Code: $CURL_EXIT" >> /tmp/anti-ad-curl.log
     fi
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
@@ -106,34 +99,3 @@ INSERT_CONTENT=$(cat << 'EOF'
 
 ) &
 # ==============广告过滤规则拉取脚本结束==============
-EOF
-)
-
-# 检查目标文件是否存在
-if [ ! -f "$TARGET_FILE" ]; then
-  echo "目标文件不存在: $TARGET_FILE"
-  exit 1
-fi
-
-# 确保目标文件以换行符结尾
-sed -i -e '$a\' "$TARGET_FILE"
-
-# 清除指定范围内容（LOG_OUT 到 exit 0 之间的内容）
-awk '
-BEGIN {skip=0}
-/LOG_OUT "Tip: Start Add Custom Firewall Rules..."/ {print; skip=1; next}
-/exit 0/ {skip=0}
-!skip
-' "$TARGET_FILE" > "${TARGET_FILE}.tmp" && mv "${TARGET_FILE}.tmp" "$TARGET_FILE"
-
-# 插入新内容
-awk -v content="$INSERT_CONTENT" '
-/LOG_OUT "Tip: Start Add Custom Firewall Rules..."/ {
-    print;
-    print content;
-    next;
-}
-1
-' "$TARGET_FILE" > "${TARGET_FILE}.tmp" && mv "${TARGET_FILE}.tmp" "$TARGET_FILE"
-
-echo "adblockfilters 广告过滤规则和 Github520 Hosts 拉取代码已写入到“开发者选项”文件 $TARGET_FILE 中，并将在 OpenClash 下次启动时生效！"
