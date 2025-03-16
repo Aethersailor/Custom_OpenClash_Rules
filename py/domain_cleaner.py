@@ -63,48 +63,57 @@ def load_china_domains():
         print("警告：未找到国内域名列表文件")
     return china_list
 
-def process_domain_file(file_path, output_path=None):
+def process_domain_file(file_path=None, content=None, output_path=None):  # 修改参数列表
     """核心处理函数"""
     processed = set()
     output_lines = []
     china_domains = load_china_domains()
     china_duplicates = 0
 
-    with open(file_path, 'r', encoding='utf-8') as f:
-        # 第一阶段：文件内部去重
-        raw_lines = [line.strip() for line in f if line.strip() and not line.startswith('#')]
+    # 新增内容处理分支
+    if content:
+        raw_lines = [line.strip() for line in content.split('\n') if line.strip() and not line.startswith('#')]
+    else:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            raw_lines = [line.strip() for line in f if line.strip() and not line.startswith('#')]
+
+    # 第一阶段：文件内部去重
+    for stripped_line in raw_lines:
+        # 修复：允许处理纯域名格式（无DOMAIN-SUFFIX前缀）
+        if stripped_line.startswith(('DOMAIN-SUFFIX,', 'DOMAIN,')):
+            clean_line = stripped_line.split(',', 1)[-1].strip()
+        else:  # 新增纯域名处理分支
+            clean_line = stripped_line.strip()
         
-        # 第二阶段：双重过滤
-        for stripped_line in raw_lines:
-            # 修复：允许处理纯域名格式（无DOMAIN-SUFFIX前缀）
-            if stripped_line.startswith(('DOMAIN-SUFFIX,', 'DOMAIN,')):
-                clean_line = stripped_line.split(',', 1)[-1].strip()
-            else:  # 新增纯域名处理分支
-                clean_line = stripped_line.strip()
+        main_domain = extract_main_domain(clean_line)
+        
+        # 新增验证顺序调整
+        if not main_domain or not is_valid_domain(main_domain):
+            continue
             
-            main_domain = extract_main_domain(clean_line)
+        # 先执行文件内去重
+        if main_domain in processed:
+            continue
             
-            # 新增验证顺序调整
-            if not main_domain or not is_valid_domain(main_domain):
-                continue
-                
-            # 先执行文件内去重
-            if main_domain in processed:
-                continue
-                
-            # 再执行国内域名过滤
-            if main_domain in china_domains:
-                china_duplicates += 1
-                continue
-                
-            processed.add(main_domain)
-            output_lines.append(main_domain)
+        # 再执行国内域名过滤
+        if main_domain in china_domains:
+            china_duplicates += 1
+            continue
+            
+        processed.add(main_domain)
+        output_lines.append(main_domain)
 
     # 保存结果
     # 修复：当未指定输出路径时自动创建新文件名
-    save_path = output_path or file_path.replace('.txt', '_cleaned.txt')  # 修改处
+    # 修改保存路径生成逻辑
+    if output_path:
+        save_path = output_path
+    else:
+        save_path = file_path.replace('.txt', '_cleaned.txt')
+    
+    # 修复字符串拼接语法错误
     with open(save_path, 'w', encoding='utf-8') as f:
-        f.write('\n'.join(sorted(output_lines)))
+        f.write('\n'.join(sorted(output_lines)))  # 修正转义符号错误
         
     return len(output_lines), china_duplicates
 
@@ -121,73 +130,73 @@ def download_url(url):  # 新增下载函数
 def main_loop():
     """新增交互式主循环"""
     print("=== 域名清理工具 ===")
+    output_dir = os.path.join(os.path.dirname(__file__), 'domain_cleaner')
+    os.makedirs(output_dir, exist_ok=True)
+    
     while True:
-        # 重构后的主程序逻辑
-        if len(sys.argv) < 2:
-            user_input = input("\n请输入文件路径/URL（直接回车使用domain_cleaner.txt）：").strip()
-            if not user_input:
-                file_path = os.path.join(os.path.dirname(__file__), 'domain_cleaner.txt')
-            else:
-                file_path = user_input
-        else:
-            file_path = sys.argv[1]
+        # 修改输入提示和退出机制
+        default_file = os.path.join(os.path.dirname(__file__), 'domain_cleaner.txt')
+        user_input = input("\n请输入文件路径/URL（输入 exit 退出，回车使用默认文件）：").strip('"\'').strip()
+        if user_input.lower() == 'exit':
+            print("程序退出")
+            break
+        file_path = user_input if user_input else default_file
 
-        # 修复1：添加文件存在性验证（原代码缩进错误导致逻辑错误）
+        # 移除调试信息输出
+        if not file_path.startswith(('http://', 'https://')):
+            try:
+                file_path = os.path.abspath(os.path.expanduser(file_path))
+            except Exception as e:
+                print(f"路径解析失败：{str(e)}")
+                continue
+
+            if not os.path.isfile(file_path):
+                print(f"文件 {file_path} 不存在！")
+                continue
+
+        # 将URL处理和本地文件处理整合到同一个代码块中
         if file_path.startswith(('http://', 'https://')):
             print(f"开始下载：{file_path}")
             content = download_url(file_path)
             if content:
-                # 修复1：添加临时文件路径定义
-                temp_file = os.path.join(os.path.dirname(__file__), 'temp_download.txt')
-                # 修复2：处理下载内容前创建输出文件名
                 url_path = urlparse(file_path).path
                 base_name = os.path.basename(url_path) or 'downloaded'
                 output_name = os.path.splitext(base_name)[0] + '.txt'
+                output_path = os.path.join(output_dir, output_name)
                 
-                with open(temp_file, 'w', encoding='utf-8') as f:
-                    f.write(content)
+                valid_count, china_duplicates = process_domain_file(content=content, output_path=output_path)
                 
-                # 修复3：确保使用绝对路径保存结果
-                output_path = os.path.join(os.path.dirname(__file__), output_name)
-                valid_count, china_duplicates = process_domain_file(temp_file, output_path)
-                os.remove(temp_file)
-                print(f"\n处理完成！")
-                print(f"输出文件路径：{output_path}")
+                print(f"\n处理完成！输出文件：{output_path}")
                 if clipboard_available:
                     pyperclip.copy(output_path)
-                    print("文件路径已复制剪贴板")
-                else:
-                    print("注意：剪贴板功能不可用，请先安装pyperclip库")
+                    print("路径已复制剪贴板")
                 print(f"过滤国内重复域名：{china_duplicates} 个")
-
-        else:
+                print(f"有效域名数量：{valid_count} 个")
+            else:
+                print("下载失败")
+        
+        # 本地文件处理移到此处
+        else:  
             if os.path.isfile(file_path):
-                output_name = os.path.abspath(  # 获取绝对路径
-                    os.path.splitext(file_path)[0] + '_cleaned.txt'
-                )
-                valid_count, china_duplicates = process_domain_file(file_path, output_name)
+                base_name = os.path.basename(file_path)
+                output_name = os.path.join(output_dir, os.path.splitext(base_name)[0] + '_cleaned.txt')
+                
+                valid_count, china_duplicates = process_domain_file(file_path=file_path, output_path=output_name)
                 
                 print(f"\n处理完成！输出文件：{output_name}")
-                print(f"文件路径：{output_name}") 
                 if clipboard_available:
                     pyperclip.copy(output_name)
                     print("路径已复制剪贴板")
-                else:
-                    print("注意：剪贴板功能不可用，请先安装pyperclip库")
                 print(f"过滤国内重复域名：{china_duplicates} 个")
                 print(f"有效域名数量：{valid_count} 个")
-                
             else:
                 print(f"文件 {file_path} 不存在！")
 
-        # 修复4：移除重复的process_domain_file调用
-        sys.argv = [sys.argv[0]]
-        
-        # 新增继续处理提示
-        choice = input("\n是否继续处理其他文件？(y/n) ").lower()
-        if choice != 'y':
-            print("程序退出")
-            break
+        # 删除循环外部的错误代码块
+        # choice = input("\n是否继续处理其他文件？(y/n) ").lower()
+        # if choice != 'y':
+        #    print("程序退出")
+        #    break
 
 if __name__ == "__main__":
     try:

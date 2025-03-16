@@ -56,9 +56,10 @@ def shuffle_domains(file_path):
         f.write('\n'.join(lines))
     
     print(f'生成成功！新文件：{new_path}')
-def split_domains(file_path, chunk_size=300):  # 修改默认值为300
-    """新功能：分割域名文件"""
-    # 函数剩余部分保持不变
+
+def split_domains(file_path, chunk_size=300):
+    """新功能：分割域名文件（支持任意文本扩展名）"""
+    # 在函数开头添加说明注释
     with open(file_path, 'r', encoding='utf-8') as f:
         lines = [line.strip() for line in f if line.strip()]
     
@@ -85,7 +86,71 @@ def split_domains(file_path, chunk_size=300):  # 修改默认值为300
     print(f"分割完成：共 {chunk_num} 个文件")
     return output_dir
 
-# 修改主程序部分
+def merge_files():
+    """新功能：合并shuffle_domains目录下的所有文件"""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    merge_dir = os.path.join(script_dir, "shuffle_domains")
+    
+    if not os.path.exists(merge_dir):
+        raise FileNotFoundError("合并目录不存在")
+    
+    # 创建输出目录
+    output_dir = os.path.join(script_dir, "shuffle_domains_output")
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # 收集所有文件内容并去重
+    merged = set()
+    valid_files = 0
+    for filename in os.listdir(merge_dir):
+        file_path = os.path.join(merge_dir, filename)
+        if os.path.isfile(file_path):
+            try:
+                # 自动检测文件编码
+                with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
+                    content = [line.strip() for line in f if line.strip()]
+                    
+                if content:
+                    merged.update(content)
+                    valid_files += 1
+            except UnicodeDecodeError:
+                print(f"跳过非文本文件：{filename}")
+                continue
+    
+    # 新增有效性检查
+    if valid_files == 0:
+        raise ValueError("没有找到可合并的有效文件（空文件或非文本文件）")
+    if not merged:
+        raise ValueError("所有文件内容均为空")
+    
+    # 生成带时间戳的新文件名
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    output_path = os.path.join(output_dir, f"merged_{timestamp}.txt")
+    
+    # 写入合并结果
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(sorted(merged)))
+    
+    return output_path
+
+# 修改主菜单显示
+def main_menu():
+    print(f"""
+{COLOR_TITLE}{'★' * 40}
+  域名处理工具 · 版本 {__version__}
+{'★' * 40}{COLOR_END}
+{COLOR_PROMPT}作者：{__author__}
+仓库：{__repo__}
+协议：{__license__} License
+
+【功能特性】
+✓ 域名列表随机乱序排列
+✓ 按指定行数分割列表文件
+✓ 自动生成时间戳文件名
+✓ 支持批量文件处理{COLOR_WARN}  # 将合并功能移到特性列表
+提示：可直接拖放文件到本窗口{COLOR_END}
+{'-' * 55}""")
+
+# 修改主程序选择逻辑
 if __name__ == '__main__':
     from colorama import init
     init(autoreset=True)  # 初始化颜色支持
@@ -94,20 +159,30 @@ if __name__ == '__main__':
     print(f"{COLOR_PROMPT}功能列表：{COLOR_END}")
     print(" 1. 随机排序文件（洗牌模式）")
     print(" 2. 智能分割文件（可定制行数）")
+    print(" 3. 合并目录文件")  # 这是正确的选项位置
     
     while True:
         try:
-            # 功能选择
-            choice = input("\n请选择功能 [1/2] (按回车退出): ").strip()
+            choice = input("\n请选择功能 [1/2/3] (按回车退出): ").strip()
             if not choice:
                 print("程序已退出")
                 break
                 
-            if choice not in ('1', '2'):
-                print("错误：请输入1或2选择功能")
+            if choice not in ('1', '2', '3'):
+                print("错误：请输入1/2/3选择功能")
                 continue
                 
-            # 文件路径输入
+            # 修改开始：选项3不需要文件输入
+            if choice == '3':
+                try:
+                    output_path = merge_files()
+                    print(f"\n{COLOR_SUCCESS}✓ 合并完成！{COLOR_END}")
+                    print(f"{COLOR_PROMPT}文件路径：{output_path}{COLOR_END}")
+                except Exception as e:
+                    print(f"合并失败：{str(e)}")
+                continue  # 跳过后续文件输入逻辑
+                
+            # 文件路径输入（仅适用于选项1/2）
             raw_path = input("请输入txt文件路径：").strip()
             if not raw_path:
                 continue
@@ -118,8 +193,8 @@ if __name__ == '__main__':
                 print(f"错误：文件不存在 - {file_path}")
                 continue
                 
-            if not file_path.lower().endswith('.txt'):
-                print("错误：仅支持.txt文件")
+            if not os.path.isfile(file_path):  # 新增文件类型验证
+                print("错误：输入的不是文件路径")
                 continue
 
             # 执行功能
@@ -127,7 +202,7 @@ if __name__ == '__main__':
                 shuffle_domains(file_path)
                 print(f"\n{COLOR_SUCCESS}✓ 洗牌完成！{COLOR_END}")
                 print(f"{COLOR_PROMPT}文件路径：{os.path.dirname(file_path)}{COLOR_END}")
-            else:
+            elif choice == '2':  # 明确选项2的分支
                 # 新增行数输入逻辑
                 while True:
                     size_input = input("请输入分割行数（默认300）：").strip()
