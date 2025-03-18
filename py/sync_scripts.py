@@ -26,6 +26,7 @@ def main():
         "insert_domain.py", 
         "shuffle_domains.py",
         "domain_validator.py",
+        "insert_domain_clipboard.py",
         os.path.basename(__file__)  # 包含脚本自身
     ]
 

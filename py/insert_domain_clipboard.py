@@ -8,12 +8,16 @@ import requests
 import tempfile
 import os
 import json
-import base64
+import time
+import platform
 import dns.message
 from datetime import datetime
 from urllib.parse import urlencode
 import urllib3
 from dns import rdatatype  # 添加在文件开头的导入部分
+import threading
+from queue import Queue
+import base64
 # 禁用SSL警告
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # 新增：IPv4地址验证函数
@@ -52,11 +56,18 @@ def check_dependencies():
     
     if missing:
         print("\n正在安装缺失依赖...")
-        subprocess.check_call(
-            [sys.executable, '-m', 'pip', 'install', *missing],
-            stdout=subprocess.DEVNULL
-        )
+        try:
+            subprocess.check_call(
+                [sys.executable, '-m', 'pip', 'install', *missing],
+                stdout=subprocess.DEVNULL
+            )
+        except Exception as e:
+            print_status(STYLES['error'], f"依赖安装失败: {str(e)}")
+            input("按回车键退出...")
+            sys.exit(1)
+            
         print("依赖安装完成，请重新运行脚本\n")
+        input("按回车键退出...")  # 新增等待
         sys.exit(1)
 check_dependencies()
 # 颜色定义
@@ -399,14 +410,21 @@ def get_config_path():
         return None
     
     return config_path
-# 在文件顶部添加time模块导入
-import time
-# 新增：IPv4地址验证函数
 def insert_domain():
+    # 在文件顶部添加导入（约第10行）
+    import threading
+    from queue import Queue
     print_section("dnsmasq-china-list 域名规则管理工具启动")
     print(f"{STYLES['title']}版本: {__version__} | 作者: {__author__} | 协议: {__license__}")
     print(f"{STYLES['title']}仓库: {__repository__}{COLORS['reset']}\n")
     
+    # 新增剪贴板初始化清理
+    try:
+        pyperclip.copy("")  # 清空剪贴板
+        print_status(STYLES['info'], "已初始化剪贴板缓冲区")
+    except Exception as e:
+        print_status(STYLES['warning'], f"剪贴板清空失败，请手动清空剪贴板后继续: {str(e)}")
+
     config_path = get_config_path()
     if not config_path:
         return
@@ -415,99 +433,143 @@ def insert_domain():
     if not geoip_db_path:
         return
 
+    # 新增剪贴板监控相关变量
+    processing_queue = Queue()
+    last_clipboard_content = None
+    processed_history = set()
+    clipboard_lock = threading.Lock()
+
     def process_domain(domain):
-        # 原有处理逻辑封装成函数
-        if domain.endswith('.cn'):
-            print_status(STYLES['warning'], ".cn域名自动跳过")
-            return
-        if check_existing_entry(config_path, domain):
-            print_status(STYLES['warning'], "规则已存在，跳过处理")
-            return
-        if validate_ns_records(domain, geoip_db_path):
-            with open(config_path, 'r', encoding='utf-8') as f:
+        """核心处理逻辑"""
+        try:
+            print_section(f"正在处理: {domain}")
+            # 调整顺序：先检查存在性
+            if check_existing_entry(config_path, domain):
+                print_status(STYLES['warning'], f"已存在记录: {domain}")
+                return
+    
+            # 存在性检查通过后再执行验证
+            if not validate_ns_records(domain, geoip_db_path):
+                print_status(STYLES['error'], f"验证失败: {domain}")
+                return
+    
+            with open(config_path, 'r+', encoding='utf-8') as f:
                 lines = f.readlines()
-            
-            new_entry = f"server=/{domain}/114.114.114.114\n"
-            insert_pos = find_insert_position(lines, domain)
-            lines.insert(insert_pos, new_entry)
-            
-            with open(config_path, 'w', newline='\n', encoding='utf-8') as f:
+                if any(f"server=/{domain}/" in line for line in lines):
+                    print_status(STYLES['warning'], f"重复记录: {domain}")
+                    return
+    
+                insert_pos = find_insert_position(lines, domain)
+                lines.insert(insert_pos, f"server=/{domain}/114.114.114.114\n")
+                f.seek(0)
                 f.writelines(lines)
+    
+            print_status(STYLES['success'], f"成功添加: {domain}")
+            pyperclip.copy("")  # 清空剪贴板
             
-            # 写入验证
-            with open(config_path, 'r', encoding='utf-8') as f:
-                written_content = f.read()
-                if new_entry.strip() not in written_content:
-                    raise RuntimeError(f"文件写入验证失败: {new_entry.strip()}")
-            
-            # Git操作
-            target_dir = os.path.dirname(config_path)
-            commit_msg = f"accelerated-domains: add {domain}"
+            # ======== 修改后的git提交逻辑 ========
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            target_dir = os.path.join(script_dir, "dnsmasq-china-list")
             
             try:
-                subprocess.run(
-                    ['git', 'add', 'accelerated-domains.china.conf'],
-                    cwd=target_dir,
-                    check=True
-                )
-                subprocess.run(
-                    ['git', 'commit', '-m', commit_msg],
-                    cwd=target_dir,
-                    check=True
-                )
-                print_status(STYLES['success'], "成功提交到Git仓库")
+                os.chdir(target_dir)
+                subprocess.run(['git', 'add', 'accelerated-domains.china.conf'], check=True)
+                commit_msg = f"accelerated-domains: add {domain}"
+                subprocess.run(['git', 'commit', '-m', commit_msg], check=True)
+                print_status(STYLES['success'], "已提交更改到本地仓库")  # 修改提示信息
             except subprocess.CalledProcessError as e:
-                print_status(STYLES['error'], f"Git操作失败: {str(e)}")
-            except Exception as e:
-                print_status(STYLES['error'], f"意外错误: {str(e)}")
-        else:
-            print_status(STYLES['error'], "域名验证未通过，跳过添加")
+                print_status(STYLES['warning'], f"Git提交失败: {str(e)}")
+            finally:
+                os.chdir(script_dir)
+            # ======== 修改结束 ========
+                
+        except Exception as e:
+            print_status(STYLES['error'], f"处理异常: {str(e)}")
+            raise
 
+    def process_domain_wrapper(domain):
+        """带错误处理的任务包装器"""
+        try:
+            process_domain(domain)
+        except Exception as e:
+            print_status(STYLES['error'], f"处理失败: {str(e)}")
+
+    def clipboard_monitor():
+        """剪贴板监控线程"""
+        nonlocal last_clipboard_content
+        while True:
+            try:  # 新增异常捕获
+                with clipboard_lock:
+                    current_content = pyperclip.paste().strip(' "\'')
+                    
+                if current_content and current_content != last_clipboard_content:
+                    domain = extract_domain(current_content)
+                    # 新增.cn域名过滤检查
+                    if domain.endswith('.cn'):
+                        print_status(STYLES['warning'], f"已忽略.cn域名: {domain}")
+                        continue
+                    if domain not in processed_history:
+                        processing_queue.put(domain)
+                        processed_history.add(domain)
+                        last_clipboard_content = current_content
+                        print_status(STYLES['success'], f"已加入队列: {domain}")
+                        
+                time.sleep(0.5)
+            except Exception as e:  # 捕获剪贴板访问异常
+                print_status(STYLES['error'], f"剪贴板监控异常: {str(e)}")
+                time.sleep(1)
+
+    # 启动监控线程
+    monitor_thread = threading.Thread(target=clipboard_monitor, daemon=True)
+    monitor_thread.start()
+
+    print_status(STYLES['info'], "剪贴板监控已启动 (自动忽略.cn域名)")
+    print_status(STYLES['info'], "检测到新域名将自动加入处理队列")
+
+    # 主处理循环
     while True:
         try:
-            # 修改输入处理：去除首尾空格和引号
-            user_input = input(f"\n{COLORS['cyan']}请输入域名/URL（或拖入txt文件/输入 exit 退出）{COLORS['reset']}: ").strip(' "\'')  # 新增 strip 参数
-            
-            if user_input.lower() == 'exit':
-                print_section("程序退出")
-                print_status(STYLES['info'], "感谢使用！")
-                break
-
-            # 修改文件检测逻辑：使用处理后的路径
-            if os.path.isfile(user_input) and user_input.endswith('.txt'):
-                print_status(STYLES['info'], f"检测到输入为文件，开始处理: {user_input}")
-                try:
-                    with open(user_input, 'r', encoding='utf-8') as f:
-                        lines = f.readlines()
-                        for line_num, line in enumerate(lines, 1):
-                            line = line.strip()
-                            if not line:
-                                continue
-                            # 新增分隔符和空行
-                            print(f"\n{STYLES['divider']}")
-                            print_status(STYLES['info'], f"开始处理第 {line_num} 行域名")
-                            print(f"{STYLES['divider']}\n")
-                            
-                            domain = extract_domain(line)
-                            process_domain(domain)
-                            time.sleep(1)  # 行间间隔1秒
-                except Exception as e:
-                    print_status(STYLES['error'], f"文件处理失败: {str(e)}")
-                continue
-
-            new_domain = extract_domain(user_input)
-            process_domain(new_domain)
+            if not processing_queue.empty():
+                domain = processing_queue.get()
+                print_section(f"正在处理: {domain}")
+                
+                # 启动独立线程处理任务
+                processing_thread = threading.Thread(
+                    target=process_domain_wrapper,
+                    args=(domain,)
+                )
+                processing_thread.start()
+                processing_thread.join()  # 等待当前任务完成
+                
+                # 清理历史记录避免内存泄漏
+                if len(processed_history) > 100:
+                    processed_history.clear()
+            else:
+                time.sleep(1)
                 
         except KeyboardInterrupt:
             print_status(STYLES['error'], "操作已中止")
             break
 
+# 修复1：移除文件末尾的重复 main 代码块（删除以下部分）
 if __name__ == "__main__":
     try:
         insert_domain()
+        # 保持主线程存活
+        while True:
+            time.sleep(3600)
+    except KeyboardInterrupt:
+        print_status(STYLES['error'], "\n程序已终止")
     except Exception as e:
-        print(f"\n{STYLES['error']}: 发生未捕获异常")
+        print(f"\n{STYLES['error']}: 致命错误 - {str(e)}")
         import traceback
         traceback.print_exc()
     finally:
-        input("\n按回车键退出...")
+        if sys.platform.startswith('win'):
+            import msvcrt
+            print("\n按任意键退出...")
+            msvcrt.getch()
+        else:
+            print("\n按回车键退出...")
+            sys.stdin.read(1)
+

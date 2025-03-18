@@ -253,7 +253,8 @@ def process_file(input_path, output_path):
     validator = DomainValidator()
     valid_domains = []
     
-    with open(input_path, 'r') as f:
+    # 修改文件读取编码为utf-8
+    with open(input_path, 'r', encoding='utf-8', errors='ignore') as f:
         domains = [line.strip() for line in f if line.strip()]  # 必须先定义domains变量
     
     print(f"总域名数量: {len(domains)}")  # 移动到domains变量之后
@@ -272,8 +273,8 @@ def process_file(input_path, output_path):
             except Exception as e:
                 print(f"验证失败 {domain}: {str(e)}")
     
-    # 保存结果
-    with open(output_path, 'w') as f:
+    # 保存结果时也使用utf-8编码
+    with open(output_path, 'w', encoding='utf-8') as f:
         f.write("\n".join(sorted(valid_domains)))
 
     # 添加结果统计
