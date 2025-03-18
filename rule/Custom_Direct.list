@@ -17,6 +17,11 @@ DOMAIN-SUFFIX,github.site
 DOMAIN-SUFFIX,github.store
 DOMAIN-SUFFIX,ghproxy.cfd
 DOMAIN-SUFFIX,ghproxy.cc
+DOMAIN-SUFFIX,kgithub.com
+DOMAIN-SUFFIX,ghps.cc
+DOMAIN-SUFFIX,hub.gitmirror.com
+DOMAIN-SUFFIX,gh.ddlc.top
+DOMAIN-SUFFIX,github.moeyy.xyz
 # Docker 反代 CDN
 DOMAIN-SUFFIX,dockerpull.pw
 DOMAIN-SUFFIX,dockerpull.org
