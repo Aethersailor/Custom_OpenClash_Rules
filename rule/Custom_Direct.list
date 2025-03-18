@@ -13,6 +13,13 @@ DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,jsdelivr.net
 DOMAIN-SUFFIX,github.boki.moe
 DOMAIN-SUFFIX,gh-proxy.com
+DOMAIN-SUFFIX,github.site
+DOMAIN-SUFFIX,github.store
+DOMAIN-SUFFIX,ghproxy.cfd
+DOMAIN-SUFFIX,ghproxy.cc
+# Docker 反代 CDN
+DOMAIN-SUFFIX,dockerpull.pw
+DOMAIN-SUFFIX,dockerpull.org
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
 # DDNS
