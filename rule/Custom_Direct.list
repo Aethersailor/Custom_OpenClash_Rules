@@ -10,18 +10,22 @@
 # ImmortalWrt 软件仓库
 DOMAIN-SUFFIX,immortalwrt.org
 # GitHub 反代 CDN
-DOMAIN-SUFFIX,jsdelivr.net
-DOMAIN-SUFFIX,github.boki.moe
 DOMAIN-SUFFIX,gh-proxy.com
+DOMAIN-SUFFIX,gh.con.sh
+DOMAIN-SUFFIX,gh.ddlc.top
+DOMAIN-SUFFIX,gh.llkk.cc
+DOMAIN-SUFFIX,ghproxy.cc
+DOMAIN-SUFFIX,ghproxy.cfd
+DOMAIN-SUFFIX,ghps.cc
+DOMAIN-SUFFIX,git.886.be
+DOMAIN-SUFFIX,github.abskoop.workers.dev
+DOMAIN-SUFFIX,github.boki.moe
+DOMAIN-SUFFIX,github.moeyy.xyz
 DOMAIN-SUFFIX,github.site
 DOMAIN-SUFFIX,github.store
-DOMAIN-SUFFIX,ghproxy.cfd
-DOMAIN-SUFFIX,ghproxy.cc
-DOMAIN-SUFFIX,kgithub.com
-DOMAIN-SUFFIX,ghps.cc
 DOMAIN-SUFFIX,hub.gitmirror.com
-DOMAIN-SUFFIX,gh.ddlc.top
-DOMAIN-SUFFIX,github.moeyy.xyz
+DOMAIN-SUFFIX,jsdelivr.net
+DOMAIN-SUFFIX,kgithub.com
 # Docker 反代 CDN
 DOMAIN-SUFFIX,dockerpull.pw
 DOMAIN-SUFFIX,dockerpull.org
