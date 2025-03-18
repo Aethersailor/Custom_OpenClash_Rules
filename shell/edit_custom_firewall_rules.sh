@@ -146,7 +146,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
             1)
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 anti-AD 广告过滤规则，规则体积较大，请耐心等候…\"
-    curl -sS -4 -L --retry 5 --retry-delay 1 \\
+    curl -sS -4 -L --retry 10 --retry-delay 2 \\
         \"https://gh-proxy.com/https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/refs/heads/master/adblock-for-dnsmasq.conf\" \\
         -o \"\$TARGET_DIR/anti-ad-for-dnsmasq.conf\" >/dev/null 2>/tmp/anti-ad-curl.log
     CURL_EXIT=\$?
@@ -162,7 +162,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
             2)
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters 广告过滤规则，规则体积较大，请耐心等候…\"
-    curl -sS -4 -L --retry 5 --retry-delay 1 \\
+    curl -sS -4 -L --retry 10 --retry-delay 2 \\
         \"https://github.boki.moe/https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/adblockdnsmasq.txt\" \\
         -o \"\$TARGET_DIR/adblockfilters-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-curl.log
     CURL_EXIT=\$?
@@ -178,7 +178,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
             3)
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则...\"
-    curl -sS -4 -L --retry 5 --retry-delay 1 \\
+    curl -sS -4 -L --retry 10 --retry-delay 2 \\
         \"https://github.boki.moe/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/refs/heads/main/rules/adblockdnsmasq.txt\" \\
         -o \"\$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
     CURL_EXIT=\$?
@@ -194,7 +194,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
             4)
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 秋风广告规则...\"
-    curl -sSL -4 --retry 5 --retry-delay 1 https://github.boki.moe/https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-hosts.txt | \\
+    curl -sSL -4 --retry 10 --retry-delay 2 https://github.boki.moe/https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-hosts.txt | \\
     sed '/127.0.0.1 localhost/d; /::1 localhost/d; 1s/^/# AWAvenue-Ads-Rule Start\\n/; \$s/\$/\\n# AWAvenue-Ads-Rule End/' >> /etc/hosts
 "
                 ;;
@@ -203,7 +203,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     if [ "$github_choice" = "y" ]; then
         NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…\"
-    curl -4 -sSL --retry 5 --retry-delay 1 \\
+    curl -4 -sSL --retry 10 --retry-delay 2 \\
         \"https://raw.hellogithub.com/hosts\" >> /etc/hosts 2>/tmp/github520-curl.log
     CURL_EXIT_GH=\$?
 
