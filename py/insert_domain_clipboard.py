@@ -80,13 +80,14 @@ COLORS = {
     "bold": "\033[1m",
     "underline": "\033[4m"
 }
+# 修改输出样式定义（移除divider）
 STYLES = {
     "info": f"{COLORS['cyan']}ℹ️  INFO{COLORS['reset']}",
     "success": f"{COLORS['green']}✅ SUCCESS{COLORS['reset']}",
-    "warning": f"{COLORS['yellow']}⚠️  WARNING{COLORS['reset']}",
+    "warning": f"{COLORS['yellow']}⚠️  WARN {COLORS['reset']}", 
     "error": f"{COLORS['red']}❌ ERROR{COLORS['reset']}",
-    "title": f"{COLORS['bold']}{COLORS['cyan']}",
-    "divider": f"{COLORS['cyan']}{'='*60}{COLORS['reset']}"
+    "title": f"{COLORS['bold']}{COLORS['cyan']}✨ {COLORS['underline']}"
+    # 移除divider样式定义
 }
 NON_CHINA_PROVIDERS = [
     'cloudflare', 'aws', 'google', 'cloudns.net', 'gandi', 
@@ -265,9 +266,11 @@ def process_doh_response(data):
     
     return list(set(ns_servers)) if ns_servers else None
 def print_section(title):
-    print(f"\n{STYLES['divider']}")
+    # 移除divider样式引用，改用固定分隔线
+    divider = "═" * 60
+    print(f"\n{COLORS['cyan']}{divider}{COLORS['reset']}")
     print(f"{STYLES['title']}{title.upper()}{COLORS['reset']}")
-    print(f"{STYLES['divider']}\n")
+    print(f"{COLORS['cyan']}{divider}{COLORS['reset']}\n")
 def print_status(style, message):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {style}: {message}")
 def extract_domain(url):
@@ -306,7 +309,8 @@ def get_geo_info(ip_address, geoip_db_path):
         return None
 def download_geoip_db():
     try:
-        print_section("初始化地理数据库")
+        # 移除旧的分隔线打印方式
+        print_status(STYLES['info'], "初始化地理数据库")
         temp_dir = tempfile.gettempdir()
         geoip_db_path = os.path.join(temp_dir, 'GeoLite2-Country.mmdb')
         
@@ -343,10 +347,8 @@ def download_geoip_db():
 def check_non_china_provider(ns_domain):
     return any(provider in ns_domain.lower() for provider in NON_CHINA_PROVIDERS)
 def validate_ns_records(new_domain, geoip_db_path):
-    # 增强章节分隔效果
-    print(f"\n{STYLES['divider']}")
-    print_section("域名验证流程")
-    print(f"{STYLES['divider']}\n")
+    # 移除硬编码的分隔线打印
+    print_status(STYLES['info'], "开始域名验证流程")
     
     print_status(STYLES['info'], f"开始验证域名: {new_domain}")
     ns_servers = query_ns_with_doh(new_domain)
@@ -442,7 +444,7 @@ def insert_domain():
     def process_domain(domain):
         """核心处理逻辑"""
         try:
-            print_section(f"正在处理: {domain}")
+            # 移除这里的print_section调用
             # 调整顺序：先检查存在性
             if check_existing_entry(config_path, domain):
                 print_status(STYLES['warning'], f"已存在记录: {domain}")
@@ -487,9 +489,11 @@ def insert_domain():
             print_status(STYLES['error'], f"处理异常: {str(e)}")
             raise
 
+    # 新增：将包装函数定义移动到insert_domain作用域内
     def process_domain_wrapper(domain):
         """带错误处理的任务包装器"""
         try:
+            print_section(f"域名处理中: {domain}")
             process_domain(domain)
         except Exception as e:
             print_status(STYLES['error'], f"处理失败: {str(e)}")
@@ -498,22 +502,31 @@ def insert_domain():
         """剪贴板监控线程"""
         nonlocal last_clipboard_content
         while True:
-            try:  # 新增异常捕获
+            try:
                 with clipboard_lock:
                     current_content = pyperclip.paste().strip(' "\'')
                     
-                if current_content and current_content != last_clipboard_content:
+                if current_content:
+                    # 新增内容变化检测
+                    if current_content == last_clipboard_content:
+                        time.sleep(0.5)
+                        continue
+                        
                     domain = extract_domain(current_content)
-                    # 新增.cn域名过滤检查
+                    # 调整检测顺序
+                    if domain in processed_history:
+                        print_status(STYLES['warning'], f"检测到历史域名: {domain}")
+                        last_clipboard_content = current_content  # 更新最后内容防止重复
+                        continue
                     if domain.endswith('.cn'):
                         print_status(STYLES['warning'], f"已忽略.cn域名: {domain}")
                         continue
-                    if domain not in processed_history:
-                        processing_queue.put(domain)
-                        processed_history.add(domain)
-                        last_clipboard_content = current_content
-                        print_status(STYLES['success'], f"已加入队列: {domain}")
                         
+                    processing_queue.put(domain)
+                    processed_history.add(domain)
+                    last_clipboard_content = current_content
+                    print_status(STYLES['success'], f"已加入队列: {domain}")
+                    
                 time.sleep(0.5)
             except Exception as e:  # 捕获剪贴板访问异常
                 print_status(STYLES['error'], f"剪贴板监控异常: {str(e)}")
@@ -531,7 +544,7 @@ def insert_domain():
         try:
             if not processing_queue.empty():
                 domain = processing_queue.get()
-                print_section(f"正在处理: {domain}")
+                # 移除此处的print_section调用
                 
                 # 启动独立线程处理任务
                 processing_thread = threading.Thread(
