@@ -520,6 +520,7 @@ def insert_domain():
                         continue
                     if domain.endswith('.cn'):
                         print_status(STYLES['warning'], f"已忽略.cn域名: {domain}")
+                        last_clipboard_content = current_content  # 新增：更新最后内容
                         continue
                         
                     processing_queue.put(domain)
