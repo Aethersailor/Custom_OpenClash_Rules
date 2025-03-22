@@ -10,58 +10,69 @@ from urllib.parse import urlparse
 import tempfile
 import shutil
 import urllib3
+import dns.resolver
+import socket
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# 新配置：使用不限QPS的DOH服务器
-# 修改DOH服务器配置
-# 在DOH_SERVERS配置下方添加线程配置
-# 修改DOH服务器配置为DNSPod（支持国内访问）
-DOH_SERVERS = [
-    {
-        'host': 'doh.pub', 
-        'path': '/dns-query',
-        'ip_cache': '1.12.12.12',  # DNSPod国内节点1
-        'last_request': 0  # 最后请求时间戳
-    },
-    {
-        'host': 'doh.pub',
-        'path': '/dns-query',
-        'ip_cache': '120.53.53.53',  # DNSPod国内节点2
-        'last_request': 0
-    }
-]
-
-# 新增线程池和超时配置（必须添加在类定义之前）
 MAX_WORKERS = 30  # 线程并发数
 REQUEST_TIMEOUT = 10  # 请求超时(秒)
 GEOIP_DB_URL = "https://github.com/Loyalsoldier/geoip/raw/release/GeoLite2-Country.mmdb"
+DNS_SERVER = '192.168.1.10'  # 本地DNS服务器地址
+DNS_PORT = 53                # 标准DNS端口
+DNS_TIMEOUT = 5              # DNS查询超时时间
 
-# 在文件开头添加socket模块导入
-import socket  # 新增导入
 
-# 在类中添加缓存字典
 class DomainValidator:
     def __init__(self):
-        self.a_record_cache = {}  # 新增A记录缓存
-        self.session = requests.Session()
-        # 配置SSL协议版本
-        self.session.mount('https://', requests.adapters.HTTPAdapter(
-            max_retries=3,
-            pool_maxsize=MAX_WORKERS,  # 现在可以正确引用
-            pool_block=True
-        ))
-        # 添加重试策略
-        retry = requests.packages.urllib3.util.retry.Retry(
-            total=3,
-            backoff_factor=0.3,
-            status_forcelist=(500, 502, 504)
-        )
-        self.session.mount('https://', requests.adapters.HTTPAdapter(max_retries=retry))
-        self.geoip_path = self.download_geoip()  # 原方法未实现
-        self.session.verify = False  # 保持原有逻辑但添加警告说明
-        self.session.trust_env = False  # 禁用系统代理证书验证
-        self.check_geoip_database()  # 新增数据库校验
+        self.a_record_cache = {}
+        # 配置DNS解析器
+        self.resolver = dns.resolver.Resolver()
+        self.resolver.nameservers = [DNS_SERVER]
+        self.resolver.port = DNS_PORT
+        self.resolver.timeout = DNS_TIMEOUT
+        self.resolver.lifetime = DNS_TIMEOUT
         
+        # 删除原有session配置，保留其他初始化代码
+        self.geoip_path = self.download_geoip()
+        self.check_geoip_database()
+
+    def query_ns_records(self, domain):
+        print(f"[DEBUG][NS] 开始查询 {domain} 的NS记录")
+        try:
+            # 使用DNS协议查询NS记录
+            answer = self.resolver.resolve(domain, 'NS', raise_on_no_answer=False)
+            ns_list = [rr.target.to_text().rstrip('.') for rr in answer.rrset] if answer.rrset else []
+            print(f"[DEBUG][NS] {domain} 的NS记录查询结果: {ns_list}")
+            return ns_list
+        except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN):
+            print(f"[WARN][NS] {domain} 未找到NS记录")
+            return []
+        except Exception as e:
+            print(f"[ERROR][NS] 查询失败: {str(e)}")
+            return []
+
+    def query_a_record(self, domain):
+        print(f"[DEBUG][A] 开始查询 {domain} 的A记录")
+        # 检查缓存
+        if domain in self.a_record_cache:
+            print(f"[CACHE] 命中A记录缓存: {domain}")
+            return self.a_record_cache[domain]
+            
+        try:
+            # 使用DNS协议查询A记录
+            answer = self.resolver.resolve(domain, 'A', raise_on_no_answer=False)
+            a_records = [rr.address for rr in answer.rrset] if answer.rrset else []
+            print(f"[DEBUG][A] {domain} 的A记录解析结果: {a_records}")
+            self.a_record_cache[domain] = a_records
+            return a_records
+        except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN):
+            print(f"[WARN][A] {domain} 未找到A记录")
+            return []
+        except Exception as e:
+            print(f"[ERROR][A] 查询失败: {str(e)}")
+            return []
+
+# 删除不再需要的DOH相关方法：doh_request, resolve_doh_ip
     def check_geoip_database(self):
         """地理数据库校验"""
         test_ips = {
@@ -84,11 +95,8 @@ class DomainValidator:
         temp_dir = tempfile.gettempdir()
         geoip_path = os.path.join(temp_dir, 'GeoLite2-Country.mmdb')
         
-        if os.path.exists(geoip_path):
-            print("检测到已存在的GeoIP数据库")
-            return geoip_path
-            
-        print("正在下载GeoIP数据库(约5MB)...")
+        # 删除存在性检查，直接下载
+        print("强制下载GeoIP数据库(约5MB)...")
         try:
             response = requests.get(GEOIP_DB_URL, stream=True, timeout=30)
             response.raise_for_status()
@@ -101,7 +109,7 @@ class DomainValidator:
                     f.write(chunk)
                     downloaded += len(chunk)
                     print(f"\r下载进度: {downloaded/1024/1024:.2f}MB", end='')
-                
+            
             print("\n数据库下载完成")
             return geoip_path
         except Exception as e:
@@ -115,164 +123,111 @@ class DomainValidator:
         except (socket.error, OSError):
             return False
 
-    def resolve_doh_ip(self, server):
-        # 直接返回预置IP
-        return server['ip_cache']
 
-    def doh_request(self, server, params):
-        """带QPS控制的请求方法"""
-        # 调整为QPS19 (52.6ms间隔)
-        elapsed = time.time() - server['last_request']
-        if elapsed < 0.0526:  # 修改间隔时间
-            time.sleep(0.0526 - elapsed)
-        
-        try:
-            url = f"https://{server['ip_cache']}{server['path']}"
-            headers = {'Host': server['host']}  # 修正Host头
-            
-            response = self.session.get(
-                url,
-                params=params,
-                headers=headers,
-                timeout=REQUEST_TIMEOUT,
-                verify=True
-            )
-            server['last_request'] = time.time()
-            return response
-        except Exception as e:
-            print(f"DOH请求失败: {str(e)}")
-            return None
 
-    def query_ns_records(self, domain):
-        print(f"[DEBUG][NS] 开始查询 {domain} 的NS记录")
-        for server in DOH_SERVERS:
-            response = self.doh_request(server, {'name': domain, 'type': 'NS'})
-            try:
-                # 修复Host头配置错误
-                headers = {'Host': server['host']}  # 改为使用server配置中的host
-                
-                if response and response.status_code == 200:
-                    data = response.json()
-                    ns_list = [ans['data'].rstrip('.') for ans in data.get('Answer', [])
-                              if ans.get('type') == 2]
-                    print(f"[DEBUG][NS] {domain} 的NS记录查询结果: {ns_list}")
-                    return ns_list
-                elif response:
-                    print(f"[WARN][NS] 非200响应: {response.status_code}")
-            except Exception as e:
-                print(f"[ERROR][NS] 查询失败: {str(e)}")
-        print(f"[WARN][NS] {domain} 未找到有效NS记录")
-        return []
 
-    def query_a_record(self, domain):
-        print(f"[DEBUG][A] 开始查询 {domain} 的A记录")
-        
-        # 检查缓存
-        if domain in self.a_record_cache:
-            print(f"[CACHE] 命中A记录缓存: {domain}")
-            return self.a_record_cache[domain]
-            
-        # 强制指定A记录类型
-        for server in DOH_SERVERS:
-            response = self.doh_request(server, {'name': domain, 'type': 'A'})  # 确保查询A记录
-            try:
-                # 修复Host头配置错误
-                headers = {'Host': server['host']}  # 改为使用server配置中的host
-                
-                if response and response.status_code == 200:
-                    data = response.json()
-                    # 严格过滤A记录
-                    a_records = [
-                        ans['data'] for ans in data.get('Answer', [])
-                        if ans.get('type') == 1  # 确保只处理A记录
-                        and self.is_valid_ipv4(ans['data'])
-                    ]
-                    print(f"[DEBUG][A] {domain} 的A记录解析结果: {a_records}")
-                    
-                    # 写入缓存
-                    self.a_record_cache[domain] = a_records
-                    return a_records
-                elif response:
-                    print(f"[WARN][A] 非200响应: {response.status_code}")
-            except Exception as e:
-                print(f"[ERROR][A] 查询失败: {str(e)}")
-        print(f"[WARN][A] {domain} 未找到有效A记录")
-        return []
+
 
     def validate_domain(self, domain):
         try:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] 正在验证: {domain}")
+            # 移除开始时间戳的打印
             ext = tldextract.extract(domain)
-            main_domain = f"{ext.domain}.{ext.suffix}"
             
-            # 获取NS服务器列表
+            if ext.suffix in ['cn', 'top']:
+                # 修改为单行简洁输出
+                print(f"[过滤] 跳过 {domain}")
+                return False
+                
+            main_domain = f"{ext.domain}.{ext.suffix}"
             ns_servers = self.query_ns_records(main_domain)
+            
+            # 简化NS记录查询成功的输出
             if not ns_servers:
-                print(f"[RESULT] {domain} 失败原因: 无NS记录")
+                print(f"[失败] {domain}: 无NS记录")
                 return False
                 
             print(f"[DEBUG][NS] {domain} 的NS服务器列表: {ns_servers}")
             
-            # 严格模式：所有NS服务器必须在中国
-            all_ns_in_china = True
+            # 改为宽松模式：任一NS服务器在中国即通过
+            any_ns_in_china = False
             with geoip2.database.Reader(self.geoip_path) as reader:
                 for ns in ns_servers:
                     ns_ips = self.query_a_record(ns)
                     print(f"[DEBUG] 检查NS服务器: {ns} 解析IP: {ns_ips}")
                     
-                    ns_in_china = False
                     for ip in ns_ips:
                         try:
                             country = reader.country(ip).country.iso_code
                             print(f"[GEOIP] {ns} 的IP {ip} 国家代码: {country}")
                             if country == 'CN':
-                                ns_in_china = True
-                                break
+                                print(f"[RESULT] {domain} 成功原因: {ns} 存在中国IP {ip}")
+                                any_ns_in_china = True
+                                break  # 发现有效IP即跳出当前NS检查
                         except Exception as e:
                             print(f"地理查询异常: {str(e)}")
                             continue
                     
-                    if not ns_in_china:
-                        print(f"[RESULT] {domain} 失败原因: {ns} 无中国IP")
-                        all_ns_in_china = False  # 新增关键逻辑
-                        break  # 发现无效NS立即终止循环
+                    if any_ns_in_china:  # 发现有效NS后立即终止全部检查
+                        break
             
-            if all_ns_in_china:
+            if any_ns_in_china:
                 print(f"[RESULT] {domain} 验证通过")
             else:
                 print(f"[RESULT] {domain} 验证失败")
             
-            return all_ns_in_china
+            return any_ns_in_china
         except Exception as e:
             print(f"[ERROR] 验证异常 {domain}: {str(e)}")
             return False
 
 def process_file(input_path, output_path):
-    # 修正变量顺序错误
     print(f"开始处理文件: {input_path}")
     validator = DomainValidator()
     valid_domains = []
     
-    # 修改文件读取编码为utf-8
     with open(input_path, 'r', encoding='utf-8', errors='ignore') as f:
-        domains = [line.strip() for line in f if line.strip()]  # 必须先定义domains变量
+        domains = [line.strip() for line in f if line.strip()]
     
-    print(f"总域名数量: {len(domains)}")  # 移动到domains变量之后
+    total = len(domains)
+    print(f"待处理域名总数: {total}")
+    
+    # 新增统计指标
+    processed = 0
+    skipped = 0
+    failed = 0
+    
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        future_to_domain = {
-            executor.submit(validator.validate_domain, domain): domain 
-            for domain in domains
-        }
+        future_to_domain = {executor.submit(validator.validate_domain, domain): domain for domain in domains}
         
         for future in concurrent.futures.as_completed(future_to_domain):
+            processed += 1
             domain = future_to_domain[future]
+            
+            # 进度显示（每10%更新一次）
+            if processed % (total//10 or 1) == 0:
+                print(f"▏ 进度: {processed/total:.0%} | 已处理: {processed} 有效: {len(valid_domains)} 跳过: {skipped} 失败: {failed}")
+                
             try:
-                if future.result():
+                result = future.result()
+                if result:
                     valid_domains.append(domain)
-                    print(f"[{datetime.now().strftime('%H:%M:%S')}] 有效域名: {domain}")
+                else:
+                    if domain.lower().endswith(('.cn', '.top')):
+                        skipped += 1
+                    else:
+                        failed += 1
             except Exception as e:
-                print(f"验证失败 {domain}: {str(e)}")
-    
+                print(f"\n[!] 严重错误 {domain}: {str(e)}")
+                failed += 1
+
+    # 优化结果输出
+    print(f"\n{' 验证完成 ':━^40}")
+    print(f"▪ 总处理量: {total}")
+    print(f"▪ 有效域名: {len(valid_domains)} (占比: {len(valid_domains)/total:.1%})")
+    print(f"▪ 过滤跳过: {skipped}")
+    print(f"▪ 验证失败: {failed}")
+    print(f"结果文件: {output_path}")
+
     # 保存结果时也使用utf-8编码
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write("\n".join(sorted(valid_domains)))
