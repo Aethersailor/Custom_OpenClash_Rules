@@ -10,10 +10,19 @@ import os
 import json
 import base64
 import dns.message
+import dns.resolver
 from datetime import datetime
 from urllib.parse import urlencode
 import urllib3
+import sys
+import subprocess
+import tkinter  # 新增GUI库导入
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
 from dns import rdatatype  # 添加在文件开头的导入部分
+NS_CACHE = {}  # 缓存结构：{ns_domain: (ip, timestamp)}
+CACHE_TTL = 3600  # 缓存有效期1小时
+CLOUDFLARE_DNS = ['192.168.1.10']  # 新增备用DNS服务器
 # 禁用SSL警告
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # 新增：IPv4地址验证函数
@@ -31,17 +40,13 @@ __author__ = "Aethersailor"
 __license__ = "CC BY-NC-SA 4.0"
 __repository__ = "https://github.com/Aethersailor/Custom_OpenClash_Rules"
 
-# 原有依赖检查函数
+# 修正后的依赖检查函数 (约第32行)
 def check_dependencies():
     required = {
-        'pyperclip': 'pyperclip', 
-        'tldextract': 'tldextract',  # ✅ 用于域名解析
-        'geoip2': 'geoip2',          # ✅ IP地理定位
-        'requests': 'requests',      # ✅ HTTP请求
-        'dns': 'dnspython'           # ✅ DNS解析
-        # 已移除：
-        # 'pygetwindow': 'pygetwindow', 
-        # 'pyautogui': 'pyautogui'
+        'tldextract': 'tldextract',  # ✅ 移除pyperclip
+        'geoip2': 'geoip2',
+        'requests': 'requests',
+        'dns': 'dnspython'
     }
     missing = []
     for pkg in required:
@@ -84,175 +89,55 @@ NON_CHINA_PROVIDERS = [
     'registrar-servers', 'foundationdns.org', 'fastly', 'akamai', 'incapsula',
     'vercel-dns.com'
 ]
-DOH_SERVERS = [
-    {
-        'host': 'dns.alidns.com',
-        'path': '/dns-query',
-        'params_type': 'dns-wire'
-    },
-    {
-        'host': 'doh.pub',
-        'path': '/dns-query',
-        'params_type': 'standard'
-    },
-    {
-        'host': 'dns.qq.com',
-        'path': '/resolve',
-        'params_type': 'standard'
-    }
-]
-DOH_HEADERS = {
-    'accept': 'application/dns-json'
-}
+
 # 修改GEOIP数据库下载地址配置
 GEOIP_DB_URLS = [
     'https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-Country.mmdb',
     'https://github.boki.moe/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-Country.mmdb'
 ]
-def resolve_doh_ip(domain):
-    """使用223.5.5.5解析DoH服务器地址（强制IPv4）"""
+
+# 在导入部分添加（约第15行）
+
+
+# 删除原有的DOH_SERVERS和DOH_HEADERS定义（约第93-113行）
+# 替换query_ns_with_doh函数（约第214行）
+def query_ns_record(domain):  # 原query_ns_with_doh
+    """使用Cloudflare DNS进行普通DNS查询"""
     try:
-        result = subprocess.run(
-            ['nslookup', '-type=A', domain, '223.5.5.5'],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            check=True
-        )
-        
-        lines = result.stdout.split('\n')
-        for line in lines:
-            if 'Addresses:' in line:
-                return line.split()[-1]
-            elif 'Address:' in line and '223.5.5.5' not in line:
-                return line.split()[-1]
+        resolver = dns.resolver.Resolver(configure=False)
+        resolver.nameservers = CLOUDFLARE_DNS  # 修改为使用服务器列表
+        answers = resolver.resolve(domain, 'NS', lifetime=5)
+        return [str(r.target).rstrip('.').lower() for r in answers]
+    except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN):
+        print_status(STYLES['error'], "未找到NS记录")
         return None
-    except subprocess.CalledProcessError as e:
-        print_status(STYLES['error'], f"解析失败 {domain}: {e.stderr}")
+    except dns.exception.Timeout:
+        print_status(STYLES['error'], "DNS查询超时")
         return None
-def query_ns_with_doh(domain):
-    """使用DNS-over-HTTPS查询NS记录"""
-    for server in DOH_SERVERS:
-        print_status(STYLES['info'], f"尝试DoH服务器: {server['host']}")
-        ip = resolve_doh_ip(server['host'])
-        if not ip:
-            continue
+    except Exception as e:
+        print_status(STYLES['error'], f"DNS查询失败: {str(e)}")
+        return None
 
-        try:
-            if server['params_type'] == 'dns-wire':
-                query = dns.message.make_query(domain, 'NS')
-                params = {
-                    'dns': base64.b64encode(query.to_wire()).decode('utf-8')
-                }
-            else:
-                params = {'name': domain, 'type': 'NS'}
+def query_a_record(domain):
+    """使用Cloudflare DNS查询A记录"""
+    try:
+        resolver = dns.resolver.Resolver(configure=False)
+        resolver.nameservers = CLOUDFLARE_DNS  # 修改为使用服务器列表
+        answers = resolver.resolve(domain, 'A', lifetime=5)
+        return [str(r) for r in answers if is_valid_ipv4(str(r))]
+    except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN):
+        print_status(STYLES['warning'], f"无有效A记录: {domain}")  # 新增状态提示
+        return None
+    except dns.exception.Timeout:
+        print_status(STYLES['error'], "DNS查询超时")
+        return None
+    except Exception as e:
+        print_status(STYLES['error'], f"查询异常: {str(e)}")
+        return None
 
-            url = f"https://{ip}{server['path']}"
-            headers = {'Host': server['host']}
-            headers.update(DOH_HEADERS)
-            
-            response = requests.get(
-                url,
-                params=params,
-                headers=headers,
-                timeout=5,
-                verify=False,
-                allow_redirects=False
-            )
-            
-            if response.status_code == 200:
-                data = response.json() if server['params_type'] == 'standard' else parse_dns_wire(response.content)
-                return process_doh_response(data)
-            else:
-                print_status(STYLES['warning'], f"异常响应 [{response.status_code}]: {response.text[:200]}")
+# 删除parse_dns_wire和process_doh_response函数（约第246-274行）
 
-        except requests.exceptions.SSLError as e:
-            print_status(STYLES['error'], f"SSL证书错误: {str(e)}")
-        except Exception as e:
-            print_status(STYLES['warning'], f"{server['host']} 查询失败: {str(e)}")
-            continue
-            
-    print_status(STYLES['error'], "所有DoH服务器查询失败")
-    return None
-def parse_dns_wire(data):
-    """解析DNS wire格式响应"""
-    msg = dns.message.from_wire(data)
-    result = {'Answer': [], 'Authority': []}
-    
-    for rrset in msg.answer:
-        # 修改为明确的类型获取方式
-        if rrset.rdtype == dns.rdatatype.from_text('NS'):
-            for item in rrset:
-                result['Answer'].append({
-                    'type': 2,
-                    'data': str(item.target).rstrip('.')
-                })
-    
-    for rrset in msg.authority:
-        if rrset.rdtype == dns.rdatatype.NS:
-            for item in rrset:
-                result['Authority'].append({
-                    'type': 2,
-                    'data': str(item.target).rstrip('.')
-                })
-    
-    return result
-def query_a_with_doh(domain):
-    """严格查询IPv4地址"""
-    for server in DOH_SERVERS:
-        ip = resolve_doh_ip(server['host'])
-        if not ip:
-            continue
 
-        try:
-            if server['params_type'] == 'dns-wire':
-                query = dns.message.make_query(domain, 'A')
-                params = {
-                    'dns': base64.b64encode(query.to_wire()).decode('utf-8')
-                }
-            else:
-                params = {'name': domain, 'type': 'A'}
-
-            url = f"https://{ip}{server['path']}"
-            headers = {'Host': server['host']}
-            headers.update(DOH_HEADERS)
-            
-            response = requests.get(
-                url,
-                params=params,
-                headers=headers,
-                timeout=5,
-                verify=False
-            )
-            
-            if response.status_code == 200:
-                data = response.json() if server['params_type'] == 'standard' else parse_dns_wire(response.content)
-                # 新增IPv4过滤
-                return [
-                    answer['data'] for answer in data.get('Answer', [])
-                    if answer.get('type') == 1 and is_valid_ipv4(answer['data'])
-                ]
-        except Exception:
-            continue
-    return None
-def process_doh_response(data):
-    """处理DoH响应并提取NS记录"""
-    ns_servers = []
-    
-    for answer in data.get('Answer', []):
-        if answer.get('type') == 2:
-            ns_data = answer.get('data', '')
-            if ns_data:
-                ns_servers.append(ns_data.rstrip('.').lower())
-    
-    if not ns_servers:
-        for authority in data.get('Authority', []):
-            if authority.get('type') == 2:
-                ns_data = authority.get('data', '')
-                if ns_data:
-                    ns_servers.append(ns_data.rstrip('.').lower())
-    
-    return list(set(ns_servers)) if ns_servers else None
 def print_section(title):
     print(f"\n{STYLES['divider']}")
     print(f"{STYLES['title']}{title.upper()}{COLORS['reset']}")
@@ -262,27 +147,48 @@ def print_status(style, message):
 def extract_domain(url):
     ext = tldextract.extract(url)
     return f"{ext.domain}.{ext.suffix}"
-def get_ip_from_ns(ns_domain):
-    """双重验证获取IPv4地址"""
+def get_ip_from_ns(ns_domain, geoip_db_path):  # 新增geoip参数
+    """带缓存的双重验证获取IPv4地址"""
+    current_time = time.time()
+    cached = NS_CACHE.get(ns_domain)
+    if cached and current_time - cached[1] < CACHE_TTL:
+        geo_info = get_geo_info(cached[0], geoip_db_path) or "未知归属地"
+        print_status(STYLES['success'], f"缓存命中: {ns_domain} -> {cached[0]} ({geo_info})")
+        return cached[0]
+    
     print_status(STYLES['info'], f"开始解析NS服务器: {ns_domain}")
     
-    # 第一重解析：DoH查询
-    ips = query_a_with_doh(ns_domain)
-    valid_ips = [ip for ip in (ips or []) if is_valid_ipv4(ip)]
+    # 更新调用名称
+    ips = query_a_record(ns_domain)  # 原query_a_with_doh
+    valid_ips = ips or []  # ✅ 移除冗余验证
     
-    # 第二重解析：系统DNS兜底
+    # 第二重解析：使用1.1.1.1 DNS解析
     if not valid_ips:
-        print_status(STYLES['warning'], "DoH未返回有效IPv4，尝试系统DNS解析")
+        print_status(STYLES['warning'], "DoH未返回有效IPv4，尝试Cloudflare解析")
         try:
-            ais = socket.getaddrinfo(ns_domain, 0, socket.AF_INET)  # 强制IPv4
-            valid_ips = list({ai[4][0] for ai in ais})
-        except socket.gaierror as e:
-            print_status(STYLES['error'], f"系统解析失败: {str(e)}")
+            resolver = dns.resolver.Resolver(configure=False)
+            resolver.nameservers = CLOUDFLARE_DNS  # 使用服务器列表
+            
+            # 查询A记录（IPv4）并设置超时
+            answers = resolver.resolve(ns_domain, 'A', lifetime=5)
+            valid_ips = [str(r) for r in answers if is_valid_ipv4(str(r))]
+            
+        except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN) as e:
+            print_status(STYLES['error'], f"DNS记录不存在: {str(e)}")
+            return None
+        except dns.exception.Timeout:
+            print_status(STYLES['error'], "DNS查询超时")
+            return None
+        except Exception as e:
+            print_status(STYLES['error'], f"DNS解析失败: {str(e)}")
             return None
     
     if valid_ips:
-        print_status(STYLES['success'], f"有效IPv4地址: {', '.join(valid_ips)}")
-        return valid_ips[0]
+        selected_ip = valid_ips[0]
+        NS_CACHE[ns_domain] = (selected_ip, current_time)
+        geo_info = get_geo_info(selected_ip, geoip_db_path) or "未知归属地"
+        print_status(STYLES['success'], f"有效IPv4地址已缓存: {selected_ip} ({geo_info})")
+        return selected_ip
     
     print_status(STYLES['error'], f"DNS解析失败 [{ns_domain}]")
     return None
@@ -333,12 +239,9 @@ def check_non_china_provider(ns_domain):
     return any(provider in ns_domain.lower() for provider in NON_CHINA_PROVIDERS)
 def validate_ns_records(new_domain, geoip_db_path):
     # 增强章节分隔效果
-    print(f"\n{STYLES['divider']}")
-    print_section("域名验证流程")
-    print(f"{STYLES['divider']}\n")
-    
+    print_status(STYLES['info'], "启动域名验证流程")
     print_status(STYLES['info'], f"开始验证域名: {new_domain}")
-    ns_servers = query_ns_with_doh(new_domain)
+    ns_servers = query_ns_record(new_domain)
     
     if not ns_servers:
         print_status(STYLES['error'], "未获取到有效NS记录")
@@ -346,31 +249,43 @@ def validate_ns_records(new_domain, geoip_db_path):
     
     print_status(STYLES['success'], f"获取到{len(ns_servers)}条NS记录: {', '.join(ns_servers)}")
     
+    # 初始化验证标志
+    china_found = False
+    
     for idx, ns_domain in enumerate(ns_servers, 1):
         print_status(STYLES['info'], f"验证NS服务器 ({idx}/{len(ns_servers)})：{ns_domain}")
         
+        # 保留非中国服务商检测作为警告
         if check_non_china_provider(ns_domain):
             print_status(STYLES['warning'], f"检测到非中国服务商：{ns_domain}")
-            return False
-        
-        ip_address = get_ip_from_ns(ns_domain)
+
+        ip_address = get_ip_from_ns(ns_domain, geoip_db_path)
         if not ip_address:
-            return False
-        
+            continue  # 跳过解析失败的记录继续检查其他NS
+            
         country = get_geo_info(ip_address, geoip_db_path)
         if not country:
-            return False
-        if country != "China":
-            print_status(STYLES['warning'], f"非中国归属地: {country}")
-            return False
-        print_status(STYLES['success'], f"验证通过: {ip_address} ({country})")
+            continue  # 跳过归属地查询失败记录
+            
+        # 关键修改点：只要有一个中国IP立即标记验证通过
+        if country == "China":
+            geo_info = get_geo_info(ip_address, geoip_db_path) or "未知归属地"
+            print_status(STYLES['success'], f"找到中国归属地: {ip_address} ({geo_info})")
+            china_found = True
+            break
     
-    return True
+    # 最终判断：只要有一个有效中国IP即返回True
+    if china_found:
+        print_status(STYLES['success'], "至少存在一个中国NS服务器，验证通过")
+        return True
+        
+    print_status(STYLES['error'], "所有NS服务器均未通过中国归属地验证")
+    return False
 def check_existing_entry(file_path, new_domain):
     entry = f"server=/{new_domain}/114.114.114.114"
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
-            return any(line.strip().startswith(entry) for line in f)
+            return any(line.strip() == entry for line in f)  # ✅ 精确匹配
     except Exception as e:
         print_status(STYLES['error'], f"文件读取失败: {e}")
         return True
@@ -416,9 +331,9 @@ def insert_domain():
         return
 
     def process_domain(domain):
-        # 原有处理逻辑封装成函数
-        if domain.endswith('.cn'):
-            print_status(STYLES['warning'], ".cn域名自动跳过")
+        # 修改为同时过滤.cn和.top域名
+        if domain.endswith(('.cn', '.top')):
+            print_status(STYLES['warning'], ".cn或.top域名自动跳过")
             return
         if check_existing_entry(config_path, domain):
             print_status(STYLES['warning'], "规则已存在，跳过处理")
@@ -463,18 +378,85 @@ def insert_domain():
         else:
             print_status(STYLES['error'], "域名验证未通过，跳过添加")
 
+    # 新增剪贴板监控相关变量
+    CLIPBOARD_CACHE = set()  # <mcsymbol name="CLIPBOARD_CACHE" filename="insert_domain.py" path="e:\Github\insert_domain.py" startline="1" type="variable"></mcsymbol>
+    PROCESSING_QUEUE = []    # <mcsymbol name="PROCESSING_QUEUE" filename="insert_domain.py" path="e:\Github\insert_domain.py" startline="1" type="variable"></mcsymbol>
+    last_clipboard = ""      # <mcsymbol name="last_clipboard" filename="insert_domain.py" path="e:\Github\insert_domain.py" startline="1" type="variable"></mcsymbol>
+
+    def clipboard_monitor():
+        """剪贴板监控核心逻辑"""
+        nonlocal last_clipboard
+        last_clipboard = pyperclip.paste().strip()
+        print_status(STYLES['info'], "监控准备就绪，请复制新内容...")
+        print_status(STYLES['info'], "---")
+        
+        while True:
+            current_content = pyperclip.paste().strip()
+            
+            if current_content and current_content != last_clipboard:
+                last_clipboard = current_content
+                # === 新增多行处理 ===
+                lines = [line.strip() for line in current_content.splitlines()]
+                valid_domains = []
+                
+                # 提取有效域名并保留原有提示
+                for line in lines:
+                    if not line:  # 跳过空行
+                        continue
+                    domain = extract_domain(line)
+                    if domain:
+                        valid_domains.append(domain)
+                    else:
+                        print_status(STYLES['warning'], f"无效内容已跳过: {line}")
+                
+                # 处理缓存检查（保持原有提示格式）
+                new_domains = []
+                for domain in valid_domains:
+                    if domain in CLIPBOARD_CACHE:
+                        print_status(STYLES['warning'], f"跳过缓存域名: {domain}")
+                        print_status(STYLES['info'], "---")
+                        continue
+                    new_domains.append(domain)
+                # === 多行处理结束 ===
+                
+                if new_domains:
+                    print_status(STYLES['success'], 
+                        f"发现{len(new_domains)}新域名（共{len(lines)}行）")
+                    PROCESSING_QUEUE.extend(new_domains)
+        
+            # 处理队列（原有逻辑完全保留）
+            while PROCESSING_QUEUE:
+                current_domain = PROCESSING_QUEUE.pop(0)
+                print_status(STYLES['info'], f"处理剪贴板域名: {current_domain}")
+                process_domain(current_domain)
+                CLIPBOARD_CACHE.add(current_domain)
+                print_status(STYLES['info'], "---")
+                time.sleep(0.5)
+        
+            time.sleep(0.1)
+
     while True:
         try:
-            # 修改输入处理：去除首尾空格和引号
-            user_input = input(f"\n{COLORS['cyan']}请输入域名/URL（或拖入txt文件/输入 exit 退出）{COLORS['reset']}: ").strip(' "\'')  # 新增 strip 参数
+            user_input = input(f"\n{COLORS['cyan']}请输入域名/URL（回车选文件｜拖入txt｜exit退出）{COLORS['reset']}: ").strip(' "\'')
             
+            # 新增剪贴板模式入口
+            if user_input == '1':
+                print_status(STYLES['info'], "进入剪贴板监控模式 (输入 exit 退出)")
+                try:
+                    clipboard_monitor()
+                except KeyboardInterrupt:
+                    print_status(STYLES['warning'], "退出剪贴板监控模式")
+                    CLIPBOARD_CACHE.clear()
+                    continue
+                    
+            # 原有退出和文件处理逻辑保持不变 ...
             if user_input.lower() == 'exit':
                 print_section("程序退出")
                 print_status(STYLES['info'], "感谢使用！")
                 break
 
-            # 修改文件检测逻辑：使用处理后的路径
-            if os.path.isfile(user_input) and user_input.endswith('.txt'):
+            # 修改文件检测逻辑（新增文件存在性检查）
+            if user_input and os.path.isfile(user_input) and user_input.endswith('.txt'):
                 print_status(STYLES['info'], f"检测到输入为文件，开始处理: {user_input}")
                 try:
                     with open(user_input, 'r', encoding='utf-8') as f:
@@ -483,14 +465,12 @@ def insert_domain():
                             line = line.strip()
                             if not line:
                                 continue
-                            # 新增分隔符和空行
-                            print(f"\n{STYLES['divider']}")
-                            print_status(STYLES['info'], f"开始处理第 {line_num} 行域名")
-                            print(f"{STYLES['divider']}\n")
-                            
+                            print_status(STYLES['info'], f"处理第 {line_num} 行 → 原始内容: {line}")
                             domain = extract_domain(line)
                             process_domain(domain)
-                            time.sleep(1)  # 行间间隔1秒
+                            # 新增分隔线打印
+                            print_status(STYLES['info'], "---")
+                            time.sleep(1)
                 except Exception as e:
                     print_status(STYLES['error'], f"文件处理失败: {str(e)}")
                 continue
