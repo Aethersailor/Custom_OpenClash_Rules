@@ -86,6 +86,8 @@ DOMAIN-SUFFIX,112114.xyz
 DOMAIN-SUFFIX,epg.v1.mk
 DOMAIN-SUFFIX,epg.aptv.app
 DOMAIN-SUFFIX,gdcucc.v1.mk
+# Bilibili 港澳台
+DOMAIN-SUFFIX,bilibili.tv
 
 # 游戏类规则
 # GoLink 加速器
