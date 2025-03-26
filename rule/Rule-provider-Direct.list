@@ -1,0 +1,80 @@
+# NAME: Rule-provider - Direct
+# AUTHOR: xzsajo
+# REPO: https://github.com/xzsajo/Custom_OpenClash_Rules
+# 强制直连域名列表，来自个人收集
+# 部分域名可能和中国大陆域名列表存在重叠
+# 规则内容较少，不会影响性能，请放心使用
+
+# IPTV 相关
+DOMAIN-SUFFIX,api.iptv800.com
+DOMAIN-SUFFIX,player.ggiptv.com
+DOMAIN-SUFFIX,iptv200.com
+DOMAIN-SUFFIX,345iptv.com
+
+# 三国杀打小抄
+DOMAIN-SUFFIX,goka.top
+
+# 游戏坐标
+DOMAIN-SUFFIX,zuobiao.press
+
+# 985盒子
+DOMAIN-SUFFIX,985hezi.com
+
+# 公益API | 公益站
+DOMAIN-SUFFIX,theoremhub.asia
+DOMAIN-SUFFIX,theoremhub.xin
+DOMAIN-KEYWORD,theoremhub
+DOMAIN-KEYWORD,koyeb
+DOMAIN-KEYWORD,hongshi
+DOMAIN-KEYWORD,onrender
+DOMAIN-SUFFIX,wei.bi
+DOMAIN-KEYWORD,oaiopen
+DOMAIN-KEYWORD,noobai
+# DOMAIN-KEYWORD,xub
+DOMAIN-SUFFIX,api-proxy.me
+DOMAIN-KEYWORD,furryapi
+DOMAIN-KEYWORD,crond
+
+# Docker 镜像
+DOMAIN-SUFFIX,xuanyuan.me
+DOMAIN-KEYWORD,imgdb
+DOMAIN-KEYWORD,webgame
+DOMAIN-KEYWORD,dockerpull
+DOMAIN-KEYWORD,tslience
+DOMAIN-SUFFIX,linux.do
+
+# 在线追番
+DOMAIN-KEYWORD,girigirilove
+DOMAIN-KEYWORD,acfun
+
+# 官方大善人
+DOMAIN-KEYWORD,pollinations
+
+# 蓝奏云
+DOMAIN-KEYWORD,dmpdmp
+
+# 影视大全
+DOMAIN-KEYWORD,btnull
+DOMAIN-KEYWORD,gying
+
+# 国内冷门
+DOMAIN-KEYWORD,magiconch
+
+# 机场订阅直连
+DOMAIN-KEYWORD,idsduf
+
+# E粉的网站
+DOMAIN-KEYWORD,myshopex
+
+# 飞桨AI Studio
+DOMAIN-KEYWORD,aistudio
+
+# Deno
+DOMAIN-KEYWORD,deno
+
+# 精准定位
+DOMAIN-KEYWORD,webs
+
+# xxxx
+DOMAIN-KEYWORD,ffaoa
+DOMAIN-KEYWORD,cmastd
