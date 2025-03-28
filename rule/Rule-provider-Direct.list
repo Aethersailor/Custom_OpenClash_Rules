@@ -68,6 +68,7 @@ DOMAIN-KEYWORD,myshopex
 
 # 飞桨AI Studio
 DOMAIN-SUFFIX,aistudio.baidu.com
+DOMAIN-SUFFIX,aistudio-app.com
 
 # Deno
 DOMAIN-KEYWORD,deno
