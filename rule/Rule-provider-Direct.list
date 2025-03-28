@@ -67,7 +67,7 @@ DOMAIN-KEYWORD,idsduf
 DOMAIN-KEYWORD,myshopex
 
 # 飞桨AI Studio
-DOMAIN-KEYWORD,aistudio
+DOMAIN-SUFFIX,aistudio.baidu.com
 
 # Deno
 DOMAIN-KEYWORD,deno
