@@ -96,9 +96,9 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 # 使用方法  
 
-> **本项目设置方案使用 Clash 的 `Fake-IP` 模式，不适用 Redir-Host 模式。**  
+> **本项目设置方案使用 OpenClash 的 `Fake-IP` 模式，不适用 Redir-Host 模式。**  
 
-> **本项目依赖 OpenClash 的“绕过中国大陆”功能实现效果，不适用 OpenClash以外的使用环境。**
+> **本项目依赖 OpenClash 的“绕过中国大陆”功能实现效果，模板本身不含国内分流功能，因此不适用 OpenClash 以外的使用环境。**
 
 准备好你的订阅链接，然后按照本项目 Wiki 中的对应部分对 OpenClash 进行设置：[OpenClash-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)  
 
@@ -162,7 +162,7 @@ https://api.asailor.org/sub
 
 ## 在 OpenClash 之外的其他软件中是否可用？  
 
-本项目的订阅模板，理论上适用于任意支持 GeoSite 规则的 Clash 工具，具体使用方法不作指导。    
+本项目依赖 OpenClash 的“`绕过中国大陆`”功能实现对国内流量的处理，因此订阅模板不含国内分流内容，**不适用**于 OpenClash 以外的使用环境。    
 
 对于 OpenClash 以外的使用环境，也可以参考维护者的另一个项目：[Custom_Clash_Rules](https://github.com/Aethersailor/Custom_Clash_Rules)
 
