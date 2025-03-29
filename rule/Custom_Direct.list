@@ -94,6 +94,8 @@ DOMAIN-SUFFIX,golinkapi.com
 DOMAIN-SUFFIX,forevernine.com
 # Watt Toolkit
 DOMAIN-SUFFIX,rmbgame.net
+# steamcommunity 302
+DOMAIN-SUFFIX,steam302.xyz 
 
 # 冷门国内域名
 # 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
