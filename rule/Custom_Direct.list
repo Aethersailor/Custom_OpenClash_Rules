@@ -101,10 +101,12 @@ DOMAIN-SUFFIX,steam302.xyz
 # 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
 
 # 以下域名待提交 GeoSite
+
+# 以下域名已提交 GeoSite
 DOMAIN-SUFFIX,efzhou.com
 DOMAIN-SUFFIX,buy0596.com
 DOMAIN-SUFFIX,fzsybj.com
-# 以下域名已提交 GeoSite
+DOMAIN-SUFFIX,benfuip.com
 DOMAIN-SUFFIX,megawords.cc
 DOMAIN-SUFFIX,agentyun.com
 
