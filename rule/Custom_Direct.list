@@ -96,6 +96,8 @@ DOMAIN-SUFFIX,forevernine.com
 DOMAIN-SUFFIX,rmbgame.net
 # steamcommunity 302
 DOMAIN-SUFFIX,steam302.xyz 
+# Reunion 2023
+IP-CIDR,108.174.48.100/32,no-resolve
 
 # 冷门国内域名
 # 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
