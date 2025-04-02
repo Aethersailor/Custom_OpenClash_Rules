@@ -112,7 +112,7 @@ IP-CIDR,108.174.48.100/32,no-resolve
 # ---------------------------------------
 # 以下域名已提交 PR
 
-# PR 至 dnsmasq-china-list
+# PR 至 felixonmars/dnsmasq-china-list
 # 2025-3-30
 DOMAIN-SUFFIX,efzhou.com
 DOMAIN-SUFFIX,buy0596.com
@@ -123,7 +123,7 @@ DOMAIN-SUFFIX,agentyun.com
 DOMAIN-SUFFIX,clangcn.com
 DOMAIN-SUFFIX,cnppa.org
 
-# PR 至 domain-list-community
+# PR 至 v2fly/domain-list-community
 DOMAIN-SUFFIX,immersivetranslate.com
 # GoLink 加速器
 DOMAIN-SUFFIX,golink.com
