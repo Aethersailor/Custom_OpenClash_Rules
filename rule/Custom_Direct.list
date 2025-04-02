@@ -105,6 +105,7 @@ IP-CIDR,108.174.48.100/32,no-resolve
 # 以下域名待提交 GeoSite
 
 # 以下域名已提交 GeoSite
+# 2025-3-30
 DOMAIN-SUFFIX,efzhou.com
 DOMAIN-SUFFIX,buy0596.com
 DOMAIN-SUFFIX,fzsybj.com
