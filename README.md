@@ -76,7 +76,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
   
 * **傻瓜化的设置操作。**  全程在 OpenClash 页面上操作，鼠标点击+复制粘贴几分钟即可完成完美设置，无需手搓配置，无需上传文件。
 
-* **丰富的分流策略组。**  包含流媒体服务、AI 工具、电商、游戏平台等在内的大量常见的分流策略组。
+* **丰富的分流策略组。**  包含流媒体服务、AI 工具、电商、游戏平台等在内的大量常见的分流策略组，同时也为轻量化需求用户提供简化版本的规则。
 
 * **节点地区分类测速优选。**  自动优选最快节点，不用自己折腾切换。
 
@@ -96,11 +96,13 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 # 使用方法  
 
-> **本项目设置方案使用 Clash 的 `Fake-IP` 模式，不适用 Redir-Host 模式。**  
+> **本项目设置方案使用 OpenClash 的 `Fake-IP` 模式，不适用 Redir-Host 模式。**  
+
+> **本项目依赖 OpenClash 的“绕过中国大陆”功能实现效果。**
 
 准备好你的订阅链接，然后按照本项目 Wiki 中的对应部分对 OpenClash 进行设置：[OpenClash-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)  
 
-方案中已包括了本项目订阅转换模板的使用方法。  
+方案中已包括了本项目订阅转换模板的使用方法，根据描述，自行选择需要使用的规则模板即可。  
 
 以上方案非常详尽，只需按部就班设置即可。全部设置内容均基于 OpenClash 的 luci 设置页面，有手就行！  
 
@@ -159,8 +161,6 @@ https://api.asailor.org/sub
 项目维护者可以确定，本项目的设置方案完美无瑕，建议不要从本项目的内容上找原因，以免浪费时间。某些特殊问题如 Google Play 更新问题涉及诸多原因，和模板本身并无关系。  
 
 ## 在 OpenClash 之外的其他软件中是否可用？  
-
-本项目的订阅模板，理论上适用于任意支持 GeoSite 规则的 Clash 工具，具体使用方法不作指导。    
 
 对于 OpenClash 以外的使用环境，也可以参考维护者的另一个项目：[Custom_Clash_Rules](https://github.com/Aethersailor/Custom_Clash_Rules)
 
