@@ -5,10 +5,9 @@
 # 此规则文件中的域名会定期 PR 至 Geosite 数据库，并删除已被 Geosite 收录的域名，因此请在支持 Geosite 的软件（如 OpenClash）中使用。
 
 
-# ImmortalWrt 在线更新服务
-# DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
-# ImmortalWrt 软件仓库
+# ImmortalWrt 相关
 DOMAIN-SUFFIX,immortalwrt.org
+DOMAIN-SUFFIX,kyarucloud.moe
 # GitHub 反代 CDN
 DOMAIN-SUFFIX,gh-proxy.com
 DOMAIN-SUFFIX,gh.con.sh
@@ -52,8 +51,8 @@ DOMAIN-SUFFIX,api.myip.com
 # DOMAIN-SUFFIX,ip-api.com 会影响某些 DNS 泄露检测网站的结果，暂时屏蔽
 DOMAIN-SUFFIX,ipapi.co
 DOMAIN-SUFFIX,ip6.seeip.org
-DOMAIN-SUFFIX,members.3322.org
 DOMAIN-SUFFIX,kit327.com
+DOMAIN-SUFFIX,members.3322.org
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
