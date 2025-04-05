@@ -5,15 +5,15 @@
 # 此规则文件中的域名会定期 PR 至 Geosite 数据库，并删除已被 Geosite 收录的域名，因此请在支持 Geosite 的软件（如 OpenClash）中使用。
 
 
-# ImmortalWrt 在线更新服务
-# DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
-# ImmortalWrt 软件仓库
+# ImmortalWrt 相关
 DOMAIN-SUFFIX,immortalwrt.org
+DOMAIN-SUFFIX,kyarucloud.moe
 # GitHub 反代 CDN
 DOMAIN-SUFFIX,gh-proxy.com
 DOMAIN-SUFFIX,gh.con.sh
 DOMAIN-SUFFIX,gh.ddlc.top
 DOMAIN-SUFFIX,gh.llkk.cc
+DOMAIN-SUFFIX,ghp.ci
 DOMAIN-SUFFIX,ghproxy.cc
 DOMAIN-SUFFIX,ghproxy.cfd
 DOMAIN-SUFFIX,ghps.cc
@@ -27,8 +27,18 @@ DOMAIN-SUFFIX,hub.gitmirror.com
 DOMAIN-SUFFIX,jsdelivr.net
 DOMAIN-SUFFIX,kgithub.com
 # Docker 反代 CDN
+DOMAIN-SUFFIX,docker.1panel.live
+DOMAIN-SUFFIX,docker.kejilion.pro
+DOMAIN-SUFFIX,docker.unsee.tech
 DOMAIN-SUFFIX,dockerpull.pw
 DOMAIN-SUFFIX,dockerpull.org
+DOMAIN-SUFFIX,dhub.kubesre.xyz
+DOMAIN-SUFFIX,hub.crdz.gq
+DOMAIN-SUFFIX,hub.rat.dev
+DOMAIN-SUFFIX,hub.xdark.top
+DOMAIN-SUFFIX,registry.dockermirror.com
+# Hugging Face 镜像
+hf-mirror.com
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
 # DDNS
@@ -41,8 +51,8 @@ DOMAIN-SUFFIX,api.myip.com
 # DOMAIN-SUFFIX,ip-api.com 会影响某些 DNS 泄露检测网站的结果，暂时屏蔽
 DOMAIN-SUFFIX,ipapi.co
 DOMAIN-SUFFIX,ip6.seeip.org
-DOMAIN-SUFFIX,members.3322.org
 DOMAIN-SUFFIX,kit327.com
+DOMAIN-SUFFIX,members.3322.org
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
@@ -88,20 +98,46 @@ DOMAIN-SUFFIX,epg.aptv.app
 DOMAIN-SUFFIX,gdcucc.v1.mk
 
 # 游戏类规则
+# 红警重聚 Reunion 2023
+IP-CIDR,108.174.48.100/32,no-resolve
+
+# =======================================
+# 以下是应当直连的冷门国内域名规则
+# =======================================
+# 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
+# ---------------------------------------
+# 以下域名待提交 PR
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
+# 2025-3-30
+DOMAIN-SUFFIX,efzhou.com
+DOMAIN-SUFFIX,buy0596.com
+DOMAIN-SUFFIX,fzsybj.com
+DOMAIN-SUFFIX,benfuip.com
+DOMAIN-SUFFIX,megawords.cc
+DOMAIN-SUFFIX,agentyun.com
+DOMAIN-SUFFIX,clangcn.com
+DOMAIN-SUFFIX,cnppa.org
+DOMAIN-SUFFIX,wowgf.com
+
+# PR 至 v2fly/domain-list-community
+DOMAIN-SUFFIX,immersivetranslate.com
 # GoLink 加速器
+DOMAIN-SUFFIX,golink.com
 DOMAIN-SUFFIX,golinkapi.com
-# 百炼英雄
+DOMAIN-SUFFIX,golinkcn.com
+# 九九互动
 DOMAIN-SUFFIX,forevernine.com
+# Watt Toolkit
+DOMAIN-SUFFIX,rmbgame.net
+# steamcommunity 302
+DOMAIN-SUFFIX,steam302.xyz 
 
-# 冷门国内域名
-# 以下是准备向 GeoSite 提交的国内冷门域名，收录后会删除对应内容
-
-# 以下域名待提交 GeoSite
-
-# 以下域名已提交 GeoSite
-DOMAIN-SUFFIX,cdkeynogap.com
-
-# 以下域名已被 GeoSite 收录
+# =======================================
+# 以下域名已被 GeoSite 收录，定期删除
 # 智慧笑联
 #DOMAIN-SUFFIX,xiaolianhb.com
 # 其他
@@ -121,5 +157,6 @@ DOMAIN-SUFFIX,cdkeynogap.com
 #DOMAIN-SUFFIX,raining.top
 #DOMAIN-SUFFIX,giecds.com
 #DOMAIN-SUFFIX,mashangfangxin.com
+#DOMAIN-SUFFIX,cdkeynogap.com
 
 # 更多已被收录的域名，此处未做保留
