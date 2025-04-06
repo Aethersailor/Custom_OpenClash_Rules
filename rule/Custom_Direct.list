@@ -112,32 +112,34 @@ IP-CIDR,108.174.48.100/32,no-resolve
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
-# 2025-3-30
-DOMAIN-SUFFIX,efzhou.com
-DOMAIN-SUFFIX,buy0596.com
-DOMAIN-SUFFIX,fzsybj.com
-DOMAIN-SUFFIX,benfuip.com
-DOMAIN-SUFFIX,megawords.cc
-DOMAIN-SUFFIX,agentyun.com
-DOMAIN-SUFFIX,clangcn.com
-DOMAIN-SUFFIX,cnppa.org
-DOMAIN-SUFFIX,wowgf.com
+# 2025-4-5
 
 # PR 至 v2fly/domain-list-community
-DOMAIN-SUFFIX,immersivetranslate.com
-# GoLink 加速器
-DOMAIN-SUFFIX,golink.com
-DOMAIN-SUFFIX,golinkapi.com
-DOMAIN-SUFFIX,golinkcn.com
-# 九九互动
-DOMAIN-SUFFIX,forevernine.com
-# Watt Toolkit
-DOMAIN-SUFFIX,rmbgame.net
-# steamcommunity 302
-DOMAIN-SUFFIX,steam302.xyz 
+
 
 # =======================================
 # 以下域名已被 GeoSite 收录，定期删除
+# 2025-3-30
+#DOMAIN-SUFFIX,efzhou.com
+#DOMAIN-SUFFIX,buy0596.com
+#DOMAIN-SUFFIX,fzsybj.com
+#DOMAIN-SUFFIX,benfuip.com
+#DOMAIN-SUFFIX,megawords.cc
+#DOMAIN-SUFFIX,agentyun.com
+#DOMAIN-SUFFIX,clangcn.com
+#DOMAIN-SUFFIX,cnppa.org
+#DOMAIN-SUFFIX,wowgf.com
+#DOMAIN-SUFFIX,immersivetranslate.com
+# GoLink 加速器
+#DOMAIN-SUFFIX,golink.com
+#DOMAIN-SUFFIX,golinkapi.com
+#DOMAIN-SUFFIX,golinkcn.com
+# 九九互动
+#DOMAIN-SUFFIX,forevernine.com
+# Watt Toolkit
+#DOMAIN-SUFFIX,rmbgame.net
+# steamcommunity 302
+#DOMAIN-SUFFIX,steam302.xyz 
 # 智慧笑联
 #DOMAIN-SUFFIX,xiaolianhb.com
 # 其他
