@@ -51,6 +51,15 @@ DOMAIN-KEYWORD,acfun
 # 官方大善人
 DOMAIN-KEYWORD,pollinations
 
+# 字典，代找电子书
+DOMAIN-KEYWORD,freemdict
+# DOMAIN-KEYWORD,freembook
+# DOMAIN-KEYWORD,annas-archive
+
+# 环球英语多媒体资源库，MET全民英语学习资源库
+DOMAIN-KEYWORD,englibrary
+DOMAIN-KEYWORD,52met
+
 # 蓝奏云
 DOMAIN-KEYWORD,dmpdmp
 
