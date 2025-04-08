@@ -5,10 +5,9 @@
 # 此规则文件中的域名会定期 PR 至 Geosite 数据库，并删除已被 Geosite 收录的域名，因此请在支持 Geosite 的软件（如 OpenClash）中使用。
 
 
-# ImmortalWrt 在线更新服务
-# DOMAIN-SUFFIX,sysupgrade.kyarucloud.moe
-# ImmortalWrt 软件仓库
+# ImmortalWrt 相关
 DOMAIN-SUFFIX,immortalwrt.org
+DOMAIN-SUFFIX,kyarucloud.moe
 # GitHub 反代 CDN
 DOMAIN-SUFFIX,gh-proxy.com
 DOMAIN-SUFFIX,gh.con.sh
@@ -52,8 +51,8 @@ DOMAIN-SUFFIX,api.myip.com
 # DOMAIN-SUFFIX,ip-api.com 会影响某些 DNS 泄露检测网站的结果，暂时屏蔽
 DOMAIN-SUFFIX,ipapi.co
 DOMAIN-SUFFIX,ip6.seeip.org
-DOMAIN-SUFFIX,members.3322.org
 DOMAIN-SUFFIX,kit327.com
+DOMAIN-SUFFIX,members.3322.org
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
@@ -113,32 +112,34 @@ IP-CIDR,108.174.48.100/32,no-resolve
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
-# 2025-3-30
-DOMAIN-SUFFIX,efzhou.com
-DOMAIN-SUFFIX,buy0596.com
-DOMAIN-SUFFIX,fzsybj.com
-DOMAIN-SUFFIX,benfuip.com
-DOMAIN-SUFFIX,megawords.cc
-DOMAIN-SUFFIX,agentyun.com
-DOMAIN-SUFFIX,clangcn.com
-DOMAIN-SUFFIX,cnppa.org
-DOMAIN-SUFFIX,wowgf.com
+# 2025-4-5
 
 # PR 至 v2fly/domain-list-community
-DOMAIN-SUFFIX,immersivetranslate.com
-# GoLink 加速器
-DOMAIN-SUFFIX,golink.com
-DOMAIN-SUFFIX,golinkapi.com
-DOMAIN-SUFFIX,golinkcn.com
-# 九九互动
-DOMAIN-SUFFIX,forevernine.com
-# Watt Toolkit
-DOMAIN-SUFFIX,rmbgame.net
-# steamcommunity 302
-DOMAIN-SUFFIX,steam302.xyz 
+
 
 # =======================================
 # 以下域名已被 GeoSite 收录，定期删除
+# 2025-3-30
+#DOMAIN-SUFFIX,efzhou.com
+#DOMAIN-SUFFIX,buy0596.com
+#DOMAIN-SUFFIX,fzsybj.com
+#DOMAIN-SUFFIX,benfuip.com
+#DOMAIN-SUFFIX,megawords.cc
+#DOMAIN-SUFFIX,agentyun.com
+#DOMAIN-SUFFIX,clangcn.com
+#DOMAIN-SUFFIX,cnppa.org
+#DOMAIN-SUFFIX,wowgf.com
+#DOMAIN-SUFFIX,immersivetranslate.com
+# GoLink 加速器
+#DOMAIN-SUFFIX,golink.com
+#DOMAIN-SUFFIX,golinkapi.com
+#DOMAIN-SUFFIX,golinkcn.com
+# 九九互动
+#DOMAIN-SUFFIX,forevernine.com
+# Watt Toolkit
+#DOMAIN-SUFFIX,rmbgame.net
+# steamcommunity 302
+#DOMAIN-SUFFIX,steam302.xyz 
 # 智慧笑联
 #DOMAIN-SUFFIX,xiaolianhb.com
 # 其他
