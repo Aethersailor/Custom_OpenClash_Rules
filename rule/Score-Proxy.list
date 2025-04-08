@@ -1,0 +1,10 @@
+# NAME: Score-Proxy
+# AUTHOR: WilliamLuuu
+# REPO: https://github.com/WilliamLuuu/Custom_OpenClash_Rules
+# 比分网代理域名列表，来自个人收集
+
+# Cross.bet
+DOMAIN-SUFFIX,cross.bet
+
+# andydanger.github.io/aureom.github.io
+DOMAIN-SUFFIX,lolesports.com

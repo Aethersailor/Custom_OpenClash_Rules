@@ -1,0 +1,7 @@
+# NAME: VPN-NiceDuck
+# AUTHOR: WilliamLuuu
+# REPO: https://github.com/WilliamLuuu/Custom_OpenClash_Rules
+# NiceDuckVPN机场域名列表，来自个人收集
+
+# NiceDuckVPN
+DOMAIN-SUFFIX,niceduck.me

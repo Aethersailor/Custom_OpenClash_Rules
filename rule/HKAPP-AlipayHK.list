@@ -1,0 +1,7 @@
+# NAME: HKAPP-AlipayHK
+# AUTHOR: WilliamLuuu
+# REPO: https://github.com/WilliamLuuu/Custom_OpenClash_Rules
+# 香港AlipayHK代理域名列表，来自个人收集
+
+# AlipayHK
+DOMAIN-SUFFIX,alipay.hk

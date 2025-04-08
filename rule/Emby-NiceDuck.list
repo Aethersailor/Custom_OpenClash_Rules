@@ -1,0 +1,10 @@
+# NAME: Emby-NiceDuck
+# AUTHOR: WilliamLuuu
+# REPO: https://github.com/WilliamLuuu/Custom_OpenClash_Rules
+# 机场服Emby代理域名列表，来自个人收集
+
+# NiceDuckEmby
+DOMAIN,dpxcf.niceduck.lol
+DOMAIN,dpxcdn.niceduck.lol
+DOMAIN,cf.niceduck.lol
+DOMAIN,jcf.niceduck.lol
