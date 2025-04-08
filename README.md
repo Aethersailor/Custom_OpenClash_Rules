@@ -191,7 +191,7 @@ https://api.asailor.org/sub
 
 - 全部节点解锁 ChatGPT
 
-- 部分节点支持 IPv6 出站
+- 部分节点支持 IPv6 **出站**，可以通过节点访问 IPv6 网站  
 
 - 部分节点支持 FullCone 全锥形 NAT
 
