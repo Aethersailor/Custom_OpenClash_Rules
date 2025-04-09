@@ -3,5 +3,5 @@
 # REPO: https://github.com/WilliamLuuu/Custom_OpenClash_Rules
 # TVBox接口代理域名列表，来自个人收集
 
-# 饭太硬
-DOMAIN-SUFFIX,xn--sss604efuw.com
+# 饭太硬为直连（DNS配置可能出错）
+# DOMAIN-SUFFIX,xn--sss604efuw.com
