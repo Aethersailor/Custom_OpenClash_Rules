@@ -67,8 +67,6 @@ DOMAIN-SUFFIX,powershellgallery.com
 DOMAIN-SUFFIX,pool.ntp.org
 # Dell
 DOMAIN-SUFFIX,dell.com
-# Cloudflare
-DOMAIN-SUFFIX,cloudflare.com
 
 # FLiNG Trainer
 DOMAIN-SUFFIX,flingtrainer.com
