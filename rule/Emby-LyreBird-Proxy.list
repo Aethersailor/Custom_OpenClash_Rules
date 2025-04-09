@@ -4,4 +4,5 @@
 # 机场服Emby代理域名列表，来自个人收集
 
 # LyreBirdEmby
-DOMAIN-SUFFIX,lyrebirdemby.com
+DOMAIN,inside.lyrebirdemby.com
+# 直连线路为cdn.lyrebirdemby.com
