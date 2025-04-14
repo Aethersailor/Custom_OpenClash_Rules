@@ -56,6 +56,8 @@ DOMAIN-SUFFIX,members.3322.org
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
+# VUM 星球
+DOMAIN-SUFFIX,vumstar.com
 
 # Akamai CDN
 DOMAIN-SUFFIX,akamaihd.net
