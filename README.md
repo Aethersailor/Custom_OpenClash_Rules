@@ -37,6 +37,8 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 如遇问题，在群内反映可以更快得到解决。  
 
+提问前请先阅读以下内容：[Stop-Ask-Questions-The-Stupid-Ways](https://github.com/dogfight360/Stop-Ask-Questions-The-Stupid-Ways)  
+
 ***
 
 * 本项目编写于2024年4月，为非盈利项目。转载本项目内容请注明本项目的仓库地址，感谢合作！  
