@@ -84,7 +84,8 @@ DOMAIN-SUFFIX,aistudio-app.com
 DOMAIN-KEYWORD,deno
 
 # 精准定位
-DOMAIN-KEYWORD,webs
+# DOMAIN-KEYWORD,webs
+DOMAIN-SUFFIX,webs.vc
 
 # xxxx
 DOMAIN-KEYWORD,ffaoa
