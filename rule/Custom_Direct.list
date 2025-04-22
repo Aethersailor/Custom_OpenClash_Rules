@@ -113,9 +113,6 @@ DOMAIN-SUFFIX,bgm.tv
 DOMAIN-SUFFIX,chii.in
 DOMAIN-SUFFIX,bangumi.tv
 
-# 么么辰的游戏百宝箱
-DOMAIN-SUFFIX,memechen.com
-
 # 雀魂麻将
 DOMAIN-SUFFIX,game.maj-soul.com
 
@@ -126,14 +123,13 @@ DOMAIN-SUFFIX,rewards.bing.com
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
-# 2025-4-5
+# 么么辰的游戏百宝箱
+DOMAIN-SUFFIX,memechen.com
 
 # PR 至 v2fly/domain-list-community
 
-
 # =======================================
 # 以下域名已被 GeoSite 收录，定期删除
-# 2025-3-30
 #DOMAIN-SUFFIX,efzhou.com
 #DOMAIN-SUFFIX,buy0596.com
 #DOMAIN-SUFFIX,fzsybj.com
