@@ -122,10 +122,6 @@ DOMAIN-SUFFIX,game.maj-soul.com
 # MicroSoft Rewards
 DOMAIN-SUFFIX,rewards.bing.com
 
-# 斗鱼CDN
-DOMAIN-SUFFIX,douyucdn.cn
-DOMAIN-SUFFIX,douyucdn2.cn
-
 # ---------------------------------------
 # 以下域名已提交 PR
 
