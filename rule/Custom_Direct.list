@@ -108,6 +108,20 @@ IP-CIDR,108.174.48.100/32,no-resolve
 # ---------------------------------------
 # 以下域名待提交 PR
 
+# Bangumi番组计划
+DOMAIN-SUFFIX,bgm.tv
+DOMAIN-SUFFIX,chii.in
+DOMAIN-SUFFIX,bangumi.tv
+
+# 么么辰的游戏百宝箱
+DOMAIN-SUFFIX,memechen.com
+
+# 雀魂麻将
+DOMAIN-SUFFIX,game.maj-soul.com
+
+# MicroSoft Rewards
+DOMAIN-SUFFIX,rewards.bing.com
+
 # ---------------------------------------
 # 以下域名已提交 PR
 
