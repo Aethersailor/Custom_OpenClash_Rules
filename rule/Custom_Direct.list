@@ -125,6 +125,8 @@ DOMAIN-SUFFIX,rewards.bing.com
 # PR 至 felixonmars/dnsmasq-china-list
 # 么么辰的游戏百宝箱
 DOMAIN-SUFFIX,memechen.com
+# 其他
+DOMAIN-SUFFIX,tshell.online
 
 # PR 至 v2fly/domain-list-community
 
