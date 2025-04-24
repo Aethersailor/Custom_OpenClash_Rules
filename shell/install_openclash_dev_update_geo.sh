@@ -91,6 +91,15 @@ if [ $? -ne 0 ]; then
 fi
 echo "GeoSite 数据库更新完成！"
 
+# 开始更新 GeoASN 数据库
+echo "开始更新 GeoASN 数据库..."
+/usr/share/openclash/openclash_geoasn.sh
+if [ $? -ne 0 ]; then
+  echo "GeoASN 数据库更新失败，请检查日志。"
+  exit 1
+fi
+echo "GeoASN 数据库更新完成！"
+
 # 开始更新大陆白名单
 echo "开始更新大陆白名单..."
 /usr/share/openclash/openclash_chnroute.sh

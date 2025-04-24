@@ -108,18 +108,30 @@ IP-CIDR,108.174.48.100/32,no-resolve
 # ---------------------------------------
 # 以下域名待提交 PR
 
+# Bangumi番组计划
+DOMAIN-SUFFIX,bgm.tv
+DOMAIN-SUFFIX,chii.in
+DOMAIN-SUFFIX,bangumi.tv
+
+# 雀魂麻将
+DOMAIN-SUFFIX,game.maj-soul.com
+
+# MicroSoft Rewards
+DOMAIN-SUFFIX,rewards.bing.com
+
 # ---------------------------------------
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
-# 2025-4-5
+# 么么辰的游戏百宝箱
+DOMAIN-SUFFIX,memechen.com
+# 其他
+DOMAIN-SUFFIX,tshell.online
 
 # PR 至 v2fly/domain-list-community
 
-
 # =======================================
 # 以下域名已被 GeoSite 收录，定期删除
-# 2025-3-30
 #DOMAIN-SUFFIX,efzhou.com
 #DOMAIN-SUFFIX,buy0596.com
 #DOMAIN-SUFFIX,fzsybj.com
