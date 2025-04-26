@@ -46,6 +46,10 @@ DOMAIN-KEYWORD,dockerpull
 DOMAIN-KEYWORD,tslience
 DOMAIN-SUFFIX,linux.do
 
+# Python 镜像
+DOMAIN-SUFFIX,mirrors.aliyun.com
+DOMAIN-SUFFIX,pypi.tuna.tsinghua.edu.cn
+
 # 在线追番
 DOMAIN-KEYWORD,girigirilove
 DOMAIN-KEYWORD,acfun
