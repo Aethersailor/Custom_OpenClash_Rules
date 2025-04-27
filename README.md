@@ -1,17 +1,17 @@
 <h1 align="center">OpenClash 保姆级设置方案<br>&<br>全分组防泄漏订阅转换规则</h1>
 
 <p align="center">
-	<img src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=for-the-badge&logo=github" alt="GitHub stars">
+	<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=flat">
+	<img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Aethersailor/Custom_OpenClash_Rules?style=flat">
+	<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/t/Aethersailor/Custom_OpenClash_Rules?style=flat">
+	<img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=online&down_message=offline&style=flat&label=backend">
 	<a href="https://t.me/custom_openclash_rules">
-		<img src="http://img.shields.io/badge/dynamic/json?style=for-the-badge&label=%E9%A2%91%E9%81%93&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules" alt="Telegram">
-	</a>
-	<a href="https://t.me/custom_openclash_rules_group">
-		<img src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&label=%E7%BE%A4%E8%81%8A&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules_group" alt="Telegram">
+		<img src="http://img.shields.io/badge/dynamic/json?style=flat&label=channel&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules" alt="Telegram">
 	</a>
 </p>
 <p align="center"><b>让你更优雅的使用 OpenClash </b></p>
 
-# 关于本项目 
+## 关于本项目 
 
 本项目可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文设置方案和订阅转换模板！  
 
@@ -33,7 +33,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 本项目的更新内容将通过通知频道进行推送，建议订阅以便了解最新的更新内容。  
 
-\>> Telegram Group: [Custom_OpenClash_Rules | 交流群](https://t.me/custom_openclash_rules_group) 
+\>> Telegram Group: [Custom_OpenClash_Rules | 交流群](https://t.me/+IN-i7q-aAVU0ZTI1) 
 
 如遇问题，在群内反映可以更快得到解决。  
 
@@ -49,7 +49,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ***
 
-# 特别声明  
+## 特别声明  
 1. 本项目的主要目的是探索与学习 OpenWrt 系统插件 OpenClash，因此无法确保所有内容的合法性、完整性、准确性或有效性。
 
 2. 项目中的内容仅用于学习与研究目的，不得将其用于任何可能违反国家、地区或组织法律法规的用途。
@@ -64,7 +64,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ***
 
-# 本项目设置方案及订阅转换模板介绍 
+## 本项目设置方案及订阅转换模板介绍 
 
 本项目的订阅转换模板是参考 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master) 等规则的订阅模板进行了魔改和完善而来。  
 
@@ -96,7 +96,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ***
 
-# 使用方法  
+## 使用方法  
 
 > **本项目设置方案使用 OpenClash 的 `Fake-IP` 模式，不适用 Redir-Host 模式。**  
 
@@ -112,15 +112,15 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ***
 
-# 一些说明  
+## 一些说明  
 
-## 关于个性化需求  
+### 关于个性化需求  
 
 由于本项目为自用目的，且个人时间有限，只能随缘更新，因此不提供个性化修改服务。  
 
 具体个性化实现方式，请参考 Wiki 中的对应章节：[个性化需求](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82)
 
-## 关于冷门国内域名收录问题  
+### 关于冷门国内域名收录问题  
 
 若需要添加少量需要直连的国内冷门域名，建议使用 OpenClash 的自定义规则功能，插入相关的规则条目。  
 
@@ -128,7 +128,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 如果希望本项目或者 GeoSite 数据库永久收录你认为需要直连的国内冷门域名，请按照如下内容进行操作：[关于国内冷门域名的收录](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E5%86%B7%E9%97%A8%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D%E7%9A%84%E6%94%B6%E5%BD%95)  
 
-## 关于广告过滤  
+### 关于广告过滤  
 
 本项目借助 OpenClash 的“开发者选项”功能，实现不依赖第三方插件的广告过滤功能。  
 
@@ -138,15 +138,17 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 其中提供了 Dnsmasq 格式和 hosts 格式的两种设置方法的示例，可以照抄，亦可自由设置其他任何符合格式要求的广告规则。
 
-## 关于 IPv6  
+### 关于 IPv6  
 
 通过正确设置 OpenWrt 的 IPv6 功能以及 OpenClash，即可实现 OpenWrt 主路由下的 IPv6 和 OpenClash 的完美兼容。在实现 IPv6 国内外分流代理的同时，还能完美通过 IPv6-Test 的国内和国外镜像站点测试。  
 
 OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案)  
 
-## 订阅转换服务  
+### 订阅转换服务  
 
 本项目提供订阅转换后端服务，便于网络环境奇葩的用户使用。  
+
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=%E5%9C%A8%E7%BA%BF&down_message=%E7%A6%BB%E7%BA%BF&style=for-the-badge&label=%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81)
 
 如果 OpenClash 自带的订阅转换服务全部不可用，你可以使用本项目提供的订阅转换服务地址：  
 
@@ -154,15 +156,15 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 https://api.asailor.org/sub
 ```
 
-填写进“订阅转换服务地址”中即可生效。 
+填写进`配置订阅信息 > 订阅转换服务地址`中即可生效。 
 
-## 不能上网？分流不正常？某些网站打不开？OpenClash 不能启动？
+### 不能上网？分流不正常？某些网站打不开？OpenClash 不能启动？
 
 出现故障请参考 [Wiki 中的故障排除部分](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4)，内含常见问题的解决方法。  
 
 项目维护者可以确定，本项目的设置方案完美无瑕，建议不要从本项目的内容上找原因，以免浪费时间。某些特殊问题如 Google Play 更新问题涉及诸多原因，和模板本身并无关系。  
 
-## 在 OpenClash 之外的其他软件中是否可用？  
+### 在 OpenClash 之外的其他软件中是否可用？  
 
 对于 OpenClash 以外的使用环境，也可以参考维护者的另一个项目：[Custom_Clash_Rules](https://github.com/Aethersailor/Custom_Clash_Rules)
 
@@ -172,16 +174,16 @@ https://api.asailor.org/sub
 
 ***
 
-# 机场推荐 
+## 机场推荐 
 
-## SSRDOG  
+### SSRDOG  
 `
 “SSRDOG（SG）是一個追求可靠、安全、高效、且高性價比的互聯網接入方案國際研發團隊，為您提供最安全的網絡加速服務！”
 `  
 
 项目维护者长期使用的一家机场，价格和流量都比较适中，搭配本项目的设置方案以及订阅模板使用，体验保证拉满。
 
-### 机场特性：  
+**机场特性：**  
 
 - 全 IEPL 线路不过墙，特殊时期服务稳定
  
@@ -216,11 +218,11 @@ Traffic、GB、Expire
 
 不屏蔽不影响使用，只是会让节点列表看着更整洁一些  
 
-# 其他推荐项目  
+## 其他推荐项目  
 
 本项目维护者在使用的一些值得推荐的其他开发者的项目。  
 
-## Clash Dash  
+### Clash Dash  
 
 Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTProxy 管理工具。  
 
@@ -228,7 +230,7 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 
 非常漂亮的APP，可以说是 iOS 下最方便最优雅的 Clash 管理方式。
 
-# 贡献者  
+## 贡献者  
 
 <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Aethersailor/Custom_OpenClash_Rules" />
@@ -236,7 +238,7 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 
 ***
 
-# 感谢  
+## 感谢  
 
 **本项目项目使用或引用了以下项目的内容**  
 
@@ -276,14 +278,14 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 
 ***
 
-# 许可		
+## 许可		
 [![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
 * CC-BY-SA-4.0  
 * 强烈鄙视所有不遵循 LICENSE 的行为。  
 
 ***
 
-# 星标记录
+## 星标记录
 
 <a href="https://star-history.com/#Aethersailor/Custom_OpenClash_Rules&Date">
  <picture>
@@ -295,7 +297,7 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 
 ***
 
-# 访问记录
+## 访问记录
 
 ![:访问数](https://count.getloli.com/@:Custom_OpenClash_Rules?theme=sketch-1)  
 
