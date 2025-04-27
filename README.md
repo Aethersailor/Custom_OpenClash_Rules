@@ -8,6 +8,9 @@
 	<a href="https://t.me/custom_openclash_rules">
 		<img src="http://img.shields.io/badge/dynamic/json?style=flat&label=channel&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules" alt="Telegram">
 	</a>
+	<a href="https://t.me/custom_openclash_rules_group">
+		<img src="https://img.shields.io/badge/dynamic/json?style=flat&label=group&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules_group" alt="Telegram">
+	</a>
 </p>
 <p align="center"><b>让你更优雅的使用 OpenClash </b></p>
 
@@ -33,7 +36,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 本项目的更新内容将通过通知频道进行推送，建议订阅以便了解最新的更新内容。  
 
-\>> Telegram Group: [Custom_OpenClash_Rules | 交流群](https://t.me/+IN-i7q-aAVU0ZTI1) 
+\>> Telegram Group: [Custom_OpenClash_Rules | 交流群](https://t.me/custom_openclash_rules_group) 
 
 如遇问题，在群内反映可以更快得到解决。  
 
