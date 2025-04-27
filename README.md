@@ -2,8 +2,11 @@
 
 <p align="center">
 	<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=flat">
+	<img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/Aethersailor/Custom_OpenClash_Rules?style=flat">
+	<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/t/Aethersailor/Custom_OpenClash_Rules?style=flat">
+	<img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=online&down_message=offline&style=flat&label=backend">
 	<a href="https://t.me/custom_openclash_rules">
-		<img src="http://img.shields.io/badge/dynamic/json?style=flat&label=%E9%A2%91%E9%81%93&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules" alt="Telegram">
+		<img src="http://img.shields.io/badge/dynamic/json?style=flat&label=channel&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules" alt="Telegram">
 	</a>
 </p>
 <p align="center"><b>让你更优雅的使用 OpenClash </b></p>
@@ -145,13 +148,15 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 
 本项目提供订阅转换后端服务，便于网络环境奇葩的用户使用。  
 
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=%E5%9C%A8%E7%BA%BF&down_message=%E7%A6%BB%E7%BA%BF&style=for-the-badge&label=%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81)
+
 如果 OpenClash 自带的订阅转换服务全部不可用，你可以使用本项目提供的订阅转换服务地址：  
 
 ```
 https://api.asailor.org/sub
 ```
 
-填写进“订阅转换服务地址”中即可生效。 
+填写进`配置订阅信息 > 订阅转换服务地址`中即可生效。 
 
 ## 不能上网？分流不正常？某些网站打不开？OpenClash 不能启动？
 
