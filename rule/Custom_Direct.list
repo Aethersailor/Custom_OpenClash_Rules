@@ -103,35 +103,6 @@ IP-CIDR,108.174.48.100/32,no-resolve
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
-# PT
-DOMAIN-KEYWORD,m-team
-DOMAIN-SUFFIX,audiences.me
-DOMAIN-SUFFIX,hhanclub.top
-DOMAIN-SUFFIX,piggo.me
-DOMAIN-SUFFIX,upxin.net
-DOMAIN-SUFFIX,ubits.club
-DOMAIN-SUFFIX,ultrahd.net
-DOMAIN-SUFFIX,zhuque.in
-DOMAIN-SUFFIX,leaves.red
-DOMAIN-SUFFIX,hdmayi.com
-DOMAIN-SUFFIX,pttime.org
-DOMAIN-SUFFIX,ptcafe.club
-DOMAIN-SUFFIX,hdpt.xyz
-DOMAIN-SUFFIX,zmpt.cc
-DOMAIN-SUFFIX,0ff.cc
-DOMAIN-SUFFIX,haidan.video
-DOMAIN-SUFFIX,wintersakura.net
-DOMAIN-SUFFIX,pandapt.net
-DOMAIN-SUFFIX,1ptba.com
-DOMAIN-SUFFIX,52pt.site
-DOMAIN-SUFFIX,hdvideo.one
-DOMAIN-SUFFIX,icc2022.com
-DOMAIN-SUFFIX,ptchina.org
-DOMAIN-SUFFIX,cyanbug.net
-DOMAIN-SUFFIX,carpt.net
-DOMAIN-SUFFIX,hdkyl.in
-DOMAIN-SUFFIX,rousi.zip
-
 # 未泱阅读
 DOMAIN-SUFFIX,winyoungreading.com
 # =======================================
