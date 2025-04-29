@@ -4,6 +4,8 @@
 # 强制直连域名列表，来自个人收集
 # 此规则文件中的域名会定期 PR 至 Geosite 数据库，并删除已被 Geosite 收录的域名，因此请在支持 Geosite 的软件（如 OpenClash）中使用。
 
+# Playstation 下载
+DOMAIN-SUFFIX,prod.dl.playstation.net
 
 # ImmortalWrt 相关
 DOMAIN-SUFFIX,immortalwrt.org
