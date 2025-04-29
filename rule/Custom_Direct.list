@@ -103,8 +103,7 @@ IP-CIDR,108.174.48.100/32,no-resolve
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
-# 未泱阅读
-DOMAIN-SUFFIX,winyoungreading.com
+
 # =======================================
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
@@ -131,6 +130,8 @@ DOMAIN-SUFFIX,memechen.com
 DOMAIN-SUFFIX,tshell.online
 
 # PR 至 v2fly/domain-list-community
+# 未泱阅读
+DOMAIN-SUFFIX,winyoungreading.com
 
 # =======================================
 # 以下域名已被 GeoSite 收录，定期删除
