@@ -119,3 +119,6 @@ if [ $? -ne 0 ]; then
 fi
 echo "订阅更新完成！"
 
+sleep 3
+echo "启动 OpenClash ..."
+/etc/init.d/openclash restart
