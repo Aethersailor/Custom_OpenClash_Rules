@@ -65,3 +65,7 @@ fi
 
 # 完成更新提示
 echo "Meta 内核更新完成！"
+
+sleep 3
+echo "启动 OpenClash ..."
+/etc/init.d/openclash restart
