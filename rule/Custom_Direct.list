@@ -120,6 +120,9 @@ DOMAIN-SUFFIX,game.maj-soul.com
 # MicroSoft Rewards
 DOMAIN-SUFFIX,rewards.bing.com
 
+# fnOS
+DOMAIN-SUFFIX,5ddd.com
+
 # ---------------------------------------
 # 以下域名已提交 PR
 
