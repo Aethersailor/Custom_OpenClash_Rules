@@ -38,7 +38,7 @@ DOMAIN-SUFFIX,hub.rat.dev
 DOMAIN-SUFFIX,hub.xdark.top
 DOMAIN-SUFFIX,registry.dockermirror.com
 # Hugging Face 镜像
-hf-mirror.com
+DOMAIN-SUFFIX,hf-mirror.com
 # 猫眼浏览器
 DOMAIN-SUFFIX,catsxp.com
 # DDNS
@@ -120,9 +120,6 @@ DOMAIN-SUFFIX,game.maj-soul.com
 # MicroSoft Rewards
 DOMAIN-SUFFIX,rewards.bing.com
 
-# fnOS
-DOMAIN-SUFFIX,5ddd.com
-
 # ---------------------------------------
 # 以下域名已提交 PR
 
@@ -131,10 +128,12 @@ DOMAIN-SUFFIX,5ddd.com
 DOMAIN-SUFFIX,memechen.com
 # 其他
 DOMAIN-SUFFIX,tshell.online
-
-# PR 至 v2fly/domain-list-community
 # 未泱阅读
 DOMAIN-SUFFIX,winyoungreading.com
+# fnOS
+DOMAIN-SUFFIX,5ddd.com
+
+# PR 至 v2fly/domain-list-community
 
 # =======================================
 # 以下域名已被 GeoSite 收录，定期删除
