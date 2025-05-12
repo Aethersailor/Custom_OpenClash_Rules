@@ -39,8 +39,6 @@ DOMAIN-SUFFIX,hub.xdark.top
 DOMAIN-SUFFIX,registry.dockermirror.com
 # Hugging Face 镜像
 DOMAIN-SUFFIX,hf-mirror.com
-# 猫眼浏览器
-DOMAIN-SUFFIX,catsxp.com
 # DDNS
 DOMAIN-KEYWORD,synology
 DOMAIN-KEYWORD,quickconnect
@@ -56,8 +54,6 @@ DOMAIN-SUFFIX,members.3322.org
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
-# VUM 星球
-DOMAIN-SUFFIX,vumstar.com
 
 # Akamai CDN
 DOMAIN-SUFFIX,akamaihd.net
@@ -124,12 +120,6 @@ DOMAIN-SUFFIX,rewards.bing.com
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
-# 么么辰的游戏百宝箱
-DOMAIN-SUFFIX,memechen.com
-# 其他
-DOMAIN-SUFFIX,tshell.online
-# 未泱阅读
-DOMAIN-SUFFIX,winyoungreading.com
 # fnOS
 DOMAIN-SUFFIX,5ddd.com
 
@@ -177,5 +167,11 @@ DOMAIN-SUFFIX,5ddd.com
 #DOMAIN-SUFFIX,giecds.com
 #DOMAIN-SUFFIX,mashangfangxin.com
 #DOMAIN-SUFFIX,cdkeynogap.com
+# 么么辰的游戏百宝箱
+#DOMAIN-SUFFIX,memechen.com
+# 其他
+#DOMAIN-SUFFIX,tshell.online
+# 未泱阅读
+#DOMAIN-SUFFIX,winyoungreading.com
 
 # 更多已被收录的域名，此处未做保留
