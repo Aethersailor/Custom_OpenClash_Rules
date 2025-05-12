@@ -36,7 +36,7 @@ DOMAIN-KEYWORD,furryapi
 DOMAIN-KEYWORD,crond
 DOMAIN-KEYWORD,clivia
 # 【Whimsy_z - 536462】Gemini
-DOMAIN-SUFFIX,doi9.top
+# DOMAIN-SUFFIX,doi9.top
 
 # Docker 镜像
 DOMAIN-SUFFIX,xuanyuan.me
