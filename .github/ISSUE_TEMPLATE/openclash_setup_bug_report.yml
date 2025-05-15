@@ -1,7 +1,7 @@
 name: OpenClash 设置方案错判上报
 description: 上报你在 OpenClash 设置方案中发现的问题
 title: '[OpenClash 设置方案错误]'
-labels: 'bug'
+labels: 'documentation'
 
 body:
   - type: checkboxes
