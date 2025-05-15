@@ -78,7 +78,7 @@ body:
     attributes:
       label: 描述模板 BUG 导致的故障现象
       description: |
-        对故障现象清晰而简介的描述
+        对故障现象清晰而简洁的描述
     validations:
       required: true
 
