@@ -22,8 +22,6 @@ body:
         - label: 我知道本项目有非常多的用户，而我的问题很有可能是个例。
           required: true
         - label: 我使用的是 OpenWrt/ImmortalWrt 官方发布的固件或官方 ImageBuilder 生成的固件，非第三方编译版本。
-          required: true3
-        - label: 我使用的是 OpenWrt/ImmortalWrt 官方发布的固件或官方 ImageBuilder 生成的固件，非第三方编译版本。
           required: true
         - label: 我部署的是主路由网络架构，而非旁路由。
           required: true
