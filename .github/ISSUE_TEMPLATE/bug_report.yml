@@ -73,7 +73,7 @@ body:
     validations:
       required: true
 
-    - type: textarea
+  - type: textarea
     id: describe_phenomenon
     attributes:
       label: 描述模板 BUG 导致的故障现象
