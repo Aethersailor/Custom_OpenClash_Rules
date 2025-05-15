@@ -1,7 +1,7 @@
 name: 请求增加规则
 description: 请求在 Full 模板中增加规则分组
 title: '[增加规则]'
-labels: 'rule'
+labels: 'enhancement'
 
 body:
   - type: checkboxes
