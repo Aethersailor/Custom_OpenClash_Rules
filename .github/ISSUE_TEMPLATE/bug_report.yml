@@ -31,6 +31,8 @@ body:
           required: true
         - label: 我知道本项目订阅转换模板引用的是第三方上游规则，其是否更新与本项目无关。
           required: true
+        - label: 我已经尝试换用本项目提供的订阅转换后端服务。
+          required: true
         - label: 我有能力协助开发并解决此问题
           required: false
         - label: 我提交的**是无意义的**催促更新或修复请求
