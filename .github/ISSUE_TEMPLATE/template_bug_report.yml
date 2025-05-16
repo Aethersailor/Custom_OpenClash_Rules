@@ -29,7 +29,9 @@ body:
           required: true
         - label: 我使用的是最新的 dev 版本 OpenClash 和内核
           required: true
-        - label: 我确认我已经完全按照 Wiki 中的方案对 OpenClash 进行设置
+        - label: 我已经完全按照 Wiki 中的方案对 OpenClash 进行设置
+          required: true
+        - label: 我已经完全阅读了 Wiki 中的[故障排除](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4)章节
           required: true
         - label: 我确认这确实是本项目模板文件导致的问题
           required: true
