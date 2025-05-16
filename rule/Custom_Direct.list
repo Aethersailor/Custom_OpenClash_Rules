@@ -54,6 +54,9 @@ DOMAIN-SUFFIX,members.3322.org
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
+# Kaspersky
+DOMAIN-SUFFIX,kaspersky.com
+DOMAIN-SUFFIX,kaspersky-labs.com
 
 # Akamai CDN
 DOMAIN-SUFFIX,akamaihd.net
