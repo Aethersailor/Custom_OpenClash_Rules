@@ -15,21 +15,21 @@ body:
           required: true
         - label: 我已经尝试通过观察日志、观察面板、检查 dns 解析流程等方式自行排查故障
           required: true
-        - label: 我使用的是 OpenWrt/ImmortalWrt 官方发布固件或官方 ImageBuilder 生成的固件，非第三方编译版本。
+        - label: 我使用的是 OpenWrt/ImmortalWrt 官方发布固件或官方 ImageBuilder 生成的固件，非第三方编译版本
           required: true
-        - label: 我部署的是主路由网络架构，而非旁路由。
+        - label: 我部署的是主路由网络架构，而非旁路由
           required: true
-        - label: 我使用的是最新的 dev 版本 OpenClash 和内核。
+        - label: 我使用的是最新的 dev 版本 OpenClash 和内核
           required: true
-        - label: 我确定自己完全按照 Wiki 中的设置方案进行了设置。
+        - label: 我确定自己完全按照 Wiki 中的设置方案进行了设置
           required: true
         - label: 我知晓开发者已经完全检查过设置的可用性。
           required: true
-        - label: 我确认设置方案确实有 BUG，而非 OpenClash 或内核有 BUG。
+        - label: 我确认我遇到的现象，确实是设置方案的 BUG 导致的
           required: true
         - label: 我有能力协助开发并解决此问题
           required: false
-        - label: 我提交的**是无意义的**催促更新或修复请求
+        - label: 我提交的是无意义的质疑或提问
           required: false
 
   - type: input
