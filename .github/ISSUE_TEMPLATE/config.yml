@@ -2,7 +2,7 @@ blank_issues_enabled: false
 
 contact_links:
 
-  - name: 我不确定是什么问题 | 我的问题不属于上述选项 | 我想讨论某个问题
+  - name: 我不确定是什么问题 | 我的问题不属于上述选项 | 我想讨论某个问题 | 我有一些建议
     url: https://github.com/Aethersailor/Custom_OpenClash_Rules/discussions/new/choose
     about: 请在 Discussions 发表
     
