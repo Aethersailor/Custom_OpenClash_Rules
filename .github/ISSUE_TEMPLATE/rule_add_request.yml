@@ -17,7 +17,7 @@ body:
           required: true
         - label: 我可以提供该规则对应的上游规则文件。
           required: false
-        - label: 我提交的**是无意义的**催促更新或修复请求
+        - label: 我提交的**是无意义的**质疑或提问
           required: false
 
   - type: textarea
