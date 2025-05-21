@@ -6,8 +6,8 @@
 
 
 # ImmortalWrt 相关
-#DOMAIN-SUFFIX,immortalwrt.org
-#DOMAIN-SUFFIX,kyarucloud.moe
+DOMAIN-SUFFIX,immortalwrt.org
+DOMAIN-SUFFIX,kyarucloud.moe
 # GitHub 反代 CDN
 DOMAIN-SUFFIX,gh-proxy.com
 DOMAIN-SUFFIX,gh.con.sh
