@@ -8,6 +8,12 @@
 # 请确保你使用的订阅转换后端以及 Clash 支持正则规则！
 # 规则在本项目中可正常生效，其他使用环境下请自行排障
 
+
+# 本规则不再更新
+# 规则内容已合并至 v2fly/domain-list-community 
+# 建议使用 geosite:category-game-platforms-download
+
+
 # Rockstar Launcher - 客户端更新/游戏更新/下载
 DOMAIN-SUFFIX,gamedownloads-rockstargames-com.akamaized.net
 
