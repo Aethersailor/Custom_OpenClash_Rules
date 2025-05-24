@@ -3,6 +3,10 @@
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # Ozon 域名规则
 
+# 本规则不再更新
+# 规则内容已合并至 v2fly/domain-list-community 
+# 建议使用 geosite:ozon
+
 DOMAIN-SUFFIX,ozon.ru
 DOMAIN-SUFFIX,ozone.ru
 DOMAIN-SUFFIX,ozonusercontent.com
