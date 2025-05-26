@@ -1,6 +1,6 @@
-name: 请求增加规则
-description: 请求在 Full 模板中增加规则分组
-title: '[增加规则]'
+name: 请求增加规则或分组
+description: 请求在 Full 模板中增加规则或分组
+title: '[增加规则或分组]'
 labels: 'enhancement'
 
 body:
@@ -11,9 +11,9 @@ body:
       description: |
         在提交之前，请确认：
       options:
-        - label: 我确认模板现有规则中均不包含此规则。
+        - label: 我确认模板现有规则中均不包含此规则或分组。
           required: true
-        - label: 我知晓仅有 Full 模板可以自由添加规则。
+        - label: 我知晓仅有 Full 模板可以自由添加规则和分组。
           required: true
         - label: 我可以提供该规则对应的上游规则文件。
           required: false
@@ -23,7 +23,7 @@ body:
   - type: textarea
     id: describe_rule
     attributes:
-      label: 描述你要增加的规则名称
+      label: 描述你要增加的规则或分组名称
       description: |
         对规则清晰而简洁的描述，例如“我需要增加 Paypal”相关的规则
     validations:
@@ -32,7 +32,7 @@ body:
   - type: textarea
     id: describe_list
     attributes:
-      label: 选择性提供上游规则文件
+      label: 提供上游规则链接、分组名称和关键词名称
       description: |
         提供上游规则文件链接，如不提供，开发者将自行寻找
     validations:
