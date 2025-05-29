@@ -121,4 +121,4 @@ echo "订阅更新完成！"
 
 sleep 3
 echo "启动 OpenClash ..."
-/etc/init.d/openclash restart
+/etc/init.d/openclash restart >/dev/null 2>&1
