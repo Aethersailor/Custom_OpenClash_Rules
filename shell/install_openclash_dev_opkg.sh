@@ -11,8 +11,8 @@ JSON_OUTPUT=$(curl -s $REPO_API_URL)
 IPK_FILE=$(echo "$JSON_OUTPUT" | awk -F'"' '/"name":/ && /.ipk"/ {print $4}' | head -n 1)
 
 # 打印调试信息
-echo "API 输出内容:"
-echo "$JSON_OUTPUT"
+#echo "API 输出内容:"
+#echo "$JSON_OUTPUT"
 echo "解析到的文件名: $IPK_FILE"
 
 # 检查是否成功获取文件名
