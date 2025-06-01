@@ -3,6 +3,9 @@
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 强制代理列表，来自个人收集
 
+# OpenClash 首页 IP 地址探测
+DOMAIN-SUFFIX,ip.sb
+DOMAIN-SUFFIX,ipify.org
 # GooglePlay 相关
 DOMAIN-SUFFIX,services.googleapis.cn
 DOMAIN-SUFFIX,clientservices.googleapis.com
@@ -24,3 +27,4 @@ DOMAIN-SUFFIX,mtalk.google.com
 DOMAIN-SUFFIX,cloudsync-prod.s3.us-east-1.amazonaws.com
 # OneDrive 网页版
 DOMAIN-SUFFIX,onedrive.live.com 
+
