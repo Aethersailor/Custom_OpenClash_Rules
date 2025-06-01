@@ -121,6 +121,8 @@ DOMAIN-SUFFIX,game.maj-soul.com
 
 # PR 至 felixonmars/dnsmasq-china-list
 DOMAIN-SUFFIX,moyubuluo.com
+# 绿联 NAS
+DOMAIN-SUFFIX,ug.link
 
 # PR 至 v2fly/domain-list-community
 
