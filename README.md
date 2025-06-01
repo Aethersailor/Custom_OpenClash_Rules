@@ -303,7 +303,10 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
  </picture>
 </a>
 
-***
+## 数据统计  
+
+![Alt](https://repobeats.axiom.co/api/embed/0d7d55da94670a4766aa0fb8ccd03c7abc9e8464.svg "Repobeats analytics image")  
+
 
 ## 访问记录
 
