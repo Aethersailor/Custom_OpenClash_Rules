@@ -38,9 +38,7 @@ DOMAIN-SUFFIX,hub.rat.dev
 DOMAIN-SUFFIX,hub.xdark.top
 DOMAIN-SUFFIX,registry.dockermirror.com
 # Hugging Face 镜像
-hf-mirror.com
-# 猫眼浏览器
-DOMAIN-SUFFIX,catsxp.com
+DOMAIN-SUFFIX,hf-mirror.com
 # DDNS
 DOMAIN-KEYWORD,synology
 DOMAIN-KEYWORD,quickconnect
@@ -56,8 +54,9 @@ DOMAIN-SUFFIX,members.3322.org
 # Windows 网络连接探测
 DOMAIN-SUFFIX,msftconnecttest.com
 DOMAIN-SUFFIX,msftncsi.com
-# VUM 星球
-DOMAIN-SUFFIX,vumstar.com
+# Kaspersky
+DOMAIN-SUFFIX,kaspersky.com
+DOMAIN-SUFFIX,kaspersky-labs.com
 
 # Akamai CDN
 DOMAIN-SUFFIX,akamaihd.net
@@ -69,6 +68,8 @@ DOMAIN-SUFFIX,powershellgallery.com
 DOMAIN-SUFFIX,pool.ntp.org
 # Dell
 DOMAIN-SUFFIX,dell.com
+# MicroSoft Rewards
+DOMAIN-SUFFIX,rewards.bing.com
 
 # FLiNG Trainer
 DOMAIN-SUFFIX,flingtrainer.com
@@ -96,41 +97,38 @@ DOMAIN-SUFFIX,112114.xyz
 DOMAIN-SUFFIX,epg.v1.mk
 DOMAIN-SUFFIX,epg.aptv.app
 DOMAIN-SUFFIX,gdcucc.v1.mk
-
-# 游戏类规则
-# 红警重聚 Reunion 2023
-IP-CIDR,108.174.48.100/32,no-resolve
-
-# =======================================
-# 以下是应当直连的冷门国内域名规则
-# =======================================
-# 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
-# ---------------------------------------
-# 以下域名待提交 PR
-
 # Bangumi番组计划
 DOMAIN-SUFFIX,bgm.tv
 DOMAIN-SUFFIX,chii.in
 DOMAIN-SUFFIX,bangumi.tv
 
+# 游戏类规则
+# 红警重聚 Reunion 2023
+IP-CIDR,108.174.48.100/32,no-resolve
 # 雀魂麻将
 DOMAIN-SUFFIX,game.maj-soul.com
 
-# MicroSoft Rewards
-DOMAIN-SUFFIX,rewards.bing.com
+# =======================================
+# 以下是应当直连的冷门国内域名规则
+# =======================================
+# ---------------------------------------
+# 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
+# ---------------------------------------
+# 以下域名待提交 PR
 
 # ---------------------------------------
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
-# 么么辰的游戏百宝箱
-DOMAIN-SUFFIX,memechen.com
-# 其他
-DOMAIN-SUFFIX,tshell.online
+DOMAIN-SUFFIX,moyubuluo.com
+# 绿联 NAS
+DOMAIN-SUFFIX,ug.link
 
 # PR 至 v2fly/domain-list-community
 
+# ---------------------------------------
 # =======================================
+
 # 以下域名已被 GeoSite 收录，定期删除
 #DOMAIN-SUFFIX,efzhou.com
 #DOMAIN-SUFFIX,buy0596.com
@@ -172,5 +170,13 @@ DOMAIN-SUFFIX,tshell.online
 #DOMAIN-SUFFIX,giecds.com
 #DOMAIN-SUFFIX,mashangfangxin.com
 #DOMAIN-SUFFIX,cdkeynogap.com
+# 么么辰的游戏百宝箱
+#DOMAIN-SUFFIX,memechen.com
+# 其他
+#DOMAIN-SUFFIX,tshell.online
+# 未泱阅读
+#DOMAIN-SUFFIX,winyoungreading.com
+# fnOS
+#DOMAIN-SUFFIX,5ddd.com
 
 # 更多已被收录的域名，此处未做保留

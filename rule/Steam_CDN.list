@@ -9,6 +9,7 @@
 # 请确保 Steam 登录的区域是中国(CN)区域，登录外区不保证效果
 
 # Steam 下载节点 CDN 地址
+DOMAIN-SUFFIX,steamcdn-a.akamaihd.net
 DOMAIN-SUFFIX,cm.steampowered.com
 DOMAIN-SUFFIX,steamserver.net
 IP-CIDR,45.121.184.0/24,no-resolve
