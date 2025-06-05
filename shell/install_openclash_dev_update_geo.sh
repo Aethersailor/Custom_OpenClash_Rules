@@ -3,59 +3,83 @@
 # 定义变量
 REPO_API_URL="https://api.github.com/repos/vernesong/OpenClash/contents/dev?ref=package"
 RAW_FILE_PREFIX="https://gh-proxy.com/https://raw.githubusercontent.com/vernesong/OpenClash/package/dev"
-TEMP_FILE="openclash.apk"
 
-# 获取 JSON 数据并解析 .apk 文件名
+# 检测系统使用的包管理器，并设置对应后缀和安装命令
+if command -v opkg >/dev/null 2>&1; then
+    PKG_MGR="opkg"
+    EXT="ipk"
+    INSTALL_CMD="opkg install --force-reinstall"
+    echo "检测到包管理器：opkg"
+elif command -v apk >/dev/null 2>&1; then
+    PKG_MGR="apk"
+    EXT="apk"
+    INSTALL_CMD="apk add -q --force-overwrite --clean-protected --allow-untrusted"
+    echo "检测到包管理器：apk"
+else
+    echo "未检测到 opkg 或 apk，无法继续安装。"
+    exit 1
+fi
+
+echo "准备下载 .$EXT 包。"
+
+# 获取 JSON 数据并解析对应后缀的文件名
 echo "正在获取 dev 版本文件信息..."
-JSON_OUTPUT=$(curl -s $REPO_API_URL)
-APK_FILE=$(echo "$JSON_OUTPUT" | awk -F'"' '/"name":/ && /.apk"/ {print $4}' | head -n 1)
+JSON_OUTPUT=$(curl -s "$REPO_API_URL")
+FILE_NAME=$(echo "$JSON_OUTPUT" \
+    | grep -oE '"name":\s*"[^"]+\.'"$EXT"'"' \
+    | sed -E 's/.*"([^"]+)".*/\1/' \
+    | head -n 1)
 
-# 打印调试信息
-#echo "API 输出内容:"
-#echo "$JSON_OUTPUT"
-echo "解析到的文件名: $APK_FILE"
-
-# 检查是否成功获取文件名
-if [ -z "$APK_FILE" ]; then
-  echo "未找到 .apk 文件，请检查目录或网络连接。"
-  exit 1
+if [ -z "$FILE_NAME" ]; then
+    echo "未找到 .$EXT 文件，请检查目录或网络连接。"
+    exit 1
 fi
 
-# 构造下载链接
-DOWNLOAD_URL="$RAW_FILE_PREFIX/$APK_FILE"
+echo "解析到的文件名：$FILE_NAME"
 
-# 下载 .apk 文件
-echo "正在下载 dev 版本 $APK_FILE..."
-wget -O $TEMP_FILE $DOWNLOAD_URL
+# 构造下载链接和临时文件名
+DOWNLOAD_URL="$RAW_FILE_PREFIX/$FILE_NAME"
+TEMP_FILE="openclash.$EXT"
+
+# 下载对应包
+echo "正在下载 dev 版本 $FILE_NAME..."
+wget -q -O "$TEMP_FILE" "$DOWNLOAD_URL"
 if [ $? -ne 0 ]; then
-  echo "下载失败，请检查网络连接或下载链接：$DOWNLOAD_URL"
-  exit 1
+    echo "下载失败，请检查网络连接或下载链接：$DOWNLOAD_URL"
+    exit 1
 fi
 
-# 安装 .apk 文件
-echo "正在安装 $APK_FILE..."
-apk add -q --force-overwrite --clean-protected --allow-untrusted $TEMP_FILE
-if [ $? -ne 0 ]; then
-  echo "OpenClash Dev 安装失败，请检查系统环境。"
-  rm -f $TEMP_FILE
-  exit 1
+# 下载成功提示
+echo "下载成功：$TEMP_FILE"
+
+# 安装对应包
+echo "正在使用 $PKG_MGR 安装 $FILE_NAME..."
+$INSTALL_CMD "$TEMP_FILE"
+RET=$?
+
+if [ $RET -ne 0 ]; then
+    echo "OpenClash Dev 安装失败，请检查系统环境。"
+    rm -f "$TEMP_FILE"
+    exit 1
 fi
+
+# 安装成功提示
+echo "OpenClash Dev 最新版安装成功！"
+
+# 清理临时文件
+rm -f "$TEMP_FILE"
 
 # 执行配置命令
 echo "更新配置 OpenClash 配置..."
 uci set openclash.config.release_branch=dev
 uci set openclash.config.skip_safe_path_check=1
-uci set openclash.config.enable='1'
+uci set openclash.config.github_address_mod='https://testingcf.jsdelivr.net/'
 uci commit openclash
 if [ $? -ne 0 ]; then
   echo "配置更新失败，请检查命令和日志。"
   exit 1
 fi
 echo "配置更新完成！"
-
-# 清理临时文件
-rm -f $TEMP_FILE
-echo "OpenClash 最新 dev 版本安装完成！"
 
 # 开始更新 Meta 内核
 echo "开始更新 Meta 内核..."
@@ -122,4 +146,6 @@ echo "订阅更新完成！"
 
 sleep 3
 echo "启动 OpenClash ..."
+uci set openclash.config.enable='1'
+uci commit openclash
 /etc/init.d/openclash restart >/dev/null 2>&1
