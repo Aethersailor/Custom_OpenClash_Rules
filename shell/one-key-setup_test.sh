@@ -26,7 +26,8 @@ echo "准备下载 .$EXT 包。"
 echo "正在获取 dev 版本文件信息..."
 JSON_OUTPUT=$(curl -s "$REPO_API_URL")
 FILE_NAME=$(echo "$JSON_OUTPUT" \
-    | awk -F'"' -v ext=".$EXT" '/"name":/ && $4 ~ ext"$"/ {print $4}' \
+    | grep -oE '"name":\s*"[^"]+\.'"$EXT"'"' \
+    | sed -E 's/.*"([^"]+)".*/\1/' \
     | head -n 1)
 
 if [ -z "$FILE_NAME" ]; then
