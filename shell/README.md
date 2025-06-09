@@ -38,7 +38,7 @@ curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rul
 **edit_custom_firewall_rules_anti-adn+github520.sh**  
 
 ```bash
-curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_anti-adn+github520.sh | sh
+curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_anti-ad+github520.sh | sh
 ```
 
 ***
