@@ -83,7 +83,7 @@ NEW_INSERT_CONTENT=""
 if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     NEW_INSERT_CONTENT="# ==============以下是广告过滤规则拉取脚本=================
 (
-    VERSION=\"1.4\"
+    VERSION=\"1.5\"
     MAX_WAIT_TIME=30
     WAIT_INTERVAL=2
     elapsed_time=0
