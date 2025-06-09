@@ -2,7 +2,7 @@
 
 # 定义变量
 REPO_API_URL="https://api.github.com/repos/vernesong/OpenClash/contents/dev?ref=package"
-RAW_FILE_PREFIX="https://gh-proxy.com/https://raw.githubusercontent.com/vernesong/OpenClash/package/dev"
+RAW_FILE_PREFIX="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@refs/heads/package/dev"
 
 # 清空屏幕并显示欢迎信息
 clear
