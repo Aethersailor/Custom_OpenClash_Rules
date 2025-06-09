@@ -16,7 +16,19 @@
 适合 dev 版本爱好者。  
 
 ```bash
-curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/install_openclash_dev_update.sh | sh
+curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/install_openclash_dev_update.sh | sh
+```
+
+***
+
+## **写入“开发者选项”中的去广告命令**  
+
+**edit_custom_firewall_rules.sh**  
+
+运行脚本后，根据提示自行选择需要写入的去广告规则指令。  
+
+```bash
+curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules.sh | sh
 ```
 
 ***
@@ -26,7 +38,7 @@ curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor
 **edit_custom_firewall_rules_anti-adn+github520.sh**  
 
 ```bash
-curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_anti-adn+github520.sh | sh
+curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_anti-adn+github520.sh | sh
 ```
 
 ***
@@ -36,7 +48,7 @@ curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor
 **edit_custom_firewall_rules_adblockfilters+github520.sh**  
   
 ```bash
-curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters+github520.sh | sh
+curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters+github520.sh | sh
 ```
 
 ***
@@ -46,7 +58,7 @@ curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor
 **edit_custom_firewall_rules_adblockfilters-modified+github520.sh**  
 
 ```bash
-curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters-modified+github520.sh | sh
+curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters-modified+github520.sh | sh
 ```
 
 ***
@@ -58,5 +70,5 @@ curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor
 一键写入“开发者选项”中的 Github520 Hosts 拉取指令  
 
 ```bash
-curl -sSL -4 https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/edit_custom_firewall_rules_github520.sh | sh
+curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_github520.sh | sh
 ```
