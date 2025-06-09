@@ -23,21 +23,16 @@
         sleep 10
     fi
 
-    # 动态选择 dnsmasq 目录
     LOG_OUT "[广告过滤规则拉取脚本] 开始检测 dnsmasq 规则目录..."
-    # 通过 uci 命令获取配置标识符
     UCI_OUTPUT=$(uci show dhcp.@dnsmasq[0] 2>/dev/null)
     
-    # 检测新版固件（哈希值模式）
     if echo "$UCI_OUTPUT" | grep -qE 'cfg[0-9a-f]{6}'; then
         HASH_ID=$(echo "$UCI_OUTPUT" | grep -oE 'cfg[0-9a-f]{6}' | head -1) 
         TARGET_DIR="/tmp/dnsmasq.${HASH_ID}.d"
         LOG_OUT "[广告过滤规则拉取脚本] 当前 dnsmasq 规则目录: $TARGET_DIR"
-    # 检测旧版固件（数字索引模式）
     elif echo "$UCI_OUTPUT" | grep -qE '@dnsmasq\[[0-9]+\]'; then
         TARGET_DIR="/tmp/dnsmasq.d"
         LOG_OUT "[广告过滤规则拉取脚本] 当前dnsmasq 规则目录: $TARGET_DIR"
-    # 兼容性回退
     else
         TARGET_DIR=$(find /tmp -maxdepth 1 -type d -name "dnsmasq.*.d" | head -n 1)
         if [ -z "$TARGET_DIR" ]; then
@@ -47,29 +42,19 @@
         LOG_OUT "[广告过滤规则拉取脚本] 检测失败，使用已存在的 dnsmasq 规则目录: $TARGET_DIR"
     fi
     
-    # 验证目录存在性
     if [ ! -d "$TARGET_DIR" ]; then
         mkdir -p "$TARGET_DIR"
     fi
 
-    # 输出清除已有的广告过滤规则的日志
     LOG_OUT "[广告过滤规则拉取脚本] 清除已有规则…"
-    # 删除 dnsmasq 格式的广告过滤规则
     rm -f "$TARGET_DIR"/*ad*.conf 
-    # 删除 hosts 格式的广告过滤规则
     sed -i '/# AWAvenue-Ads-Rule Start/,/# AWAvenue-Ads-Rule End/d' /etc/hosts
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 
-    # 输出拉取最新的 adblockfilters 广告过滤规则的日志
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 adblockfilters 广告过滤规则，规则体积较大，请耐心等候…"
-    # 下载 adblockfilters 规则到动态选择的目录
-    curl -sS -4 -L --retry 10 --retry-delay 2 \
-        "https://gh-proxy.com/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnsmasq.txt" \
-        -o "$TARGET_DIR/adblockfilters-for-dnsmasq.conf" >/dev/null 2>/tmp/adblockfilters-curl.log
-
+    curl -sS -L -4 --retry 5 --retry-delay 1 "https://testingcf.jsdelivr.net/gh/217heidai/adblockfilters@refs/heads/main/rules/adblockdnsmasq.txt" -o "$TARGET_DIR/adblockfilters-for-dnsmasq.conf" >/dev/null 2>/tmp/adblockfilters-curl.log
     CURL_EXIT=$?
 
-    # 检查 curl 命令是否成功
     if [ $CURL_EXIT -eq 0 ]; then
         LOG_OUT "[广告过滤规则拉取脚本] adblockfilters 规则拉取成功！保存路径：${TARGET_DIR}/adblockfilters-for-dnsmasq.conf"
     else
@@ -78,8 +63,7 @@
     fi
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
-    curl -4 -sSL --retry 10 --retry-delay 2 \
-        "https://raw.hellogithub.com/hosts" >> /etc/hosts 2>/tmp/github520-curl.log
+    curl -sS -L -4 --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts >/dev/null 2>/tmp/github520-curl.log
     CURL_EXIT_GH=$?
 
     if [ $CURL_EXIT_GH -eq 0 ]; then
