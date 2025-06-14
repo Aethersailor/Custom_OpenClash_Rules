@@ -122,6 +122,7 @@ DOMAIN-SUFFIX,game.maj-soul.com
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
+DOMAIN-SUFFIX,guanyierp.com
 DOMAIN-SUFFIX,moyubuluo.com
 # 绿联 NAS
 DOMAIN-SUFFIX,ug.link
