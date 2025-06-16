@@ -101,6 +101,8 @@ DOMAIN-SUFFIX,gdcucc.v1.mk
 DOMAIN-SUFFIX,bgm.tv
 DOMAIN-SUFFIX,chii.in
 DOMAIN-SUFFIX,bangumi.tv
+# 肥羊 All in One
+DOMAIN-SUFFIX,freetv.top
 
 # 游戏类规则
 # 红警重聚 Reunion 2023
@@ -120,9 +122,8 @@ DOMAIN-SUFFIX,game.maj-soul.com
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
-DOMAIN-SUFFIX,moyubuluo.com
-# 绿联 NAS
-DOMAIN-SUFFIX,ug.link
+DOMAIN-SUFFIX,guanyierp.com
+DOMAIN-SUFFIX,chememall.com
 
 # PR 至 v2fly/domain-list-community
 
@@ -130,6 +131,9 @@ DOMAIN-SUFFIX,ug.link
 # =======================================
 
 # 以下域名已被 GeoSite 收录，定期删除
+#DOMAIN-SUFFIX,astral-vector.com
+#DOMAIN-SUFFIX,ug.link
+#DOMAIN-SUFFIX,moyubuluo.com
 #DOMAIN-SUFFIX,efzhou.com
 #DOMAIN-SUFFIX,buy0596.com
 #DOMAIN-SUFFIX,fzsybj.com

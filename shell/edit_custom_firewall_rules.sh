@@ -83,7 +83,7 @@ NEW_INSERT_CONTENT=""
 if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     NEW_INSERT_CONTENT="# ==============以下是广告过滤规则拉取脚本=================
 (
-    VERSION=\"1.4\"
+    VERSION=\"1.5\"
     MAX_WAIT_TIME=30
     WAIT_INTERVAL=2
     elapsed_time=0
@@ -147,7 +147,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 anti-AD 广告过滤规则，规则体积较大，请耐心等候…\"
     curl -sS -4 -L --retry 10 --retry-delay 2 \\
-        \"https://gh-proxy.com/https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/refs/heads/master/adblock-for-dnsmasq.conf\" \\
+        \"https://testingcf.jsdelivr.net/gh/privacy-protection-tools/anti-AD@refs/heads/master/adblock-for-dnsmasq.conf\" \\
         -o \"\$TARGET_DIR/anti-ad-for-dnsmasq.conf\" >/dev/null 2>/tmp/anti-ad-curl.log
     CURL_EXIT=\$?
 
@@ -163,7 +163,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters 广告过滤规则，规则体积较大，请耐心等候…\"
     curl -sS -4 -L --retry 10 --retry-delay 2 \\
-        \"https://gh-proxy.com/https://raw.githubusercontent.com/217heidai/adblockfilters/refs/heads/main/rules/adblockdnsmasq.txt\" \\
+        \"https://testingcf.jsdelivr.net/gh/217heidai/adblockfilters@refs/heads/main/rules/adblockdnsmasq.txt\" \\
         -o \"\$TARGET_DIR/adblockfilters-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-curl.log
     CURL_EXIT=\$?
 
@@ -179,7 +179,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则...\"
     curl -sS -4 -L --retry 10 --retry-delay 2 \\
-        \"https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/refs/heads/main/rules/adblockdnsmasq.txt\" \\
+        \"https://testingcf.jsdelivr.net/gh/Aethersailor/adblockfilters-modified@refs/heads/main/rules/adblockdnsmasq.txt\" \\
         -o \"\$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
     CURL_EXIT=\$?
 
@@ -194,7 +194,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
             4)
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 秋风广告规则...\"
-    curl -sSL -4 --retry 10 --retry-delay 2 https://gh-proxy.com/https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-hosts.txt | \\
+    curl -sSL -4 --retry 10 --retry-delay 2 https://testingcf.jsdelivr.net/gh/TG-Twilight/AWAvenue-Ads-Rule@main/Filters/AWAvenue-Ads-Rule-hosts.txt | \\
     sed '/127.0.0.1 localhost/d; /::1 localhost/d; 1s/^/# AWAvenue-Ads-Rule Start\\n/; \$s/\$/\\n# AWAvenue-Ads-Rule End/' >> /etc/hosts
 "
                 ;;

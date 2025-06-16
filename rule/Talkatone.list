@@ -4,7 +4,7 @@
 
 # 本规则不再更新
 # 规则内容已合并至 v2fly/domain-list-community 
-# 建议使用 geosite:talktone
+# 建议使用 geosite:talkatone
 
 DOMAIN-SUFFIX,mobilefuse.com
 DOMAIN-SUFFIX,inmobi.com

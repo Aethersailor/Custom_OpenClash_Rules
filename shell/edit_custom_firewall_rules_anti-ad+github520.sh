@@ -7,7 +7,7 @@ TARGET_FILE="/etc/openclash/custom/openclash_custom_firewall_rules.sh"
 INSERT_CONTENT=$(cat << 'EOF'
 # ==============以下是广告过滤规则拉取脚本=================
 (
-    VERSION="1.4"
+    VERSION="1.5"
     MAX_WAIT_TIME=30
     WAIT_INTERVAL=2
     elapsed_time=0
@@ -71,7 +71,7 @@ INSERT_CONTENT=$(cat << 'EOF'
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 anti-AD 广告过滤规则，规则体积较大，请耐心等候…"
     # 下载 anti-AD 规则到动态选择的目录
     curl -sS -4 -L --retry 10 --retry-delay 2 \
-        "https://gh-proxy.com/https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/refs/heads/master/adblock-for-dnsmasq.conf" \
+        "https://testingcf.jsdelivr.net/gh/privacy-protection-tools/anti-AD@refs/heads/master/adblock-for-dnsmasq.conf" \
         -o "$TARGET_DIR/anti-ad-for-dnsmasq.conf" >/dev/null 2>/tmp/anti-ad-curl.log
     CURL_EXIT=$?
 

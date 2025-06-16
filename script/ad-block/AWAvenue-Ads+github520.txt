@@ -52,14 +52,14 @@
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 秋风广告规则…"
-    curl -sSL -4 --retry 10 --retry-delay 2 "https://gh-proxy.com/https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-hosts.txt" \
-      | sed '/127.0.0.1 localhost/d; /::1 localhost/d; 1s/^/# AWAvenue-Ads-Rule Start\n/; $s/$/\n# AWAvenue-Ads-Rule End/' >> /etc/hosts
+    curl -sSL -4 --retry 5 --retry-delay 1 https://testingcf.jsdelivr.net/gh/TG-Twilight/AWAvenue-Ads-Rule@main/Filters/AWAvenue-Ads-Rule-hosts.txt | \
+    sed '/127.0.0.1 localhost/d; /::1 localhost/d; 1s/^/# AWAvenue-Ads-Rule Start\n/; $s/$/\n# AWAvenue-Ads-Rule End/' >> /etc/hosts
 
     LOG_OUT "[广告过滤规则拉取脚本] 清除已有的 GitHub520 加速规则…"
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 GitHub520 加速规则…"
-    curl -sSL -4 --retry 10 --retry-delay 2 "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
+    curl -sSL -4 --retry 5 --retry-delay 1 "https://raw.hellogithub.com/hosts" >> /etc/hosts 2> /tmp/github520-curl.log
 
     if [ $? -eq 0 ]; then
         LOG_OUT "[广告过滤规则拉取脚本] GitHub520 加速规则拉取成功！"
