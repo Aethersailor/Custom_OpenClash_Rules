@@ -46,7 +46,8 @@ DOMAIN-KEYWORD,imgdb
 DOMAIN-KEYWORD,webgame
 DOMAIN-KEYWORD,dockerpull
 DOMAIN-KEYWORD,tslience
-DOMAIN-SUFFIX,linux.do
+# LINUX DO 论坛
+# DOMAIN-SUFFIX,linux.do
 
 # Python 镜像
 DOMAIN-SUFFIX,mirrors.aliyun.com
@@ -104,3 +105,6 @@ DOMAIN-KEYWORD,asailor
 
 # 入学
 DOMAIN-SUFFIX,pepaper.org
+
+# 交易所
+DOMAIN-KEYWORD,okx
