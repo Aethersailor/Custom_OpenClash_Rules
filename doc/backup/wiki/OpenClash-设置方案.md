@@ -538,7 +538,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 如果你使用的是在国内和本地设备上搭建的订阅转换后端，无法直连 GitHub，请使用以下反代后的模板链接：  
 
 ```
-https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Mainland.ini
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Mainland.ini
 ```
 
 **注意！必须使用本项目的订阅转换模板才能实现免套娃无 DNS 泄露！**  
