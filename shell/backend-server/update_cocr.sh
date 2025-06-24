@@ -34,20 +34,6 @@ download_file "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_R
 download_file "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_Full.ini" "$BASE_DIR/Custom_Clash_Full.ini"
 download_file "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_GFW.ini" "$BASE_DIR/Custom_Clash_GFW.ini"
 download_file "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_Lite.ini" "$BASE_DIR/Custom_Clash_Lite.ini"
+download_file "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_Mainland.ini" "$BASE_DIR/Custom_Clash_Mainland.ini"
 
-# 下载并修改Custom_Clash_Mainland.ini
-MAINLAND_FILE="$BASE_DIR/Custom_Clash_Mainland.ini"
-download_file "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_Mainland.ini" "$MAINLAND_FILE"
-
-# 修改规则内容
-echo "[$(date '+%F %T')] 正在修改 $MAINLAND_FILE 中的规则路径..."
-
-# 规则替换函数：只保留逗号前规则名与目标路径
-sed -i \
-  -e '/Custom_Direct.list/s#^ruleset=🎯 全球直连,[^,]*.*#ruleset=🎯 全球直连,rules/Custom_OpenClash_Rules/Custom_Direct.list#' \
-  -e '/Custom_Proxy.list/s#^ruleset=🚀 手动选择,[^,]*.*#ruleset=🚀 手动选择,rules/Custom_OpenClash_Rules/Custom_Proxy.list#' \
-  -e '/Steam_CDN.list/s#^ruleset=🎯 全球直连,[^,]*.*#ruleset=🎯 全球直连,rules/Custom_OpenClash_Rules/Steam_CDN.list#' \
-  "$MAINLAND_FILE"
-
-echo "[$(date '+%F %T')] Custom_Clash_Mainland.ini 修改完成。"
 echo "[$(date '+%F %T')] 所有操作完成。"
