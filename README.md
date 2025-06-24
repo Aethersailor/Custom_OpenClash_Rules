@@ -36,7 +36,9 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 \>> Telegram Channel: [Custom_OpenClash_Rules | 通知频道](https://t.me/custom_openclash_rules)  
 
-\>> Telegram Group: [Custom_OpenClash_Rules | 交流群](https://t.me/custom_openclash_rules_group) 
+\>> Telegram Group: [Custom_OpenClash_Rules | 交流群](https://t.me/custom_openclash_rules_group)   
+
+维护者的 GitHub 账号曾被误封过，连带本仓库一同被 404。请加入通知频道谨防失联。  
 
 如遇问题，前请先阅读以下内容：
 
