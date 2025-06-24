@@ -13,7 +13,9 @@
 
 * **本项目依赖 OpenClash 的`绕过中国大陆`功能，介意这一点的麻烦关闭网页。**  
 
-* **本项目维护者反对使用所谓的“旁路由”网络架构，本项目所有教程均以主路由环境为例，仅对旁路由网络架构下的设置差异作简单提示。“旁路由”用户请自行融会贯通举一反三，出了问题也不要提问，谁教你用旁路由的你去找谁，感谢合作。**    
+* **本项目维护者反对使用所谓的“旁路由”网络架构，本项目所有教程均以主路由环境为例，仅对旁路由网络架构下的设置差异作简单提示。“旁路由”用户请自行融会贯通举一反三，出了问题也不要提问，谁教你用旁路由的你去找谁，感谢合作。**  
+
+* Wiki 页面右边有目录  
 
 ## 本方案所实现的效果  
 
@@ -101,17 +103,30 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置�
 
 当然了，我这里和运营商 DNS 在同一个城市，所以延迟表现比较优秀。如果你和运营商 DNS 不是同城的话，延迟可能就没那么优秀了，但一般也会优于第三方 DNS。  
 
-网上某些教程教小白用 AdGuardHome 等插件一顿折腾，添加一堆没用的第三方 DNS，套娃一层套一层，然后弄出来个 5ms 甚至 10ms 更高的解析延迟，再告诉你这是“优化”了，这种纯属扯淡，不信你去换个最垃圾的硬路由， DHCP 直接默认就给你分配运营商 DNS 的那种，你会发现网页打开就是光速，你猜为什么。
-
-另外，请勿迷信什么乐观缓存，Fake-IP 模式下搭配其他前置缓存插件只会导致更多的问题，路由器上什么缓存都没有浏览器自身的 DNS 缓存作用大。  
-
 按照本项目的方案设置后，运行商 DNS 只用于解析中国大陆域名，不存在污染问题，完全不用担心运营商 DNS 没有 DoT/DoH 加密。海外域名全部远端解析取得离机场最近的 CDN，更没有污染，也没有隐私泄露风险。  
 
-**除非你是使用的长城宽带之类的存在流量穿透的宽带线路，DNS 延迟很高或无法正确解析到离你地理位置最近的 CDN，否则根本就没有必要用 DNS 优化插件**  
+```
+坚持要使用第三方 DNS 的话，请使用国内的 DOH 服务器。不要使用 UDP 服务器，大概率会被运营商劫持。
+```
 
-**如果你非要认为 1ms 的解析时间差距会明显影响上网体验，那我无话可说，一定要使用第三方 DNS 或者 DNS 优化插件的话，方案中对应步骤会提及如何进行设置**  
+### 0.5. 关于“套娃”设置  
 
-### 0.5. 关于广告过滤  
+以维护者所在的网络环境为例，部署本方案后，使用脚本去批量测试 1000 次国内外主流域名的解析速度，dnsmasq 提供的解析延迟稳定在 1-1.5ms 左右，而加了 AdGuard Home 并开启缓存后，解析延迟也不过是降低大约 1ms，仅仅压缩了 1ms，而代价则是要面对缓存和 Fake-IP 并存导致的各种问题。  
+
+网上某些教程教小白用 AdGuardHome 等插件一顿折腾，添加一堆没用的第三方 DNS，套娃一层套一层，然后弄出来个 5ms 甚至 10ms 更高的解析延迟，再告诉你这是“优化”了，这种纯属扯淡。不信你去换个最垃圾的百元硬路由， DHCP 直接默认就给你分配运营商 DNS 的那种，你会发现网页打开就是光速，你猜为什么。
+
+另外，请勿迷信什么乐观缓存，Fake-IP 模式下搭配其他前置缓存插件只会导致更多的问题，路由器上什么缓存都没有浏览器和操作系统自带的 DNS 缓存作用大。  
+
+**除非你是使用的长城宽带之类的存在流量穿透的宽带线路，DNS 延迟很高或无法正确解析到离你地理位置最近的 CDN，否则根本就没有必要用 DNS 优化插件。**  
+
+**如果你坚持认为 1ms 的解析时间差距会明显影响上网体验，而愿意承受套娃带来的其他副作用，那我无话可说**  
+
+```
+套娃强迫症，不套娃不舒服，坚持要“套娃”设置，仅建议在 Nameserver 上游添加 SmartDNS。
+完全无副作用。
+```
+
+### 0.6. 关于广告过滤  
 
 按照本项目方案，只使用 OpenClash 一个插件，且中国大陆域名均绕过了 OpenClash 内核，因此无法依靠 OpenClash 的规则来完成广告过滤。  
 
@@ -121,7 +136,9 @@ https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置�
 
 [广告拦截设置方法](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%97%A0%E6%8F%92%E4%BB%B6%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)  
 
-### 0.6. 为何不提供 uci 一键设置脚本  
+**注意：任何 DNS 广告过滤规则的过滤效果都比不上浏览器插件的过滤效果。**  
+
+### 0.7. 为何不提供 uci 一键设置脚本  
 
 uci 一键设置脚本可以实现一键应用本方案的设置内容至 OpenClash 中，从技术上来说毫无难度。  
 
@@ -304,9 +321,9 @@ clientservices.googleapis.com
 
 一些分流数据库，必须保持更新，否则会对绕过大陆功能以及分流规则产生影响。按照图中设置即可，具体用途不多做解释，可以自行查找相关资料。  
 
-注意，每次数据库更新成功后 OpenClash 会自动重启，建议设置更新时间为每日不用网的时候，比如凌晨。  
+图片可能存在滞后性，此页面所有的数据库全部开启更新，包括图片中未包含的数据库选项。  
 
-更新时间务必错开，几个数据库、白名单以及订阅更新不要选择同一更新时间。  
+注意，每次数据库更新成功后 OpenClash 会自动重启，建议设置更新时间为每日不用网的时候，比如凌晨。  
 
 设置完后点击页面下方的“保存设置”，然后顺手把三个“检查并更新”按钮都点一遍。在 OpenClash 的“运行日志”页面可以查看更新结果，此操作可以顺带验证你的 OpenWrt 是否能顺利访问  
 Github 或者你在之前设置的 CDN 比如 testingcf  
@@ -460,85 +477,66 @@ OpenClash 在更新订阅的过程中会短暂重启，所以建议设置在不�
 
 各模板的功能和特性如下：  
     
-|规则名|Custom_Clash|Custom_Clash_Mainland|Custom_Clash_Lite|Custom_Clash_GFW|Custom_Clash_Full| 
-|:-:|:-:|:-:|:-:|:-:|:-:|
-|说明|全分组模板⭐|反代规则模板|轻量化规则模板|gfwlist 规则模板|Full 规则模板|
-|无 DNS 泄露|✅|✅|✅|✅|✅|
-|能否通过 DNS 泄露测试|✅|✅|✅|❌|✅|
-|基本国内外分流|✅|✅|✅|❌|✅|
-|gfwlist代理|✅|✅|✅|✅|✅|
-|流媒体分流|✅|✅|❌|❌|✅|
-|AI分流|✅|✅|❌|❌|✅|
-|海外网站处理方式|代理|代理|代理|直连|代理|
-|后端必须直连 Github|是|否|是|是|是|
-|适用后端|远程|本地|远程|远程|远程|
+|规则名|Custom_Clash|Custom_Clash_Lite|Custom_Clash_GFW|Custom_Clash_Full| 
+|:-:|:-:|:-:|:-:|:-:|
+|说明|全分组模板⭐|轻量化分组模板|gfwlist 规则模板|Full 重度分组模板|
+|无 DNS 泄露|✅|✅|✅|✅|
+|能否通过 DNS 泄露测试|✅|✅|❌|✅|
+|基本国内外分流|✅|✅|❌|✅|
+|gfwlist代理|✅|✅|✅|✅|
+|流媒体分流|✅|❌|❌|✅|
+|AI分流|✅|❌|❌|✅|
+|海外网站处理方式|代理|代理|直连|代理|
 ***
-我应该选择使用哪个模板？  
+应该选择使用哪个模板？  
+（2025.6.25 之后，不再提供国内自建后端专用模板，所有模板地址使用 jsdeliver 加速，可以直接访问）  
 * Custom_Clash.ini
 ```
 本项目的标准订阅转换模板，适配所有需求，推荐使用。  
-无DNS泄露，可通过泄露检测网站的测试。  
+无 DNS 泄露，可通过泄露检测网站的测试。  
 使用本项目推荐机场建议直接使用该模板，复刻维护者的使用体验。  
 ```
 ```
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash.ini
 ```
 ***
-* Custom_Clash_Mainland.ini  
-```
-针对国内自建后端用户无法访问 Github 的情况提供的反代订阅模板，由 Custom_Clash.ini 的内容经添加反代地址后自动生成
-仅供本地自建后端用户使用，使用第三方后端请勿使用该模板。  
-无DNS泄露，可通过泄露检测网站的测试。  
-```
-非自建后端不要使用这个模板！
-```
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Mainland.ini
-```
-***
+
 * Custom_Clash_Lite.ini  
 ```
 只具备基本的国内外分流功能，无DNS泄露，适合不需要流媒体解锁/AI分流等特殊分流功能，节点延迟较低且流量充裕的用户。  
-无DNS泄露，可通过泄露检测网站的测试。  
+无 DNS 泄露，可通过泄露检测网站的测试。  
 ```
 ```
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_Lite.ini
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_Lite.ini
 ```
 ***
 * Custom_Clash_GFW.ini  
 ```
 无任何分流功能，仅代理 GFWList 网站和 Telegram 相关 IP，其余连接全部直连。适合流量较少或节点较慢的垃圾机场用户。  
-无DNS泄露，但无法通过泄露检测网站的测试。  
+无 DNS 泄露，但无法通过泄露检测网站的测试。  
 ```
 ```
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_GFW.ini
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_GFW.ini
 ```
 ***
 * Custom_Clash_Full.ini  
 ```
-重度分流规则模板，任何人都可以向该规则内添加你认为可以用的到的规则或节点分组，可以通过 PR/issue/Telegram群组 向维护者提出增加规则的请求。
+重度分流规则模板，任何人都可以向该规则内添加你认为可以用的到的规则或节点分组，可以通过 PR/issue/Telegram 群组 向维护者提出增加规则的请求。
 该规则模板仅追求规则覆盖面，不做任何性能上的考量。  
-无DNS泄露，可通过泄露检测网站的测试。  
+无 DNS 泄露，可通过泄露检测网站的测试。  
 ```
 ```
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash_Full.ini
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_Full.ini
 ```
 
 ***
 
 还是看不懂该选哪个怎么办？请直接使用标准订阅转换模板 Custom_Clash.ini
 
-注意，订阅转换模板选择“自定义模板”然后在下方填入本项目的自定义模板地址：  
-
-如果你使用的是 OpenClash 列表中/第三方/自己在海外 VPS 上搭建的订阅转换服务，订阅后端可以直连问 Github，请使用以下模板链接：  
+订阅转换模板选择“自定义模板”然后在下方填入本项目的自定义模板地址：  
 
 ```
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini
-```
-
-如果你使用的是在国内和本地设备上搭建的订阅转换后端，无法直连 GitHub，请使用以下反代后的模板链接：  
-
-```
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Mainland.ini
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash.ini
 ```
 
 **注意！必须使用本项目的订阅转换模板才能实现免套娃无 DNS 泄露！**  
@@ -552,6 +550,8 @@ https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads
 ```
 https://api.asailor.org/sub
 ```   
+
+**使用本项目的订阅后端，“自定义模板”地址中无需再填写冗长的模板文件的远程地址，仅需填写文件名如 `Custom_Clash.ini` ，即可调用对应的模板文件。  **
 
 本项目的订阅转换后端服务支持 vless/hy2 等较新的节点类型。**用爱发电，且用且珍惜。**  
 
