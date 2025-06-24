@@ -492,7 +492,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/C
 ```
 非自建后端不要使用这个模板！
 ```
-https://gh-proxy.com/https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Mainland.ini
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Mainland.ini
 ```
 ***
 * Custom_Clash_Lite.ini  
