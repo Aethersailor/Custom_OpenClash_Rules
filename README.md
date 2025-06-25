@@ -297,7 +297,9 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 
 ## 星标记录
 
-<a href="https://star-history.com/#Aethersailor/Custom_OpenClash_Rules&Date">
+## Star History
+
+<a href="https://www.star-history.com/#Aethersailor/Custom_OpenClash_Rules&Date">
  <picture>
    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Aethersailor/Custom_OpenClash_Rules&type=Date&theme=dark" />
    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Aethersailor/Custom_OpenClash_Rules&type=Date" />
