@@ -289,15 +289,14 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 
 ***
 
-## 许可		
+## 许可  
+
 [![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
 * CC-BY-SA-4.0  
 
 ***
 
-## 星标记录
-
-## Star History
+## 星标记录  
 
 <a href="https://www.star-history.com/#Aethersailor/Custom_OpenClash_Rules&Date">
  <picture>
@@ -312,8 +311,14 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 ![Alt](https://repobeats.axiom.co/api/embed/0d7d55da94670a4766aa0fb8ccd03c7abc9e8464.svg "Repobeats analytics image")  
 
 
-## 访问记录
+## 访问记录  
 
 ![:访问数](https://count.getloli.com/@:Custom_OpenClash_Rules?theme=sketch-1)  
 
 2025年2月开始统计  
+
+## 广告  
+
+**DartNode 免费 VPS**  
+
+[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
