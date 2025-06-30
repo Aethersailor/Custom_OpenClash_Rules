@@ -83,17 +83,16 @@ NEW_INSERT_CONTENT=""
 if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
     NEW_INSERT_CONTENT="# ==============以下是广告过滤规则拉取脚本=================
 (
-    VERSION=\"1.5\"
     MAX_WAIT_TIME=30
     WAIT_INTERVAL=2
     elapsed_time=0
 
     if /etc/init.d/openclash status | grep -q \"Syntax:\"; then
-        LOG_OUT \"[广告过滤规则拉取脚本] 当前版本 \$VERSION，正在检测 OpenClash 运行状态...\"
+        LOG_OUT \"[广告过滤规则拉取脚本] 正在检测 OpenClash 运行状态...\"
         LOG_OUT \"[广告过滤规则拉取脚本] 等待 10 秒以确保 OpenClash 已启动...\"
         sleep 10
     else
-        LOG_OUT \"[广告过滤规则拉取脚本] 当前版本 \$VERSION，正在检测 OpenClash 运行状态...\"
+        LOG_OUT \"[广告过滤规则拉取脚本] 正在检测 OpenClash 运行状态...\"
         while ! /etc/init.d/openclash status | grep -q \"running\"; do
             if [ \$elapsed_time -ge \$MAX_WAIT_TIME ]; then
                 LOG_OUT \"[广告过滤规则拉取脚本] 未能在 30 秒内检测到 OpenClash 运行状态，脚本已停止运行...\"
