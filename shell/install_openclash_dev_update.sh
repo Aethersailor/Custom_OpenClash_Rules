@@ -80,17 +80,28 @@ echo "OpenClash Dev 最新版安装成功！"
 # 清理临时文件
 rm -f "$TEMP_FILE"
 
+# 加载预设配置（如果存在）
+if [ -f /etc/config/openclash-set ]; then
+  echo "检测到个性化预设配置文件，正在加载..."
+  sh /etc/config/openclash-set
+  if [ $? -ne 0 ]; then
+    echo "加载个性化预设配置时出现错误，请检查 /etc/config/openclash-set 内容。"
+    exit 1
+  fi
+  echo "个性化预设配置加载完成！"
+fi
+
 # 执行配置命令
-echo "更新配置 OpenClash 配置..."
+echo "更新 OpenClash 设置..."
 uci set openclash.config.release_branch=dev
 uci set openclash.config.skip_safe_path_check=1
 uci set openclash.config.github_address_mod='https://testingcf.jsdelivr.net/'
 uci commit openclash
 if [ $? -ne 0 ]; then
-  echo "配置更新失败，请检查命令和日志。"
+  echo "设置更新失败，请检查命令和日志。"
   exit 1
 fi
-echo "配置更新完成！"
+echo "设置更新完成！"
 
 # 开始更新 Meta 内核
 echo "开始更新 Meta 内核..."
