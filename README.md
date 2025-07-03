@@ -243,11 +243,21 @@ Traffic、GB、Expire
 
 以下排名不分先后
 
+### 插件
+
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
+
+### 内核
 
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
 
+### 模板
+
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
+
+- [TraderWukong/demo](https://github.com/TraderWukong/demo)
+
+### 分流规则
 
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 
@@ -257,11 +267,13 @@ Traffic、GB、Expire
 
 - [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
 
-- [TraderWukong/demo](https://github.com/TraderWukong/demo)
-
 - [dogfight360/UsbEAm](https://www.dogfight360.com/blog/18627/)
 
 - [ddgksf2013/ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)
+
+- [mottzz87/crules](https://github.com/mottzz87/crules)
+
+### 广告过滤规则
 
 - [217heidai/adblockfilters](https://github.com/217heidai/adblockfilters)
 
@@ -269,9 +281,15 @@ Traffic、GB、Expire
 
 - [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)
 
+### 加速规则
+
 - [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520)
 
+### 其他
+
 - [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/)
+
+- [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool)
 
 - [ChatGPT/OpenAI](https://chatgpt.com/)
 
