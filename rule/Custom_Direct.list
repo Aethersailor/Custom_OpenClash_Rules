@@ -182,5 +182,10 @@ DOMAIN-SUFFIX,chememall.com
 #DOMAIN-SUFFIX,winyoungreading.com
 # fnOS
 #DOMAIN-SUFFIX,5ddd.com
+# 海翔登录
+DOMAIN-SUFFIX,seaflysoft.com
+# PT
+DOMAIN-SUFFIX,m-team.cc
+DOMAIN-SUFFIX,pttime.org
 
 # 更多已被收录的域名，此处未做保留
