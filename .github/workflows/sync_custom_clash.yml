@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - cfg/Custom_Clash.ini  # 当源文件更新时触发
-  workflow_dispatch:           # 允许手动触发
+      - cfg/Custom_Clash.ini  # 源文件更新时触发
+  workflow_dispatch:           # 手动触发
 
 jobs:
   sync-and-modify:
@@ -27,15 +27,16 @@ jobs:
       # Step 3: 修改文件
       - name: Modify File
         run: |
-          # 拷贝源文件为目标仓库中的 cfg/Custom_Clash.ini
+          # 拷贝源文件到目标仓库
           cp cfg/Custom_Clash.ini target-repo/cfg/Custom_Clash.ini
           cd target-repo
 
-          # 保留 [custom] 及其后所有内容
+          # 保留 [custom] 及其后内容
           awk '/\[custom\]/{f=1} f' cfg/Custom_Clash.ini > tmp && mv tmp cfg/Custom_Clash.ini
 
-          # 添加头部注释
-          sed -i '1i ;该订阅模板为 Custom_OpenClash_Rules 项目的衍生项目\n;基于 ACL4SSR 模板魔改而来，感谢原作者！' cfg/Custom_Clash.ini
+          # 添加头部注释（每行单独插入）
+          sed -i '1i ;基于 ACL4SSR 模板魔改而来，感谢原作者！' cfg/Custom_Clash.ini
+          sed -i '1i ;该订阅模板为 Custom_OpenClash_Rules 项目的衍生项目' cfg/Custom_Clash.ini
           sed -i '1i ;项目地址：https://github.com/Aethersailor/Custom_Clash_Rules' cfg/Custom_Clash.ini
           sed -i '1i ;作者：https://github.com/Aethersailor' cfg/Custom_Clash.ini
           sed -i '1i ;全分组防 DNS 泄漏订阅转换模板' cfg/Custom_Clash.ini
@@ -47,11 +48,11 @@ jobs:
           sed -i '/GEOSITE,cn/d' cfg/Custom_Clash.ini
           sed -i '/GEOIP,cn/d' cfg/Custom_Clash.ini
 
-          # 在 Custom_Proxy 行之后插入两条规则
+          # 在 Custom_Proxy 行后插入两条规则（每条单独插入）
           sed -i '/Custom_Proxy/a ruleset=🎯 全球直连,[]GEOIP,cn,no-resolve' cfg/Custom_Clash.ini
           sed -i '/Custom_Proxy/a ruleset=🎯 全球直连,[]GEOSITE,cn' cfg/Custom_Clash.ini
 
-      # Step 4: 提交并推送更改到目标仓库
+      # Step 4: 提交并推送更改
       - name: Commit and Push Changes
         run: |
           cd target-repo
