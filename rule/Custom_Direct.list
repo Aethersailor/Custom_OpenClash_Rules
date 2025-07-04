@@ -117,16 +117,13 @@ DOMAIN-SUFFIX,game.maj-soul.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# 海翔登录
-DOMAIN-SUFFIX,seaflysoft.com
-# PT
-DOMAIN-SUFFIX,m-team.cc
-DOMAIN-SUFFIX,pttime.org
 
 # ---------------------------------------
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
+# 海翔登录
+DOMAIN-SUFFIX,seaflysoft.com
 
 # PR 至 v2fly/domain-list-community
 
