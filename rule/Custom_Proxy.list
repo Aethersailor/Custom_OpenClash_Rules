@@ -29,4 +29,5 @@ DOMAIN-SUFFIX,cloudsync-prod.s3.us-east-1.amazonaws.com
 DOMAIN-SUFFIX,hoyolab.com
 # OneDrive 网页版
 DOMAIN-SUFFIX,onedrive.live.com
-
+# 其他
+DOMAIN-SUFFIX,7pzzv.us
