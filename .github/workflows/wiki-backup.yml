@@ -1,4 +1,4 @@
-name: Backup wiki root files
+name: Backup wiki
 
 on:
   workflow_dispatch:
