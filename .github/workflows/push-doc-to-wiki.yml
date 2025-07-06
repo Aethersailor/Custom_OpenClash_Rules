@@ -14,9 +14,11 @@ jobs:
       - name: Checkout main repository
         uses: actions/checkout@v3
 
-      - name: Clone wiki repository
+      - name: Clone wiki repository with auth
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git clone https://github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git _wiki
+          git clone https://x-access-token:${TOKEN}@github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git _wiki
 
       - name: Prepare doc directory in wiki repository
         run: |
