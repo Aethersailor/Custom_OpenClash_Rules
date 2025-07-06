@@ -32,7 +32,7 @@ jobs:
             num=$(echo "$line" | sed -E 's/^([0-9]+)\..*/\1/')
             raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
             filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
-            echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}|./wiki/${num}.${filename}.md" >> link_map.txt
+            echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}|${num}.${filename}.md" >> link_map.txt
           done
           echo "LINK_MAP_END" >> link_map.txt
           cat link_map.txt
