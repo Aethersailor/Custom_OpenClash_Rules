@@ -1,54 +1,59 @@
-name: Backup Wiki
+name: Backup wiki root files
 
 on:
-  # 每天凌晨 3:00 备份
-  schedule:
-    - cron: '0 3 * * *'
-
-  # 手动触发
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
-  backup-wiki:
+  backup-wiki-root:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout this repository
-        uses: actions/checkout@v4
+      - name: Checkout main repository
+        uses: actions/checkout@v3
 
-      - name: Clone the Wiki repository
+      - name: Clone wiki repository with auth
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git clone https://github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git wiki-temp
+          git clone https://x-access-token:${TOKEN}@github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git _wiki
 
-      - name: Clear old backup and copy new files
+      - name: Clean old wiki backup
         run: |
-          rm -rf wiki
           mkdir -p wiki
-          cp -r wiki-temp/*.md wiki/
+          find wiki -type f -name "*.md" -delete
 
-      - name: Rename Home.md to README.md
+      - name: Parse Home.md and copy files with path replacement
         run: |
-          if [ -f wiki/Home.md ]; then
-            mv wiki/Home.md wiki/README.md
-          fi
+          # 提取序号、文件名，格式：1 OpenClash-设置方案
+          grep -E '^[0-9]+\.\s*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
+            num=$(echo "$line" | sed -E 's/^([0-9]+)\..*/\1/')
+            raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
+            filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
 
-      - name: Replace image paths in Markdown
-        run: |
-          find wiki -type f -name "*.md" -exec sed -i 's#](doc/#](../doc/#g' {} +
+            src_file="_wiki/${filename}.md"
+            dst_file="wiki/${num}.${filename}.md"
+
+            echo "Processing: $src_file → $dst_file"
+
+            if [ -f "$src_file" ]; then
+              cp "$src_file" "$dst_file"
+
+              # 替换路径
+              sed -i 's#](doc/#](../doc/#g' "$dst_file"
+            else
+              echo "Warning: File not found: $src_file"
+            fi
+          done
 
       - name: Commit and push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
           git add wiki
 
-          # 只有有变更时才提交
           if ! git diff --cached --quiet; then
-            git commit -m "Backup Wiki $(date +'%Y-%m-%d %H:%M:%S')"
+            git commit -m "Backup wiki root files from wiki repository"
             git push
-          else
-            echo "No changes detected, skipping commit."
           fi
