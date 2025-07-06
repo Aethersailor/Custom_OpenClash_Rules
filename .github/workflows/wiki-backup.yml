@@ -32,7 +32,7 @@ jobs:
             num=$(echo "$line" | sed -E 's/^([0-9]+)\..*/\1/')
             raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
             filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
-            echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}|wiki/${num}.${filename}.md" >> link_map.txt
+            echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}|./wiki/${num}.${filename}.md" >> link_map.txt
           done
           echo "LINK_MAP_END" >> link_map.txt
           cat link_map.txt
@@ -44,7 +44,7 @@ jobs:
           # 替换 doc 路径
           sed -i 's#](doc/#](../doc/#g' wiki/README.md
 
-          # 替换 wiki 页面链接
+          # 替换 wiki 页面链接为相对路径
           while IFS='|' read -r src dst; do
             [[ "$src" == LINK_MAP_START ]] && continue
             [[ "$src" == LINK_MAP_END ]] && continue
@@ -69,7 +69,7 @@ jobs:
               # 替换 doc 路径
               sed -i 's#](doc/#](../doc/#g' "$dst_file"
 
-              # 替换 wiki 页面链接
+              # 替换 wiki 页面链接为相对路径
               while IFS='|' read -r src dst; do
                 [[ "$src" == LINK_MAP_START ]] && continue
                 [[ "$src" == LINK_MAP_END ]] && continue
