@@ -35,10 +35,9 @@ jobs:
             raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
             filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
 
-            # 完整页面替换
+            # 页面本身
             echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}|${num}.${filename}.md" >> link_map.txt
-
-            # 页面内锚点链接替换
+            # 页面带锚点
             echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}#|${num}.${filename}.md#" >> link_map.txt
           done
 
@@ -53,12 +52,16 @@ jobs:
           # 替换 doc 路径
           sed -i 's#](doc/#](../doc/#g' wiki/README.md
 
-          # 替换 wiki 页面链接和章节
+          # 替换 wiki 页面链接
           while IFS='|' read -r src dst; do
             [[ "$src" == LINK_MAP_START ]] && continue
             [[ "$src" == LINK_MAP_END ]] && continue
-            echo "Replacing $src → $dst"
-            sed -i "s#${src}#${dst}#g" wiki/README.md
+            echo "Replacing $src → $dst in README.md"
+
+            src_escaped=$(printf '%s\n' "$src" | sed 's/[\/&]/\\&/g')
+            dst_escaped=$(printf '%s\n' "$dst" | sed 's/[\/&]/\\&/g')
+
+            sed -i "s#${src_escaped}#${dst_escaped}#g" wiki/README.md
           done < link_map.txt
 
       - name: Parse Home.md and copy listed files with replacements
@@ -79,12 +82,16 @@ jobs:
               # 替换 doc 路径
               sed -i 's#](doc/#](../doc/#g' "$dst_file"
 
-              # 替换 wiki 页面链接和章节
+              # 替换 wiki 页面链接
               while IFS='|' read -r src dst; do
                 [[ "$src" == LINK_MAP_START ]] && continue
                 [[ "$src" == LINK_MAP_END ]] && continue
                 echo "Replacing $src → $dst in $dst_file"
-                sed -i "s#${src}#${dst}#g" "$dst_file"
+
+                src_escaped=$(printf '%s\n' "$src" | sed 's/[\/&]/\\&/g')
+                dst_escaped=$(printf '%s\n' "$dst" | sed 's/[\/&]/\\&/g')
+
+                sed -i "s#${src_escaped}#${dst_escaped}#g" "$dst_file"
               done < link_map.txt
 
             else
