@@ -24,9 +24,13 @@ jobs:
           mkdir -p wiki
           find wiki -type f -name "*.md" -delete
 
-      - name: Parse Home.md and copy files with path replacement
+      - name: Copy Home.md to wiki/README.md with path replacement
         run: |
-          # 提取序号、文件名，格式：1 OpenClash-设置方案
+          cp _wiki/Home.md wiki/README.md
+          sed -i 's#](doc/#](../doc/#g' wiki/README.md
+
+      - name: Parse Home.md and copy listed files with path replacement
+        run: |
           grep -E '^[0-9]+\.\s*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
             num=$(echo "$line" | sed -E 's/^([0-9]+)\..*/\1/')
             raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
@@ -39,8 +43,6 @@ jobs:
 
             if [ -f "$src_file" ]; then
               cp "$src_file" "$dst_file"
-
-              # 替换路径
               sed -i 's#](doc/#](../doc/#g' "$dst_file"
             else
               echo "Warning: File not found: $src_file"
