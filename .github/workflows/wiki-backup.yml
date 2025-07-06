@@ -24,12 +24,34 @@ jobs:
           mkdir -p wiki
           find wiki -type f -name "*.md" -delete
 
-      - name: Copy Home.md to wiki/README.md with path replacement
+      - name: Build link replacement map
+        id: build-map
+        run: |
+          echo "LINK_MAP_START" > link_map.txt
+          grep -E '^[0-9]+\.\s*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
+            num=$(echo "$line" | sed -E 's/^([0-9]+)\..*/\1/')
+            raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
+            filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
+            echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}|wiki/${num}.${filename}.md" >> link_map.txt
+          done
+          echo "LINK_MAP_END" >> link_map.txt
+          cat link_map.txt
+
+      - name: Copy Home.md to wiki/README.md with replacements
         run: |
           cp _wiki/Home.md wiki/README.md
+
+          # 替换 doc 路径
           sed -i 's#](doc/#](../doc/#g' wiki/README.md
 
-      - name: Parse Home.md and copy listed files with path replacement
+          # 替换 wiki 页面链接
+          while IFS='|' read -r src dst; do
+            [[ "$src" == LINK_MAP_START ]] && continue
+            [[ "$src" == LINK_MAP_END ]] && continue
+            sed -i "s#${src}#${dst}#g" wiki/README.md
+          done < link_map.txt
+
+      - name: Parse Home.md and copy listed files with replacements
         run: |
           grep -E '^[0-9]+\.\s*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
             num=$(echo "$line" | sed -E 's/^([0-9]+)\..*/\1/')
@@ -43,7 +65,17 @@ jobs:
 
             if [ -f "$src_file" ]; then
               cp "$src_file" "$dst_file"
+
+              # 替换 doc 路径
               sed -i 's#](doc/#](../doc/#g' "$dst_file"
+
+              # 替换 wiki 页面链接
+              while IFS='|' read -r src dst; do
+                [[ "$src" == LINK_MAP_START ]] && continue
+                [[ "$src" == LINK_MAP_END ]] && continue
+                sed -i "s#${src}#${dst}#g" "$dst_file"
+              done < link_map.txt
+
             else
               echo "Warning: File not found: $src_file"
             fi
