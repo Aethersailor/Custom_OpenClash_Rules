@@ -1,7 +1,7 @@
-name: Backup GitHub Wiki
+name: Backup Wiki
 
 on:
-  # 定时触发：每天凌晨 3:00
+  # 每天凌晨 3:00 备份
   schedule:
     - cron: '0 3 * * *'
 
@@ -26,6 +26,12 @@ jobs:
           mkdir -p wiki
           cp -r wiki-temp/*.md wiki/
 
+      - name: Rename Home.md to README.md
+        run: |
+          if [ -f wiki/Home.md ]; then
+            mv wiki/Home.md wiki/README.md
+          fi
+
       - name: Replace image paths in Markdown
         run: |
           find wiki -type f -name "*.md" -exec sed -i 's#](doc/#](../doc/#g' {} +
@@ -39,7 +45,7 @@ jobs:
 
           git add wiki
 
-          # 只有有更改时才提交
+          # 只有有变更时才提交
           if ! git diff --cached --quiet; then
             git commit -m "Backup Wiki $(date +'%Y-%m-%d %H:%M:%S')"
             git push
