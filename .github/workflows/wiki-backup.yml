@@ -28,13 +28,22 @@ jobs:
         id: build-map
         run: |
           echo "LINK_MAP_START" > link_map.txt
+
+          # 解析 Home.md 生成页面链接和锚点替换规则
           grep -E '^[0-9]+\.\s*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
             num=$(echo "$line" | sed -E 's/^([0-9]+)\..*/\1/')
             raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
             filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
+
+            # 完整页面替换
             echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}|${num}.${filename}.md" >> link_map.txt
+
+            # 页面内锚点链接替换
+            echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}#|${num}.${filename}.md#" >> link_map.txt
           done
+
           echo "LINK_MAP_END" >> link_map.txt
+          echo "==== Link Map ===="
           cat link_map.txt
 
       - name: Copy Home.md to wiki/README.md with replacements
@@ -44,10 +53,11 @@ jobs:
           # 替换 doc 路径
           sed -i 's#](doc/#](../doc/#g' wiki/README.md
 
-          # 替换 wiki 页面链接为相对路径
+          # 替换 wiki 页面链接和章节
           while IFS='|' read -r src dst; do
             [[ "$src" == LINK_MAP_START ]] && continue
             [[ "$src" == LINK_MAP_END ]] && continue
+            echo "Replacing $src → $dst"
             sed -i "s#${src}#${dst}#g" wiki/README.md
           done < link_map.txt
 
@@ -69,10 +79,11 @@ jobs:
               # 替换 doc 路径
               sed -i 's#](doc/#](../doc/#g' "$dst_file"
 
-              # 替换 wiki 页面链接为相对路径
+              # 替换 wiki 页面链接和章节
               while IFS='|' read -r src dst; do
                 [[ "$src" == LINK_MAP_START ]] && continue
                 [[ "$src" == LINK_MAP_END ]] && continue
+                echo "Replacing $src → $dst in $dst_file"
                 sed -i "s#${src}#${dst}#g" "$dst_file"
               done < link_map.txt
 
