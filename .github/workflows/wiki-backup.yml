@@ -29,16 +29,13 @@ jobs:
         run: |
           echo "LINK_MAP_START" > link_map.txt
 
-          # 解析 Home.md 生成页面链接和锚点替换规则
           grep -E '^[0-9]+\.\s*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
             num=$(echo "$line" | sed -E 's/^([0-9]+)\..*/\1/')
             raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
             filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
 
-            # 页面本身
+            # 只替换页面部分，不自动附加锚点
             echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}|${num}.${filename}.md" >> link_map.txt
-            # 页面带锚点
-            echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}#|${num}.${filename}.md#" >> link_map.txt
           done
 
           echo "LINK_MAP_END" >> link_map.txt
@@ -58,10 +55,15 @@ jobs:
             [[ "$src" == LINK_MAP_END ]] && continue
             echo "Replacing $src → $dst in README.md"
 
+            # 转义链接中的特殊字符
             src_escaped=$(printf '%s\n' "$src" | sed 's/[\/&]/\\&/g')
             dst_escaped=$(printf '%s\n' "$dst" | sed 's/[\/&]/\\&/g')
 
-            sed -i "s#${src_escaped}#${dst_escaped}#g" wiki/README.md
+            # 普通页面链接
+            sed -i "s~${src_escaped}~${dst_escaped}~g" wiki/README.md
+
+            # 带 # 锚点的链接
+            sed -i "s~${src_escaped}#~${dst_escaped}#~g" wiki/README.md
           done < link_map.txt
 
       - name: Parse Home.md and copy listed files with replacements
@@ -91,7 +93,8 @@ jobs:
                 src_escaped=$(printf '%s\n' "$src" | sed 's/[\/&]/\\&/g')
                 dst_escaped=$(printf '%s\n' "$dst" | sed 's/[\/&]/\\&/g')
 
-                sed -i "s#${src_escaped}#${dst_escaped}#g" "$dst_file"
+                sed -i "s~${src_escaped}~${dst_escaped}~g" "$dst_file"
+                sed -i "s~${src_escaped}#~${dst_escaped}#~g" "$dst_file"
               done < link_map.txt
 
             else
