@@ -21,13 +21,10 @@ jobs:
       - name: Prepare doc directory in wiki repository
         run: |
           mkdir -p _wiki/doc
-          
-          # 删除 doc 目录下除 README.md 外的内容
           find _wiki/doc -mindepth 1 -not -name README.md -exec rm -rf {} +
 
       - name: Sync main repo's doc to wiki repository
         run: |
-          # 使用 rsync 排除 README.md
           rsync -av --exclude 'README.md' doc/ _wiki/doc/
 
       - name: Commit and push changes to wiki
@@ -36,6 +33,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add doc
+
           if ! git diff --cached --quiet; then
             git commit -m "Sync doc from main repository"
             git push
+          fi
