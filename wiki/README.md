@@ -2,6 +2,8 @@
 这是全网最详细的 OpenClash 设置方案。  
 让你以最优雅的方式使用 OpenClash。
 
+本项目 Wiki 内容会自动同步备份至仓库 Wiki 目录下，如需保存，建议 fork 本仓库。
+
 1. [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)  
 讲解本项目相关的 OpenClash 设置方法。  
 
