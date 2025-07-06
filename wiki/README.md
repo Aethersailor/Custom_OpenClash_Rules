@@ -2,7 +2,7 @@
 这是全网最详细的 OpenClash 设置方案。  
 让你以最优雅的方式使用 OpenClash。
 
-本项目 Wiki 内容会自动同步备份至仓库 Wiki 目录下，如需保存，建议 fork 本仓库。
+本项目 Wiki 内容会自动同步备份至仓库 Wiki 目录下，如需保存内容，建议 fork 本仓库，并定期执行同步。
 
 1. [OpenClash 设置方案](1.OpenClash-设置方案.md)  
 讲解本项目相关的 OpenClash 设置方法。  
