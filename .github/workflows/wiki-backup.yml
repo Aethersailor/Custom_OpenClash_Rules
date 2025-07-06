@@ -1,62 +1,48 @@
-name: Backup wiki
+name: Sync Wiki
 
 on:
-  workflow_dispatch:
+  # 定时同步：每天凌晨 3:00
   schedule:
-    - cron: '0 0 * * *'  # 每天凌晨同步，可修改
+    - cron: '0 3 * * *'
+  
+  # 手动触发
+  workflow_dispatch:
 
 jobs:
-  backup-wiki-root:
+  sync-wiki:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout main repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Clone wiki repository with auth
-        env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Clone Wiki repository
         run: |
-          git clone https://x-access-token:${TOKEN}@github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git _wiki
+          git clone https://github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git wiki-temp
 
-      - name: Clean old wiki backup
+      - name: Prepare backup directory
         run: |
-          # 删除主仓库 wiki 目录下所有 .md 文件
-          mkdir -p wiki
-          find wiki -type f -name "*.md" -delete
+          rm -rf doc/wiki/backup
+          mkdir -p doc/wiki/backup
+          cp -r wiki-temp/*.md doc/wiki/backup/
 
-      - name: Parse Home.md and copy files
+      - name: Replace image paths
         run: |
-          # 读取 Home.md，逐条处理
-          awk '/^[0-9]+\.\s*\[.*\]\(.*\)/ {print}' _wiki/Home.md | while read -r line; do
-            # 序号
-            num=$(echo "$line" | sed -n 's/^\([0-9]\+\)\..*/\1/p')
-            # 提取链接中的文件名（URL 编码）
-            raw_url=$(echo "$line" | sed -n 's/.*](.*\/wiki\/\(.*\)).*/\1/p')
-            # 解码
-            filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
-            # 源文件路径
-            src_file="_wiki/${filename}.md"
-            # 目标文件路径
-            dst_file="wiki/${num}.${filename}.md"
-
-            echo "Processing: $src_file → $dst_file"
-
-            # 如果文件存在，复制
-            if [ -f "$src_file" ]; then
-              cp "$src_file" "$dst_file"
-            else
-              echo "Warning: $src_file not found, skipping."
-            fi
-          done
+          find doc/wiki/backup -type f -name "*.md" -exec sed -i 's#](doc/#](../doc/#g' {} +
 
       - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add wiki
 
+          git add doc/wiki/backup
+
+          # 只有有更改时才提交
           if ! git diff --cached --quiet; then
-            git commit -m "Backup wiki root files from wiki repository"
+            git commit -m "Backup Wiki $(date +'%Y-%m-%d %H:%M:%S')"
             git push
+          else
+            echo "No changes detected, skipping commit."
           fi
