@@ -20,7 +20,11 @@ jobs:
 
       - name: Copy doc/ to wiki (excluding README)
         run: |
-          rsync -av --delete --exclude='README.md' --exclude='README' --exclude='readme.md' doc/ wiki/
+          rsync -av --delete \
+            --exclude='README.md' \
+            --exclude='README' \
+            --exclude='readme.md' \
+            doc/ wiki/
 
       - name: Commit and push to wiki
         working-directory: wiki
@@ -31,3 +35,4 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "Sync from main repo doc directory"
             git push
+          fi
