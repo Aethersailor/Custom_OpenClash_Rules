@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'doc/**'   # 只有 doc 目录变更时触发
+      - 'doc/**'
 
 jobs:
   sync-to-wiki:
@@ -16,21 +16,23 @@ jobs:
 
       - name: Clone wiki repository
         run: |
-          git clone https://github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git wiki
+          git clone https://github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git _wiki
 
-      - name: Sync doc directory, exclude README.md
+      - name: Prepare doc directory in wiki repository
         run: |
-          mkdir -p wiki/doc
+          mkdir -p _wiki/doc
           
-          # 清空 wiki 的 doc 目录，但保留 README.md
-          find wiki/doc -mindepth 1 -not -name README.md -exec rm -rf {} +
+          # 删除 doc 目录下除 README.md 外的内容
+          find _wiki/doc -mindepth 1 -not -name README.md -exec rm -rf {} +
 
-          # 将主仓库 doc 的内容同步过去
-          rsync -av --exclude 'README.md' doc/ wiki/doc/
+      - name: Sync main repo's doc to wiki repository
+        run: |
+          # 使用 rsync 排除 README.md
+          rsync -av --exclude 'README.md' doc/ _wiki/doc/
 
       - name: Commit and push changes to wiki
         run: |
-          cd wiki
+          cd _wiki
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add doc
