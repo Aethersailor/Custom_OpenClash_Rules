@@ -33,7 +33,7 @@
 
 如果不关闭此项，Dnsmasq 解析的地址中不会返回 IPv6 地址，也就无法访问 IPv6 网站。  
 
-![](doc/ipv6/openwrt/pics/v6-7.png)  
+![](../doc/ipv6/openwrt/pics/v6-7.png)  
 
 ***
 
@@ -57,19 +57,19 @@
 
 6. 按图设置。 
 
-![](doc/ipv6/openwrt/pics/v6-1.png)  
+![](../doc/ipv6/openwrt/pics/v6-1.png)  
 
-![](doc/ipv6/openwrt/pics/v6-2.png)  
+![](../doc/ipv6/openwrt/pics/v6-2.png)  
 
 * 在 `WAN 接口`的 `DHCP` 中检查设置，确保 `DHCP > IPv6 设置`已经关闭  
 
-![](doc/ipv6/openwrt/pics/v6-3.png)  
+![](../doc/ipv6/openwrt/pics/v6-3.png)  
 
 * 保存并应用设置后，你的接口界面中应该会出现一个虚拟的 wan_6接口。注意此接口是无法编辑设置的。  
 
 * 确认红框中的 `IPv6-PD` 地址，获取到了这个地址才能进行下一步操作。  
 
-![](doc/ipv6/openwrt/pics/wan.png)   
+![](../doc/ipv6/openwrt/pics/wan.png)   
 
 
 * **手动创建**  
@@ -86,13 +86,13 @@ WAN > 高级设置 > IPv6 分配长度
 
 按照图中内容对 `WAN6` 接口进行配置  
 
-![](doc/ipv6/openwrt/pics/wan6-1.png)  
+![](../doc/ipv6/openwrt/pics/wan6-1.png)  
 
-![](doc/ipv6/openwrt/pics/wan6-2.png)  
+![](../doc/ipv6/openwrt/pics/wan6-2.png)  
 
 保存并应用配置后，检查 WAN6 接口是否取得了 `IPv6-PD` 地址。  
 
-![](doc/ipv6/openwrt/pics/wan2.png)  
+![](../doc/ipv6/openwrt/pics/wan2.png)  
 
 如果你没有 PD 地址，说明你的 PD 地址被上一级路由占用了，或者干脆你的运行商没给。  
 
@@ -106,7 +106,7 @@ WAN > 高级设置 > IPv6 分配长度
 
 * `“委托 IPv6 前缀”`允许下级设备再划分子网，按需勾选。    
 
-![](doc/ipv6/openwrt/pics/v6-4.png)  
+![](../doc/ipv6/openwrt/pics/v6-4.png)  
 
 接着设置 LAN 口的 IPv6 网络地址分配服务，让局域网设备可以取得 IPv6 地址。  
 
@@ -124,7 +124,7 @@ WAN > 高级设置 > IPv6 分配长度
 
 在 `LAN > 高级设置 > IPv6 后缀` 中填入 `eui64`  
 
-![](doc/ipv6/openwrt/pics/eui64.png)  
+![](../doc/ipv6/openwrt/pics/eui64.png)  
 
 EUI-64 可以让设备的后缀地址由 MAC 地址生成，因此可以生成唯一的后缀。  
 
@@ -132,13 +132,13 @@ EUI-64 网络地址分配方式的技术解释可以看 ImmortalWrt 仓库的文
 
 同时我们需要禁止 OpenWrt 通告 IPv6 地址的 DNS，因为设备只需要 OpenWrt 的 IPv4 DNS 地址即可实现 IPv6 解析。  
 
-![192.168.1.1 为 OpenWrt的 IPv4 地址](doc/ipv6/openwrt/pics/nslookup.png)  
+![192.168.1.1 为 OpenWrt的 IPv4 地址](../doc/ipv6/openwrt/pics/nslookup.png)  
 
 强迫下游设备使用 OpenWrt 的 IPv4 地址（比如192.168.1.1）来解析包括 IPv6 域名在内的全部域名，可以避免很多问题。    
 
-![](doc/ipv6/openwrt/pics/v6-5.png)  
+![](../doc/ipv6/openwrt/pics/v6-5.png)  
 
-![](doc/ipv6/openwrt/pics/v6-6.png)  
+![](../doc/ipv6/openwrt/pics/v6-6.png)  
 
 如此设置之后，局域网支持 IPv6 的设备都将获得一个固定且唯一的 IPv6 地址，并且 IPv6 DNS 为空。  
 
@@ -154,7 +154,7 @@ EUI-64 网络地址分配方式的技术解释可以看 ImmortalWrt 仓库的文
 
 正常情况下，会取得全部通过的结果  
 
-![](doc/ipv6/openwrt/pics/ipv6test.png)  
+![](../doc/ipv6/openwrt/pics/ipv6test.png)  
 
 至此，OpenWrt 的 IPv6 功能设置完毕。  
 
@@ -162,9 +162,9 @@ EUI-64 网络地址分配方式的技术解释可以看 ImmortalWrt 仓库的文
 
 * 如果想了解当前访问的网页，使用的是 IPv4 还是 IPv6 线路，可以使用浏览器插件`IPvFoo`，在 Chrome/Firefox 浏览器的插件商店中均有下载。  
 
-![](doc/ipv6/openwrt/pics/chrome.png)  
+![](../doc/ipv6/openwrt/pics/chrome.png)  
 
-![](doc/ipv6/openwrt/pics/firefox.png)  
+![](../doc/ipv6/openwrt/pics/firefox.png)  
 
 * 使用 Firefox 浏览器，请在 `about:config` 中将 `network.dns.preferIPv6` 的值设定为 `true`，否则浏览器不会使用 IPv6 访问目标网站。  
 
@@ -176,9 +176,9 @@ EUI-64 网络地址分配方式的技术解释可以看 ImmortalWrt 仓库的文
 
 图片仅供参考  
 
-![](doc/ipv6/lede/pics/lede6-1.png)  
+![](../doc/ipv6/lede/pics/lede6-1.png)  
 
-![](doc/ipv6/lede/pics/dhcpv6.png)  
+![](../doc/ipv6/lede/pics/dhcpv6.png)  
 
 ***
 
@@ -204,7 +204,7 @@ EUI-64 网络地址分配方式的技术解释可以看 ImmortalWrt 仓库的文
 
 比如当你的 OpenWrt 的上游 DNS 服务器提供 IPv6 域名解析时，你的 OpenWrt 的 Dnsmasq 就可以提供 IPv6 域名的解析服务，这和你通过 IPv4 还是 IPv6 去请求 Dnsmasq 解析是无关的，即便你使用路由器的 IPv4 地址去请求域名解析，一样可以取得 IPv6 结果。    
 
-![192.168.1.1 为 OpenWrt的 IPv4 地址](doc/ipv6/openwrt/pics/nslookup.png)
+![192.168.1.1 为 OpenWrt的 IPv4 地址](../doc/ipv6/openwrt/pics/nslookup.png)
 
 也就是说，当 OpenWrt 作为你的 DNS 服务器时，只要你的局域网设备获得了 IPv6 地址并且可以正常访问 IPv6 网络，即使局域网设备只取得了 IPv4 的 DNS 地址（比如 192.168.1.1），仍然可以通过 IPv4 的 DNS（192.168.1.1）去解析获得 AAAA 记录从而正常访问 IPv6 网站。  
 
