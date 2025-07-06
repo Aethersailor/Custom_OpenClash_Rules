@@ -1,34 +1,34 @@
-name: Sync Wiki
+name: Backup GitHub Wiki
 
 on:
-  # 定时同步：每天凌晨 3:00
+  # 定时触发：每天凌晨 3:00
   schedule:
     - cron: '0 3 * * *'
-  
+
   # 手动触发
   workflow_dispatch:
 
 jobs:
-  sync-wiki:
+  backup-wiki:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main repository
+      - name: Checkout this repository
         uses: actions/checkout@v4
 
-      - name: Clone Wiki repository
+      - name: Clone the Wiki repository
         run: |
           git clone https://github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git wiki-temp
 
-      - name: Prepare backup directory
+      - name: Clear old backup and copy new files
         run: |
-          rm -rf doc/wiki/backup
-          mkdir -p doc/wiki/backup
-          cp -r wiki-temp/*.md doc/wiki/backup/
+          rm -rf wiki
+          mkdir -p wiki
+          cp -r wiki-temp/*.md wiki/
 
-      - name: Replace image paths
+      - name: Replace image paths in Markdown
         run: |
-          find doc/wiki/backup -type f -name "*.md" -exec sed -i 's#](doc/#](../doc/#g' {} +
+          find wiki -type f -name "*.md" -exec sed -i 's#](doc/#](../doc/#g' {} +
 
       - name: Commit and push changes
         env:
@@ -37,7 +37,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add doc/wiki/backup
+          git add wiki
 
           # 只有有更改时才提交
           if ! git diff --cached --quiet; then
