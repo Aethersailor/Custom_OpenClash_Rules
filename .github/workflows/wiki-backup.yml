@@ -1,4 +1,4 @@
-name: Backup wiki root files
+name: Backup Wiki
 
 on:
   workflow_dispatch:
@@ -109,6 +109,7 @@ jobs:
           git add wiki
 
           if ! git diff --cached --quiet; then
-            git commit -m "Backup wiki root files from wiki repository"
+            commit_time=$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')
+            git commit -m "Backup Wiki at ${commit_time} UTC+8"
             git push
           fi
