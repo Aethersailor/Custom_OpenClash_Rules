@@ -124,6 +124,8 @@ DOMAIN-SUFFIX,game.maj-soul.com
 # PR 至 felixonmars/dnsmasq-china-list
 # 海翔登录
 DOMAIN-SUFFIX,seaflysoft.com
+# 鸿蒙出境易
+DOMAIN-SUFFIX,chujingapp.com
 
 # PR 至 v2fly/domain-list-community
 
