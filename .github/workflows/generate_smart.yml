@@ -1,9 +1,13 @@
-name: Generate Custom_Clash_Smart.ini
+name: Generate Smart INI Files
 
 on:
   push:
+    # 只监听源文件变更，避免 Smart 文件触发循环
     paths:
       - cfg/Custom_Clash.ini
+      - cfg/Custom_Clash_Full.ini
+      - cfg/Custom_Clash_GFW.ini
+      - cfg/Custom_Clash_Lite.ini
 
   workflow_dispatch:
 
@@ -15,18 +19,36 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: Process Custom_Clash.ini and generate Custom_Clash_Smart.ini
+      - name: Process ini files and generate smart versions
         run: |
-          echo "Processing cfg/Custom_Clash.ini ..."
+          echo "Start processing ini files..."
 
-          # 删除指定行和指定内容
-          awk '!/^custom_proxy_group=♻️ 自动选择/ && !/^custom_proxy_group=🌐 其他地区/ {
-            gsub(/`?\[\]♻️ 自动选择/, "")
-            gsub(/`?\[\]🌐 其他地区/, "")
-            print
-          }' cfg/Custom_Clash.ini > cfg/Custom_Clash_Smart.ini
+          # 定义要处理的文件对：格式为 "源文件:目标文件"
+          FILES_TO_PROCESS=(
+            "cfg/Custom_Clash.ini:cfg/Custom_Clash_Smart.ini"
+            "cfg/Custom_Clash_Full.ini:cfg/Custom_Clash_Smart_Full.ini"
+            "cfg/Custom_Clash_GFW.ini:cfg/Custom_Clash_Smart_GFW.ini"
+            "cfg/Custom_Clash_Lite.ini:cfg/Custom_Clash_Smart_Lite.ini"
+          )
 
-          echo "Generated cfg/Custom_Clash_Smart.ini"
+          for pair in "${FILES_TO_PROCESS[@]}"; do
+            input_file="${pair%%:*}"
+            output_file="${pair##*:}"
+
+            if [[ -f "$input_file" ]]; then
+              echo "Processing $input_file -> $output_file"
+
+              awk '!/^custom_proxy_group=♻️ 自动选择/ && !/^custom_proxy_group=🌐 其他地区/ {
+                gsub(/`?\[\]♻️ 自动选择/, "")
+                gsub(/`?\[\]🌐 其他地区/, "")
+                print
+              }' "$input_file" > "$output_file"
+
+              echo "Generated $output_file"
+            else
+              echo "Warning: $input_file does not exist, skipping"
+            fi
+          done
 
       - name: Commit and push changes
         env:
@@ -35,12 +57,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add cfg/Custom_Clash_Smart.ini
+          git add cfg/*_Smart*.ini
 
           # 仅有变更时提交
           if ! git diff --cached --quiet; then
             echo "Changes detected, committing..."
-            git commit -m "Generate Custom_Clash_Smart.ini based on Custom_Clash.ini"
+            git commit -m "Generate Smart INI files based on source files"
             git push
           else
             echo "No changes detected, skipping commit."
