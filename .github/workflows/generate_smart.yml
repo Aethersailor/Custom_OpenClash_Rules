@@ -2,7 +2,7 @@ name: Generate Smart INI Files
 
 on:
   push:
-    # 只监听源文件变更，避免 Smart 文件触发循环
+    # 只监听源文件，避免 Smart 文件触发循环
     paths:
       - cfg/Custom_Clash.ini
       - cfg/Custom_Clash_Full.ini
@@ -23,13 +23,17 @@ jobs:
         run: |
           echo "Start processing ini files..."
 
-          # 定义要处理的文件对：格式为 "源文件:目标文件"
           FILES_TO_PROCESS=(
             "cfg/Custom_Clash.ini:cfg/Custom_Clash_Smart.ini"
             "cfg/Custom_Clash_Full.ini:cfg/Custom_Clash_Smart_Full.ini"
             "cfg/Custom_Clash_GFW.ini:cfg/Custom_Clash_Smart_GFW.ini"
             "cfg/Custom_Clash_Lite.ini:cfg/Custom_Clash_Smart_Lite.ini"
           )
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          commit_flag=0
 
           for pair in "${FILES_TO_PROCESS[@]}"; do
             input_file="${pair%%:*}"
@@ -45,25 +49,27 @@ jobs:
               }' "$input_file" > "$output_file"
 
               echo "Generated $output_file"
+
+              git add "$output_file"
+
+              if ! git diff --cached --quiet; then
+                echo "Changes detected in $output_file, committing..."
+                git commit -m "Generate $(basename "$output_file") based on $(basename "$input_file")"
+                commit_flag=1
+              else
+                echo "No changes detected in $output_file, skipping commit."
+                git reset "$output_file"
+              fi
+
             else
               echo "Warning: $input_file does not exist, skipping"
             fi
           done
 
-      - name: Commit and push changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          git add cfg/*_Smart*.ini
-
-          # 仅有变更时提交
-          if ! git diff --cached --quiet; then
-            echo "Changes detected, committing..."
-            git commit -m "Generate Smart INI files based on source files"
+          # 所有文件处理完再 push
+          if [[ "$commit_flag" -eq 1 ]]; then
+            echo "Pushing changes..."
             git push
           else
-            echo "No changes detected, skipping commit."
+            echo "No changes to push."
           fi
