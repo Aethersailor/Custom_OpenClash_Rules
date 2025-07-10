@@ -5,7 +5,7 @@ on:
     paths:
       - cfg/Custom_Clash.ini
 
-  workflow_dispatch:  # 手动触发支持
+  workflow_dispatch:  # 支持手动触发
 
 jobs:
   generate-smart:
@@ -17,8 +17,9 @@ jobs:
 
       - name: Process Custom_Clash.ini and generate Custom_Clash_Smart.ini
         run: |
-          # 处理 cfg/Custom_Clash.ini，去除目标内容并生成新文件
+          echo "Processing cfg/Custom_Clash.ini ..."
           awk '!/^custom_proxy_group=♻️ 自动选择/ && !/^custom_proxy_group=🌐 其他地区/ {gsub(/\[\]♻️ 自动选择/, ""); print}' cfg/Custom_Clash.ini > cfg/Custom_Clash_Smart.ini
+          echo "Generated cfg/Custom_Clash_Smart.ini"
 
       - name: Commit and push changes
         env:
@@ -31,5 +32,9 @@ jobs:
 
           # 仅有变更时提交
           if ! git diff --cached --quiet; then
+            echo "Changes detected, committing..."
             git commit -m "Generate Custom_Clash_Smart.ini based on Custom_Clash.ini"
             git push
+          else
+            echo "No changes detected, skipping commit."
+          fi
