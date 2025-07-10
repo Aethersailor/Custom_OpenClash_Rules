@@ -2,7 +2,6 @@ name: Generate Smart INI Files
 
 on:
   push:
-    # 只监听源文件，避免 Smart 文件触发循环
     paths:
       - cfg/Custom_Clash.ini
       - cfg/Custom_Clash_Full.ini
@@ -42,11 +41,17 @@ jobs:
             if [[ -f "$input_file" ]]; then
               echo "Processing $input_file -> $output_file"
 
+              # 第一轮处理：删除行和行内内容
               awk '!/^custom_proxy_group=♻️ 自动选择/ && !/^custom_proxy_group=🌐 其他地区/ {
                 gsub(/`?\[\]♻️ 自动选择/, "")
                 gsub(/`?\[\]🌐 其他地区/, "")
                 print
-              }' "$input_file" > "$output_file"
+              }' "$input_file" > "$output_file.tmp"
+
+              # 第二轮处理：插入注释
+              awk '{print} /^;节点地区分组/ {print ";Smart 内核专用模板，节点分组仅保留地区分组"}' "$output_file.tmp" > "$output_file"
+
+              rm "$output_file.tmp"
 
               echo "Generated $output_file"
 
@@ -66,7 +71,6 @@ jobs:
             fi
           done
 
-          # 所有文件处理完再 push
           if [[ "$commit_flag" -eq 1 ]]; then
             echo "Pushing changes..."
             git push
