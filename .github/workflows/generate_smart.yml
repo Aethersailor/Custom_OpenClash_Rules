@@ -25,7 +25,6 @@ jobs:
           FILES_TO_PROCESS=(
             "cfg/Custom_Clash.ini:cfg/Custom_Clash_Smart.ini"
             "cfg/Custom_Clash_Full.ini:cfg/Custom_Clash_Smart_Full.ini"
-            "cfg/Custom_Clash_GFW.ini:cfg/Custom_Clash_Smart_GFW.ini"
             "cfg/Custom_Clash_Lite.ini:cfg/Custom_Clash_Smart_Lite.ini"
           )
 
