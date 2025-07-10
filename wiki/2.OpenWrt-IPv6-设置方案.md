@@ -24,6 +24,10 @@
 ## 1. OpenWrt/ImmortalWrt 固件 IPv6 设置方案  
 
 本方案仅仅提供 OpenWrt/ImmortalWrt 固件的详细设置步骤，对于 LEDE 固件暂不提供详细设置步骤。  
+
+请确保你已经将光猫设置为桥接模式，使用 OpenWrt 作为主路由进行拨号。  
+
+光猫改桥接请打光猫上的装维师傅电话进行修改。  
   
 ### 1.1. Dnsmasq 设置  
 
