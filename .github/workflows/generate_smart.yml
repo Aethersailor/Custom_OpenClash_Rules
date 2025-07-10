@@ -5,7 +5,7 @@ on:
     paths:
       - cfg/Custom_Clash.ini
 
-  workflow_dispatch:  # 支持手动触发
+  workflow_dispatch:
 
 jobs:
   generate-smart:
@@ -19,8 +19,12 @@ jobs:
         run: |
           echo "Processing cfg/Custom_Clash.ini ..."
 
-          # 删除每行中的 "`[]♻️ 自动选择"，删除以 custom_proxy_group=♻️ 自动选择 和 custom_proxy_group=🌐 其他地区 开头的行
-          awk '!/^custom_proxy_group=♻️ 自动选择/ && !/^custom_proxy_group=🌐 其他地区/ {gsub(/`?\[\]♻️ 自动选择/, ""); print}' cfg/Custom_Clash.ini > cfg/Custom_Clash_Smart.ini
+          # 删除指定行和指定内容
+          awk '!/^custom_proxy_group=♻️ 自动选择/ && !/^custom_proxy_group=🌐 其他地区/ {
+            gsub(/`?\[\]♻️ 自动选择/, "")
+            gsub(/`?\[\]🌐 其他地区/, "")
+            print
+          }' cfg/Custom_Clash.ini > cfg/Custom_Clash_Smart.ini
 
           echo "Generated cfg/Custom_Clash_Smart.ini"
 
