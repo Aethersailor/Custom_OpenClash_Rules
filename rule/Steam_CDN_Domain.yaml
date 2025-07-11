@@ -1,8 +1,10 @@
 # Generated from rule/Steam_CDN.list
-# Project: https://github.com/Aethersailor/Custom_OpenClash_Rules
-# Source: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Steam_CDN.list
+# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Steam_CDN.list
+# UPDATE: 2025-07-11 18:51:27
+# TOTAL: 3
 
 payload:
-  - DOMAIN-SUFFIX,steamcdn-a.akamaihd.net
-  - DOMAIN-SUFFIX,cm.steampowered.com
-  - DOMAIN-SUFFIX,steamserver.net
+  - '+.steamcdn-a.akamaihd.net'
+  - '+.cm.steampowered.com'
+  - '+.steamserver.net'
