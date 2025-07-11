@@ -26,20 +26,20 @@ jobs:
 
       - name: Generate YAML from LIST files
         run: |
-          FILES=("Custom_Direct" "Custom_Proxy" "Steam_CDN")  # 将来可在此添加更多文件名
+          FILES=("Custom_Direct" "Custom_Proxy")  # 将来可在此添加更多文件名
 
           for base_name in "${FILES[@]}"; do
             list_file="rule/${base_name}.list"
-            yaml_file="rule/${base_name}.yaml"
+            domain_yaml_file="rule/${base_name}_Domain.yaml"
             ip_yaml_file="rule/${base_name}_IP.yaml"
 
             # 生成域名类规则
-            echo "# Generated from ${list_file}" > "$yaml_file"
-            echo "# Project: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$yaml_file"
-            echo "# Source: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$yaml_file"
-            echo "" >> "$yaml_file"
-            echo "payload:" >> "$yaml_file"
-            grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed 's/^/  - /' >> "$yaml_file"
+            echo "# Generated from ${list_file}" > "$domain_yaml_file"
+            echo "# Project: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$domain_yaml_file"
+            echo "# Source: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$domain_yaml_file"
+            echo "" >> "$domain_yaml_file"
+            echo "payload:" >> "$domain_yaml_file"
+            grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed 's/^/  - /' >> "$domain_yaml_file"
 
             # 生成IP类规则
             echo "# Generated from ${list_file}" > "$ip_yaml_file"
@@ -50,17 +50,17 @@ jobs:
             grep -E '^(IP-|IP-CIDR)' "$list_file" | sed 's/^/  - /' >> "$ip_yaml_file"
 
             # 判断是否有变更
-            if [[ -n $(git status --porcelain "$yaml_file" "$ip_yaml_file") ]]; then
-              git add "$yaml_file" "$ip_yaml_file"
+            if [[ -n $(git status --porcelain "$domain_yaml_file" "$ip_yaml_file") ]]; then
+              git add "$domain_yaml_file" "$ip_yaml_file"
 
               # 优化 commit 信息，去掉 rule/ 前缀
               short_list_file="$(basename "$list_file")"
-              short_yaml_file="$(basename "$yaml_file")"
+              short_domain_yaml_file="$(basename "$domain_yaml_file")"
               short_ip_yaml_file="$(basename "$ip_yaml_file")"
 
-              git commit -m "Generate ${short_yaml_file} and ${short_ip_yaml_file} from ${short_list_file}"
+              git commit -m "Generate ${short_domain_yaml_file} and ${short_ip_yaml_file} from ${short_list_file}"
             else
-              echo "No changes in ${yaml_file} and ${ip_yaml_file}, skip commit."
+              echo "No changes in ${domain_yaml_file} and ${ip_yaml_file}, skip commit."
             fi
           done
 
