@@ -66,3 +66,4 @@ jobs:
             git push origin HEAD:main
           else
             echo "No new commits to push."
+          fi
