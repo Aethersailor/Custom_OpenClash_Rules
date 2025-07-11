@@ -1,0 +1,63 @@
+name: Generate YAML Rules
+
+on:
+  push:
+    paths:
+      - 'rule/*.list'
+  workflow_dispatch:
+
+jobs:
+  generate-rules:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Generate YAML from LIST files
+        run: |
+          FILES=("Custom_Direct" "Custom_Proxy")  # 将来可在此添加更多文件名
+
+          for base_name in "${FILES[@]}"; do
+            list_file="rule/${base_name}.list"
+            yaml_file="rule/${base_name}.yaml"
+            ip_yaml_file="rule/${base_name}_IP.yaml"
+
+            # 生成域名类规则
+            echo "# Generated from ${list_file}" > "$yaml_file"
+            echo "# Project: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$yaml_file"
+            echo "# Source: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$yaml_file"
+            echo "" >> "$yaml_file"
+            echo "payload:" >> "$yaml_file"
+            grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed 's/^/  - /' >> "$yaml_file"
+
+            # 生成IP类规则
+            echo "# Generated from ${list_file}" > "$ip_yaml_file"
+            echo "# Project: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$ip_yaml_file"
+            echo "# Source: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$ip_yaml_file"
+            echo "" >> "$ip_yaml_file"
+            echo "payload:" >> "$ip_yaml_file"
+            grep -E '^(IP-|IP-CIDR)' "$list_file" | sed 's/^/  - /' >> "$ip_yaml_file"
+
+            # 判断是否有变更
+            if [[ -n $(git status --porcelain "$yaml_file" "$ip_yaml_file") ]]; then
+              git add "$yaml_file" "$ip_yaml_file"
+              git commit -m "Generate ${yaml_file} and ${ip_yaml_file} from ${list_file}"
+            else
+              echo "No changes in ${yaml_file} and ${ip_yaml_file}, skip commit."
+            fi
+          done
+
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ -n $(git log origin/main..HEAD) ]]; then
+            git push origin HEAD:main
+          else
+            echo "No new commits to push."
