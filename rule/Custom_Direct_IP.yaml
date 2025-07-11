@@ -1,11 +1,11 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# UPDATE: 2025-07-11 18:51:27
+# UPDATE: 2025-07-11 19:12:11
 # TOTAL: 4
 
 payload:
-  - '5.5.5.5/32,no-resolve'
-  - '218.78.7.16/32,no-resolve'
-  - '98.126.27.164/32,no-resolve'
-  - '108.174.48.100/32,no-resolve'
+  - '5.5.5.5/32'
+  - '218.78.7.16/32'
+  - '98.126.27.164/32'
+  - '108.174.48.100/32'
