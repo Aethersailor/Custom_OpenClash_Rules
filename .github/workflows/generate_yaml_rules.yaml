@@ -26,7 +26,7 @@ jobs:
 
       - name: Generate YAML from LIST files
         run: |
-          FILES=("Custom_Direct" "Custom_Proxy")  # 将来可在此添加更多文件名
+          FILES=("Custom_Direct" "Custom_Proxy" "Steam_CDN")  # 将来可在此添加更多文件名
 
           for base_name in "${FILES[@]}"; do
             list_file="rule/${base_name}.list"
