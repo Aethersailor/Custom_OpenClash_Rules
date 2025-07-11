@@ -1,0 +1,7 @@
+# Generated from rule/Custom_Proxy.list
+# Project: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# Source: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Proxy.list
+
+payload:
+  - IP-CIDR,1.1.1.1/32,no-resolve
+  - IP-CIDR,1.0.0.1/32,no-resolve
