@@ -52,7 +52,13 @@ jobs:
             # 判断是否有变更
             if [[ -n $(git status --porcelain "$yaml_file" "$ip_yaml_file") ]]; then
               git add "$yaml_file" "$ip_yaml_file"
-              git commit -m "Generate ${yaml_file} and ${ip_yaml_file} from ${list_file}"
+
+              # 优化 commit 信息，去掉 rule/ 前缀
+              short_list_file="$(basename "$list_file")"
+              short_yaml_file="$(basename "$yaml_file")"
+              short_ip_yaml_file="$(basename "$ip_yaml_file")"
+
+              git commit -m "Generate ${short_yaml_file} and ${short_ip_yaml_file} from ${short_list_file}"
             else
               echo "No changes in ${yaml_file} and ${ip_yaml_file}, skip commit."
             fi
