@@ -141,6 +141,8 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 如果希望本项目或者 GeoSite 数据库永久收录你认为需要直连的国内冷门域名，请按照如下内容进行操作：[关于国内冷门域名的收录](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E5%86%B7%E9%97%A8%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D%E7%9A%84%E6%94%B6%E5%BD%95)  
 
+---
+
 ### 关于广告过滤  
 
 本项目借助 OpenClash 的“开发者选项”功能，实现不依赖第三方插件的广告过滤功能。  
@@ -157,6 +159,8 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案)  
 
+---
+
 ### 订阅转换服务  
 
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=%E5%9C%A8%E7%BA%BF&down_message=%E7%A6%BB%E7%BA%BF&style=for-the-badge&label=%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81)
@@ -170,6 +174,8 @@ https://api.asailor.org/sub
 填写进`配置订阅信息 > 订阅转换服务地址`中即可生效。 
 
 **本项目后端已支持 Smart 内核的全部参数。**
+
+---
 
 ### 不能上网？分流不正常？某些网站打不开？OpenClash 不能启动？
 
