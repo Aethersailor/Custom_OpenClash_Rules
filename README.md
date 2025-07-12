@@ -289,6 +289,10 @@ Traffic、GB、Expire
 
 - [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520)
 
+### 订阅转换后端
+
+- [Aethersailor/subconverter](https://github.com/Aethersailor/subconverter)
+
 ### 其他
 
 - [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/)
@@ -296,6 +300,8 @@ Traffic、GB、Expire
 - [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool)
 
 - [ChatGPT/OpenAI](https://chatgpt.com/)
+
+- [Cursor/Anysphere](https://cursor.com/)
 
 ***
 
