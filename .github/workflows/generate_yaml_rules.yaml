@@ -26,65 +26,37 @@ jobs:
 
       - name: Generate YAML from LIST files
         run: |
-          FILES=("Custom_Direct" "Custom_Proxy" "Steam_CDN")  # 将来可在此添加更多文件名
+          FILES=("Custom_Direct" "Custom_Proxy" "Steam_CDN")
 
           for base_name in "${FILES[@]}"; do
             list_file="rule/${base_name}.list"
-            domain_yaml_file="rule/${base_name}_Domain.yaml"
-            ip_yaml_file="rule/${base_name}_IP.yaml"
-            classical_yaml_file="rule/${base_name}_Classical.yaml"
 
-            domain_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^DOMAIN-SUFFIX,(.+)/  - '+.\1'/" | sed -E "s/^DOMAIN-KEYWORD,(.+)/  - '*\1*'/" | sed -E "s/^DOMAIN,(.+)/  - '\1'/")
-            ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - '\1'/" | sed -E "s/^IP,([^,]+).*/  - '\1'/")
+            declare -A files=(
+              ["${base_name}_Domain.yaml"]="$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^DOMAIN-SUFFIX,(.+)/  - '+.\1'/" | sed -E "s/^DOMAIN-KEYWORD,(.+)/  - '*\1*'/" | sed -E "s/^DOMAIN,(.+)/  - '\1'/")"
+              ["${base_name}_IP.yaml"]="$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - '\1'/" | sed -E "s/^IP,([^,]+).*/  - '\1'/")"
+              ["${base_name}_Classical.yaml"]="$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^(.*)/  - \1/")
+$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/")"
+            )
 
-            classical_domain_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^(.*)/  - \1/")
-            classical_ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/")
+            for yaml_file in "${!files[@]}"; do
+              content="${files[$yaml_file]}"
+              count=$(echo "$content" | grep -c '  - ' || true)
 
-            domain_count=$(echo "$domain_rules" | grep -c '  - ' || true)
-            ip_count=$(echo "$ip_rules" | grep -c '  - ' || true)
+              echo "# Generated from ${list_file}" > "rule/$yaml_file"
+              echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "rule/$yaml_file"
+              echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "rule/$yaml_file"
+              echo "# TOTAL: ${count}" >> "rule/$yaml_file"
+              echo "" >> "rule/$yaml_file"
+              echo "payload:" >> "rule/$yaml_file"
+              echo "$content" >> "rule/$yaml_file"
 
-            # 生成域名类规则
-            echo "# Generated from ${list_file}" > "$domain_yaml_file"
-            echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$domain_yaml_file"
-            echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$domain_yaml_file"
-            echo "# TOTAL: ${domain_count}" >> "$domain_yaml_file"
-            echo "" >> "$domain_yaml_file"
-            echo "payload:" >> "$domain_yaml_file"
-            echo "$domain_rules" >> "$domain_yaml_file"
-
-            # 生成IP类规则
-            echo "# Generated from ${list_file}" > "$ip_yaml_file"
-            echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$ip_yaml_file"
-            echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$ip_yaml_file"
-            echo "# TOTAL: ${ip_count}" >> "$ip_yaml_file"
-            echo "" >> "$ip_yaml_file"
-            echo "payload:" >> "$ip_yaml_file"
-            echo "$ip_rules" >> "$ip_yaml_file"
-
-            # 生成Classical规则
-            classical_total=$((domain_count + ip_count))
-            echo "# Generated from ${list_file}" > "$classical_yaml_file"
-            echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$classical_yaml_file"
-            echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$classical_yaml_file"
-            echo "# TOTAL: ${classical_total}" >> "$classical_yaml_file"
-            echo "" >> "$classical_yaml_file"
-            echo "payload:" >> "$classical_yaml_file"
-            echo "$classical_domain_rules" >> "$classical_yaml_file"
-            echo "$classical_ip_rules" >> "$classical_yaml_file"
-
-            # 判断是否有变更
-            if [[ -n $(git status --porcelain "$domain_yaml_file" "$ip_yaml_file" "$classical_yaml_file") ]]; then
-              git add "$domain_yaml_file" "$ip_yaml_file" "$classical_yaml_file"
-
-              short_list_file="$(basename "$list_file")"
-              short_domain_yaml_file="$(basename "$domain_yaml_file")"
-              short_ip_yaml_file="$(basename "$ip_yaml_file")"
-              short_classical_yaml_file="$(basename "$classical_yaml_file")"
-
-              git commit -m "Generate ${short_domain_yaml_file}, ${short_ip_yaml_file}, and ${short_classical_yaml_file} from ${short_list_file}"
-            else
-              echo "No changes in generated files, skip commit."
-            fi
+              if [[ -n $(git status --porcelain "rule/$yaml_file") ]]; then
+                git add "rule/$yaml_file"
+                git commit -m "Generate $(basename "$yaml_file") from $(basename "$list_file")"
+              else
+                echo "No changes in $yaml_file, skip commit."
+              fi
+            done
           done
 
       - name: Push changes
