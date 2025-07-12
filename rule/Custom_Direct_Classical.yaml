@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 74
+# TOTAL: 75
 
 payload:
   - DOMAIN-SUFFIX,immortalwrt.org
@@ -40,6 +40,7 @@ payload:
   - DOMAIN-SUFFIX,checkipv6.dyndns.org
   - DOMAIN-SUFFIX,ifconfig.co
   - DOMAIN-SUFFIX,api.myip.com
+  - DOMAIN-SUFFIX,giveup.top
   - DOMAIN-SUFFIX,ipapi.co
   - DOMAIN-SUFFIX,ip6.seeip.org
   - DOMAIN-SUFFIX,kit327.com
