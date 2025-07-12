@@ -41,15 +41,14 @@ jobs:
             if [[ -f "$input_file" ]]; then
               echo "Processing $input_file -> $output_file"
 
-              # 第一轮处理：删除行和行内内容
-              awk '!/^custom_proxy_group=♻️ 自动选择/ && !/^custom_proxy_group=🌐 其他地区/ {
+              # 第一轮处理：删除自动选择分组
+              awk '!/^custom_proxy_group=♻️ 自动选择/ {
                 gsub(/`?\[\]♻️ 自动选择/, "")
-                gsub(/`?\[\]🌐 其他地区/, "")
                 print
               }' "$input_file" > "$output_file.tmp"
 
               # 第二轮处理：插入注释
-              awk '{print} /^;节点地区分组/ {print ";Smart 内核专用模板，节点分组仅保留地区分组"}' "$output_file.tmp" > "$output_file.tmp2"
+              awk '{print} /^;节点地区分组/ {print ";Smart 内核专用模板，移除自动选择分组"}' "$output_file.tmp" > "$output_file.tmp2"
 
               # 第三轮处理：替换url-test为smart
               sed 's/url-test/smart/g' "$output_file.tmp2" > "$output_file.tmp3"
