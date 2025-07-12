@@ -34,6 +34,7 @@ jobs:
             domain_yaml_file="rule/${base_name}_Domain.yaml"
             ip_yaml_file="rule/${base_name}_IP.yaml"
             classical_yaml_file="rule/${base_name}_Classical.yaml"
+            classical_ip_yaml_file="rule/${base_name}_Classical_IP.yaml"
 
             domain_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^DOMAIN-SUFFIX,(.+)/  - '+.\1'/" | sed -E "s/^DOMAIN-KEYWORD,(.+)/  - '*\1*'/" | sed -E "s/^DOMAIN,(.+)/  - '\1'/")
             ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - '\1'/" | sed -E "s/^IP,([^,]+).*/  - '\1'/")
@@ -41,6 +42,8 @@ jobs:
             classical_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^(.*)/  - \1/")
             classical_rules+=$'\n'
             classical_rules+=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/")
+
+            classical_ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/")
 
             generate_and_commit() {
               file="$1"
@@ -66,6 +69,7 @@ jobs:
             generate_and_commit "$domain_yaml_file" "$domain_rules"
             generate_and_commit "$ip_yaml_file" "$ip_rules"
             generate_and_commit "$classical_yaml_file" "$classical_rules"
+            generate_and_commit "$classical_ip_yaml_file" "$classical_ip_rules"
 
           done
 
