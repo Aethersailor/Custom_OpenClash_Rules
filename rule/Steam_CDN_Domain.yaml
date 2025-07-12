@@ -1,0 +1,9 @@
+# Generated from rule/Steam_CDN.list
+# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Steam_CDN.list
+# TOTAL: 3
+
+payload:
+  - '+.steamcdn-a.akamaihd.net'
+  - '+.cm.steampowered.com'
+  - '+.steamserver.net'
