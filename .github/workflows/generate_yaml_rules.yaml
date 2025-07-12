@@ -34,8 +34,6 @@ jobs:
             ip_yaml_file="rule/${base_name}_IP.yaml"
             classical_yaml_file="rule/${base_name}_Classical.yaml"
 
-            timestamp=$(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M:%S')
-
             domain_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^DOMAIN-SUFFIX,(.+)/  - '+.\1'/" | sed -E "s/^DOMAIN-KEYWORD,(.+)/  - '*\1*'/" | sed -E "s/^DOMAIN,(.+)/  - '\1'/")
             ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - '\1'/" | sed -E "s/^IP,([^,]+).*/  - '\1'/")
 
@@ -49,7 +47,6 @@ jobs:
             echo "# Generated from ${list_file}" > "$domain_yaml_file"
             echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$domain_yaml_file"
             echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$domain_yaml_file"
-            echo "# UPDATE: ${timestamp}" >> "$domain_yaml_file"
             echo "# TOTAL: ${domain_count}" >> "$domain_yaml_file"
             echo "" >> "$domain_yaml_file"
             echo "payload:" >> "$domain_yaml_file"
@@ -59,7 +56,6 @@ jobs:
             echo "# Generated from ${list_file}" > "$ip_yaml_file"
             echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$ip_yaml_file"
             echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$ip_yaml_file"
-            echo "# UPDATE: ${timestamp}" >> "$ip_yaml_file"
             echo "# TOTAL: ${ip_count}" >> "$ip_yaml_file"
             echo "" >> "$ip_yaml_file"
             echo "payload:" >> "$ip_yaml_file"
@@ -70,7 +66,6 @@ jobs:
             echo "# Generated from ${list_file}" > "$classical_yaml_file"
             echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$classical_yaml_file"
             echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$classical_yaml_file"
-            echo "# UPDATE: ${timestamp}" >> "$classical_yaml_file"
             echo "# TOTAL: ${classical_total}" >> "$classical_yaml_file"
             echo "" >> "$classical_yaml_file"
             echo "payload:" >> "$classical_yaml_file"
