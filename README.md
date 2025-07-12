@@ -157,8 +157,6 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 
 ### 订阅转换服务  
 
-本项目提供订阅转换后端服务，便于网络环境奇葩的用户使用。  
-
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=%E5%9C%A8%E7%BA%BF&down_message=%E7%A6%BB%E7%BA%BF&style=for-the-badge&label=%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81)
 
 如果 OpenClash 自带的订阅转换服务全部不可用，你可以使用本项目提供的订阅转换服务地址：  
@@ -168,6 +166,8 @@ https://api.asailor.org/sub
 ```
 
 填写进`配置订阅信息 > 订阅转换服务地址`中即可生效。 
+
+**本项目后端已支持 Smart 内核的全部参数。**
 
 ### 不能上网？分流不正常？某些网站打不开？OpenClash 不能启动？
 
