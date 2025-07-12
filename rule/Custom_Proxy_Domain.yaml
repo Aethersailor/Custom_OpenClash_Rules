@@ -1,0 +1,21 @@
+# Generated from rule/Custom_Proxy.list
+# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Proxy.list
+# TOTAL: 15
+
+payload:
+  - '+.ip.sb'
+  - '+.ipify.org'
+  - '+.services.googleapis.cn'
+  - '+.clientservices.googleapis.com'
+  - '+.googleapis.cn'
+  - '+.xn--ngstr-lra8j.com'
+  - '+.mtalk.google.com'
+  - '+.stun.playstation.net'
+  - '+.platformio.org'
+  - '+.arduino.cc'
+  - '+.dmhy.org'
+  - '+.cloudsync-prod.s3.us-east-1.amazonaws.com'
+  - '+.hoyolab.com'
+  - '+.onedrive.live.com'
+  - '+.7pzzv.us'
