@@ -1,0 +1,80 @@
+name: Generate YAML Rules
+
+on:
+  push:
+    paths:
+      - 'rule/*.list'
+  workflow_dispatch:
+
+jobs:
+  generate-rules:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set Git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Generate YAML from LIST files
+        run: |
+          FILES=("Custom_Direct" "Custom_Proxy" "Steam_CDN")
+
+          for base_name in "${FILES[@]}"; do
+            list_file="rule/${base_name}.list"
+
+            domain_yaml_file="rule/${base_name}_Domain.yaml"
+            ip_yaml_file="rule/${base_name}_IP.yaml"
+            classical_yaml_file="rule/${base_name}_Classical.yaml"
+
+            domain_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^DOMAIN-SUFFIX,(.+)/  - '+.\1'/" | sed -E "s/^DOMAIN-KEYWORD,(.+)/  - '*\1*'/" | sed -E "s/^DOMAIN,(.+)/  - '\1'/")
+            ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - '\1'/" | sed -E "s/^IP,([^,]+).*/  - '\1'/")
+
+            classical_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^(.*)/  - \1/")
+            classical_rules+=$'\n'
+            classical_rules+=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/")
+
+            generate_and_commit() {
+              file="$1"
+              content="$2"
+              total=$(echo "$content" | grep -c '  - ' || true)
+
+              echo "# Generated from ${list_file}" > "$file"
+              echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$file"
+              echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$file"
+              echo "# TOTAL: ${total}" >> "$file"
+              echo "" >> "$file"
+              echo "payload:" >> "$file"
+              echo "$content" >> "$file"
+
+              if [[ -n $(git status --porcelain "$file") ]]; then
+                git add "$file"
+                git commit -m "Generate $(basename "$file") from $(basename "$list_file")"
+              else
+                echo "No changes in ${file}, skip commit."
+              fi
+            }
+
+            generate_and_commit "$domain_yaml_file" "$domain_rules"
+            generate_and_commit "$ip_yaml_file" "$ip_rules"
+            generate_and_commit "$classical_yaml_file" "$classical_rules"
+
+          done
+
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ -n $(git log origin/main..HEAD) ]]; then
+            git push origin HEAD:main
+          else
+            echo "No new commits to push."
+          fi

@@ -11,6 +11,8 @@ DOMAIN-SUFFIX,services.googleapis.cn
 DOMAIN-SUFFIX,clientservices.googleapis.com
 DOMAIN-SUFFIX,googleapis.cn
 DOMAIN-SUFFIX,xn--ngstr-lra8j.com
+# Google 相关
+DOMAIN-SUFFIX,mtalk.google.com
 # PS5 STUN
 DOMAIN-SUFFIX,stun.playstation.net
 # Cloudflare DNS
@@ -21,10 +23,11 @@ DOMAIN-SUFFIX,platformio.org
 DOMAIN-SUFFIX,arduino.cc
 # PT 相关
 DOMAIN-SUFFIX,dmhy.org
-# Google 相关
-DOMAIN-SUFFIX,mtalk.google.com
 # EA Desktop 云同步
 DOMAIN-SUFFIX,cloudsync-prod.s3.us-east-1.amazonaws.com
+# HoYoLAB
+DOMAIN-SUFFIX,hoyolab.com
 # OneDrive 网页版
-DOMAIN-SUFFIX,onedrive.live.com 
-
+DOMAIN-SUFFIX,onedrive.live.com
+# 其他
+DOMAIN-SUFFIX,7pzzv.us

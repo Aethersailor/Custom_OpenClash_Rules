@@ -1,0 +1,67 @@
+name: Sync and Modify Custom_Clash.ini
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - cfg/Custom_Clash.ini  # 源文件更新时触发
+  workflow_dispatch:           # 手动触发
+
+jobs:
+  sync-and-modify:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: 检出源仓库
+      - name: Checkout Source Repo
+        uses: actions/checkout@v3
+
+      # Step 2: 克隆目标仓库
+      - name: Clone Target Repo
+        run: |
+          git clone https://github.com/Aethersailor/Custom_Clash_Rules.git target-repo
+          cd target-repo
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+
+      # Step 3: 修改文件
+      - name: Modify File
+        run: |
+          # 拷贝源文件到目标仓库
+          cp cfg/Custom_Clash.ini target-repo/cfg/Custom_Clash.ini
+          cd target-repo
+
+          # 保留 [custom] 及其后内容
+          awk '/\[custom\]/{f=1} f' cfg/Custom_Clash.ini > tmp && mv tmp cfg/Custom_Clash.ini
+
+          # 添加头部注释（每行单独插入）
+          sed -i '1i ;基于 ACL4SSR 模板魔改而来，感谢原作者！' cfg/Custom_Clash.ini
+          sed -i '1i ;该订阅模板为 Custom_OpenClash_Rules 项目的衍生项目' cfg/Custom_Clash.ini
+          sed -i '1i ;项目地址：https://github.com/Aethersailor/Custom_Clash_Rules' cfg/Custom_Clash.ini
+          sed -i '1i ;作者：https://github.com/Aethersailor' cfg/Custom_Clash.ini
+          sed -i '1i ;全分组防 DNS 泄漏订阅转换模板' cfg/Custom_Clash.ini
+          sed -i '1i ;Custom_Clash_Rules' cfg/Custom_Clash.ini
+          sed -i '1i' cfg/Custom_Clash.ini
+          sed -i '1i' cfg/Custom_Clash.ini
+
+          # 删除包含 GEOSITE,cn 和 GEOIP,cn 的行
+          sed -i '/GEOSITE,cn/d' cfg/Custom_Clash.ini
+          sed -i '/GEOIP,cn/d' cfg/Custom_Clash.ini
+
+          # 在 Custom_Proxy 行后插入两条规则（每条单独插入）
+          sed -i '/Custom_Proxy/a ruleset=🎯 全球直连,[]GEOIP,cn,no-resolve' cfg/Custom_Clash.ini
+          sed -i '/Custom_Proxy/a ruleset=🎯 全球直连,[]GEOSITE,cn' cfg/Custom_Clash.ini
+
+      # Step 4: 提交并推送更改
+      - name: Commit and Push Changes
+        run: |
+          cd target-repo
+          git add cfg/Custom_Clash.ini
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Custom_Clash.ini based on upstream"
+            git push https://$TARGET_REPO_TOKEN@github.com/Aethersailor/Custom_Clash_Rules.git main
+          else
+            echo "No changes to commit."
+          fi
+        env:
+          TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}

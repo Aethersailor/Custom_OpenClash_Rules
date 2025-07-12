@@ -9,9 +9,9 @@
 
 兼容 APK 和 OPKG 包管理器。  
 
-大多数固件的软件源默认自带的 OpenClash 是 master 版本， 在值守式更新后，会将 OpenClash 和内核还原为 master 版本  
+大多数固件的软件源默认自带的 OpenClash 是 master 版本，在值守式更新后，会将 OpenClash 和内核还原为 master 版本  
 
-该脚本可以安装 OpenClash 最新 dev 版本，并更新内核以及所有数据库、白名单、订阅至最新版，然后启动 OpenClash。  
+该脚本可以自动从 OpenClash 官方仓库拉取最新 dev 版本安装包并安装，并更新内核至 dev 版本，同时更新所有的数据库、大陆白名单以及订阅至最新版，然后启动 OpenClash。  
 
 适合 dev 版本爱好者。  
 

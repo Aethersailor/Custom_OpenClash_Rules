@@ -104,6 +104,7 @@ DOMAIN-SUFFIX,bangumi.tv
 # 肥羊 All in One
 DOMAIN-SUFFIX,freetv.top
 
+
 # 游戏类规则
 # 红警重聚 Reunion 2023
 IP-CIDR,108.174.48.100/32,no-resolve
@@ -122,15 +123,19 @@ DOMAIN-SUFFIX,game.maj-soul.com
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
-DOMAIN-SUFFIX,guanyierp.com
-DOMAIN-SUFFIX,chememall.com
+# 海翔登录
+DOMAIN-SUFFIX,seaflysoft.com
 
 # PR 至 v2fly/domain-list-community
+# 鸿蒙出境易
+DOMAIN-SUFFIX,chujingapp.com
 
 # ---------------------------------------
 # =======================================
 
 # 以下域名已被 GeoSite 收录，定期删除
+#DOMAIN-SUFFIX,guanyierp.com
+#DOMAIN-SUFFIX,chememall.com
 #DOMAIN-SUFFIX,astral-vector.com
 #DOMAIN-SUFFIX,ug.link
 #DOMAIN-SUFFIX,moyubuluo.com

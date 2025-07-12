@@ -34,7 +34,7 @@ fi
 echo "准备下载 .$EXT 包。"
 
 # 获取 JSON 数据并解析对应后缀的文件名
-echo "正在获取 dev 版本文件信息..."
+echo "正在从 OpenClash 官方仓库读取 dev 版本文件信息..."
 JSON_OUTPUT=$(curl -s "$REPO_API_URL")
 FILE_NAME=$(echo "$JSON_OUTPUT" \
     | grep -oE '"name":\s*"[^"]+\.'"$EXT"'"' \
@@ -53,7 +53,7 @@ DOWNLOAD_URL="$RAW_FILE_PREFIX/$FILE_NAME"
 TEMP_FILE="openclash.$EXT"
 
 # 下载对应包
-echo "正在下载 dev 版本 $FILE_NAME..."
+echo "正在从 OpenClash 官方仓库下载 dev 版本 $FILE_NAME..."
 wget -q -O "$TEMP_FILE" "$DOWNLOAD_URL"
 if [ $? -ne 0 ]; then
     echo "下载失败，请检查网络连接或下载链接：$DOWNLOAD_URL"
@@ -80,17 +80,29 @@ echo "OpenClash Dev 最新版安装成功！"
 # 清理临时文件
 rm -f "$TEMP_FILE"
 
+# 加载 OpenClash 预设配置（如果存在）
+# 个性化 OpenClash 配置请写入 /etc/config/openclash-set 文件，刷机后运行本脚本会加载对应的设置
+if [ -f /etc/config/openclash-set ]; then
+  echo "检测到个性化预设配置文件，正在加载..."
+  sh /etc/config/openclash-set
+  if [ $? -ne 0 ]; then
+    echo "加载个性化预设配置时出现错误，请检查 /etc/config/openclash-set 内容。"
+    exit 1
+  fi
+  echo "个性化预设配置加载完成！"
+fi
+
 # 执行配置命令
-echo "更新配置 OpenClash 配置..."
+echo "更新 OpenClash 设置..."
 uci set openclash.config.release_branch=dev
 uci set openclash.config.skip_safe_path_check=1
 uci set openclash.config.github_address_mod='https://testingcf.jsdelivr.net/'
 uci commit openclash
 if [ $? -ne 0 ]; then
-  echo "配置更新失败，请检查命令和日志。"
+  echo "设置更新失败，请检查命令和日志。"
   exit 1
 fi
-echo "配置更新完成！"
+echo "设置更新完成！已切换 OpenClash 更新分支为 Developer，并使用 https://testingcf.jsdelivr.net/ 加速访问 GitHub。"
 
 # 开始更新 Meta 内核
 echo "开始更新 Meta 内核..."
@@ -160,3 +172,4 @@ echo "启动 OpenClash ..."
 uci set openclash.config.enable='1'
 uci commit openclash
 /etc/init.d/openclash restart >/dev/null 2>&1
+echo "脚本运行完毕！"

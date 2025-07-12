@@ -1,0 +1,42 @@
+name: Sync doc to Wiki
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'doc/**'
+
+jobs:
+  sync-to-wiki:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v3
+
+      - name: Clone wiki repository with auth
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone https://x-access-token:${TOKEN}@github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git _wiki
+
+      - name: Prepare doc directory in wiki repository
+        run: |
+          mkdir -p _wiki/doc
+          find _wiki/doc -mindepth 1 -not -name README.md -exec rm -rf {} +
+
+      - name: Sync main repo's doc to wiki repository
+        run: |
+          rsync -av --exclude 'README.md' doc/ _wiki/doc/
+
+      - name: Commit and push changes to wiki
+        run: |
+          cd _wiki
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add doc
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Sync doc from main repository"
+            git push
+          fi

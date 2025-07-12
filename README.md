@@ -36,7 +36,9 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 \>> Telegram Channel: [Custom_OpenClash_Rules | 通知频道](https://t.me/custom_openclash_rules)  
 
-\>> Telegram Group: [Custom_OpenClash_Rules | 交流群](https://t.me/custom_openclash_rules_group) 
+\>> Telegram Group: [Custom_OpenClash_Rules | 交流群](https://t.me/custom_openclash_rules_group)   
+
+维护者的 GitHub 账号曾被误封过，连带本仓库一同被 404。请加入通知频道谨防失联。  
 
 如遇问题，前请先阅读以下内容：
 
@@ -218,6 +220,8 @@ https://api.asailor.org/sub
 
 本项目订阅模板的节点地区分类即参考了该机场的节点地区进行分类。  
 
+**仅作推荐，维护者和推荐机场无任何关系，不对机场服务质量进行任何担保。**  
+
 PS：该机场 Hong Kong 11-15 节点以及其他部分节点暂不支持 IPv6 出站，如果需要使用 IPv6 出站功能，建议在 订阅设置 > 排除节点中设置排除如下关键词，以避免使用非 IPv6 出站节点：  
 Traffic、GB、Expire、11、12、13、14、15  
 
@@ -227,17 +231,7 @@ Traffic、GB、Expire
 
 不屏蔽不影响使用，只是会让节点列表看着更整洁一些  
 
-## 其他推荐项目  
-
-本项目维护者在使用的一些值得推荐的其他开发者的项目。  
-
-### Clash Dash  
-
-Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTProxy 管理工具。  
-
-点击直达：[Clash-Dash](https://github.com/bin64/Clash-Dash)  
-
-非常漂亮的APP，可以说是 iOS 下最方便最优雅的 Clash 管理方式。
+***
 
 ## 贡献者  
 
@@ -253,11 +247,21 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 
 以下排名不分先后
 
+### 插件
+
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
+
+### 内核
 
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
 
+### 模板
+
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
+
+- [TraderWukong/demo](https://github.com/TraderWukong/demo)
+
+### 分流规则
 
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 
@@ -267,11 +271,13 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 
 - [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
 
-- [TraderWukong/demo](https://github.com/TraderWukong/demo)
-
 - [dogfight360/UsbEAm](https://www.dogfight360.com/blog/18627/)
 
 - [ddgksf2013/ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)
+
+- [mottzz87/crules](https://github.com/mottzz87/crules)
+
+### 广告过滤规则
 
 - [217heidai/adblockfilters](https://github.com/217heidai/adblockfilters)
 
@@ -279,23 +285,30 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 
 - [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)
 
+### 加速规则
+
 - [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520)
 
+### 其他
+
 - [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/)
+
+- [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool)
 
 - [ChatGPT/OpenAI](https://chatgpt.com/)
 
 ***
 
-## 许可		
+## 许可  
+
 [![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
 * CC-BY-SA-4.0  
 
 ***
 
-## 星标记录
+## 星标记录  
 
-<a href="https://star-history.com/#Aethersailor/Custom_OpenClash_Rules&Date">
+<a href="https://www.star-history.com/#Aethersailor/Custom_OpenClash_Rules&Date">
  <picture>
    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Aethersailor/Custom_OpenClash_Rules&type=Date&theme=dark" />
    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Aethersailor/Custom_OpenClash_Rules&type=Date" />
@@ -308,8 +321,16 @@ Clash Dash 是一款在 iOS 下使用原生 SwiftUI 开发的 OpenClash/MihomoTP
 ![Alt](https://repobeats.axiom.co/api/embed/0d7d55da94670a4766aa0fb8ccd03c7abc9e8464.svg "Repobeats analytics image")  
 
 
-## 访问记录
+## 访问记录  
 
 ![:访问数](https://count.getloli.com/@:Custom_OpenClash_Rules?theme=sketch-1)  
 
 2025年2月开始统计  
+
+***
+
+## 广告  
+
+**DartNode 免费 VPS**  
+
+[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")

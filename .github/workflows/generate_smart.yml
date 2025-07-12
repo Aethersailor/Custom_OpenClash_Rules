@@ -1,0 +1,78 @@
+name: Generate Smart INI Files
+
+on:
+  push:
+    paths:
+      - cfg/Custom_Clash.ini
+      - cfg/Custom_Clash_Full.ini
+      - cfg/Custom_Clash_GFW.ini
+      - cfg/Custom_Clash_Lite.ini
+
+  workflow_dispatch:
+
+jobs:
+  generate-smart:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Process ini files and generate smart versions
+        run: |
+          echo "Start processing ini files..."
+
+          FILES_TO_PROCESS=(
+            "cfg/Custom_Clash.ini:cfg/Custom_Clash_Smart.ini"
+            "cfg/Custom_Clash_Full.ini:cfg/Custom_Clash_Smart_Full.ini"
+            "cfg/Custom_Clash_Lite.ini:cfg/Custom_Clash_Smart_Lite.ini"
+          )
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          commit_flag=0
+
+          for pair in "${FILES_TO_PROCESS[@]}"; do
+            input_file="${pair%%:*}"
+            output_file="${pair##*:}"
+
+            if [[ -f "$input_file" ]]; then
+              echo "Processing $input_file -> $output_file"
+
+              # 第一轮处理：删除行和行内内容
+              awk '!/^custom_proxy_group=♻️ 自动选择/ && !/^custom_proxy_group=🌐 其他地区/ {
+                gsub(/`?\[\]♻️ 自动选择/, "")
+                gsub(/`?\[\]🌐 其他地区/, "")
+                print
+              }' "$input_file" > "$output_file.tmp"
+
+              # 第二轮处理：插入注释
+              awk '{print} /^;节点地区分组/ {print ";Smart 内核专用模板，节点分组仅保留地区分组"}' "$output_file.tmp" > "$output_file"
+
+              rm "$output_file.tmp"
+
+              echo "Generated $output_file"
+
+              git add "$output_file"
+
+              if ! git diff --cached --quiet; then
+                echo "Changes detected in $output_file, committing..."
+                git commit -m "Generate $(basename "$output_file") based on $(basename "$input_file")"
+                commit_flag=1
+              else
+                echo "No changes detected in $output_file, skipping commit."
+                git reset "$output_file"
+              fi
+
+            else
+              echo "Warning: $input_file does not exist, skipping"
+            fi
+          done
+
+          if [[ "$commit_flag" -eq 1 ]]; then
+            echo "Pushing changes..."
+            git push
+          else
+            echo "No changes to push."
+          fi
