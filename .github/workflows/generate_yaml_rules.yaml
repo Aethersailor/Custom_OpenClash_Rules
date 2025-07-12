@@ -26,7 +26,7 @@ jobs:
 
       - name: Generate YAML from LIST files
         run: |
-          FILES=("Custom_Direct" "Custom_Proxy" "Steam_CDN")  # 将来可在此添加更多文件名
+          FILES=("Custom_Direct" "Custom_Proxy" "Steam_CDN")
 
           for base_name in "${FILES[@]}"; do
             list_file="rule/${base_name}.list"
@@ -36,60 +36,49 @@ jobs:
 
             timestamp=$(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M:%S')
 
+            # 生成规则内容
             domain_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^DOMAIN-SUFFIX,(.+)/  - '+.\1'/" | sed -E "s/^DOMAIN-KEYWORD,(.+)/  - '*\1*'/" | sed -E "s/^DOMAIN,(.+)/  - '\1'/")
             ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - '\1'/" | sed -E "s/^IP,([^,]+).*/  - '\1'/")
-
             classical_domain_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^(.*)/  - \1/")
             classical_ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/")
 
             domain_count=$(echo "$domain_rules" | grep -c '  - ' || true)
             ip_count=$(echo "$ip_rules" | grep -c '  - ' || true)
-
-            # 生成域名类规则
-            echo "# Generated from ${list_file}" > "$domain_yaml_file"
-            echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$domain_yaml_file"
-            echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$domain_yaml_file"
-            echo "# UPDATE: ${timestamp}" >> "$domain_yaml_file"
-            echo "# TOTAL: ${domain_count}" >> "$domain_yaml_file"
-            echo "" >> "$domain_yaml_file"
-            echo "payload:" >> "$domain_yaml_file"
-            echo "$domain_rules" >> "$domain_yaml_file"
-
-            # 生成IP类规则
-            echo "# Generated from ${list_file}" > "$ip_yaml_file"
-            echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$ip_yaml_file"
-            echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$ip_yaml_file"
-            echo "# UPDATE: ${timestamp}" >> "$ip_yaml_file"
-            echo "# TOTAL: ${ip_count}" >> "$ip_yaml_file"
-            echo "" >> "$ip_yaml_file"
-            echo "payload:" >> "$ip_yaml_file"
-            echo "$ip_rules" >> "$ip_yaml_file"
-
-            # 生成Classical规则
             classical_total=$((domain_count + ip_count))
-            echo "# Generated from ${list_file}" > "$classical_yaml_file"
-            echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$classical_yaml_file"
-            echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$classical_yaml_file"
-            echo "# UPDATE: ${timestamp}" >> "$classical_yaml_file"
-            echo "# TOTAL: ${classical_total}" >> "$classical_yaml_file"
-            echo "" >> "$classical_yaml_file"
-            echo "payload:" >> "$classical_yaml_file"
-            echo "$classical_domain_rules" >> "$classical_yaml_file"
-            echo "$classical_ip_rules" >> "$classical_yaml_file"
 
-            # 判断是否有变更
-            if [[ -n $(git status --porcelain "$domain_yaml_file" "$ip_yaml_file" "$classical_yaml_file") ]]; then
-              git add "$domain_yaml_file" "$ip_yaml_file" "$classical_yaml_file"
+            generate_file() {
+              local file="$1"
+              local content="$2"
+              local total="$3"
+              local temp_file="${file}.tmp"
 
-              short_list_file="$(basename "$list_file")"
-              short_domain_yaml_file="$(basename "$domain_yaml_file")"
-              short_ip_yaml_file="$(basename "$ip_yaml_file")"
-              short_classical_yaml_file="$(basename "$classical_yaml_file")"
+              # 先写到临时文件
+              echo "# Generated from ${list_file}" > "$temp_file"
+              echo "# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules" >> "$temp_file"
+              echo "# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/${list_file}" >> "$temp_file"
+              echo "# UPDATE: ${timestamp}" >> "$temp_file"
+              echo "# TOTAL: ${total}" >> "$temp_file"
+              echo "" >> "$temp_file"
+              echo "payload:" >> "$temp_file"
+              echo "$content" >> "$temp_file"
 
-              git commit -m "Generate ${short_domain_yaml_file}, ${short_ip_yaml_file}, and ${short_classical_yaml_file} from ${short_list_file}"
-            else
-              echo "No changes in generated files, skip commit."
-            fi
+              # 如果内容无变化，只更新时间，不提交
+              if cmp -s "$temp_file" "$file"; then
+                echo "No changes in ${file}, skip commit."
+                rm "$temp_file"
+              else
+                mv "$temp_file" "$file"
+                git add "$file"
+                short_file="$(basename "$file")"
+                git commit -m "Generate ${short_file} from $(basename "$list_file")"
+              fi
+            }
+
+            generate_file "$domain_yaml_file" "$domain_rules" "$domain_count"
+            generate_file "$ip_yaml_file" "$ip_rules" "$ip_count"
+            generate_file "$classical_yaml_file" "$classical_domain_rules
+$classical_ip_rules" "$classical_total"
+
           done
 
       - name: Push changes
