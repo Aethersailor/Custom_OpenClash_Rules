@@ -1,0 +1,32 @@
+# Generated from rule/Steam_CDN.list
+# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Steam_CDN.list
+# TOTAL: 26
+
+payload:
+  - DOMAIN-SUFFIX,steamcdn-a.akamaihd.net
+  - DOMAIN-SUFFIX,cm.steampowered.com
+  - DOMAIN-SUFFIX,steamserver.net
+  - IP-CIDR,45.121.184.0/24,no-resolve
+  - IP-CIDR,103.10.124.0/23,no-resolve
+  - IP-CIDR,103.28.54.0/24,no-resolve
+  - IP-CIDR,146.66.152.0/24,no-resolve
+  - IP-CIDR,146.66.155.0/24,no-resolve
+  - IP-CIDR,153.254.86.0/24,no-resolve
+  - IP-CIDR,155.133.224.0/22,no-resolve
+  - IP-CIDR,155.133.230.0/24,no-resolve
+  - IP-CIDR,155.133.232.0/23,no-resolve
+  - IP-CIDR,155.133.234.0/24,no-resolve
+  - IP-CIDR,155.133.236.0/22,no-resolve
+  - IP-CIDR,155.133.240.0/23,no-resolve
+  - IP-CIDR,155.133.244.0/23,no-resolve
+  - IP-CIDR,155.133.246.0/24,no-resolve
+  - IP-CIDR,155.133.248.0/21,no-resolve
+  - IP-CIDR,162.254.192.0/21,no-resolve
+  - IP-CIDR,185.25.182.0/23,no-resolve
+  - IP-CIDR,190.217.32.0/22,no-resolve
+  - IP-CIDR,192.69.96.0/22,no-resolve
+  - IP-CIDR,205.196.6.0/24,no-resolve
+  - IP-CIDR,208.64.200.0/22,no-resolve
+  - IP-CIDR,208.78.164.0/22,no-resolve
+  - IP-CIDR,205.185.194.0/24,no-resolve
