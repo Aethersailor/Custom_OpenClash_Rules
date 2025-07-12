@@ -54,9 +54,12 @@ jobs:
               sed 's/url-test/smart/g' "$output_file.tmp2" > "$output_file.tmp3"
 
               # 第四轮处理：替换smart行末尾的参数
-              sed 's/`300,,50$/`300`uselightgbm=true`collectdata=false`strategy=sticky-sessions/g' "$output_file.tmp3" > "$output_file"
+              sed 's/`300,,50$/`300`uselightgbm=true`collectdata=false`strategy=sticky-sessions/g' "$output_file.tmp3" > "$output_file.tmp4"
 
-              rm "$output_file.tmp" "$output_file.tmp2" "$output_file.tmp3"
+              # 第五轮处理：替换节点和地区为智能
+              sed 's/节点`/智能`/g; s/地区`/智能`/g' "$output_file.tmp4" > "$output_file"
+
+              rm "$output_file.tmp" "$output_file.tmp2" "$output_file.tmp3" "$output_file.tmp4"
 
               echo "Generated $output_file"
 
