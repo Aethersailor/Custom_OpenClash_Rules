@@ -260,7 +260,7 @@ Traffic、GB、Expire
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
 
-### 🛣分 流规则
+### 🛣 分流规则
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 - [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community)
 - [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list)
