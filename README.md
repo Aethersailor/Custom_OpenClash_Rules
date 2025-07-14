@@ -1,4 +1,4 @@
-# 🚀 OpenClash 保姆级设置方案<br>&<br>🛡️ 全分组防泄漏订阅转换规则
+<h1 align="center">🚀 OpenClash 保姆级设置方案<br>&<br>🛡️ 全分组防泄漏订阅转换规则</h1>
 
 <p align="center">
 	<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=flat">
