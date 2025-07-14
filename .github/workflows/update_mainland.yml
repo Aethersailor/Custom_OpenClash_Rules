@@ -11,6 +11,9 @@ jobs:
     steps:
     - name: Check out the repository
       uses: actions/checkout@v3
+      with:
+        ref: main
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -28,11 +31,14 @@ jobs:
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add cfg/Custom_Clash_Mainland.ini
 
+        # 确保在 main 分支
+        git checkout main
+
         # 判断是否有变更，只有在有变更时才提交
         if ! git diff --cached --quiet; then
           git commit -m "Update Custom_Clash_Mainland.ini based on Custom_Clash.ini"
           git pull --rebase origin main
-          git push origin HEAD
+          git push origin main
         else
           echo "No changes to commit."
         fi
