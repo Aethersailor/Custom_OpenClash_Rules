@@ -312,7 +312,7 @@ Traffic、GB、Expire
 
 2025年2月开始统计  
 
-## 🚫 广告
+## 📢 广告
 
 **DartNode 免费 VPS**  
 
