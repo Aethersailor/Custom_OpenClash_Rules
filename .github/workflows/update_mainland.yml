@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - cfg/Custom_Clash.ini
+  workflow_dispatch:
 
 jobs:
   update-mainland:
