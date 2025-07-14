@@ -15,11 +15,13 @@ jobs:
           echo "Fetching failed and cancelled workflow runs for $REPO"
           page=1
           while :; do
-            runs=$(curl -s -H "Authorization: token $GH_PAT" \
-              "https://api.github.com/repos/$REPO/actions/runs?per_page=100&page=$page" | jq '.workflow_runs[] | select(.conclusion=="failure" or .conclusion=="cancelled") | .id')
-            if [ -z "$runs" ]; then
+            response=$(curl -s -H "Authorization: token $GH_PAT" \
+              "https://api.github.com/repos/$REPO/actions/runs?per_page=100&page=$page")
+            run_count=$(echo "$response" | jq '.workflow_runs | length')
+            if [ "$run_count" -eq 0 ]; then
               break
             fi
+            runs=$(echo "$response" | jq '.workflow_runs[] | select(.conclusion=="failure" or .conclusion=="cancelled") | .id')
             for run_id in $runs; do
               echo "Deleting run $run_id"
               curl -s -X DELETE -H "Authorization: token $GH_PAT" \
