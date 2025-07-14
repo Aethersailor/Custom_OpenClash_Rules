@@ -1,4 +1,4 @@
-<h1 align="center">OpenClash 保姆级设置方案<br>&<br>全分组防泄漏订阅转换规则</h1>
+# 🚀 OpenClash 保姆级设置方案<br>&<br>🛡️ 全分组防泄漏订阅转换规则
 
 <p align="center">
 	<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=flat">
@@ -12,10 +12,10 @@
 		<img src="https://img.shields.io/badge/dynamic/json?style=flat&label=group&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules_group" alt="Telegram">
 	</a>
 </p>
-<p align="center"><b>让你更优雅的使用 OpenClash </b>
+<p align="center"><b>✨ 让你更优雅的使用 OpenClash ✨</b>
 </p>
 
-## 关于本项目 
+## 📖 关于本项目 
 
 本项目可能是目前全网最强的 [OpenClash](https://github.com/vernesong/OpenClash) 保姆级图文设置方案和订阅转换模板！  
 
@@ -52,15 +52,15 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 * **本项目仅为维护者个人经验的一个总结性示例，不具备权威性，并非 OpenClash 的唯一使用方式。**
 
-* **本项目没有任何 YouTube 频道，也未在 YouTube 上传任何“教学视频”。**  
+* **本项目没有任何 YouTube 频道，也未在 YouTube 上传任何"教学视频"。**  
 
-* **本项目没有“借鉴”任何其他的教程或视频，如果你使用他人提供的教程或模板出现问题，请勿在本项目的 issue 或 TG 群组中提问，感谢配合。**
+* **本项目没有"借鉴"任何其他的教程或视频，如果你使用他人提供的教程或模板出现问题，请勿在本项目的 issue 或 TG 群组中提问，感谢配合。**
 
 * **本项有部分内容适合新手小白，但不代表维护者对小白有任何帮助义务。**  
 
 ***
 
-## 特别声明  
+## ⚠️ 特别声明  
 1. 本项目的主要目的是探索与学习 OpenWrt 系统插件 OpenClash，因此无法确保所有内容的合法性、完整性、准确性或有效性。
 
 2. 项目中的内容仅用于学习与研究目的，不得将其用于任何可能违反国家、地区或组织法律法规的用途。
@@ -75,7 +75,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ***
 
-## 本项目设置方案及订阅转换模板介绍 
+## 📝 本项目设置方案及订阅转换模板介绍 
 
 本项目的订阅转换模板是参考 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master) 等规则的订阅模板进行了魔改和完善而来。  
 
@@ -109,11 +109,11 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ***
 
-## 使用方法  
+## 🛠️ 使用方法  
 
 > **本项目设置方案使用 OpenClash 的 `Fake-IP` 模式，不适用 Redir-Host 模式。**  
 
-> **本项目依赖 OpenClash 的“绕过中国大陆”功能实现效果。**
+> **本项目依赖 OpenClash 的"绕过中国大陆"功能实现效果。**
 
 准备好你的订阅链接，然后按照本项目 Wiki 中的对应部分对 OpenClash 进行设置：[OpenClash-设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)  
 
@@ -125,7 +125,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ***
 
-## 一些说明  
+## 💡 一些说明  
 
 ### 关于个性化需求  
 
@@ -145,7 +145,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ### 关于广告过滤  
 
-本项目借助 OpenClash 的“开发者选项”功能，实现不依赖第三方插件的广告过滤功能。  
+本项目借助 OpenClash 的"开发者选项"功能，实现不依赖第三方插件的广告过滤功能。  
 
 具体设置见 Wiki 中的方案：[广告拦截设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%97%A0%E6%8F%92%E4%BB%B6%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)  
 
@@ -193,11 +193,11 @@ https://api.asailor.org/sub
 
 ***
 
-## 机场推荐 
+## ✈️ 机场推荐 
 
 ### SSRDOG  
 `
-“SSRDOG（SG）是一個追求可靠、安全、高效、且高性價比的互聯網接入方案國際研發團隊，為您提供最安全的網絡加速服務！”
+"SSRDOG（SG）是一個追求可靠、安全、高效、且高性價比的互聯網接入方案國際研發團隊，為您提供最安全的網絡加速服務！"
 `  
 
 项目维护者长期使用的一家机场，价格和流量都比较适中，搭配本项目的设置方案以及订阅模板使用，体验保证拉满。
@@ -241,7 +241,7 @@ Traffic、GB、Expire
 
 ***
 
-## 贡献者  
+## 🤝 贡献者  
 
 <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Aethersailor/Custom_OpenClash_Rules" />
@@ -249,7 +249,7 @@ Traffic、GB、Expire
 
 ***
 
-## 感谢  
+## 🙏 感谢  
 
 **本项目项目使用或引用了以下项目的内容**  
 
@@ -313,7 +313,7 @@ Traffic、GB、Expire
 
 ***
 
-## 许可  
+## 📝 许可  
 
 [![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
 * CC-BY-SA-4.0  
