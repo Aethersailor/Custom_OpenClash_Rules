@@ -1,0 +1,61 @@
+name: Generate Smart GFW INI File
+
+on:
+  push:
+    paths:
+      - cfg/Custom_Clash_GFW.ini
+  workflow_dispatch:
+
+jobs:
+  generate-smart-gfw:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Process GFW ini file and generate smart version
+        run: |
+          echo "Processing cfg/Custom_Clash_GFW.ini -> cfg/Custom_Clash_Smart_GFW.ini"
+
+          input_file="cfg/Custom_Clash_GFW.ini"
+          output_file="cfg/Custom_Clash_Smart_GFW.ini"
+
+          if [[ -f "$input_file" ]]; then
+            # 1. 替换 url-test 为 smart
+            sed 's/url-test/smart/g' "$input_file" > "$output_file.tmp1"
+
+            # 2. 替换 300,,50 为 smart 参数
+            sed 's/`300,,50$/`300`uselightgbm=true`collectdata=false`strategy=sticky-sessions/g' "$output_file.tmp1" > "$output_file.tmp2"
+
+            # 3. 替换 自动选择 为 自动智能
+            sed 's/自动选择/自动智能/g' "$output_file.tmp2" > "$output_file"
+
+            rm "$output_file.tmp1" "$output_file.tmp2"
+
+            echo "Generated $output_file"
+
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add "$output_file"
+
+            if ! git diff --cached --quiet; then
+              echo "Changes detected in $output_file, committing..."
+              git commit -m "Generate $(basename "$output_file") based on $(basename "$input_file")"
+            else
+              echo "No changes detected in $output_file, skipping commit."
+              git reset "$output_file"
+            fi
+          else
+            echo "Warning: $input_file does not exist, skipping"
+          fi
+
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ -n $(git log origin/main..HEAD) ]]; then
+            git push origin HEAD:main
+          else
+            echo "No new commits to push."
+          fi 
