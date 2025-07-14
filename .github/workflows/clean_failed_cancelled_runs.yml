@@ -11,7 +11,7 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
           REPO: ${{ github.repository }}
-          GITHUB_WORKFLOW_REF: ${{ github.workflow_ref }}
+          WORKFLOW_NAME: ${{ github.workflow }}
         run: |
           echo "Fetching failed and cancelled workflow runs for $REPO"
           page=1
@@ -33,9 +33,8 @@ jobs:
 
           # 额外：删除本 workflow 的所有 run（包括成功的）
           echo "Deleting all runs of this workflow itself (including successful runs)..."
-          workflow_file=$(basename "$GITHUB_WORKFLOW_REF")
           workflow_id=$(curl -s -H "Authorization: token $GH_PAT" \
-            "https://api.github.com/repos/$REPO/actions/workflows" | jq ".workflows[] | select(.path | endswith(\"$workflow_file\")) | .id")
+            "https://api.github.com/repos/$REPO/actions/workflows" | jq ".workflows[] | select(.name == \"$WORKFLOW_NAME\") | .id")
 
           if [ -n "$workflow_id" ]; then
             page=1
