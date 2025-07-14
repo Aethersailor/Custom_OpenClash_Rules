@@ -281,6 +281,7 @@ Traffic、GB、Expire
 - [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/)
 - [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool)
 - [ChatGPT/OpenAI](https://chatgpt.com/)
+- [Anysphere/Cursor](https://cursor.com/downloads)
 
 ---
 
