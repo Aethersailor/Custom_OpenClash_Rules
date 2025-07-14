@@ -32,7 +32,7 @@ https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/C
 
 Custom_Full_Clash.ini
 ```
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Full_Clash.ini
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_Full.ini
 ```
 
 Custom_Clash_Smart.ini
