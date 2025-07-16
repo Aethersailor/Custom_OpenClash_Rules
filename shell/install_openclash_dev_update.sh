@@ -20,14 +20,14 @@ if command -v opkg >/dev/null 2>&1; then
     PKG_MGR="opkg"
     EXT="ipk"
     INSTALL_CMD="opkg install --force-reinstall"
-    echo "检测到包管理器：opkg"
+    echo "检测到包管理器：OPKG"
 elif command -v apk >/dev/null 2>&1; then
     PKG_MGR="apk"
     EXT="apk"
     INSTALL_CMD="apk add -q --force-overwrite --clean-protected --allow-untrusted"
-    echo "检测到包管理器：apk"
+    echo "检测到包管理器：APK"
 else
-    echo "未检测到 opkg 或 apk，无法继续安装。"
+    echo "未检测到 OPKG 或 APK，无法继续安装。"
     exit 1
 fi
 
@@ -35,10 +35,10 @@ echo "准备下载 .$EXT 包。"
 
 # 获取 JSON 数据并解析对应后缀的文件名
 echo "正在从 OpenClash 官方仓库读取 dev 版本文件信息..."
-JSON_OUTPUT=$(curl -s "$REPO_API_URL")
+JSON_OUTPUT=$(wget -qO- "$REPO_API_URL")
 FILE_NAME=$(echo "$JSON_OUTPUT" \
-    | grep -oE '"name":\s*"[^"]+\.'"$EXT"'"' \
-    | sed -E 's/.*"([^"]+)".*/\1/' \
+    | grep -oE '"name":\s*"[^\"]+\.'"$EXT"'"' \
+    | sed -E 's/.*"([^\"]+)".*/\1/' \
     | head -n 1)
 
 if [ -z "$FILE_NAME" ]; then
