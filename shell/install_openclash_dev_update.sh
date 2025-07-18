@@ -180,13 +180,13 @@ echo
 
 # 调用 OpenClash 自带脚本更新内核
 echo "--------------------[ 更新内核 ]--------------------------"
-echo "开始更新 Meta 内核..."
+echo "开始更新内核..."
 /usr/share/openclash/openclash_core.sh
 if [ $? -ne 0 ]; then
-  echo "Meta 内核更新失败，请检查日志。"
+  echo "内核更新失败，请检查日志。"
   exit 1
 fi
-echo "Meta 内核更新完成！"
+echo "内核更新完成！"
 echo 
 
 # 调用 OpenClash 自带脚本更新 GeoIP Dat 数据库
@@ -238,7 +238,7 @@ echo "--------------------[ 更新大陆 IP白名单 ]--------------------"
 echo "开始更新大陆 IP 白名单..."
 /usr/share/openclash/openclash_chnroute.sh
 if [ $? -ne 0 ]; then
-  echo "大陆白名单更新失败，请检查日志。"
+  echo "大陆 IP 白名单更新失败，请检查日志。"
   exit 1
 fi
 echo "大陆 IP 白名单更新完成！"
