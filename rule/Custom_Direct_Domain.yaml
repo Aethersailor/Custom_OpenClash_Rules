@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 78
+# TOTAL: 86
 
 payload:
   - '+.immortalwrt.org'
@@ -72,6 +72,14 @@ payload:
   - '+.chii.in'
   - '+.bangumi.tv'
   - '+.freetv.top'
+  - '+.plusjp1.younoyes.com'
+  - '+.plusde1.younoyes.com'
+  - '+.plusus1.younoyes.com'
+  - '+.plusus2.younoyes.com'
+  - '+.plusus3.younoyes.com'
+  - '+.plushk1.younoyes.com'
+  - '+.plushk2.younoyes.com'
+  - '+.plushk3.younoyes.com'
   - '+.game.maj-soul.com'
   - '+.gsgltz.com'
   - '+.gsnhcg.com'
