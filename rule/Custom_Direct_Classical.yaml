@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 78
+# TOTAL: 79
 
 payload:
   - DOMAIN-SUFFIX,immortalwrt.org
@@ -73,6 +73,7 @@ payload:
   - DOMAIN-SUFFIX,bangumi.tv
   - DOMAIN-SUFFIX,freetv.top
   - DOMAIN-SUFFIX,game.maj-soul.com
+  - DOMAIN-SUFFIX,gsstic.com
   - DOMAIN-SUFFIX,sxlljm.com
   - DOMAIN-SUFFIX,seedpace.com
   - DOMAIN-SUFFIX,qiaoxuesi.com
