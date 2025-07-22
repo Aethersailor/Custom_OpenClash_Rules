@@ -106,19 +106,51 @@ if [ $RET -eq 0 ]; then
 
     echo "正在测试加速链接速度..."
     
-    # 测试 ghfast.top 速度
+    # 测试 ghfast.top 速度（OpenWrt 兼容版本）
     echo "测试 ghfast.top 连接速度..."
-    GHFAST_TIME=$(timeout 10 curl -s -w "%{time_total}" -o /dev/null "$MODEL_URL_GHFAST" 2>/dev/null || echo "999")
+    GHFAST_START=$(date +%s)
+    wget -q --timeout=5 --spider "$MODEL_URL_GHFAST" 2>&1
+    GHFAST_RET=$?
+    GHFAST_END=$(date +%s)
+    GHFAST_TIME=$((GHFAST_END - GHFAST_START))
     
     # 测试 gh-proxy.com 速度
     echo "测试 gh-proxy.com 连接速度..."
-    GHPROXY_TIME=$(timeout 10 curl -s -w "%{time_total}" -o /dev/null "$MODEL_URL_GHPROXY" 2>/dev/null || echo "999")
+    GHPROXY_START=$(date +%s)
+    wget -q --timeout=5 --spider "$MODEL_URL_GHPROXY" 2>&1
+    GHPROXY_RET=$?
+    GHPROXY_END=$(date +%s)
+    GHPROXY_TIME=$((GHPROXY_END - GHPROXY_START))
     
-    echo "ghfast.top 响应时间: ${GHFAST_TIME}s"
-    echo "gh-proxy.com 响应时间: ${GHPROXY_TIME}s"
+    # 检查连接是否成功（OpenWrt wget 返回码检查）
+    if [ $GHFAST_RET -eq 0 ]; then
+      echo "ghfast.top 连接成功，响应时间: ${GHFAST_TIME}s"
+    else
+      echo "ghfast.top 连接失败，设置超时时间"
+      GHFAST_TIME=999
+    fi
     
-    # 选择最快的链接
-    if [ "$(echo "$GHFAST_TIME < $GHPROXY_TIME" | bc 2>/dev/null || echo "0")" = "1" ]; then
+    if [ $GHPROXY_RET -eq 0 ]; then
+      echo "gh-proxy.com 连接成功，响应时间: ${GHPROXY_TIME}s"
+    else
+      echo "gh-proxy.com 连接失败，设置超时时间"
+      GHPROXY_TIME=999
+    fi
+    
+    # 选择最快的链接（排除超时情况）
+    if [ "$GHFAST_TIME" = "999" ] && [ "$GHPROXY_TIME" = "999" ]; then
+      echo "两个 CDN 均无法连接，直接尝试 ghfast.top..."
+      FASTEST_URL="$MODEL_URL_GHFAST"
+      FASTEST_NAME="ghfast.top"
+    elif [ "$GHFAST_TIME" = "999" ]; then
+      echo "ghfast.top 无法连接，使用 gh-proxy.com..."
+      FASTEST_URL="$MODEL_URL_GHPROXY"
+      FASTEST_NAME="gh-proxy.com"
+    elif [ "$GHPROXY_TIME" = "999" ]; then
+      echo "gh-proxy.com 无法连接，使用 ghfast.top..."
+      FASTEST_URL="$MODEL_URL_GHFAST"
+      FASTEST_NAME="ghfast.top"
+    elif [ "$(echo "$GHFAST_TIME < $GHPROXY_TIME" | bc 2>/dev/null || echo "0")" = "1" ]; then
       echo "ghfast.top 速度更快，优先使用..."
       FASTEST_URL="$MODEL_URL_GHFAST"
       FASTEST_NAME="ghfast.top"
