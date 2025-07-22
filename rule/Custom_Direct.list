@@ -128,6 +128,8 @@ DOMAIN-SUFFIX,game.maj-soul.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 个人网站 / add by Telegram user: Km / Date: 2025-07-23 03:31:58
+DOMAIN-SUFFIX,737698.xyz
 # 企业博客 用的腾讯云cdn 更推荐直连 / add by Telegram user: 🤗 / Date: 2025-07-23 02:33:17
 DOMAIN-SUFFIX,znnu.com
 # add by Telegram user: Aethersailor / Date: 2025-07-23 00:20:38
