@@ -102,10 +102,8 @@ if [ $RET -eq 0 ]; then
     TMP_JSON="/tmp/mihomo_releases.json"
     wget -q -O "$TMP_JSON" "https://api.github.com/repos/vernesong/mihomo/releases"
 
-    model_line=$(grep -n '"name": *"Model-large.bin"' "$TMP_JSON" | head -n1 | cut -d: -f1)
-    if [ -n "$model_line" ]; then
-      MODEL_URL=$(tail -n +"$model_line" "$TMP_JSON" | grep -m1 '"browser_download_url":' | sed 's/.*"browser_download_url": *"//;s/".*//')
-    fi
+    # 更精确地查找 Model-large.bin 的下载链接
+    MODEL_URL=$(grep -A 20 "Model-large.bin" "$TMP_JSON" | grep "browser_download_url" | head -n1 | sed 's/.*"browser_download_url": *"//;s/".*//')
 
     # echo "DEBUG: MODEL_URL=$MODEL_URL"
 
