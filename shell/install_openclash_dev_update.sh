@@ -104,25 +104,47 @@ if [ $RET -eq 0 ]; then
     MODEL_URL_GHPROXY="https://gh-proxy.com/github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
     MODEL_URL_GHFAST="https://ghfast.top/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
 
-    echo "正在测试加速链接速度..."
+    echo "正在同时测试两个加速链接速度（5秒超时）..."
     
-    # 测试 ghfast.top 速度（OpenWrt 兼容版本）
-    echo "测试 ghfast.top 连接速度..."
+    # 同时测试两个 CDN 速度
     GHFAST_START=$(date +%s)
-    wget -q --timeout=5 --spider "$MODEL_URL_GHFAST" 2>&1
-    GHFAST_RET=$?
-    GHFAST_END=$(date +%s)
-    GHFAST_TIME=$((GHFAST_END - GHFAST_START))
-    
-    # 测试 gh-proxy.com 速度
-    echo "测试 gh-proxy.com 连接速度..."
     GHPROXY_START=$(date +%s)
-    wget -q --timeout=5 --spider "$MODEL_URL_GHPROXY" 2>&1
-    GHPROXY_RET=$?
+    
+    # 后台同时运行两个测速
+    wget -q --timeout=5 --spider "$MODEL_URL_GHFAST" 2>&1 &
+    GHFAST_PID=$!
+    wget -q --timeout=5 --spider "$MODEL_URL_GHPROXY" 2>&1 &
+    GHPROXY_PID=$!
+    
+    # 等待5秒或进程结束
+    sleep 5
+    
+    # 检查进程是否还在运行，如果还在运行则强制结束
+    if kill -0 $GHFAST_PID 2>/dev/null; then
+      kill $GHFAST_PID 2>/dev/null
+      GHFAST_RET=1
+      echo "ghfast.top 测速超时"
+    else
+      wait $GHFAST_PID
+      GHFAST_RET=$?
+    fi
+    
+    if kill -0 $GHPROXY_PID 2>/dev/null; then
+      kill $GHPROXY_PID 2>/dev/null
+      GHPROXY_RET=1
+      echo "gh-proxy.com 测速超时"
+    else
+      wait $GHPROXY_PID
+      GHPROXY_RET=$?
+    fi
+    
+    # 计算实际耗时
+    GHFAST_END=$(date +%s)
     GHPROXY_END=$(date +%s)
+    GHFAST_TIME=$((GHFAST_END - GHFAST_START))
     GHPROXY_TIME=$((GHPROXY_END - GHPROXY_START))
     
-    # 检查连接是否成功（OpenWrt wget 返回码检查）
+    # 检查连接结果
     if [ $GHFAST_RET -eq 0 ]; then
       echo "ghfast.top 连接成功，响应时间: ${GHFAST_TIME}s"
     else
