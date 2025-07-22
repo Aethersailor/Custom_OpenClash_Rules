@@ -104,15 +104,48 @@ if [ $RET -eq 0 ]; then
     MODEL_URL_GHPROXY="https://gh-proxy.com/github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
     MODEL_URL_GHFAST="https://ghfast.top/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
 
-    echo "尝试通过 GitHub 反代 CDN（ghfast.top）下载内核模型文件..."
-    wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHFAST" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHFAST"
-    if [ $? -eq 0 ]; then
-      echo "Smart 内核模型文件下载成功（ghfast.top）：$MODEL_PATH"
+    echo "正在测试加速链接速度..."
+    
+    # 测试 ghfast.top 速度
+    echo "测试 ghfast.top 连接速度..."
+    GHFAST_TIME=$(timeout 10 curl -s -w "%{time_total}" -o /dev/null "$MODEL_URL_GHFAST" 2>/dev/null || echo "999")
+    
+    # 测试 gh-proxy.com 速度
+    echo "测试 gh-proxy.com 连接速度..."
+    GHPROXY_TIME=$(timeout 10 curl -s -w "%{time_total}" -o /dev/null "$MODEL_URL_GHPROXY" 2>/dev/null || echo "999")
+    
+    echo "ghfast.top 响应时间: ${GHFAST_TIME}s"
+    echo "gh-proxy.com 响应时间: ${GHPROXY_TIME}s"
+    
+    # 选择最快的链接
+    if [ "$(echo "$GHFAST_TIME < $GHPROXY_TIME" | bc 2>/dev/null || echo "0")" = "1" ]; then
+      echo "ghfast.top 速度更快，优先使用..."
+      FASTEST_URL="$MODEL_URL_GHFAST"
+      FASTEST_NAME="ghfast.top"
     else
-      echo "尝试通过 GitHub 反代 CDN（gh-proxy.com）下载内核模型文件..."
-      wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHPROXY" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHPROXY"
+      echo "gh-proxy.com 速度更快，优先使用..."
+      FASTEST_URL="$MODEL_URL_GHPROXY"
+      FASTEST_NAME="gh-proxy.com"
+    fi
+    
+    echo "尝试通过 GitHub 反代 CDN（$FASTEST_NAME）下载内核模型文件..."
+    wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$FASTEST_URL" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$FASTEST_URL"
+    if [ $? -eq 0 ]; then
+      echo "Smart 内核模型文件下载成功（$FASTEST_NAME）：$MODEL_PATH"
+    else
+      echo "$FASTEST_NAME 下载失败，尝试另一个加速链接..."
+      if [ "$FASTEST_NAME" = "ghfast.top" ]; then
+        FALLBACK_URL="$MODEL_URL_GHPROXY"
+        FALLBACK_NAME="gh-proxy.com"
+      else
+        FALLBACK_URL="$MODEL_URL_GHFAST"
+        FALLBACK_NAME="ghfast.top"
+      fi
+      
+      echo "尝试通过 GitHub 反代 CDN（$FALLBACK_NAME）下载内核模型文件..."
+      wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$FALLBACK_URL" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$FALLBACK_URL"
       if [ $? -eq 0 ]; then
-        echo "Smart 内核模型文件下载成功（gh-proxy）：$MODEL_PATH"
+        echo "Smart 内核模型文件下载成功（$FALLBACK_NAME）：$MODEL_PATH"
       else
         echo "反代 CDN 均失败，尝试通过 GitHub 直链下载..."
         wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$MODEL_URL" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$MODEL_URL"
