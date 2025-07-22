@@ -103,10 +103,12 @@ if [ $RET -eq 0 ]; then
     wget -q -O "$TMP_JSON" "https://api.github.com/repos/vernesong/mihomo/releases"
 
     # 更精确地查找 Model-large.bin 的下载链接
-    # 使用 sed 来精确匹配 Model-large.bin 的下载链接
-    MODEL_URL=$(sed -n '/"name": "Model-large.bin"/,/browser_download_url/p' "$TMP_JSON" | grep "browser_download_url" | head -n1 | sed 's/.*"browser_download_url": *"//;s/".*//')
+    # 使用简单的 grep 和 sed 组合来查找 Model-large.bin 的下载链接
+    MODEL_URL=$(grep -B 1 -A 1 '"name": "Model-large.bin"' "$TMP_JSON" | grep '"browser_download_url":' | head -n1 | sed 's/.*"browser_download_url": *"//;s/".*//')
 
-    # echo "DEBUG: MODEL_URL=$MODEL_URL"
+    echo "DEBUG: MODEL_URL=$MODEL_URL"
+    echo "DEBUG: JSON file exists: $(ls -la "$TMP_JSON" 2>/dev/null || echo 'File not found')"
+    echo "DEBUG: JSON content sample: $(head -n 5 "$TMP_JSON" 2>/dev/null | tr '\n' ' ')"
 
     if [ -n "$MODEL_URL" ]; then
       MODEL_PATH="/etc/openclash/Model.bin"
