@@ -8,6 +8,7 @@ on:
       - 'cfg/**'
       - 'rule/**'
       - 'game_rule/**'
+      - 'shell/**'
 
   workflow_dispatch:  # 支持手动触发
 
