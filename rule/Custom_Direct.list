@@ -128,6 +128,8 @@ DOMAIN-SUFFIX,game.maj-soul.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 教育域名 / add by Telegram user: Feng Ninger / Date:2025-07-22 13:56:06
+DOMAIN-SUFFIX,tumukaoyan.com
 # 招聘网站 / add by Telegram user: Feng Ninger / Date:2025-07-22 13:55:25
 DOMAIN-SUFFIX,crtyhr.com
 # 教育 / add by Telegram user: lu / Date:2025-07-22 13:54:28
