@@ -105,13 +105,15 @@ if [ $RET -eq 0 ]; then
     # 更精确地查找 Model-large.bin 的下载链接
     MODEL_URL=$(grep -A 20 "Model-large.bin" "$TMP_JSON" | grep "browser_download_url" | head -n1 | sed 's/.*"browser_download_url": *"//;s/".*//')
 
-    # echo "DEBUG: MODEL_URL=$MODEL_URL"
+    echo "DEBUG: MODEL_URL=$MODEL_URL"
 
     if [ -n "$MODEL_URL" ]; then
       MODEL_PATH="/etc/openclash/Model.bin"
       MODEL_URL_GHPROXY="https://gh-proxy.com/${MODEL_URL#https://}"
       MODEL_URL_GHFAST="https://ghfast.top/${MODEL_URL}"
 
+      echo "DEBUG: MODEL_URL_GHPROXY=$MODEL_URL_GHPROXY"
+      echo "DEBUG: MODEL_URL_GHFAST=$MODEL_URL_GHFAST"
       echo "尝试通过 GitHub 反代 CDN（ghfast.top）下载内核模型文件..."
       wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHFAST" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHFAST"
       if [ $? -eq 0 ]; then
