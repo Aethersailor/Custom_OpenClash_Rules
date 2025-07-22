@@ -96,48 +96,32 @@ if [ $RET -eq 0 ]; then
   SMART_ENABLE=$(uci get openclash.config.smart_enable 2>/dev/null)
   if [ "$SMART_ENABLE" = "1" ]; then
     echo "检测到 Smart 内核已开启。"
-    echo "正在获取最新 Smart 内核模型文件信息..."
+    echo "正在下载 Smart 内核模型文件..."
 
-    MODEL_URL=""
-    TMP_JSON="/tmp/mihomo_releases.json"
-    wget -q -O "$TMP_JSON" "https://api.github.com/repos/vernesong/mihomo/releases"
+    # 使用固定的 Model-large.bin 下载地址
+    MODEL_URL="https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
+    MODEL_PATH="/etc/openclash/Model.bin"
+    MODEL_URL_GHPROXY="https://gh-proxy.com/github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
+    MODEL_URL_GHFAST="https://ghfast.top/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
 
-    # 更精确地查找 Model-large.bin 的下载链接
-    # 使用简单的 grep 和 sed 组合来查找 Model-large.bin 的下载链接
-    MODEL_URL=$(grep -B 1 -A 1 '"name": "Model-large.bin"' "$TMP_JSON" | grep '"browser_download_url":' | head -n1 | sed 's/.*"browser_download_url": *"//;s/".*//')
-
-    echo "DEBUG: MODEL_URL=$MODEL_URL"
-    echo "DEBUG: JSON file exists: $(ls -la "$TMP_JSON" 2>/dev/null || echo 'File not found')"
-    echo "DEBUG: JSON content sample: $(head -n 5 "$TMP_JSON" 2>/dev/null | tr '\n' ' ')"
-
-    if [ -n "$MODEL_URL" ]; then
-      MODEL_PATH="/etc/openclash/Model.bin"
-      MODEL_URL_GHPROXY="https://gh-proxy.com/${MODEL_URL#https://}"
-      MODEL_URL_GHFAST="https://ghfast.top/${MODEL_URL}"
-
-      # echo "DEBUG: MODEL_URL_GHPROXY=$MODEL_URL_GHPROXY"
-      # echo "DEBUG: MODEL_URL_GHFAST=$MODEL_URL_GHFAST"
-      echo "尝试通过 GitHub 反代 CDN（ghfast.top）下载内核模型文件..."
-      wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHFAST" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHFAST"
+    echo "尝试通过 GitHub 反代 CDN（ghfast.top）下载内核模型文件..."
+    wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHFAST" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHFAST"
+    if [ $? -eq 0 ]; then
+      echo "Smart 内核模型文件下载成功（ghfast.top）：$MODEL_PATH"
+    else
+      echo "尝试通过 GitHub 反代 CDN（gh-proxy.com）下载内核模型文件..."
+      wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHPROXY" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHPROXY"
       if [ $? -eq 0 ]; then
-        echo "Smart 内核模型文件下载成功（ghfast.top）：$MODEL_PATH"
+        echo "Smart 内核模型文件下载成功（gh-proxy）：$MODEL_PATH"
       else
-        echo "尝试通过 GitHub 反代 CDN（gh-proxy.com）下载内核模型文件..."
-        wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHPROXY" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$MODEL_URL_GHPROXY"
+        echo "反代 CDN 均失败，尝试通过 GitHub 直链下载..."
+        wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$MODEL_URL" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$MODEL_URL"
         if [ $? -eq 0 ]; then
-          echo "Smart 内核模型文件下载成功（gh-proxy）：$MODEL_PATH"
+          echo "Smart 内核模型文件下载成功（GitHub 直链）：$MODEL_PATH"
         else
-          echo "反代 CDN 均失败，尝试通过 GitHub 直链下载..."
-          wget --show-progress --progress=bar:force:noscroll -T 30 -O "$MODEL_PATH" "$MODEL_URL" 2>/dev/null || wget -T 30 -O "$MODEL_PATH" "$MODEL_URL"
-          if [ $? -eq 0 ]; then
-            echo "Smart 内核模型文件下载成功（GitHub 直链）：$MODEL_PATH"
-          else
-            echo "所有方式均失败，Smart 内核启动时会自动下载模型文件。"
-          fi
+          echo "所有方式均失败，Smart 内核启动时会自动下载模型文件。"
         fi
       fi
-    else
-      echo "未能获取到 Smart 内核模型文件的下载链接，Smart 内核启动时会自动下载模型文件。"
     fi
   else
     echo "检测到 Smart 内核未启用。"
@@ -147,7 +131,6 @@ echo
 
 # 清理临时文件
 rm -f "$TEMP_FILE"
-[ -f /tmp/mihomo_releases.json ] && rm -f /tmp/mihomo_releases.json
 
 # 加载 OpenClash 预设配置（如果存在）
 echo "--------------------[ 加载个性化预设配置 ]----------------"
