@@ -104,7 +104,7 @@ if [ $RET -eq 0 ]; then
     MODEL_URL_GHPROXY="https://gh-proxy.com/github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
     MODEL_URL_GHFAST="https://ghfast.top/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
 
-    echo "正在同时测试两个加速链接速度（5秒超时）..."
+    echo "正在测试加速链接速度..."
     
     # 同时测试两个 CDN 速度
     GHFAST_START=$(date +%s)
@@ -123,7 +123,6 @@ if [ $RET -eq 0 ]; then
     if kill -0 $GHFAST_PID 2>/dev/null; then
       kill $GHFAST_PID 2>/dev/null
       GHFAST_RET=1
-      echo "ghfast.top 测速超时"
     else
       wait $GHFAST_PID
       GHFAST_RET=$?
@@ -132,7 +131,6 @@ if [ $RET -eq 0 ]; then
     if kill -0 $GHPROXY_PID 2>/dev/null; then
       kill $GHPROXY_PID 2>/dev/null
       GHPROXY_RET=1
-      echo "gh-proxy.com 测速超时"
     else
       wait $GHPROXY_PID
       GHPROXY_RET=$?
@@ -144,40 +142,35 @@ if [ $RET -eq 0 ]; then
     GHFAST_TIME=$((GHFAST_END - GHFAST_START))
     GHPROXY_TIME=$((GHPROXY_END - GHPROXY_START))
     
-    # 检查连接结果
+    # 检查连接结果并设置时间
     if [ $GHFAST_RET -eq 0 ]; then
-      echo "ghfast.top 连接成功，响应时间: ${GHFAST_TIME}s"
+      GHFAST_AVAILABLE=1
     else
-      echo "ghfast.top 连接失败，设置超时时间"
       GHFAST_TIME=999
+      GHFAST_AVAILABLE=0
     fi
     
     if [ $GHPROXY_RET -eq 0 ]; then
-      echo "gh-proxy.com 连接成功，响应时间: ${GHPROXY_TIME}s"
+      GHPROXY_AVAILABLE=1
     else
-      echo "gh-proxy.com 连接失败，设置超时时间"
       GHPROXY_TIME=999
+      GHPROXY_AVAILABLE=0
     fi
     
     # 选择最快的链接（排除超时情况）
     if [ "$GHFAST_TIME" = "999" ] && [ "$GHPROXY_TIME" = "999" ]; then
-      echo "两个 CDN 均无法连接，直接尝试 ghfast.top..."
       FASTEST_URL="$MODEL_URL_GHFAST"
       FASTEST_NAME="ghfast.top"
     elif [ "$GHFAST_TIME" = "999" ]; then
-      echo "ghfast.top 无法连接，使用 gh-proxy.com..."
       FASTEST_URL="$MODEL_URL_GHPROXY"
       FASTEST_NAME="gh-proxy.com"
     elif [ "$GHPROXY_TIME" = "999" ]; then
-      echo "gh-proxy.com 无法连接，使用 ghfast.top..."
       FASTEST_URL="$MODEL_URL_GHFAST"
       FASTEST_NAME="ghfast.top"
     elif [ "$(echo "$GHFAST_TIME < $GHPROXY_TIME" | bc 2>/dev/null || echo "0")" = "1" ]; then
-      echo "ghfast.top 速度更快，优先使用..."
       FASTEST_URL="$MODEL_URL_GHFAST"
       FASTEST_NAME="ghfast.top"
     else
-      echo "gh-proxy.com 速度更快，优先使用..."
       FASTEST_URL="$MODEL_URL_GHPROXY"
       FASTEST_NAME="gh-proxy.com"
     fi
