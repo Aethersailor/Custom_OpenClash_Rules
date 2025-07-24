@@ -4,7 +4,7 @@
 # TOTAL: 4
 
 payload:
-  - IP-CIDR,5.5.5.5/32,no-resolve
-  - IP-CIDR,218.78.7.16/32,no-resolve
-  - IP-CIDR,98.126.27.164/32,no-resolve
   - IP-CIDR,108.174.48.100/32,no-resolve
+  - IP-CIDR,218.78.7.16/32,no-resolve
+  - IP-CIDR,5.5.5.5/32,no-resolve
+  - IP-CIDR,98.126.27.164/32,no-resolve
