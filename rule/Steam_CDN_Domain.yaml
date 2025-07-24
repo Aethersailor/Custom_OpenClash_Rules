@@ -4,6 +4,6 @@
 # TOTAL: 3
 
 payload:
-  - '+.steamcdn-a.akamaihd.net'
   - '+.cm.steampowered.com'
+  - '+.steamcdn-a.akamaihd.net'
   - '+.steamserver.net'
