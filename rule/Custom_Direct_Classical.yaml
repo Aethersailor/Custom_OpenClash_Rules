@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 124
+# TOTAL: 125
 
 payload:
   - DOMAIN-SUFFIX,immortalwrt.org
@@ -81,6 +81,7 @@ payload:
   - DOMAIN-SUFFIX,plushk2.younoyes.com
   - DOMAIN-SUFFIX,plushk3.younoyes.com
   - DOMAIN-SUFFIX,game.maj-soul.com
+  - DOMAIN-SUFFIX,zhongancloud.com
   - DOMAIN-SUFFIX,xdqtech.com
   - DOMAIN-SUFFIX,tuxing.art
   - DOMAIN-SUFFIX,lsbj365.com
