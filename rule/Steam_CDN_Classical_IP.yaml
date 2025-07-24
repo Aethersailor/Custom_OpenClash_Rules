@@ -4,7 +4,6 @@
 # TOTAL: 23
 
 payload:
-  - IP-CIDR,45.121.184.0/24,no-resolve
   - IP-CIDR,103.10.124.0/23,no-resolve
   - IP-CIDR,103.28.54.0/24,no-resolve
   - IP-CIDR,146.66.152.0/24,no-resolve
@@ -23,7 +22,8 @@ payload:
   - IP-CIDR,185.25.182.0/23,no-resolve
   - IP-CIDR,190.217.32.0/22,no-resolve
   - IP-CIDR,192.69.96.0/22,no-resolve
+  - IP-CIDR,205.185.194.0/24,no-resolve
   - IP-CIDR,205.196.6.0/24,no-resolve
   - IP-CIDR,208.64.200.0/22,no-resolve
   - IP-CIDR,208.78.164.0/22,no-resolve
-  - IP-CIDR,205.185.194.0/24,no-resolve
+  - IP-CIDR,45.121.184.0/24,no-resolve
