@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 120
+# TOTAL: 121
 
 payload:
   - '+.immortalwrt.org'
@@ -81,6 +81,7 @@ payload:
   - '+.plushk2.younoyes.com'
   - '+.plushk3.younoyes.com'
   - '+.game.maj-soul.com'
+  - '+.zhongancloud.com'
   - '+.xdqtech.com'
   - '+.tuxing.art'
   - '+.lsbj365.com'
