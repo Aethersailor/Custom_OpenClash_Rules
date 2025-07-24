@@ -81,13 +81,18 @@ payload:
   - DOMAIN-SUFFIX,plushk2.younoyes.com
   - DOMAIN-SUFFIX,plushk3.younoyes.com
   - DOMAIN-SUFFIX,game.maj-soul.com
-  - DOMAIN-SUFFIX,zhongancloud.com
   - DOMAIN-SUFFIX,xdqtech.com
+  - DOMAIN-SUFFIX,chaz.fun
+  - DOMAIN-SUFFIX,dushe1.app
+  - DOMAIN-SUFFIX,jxpp.com
+  - DOMAIN-SUFFIX,seaflysoft.com
+  - DOMAIN-SUFFIX,seedpace.com
+  - DOMAIN-SUFFIX,qiaoxuesi.com
+  - DOMAIN-SUFFIX,zhongancloud.com
   - DOMAIN-SUFFIX,tuxing.art
   - DOMAIN-SUFFIX,lsbj365.com
   - DOMAIN-SUFFIX,keyoo.com
   - DOMAIN-SUFFIX,tcy365.net
-  - DOMAIN-SUFFIX,chaz.fun
   - DOMAIN-SUFFIX,belimked.com
   - DOMAIN-SUFFIX,lanyun.net
   - DOMAIN-SUFFIX,52jiawei.com
@@ -99,7 +104,6 @@ payload:
   - DOMAIN-SUFFIX,dingdingzn.com
   - DOMAIN-SUFFIX,737698.xyz
   - DOMAIN-SUFFIX,znnu.com
-  - DOMAIN-SUFFIX,jxpp.com
   - DOMAIN-SUFFIX,jxjktzjt.com
   - DOMAIN-SUFFIX,snltty.com
   - DOMAIN-SUFFIX,znztv.com
@@ -109,7 +113,6 @@ payload:
   - DOMAIN-SUFFIX,crtyhr.com
   - DOMAIN-SUFFIX,letaoedu.com
   - DOMAIN-SUFFIX,sixloy428.top
-  - DOMAIN-SUFFIX,dushe1.app
   - DOMAIN-SUFFIX,hbctic.com
   - DOMAIN-SUFFIX,hbcof.com
   - DOMAIN-SUFFIX,hexiny.com
@@ -121,9 +124,6 @@ payload:
   - DOMAIN-SUFFIX,gsjkjt.com
   - DOMAIN-SUFFIX,gsstic.com
   - DOMAIN-SUFFIX,sxlljm.com
-  - DOMAIN-SUFFIX,seedpace.com
-  - DOMAIN-SUFFIX,qiaoxuesi.com
-  - DOMAIN-SUFFIX,seaflysoft.com
   - DOMAIN-SUFFIX,chujingapp.com
   - IP-CIDR,5.5.5.5/32,no-resolve
   - IP-CIDR,218.78.7.16/32,no-resolve
