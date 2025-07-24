@@ -36,14 +36,14 @@ jobs:
             classical_yaml_file="rule/${base_name}_Classical.yaml"
             classical_ip_yaml_file="rule/${base_name}_Classical_IP.yaml"
 
-            domain_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^DOMAIN-SUFFIX,(.+)/  - '+.\1'/" | sed -E "s/^DOMAIN-KEYWORD,(.+)/  - '*\1*'/" | sed -E "s/^DOMAIN,(.+)/  - '\1'/")
-            ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - '\1'/" | sed -E "s/^IP,([^,]+).*/  - '\1'/")
+            domain_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^DOMAIN-SUFFIX,(.+)/  - '+.\1'/" | sed -E "s/^DOMAIN-KEYWORD,(.+)/  - '*\1*'/" | sed -E "s/^DOMAIN,(.+)/  - '\1'/" | sort)
+            ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - '\1'/" | sed -E "s/^IP,([^,]+).*/  - '\1'/" | sort)
 
-            classical_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^(.*)/  - \1/")
+            classical_rules=$(grep -E '^(DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^(.*)/  - \1/" | sort)
             classical_rules+=$'\n'
-            classical_rules+=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/")
+            classical_rules+=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sort)
 
-            classical_ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/")
+            classical_ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sort)
 
             generate_and_commit() {
               file="$1"
