@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 129
+# TOTAL: 130
 
 payload:
   - DOMAIN-KEYWORD,quickconnect
@@ -48,6 +48,7 @@ payload:
   - DOMAIN-SUFFIX,gh.con.sh
   - DOMAIN-SUFFIX,gh.ddlc.top
   - DOMAIN-SUFFIX,gh.llkk.cc
+  - DOMAIN-SUFFIX,ghcr.io
   - DOMAIN-SUFFIX,ghp.ci
   - DOMAIN-SUFFIX,ghproxy.cc
   - DOMAIN-SUFFIX,ghproxy.cfd
