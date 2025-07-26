@@ -141,6 +141,8 @@ DOMAIN-SUFFIX,jxpp.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# add by Telegram user: Aethersailor / Date: 2025-07-26 16:01:18
+DOMAIN-SUFFIX,dcgstd.com
 # add by Telegram user: 左右 / Date: 2025-07-26 12:31:49
 DOMAIN-SUFFIX,ghcr.io
 # add by Telegram user: P / Date: 2025-07-26 01:49:54
