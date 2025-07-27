@@ -46,23 +46,32 @@ jobs:
           
           # Add a comment to the PR
           gh pr comment ${{ github.event.pull_request.number }} \
-            --body "## ❌ PR Rejected
+            --body "## ❌ PR Rejected / PR 被拒绝
 
           This PR has been automatically rejected because it contains modifications to files in the `/cfg` directory.
+          此 PR 已被自动拒绝，因为它包含对 `/cfg` 目录文件的修改。
 
-          ### Why was this rejected?
+          ### Why was this rejected? / 为什么被拒绝？
           - Modifying `.ini` template files will affect all users' configured node options
+          - 修改 `.ini` 模板文件会影响所有用户已设置的节点选项
           - Except for the Full template, other templates do not accept any PRs
+          - 除了 Full 模板以外，其他模板不接受任何 PR
           - This ensures configuration integrity and prevents disruption to existing user setups
+          - 这确保了配置完整性并防止破坏现有用户设置
           - Only GitHub Actions workflows and repository owner can modify these files
+          - 只有 GitHub Actions 工作流和仓库所有者可以修改这些文件
 
-          ### What should you do?
+          ### What should you do? / 你应该怎么做？
           - If you need to modify configuration files, please update the source files instead
+          - 如果你需要修改配置文件，请更新源文件
           - The GitHub Actions workflows will automatically generate the appropriate `/cfg` files
+          - GitHub Actions 工作流将自动生成相应的 `/cfg` 文件
           - If you believe this rejection is in error, please contact the repository maintainers
+          - 如果你认为此拒绝是错误的，请联系仓库维护者
 
           ---
-          *This is an automated response from the repository protection system.*"
+          *This is an automated response from the repository protection system.*
+          *这是来自仓库保护系统的自动回复。*"
 
       - name: Close unauthorized PRs
         if: steps.check-actor.outputs.is_allowed == 'false'
@@ -80,43 +89,58 @@ jobs:
           # Add a comment to confirm it's allowed
           if [[ "${{ steps.check-actor.outputs.reason }}" == "github_actions" ]]; then
             gh pr comment ${{ github.event.pull_request.number }} \
-              --body "## ✅ PR Allowed
+              --body "## ✅ PR Allowed / PR 被允许
 
           This PR has been automatically allowed because it was created by GitHub Actions.
+          此 PR 已被自动允许，因为它是由 GitHub Actions 创建的。
 
-          ### Why was this allowed?
+          ### Why was this allowed? / 为什么被允许？
           - This PR was created by a GitHub Actions workflow
+          - 此 PR 是由 GitHub Actions 工作流创建的
           - Automated updates to `/cfg` directory are permitted
+          - 允许对 `/cfg` 目录进行自动化更新
           - The changes are part of the automated configuration generation process
+          - 这些更改是自动化配置生成过程的一部分
 
           ---
-          *This is an automated response from the repository protection system.*"
+          *This is an automated response from the repository protection system.*
+          *这是来自仓库保护系统的自动回复。*"
           elif [[ "${{ steps.check-actor.outputs.reason }}" == "excluded_file" ]]; then
             gh pr comment ${{ github.event.pull_request.number }} \
-              --body "## ✅ PR Allowed
+              --body "## ✅ PR Allowed / PR 被允许
 
           This PR has been allowed because it only modifies `Custom_Clash_Full.ini`.
+          此 PR 已被允许，因为它只修改 `Custom_Clash_Full.ini`。
 
-          ### Why was this allowed?
+          ### Why was this allowed? / 为什么被允许？
           - `Custom_Clash_Full.ini` is excluded from protection rules
+          - `Custom_Clash_Full.ini` 被排除在保护规则之外
           - This file can be modified by any user
+          - 任何用户都可以修改此文件
           - Other `/cfg` directory files remain protected
+          - 其他 `/cfg` 目录文件仍然受到保护
 
           ---
-          *This is an automated response from the repository protection system.*"
+          *This is an automated response from the repository protection system.*
+          *这是来自仓库保护系统的自动回复。*"
           else
             gh pr comment ${{ github.event.pull_request.number }} \
-              --body "## ✅ PR Allowed
+              --body "## ✅ PR Allowed / PR 被允许
 
           This PR has been allowed because it was created by the repository owner.
+          此 PR 已被允许，因为它是由仓库所有者创建的。
 
-          ### Why was this allowed?
+          ### Why was this allowed? / 为什么被允许？
           - This PR was created by the repository owner
+          - 此 PR 是由仓库所有者创建的
           - Repository owners have full access to modify files in this directory
+          - 仓库所有者拥有修改此目录文件的完全访问权限
           - Manual modifications by the owner are permitted
+          - 允许所有者进行手动修改
 
           ---
-          *This is an automated response from the repository protection system.*"
+          *This is an automated response from the repository protection system.*
+          *这是来自仓库保护系统的自动回复。*"
           fi
 
       - name: Show PR Details
