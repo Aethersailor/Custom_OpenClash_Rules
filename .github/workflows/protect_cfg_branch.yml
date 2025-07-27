@@ -1,0 +1,73 @@
+name: Protect CFG Directory Branch
+
+on:
+  push:
+    paths:
+      - 'cfg/**'
+
+jobs:
+  check-and-block:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check if push is from GitHub Actions
+        id: check-actor
+        run: |
+          if [[ "${{ github.actor }}" == "github-actions[bot]" ]]; then
+            echo "is_github_actions=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_github_actions=false" >> $GITHUB_OUTPUT
+          fi
+          
+          echo "Push author: ${{ github.actor }}"
+          echo "Is GitHub Actions: ${{ steps.check-actor.outputs.is_github_actions }}"
+
+      - name: Block non-GitHub Actions pushes
+        if: steps.check-actor.outputs.is_github_actions == 'false'
+        run: |
+          echo "🚫 Blocking push to ${{ github.ref }}"
+          echo "Reason: Direct pushes to /cfg directory are not allowed"
+          echo "Only GitHub Actions can modify files in the /cfg directory"
+          
+          # Create a status check that will fail
+          echo "## ❌ Push Blocked" > status.md
+          echo "" >> status.md
+          echo "This push has been automatically blocked because it contains modifications to files in the `/cfg` directory." >> status.md
+          echo "" >> status.md
+          echo "### Why was this blocked?" >> status.md
+          echo "- Direct modifications to `/cfg` directory files are not allowed" >> status.md
+          echo "- Only GitHub Actions workflows can modify files in this directory" >> status.md
+          echo "- This ensures configuration integrity and prevents manual errors" >> status.md
+          echo "" >> status.md
+          echo "### What should you do?" >> status.md
+          echo "- If you need to modify configuration files, please update the source files instead" >> status.md
+          echo "- The GitHub Actions workflows will automatically generate the appropriate `/cfg` files" >> status.md
+          echo "- If you believe this block is in error, please contact the repository maintainers" >> status.md
+          
+          # Exit with error to fail the workflow
+          exit 1
+
+      - name: Allow GitHub Actions pushes
+        if: steps.check-actor.outputs.is_github_actions == 'true'
+        run: |
+          echo "✅ Allowing push to ${{ github.ref }}"
+          echo "Reason: This push was created by GitHub Actions"
+          
+          # Create a status check that will pass
+          echo "## ✅ Push Allowed" > status.md
+          echo "" >> status.md
+          echo "This push has been automatically allowed because it was created by GitHub Actions." >> status.md
+          echo "" >> status.md
+          echo "### Why was this allowed?" >> status.md
+          echo "- This push was created by a GitHub Actions workflow" >> status.md
+          echo "- Automated updates to `/cfg` directory are permitted" >> status.md
+          echo "- The changes are part of the automated configuration generation process" >> status.md
+
+      - name: Show Push Details
+        run: |
+          echo "Branch: ${{ github.ref }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Author: ${{ github.actor }}"
+          echo "Event: ${{ github.event_name }}"
+          echo "Changed Files:"
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "^cfg/" || echo "No cfg files changed" 
