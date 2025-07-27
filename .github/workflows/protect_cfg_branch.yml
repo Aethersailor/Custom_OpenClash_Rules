@@ -60,10 +60,8 @@ jobs:
           echo "- 只有 GitHub Actions 工作流和仓库所有者可以修改这些文件" >> status.md
           echo "" >> status.md
           echo "### What should you do? / 你应该怎么做？" >> status.md
-          echo "- If you need to modify configuration files, please update the source files instead" >> status.md
-          echo "- 如果你需要修改配置文件，请更新源文件" >> status.md
-          echo "- The GitHub Actions workflows will automatically generate the appropriate `/cfg` files" >> status.md
-          echo "- GitHub Actions 工作流将自动生成相应的 `/cfg` 文件" >> status.md
+          echo "- If you need to modify configuration files, please fork and modify for your own use" >> status.md
+          echo "- 如果你需要修改配置文件，请 fork 以后修改自用" >> status.md
           echo "- If you believe this block is in error, please contact the repository maintainers" >> status.md
           echo "- 如果你认为此阻止是错误的，请联系仓库维护者" >> status.md
           
