@@ -53,8 +53,8 @@ jobs:
           sed -i '/GEOIP,cn/d' cfg/Custom_Clash.ini
 
           # 在 Custom_Proxy 行后插入两条规则
-          sed -i '/Custom_Proxy/a\        ruleset=🎯 全球直连,[]GEOIP,cn,no-resolve' cfg/Custom_Clash.ini
-          sed -i '/Custom_Proxy/a\        ruleset=🎯 全球直连,[]GEOSITE,cn' cfg/Custom_Clash.ini
+          sed -i '/Custom_Proxy/a ruleset=🎯 全球直连,[]GEOIP,cn,no-resolve' cfg/Custom_Clash.ini
+          sed -i '/Custom_Proxy/a ruleset=🎯 全球直连,[]GEOSITE,cn' cfg/Custom_Clash.ini
 
           # 清理临时文件
           rm -f header_comments.txt
