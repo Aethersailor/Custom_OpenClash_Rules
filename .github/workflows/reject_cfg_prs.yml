@@ -62,10 +62,8 @@ jobs:
           - 只有 GitHub Actions 工作流和仓库所有者可以修改这些文件
 
           ### What should you do? / 你应该怎么做？
-          - If you need to modify configuration files, please update the source files instead
-          - 如果你需要修改配置文件，请更新源文件
-          - The GitHub Actions workflows will automatically generate the appropriate `/cfg` files
-          - GitHub Actions 工作流将自动生成相应的 `/cfg` 文件
+          - If you need to modify configuration files, please fork and modify for your own use
+          - 如果你需要修改配置文件，请 fork 以后修改自用
           - If you believe this rejection is in error, please contact the repository maintainers
           - 如果你认为此拒绝是错误的，请联系仓库维护者
 
