@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 129
+# TOTAL: 130
 
 payload:
   - '*quickconnect*'
@@ -76,6 +76,7 @@ payload:
   - '+.hub.rat.dev'
   - '+.hub.xdark.top'
   - '+.ifconfig.co'
+  - '+.igpsport.com'
   - '+.immortalwrt.org'
   - '+.ip6.seeip.org'
   - '+.ipapi.co'
