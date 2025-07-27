@@ -11,24 +11,30 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Check if PR is from GitHub Actions
+      - name: Check if PR is from GitHub Actions or repository owner
         id: check-actor
         run: |
           if [[ "${{ github.event.pull_request.user.login }}" == "github-actions[bot]" ]]; then
-            echo "is_github_actions=true" >> $GITHUB_OUTPUT
+            echo "is_allowed=true" >> $GITHUB_OUTPUT
+            echo "reason=github_actions" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event.pull_request.user.login }}" == "Aethersailor" ]]; then
+            echo "is_allowed=true" >> $GITHUB_OUTPUT
+            echo "reason=repository_owner" >> $GITHUB_OUTPUT
           else
-            echo "is_github_actions=false" >> $GITHUB_OUTPUT
+            echo "is_allowed=false" >> $GITHUB_OUTPUT
+            echo "reason=unauthorized_user" >> $GITHUB_OUTPUT
           fi
           
           echo "PR author: ${{ github.event.pull_request.user.login }}"
-          echo "Is GitHub Actions: ${{ steps.check-actor.outputs.is_github_actions }}"
+          echo "Is allowed: ${{ steps.check-actor.outputs.is_allowed }}"
+          echo "Reason: ${{ steps.check-actor.outputs.reason }}"
 
-      - name: Reject non-GitHub Actions PRs
-        if: steps.check-actor.outputs.is_github_actions == 'false'
+      - name: Reject unauthorized PRs
+        if: steps.check-actor.outputs.is_allowed == 'false'
         run: |
           echo "🚫 Rejecting PR #${{ github.event.pull_request.number }}"
-          echo "Reason: Direct modifications to /cfg directory are not allowed"
-          echo "Only GitHub Actions can modify files in the /cfg directory"
+          echo "Reason: Unauthorized user trying to modify /cfg directory"
+          echo "Only GitHub Actions and repository owner can modify files in the /cfg directory"
           
           # Add a comment to the PR
           gh pr comment ${{ github.event.pull_request.number }} \
@@ -37,8 +43,8 @@ jobs:
           This PR has been automatically rejected because it contains modifications to files in the `/cfg` directory.
 
           ### Why was this rejected?
-          - Direct modifications to `/cfg` directory files are not allowed
-          - Only GitHub Actions workflows can modify files in this directory
+          - Direct modifications to `/cfg` directory files are not allowed for unauthorized users
+          - Only GitHub Actions workflows and repository owner can modify files in this directory
           - This ensures configuration integrity and prevents manual errors
 
           ### What should you do?
@@ -49,22 +55,23 @@ jobs:
           ---
           *This is an automated response from the repository protection system.*"
 
-      - name: Close PR if not from GitHub Actions
-        if: steps.check-actor.outputs.is_github_actions == 'false'
+      - name: Close unauthorized PRs
+        if: steps.check-actor.outputs.is_allowed == 'false'
         run: |
           gh pr close ${{ github.event.pull_request.number }} \
             --delete-branch \
             --reason "not_planned"
 
-      - name: Allow GitHub Actions PRs
-        if: steps.check-actor.outputs.is_github_actions == 'true'
+      - name: Allow authorized PRs
+        if: steps.check-actor.outputs.is_allowed == 'true'
         run: |
           echo "✅ Allowing PR #${{ github.event.pull_request.number }}"
-          echo "Reason: This PR was created by GitHub Actions"
+          echo "Reason: This PR was created by ${{ steps.check-actor.outputs.reason }}"
           
           # Add a comment to confirm it's allowed
-          gh pr comment ${{ github.event.pull_request.number }} \
-            --body "## ✅ PR Allowed
+          if [[ "${{ steps.check-actor.outputs.reason }}" == "github_actions" ]]; then
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --body "## ✅ PR Allowed
 
           This PR has been automatically allowed because it was created by GitHub Actions.
 
@@ -75,6 +82,20 @@ jobs:
 
           ---
           *This is an automated response from the repository protection system.*"
+          else
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --body "## ✅ PR Allowed
+
+          This PR has been allowed because it was created by the repository owner.
+
+          ### Why was this allowed?
+          - This PR was created by the repository owner
+          - Repository owners have full access to modify files in this directory
+          - Manual modifications by the owner are permitted
+
+          ---
+          *This is an automated response from the repository protection system.*"
+          fi
 
       - name: Show PR Details
         run: |
