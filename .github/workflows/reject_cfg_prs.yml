@@ -1,0 +1,86 @@
+name: Reject CFG Directory PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'cfg/**'
+
+jobs:
+  check-and-reject:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check if PR is from GitHub Actions
+        id: check-actor
+        run: |
+          if [[ "${{ github.event.pull_request.user.login }}" == "github-actions[bot]" ]]; then
+            echo "is_github_actions=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_github_actions=false" >> $GITHUB_OUTPUT
+          fi
+          
+          echo "PR author: ${{ github.event.pull_request.user.login }}"
+          echo "Is GitHub Actions: ${{ steps.check-actor.outputs.is_github_actions }}"
+
+      - name: Reject non-GitHub Actions PRs
+        if: steps.check-actor.outputs.is_github_actions == 'false'
+        run: |
+          echo "🚫 Rejecting PR #${{ github.event.pull_request.number }}"
+          echo "Reason: Direct modifications to /cfg directory are not allowed"
+          echo "Only GitHub Actions can modify files in the /cfg directory"
+          
+          # Add a comment to the PR
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body "## ❌ PR Rejected
+
+          This PR has been automatically rejected because it contains modifications to files in the `/cfg` directory.
+
+          ### Why was this rejected?
+          - Direct modifications to `/cfg` directory files are not allowed
+          - Only GitHub Actions workflows can modify files in this directory
+          - This ensures configuration integrity and prevents manual errors
+
+          ### What should you do?
+          - If you need to modify configuration files, please update the source files instead
+          - The GitHub Actions workflows will automatically generate the appropriate `/cfg` files
+          - If you believe this rejection is in error, please contact the repository maintainers
+
+          ---
+          *This is an automated response from the repository protection system.*"
+
+      - name: Close PR if not from GitHub Actions
+        if: steps.check-actor.outputs.is_github_actions == 'false'
+        run: |
+          gh pr close ${{ github.event.pull_request.number }} \
+            --delete-branch \
+            --reason "not_planned"
+
+      - name: Allow GitHub Actions PRs
+        if: steps.check-actor.outputs.is_github_actions == 'true'
+        run: |
+          echo "✅ Allowing PR #${{ github.event.pull_request.number }}"
+          echo "Reason: This PR was created by GitHub Actions"
+          
+          # Add a comment to confirm it's allowed
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body "## ✅ PR Allowed
+
+          This PR has been automatically allowed because it was created by GitHub Actions.
+
+          ### Why was this allowed?
+          - This PR was created by a GitHub Actions workflow
+          - Automated updates to `/cfg` directory are permitted
+          - The changes are part of the automated configuration generation process
+
+          ---
+          *This is an automated response from the repository protection system.*"
+
+      - name: Show PR Details
+        run: |
+          echo "PR Number: ${{ github.event.pull_request.number }}"
+          echo "PR Title: ${{ github.event.pull_request.title }}"
+          echo "PR Author: ${{ github.event.pull_request.user.login }}"
+          echo "PR URL: ${{ github.event.pull_request.html_url }}"
+          echo "Changed Files:"
+          gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path' 
