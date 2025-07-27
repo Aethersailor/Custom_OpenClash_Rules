@@ -13,7 +13,14 @@ jobs:
       - name: Check if push is from GitHub Actions or repository owner
         id: check-actor
         run: |
-          if [[ "${{ github.actor }}" == "github-actions[bot]" ]]; then
+          # Get the list of changed cfg files
+          changed_cfg_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "^cfg/" || echo "")
+          
+          # Check if only Custom_Clash_Full.ini is being modified
+          if [[ "$changed_cfg_files" == "cfg/Custom_Clash_Full.ini" ]]; then
+            echo "is_allowed=true" >> $GITHUB_OUTPUT
+            echo "reason=excluded_file" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.actor }}" == "github-actions[bot]" ]]; then
             echo "is_allowed=true" >> $GITHUB_OUTPUT
             echo "reason=github_actions" >> $GITHUB_OUTPUT
           elif [[ "${{ github.actor }}" == "Aethersailor" ]]; then
@@ -25,6 +32,7 @@ jobs:
           fi
           
           echo "Push author: ${{ github.actor }}"
+          echo "Changed cfg files: $changed_cfg_files"
           echo "Is allowed: ${{ steps.check-actor.outputs.is_allowed }}"
           echo "Reason: ${{ steps.check-actor.outputs.reason }}"
 
@@ -69,6 +77,13 @@ jobs:
             echo "- This push was created by a GitHub Actions workflow" >> status.md
             echo "- Automated updates to `/cfg` directory are permitted" >> status.md
             echo "- The changes are part of the automated configuration generation process" >> status.md
+          elif [[ "${{ steps.check-actor.outputs.reason }}" == "excluded_file" ]]; then
+            echo "This push has been allowed because it only modifies Custom_Clash_Full.ini." >> status.md
+            echo "" >> status.md
+            echo "### Why was this allowed?" >> status.md
+            echo "- Custom_Clash_Full.ini is excluded from protection rules" >> status.md
+            echo "- This file can be modified by any user" >> status.md
+            echo "- Other /cfg directory files remain protected" >> status.md
           else
             echo "This push has been allowed because it was created by the repository owner." >> status.md
             echo "" >> status.md

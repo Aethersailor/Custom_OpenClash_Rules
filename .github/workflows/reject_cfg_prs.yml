@@ -14,7 +14,14 @@ jobs:
       - name: Check if PR is from GitHub Actions or repository owner
         id: check-actor
         run: |
-          if [[ "${{ github.event.pull_request.user.login }}" == "github-actions[bot]" ]]; then
+          # Get the list of changed files in the PR
+          changed_files=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path' | grep "^cfg/" || echo "")
+          
+          # Check if Custom_Clash_Full.ini is the only cfg file being modified
+          if [[ "$changed_files" == "cfg/Custom_Clash_Full.ini" ]]; then
+            echo "is_allowed=true" >> $GITHUB_OUTPUT
+            echo "reason=excluded_file" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event.pull_request.user.login }}" == "github-actions[bot]" ]]; then
             echo "is_allowed=true" >> $GITHUB_OUTPUT
             echo "reason=github_actions" >> $GITHUB_OUTPUT
           elif [[ "${{ github.event.pull_request.user.login }}" == "Aethersailor" ]]; then
@@ -26,6 +33,7 @@ jobs:
           fi
           
           echo "PR author: ${{ github.event.pull_request.user.login }}"
+          echo "Changed cfg files: $changed_files"
           echo "Is allowed: ${{ steps.check-actor.outputs.is_allowed }}"
           echo "Reason: ${{ steps.check-actor.outputs.reason }}"
 
@@ -79,6 +87,19 @@ jobs:
           - This PR was created by a GitHub Actions workflow
           - Automated updates to `/cfg` directory are permitted
           - The changes are part of the automated configuration generation process
+
+          ---
+          *This is an automated response from the repository protection system.*"
+          elif [[ "${{ steps.check-actor.outputs.reason }}" == "excluded_file" ]]; then
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --body "## ✅ PR Allowed
+
+          This PR has been allowed because it only modifies `Custom_Clash_Full.ini`.
+
+          ### Why was this allowed?
+          - `Custom_Clash_Full.ini` is excluded from protection rules
+          - This file can be modified by any user
+          - Other `/cfg` directory files remain protected
 
           ---
           *This is an automated response from the repository protection system.*"
