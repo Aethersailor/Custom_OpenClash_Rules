@@ -141,6 +141,8 @@ DOMAIN-SUFFIX,jxpp.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 国内某骑行设备的网站 / add by Telegram user: 2. / Date: 2025-07-27 23:59:27
+DOMAIN-SUFFIX,igpsport.com
 # add by Telegram user: Aethersailor / Date: 2025-07-27 02:04:15
 DOMAIN-SUFFIX,kmeila.com
 # add by Telegram user: Aethersailor / Date: 2025-07-27 02:03:58
