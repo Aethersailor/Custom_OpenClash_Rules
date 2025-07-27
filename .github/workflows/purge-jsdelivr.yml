@@ -34,8 +34,11 @@ jobs:
           done
           
           echo "Countdown finished. Proceeding with cache purge..."
+        # 添加取消处理，静默退出
+        if: ${{ !cancelled() }}
 
       - name: Purge jsDelivr Cache
+        if: ${{ !cancelled() }}
         env:
           REPO: Aethersailor/Custom_OpenClash_Rules
         run: |
