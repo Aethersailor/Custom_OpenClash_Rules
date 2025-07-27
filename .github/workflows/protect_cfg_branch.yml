@@ -49,9 +49,10 @@ jobs:
           echo "This push has been automatically blocked because it contains modifications to files in the `/cfg` directory." >> status.md
           echo "" >> status.md
           echo "### Why was this blocked?" >> status.md
-          echo "- Direct modifications to `/cfg` directory files are not allowed for unauthorized users" >> status.md
-          echo "- Only GitHub Actions workflows and repository owner can modify files in this directory" >> status.md
-          echo "- This ensures configuration integrity and prevents manual errors" >> status.md
+          echo "- Modifying `.ini` template files will affect all users' configured node options" >> status.md
+          echo "- Except for the Full template, other templates do not accept any PRs" >> status.md
+          echo "- This ensures configuration integrity and prevents disruption to existing user setups" >> status.md
+          echo "- Only GitHub Actions workflows and repository owner can modify these files" >> status.md
           echo "" >> status.md
           echo "### What should you do?" >> status.md
           echo "- If you need to modify configuration files, please update the source files instead" >> status.md

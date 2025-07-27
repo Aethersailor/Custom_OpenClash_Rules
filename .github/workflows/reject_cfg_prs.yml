@@ -51,9 +51,10 @@ jobs:
           This PR has been automatically rejected because it contains modifications to files in the `/cfg` directory.
 
           ### Why was this rejected?
-          - Direct modifications to `/cfg` directory files are not allowed for unauthorized users
-          - Only GitHub Actions workflows and repository owner can modify files in this directory
-          - This ensures configuration integrity and prevents manual errors
+          - Modifying `.ini` template files will affect all users' configured node options
+          - Except for the Full template, other templates do not accept any PRs
+          - This ensures configuration integrity and prevents disruption to existing user setups
+          - Only GitHub Actions workflows and repository owner can modify these files
 
           ### What should you do?
           - If you need to modify configuration files, please update the source files instead
