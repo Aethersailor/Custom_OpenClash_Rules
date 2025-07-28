@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 131
+# TOTAL: 132
 
 payload:
   - '*quickconnect*'
@@ -16,6 +16,7 @@ payload:
   - '+.api.myip.com'
   - '+.armvm.com'
   - '+.bangumi.tv'
+  - '+.bdcb.cc'
   - '+.belimked.com'
   - '+.bgm.tv'
   - '+.chaz.fun'
