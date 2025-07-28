@@ -136,11 +136,22 @@ DOMAIN-SUFFIX,chaz.fun
 DOMAIN-SUFFIX,dushe1.app
 # add by Telegram user: Aethersailor / Date: 2025-07-23 00:20:38
 DOMAIN-SUFFIX,jxpp.com
+# add by Telegram user: Aethersailor / Date: 2025-07-27 02:03:58
+DOMAIN-SUFFIX,afuns.me
+# add by Telegram user: 左右 / Date: 2025-07-26 12:31:49
+DOMAIN-SUFFIX,ghcr.io
 
 # ---------------------------------------
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
+
 # 高驰手表app / add by Telegram user: nmd / Date: 2025-07-28 16:21:27
 DOMAIN-SUFFIX,coros.com
 # add by Telegram user: 你是 / Date: 2025-07-28 14:05:38
@@ -153,12 +164,8 @@ DOMAIN-SUFFIX,xopenbeta.com
 DOMAIN-SUFFIX,igpsport.com
 # add by Telegram user: Aethersailor / Date: 2025-07-27 02:04:15
 DOMAIN-SUFFIX,kmeila.com
-# add by Telegram user: Aethersailor / Date: 2025-07-27 02:03:58
-DOMAIN-SUFFIX,afuns.me
 # add by Telegram user: Aethersailor / Date: 2025-07-26 16:01:18
 DOMAIN-SUFFIX,dcgstd.com
-# add by Telegram user: 左右 / Date: 2025-07-26 12:31:49
-DOMAIN-SUFFIX,ghcr.io
 # add by Telegram user: P / Date: 2025-07-26 01:49:54
 DOMAIN-SUFFIX,scbaijia.com
 # add by Telegram user: P / Date: 2025-07-26 01:45:38
@@ -167,13 +174,6 @@ DOMAIN-SUFFIX,7sef.com
 DOMAIN-SUFFIX,u-carloan.com
 # add by Telegram user: chrysaly / Date: 2025-07-25 11:31:30
 DOMAIN-SUFFIX,qianuni.com
-
-
-# ---------------------------------------
-# 以下域名已提交 PR
-
-# PR 至 felixonmars/dnsmasq-china-list
-
 # 海翔登录
 DOMAIN-SUFFIX,seaflysoft.com
 # 希沃学习机
