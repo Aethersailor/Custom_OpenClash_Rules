@@ -20,6 +20,12 @@ concurrency:
 jobs:
   purge-jsdelivr:
     runs-on: ubuntu-latest
+    # 添加静默设置，无论成功失败都不发送通知
+    continue-on-error: true
+    # 禁用所有通知
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Wait for 1 minute before purging
