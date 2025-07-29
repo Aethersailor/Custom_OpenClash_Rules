@@ -145,6 +145,8 @@ DOMAIN-SUFFIX,ghcr.io
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# steam离线号游戏库 / add by Telegram user: 真怪誕呀 / Date: 2025-07-29 13:59:20
+DOMAIN-SUFFIX,zuobiao.press
 
 
 # ---------------------------------------
