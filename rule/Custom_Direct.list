@@ -145,6 +145,8 @@ DOMAIN-SUFFIX,ghcr.io
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 墨督督私域网课 / add by Telegram user: Fruit / Date: 2025-07-29 19:33:49
+DOMAIN-SUFFIX,sksight.com
 # 儿童学习机 / add by Telegram user: sanligu / Date: 2025-07-29 15:54:04
 DOMAIN-SUFFIX,51wanxue.com
 # 盖世童书的网址 / add by Telegram user: sanligu / Date: 2025-07-29 15:52:19
