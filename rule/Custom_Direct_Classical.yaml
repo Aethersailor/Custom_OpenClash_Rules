@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 149
+# TOTAL: 150
 
 payload:
   - DOMAIN-KEYWORD,quickconnect
@@ -106,6 +106,7 @@ payload:
   - DOMAIN-SUFFIX,members.3322.org
   - DOMAIN-SUFFIX,msftconnecttest.com
   - DOMAIN-SUFFIX,msftncsi.com
+  - DOMAIN-SUFFIX,mslmc.net
   - DOMAIN-SUFFIX,nn.ci
   - DOMAIN-SUFFIX,ottai.com
   - DOMAIN-SUFFIX,plusde1.younoyes.com
