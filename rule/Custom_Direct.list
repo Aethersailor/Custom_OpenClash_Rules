@@ -13,6 +13,7 @@ DOMAIN-SUFFIX,gh-proxy.com
 DOMAIN-SUFFIX,gh.con.sh
 DOMAIN-SUFFIX,gh.ddlc.top
 DOMAIN-SUFFIX,gh.llkk.cc
+DOMAIN-SUFFIX,ghfast.top
 DOMAIN-SUFFIX,ghp.ci
 DOMAIN-SUFFIX,ghproxy.cc
 DOMAIN-SUFFIX,ghproxy.cfd
@@ -140,23 +141,16 @@ DOMAIN-SUFFIX,jxpp.com
 DOMAIN-SUFFIX,afuns.me
 # add by Telegram user: 左右 / Date: 2025-07-26 12:31:49
 DOMAIN-SUFFIX,ghcr.io
+# sanligu home lab / add by Telegram user: sanligu / Date: 2025-07-29 15:50:35
+DOMAIN-SUFFIX,sanligu.top
+# 三国杀打小抄官网 / add by Telegram user: 真怪誕呀 / Date: 2025-07-29 14:03:56
+DOMAIN-SUFFIX,goka.top
 
 # ---------------------------------------
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# 墨督督私域网课 / add by Telegram user: Fruit / Date: 2025-07-29 19:33:49
-DOMAIN-SUFFIX,sksight.com
-# 儿童学习机 / add by Telegram user: sanligu / Date: 2025-07-29 15:54:04
-DOMAIN-SUFFIX,51wanxue.com
-# 盖世童书的网址 / add by Telegram user: sanligu / Date: 2025-07-29 15:52:19
-DOMAIN-SUFFIX,gaishitongshu.com
-# sanligu home lab / add by Telegram user: sanligu / Date: 2025-07-29 15:50:35
-DOMAIN-SUFFIX,sanligu.top
-# 三国杀打小抄官网 / add by Telegram user: 真怪誕呀 / Date: 2025-07-29 14:03:56
-DOMAIN-SUFFIX,goka.top
-# steam离线号游戏库 / add by Telegram user: 真怪誕呀 / Date: 2025-07-29 13:59:20
-DOMAIN-SUFFIX,zuobiao.press
+
 
 
 # ---------------------------------------
@@ -164,6 +158,14 @@ DOMAIN-SUFFIX,zuobiao.press
 
 # PR 至 felixonmars/dnsmasq-china-list
 
+# 墨督督私域网课 / add by Telegram user: Fruit / Date: 2025-07-29 19:33:49
+DOMAIN-SUFFIX,sksight.com
+# 儿童学习机 / add by Telegram user: sanligu / Date: 2025-07-29 15:54:04
+DOMAIN-SUFFIX,51wanxue.com
+# 盖世童书的网址 / add by Telegram user: sanligu / Date: 2025-07-29 15:52:19
+DOMAIN-SUFFIX,gaishitongshu.com
+# steam离线号游戏库 / add by Telegram user: 真怪誕呀 / Date: 2025-07-29 13:59:20
+DOMAIN-SUFFIX,zuobiao.press
 # 高驰手表app / add by Telegram user: nmd / Date: 2025-07-28 16:21:27
 DOMAIN-SUFFIX,coros.com
 # add by Telegram user: 你是 / Date: 2025-07-28 14:05:38
