@@ -150,6 +150,8 @@ DOMAIN-SUFFIX,goka.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# msl官网 / add by Telegram user: Giveup. / Date: 2025-07-30 22:13:02
+DOMAIN-SUFFIX,mslmc.net
 # 国内网站 / add by Telegram user: sanligu / Date: 2025-07-30 20:55:25
 DOMAIN-SUFFIX,gzybao.com
 # add by Telegram user: Aethersailor / Date: 2025-07-30 18:11:46
