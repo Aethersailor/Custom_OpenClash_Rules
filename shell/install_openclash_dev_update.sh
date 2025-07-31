@@ -19,20 +19,24 @@ sleep 1
 
 # 检测系统使用的包管理器，并设置对应后缀和安装命令
 echo "--------------------[ 检查包管理器 ]--------------------"
-# 检测 OPKG 包管理器
+# 检测 OPKG 包管理器（OpenWrt 传统版本）
 if command -v opkg >/dev/null 2>&1; then
     PKG_MGR="opkg"
     EXT="ipk"
     INSTALL_CMD="opkg install --force-reinstall"
-    echo "检测到包管理器：OPKG"
-# 检测 APK 包管理器
+    echo "检测到包管理器：OPKG (OpenWrt 传统版本)"
+# 检测 APK 包管理器（OpenWrt Snapshot 新版本）
 elif command -v apk >/dev/null 2>&1; then
     PKG_MGR="apk"
     EXT="apk"
     INSTALL_CMD="apk add -q --force-overwrite --clean-protected --allow-untrusted"
-    echo "检测到包管理器：APK"
+    echo "检测到包管理器：APK (OpenWrt Snapshot 新版本)"
 else
-    echo "未检测到 OPKG 或 APK，无法继续安装。"
+    echo "错误：未检测到支持的包管理器"
+    echo "支持的包管理器："
+    echo "  - OPKG (OpenWrt 传统版本)"
+    echo "  - APK  (OpenWrt Snapshot 新版本)"
+    echo "请确保在支持的系统上运行此脚本。"
     exit 1
 fi
 
@@ -223,6 +227,8 @@ if [ -f /etc/config/openclash-set ]; then
     exit 1
   fi
   echo "个性化预设配置加载完成！"
+else
+  echo "未检测到个性化预设配置文件，跳过此步骤。"
 fi
 echo 
 
