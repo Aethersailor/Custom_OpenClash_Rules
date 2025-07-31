@@ -20,14 +20,18 @@ if command -v opkg >/dev/null 2>&1; then
     PKG_MGR="opkg"
     EXT="ipk"
     INSTALL_CMD="opkg install --force-reinstall"
-    echo "检测到包管理器：opkg"
+    echo "检测到包管理器：OPKG (OpenWrt 传统版本)"
 elif command -v apk >/dev/null 2>&1; then
     PKG_MGR="apk"
     EXT="apk"
     INSTALL_CMD="apk add -q --force-overwrite --clean-protected --allow-untrusted"
-    echo "检测到包管理器：apk"
+    echo "检测到包管理器：APK (OpenWrt Snapshot 新版本)"
 else
-    echo "未检测到 opkg 或 apk，无法继续安装。"
+    echo "错误：未检测到支持的包管理器"
+    echo "支持的包管理器："
+    echo "  - OPKG (OpenWrt 传统版本)"
+    echo "  - APK  (OpenWrt Snapshot 新版本)"
+    echo "请确保在支持的系统上运行此脚本。"
     exit 1
 fi
 
