@@ -28,6 +28,7 @@ jobs:
             "cfg/Custom_Clash.ini:cfg/Custom_Clash_Smart.ini"
             "cfg/Custom_Clash_Full.ini:cfg/Custom_Clash_Smart_Full.ini"
             "cfg/Custom_Clash_Lite.ini:cfg/Custom_Clash_Smart_Lite.ini"
+            "cfg/Custom_Clash_SSRDOG.ini:cfg/Custom_Clash_Smart_SSRDOG.ini"
           )
 
           git config user.name "github-actions[bot]"
