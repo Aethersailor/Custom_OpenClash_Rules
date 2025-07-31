@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 152
+# TOTAL: 153
 
 payload:
   - DOMAIN-KEYWORD,quickconnect
@@ -42,6 +42,7 @@ payload:
   - DOMAIN-SUFFIX,dockerpull.org
   - DOMAIN-SUFFIX,dockerpull.pw
   - DOMAIN-SUFFIX,dushe1.app
+  - DOMAIN-SUFFIX,englibrary.com
   - DOMAIN-SUFFIX,epg.aptv.app
   - DOMAIN-SUFFIX,epg.v1.mk
   - DOMAIN-SUFFIX,flingtrainer.com
