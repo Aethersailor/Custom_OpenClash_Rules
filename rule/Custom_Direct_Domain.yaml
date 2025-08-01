@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 158
+# TOTAL: 159
 
 payload:
   - '*quickconnect*'
@@ -146,6 +146,7 @@ payload:
   - '+.u-carloan.com'
   - '+.vbkhk.com'
   - '+.vbkr.com'
+  - '+.vbkrhk.com'
   - '+.vclbroker.com'
   - '+.vclbrokers.com'
   - '+.vcltrade.com'
