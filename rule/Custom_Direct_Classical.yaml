@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 168
+# TOTAL: 169
 
 payload:
   - DOMAIN-KEYWORD,quickconnect
@@ -30,6 +30,7 @@ payload:
   - DOMAIN-SUFFIX,chii.in
   - DOMAIN-SUFFIX,chujingapp.com
   - DOMAIN-SUFFIX,cn-music.mefun.vip
+  - DOMAIN-SUFFIX,codeloop.top
   - DOMAIN-SUFFIX,coros.com
   - DOMAIN-SUFFIX,crtyhr.com
   - DOMAIN-SUFFIX,dcgstd.com
