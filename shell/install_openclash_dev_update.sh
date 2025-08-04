@@ -208,7 +208,7 @@ if [ $RET -eq 0 ]; then
       fi
     fi
   else
-    echo "检测到 Smart 内核未启用。"
+    echo "检测到 Smart 内核未启用，跳过模型下载。"
   fi
 fi
 echo 
