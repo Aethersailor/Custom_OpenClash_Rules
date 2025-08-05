@@ -145,13 +145,27 @@ DOMAIN-SUFFIX,ghcr.io
 DOMAIN-SUFFIX,sanligu.top
 # 三国杀打小抄官网 / add by Telegram user: 真怪誕呀 / Date: 2025-07-29 14:03:56
 DOMAIN-SUFFIX,goka.top
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:13:34
+DOMAIN-SUFFIX,vbkhk.com
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:12:21
+DOMAIN-SUFFIX,vbkr.com
+# 情侣软件suki / add by Telegram user: e / Date: 2025-08-03 21:01:20
+DOMAIN-SUFFIX,codeloop.top
+# add by Telegram user: Aethersailor / Date: 2025-07-30 18:11:46
+DOMAIN-SUFFIX,warmheart.top
 
 # ---------------------------------------
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# 情侣软件suki / add by Telegram user: e / Date: 2025-08-03 21:01:20
-DOMAIN-SUFFIX,codeloop.top
+
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
+
+
 # 手机系统优化工具网站 / add by Telegram user: 法兰西 / Date: 2025-08-03 16:34:24
 DOMAIN-SUFFIX,mtaokj.com
 # 考试培训网站 / add by Telegram user: Wintermute / Date: 2025-08-03 14:50:21
@@ -166,10 +180,6 @@ DOMAIN-SUFFIX,xixih.cc
 DOMAIN-SUFFIX,vbkrhk.com
 # 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:14:53
 DOMAIN-SUFFIX,vcltrade.com
-# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:13:34
-DOMAIN-SUFFIX,vbkhk.com
-# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:12:21
-DOMAIN-SUFFIX,vbkr.com
 # 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 14:52:47
 DOMAIN-SUFFIX,hstbroker.com
 # 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 14:46:57
@@ -192,20 +202,10 @@ DOMAIN-SUFFIX,yiso.fun
 DOMAIN-SUFFIX,mslmc.net
 # 国内网站 / add by Telegram user: sanligu / Date: 2025-07-30 20:55:25
 DOMAIN-SUFFIX,gzybao.com
-# add by Telegram user: Aethersailor / Date: 2025-07-30 18:11:46
-DOMAIN-SUFFIX,warmheart.top
 # 卡券交易 / add by Telegram user: 闹斯特麻麻 / Date: 2025-07-30 10:08:28
 DOMAIN-SUFFIX,xiankabao.com
 # 医疗健康 / add by Telegram user: 闹斯特麻麻 / Date: 2025-07-30 10:07:17
 DOMAIN-SUFFIX,ottai.com
-
-
-
-# ---------------------------------------
-# 以下域名已提交 PR
-
-# PR 至 felixonmars/dnsmasq-china-list
-
 # 墨督督私域网课 / add by Telegram user: Fruit / Date: 2025-07-29 19:33:49
 DOMAIN-SUFFIX,sksight.com
 # 儿童学习机 / add by Telegram user: sanligu / Date: 2025-07-29 15:54:04
