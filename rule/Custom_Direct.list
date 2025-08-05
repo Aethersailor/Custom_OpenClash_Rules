@@ -114,7 +114,8 @@ DOMAIN-SUFFIX,plusus3.younoyes.com
 DOMAIN-SUFFIX,plushk1.younoyes.com
 DOMAIN-SUFFIX,plushk2.younoyes.com
 DOMAIN-SUFFIX,plushk3.younoyes.com
-
+# 视频网站 / add by Telegram user: jiro / Date:2025-07-22 12:04:55
+DOMAIN-SUFFIX,dushe1.app
 
 # 游戏类规则
 # 红警重聚 Reunion 2023
@@ -122,40 +123,25 @@ IP-CIDR,108.174.48.100/32,no-resolve
 # 雀魂麻将
 DOMAIN-SUFFIX,game.maj-soul.com
 
+# 机器人添加域名
+# 以下域名由用户通过机器人添加，无备案且 NS 不属于中国大陆
+# add by Telegram user: Aethersailor / Date: 2025-07-23 00:20:38
+DOMAIN-SUFFIX,jxpp.com
+# add by Telegram user: Aethersailor / Date: 2025-07-27 02:03:58
+DOMAIN-SUFFIX,afuns.me
+# sanligu home lab / add by Telegram user: sanligu / Date: 2025-07-29 15:50:35
+DOMAIN-SUFFIX,sanligu.top
+# 三国杀打小抄官网 / add by Telegram user: 真怪誕呀 / Date: 2025-07-29 14:03:56
+DOMAIN-SUFFIX,goka.top
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:12:21
+DOMAIN-SUFFIX,vbkr.com
+
 # =======================================
 # 以下是应当直连的冷门国内域名规则
 # =======================================
 
 # ---------------------------------------
-# 以下是无法提交上游的域名
-#----------------------------------------
-# add by Telegram user: Coco / Date: 2025-07-23 22:58:43
-DOMAIN-SUFFIX,xdqtech.com
-# add by Telegram user: Aethersailor / Date: 2025-07-23 16:31:37
-DOMAIN-SUFFIX,chaz.fun
-# 视频网站 / add by Telegram user: jiro / Date:2025-07-22 12:04:55
-DOMAIN-SUFFIX,dushe1.app
-# add by Telegram user: Aethersailor / Date: 2025-07-23 00:20:38
-DOMAIN-SUFFIX,jxpp.com
-# add by Telegram user: Aethersailor / Date: 2025-07-27 02:03:58
-DOMAIN-SUFFIX,afuns.me
-# add by Telegram user: 左右 / Date: 2025-07-26 12:31:49
-DOMAIN-SUFFIX,ghcr.io
-# sanligu home lab / add by Telegram user: sanligu / Date: 2025-07-29 15:50:35
-DOMAIN-SUFFIX,sanligu.top
-# 三国杀打小抄官网 / add by Telegram user: 真怪誕呀 / Date: 2025-07-29 14:03:56
-DOMAIN-SUFFIX,goka.top
-# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:13:34
-DOMAIN-SUFFIX,vbkhk.com
-# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:12:21
-DOMAIN-SUFFIX,vbkr.com
-# 情侣软件suki / add by Telegram user: e / Date: 2025-08-03 21:01:20
-DOMAIN-SUFFIX,codeloop.top
-# add by Telegram user: Aethersailor / Date: 2025-07-30 18:11:46
-DOMAIN-SUFFIX,warmheart.top
-
-# ---------------------------------------
-# 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会删除对应内容
+# 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
 
@@ -164,8 +150,8 @@ DOMAIN-SUFFIX,warmheart.top
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
-
-
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:13:34
+DOMAIN-SUFFIX,vbkhk.com
 # 手机系统优化工具网站 / add by Telegram user: 法兰西 / Date: 2025-08-03 16:34:24
 DOMAIN-SUFFIX,mtaokj.com
 # 考试培训网站 / add by Telegram user: Wintermute / Date: 2025-08-03 14:50:21
@@ -317,6 +303,14 @@ DOMAIN-SUFFIX,sxlljm.com
 # PR 至 v2fly/domain-list-community
 # 鸿蒙出境易
 DOMAIN-SUFFIX,chujingapp.com
+# add by Telegram user: Coco / Date: 2025-07-23 22:58:43
+DOMAIN-SUFFIX,xdqtech.com
+# add by Telegram user: Aethersailor / Date: 2025-07-23 16:31:37
+DOMAIN-SUFFIX,chaz.fun
+# 情侣软件suki / add by Telegram user: e / Date: 2025-08-03 21:01:20
+DOMAIN-SUFFIX,codeloop.top
+# add by Telegram user: Aethersailor / Date: 2025-07-30 18:11:46
+DOMAIN-SUFFIX,warmheart.top
 
 # ---------------------------------------
 # =======================================
