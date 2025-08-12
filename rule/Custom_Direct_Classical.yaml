@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 174
+# TOTAL: 175
 
 payload:
   - DOMAIN-KEYWORD,quickconnect
@@ -105,6 +105,7 @@ payload:
   - DOMAIN-SUFFIX,kgithub.com
   - DOMAIN-SUFFIX,kit327.com
   - DOMAIN-SUFFIX,kmeila.com
+  - DOMAIN-SUFFIX,kuaicha888.com
   - DOMAIN-SUFFIX,kyarucloud.moe
   - DOMAIN-SUFFIX,lanyun.net
   - DOMAIN-SUFFIX,letaoedu.com
