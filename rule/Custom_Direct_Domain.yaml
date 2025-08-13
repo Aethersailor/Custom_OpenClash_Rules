@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 171
+# TOTAL: 172
 
 payload:
   - '*quickconnect*'
@@ -145,6 +145,7 @@ payload:
   - '+.snfox.com'
   - '+.snltty.com'
   - '+.sptv.ii00.cc'
+  - '+.starlink.uno'
   - '+.suyur.com'
   - '+.sxlljm.com'
   - '+.tangguobaohe.com'
