@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 178
+# TOTAL: 179
 
 payload:
   - '*quickconnect*'
@@ -166,6 +166,7 @@ payload:
   - '+.vcltrade.com'
   - '+.warmheart.top'
   - '+.webs.vc'
+  - '+.wenyi188.com'
   - '+.wewillpro.com'
   - '+.wlcdn88.com'
   - '+.wwwh.eu.org'
