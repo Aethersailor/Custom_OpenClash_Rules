@@ -144,6 +144,8 @@ DOMAIN-SUFFIX,vbkr.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# CG相关资源分享网站 / add by Telegram user: 慧慧 / Date: 2025-08-14 13:51:28
+DOMAIN-SUFFIX,cg3da.com
 # 软件及服务 / add by Telegram user: rl / Date: 2025-08-14 09:47:11
 DOMAIN-SUFFIX,adobe.com
 # add by Telegram user: r / Date: 2025-08-14 00:22:00
