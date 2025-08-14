@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 182
+# TOTAL: 183
 
 payload:
   - DOMAIN-KEYWORD,quickconnect
@@ -166,6 +166,7 @@ payload:
   - DOMAIN-SUFFIX,vcltrade.com
   - DOMAIN-SUFFIX,warmheart.top
   - DOMAIN-SUFFIX,webs.vc
+  - DOMAIN-SUFFIX,wenyi188.com
   - DOMAIN-SUFFIX,wewillpro.com
   - DOMAIN-SUFFIX,wlcdn88.com
   - DOMAIN-SUFFIX,wwwh.eu.org
