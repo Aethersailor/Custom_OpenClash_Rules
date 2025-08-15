@@ -1,11 +1,12 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 179
+# TOTAL: 180
 
 payload:
   - '*quickconnect*'
   - '*synology*'
+  - '+.03241119.xyz'
   - '+.112114.xyz'
   - '+.1996999.xyz'
   - '+.51wanxue.com'
