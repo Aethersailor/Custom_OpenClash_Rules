@@ -144,6 +144,8 @@ DOMAIN-SUFFIX,vbkr.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 阿里云域名 / add by Telegram user: EzrAAA / Date: 2025-08-15 22:40:29
+DOMAIN-SUFFIX,03241119.xyz
 # add by Telegram user: 花火 / Date: 2025-08-14 21:01:04
 DOMAIN-SUFFIX,wenyi188.com
 # 鸿蒙智行 / add by Telegram user: rl / Date: 2025-08-14 19:33:16
