@@ -151,6 +151,8 @@ DOMAIN-SUFFIX,xn--4kq62z5rby2qupq9ub.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# add by Telegram user: Yilan / Date: 2025-08-16 09:47:19
+DOMAIN-SUFFIX,hwbim.com
 
 # 2025.8.16 整理完毕
 
