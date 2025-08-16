@@ -151,6 +151,8 @@ DOMAIN-SUFFIX,xn--4kq62z5rby2qupq9ub.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# add by Telegram user: Yongyu / Date: 2025-08-17 01:12:13
+DOMAIN-SUFFIX,yongyu.xyz
 # 易班网是高校教育教学等功能社区 / add by Telegram user: 仔 / Date: 2025-08-16 10:02:18
 DOMAIN-SUFFIX,yooc.me
 # add by Telegram user: Yilan / Date: 2025-08-16 09:47:19
