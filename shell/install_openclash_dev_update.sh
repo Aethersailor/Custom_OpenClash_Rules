@@ -187,7 +187,7 @@ echo "GeoASN 数据库更新完成！"
 echo 
 
 # 调用 OpenClash 自带脚本更新大陆 IP白名单
-echo "--------------------[ 更新大陆 IP白名单 ]--------------------"
+echo "--------------------[ 更新大陆 IP 白名单 ]--------------------"
 echo "开始更新大陆 IP 白名单..."
 /usr/share/openclash/openclash_chnroute.sh
 if [ $? -ne 0 ]; then
