@@ -151,6 +151,8 @@ DOMAIN-SUFFIX,xn--4kq62z5rby2qupq9ub.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# xiaomi.com / add by Telegram user: r / Date: 2025-08-21 18:58:58
+DOMAIN-SUFFIX,ok321.top
 # 小电视空降助手，跳过 b 站广告 / add by Telegram user: chrysaly / Date: 2025-08-21 14:19:34
 DOMAIN-SUFFIX,bsbsb.top
 # 蜜蜂试卷APP 域名 / add by Telegram user: hjxt / Date: 2025-08-21 09:44:58
