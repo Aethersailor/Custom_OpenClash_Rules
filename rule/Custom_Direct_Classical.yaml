@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 192
+# TOTAL: 198
 
 payload:
   - DOMAIN-KEYWORD,quickconnect
@@ -27,6 +27,7 @@ payload:
   - DOMAIN-SUFFIX,bdcb.cc
   - DOMAIN-SUFFIX,belimked.com
   - DOMAIN-SUFFIX,bgm.tv
+  - DOMAIN-SUFFIX,bsbsb.top
   - DOMAIN-SUFFIX,centbrowser.net
   - DOMAIN-SUFFIX,cg3da.com
   - DOMAIN-SUFFIX,chaz.fun
@@ -36,6 +37,7 @@ payload:
   - DOMAIN-SUFFIX,chujingapp.com
   - DOMAIN-SUFFIX,cn-music.mefun.vip
   - DOMAIN-SUFFIX,codeloop.top
+  - DOMAIN-SUFFIX,congmiqq.com
   - DOMAIN-SUFFIX,coros.com
   - DOMAIN-SUFFIX,crtyhr.com
   - DOMAIN-SUFFIX,dcgstd.com
@@ -49,6 +51,7 @@ payload:
   - DOMAIN-SUFFIX,docker.unsee.tech
   - DOMAIN-SUFFIX,dockerpull.org
   - DOMAIN-SUFFIX,dockerpull.pw
+  - DOMAIN-SUFFIX,dothantech.com
   - DOMAIN-SUFFIX,dushe1.app
   - DOMAIN-SUFFIX,englibrary.com
   - DOMAIN-SUFFIX,epg.aptv.app
@@ -122,14 +125,17 @@ payload:
   - DOMAIN-SUFFIX,longmenshuju.com
   - DOMAIN-SUFFIX,lsbj365.com
   - DOMAIN-SUFFIX,members.3322.org
+  - DOMAIN-SUFFIX,mifeng.plus
   - DOMAIN-SUFFIX,msftconnecttest.com
   - DOMAIN-SUFFIX,msftncsi.com
   - DOMAIN-SUFFIX,mslmc.net
   - DOMAIN-SUFFIX,mtaokj.com
   - DOMAIN-SUFFIX,myshopex.com
   - DOMAIN-SUFFIX,nn.ci
+  - DOMAIN-SUFFIX,ok321.top
   - DOMAIN-SUFFIX,onebuygz.com
   - DOMAIN-SUFFIX,ottai.com
+  - DOMAIN-SUFFIX,paperang.com
   - DOMAIN-SUFFIX,plusde1.younoyes.com
   - DOMAIN-SUFFIX,plushk1.younoyes.com
   - DOMAIN-SUFFIX,plushk2.younoyes.com

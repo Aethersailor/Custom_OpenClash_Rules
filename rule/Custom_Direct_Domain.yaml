@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 188
+# TOTAL: 194
 
 payload:
   - '*quickconnect*'
@@ -27,6 +27,7 @@ payload:
   - '+.bdcb.cc'
   - '+.belimked.com'
   - '+.bgm.tv'
+  - '+.bsbsb.top'
   - '+.centbrowser.net'
   - '+.cg3da.com'
   - '+.chaz.fun'
@@ -36,6 +37,7 @@ payload:
   - '+.chujingapp.com'
   - '+.cn-music.mefun.vip'
   - '+.codeloop.top'
+  - '+.congmiqq.com'
   - '+.coros.com'
   - '+.crtyhr.com'
   - '+.dcgstd.com'
@@ -49,6 +51,7 @@ payload:
   - '+.docker.unsee.tech'
   - '+.dockerpull.org'
   - '+.dockerpull.pw'
+  - '+.dothantech.com'
   - '+.dushe1.app'
   - '+.englibrary.com'
   - '+.epg.aptv.app'
@@ -122,14 +125,17 @@ payload:
   - '+.longmenshuju.com'
   - '+.lsbj365.com'
   - '+.members.3322.org'
+  - '+.mifeng.plus'
   - '+.msftconnecttest.com'
   - '+.msftncsi.com'
   - '+.mslmc.net'
   - '+.mtaokj.com'
   - '+.myshopex.com'
   - '+.nn.ci'
+  - '+.ok321.top'
   - '+.onebuygz.com'
   - '+.ottai.com'
+  - '+.paperang.com'
   - '+.plusde1.younoyes.com'
   - '+.plushk1.younoyes.com'
   - '+.plushk2.younoyes.com'
