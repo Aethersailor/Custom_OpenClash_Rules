@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 196
+# TOTAL: 197
 
 payload:
   - '*quickconnect*'
@@ -75,6 +75,7 @@ payload:
   - '+.ghproxy.cc'
   - '+.ghproxy.cfd'
   - '+.ghps.cc'
+  - '+.girigirilove.com'
   - '+.git.886.be'
   - '+.github.abskoop.workers.dev'
   - '+.github.boki.moe'
