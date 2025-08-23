@@ -160,6 +160,8 @@ DOMAIN-SUFFIX,sapphiretech.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 飞桨AI的base_url / add by Telegram user: 真怪誕呀 / Date: 2025-08-23 17:22:59
+DOMAIN-SUFFIX,aistudio-app.com
 # 牛逼云无需富强官网 / add by Telegram user: 真怪誕呀 / Date: 2025-08-23 17:18:18
 DOMAIN-SUFFIX,idsduf.com
 
