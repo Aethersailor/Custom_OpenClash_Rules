@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 197
+# TOTAL: 198
 
 payload:
   - '*quickconnect*'
@@ -36,6 +36,7 @@ payload:
   - '+.checkipv6.dyndns.org'
   - '+.chii.in'
   - '+.chujingapp.com'
+  - '+.clivia.fun'
   - '+.cn-music.mefun.vip'
   - '+.codeloop.top'
   - '+.congmiqq.com'
