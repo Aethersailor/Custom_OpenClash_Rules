@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 202
+# TOTAL: 203
 
 payload:
   - DOMAIN-KEYWORD,quickconnect
@@ -62,6 +62,7 @@ payload:
   - DOMAIN-SUFFIX,flingtrainer.com
   - DOMAIN-SUFFIX,fowep.com
   - DOMAIN-SUFFIX,freetv.top
+  - DOMAIN-SUFFIX,frp-ski.com
   - DOMAIN-SUFFIX,fssbcc.top
   - DOMAIN-SUFFIX,gaishitongshu.com
   - DOMAIN-SUFFIX,game.maj-soul.com
