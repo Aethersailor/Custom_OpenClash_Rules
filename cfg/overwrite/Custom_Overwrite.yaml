@@ -88,6 +88,7 @@ ENABLE_META_SNIFFER_PURE_IP = 1
 # ENABLE_TCP_CONCURRENT (启用 TCP 并发, 0: 插件不覆写, 1: 启用)
 ENABLE_TCP_CONCURRENT = 1
 # FIND_PROCESS_MODE (进程查找模式, 0: 插件不覆写, off: 关闭, always, strict)
+FIND_PROCESS_MODE = off
 # GLOBAL_CLIENT_FINGERPRINT (全局客户端指纹, none/random/chrome/firefox/safari/ios/android/edge/360/qq/0: 插件不覆写)
 # ENABLE_UNIFIED_DELAY (启用统一延迟计算, 0: 插件不覆写, 1: 启用)
 ENABLE_UNIFIED_DELAY = 1
