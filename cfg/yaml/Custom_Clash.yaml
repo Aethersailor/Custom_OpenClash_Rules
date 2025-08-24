@@ -685,7 +685,7 @@ proxy-groups:
   - name: "🇭🇰 香港节点"
     type: url-test
     url: https://www.gstatic.com/generate_204
-    filter: "(?i)(港|HK|Hong\s*Kong|HongKong|深港|🇭🇰)"
+    filter: "(?i)(港|HK|Hong Kong|HongKong|深港|🇭🇰)"
     use:
       - provider1
     interval: 300
