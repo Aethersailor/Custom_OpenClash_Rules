@@ -57,7 +57,7 @@ ENABLE_V6_UDP_PROXY = 1
 
 # --- 代理与模式 ---
 # EN_MODE (插件运行模式：fake-ip/fake-ip-tun/fake-ip-mix or redir-host/redir-host-tun/redir-host-mix)
-EN_MOD = fake-ip-mix
+EN_MODE = fake-ip-mix
 # ENABLE_UDP_PROXY (启用 UDP 代理, 0: 禁用, 1: 启用, only for EN_MODE_TUN is nil)
 ENABLE_UDP_PROXY = 1
 # DISABLE_UDP_QUIC (禁用 UDP QUIC, 0: 启用, 1: 禁用)
