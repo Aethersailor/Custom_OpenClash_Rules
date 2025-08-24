@@ -68,8 +68,6 @@ dns:
   fake-ip-filter:
     - '*.lan'
     - localhost.ptlogin2.qq.com
-    - rule-set:fakeip-filter
-    - geosite:fakeip-filter
     - geosite:cn
   fake-ip-filter-mode: blacklist
   respect-rules: false
