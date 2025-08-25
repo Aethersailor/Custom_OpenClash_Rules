@@ -283,6 +283,9 @@ Traffic、GB、Expire
 ### ⚡ 加速规则
 - [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520)
 
+### 🔄 订阅转换后端
+- [asdlokj1qpi233/subconverter](https://github.com/asdlokj1qpi233/subconverter)
+
 ### 🔖 其他
 - [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/)
 - [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool)
