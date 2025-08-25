@@ -5,19 +5,21 @@ redir-port: 7892
 tproxy-port: 7895
 allow-lan: true
 bind-address: "*"
-find-process-mode: off
 mode: rule
+tcp-concurrent: true
+unified-delay: true
 
 geox-url:
-  geoip: "https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat"
-  geosite: "https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat"
-  mmdb: "https://testingcf.jsdelivr.net/gh/alecthw/mmdb_china_ip_list@release/Country.mmdb"
-  asn: "https://testingcf.jsdelivr.net/gh/xishang0128/geoip@release/GeoLite2-ASN.mmdb"
+  mmdb: https://testingcf.jsdelivr.net/gh/alecthw/mmdb_china_ip_list@release/Country.mmdb
+  geoip: https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat
+  geosite: https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
+  asn: https://testingcf.jsdelivr.net/gh/xishang0128/geoip@release/GeoLite2-ASN.mmdb
 
 geo-auto-update: true # 是否自动更新 geodata
 geo-update-interval: 24 # 更新间隔，单位：小时
+geodata-mode: true
 
-log-level: warning
+log-level: info
 ipv6: true
 external-controller: 0.0.0.0:9090
 
@@ -41,23 +43,34 @@ sniffer:
   override-destination: true
   sniff:
     QUIC:
-      ports: [ 443 ]
+      ports:
+      - 443
     TLS:
-      ports: [443, 8443]
+      ports:
+      - 443
+      - 8443
     HTTP:
-      ports: [80, 8080-8880]
+      ports:
+      - 80
+      - 8080-8880
       override-destination: true
   force-domain:
-    - +.v2ex.com
     - "+.netflix.com"
     - "+.nflxvideo.net"
     - "+.amazonaws.com"
     - "+.media.dssott.com"
+  skip-domain:
+    - "+.apple.com"
+    - Mijia Cloud
+    - dlg.io.mi.com
+    - "+.oray.com"
+    - "+.sunlogin.net"
+    - "+.push.apple.com"
+  parse-pure-ip: true
+  force-dns-mapping: true
 
 dns:
-  cache-algorithm: arc
   enable: true
-  prefer-h3: true
   listen: 0.0.0.0:7874
   ipv6: true
   default-nameserver:
