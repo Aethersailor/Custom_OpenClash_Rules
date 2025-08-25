@@ -162,6 +162,8 @@ DOMAIN-SUFFIX,idsduf.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 论坛网站 / add by Telegram user: Shady / Date: 2025-08-25 19:21:52
+DOMAIN-SUFFIX,z6e.com
 # 樱花内网穿透节点域名 / add by Telegram user: 花火 / Date: 2025-08-24 15:04:10
 DOMAIN-SUFFIX,frp-ski.com
 
