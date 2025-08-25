@@ -154,10 +154,6 @@ DOMAIN-SUFFIX,sapphiretech.com
 # 牛逼云无需富强官网 / add by Telegram user: 真怪誕呀 / Date: 2025-08-23 17:18:18
 DOMAIN-SUFFIX,idsduf.com
 
-
-# 测试
-DOMAIN,testasailor.com
-
 # =======================================
 # 以下是应当直连的冷门国内域名规则
 # =======================================
@@ -166,18 +162,18 @@ DOMAIN,testasailor.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# 论坛网站 / add by Telegram user: Shady / Date: 2025-08-25 19:21:52
-DOMAIN-SUFFIX,z6e.com
-# 樱花内网穿透节点域名 / add by Telegram user: 花火 / Date: 2025-08-24 15:04:10
-DOMAIN-SUFFIX,frp-ski.com
 
-# 2025.8.23 分类整理完毕
+# 2025.8.25 分类整理完毕
 
 # ---------------------------------------
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
 
+# 论坛网站 / add by Telegram user: Shady / Date: 2025-08-25 19:21:52
+DOMAIN-SUFFIX,z6e.com
+# 樱花内网穿透节点域名 / add by Telegram user: 花火 / Date: 2025-08-24 15:04:10
+DOMAIN-SUFFIX,frp-ski.com
 # 公益open-webui / add by Telegram user: 真怪誕呀 / Date: 2025-08-23 17:41:37
 DOMAIN-SUFFIX,clivia.fun
 # girigirilove在线追番网站 / add by Telegram user: 真怪誕呀 / Date: 2025-08-23 17:26:28
