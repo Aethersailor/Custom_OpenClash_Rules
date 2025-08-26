@@ -185,6 +185,8 @@ https://api.asailor.org/sub
 
 填写进`配置订阅信息 > 订阅转换服务地址`中即可生效。
 
+> 本项目后端服务使用 [asdlokj1qpi233/subconverter](https://github.com/asdlokj1qpi233/subconverter) 进行部署。
+
 ---
 
 ### ❓ 不能上网？分流不正常？某些网站打不开？OpenClash 不能启动？
