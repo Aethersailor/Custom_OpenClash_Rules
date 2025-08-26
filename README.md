@@ -80,7 +80,7 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 ## 📝 本项目设置方案及订阅转换模板介绍
 
-本项目的订阅转换模板是参考 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master) 等规则的订阅模板进行了魔改和完善而来。
+本项目的订阅转换模板是参考 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master) 等规则的订阅模板进行了魔改和完善而来，分流数据基于 GeoSite。
 
 **按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，配合本项目的订阅转换模板对 OpenClash 进行配置，即可实现以下特性，更优雅的使用你的 OpenClash：**
 
