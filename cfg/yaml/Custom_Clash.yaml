@@ -902,7 +902,7 @@ rule-providers:
     interval: 10800
     path: ./rule_provider/Custom_Direct_Classical.yaml
     type: http
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical.yaml"
+    url: "https://cdn.gh-proxy.com/https://raw.githubusercontent.com/Jiro198435/Custom_OpenClash_Rules/refs/heads/patch-4/rule/Custom_Direct_Classical.yaml"
     proxy: DIRECT
 
   Custom_Proxy:
