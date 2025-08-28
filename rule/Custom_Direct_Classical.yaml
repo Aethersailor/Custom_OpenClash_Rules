@@ -6,6 +6,14 @@
 payload:
   - DOMAIN-KEYWORD,quickconnect
   - DOMAIN-KEYWORD,synology
+  - DOMAIN-KEYWORD,ffzy
+  - DOMAIN-KEYWORD,ipify
+  - DOMAIN-KEYWORD,gdhktv
+  - DOMAIN-KEYWORD,viptv
+  - DOMAIN-KEYWORD,viphktv
+  - DOMAIN-KEYWORD,dushe
+  - DOMAIN-KEYWORD,aicoin
+  - DOMAIN-KEYWORD,deepcoin
   - DOMAIN-SUFFIX,03241119.xyz
   - DOMAIN-SUFFIX,112114.xyz
   - DOMAIN-SUFFIX,115cdn.de
