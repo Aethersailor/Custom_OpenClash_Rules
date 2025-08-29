@@ -162,6 +162,8 @@ DOMAIN-SUFFIX,idsduf.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# ip地址查询 / add by Telegram user: Blunt / Date: 2025-08-30 03:17:50
+DOMAIN-SUFFIX,900cha.com
 # IPTV图标 / add by Telegram user: sanligu / Date: 2025-08-29 18:19:15
 DOMAIN-SUFFIX,51zmt.top
 # 台铃电动车管理 / add by Telegram user: Lailin / Date: 2025-08-28 03:37:02
