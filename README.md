@@ -147,6 +147,8 @@ OpenClash 无疑是 OpenWrt 中最强大的科学上网软件，它可以实现�
 
 访问 [COCR RULE BOT](https://t.me/asailor_rulebot) 按照提示上报域名即可，符合要求的域名会自动添加至本项目的直连规则中。  
 
+> [Rule-Bot](https://github.com/Aethersailor/Rule-Bot) 是维护者的另一个开源项目，如果你自行维护了规则文件的话，可以使用 Rule-Bot 方便的实现域名的自动化检测和添加。
+
 > 另外，**维护者会定期将收集到的国内冷门域名向上游规则进行 PR**
 
 ---
@@ -262,13 +264,13 @@ Traffic、GB、Expire
 
 以下排名不分先后
 
-### 🛠️ 插件
+### 🔌 插件
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
 
 ### 🧩 内核
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
 
-### 📄 模板
+### 🗂 模板
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
 
@@ -292,9 +294,12 @@ Traffic、GB、Expire
 ### 🔄 订阅转换后端
 - [asdlokj1qpi233/subconverter](https://github.com/asdlokj1qpi233/subconverter)
 
+### 🧰 工具
+- [Aethersailor/Rule-Bot](https://github.com/Aethersailor/Rule-Bot)
+- [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool)
+
 ### 🔖 其他
 - [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/)
-- [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool)
 - [OpenAI/ChatGPT](https://chatgpt.com/)
 - [Anysphere/Cursor](https://cursor.com/downloads)
 
