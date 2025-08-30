@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 224
+# TOTAL: 225
 
 payload:
   - '*quickconnect*'
@@ -97,6 +97,7 @@ payload:
   - '+.giveup.top'
   - '+.gmya.net'
   - '+.goka.top'
+  - '+.gseen.com'
   - '+.gsgltz.com'
   - '+.gsjkjt.com'
   - '+.gsnhcg.com'
