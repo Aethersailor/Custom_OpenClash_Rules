@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 222
+# TOTAL: 223
 
 payload:
   - '*quickconnect*'
@@ -61,6 +61,7 @@ payload:
   - '+.dockerpull.org'
   - '+.dockerpull.pw'
   - '+.dothantech.com'
+  - '+.douqq.com'
   - '+.dushe1.app'
   - '+.englibrary.com'
   - '+.epg.aptv.app'
