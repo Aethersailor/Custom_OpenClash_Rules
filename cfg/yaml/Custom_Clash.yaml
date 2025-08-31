@@ -97,7 +97,7 @@ proxy-providers:
     proxy: DIRECT
     header:
       User-Agent:
-      - "Clash/v1.18.0"
+      - "clash.meta"
       - "mihomo/1.18.3"
 
     health-check:
