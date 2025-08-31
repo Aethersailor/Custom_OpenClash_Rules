@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 216
+# TOTAL: 233
 
 payload:
   - DOMAIN-KEYWORD,quickconnect
@@ -14,11 +14,13 @@ payload:
   - DOMAIN-SUFFIX,51zmt.top
   - DOMAIN-SUFFIX,52jiawei.com
   - DOMAIN-SUFFIX,52met.com
+  - DOMAIN-SUFFIX,52muban.com
   - DOMAIN-SUFFIX,657192.com
   - DOMAIN-SUFFIX,737698.xyz
   - DOMAIN-SUFFIX,7sef.com
   - DOMAIN-SUFFIX,900cha.com
   - DOMAIN-SUFFIX,985hezi.com
+  - DOMAIN-SUFFIX,998tool.com
   - DOMAIN-SUFFIX,adobe.com
   - DOMAIN-SUFFIX,afuns.me
   - DOMAIN-SUFFIX,aistudio-app.com
@@ -34,6 +36,7 @@ payload:
   - DOMAIN-SUFFIX,bsbsb.top
   - DOMAIN-SUFFIX,centbrowser.net
   - DOMAIN-SUFFIX,cg3da.com
+  - DOMAIN-SUFFIX,chaxunjiao.com
   - DOMAIN-SUFFIX,chaz.fun
   - DOMAIN-SUFFIX,checkip.dyndns.org
   - DOMAIN-SUFFIX,checkipv6.dyndns.org
@@ -58,6 +61,7 @@ payload:
   - DOMAIN-SUFFIX,dockerpull.org
   - DOMAIN-SUFFIX,dockerpull.pw
   - DOMAIN-SUFFIX,dothantech.com
+  - DOMAIN-SUFFIX,douqq.com
   - DOMAIN-SUFFIX,dushe1.app
   - DOMAIN-SUFFIX,englibrary.com
   - DOMAIN-SUFFIX,epg.aptv.app
@@ -69,6 +73,7 @@ payload:
   - DOMAIN-SUFFIX,freetv.top
   - DOMAIN-SUFFIX,frp-ski.com
   - DOMAIN-SUFFIX,fssbcc.top
+  - DOMAIN-SUFFIX,fzwqq.com
   - DOMAIN-SUFFIX,gaishitongshu.com
   - DOMAIN-SUFFIX,game.maj-soul.com
   - DOMAIN-SUFFIX,gdcucc.v1.mk
@@ -90,8 +95,11 @@ payload:
   - DOMAIN-SUFFIX,github.site
   - DOMAIN-SUFFIX,github.store
   - DOMAIN-SUFFIX,giveup.top
+  - DOMAIN-SUFFIX,gjtool.com
   - DOMAIN-SUFFIX,gmya.net
   - DOMAIN-SUFFIX,goka.top
+  - DOMAIN-SUFFIX,googoc.com
+  - DOMAIN-SUFFIX,gseen.com
   - DOMAIN-SUFFIX,gsgltz.com
   - DOMAIN-SUFFIX,gsjkjt.com
   - DOMAIN-SUFFIX,gsnhcg.com
@@ -115,9 +123,11 @@ payload:
   - DOMAIN-SUFFIX,ifconfig.co
   - DOMAIN-SUFFIX,igpsport.com
   - DOMAIN-SUFFIX,immortalwrt.org
+  - DOMAIN-SUFFIX,ip159.com
   - DOMAIN-SUFFIX,ip6.seeip.org
   - DOMAIN-SUFFIX,ipapi.co
   - DOMAIN-SUFFIX,ipinfo.io
+  - DOMAIN-SUFFIX,ipshu.com
   - DOMAIN-SUFFIX,istoreos.com
   - DOMAIN-SUFFIX,jsdelivr.net
   - DOMAIN-SUFFIX,jxjktzjt.com
@@ -143,6 +153,9 @@ payload:
   - DOMAIN-SUFFIX,mtaokj.com
   - DOMAIN-SUFFIX,mykuaidi.com
   - DOMAIN-SUFFIX,myshopex.com
+  - DOMAIN-SUFFIX,naixi.com
+  - DOMAIN-SUFFIX,neihang.net
+  - DOMAIN-SUFFIX,netzz.net
   - DOMAIN-SUFFIX,nn.ci
   - DOMAIN-SUFFIX,nxog.top
   - DOMAIN-SUFFIX,ok321.top
@@ -181,8 +194,10 @@ payload:
   - DOMAIN-SUFFIX,sxlljm.com
   - DOMAIN-SUFFIX,tailgdd.com
   - DOMAIN-SUFFIX,tangguobaohe.com
+  - DOMAIN-SUFFIX,tcp.pub
   - DOMAIN-SUFFIX,tcy365.net
   - DOMAIN-SUFFIX,thinkerride.com
+  - DOMAIN-SUFFIX,tool56.com
   - DOMAIN-SUFFIX,tumukaoyan.com
   - DOMAIN-SUFFIX,tuxing.art
   - DOMAIN-SUFFIX,u-carloan.com
@@ -200,7 +215,9 @@ payload:
   - DOMAIN-SUFFIX,wewillpro.com
   - DOMAIN-SUFFIX,wlcdn88.com
   - DOMAIN-SUFFIX,wwwh.eu.org
+  - DOMAIN-SUFFIX,xbgjw.com
   - DOMAIN-SUFFIX,xdqtech.com
+  - DOMAIN-SUFFIX,xdtool.com
   - DOMAIN-SUFFIX,xiankabao.com
   - DOMAIN-SUFFIX,xiaochuanyun.com
   - DOMAIN-SUFFIX,xixih.cc
