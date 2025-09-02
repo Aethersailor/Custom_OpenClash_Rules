@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 229
+# TOTAL: 231
 
 payload:
   - '*quickconnect*'
@@ -66,6 +66,7 @@ payload:
   - '+.englibrary.com'
   - '+.epg.aptv.app'
   - '+.epg.v1.mk'
+  - '+.feizhiyi.com'
   - '+.ffhome.com'
   - '+.flingtrainer.com'
   - '+.fofuai.com'
@@ -73,6 +74,7 @@ payload:
   - '+.freetv.top'
   - '+.frp-ski.com'
   - '+.fssbcc.top'
+  - '+.fsytss.com'
   - '+.fzwqq.com'
   - '+.gaishitongshu.com'
   - '+.game.maj-soul.com'
