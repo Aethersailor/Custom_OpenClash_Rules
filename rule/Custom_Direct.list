@@ -162,6 +162,10 @@ DOMAIN-SUFFIX,idsduf.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 学习网站 / add by Telegram user: Shady / Date: 2025-08-31 16:45:54
+DOMAIN-SUFFIX,feizhiyi.com
+# 佛山一天膳食app / add by Telegram user: Evan / Date: 2025-08-31 16:39:49
+DOMAIN-SUFFIX,fsytss.com
 # add by Telegram user: Blunt / Date: 2025-08-30 22:09:47
 DOMAIN-SUFFIX,googoc.com
 # add by Telegram user: Blunt / Date: 2025-08-30 22:08:34
