@@ -863,7 +863,7 @@ rules:
 - "GEOSITE,youtube,📹 YouTube"
 - "GEOSITE,apple-tvplus,🎥 AppleTV+"
 - "GEOSITE,apple,🍎 苹果服务"
-- GEOSITE,microsoft,Ⓜ️ 微软服务
+- "GEOSITE,microsoft,Ⓜ️ 微软服务"
 - "GEOSITE,googlefcm,📢 谷歌FCM"
 - "GEOSITE,google,🇬 谷歌服务"
 - "GEOSITE,tiktok,🎶 TikTok"
