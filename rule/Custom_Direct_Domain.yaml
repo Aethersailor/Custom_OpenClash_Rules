@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 235
+# TOTAL: 236
 
 payload:
   - '*quickconnect*'
@@ -10,6 +10,7 @@ payload:
   - '+.112114.xyz'
   - '+.115cdn.de'
   - '+.1996999.xyz'
+  - '+.204cloud.com'
   - '+.51wanxue.com'
   - '+.51zmt.top'
   - '+.52jiawei.com'
