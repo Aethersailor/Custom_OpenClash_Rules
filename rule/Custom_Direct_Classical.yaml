@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 237
+# TOTAL: 238
 
 payload:
   - DOMAIN-KEYWORD,quickconnect
@@ -148,6 +148,7 @@ payload:
   - DOMAIN-SUFFIX,longmenshuju.com
   - DOMAIN-SUFFIX,lsbj365.com
   - DOMAIN-SUFFIX,lyilife.com
+  - DOMAIN-SUFFIX,meishiffx.online
   - DOMAIN-SUFFIX,members.3322.org
   - DOMAIN-SUFFIX,micu.hk
   - DOMAIN-SUFFIX,mifeng.plus
