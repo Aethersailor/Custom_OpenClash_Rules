@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 234
+# TOTAL: 235
 
 payload:
   - '*quickconnect*'
@@ -152,6 +152,7 @@ payload:
   - '+.members.3322.org'
   - '+.micu.hk'
   - '+.mifeng.plus'
+  - '+.mobai.sbs'
   - '+.msftconnecttest.com'
   - '+.msftncsi.com'
   - '+.mslmc.net'
