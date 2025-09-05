@@ -260,7 +260,7 @@ Traffic、GB、Expire
 
 ## 🙏 感谢
 
-**本项目项目使用或引用了以下项目的内容**
+**本项目项目使用或引用了以下内容**
 
 以下排名不分先后
 
@@ -293,6 +293,7 @@ Traffic、GB、Expire
 
 ### 🔄 订阅转换后端
 - [asdlokj1qpi233/subconverter](https://github.com/asdlokj1qpi233/subconverter)
+- [Aethersailor/subconverter](https://github.com/Aethersailor/subconverter)
 
 ### 🧰 工具
 - [Aethersailor/Rule-Bot](https://github.com/Aethersailor/Rule-Bot)
