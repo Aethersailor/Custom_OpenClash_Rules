@@ -142,6 +142,42 @@ fi
 echo "内核更新完成！"
 echo 
 
+# 检查 Smart 内核配置
+echo "--------------------[ 检查 Smart 内核配置 ]----------------"
+CORE_TYPE=$(uci get openclash.config.core_type 2>/dev/null)
+if [ "$CORE_TYPE" = "Smart" ]; then
+  echo "检测到开启了 Smart 内核"
+  echo "正在配置 Smart 内核相关设置..."
+  
+  # 配置 Smart 内核相关参数
+  uci set openclash.config.auto_smart_switch='1'
+  uci set openclash.config.lgbm_auto_update='1'
+  uci set openclash.config.lgbm_custom_url='https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin'
+  uci commit openclash
+  
+  if [ $? -ne 0 ]; then
+    echo "Smart 内核配置更新失败，请检查日志。"
+    exit 1
+  fi
+  echo "Smart 内核配置更新完成！已开启 Smart 策略自动切换，并启用 LGBM 完整版模型和模型自动更新。"
+  echo 
+  
+  # 更新 Smart 模型
+  echo "--------------------[ 更新 Smart 模型 ]---------------------"
+  echo "开始更新 Smart 模型..."
+  /usr/share/openclash/openclash_lgbm.sh
+  if [ $? -ne 0 ]; then
+    echo "Smart 模型更新失败，请检查日志。"
+    exit 1
+  fi
+  echo "Smart 模型更新完成！"
+  echo 
+else
+  echo "检测到 Smart 内核未开启"
+  echo "跳过 Smart 内核相关配置和模型更新"
+  echo 
+fi
+
 # 调用 OpenClash 自带脚本更新 GeoIP Dat 数据库
 echo "--------------------[ 更新 GeoIP Dat 数据库 ]-------------"
 echo "开始更新 GeoIP Dat 数据库..."
