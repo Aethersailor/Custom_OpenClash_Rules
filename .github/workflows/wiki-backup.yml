@@ -110,6 +110,6 @@ jobs:
 
           if ! git diff --cached --quiet; then
             commit_time=$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')
-            git commit -m "Backup Wiki at ${commit_time} UTC+8"
+            git commit -m "Auto Backup Wiki at ${commit_time} UTC+8"
             git push
           fi
