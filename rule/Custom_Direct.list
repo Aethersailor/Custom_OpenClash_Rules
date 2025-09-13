@@ -127,6 +127,13 @@ DOMAIN-SUFFIX,game.maj-soul.com
 # 软件及服务 / add by Telegram user: rl / Date: 2025-08-14 09:47:11
 DOMAIN-SUFFIX,adobe.com
 
+# 下载类
+# 馒头
+DOMAIN-KEYWORD,m-team
+DOMAIN-SUFFIX,m-team.cc
+DOMAIN-SUFFIX,m-team.io
+DOMAIN-SUFFIX,manfuz.co
+
 # 机器人添加域名
 # 以下域名由用户通过机器人添加，无备案且 NS 不属于中国大陆，或者属于 .top 域名
 # add by Telegram user: Aethersailor / Date: 2025-07-23 00:20:38
