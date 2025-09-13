@@ -178,21 +178,8 @@ DOMAIN-SUFFIX,51zmt.top
 DOMAIN-SUFFIX,chenyuxia.com
 # 视频网站 / add by Telegram user: Shady / Date: 2025-08-26 13:07:08
 DOMAIN-SUFFIX,nxog.top
-
-# =======================================
-# 以下是应当直连的冷门国内域名规则
-# =======================================
-
-# ---------------------------------------
-# 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
-# ---------------------------------------
-# 以下域名待提交 PR
 # 我的世界服务器 / add by Telegram user: 💡💡 / Date: 2025-09-12 12:44:33
 DOMAIN-SUFFIX,zctnet.top
-# Mc统一登陆通行证 / add by Telegram user: 💡💡 / Date: 2025-09-12 12:22:24
-DOMAIN-SUFFIX,mc-user.com
-# 笔袋应用 学习网站 / add by Telegram user: Jiajun / Date: 2025-09-11 19:23:53
-DOMAIN-SUFFIX,gaojiua.com
 # iptv源 / add by Telegram user: sanligu / Date: 2025-09-11 19:15:47
 DOMAIN-SUFFIX,tclai.top
 # add by Telegram user: 网猫-工作时间早10-晚11 / Date: 2025-09-10 09:21:45
@@ -204,13 +191,26 @@ DOMAIN-SUFFIX,privateapi.xyz
 # 极氪APP / add by Telegram user: EzrAAA / Date: 2025-09-06 18:01:14
 DOMAIN-SUFFIX,halvie.com
 
-# 2025.9.6 分类整理完毕
+# =======================================
+# 以下是应当直连的冷门国内域名规则
+# =======================================
+
+# ---------------------------------------
+# 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
+# ---------------------------------------
+# 以下域名待提交 PR
+
+# 2025.9.13 分类整理完毕
 
 # ---------------------------------------
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
 
+# Mc统一登陆通行证 / add by Telegram user: 💡💡 / Date: 2025-09-12 12:22:24
+DOMAIN-SUFFIX,mc-user.com
+# 笔袋应用 学习网站 / add by Telegram user: Jiajun / Date: 2025-09-11 19:23:53
+DOMAIN-SUFFIX,gaojiua.com
 # add by Telegram user: Blunt / Date: 2025-08-30 22:08:34
 DOMAIN-SUFFIX,tcp.pub
 # add by Telegram user: Blunt / Date: 2025-08-30 22:04:04
