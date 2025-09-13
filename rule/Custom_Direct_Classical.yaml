@@ -1,9 +1,10 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 249
+# TOTAL: 253
 
 payload:
+  - DOMAIN-KEYWORD,m-team
   - DOMAIN-KEYWORD,quickconnect
   - DOMAIN-KEYWORD,synology
   - DOMAIN-SUFFIX,03241119.xyz
@@ -153,6 +154,9 @@ payload:
   - DOMAIN-SUFFIX,lsbj365.com
   - DOMAIN-SUFFIX,lyihub.com
   - DOMAIN-SUFFIX,lyilife.com
+  - DOMAIN-SUFFIX,m-team.cc
+  - DOMAIN-SUFFIX,m-team.io
+  - DOMAIN-SUFFIX,manfuz.co
   - DOMAIN-SUFFIX,mc-user.com
   - DOMAIN-SUFFIX,meishiffx.online
   - DOMAIN-SUFFIX,members.3322.org
