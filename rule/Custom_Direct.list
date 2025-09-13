@@ -207,6 +207,27 @@ DOMAIN-SUFFIX,halvie.com
 
 # PR 至 felixonmars/dnsmasq-china-list
 
+
+# PR 至 v2fly/domain-list-community
+
+# 鸿蒙出境易
+DOMAIN-SUFFIX,chujingapp.com
+# add by Telegram user: Coco / Date: 2025-07-23 22:58:43
+DOMAIN-SUFFIX,xdqtech.com
+# add by Telegram user: Aethersailor / Date: 2025-07-23 16:31:37
+DOMAIN-SUFFIX,chaz.fun
+# 情侣软件suki / add by Telegram user: e / Date: 2025-08-03 21:01:20
+DOMAIN-SUFFIX,codeloop.top
+# add by Telegram user: Aethersailor / Date: 2025-07-30 18:11:46
+DOMAIN-SUFFIX,warmheart.top
+
+# ---------------------------------------
+# =======================================
+
+# 以下域名已被 GeoSite 收录，定期删除
+
+# 以下域名已被收录，计划于 2025.11.6 删除
+
 # Mc统一登陆通行证 / add by Telegram user: 💡💡 / Date: 2025-09-12 12:22:24
 DOMAIN-SUFFIX,mc-user.com
 # 笔袋应用 学习网站 / add by Telegram user: Jiajun / Date: 2025-09-11 19:23:53
@@ -269,24 +290,6 @@ DOMAIN-SUFFIX,115cdn.de
 DOMAIN-SUFFIX,micu.hk
 # add by Telegram user: Aethersailor / Date: 2025-08-26 19:16:32
 DOMAIN-SUFFIX,ugdocker.link
-
-# PR 至 v2fly/domain-list-community
-
-# 鸿蒙出境易
-DOMAIN-SUFFIX,chujingapp.com
-# add by Telegram user: Coco / Date: 2025-07-23 22:58:43
-DOMAIN-SUFFIX,xdqtech.com
-# add by Telegram user: Aethersailor / Date: 2025-07-23 16:31:37
-DOMAIN-SUFFIX,chaz.fun
-# 情侣软件suki / add by Telegram user: e / Date: 2025-08-03 21:01:20
-DOMAIN-SUFFIX,codeloop.top
-# add by Telegram user: Aethersailor / Date: 2025-07-30 18:11:46
-DOMAIN-SUFFIX,warmheart.top
-
-# ---------------------------------------
-# =======================================
-
-# 以下域名已被 GeoSite 收录，定期删除
 
 # 以下域名已被收录，计划于 2025.10.6 删除
 
