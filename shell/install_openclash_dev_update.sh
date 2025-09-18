@@ -162,15 +162,55 @@ if [ "$CORE_TYPE" = "Smart" ]; then
   echo "Smart 内核配置更新完成！已开启 Smart 策略自动切换，并启用 LGBM 完整版模型和模型自动更新。"
   echo 
   
-  # 更新 Smart 模型
+  # 更新 Smart 模型（直接下载，含多镜像与回退）
   echo "--------------------[ 更新 Smart 模型 ]---------------------"
-  echo "开始更新 Smart 模型..."
-  /usr/share/openclash/openclash_lgbm.sh
-  if [ $? -ne 0 ]; then
-    echo "Smart 模型更新失败，请检查日志。"
+  echo "开始下载 Smart 模型（Model-large.bin）..."
+  TMP_MODEL="/tmp/Model-large.bin"
+  TARGET_DIR="/etc/openclash"
+  TARGET_FILE="$TARGET_DIR/Model.bin"
+  # 主与备用镜像
+  MODEL_URL_1="https://gh-proxy.com/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
+  MODEL_URL_2="https://download.fastgit.org/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
+  MODEL_URL_3="https://github.moeyy.xyz/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
+  MODEL_URL_4="https://mirror.ghproxy.com/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
+
+  mkdir -p "$TARGET_DIR"
+
+  download_ok=0
+  for URL in "$MODEL_URL_1" "$MODEL_URL_2" "$MODEL_URL_3" "$MODEL_URL_4"; do
+    echo "尝试下载：$URL"
+    if ! command -v curl >/dev/null 2>&1; then
+      echo "未找到 curl，请安装后重试。"
+      RET=127
+      break
+    fi
+    # 使用 curl 下载，保留进度显示（不使用 -s），跟随跳转、失败即返回非零、重试与超时
+    curl -L --fail --retry 3 --connect-timeout 30 --max-time 600 --insecure -o "$TMP_MODEL" "$URL"
+    RET=$?
+
+    if [ $RET -eq 0 ] && [ -s "$TMP_MODEL" ]; then
+      download_ok=1
+      echo "下载成功。"
+      break
+    else
+      echo "下载失败，尝试下一个镜像..."
+      [ -f "$TMP_MODEL" ] && rm -f "$TMP_MODEL"
+    fi
+  done
+
+  if [ "$download_ok" -ne 1 ]; then
+    echo "Smart 模型下载失败或文件为空，请检查网络与镜像可用性。"
     exit 1
   fi
-  echo "Smart 模型更新完成！"
+
+  mv -f "$TMP_MODEL" "$TARGET_FILE" || {
+    echo "移动模型文件失败，请检查权限与磁盘空间。";
+    [ -f "$TMP_MODEL" ] && rm -f "$TMP_MODEL";
+    exit 1;
+  }
+
+  chmod 644 "$TARGET_FILE"
+  echo "Smart 模型更新完成：$TARGET_FILE"
   echo 
 else
   echo "检测到 Smart 内核未开启"
