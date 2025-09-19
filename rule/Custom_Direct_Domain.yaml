@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 256
+# TOTAL: 257
 
 payload:
   - '*m-team*'
@@ -134,6 +134,7 @@ payload:
   - '+.ifish7.com'
   - '+.igpsport.com'
   - '+.immortalwrt.org'
+  - '+.iotrix.net'
   - '+.ip159.com'
   - '+.ip6.seeip.org'
   - '+.ipapi.co'
