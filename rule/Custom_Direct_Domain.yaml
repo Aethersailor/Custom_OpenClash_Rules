@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 258
+# TOTAL: 259
 
 payload:
   - '*m-team*'
@@ -255,6 +255,7 @@ payload:
   - '+.yongyu.xyz'
   - '+.yooc.me'
   - '+.yunzuoye.net'
+  - '+.yzcsoft.com'
   - '+.z6e.com'
   - '+.zctnet.top'
   - '+.zeekrline.com'
