@@ -201,6 +201,8 @@ DOMAIN-SUFFIX,geektool.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 学校洗衣机APP：悠洗 / add by Telegram user: lei / Date: 2025-09-20 16:47:16
+DOMAIN-SUFFIX,ulife.group
 # 汇丰香港，走代理会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:35:06
 DOMAIN-SUFFIX,hsbc.com.hk
 # 中国银行香港，如果走代理，会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:33:44
