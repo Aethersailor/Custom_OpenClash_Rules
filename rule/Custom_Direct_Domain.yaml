@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 262
+# TOTAL: 263
 
 payload:
   - '*m-team*'
@@ -231,6 +231,7 @@ payload:
   - '+.tuxing.art'
   - '+.u-carloan.com'
   - '+.ugdocker.link'
+  - '+.ulife.group'
   - '+.vbkhk.com'
   - '+.vbkr.com'
   - '+.vbkrhk.com'
