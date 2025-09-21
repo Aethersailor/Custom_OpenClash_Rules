@@ -134,6 +134,12 @@ DOMAIN-SUFFIX,m-team.cc
 DOMAIN-SUFFIX,m-team.io
 DOMAIN-SUFFIX,manfuz.co
 
+# 金融类
+# 汇丰香港，走代理会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:35:06
+DOMAIN-SUFFIX,hsbc.com.hk
+# 中国银行香港，如果走代理，会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:33:44
+DOMAIN-SUFFIX,bochk.com
+
 # 机器人添加域名
 # 以下域名由用户通过机器人添加，无备案且 NS 不属于中国大陆，或者属于 .top 域名
 # add by Telegram user: Aethersailor / Date: 2025-07-23 00:20:38
@@ -192,6 +198,12 @@ DOMAIN-SUFFIX,privateapi.xyz
 DOMAIN-SUFFIX,halvie.com
 # add by Telegram user: Lailin / Date: 2025-09-14 12:09:49
 DOMAIN-SUFFIX,geektool.top
+# 博客 / add by Telegram user: Aloys / Date: 2025-09-18 22:38:49
+DOMAIN-SUFFIX,aloys233.top
+# 问卷星 / add by Telegram user: 法兰西 / Date: 2025-09-17 21:06:29
+DOMAIN-SUFFIX,wjx.top
+# 黑苹果屋网站 / add by Telegram user: 李白 / Date: 2025-09-20 01:20:48
+DOMAIN-SUFFIX,imacos.top
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -201,37 +213,8 @@ DOMAIN-SUFFIX,geektool.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# 医疗门户 / add by Telegram user: Evan / Date: 2025-09-21 11:45:41
-DOMAIN-SUFFIX,hnxzctec.com
-# ros路由表更新 / add by Telegram user: 雪菜 / Date: 2025-09-20 23:14:04
-DOMAIN-SUFFIX,tcp5.com
-# 海信供应商登录系统 / add by Telegram user: 雪菜 / Date: 2025-09-20 22:52:55
-DOMAIN-SUFFIX,qiankunshopping.com
-# 学校 / add by Telegram user: lei / Date: 2025-09-20 16:48:58
-DOMAIN-SUFFIX,fjpit.com
-# 学校洗衣机APP：悠洗 / add by Telegram user: lei / Date: 2025-09-20 16:47:16
-DOMAIN-SUFFIX,ulife.group
-# 汇丰香港，走代理会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:35:06
-DOMAIN-SUFFIX,hsbc.com.hk
-# 中国银行香港，如果走代理，会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:33:44
-DOMAIN-SUFFIX,bochk.com
-# 立林全屋智能 / add by Telegram user: Q / Date: 2025-09-20 05:42:29
-DOMAIN-SUFFIX,leelen.com
-# 逸掌柜电商软件 / add by Telegram user: Q / Date: 2025-09-20 05:40:16
-DOMAIN-SUFFIX,yzcsoft.com
-# 黑苹果屋网站 / add by Telegram user: 李白 / Date: 2025-09-20 01:20:48
-DOMAIN-SUFFIX,imacos.top
-# 微信智能设备控制小程序 / add by Telegram user: 李白 / Date: 2025-09-19 10:15:59
-DOMAIN-SUFFIX,iotrix.net
-# mc投影图下载 / add by Telegram user: Aloys / Date: 2025-09-18 22:43:15
-DOMAIN-SUFFIX,redenmc.com
-# 博客 / add by Telegram user: Aloys / Date: 2025-09-18 22:38:49
-DOMAIN-SUFFIX,aloys233.top
-# 问卷星 / add by Telegram user: 法兰西 / Date: 2025-09-17 21:06:29
-DOMAIN-SUFFIX,wjx.top
 
-
-# 2025.9.17 分类整理完毕
+# 2025.9.21 分类整理完毕
 
 # ---------------------------------------
 # 以下域名已提交 PR
@@ -244,6 +227,24 @@ DOMAIN-SUFFIX,shuqiandiqiu.com
 DOMAIN-SUFFIX,oceando.cloud
 # 代理网站 / add by Telegram user: 网猫-工作时间早10-晚11 / Date: 2025-09-15 12:34:42
 DOMAIN-SUFFIX,canghaiip.com
+# 医疗门户 / add by Telegram user: Evan / Date: 2025-09-21 11:45:41
+DOMAIN-SUFFIX,hnxzctec.com
+# ros路由表更新 / add by Telegram user: 雪菜 / Date: 2025-09-20 23:14:04
+DOMAIN-SUFFIX,tcp5.com
+# 海信供应商登录系统 / add by Telegram user: 雪菜 / Date: 2025-09-20 22:52:55
+DOMAIN-SUFFIX,qiankunshopping.com
+# 学校 / add by Telegram user: lei / Date: 2025-09-20 16:48:58
+DOMAIN-SUFFIX,fjpit.com
+# 学校洗衣机APP：悠洗 / add by Telegram user: lei / Date: 2025-09-20 16:47:16
+DOMAIN-SUFFIX,ulife.group
+# 立林全屋智能 / add by Telegram user: Q / Date: 2025-09-20 05:42:29
+DOMAIN-SUFFIX,leelen.com
+# 逸掌柜电商软件 / add by Telegram user: Q / Date: 2025-09-20 05:40:16
+DOMAIN-SUFFIX,yzcsoft.com
+# 微信智能设备控制小程序 / add by Telegram user: 李白 / Date: 2025-09-19 10:15:59
+DOMAIN-SUFFIX,iotrix.net
+# mc投影图下载 / add by Telegram user: Aloys / Date: 2025-09-18 22:43:15
+DOMAIN-SUFFIX,redenmc.com
 
 # PR 至 v2fly/domain-list-community
 
