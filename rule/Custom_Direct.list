@@ -213,6 +213,8 @@ DOMAIN-SUFFIX,imacos.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# NHK官网 / add by Telegram user: 雪菜 / Date: 2025-09-21 22:03:09
+DOMAIN-SUFFIX,nhk.or.jp
 
 # 2025.9.21 分类整理完毕
 
