@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 275
+# TOTAL: 276
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -69,6 +69,7 @@ payload:
   - DOMAIN-SUFFIX,dothantech.com
   - DOMAIN-SUFFIX,douqq.com
   - DOMAIN-SUFFIX,dushe1.app
+  - DOMAIN-SUFFIX,einfo-tech.com
   - DOMAIN-SUFFIX,englibrary.com
   - DOMAIN-SUFFIX,epg.aptv.app
   - DOMAIN-SUFFIX,epg.v1.mk
