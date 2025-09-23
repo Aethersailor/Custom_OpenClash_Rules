@@ -1,6 +1,6 @@
 # 80/443 之外的端口规则
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
-# TOTAL: 6
+# TOTAL: 3
 
 payload:
   - DST-PORT,1-79
