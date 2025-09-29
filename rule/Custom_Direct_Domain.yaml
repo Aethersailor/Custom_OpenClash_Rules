@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 273
+# TOTAL: 274
 
 payload:
   - '*m-team*'
@@ -51,6 +51,7 @@ payload:
   - '+.chujingapp.com'
   - '+.clivia.fun'
   - '+.cn-music.mefun.vip'
+  - '+.cnb.space'
   - '+.codeloop.top'
   - '+.congmiqq.com'
   - '+.coros.com'
