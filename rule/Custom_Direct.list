@@ -213,6 +213,8 @@ DOMAIN-SUFFIX,imacos.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 视频网站 / add by Telegram user: hvccff / Date: 2025-10-06 18:30:24
+DOMAIN-SUFFIX,ydayc.com
 # add by Telegram user: Aethersailor / Date: 2025-10-05 09:24:40
 DOMAIN-SUFFIX,xzsckj.com
 # 阿里云技术 / add by Telegram user: conn / Date: 2025-10-04 23:36:18
