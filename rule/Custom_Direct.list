@@ -204,6 +204,12 @@ DOMAIN-SUFFIX,aloys233.top
 DOMAIN-SUFFIX,wjx.top
 # 黑苹果屋网站 / add by Telegram user: 李白 / Date: 2025-09-20 01:20:48
 DOMAIN-SUFFIX,imacos.top
+# pt站劳教所 / add by Telegram user: kevin / Date: 2025-09-22 14:36:31
+DOMAIN-SUFFIX,ptl.gs
+# pt站劳教所 / add by Telegram user: kevin / Date: 2025-09-22 14:35:53
+DOMAIN-SUFFIX,ptlgs.org
+# NHK官网 / add by Telegram user: 雪菜 / Date: 2025-09-21 22:03:09
+DOMAIN-SUFFIX,nhk.or.jp
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -213,6 +219,15 @@ DOMAIN-SUFFIX,imacos.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+
+
+# 2025.10.8 分类整理完毕
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
+
 # 6V电影网 / add by Telegram user: 鱼 / Date: 2025-10-08 17:51:33
 DOMAIN-SUFFIX,6v520.net
 # 问道手游聚宝斋app / add by Telegram user: young / Date: 2025-10-08 16:43:02
@@ -245,19 +260,6 @@ DOMAIN-SUFFIX,ssjj2.com
 DOMAIN-SUFFIX,einfo-tech.com
 # add by Telegram user: 法兰西 / Date: 2025-09-22 20:12:53
 DOMAIN-SUFFIX,afeica.com
-# pt站劳教所 / add by Telegram user: kevin / Date: 2025-09-22 14:36:31
-DOMAIN-SUFFIX,ptl.gs
-# pt站劳教所 / add by Telegram user: kevin / Date: 2025-09-22 14:35:53
-DOMAIN-SUFFIX,ptlgs.org
-# NHK官网 / add by Telegram user: 雪菜 / Date: 2025-09-21 22:03:09
-DOMAIN-SUFFIX,nhk.or.jp
-
-# 2025.9.21 分类整理完毕
-
-# ---------------------------------------
-# 以下域名已提交 PR
-
-# PR 至 felixonmars/dnsmasq-china-list
 
 # add by Telegram user: Aethersailor / Date: 2025-09-17 11:19:09
 DOMAIN-SUFFIX,shuqiandiqiu.com
