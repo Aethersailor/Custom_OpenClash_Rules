@@ -287,6 +287,7 @@ Traffic、GB、Expire
 - [217heidai/adblockfilters](https://github.com/217heidai/adblockfilters)
 - [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
 - [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)
+- [Aethersailor/adblockfilters-modified](https://github.com/Aethersailor/adblockfilters-modified)
 
 ### ⚡ 加速规则
 - [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520)
