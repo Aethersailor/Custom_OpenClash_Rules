@@ -220,6 +220,8 @@ DOMAIN-SUFFIX,nhk.or.jp
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# add by Telegram user: 啥也不是 / Date: 2025-10-11 14:33:51
+DOMAIN-SUFFIX,fengsutb.com
 
 
 # 2025.10.8 分类整理完毕
