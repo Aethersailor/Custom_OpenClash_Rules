@@ -220,21 +220,20 @@ DOMAIN-SUFFIX,nhk.or.jp
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# add by Telegram user: Bin / Date: 2025-10-11 19:35:13
-DOMAIN-SUFFIX,ourschool.cc
-# add by Telegram user: Bin / Date: 2025-10-11 19:34:37
-DOMAIN-SUFFIX,diyiedu.com
-# add by Telegram user: 啥也不是 / Date: 2025-10-11 14:33:51
-DOMAIN-SUFFIX,fengsutb.com
 
-
-# 2025.10.8 分类整理完毕
+# 2025.10.12 分类整理完毕
 
 # ---------------------------------------
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
 
+# add by Telegram user: Bin / Date: 2025-10-11 19:35:13
+DOMAIN-SUFFIX,ourschool.cc
+# add by Telegram user: Bin / Date: 2025-10-11 19:34:37
+DOMAIN-SUFFIX,diyiedu.com
+# add by Telegram user: 啥也不是 / Date: 2025-10-11 14:33:51
+DOMAIN-SUFFIX,fengsutb.com
 # 6V电影网 / add by Telegram user: 鱼 / Date: 2025-10-08 17:51:33
 DOMAIN-SUFFIX,6v520.net
 # 问道手游聚宝斋app / add by Telegram user: young / Date: 2025-10-08 16:43:02
