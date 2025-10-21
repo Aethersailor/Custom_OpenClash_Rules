@@ -210,6 +210,14 @@ DOMAIN-SUFFIX,gootho.com
 
 # PR 至 v2fly/domain-list-community
 
+
+
+# ---------------------------------------
+# =======================================
+
+# 以下域名已被 GeoSite 上游项目收录，定期删除
+
+# 以下域名已被收录，计划于 2025.12.5 删除
 # 鸿蒙出境易
 DOMAIN-SUFFIX,chujingapp.com
 # add by Telegram user: Coco / Date: 2025-07-23 22:58:43
@@ -258,13 +266,6 @@ DOMAIN-SUFFIX,wjx.top
 DOMAIN-SUFFIX,imacos.top
 # add by Telegram user: Aethersailor / Date: 2025-10-16 18:53:47
 DOMAIN-SUFFIX,saduck.top
-
-# ---------------------------------------
-# =======================================
-
-# 以下域名已被 GeoSite 上游项目收录，定期删除
-
-# 以下域名已被收录，计划于 2025.12.1 删除
 # 财经网站 / add by Telegram user: Mouton / Date: 2025-10-18 22:48:47
 DOMAIN-SUFFIX,gangtise.com
 # 国内企业地址 / add by Telegram user: cook / Date: 2025-10-16 17:35:12
