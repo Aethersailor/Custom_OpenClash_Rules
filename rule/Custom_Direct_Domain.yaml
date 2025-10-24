@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 310
+# TOTAL: 311
 
 payload:
   - '*m-team*'
@@ -82,6 +82,7 @@ payload:
   - '+.englibrary.com'
   - '+.epg.aptv.app'
   - '+.epg.v1.mk'
+  - '+.everdrawing.com'
   - '+.feihengip.com'
   - '+.feizhiyi.com'
   - '+.fengsutb.com'
