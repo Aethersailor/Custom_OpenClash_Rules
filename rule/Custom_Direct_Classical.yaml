@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 315
+# TOTAL: 316
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -125,6 +125,7 @@ payload:
   - DOMAIN-SUFFIX,gjtool.com
   - DOMAIN-SUFFIX,gmoj.net
   - DOMAIN-SUFFIX,gmya.net
+  - DOMAIN-SUFFIX,goalmapapp.com
   - DOMAIN-SUFFIX,goka.top
   - DOMAIN-SUFFIX,googoc.com
   - DOMAIN-SUFFIX,gootho.com
