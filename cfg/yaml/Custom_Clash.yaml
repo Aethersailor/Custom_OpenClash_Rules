@@ -834,7 +834,7 @@ proxy-groups:
     type: select
     url: https://www.gstatic.com/generate_204
     proxies:
-      - DIRECT
+      - ua3f
 
   - name: "🐟 遵循规则"
     type: select
