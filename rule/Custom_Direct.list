@@ -181,6 +181,11 @@ DOMAIN-SUFFIX,tozi-cn.top
 # girigirilove在线追番网站 / add by Telegram user: 真怪誕呀 / Date: 2025-08-23 17:26:28
 DOMAIN-SUFFIX,girigirilove.com
 
+# 个人导航网站及游戏站点 / add by Telegram user: Char / Date: 2025-10-28 00:00:59
+DOMAIN-SUFFIX,cheshire.top
+# Server酱³ · 极简推送服务 / add by Telegram user: 雪菜 / Date: 2025-10-20 18:34:08
+DOMAIN-SUFFIX,ft07.com
+
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -190,6 +195,19 @@ DOMAIN-SUFFIX,girigirilove.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+
+
+
+
+# 2025.11.1 分类整理完毕
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
+
+# add by Telegram user: Aethersailor / Date: 2025-10-19 12:38:07
+DOMAIN-SUFFIX,gootho.com
 # 小熊猫c＋＋ IDE / add by Telegram user: y / Date: 2025-10-31 22:16:45
 DOMAIN-SUFFIX,royqh.net
 # 便单APP / add by Telegram user: y / Date: 2025-10-31 01:24:28
@@ -200,8 +218,6 @@ DOMAIN-SUFFIX,shyxhy.com
 DOMAIN-SUFFIX,shunjing.xin
 # 灵溪网 绿色软件下载与技术分享 / add by Telegram user: ecerc / Date: 2025-10-28 20:04:52
 DOMAIN-SUFFIX,ghoxz.com
-# 个人导航网站及游戏站点 / add by Telegram user: Char / Date: 2025-10-28 00:00:59
-DOMAIN-SUFFIX,cheshire.top
 # 像素芝士 / add by Telegram user: ecerc / Date: 2025-10-26 23:22:45
 DOMAIN-SUFFIX,pixcheese.com
 # add by Telegram user: young / Date: 2025-10-26 11:13:59
@@ -228,19 +244,7 @@ DOMAIN-SUFFIX,hzlawyer.net
 DOMAIN-SUFFIX,xinghaiwaimai.com
 # add by Telegram user: Aethersailor / Date: 2025-10-20 19:15:45
 DOMAIN-SUFFIX,86656.net
-# Server酱³ · 极简推送服务 / add by Telegram user: 雪菜 / Date: 2025-10-20 18:34:08
-DOMAIN-SUFFIX,ft07.com
 
-
-# 2025.10.19 分类整理完毕
-
-# ---------------------------------------
-# 以下域名已提交 PR
-
-# PR 至 felixonmars/dnsmasq-china-list
-
-# add by Telegram user: Aethersailor / Date: 2025-10-19 12:38:07
-DOMAIN-SUFFIX,gootho.com
 
 # PR 至 v2fly/domain-list-community
 
