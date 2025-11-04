@@ -4,20 +4,20 @@
 # TOTAL: 17
 
 payload:
+  - DOMAIN-SUFFIX,7pzzv.us
+  - DOMAIN-SUFFIX,arduino.cc
+  - DOMAIN-SUFFIX,clientservices.googleapis.com
+  - DOMAIN-SUFFIX,cloudsync-prod.s3.us-east-1.amazonaws.com
+  - DOMAIN-SUFFIX,dmhy.org
+  - DOMAIN-SUFFIX,googleapis.cn
+  - DOMAIN-SUFFIX,hoyolab.com
   - DOMAIN-SUFFIX,ip.sb
   - DOMAIN-SUFFIX,ipify.org
-  - DOMAIN-SUFFIX,services.googleapis.cn
-  - DOMAIN-SUFFIX,clientservices.googleapis.com
-  - DOMAIN-SUFFIX,googleapis.cn
-  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com
   - DOMAIN-SUFFIX,mtalk.google.com
-  - DOMAIN-SUFFIX,stun.playstation.net
-  - DOMAIN-SUFFIX,platformio.org
-  - DOMAIN-SUFFIX,arduino.cc
-  - DOMAIN-SUFFIX,dmhy.org
-  - DOMAIN-SUFFIX,cloudsync-prod.s3.us-east-1.amazonaws.com
-  - DOMAIN-SUFFIX,hoyolab.com
   - DOMAIN-SUFFIX,onedrive.live.com
-  - DOMAIN-SUFFIX,7pzzv.us
-  - IP-CIDR,1.1.1.1/32,no-resolve
+  - DOMAIN-SUFFIX,platformio.org
+  - DOMAIN-SUFFIX,services.googleapis.cn
+  - DOMAIN-SUFFIX,stun.playstation.net
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com
   - IP-CIDR,1.0.0.1/32,no-resolve
+  - IP-CIDR,1.1.1.1/32,no-resolve

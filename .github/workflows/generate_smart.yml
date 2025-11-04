@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Process ini files and generate smart versions
         run: |
@@ -26,17 +28,21 @@ jobs:
             "cfg/Custom_Clash.ini:cfg/Custom_Clash_Smart.ini"
             "cfg/Custom_Clash_Full.ini:cfg/Custom_Clash_Smart_Full.ini"
             "cfg/Custom_Clash_Lite.ini:cfg/Custom_Clash_Smart_Lite.ini"
+            "cfg/Custom_Clash_SSRDOG.ini:cfg/Custom_Clash_Smart_SSRDOG.ini"
           )
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          # Pull latest changes to avoid conflicts
+          git pull origin main
+
           commit_flag=0
+          changed_files=()
 
           for pair in "${FILES_TO_PROCESS[@]}"; do
             input_file="${pair%%:*}"
             output_file="${pair##*:}"
-            commit_made=false
 
             if [[ -f "$input_file" ]]; then
               echo "Processing $input_file -> $output_file"
@@ -63,16 +69,13 @@ jobs:
 
               echo "Generated $output_file"
 
-              git add "$output_file"
-
-              if ! git diff --cached --quiet; then
-                echo "Changes detected in $output_file, committing..."
-                git commit -m "Generate $(basename "$output_file") based on $(basename "$input_file")"
+              # Check if file has changes
+              if ! git diff --quiet "$output_file"; then
+                git add "$output_file"
+                changed_files+=("$output_file")
                 commit_flag=1
-                commit_made=true
               else
-                echo "No changes detected in $output_file, skipping commit."
-                git reset "$output_file"
+                echo "No changes detected in $output_file, skipping."
               fi
 
             else
@@ -81,8 +84,24 @@ jobs:
           done
 
           if [[ "$commit_flag" -eq 1 ]]; then
+            echo "Committing changes for files: ${changed_files[*]}"
+            
+            # Create commit message for each changed file
+            commit_message=""
+            for file in "${changed_files[@]}"; do
+              base_name=$(basename "$file")
+              input_name=$(basename "${file/_Smart./.}")
+              if [[ -z "$commit_message" ]]; then
+                commit_message="Generate $base_name based on $input_name"
+              else
+                commit_message="$commit_message, $base_name based on $input_name"
+              fi
+            done
+            
+            git commit -m "$commit_message"
+            
             echo "Pushing changes..."
-            git push
+            git push origin main
           else
-            echo "No changes to push."
+            echo "No changes to commit or push."
           fi

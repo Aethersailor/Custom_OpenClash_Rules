@@ -34,23 +34,30 @@ jobs:
           # 保留 [custom] 及其后内容
           awk '/\[custom\]/{f=1} f' cfg/Custom_Clash.ini > tmp && mv tmp cfg/Custom_Clash.ini
 
-          # 添加头部注释（每行单独插入）
-          sed -i '1i ;基于 ACL4SSR 模板魔改而来，感谢原作者！' cfg/Custom_Clash.ini
-          sed -i '1i ;该订阅模板为 Custom_OpenClash_Rules 项目的衍生项目' cfg/Custom_Clash.ini
-          sed -i '1i ;项目地址：https://github.com/Aethersailor/Custom_Clash_Rules' cfg/Custom_Clash.ini
-          sed -i '1i ;作者：https://github.com/Aethersailor' cfg/Custom_Clash.ini
-          sed -i '1i ;全分组防 DNS 泄漏订阅转换模板' cfg/Custom_Clash.ini
-          sed -i '1i ;Custom_Clash_Rules' cfg/Custom_Clash.ini
-          sed -i '1i' cfg/Custom_Clash.ini
-          sed -i '1i' cfg/Custom_Clash.ini
+          # 创建临时文件用于构建头部注释
+          cat > header_comments.txt << 'EOF'
+
+          ;Custom_Clash_Rules
+          ;全分组防 DNS 泄漏订阅转换模板
+          ;作者：https://github.com/Aethersailor
+          ;项目地址：https://github.com/Aethersailor/Custom_Clash_Rules
+          ;该订阅模板为 Custom_OpenClash_Rules 项目的衍生项目
+          ;基于 ACL4SSR 模板魔改而来，感谢原作者！
+          EOF
+
+          # 合并头部注释和原文件
+          cat header_comments.txt cfg/Custom_Clash.ini > temp_file && mv temp_file cfg/Custom_Clash.ini
 
           # 删除包含 GEOSITE,cn 和 GEOIP,cn 的行
           sed -i '/GEOSITE,cn/d' cfg/Custom_Clash.ini
           sed -i '/GEOIP,cn/d' cfg/Custom_Clash.ini
 
-          # 在 Custom_Proxy 行后插入两条规则（每条单独插入）
+          # 在 Custom_Proxy 行后插入两条规则
           sed -i '/Custom_Proxy/a ruleset=🎯 全球直连,[]GEOIP,cn,no-resolve' cfg/Custom_Clash.ini
           sed -i '/Custom_Proxy/a ruleset=🎯 全球直连,[]GEOSITE,cn' cfg/Custom_Clash.ini
+
+          # 清理临时文件
+          rm -f header_comments.txt
 
       # Step 4: 提交并推送更改
       - name: Commit and Push Changes

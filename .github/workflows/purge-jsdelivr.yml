@@ -8,15 +8,43 @@ on:
       - 'cfg/**'
       - 'rule/**'
       - 'game_rule/**'
+      - 'shell/**'
 
   workflow_dispatch:  # 支持手动触发
+
+# 添加并发控制，取消重复任务
+concurrency:
+  group: purge-jsdelivr-cache
+  cancel-in-progress: true
 
 jobs:
   purge-jsdelivr:
     runs-on: ubuntu-latest
+    # 添加静默设置，无论成功失败都不发送通知
+    continue-on-error: true
+    # 禁用所有通知
+    defaults:
+      run:
+        shell: bash
 
     steps:
+      - name: Wait for 1 minute before purging
+        run: |
+          echo "Waiting for 1 minute before purging cache..."
+          echo "This allows time for multiple changes to be batched together."
+          echo "If another purge task is triggered during this time, this one will be cancelled."
+          
+          for i in {60..1}; do
+            echo "Countdown: $i seconds remaining..."
+            sleep 1
+          done
+          
+          echo "Countdown finished. Proceeding with cache purge..."
+        # 添加取消处理，静默退出
+        if: ${{ !cancelled() }}
+
       - name: Purge jsDelivr Cache
+        if: ${{ !cancelled() }}
         env:
           REPO: Aethersailor/Custom_OpenClash_Rules
         run: |

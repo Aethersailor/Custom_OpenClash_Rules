@@ -1,0 +1,151 @@
+name: Reject CFG Directory PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'cfg/**'
+
+jobs:
+  check-and-reject:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check if PR is from GitHub Actions or repository owner
+        id: check-actor
+        run: |
+          # Get the list of changed files in the PR
+          changed_files=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path' | grep "^cfg/" || echo "")
+          
+          # Check if Custom_Clash_Full.ini is the only cfg file being modified
+          if [[ "$changed_files" == "cfg/Custom_Clash_Full.ini" ]]; then
+            echo "is_allowed=true" >> $GITHUB_OUTPUT
+            echo "reason=excluded_file" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event.pull_request.user.login }}" == "github-actions[bot]" ]]; then
+            echo "is_allowed=true" >> $GITHUB_OUTPUT
+            echo "reason=github_actions" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event.pull_request.user.login }}" == "Aethersailor" ]]; then
+            echo "is_allowed=true" >> $GITHUB_OUTPUT
+            echo "reason=repository_owner" >> $GITHUB_OUTPUT
+          else
+            echo "is_allowed=false" >> $GITHUB_OUTPUT
+            echo "reason=unauthorized_user" >> $GITHUB_OUTPUT
+          fi
+          
+          echo "PR author: ${{ github.event.pull_request.user.login }}"
+          echo "Changed cfg files: $changed_files"
+          echo "Is allowed: ${{ steps.check-actor.outputs.is_allowed }}"
+          echo "Reason: ${{ steps.check-actor.outputs.reason }}"
+
+      - name: Reject unauthorized PRs
+        if: steps.check-actor.outputs.is_allowed == 'false'
+        run: |
+          echo "🚫 Rejecting PR #${{ github.event.pull_request.number }}"
+          echo "Reason: Unauthorized user trying to modify /cfg directory"
+          echo "Only GitHub Actions and repository owner can modify files in the /cfg directory"
+          
+          # Add a comment to the PR
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body "## ❌ PR Rejected / PR 被拒绝
+
+          This PR has been automatically rejected because it contains modifications to files in the `/cfg` directory.
+          此 PR 已被自动拒绝，因为它包含对 `/cfg` 目录文件的修改。
+
+          ### Why was this rejected? / 为什么被拒绝？
+          - Modifying `.ini` template files will affect all users' configured node options
+          - 修改 `.ini` 模板文件会影响所有用户已设置的节点选项
+          - Except for the Full template, other templates do not accept any PRs
+          - 除了 Full 模板以外，其他模板不接受任何 PR
+          - This ensures configuration integrity and prevents disruption to existing user setups
+          - 这确保了配置完整性并防止破坏现有用户设置
+          - Only GitHub Actions workflows and repository owner can modify these files
+          - 只有 GitHub Actions 工作流和仓库所有者可以修改这些文件
+
+          ### What should you do? / 你应该怎么做？
+          - If you need to modify configuration files, please fork and modify for your own use
+          - 如果你需要修改配置文件，请 fork 以后修改自用
+          - If you believe this rejection is in error, please contact the repository maintainers
+          - 如果你认为此拒绝是错误的，请联系仓库维护者
+
+          ---
+          *This is an automated response from the repository protection system.*
+          *这是来自仓库保护系统的自动回复。*"
+
+      - name: Close unauthorized PRs
+        if: steps.check-actor.outputs.is_allowed == 'false'
+        run: |
+          gh pr close ${{ github.event.pull_request.number }} \
+            --delete-branch \
+            --reason "not_planned"
+
+      - name: Allow authorized PRs
+        if: steps.check-actor.outputs.is_allowed == 'true'
+        run: |
+          echo "✅ Allowing PR #${{ github.event.pull_request.number }}"
+          echo "Reason: This PR was created by ${{ steps.check-actor.outputs.reason }}"
+          
+          # Add a comment to confirm it's allowed
+          if [[ "${{ steps.check-actor.outputs.reason }}" == "github_actions" ]]; then
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --body "## ✅ PR Allowed / PR 被允许
+
+          This PR has been automatically allowed because it was created by GitHub Actions.
+          此 PR 已被自动允许，因为它是由 GitHub Actions 创建的。
+
+          ### Why was this allowed? / 为什么被允许？
+          - This PR was created by a GitHub Actions workflow
+          - 此 PR 是由 GitHub Actions 工作流创建的
+          - Automated updates to `/cfg` directory are permitted
+          - 允许对 `/cfg` 目录进行自动化更新
+          - The changes are part of the automated configuration generation process
+          - 这些更改是自动化配置生成过程的一部分
+
+          ---
+          *This is an automated response from the repository protection system.*
+          *这是来自仓库保护系统的自动回复。*"
+          elif [[ "${{ steps.check-actor.outputs.reason }}" == "excluded_file" ]]; then
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --body "## ✅ PR Allowed / PR 被允许
+
+          This PR has been allowed because it only modifies `Custom_Clash_Full.ini`.
+          此 PR 已被允许，因为它只修改 `Custom_Clash_Full.ini`。
+
+          ### Why was this allowed? / 为什么被允许？
+          - `Custom_Clash_Full.ini` is excluded from protection rules
+          - `Custom_Clash_Full.ini` 被排除在保护规则之外
+          - This file can be modified by any user
+          - 任何用户都可以修改此文件
+          - Other `/cfg` directory files remain protected
+          - 其他 `/cfg` 目录文件仍然受到保护
+
+          ---
+          *This is an automated response from the repository protection system.*
+          *这是来自仓库保护系统的自动回复。*"
+          else
+            gh pr comment ${{ github.event.pull_request.number }} \
+              --body "## ✅ PR Allowed / PR 被允许
+
+          This PR has been allowed because it was created by the repository owner.
+          此 PR 已被允许，因为它是由仓库所有者创建的。
+
+          ### Why was this allowed? / 为什么被允许？
+          - This PR was created by the repository owner
+          - 此 PR 是由仓库所有者创建的
+          - Repository owners have full access to modify files in this directory
+          - 仓库所有者拥有修改此目录文件的完全访问权限
+          - Manual modifications by the owner are permitted
+          - 允许所有者进行手动修改
+
+          ---
+          *This is an automated response from the repository protection system.*
+          *这是来自仓库保护系统的自动回复。*"
+          fi
+
+      - name: Show PR Details
+        run: |
+          echo "PR Number: ${{ github.event.pull_request.number }}"
+          echo "PR Title: ${{ github.event.pull_request.title }}"
+          echo "PR Author: ${{ github.event.pull_request.user.login }}"
+          echo "PR URL: ${{ github.event.pull_request.html_url }}"
+          echo "Changed Files:"
+          gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path' 

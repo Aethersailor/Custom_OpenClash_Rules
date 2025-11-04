@@ -11,12 +11,14 @@
 
 大多数固件的软件源默认自带的 OpenClash 是 master 版本，在值守式更新后，会将 OpenClash 和内核还原为 master 版本  
 
-该脚本可以自动从 OpenClash 官方仓库拉取最新 dev 版本安装包并安装，并更新内核至 dev 版本，同时更新所有的数据库、大陆白名单以及订阅至最新版，然后启动 OpenClash。  
+该脚本可以自动从 OpenClash 官方仓库拉取最新 dev 版本安装包并安装，并更新内核至 dev 版本，同时更新所有的数据库、大陆白名单以及订阅至最新版，然后启动 OpenClash。
+
+**新增功能：** 如果检测到 Smart 内核已启用（`openclash.config.smart_enable = '1'`），脚本会自动下载最新的 Smart 内核模型文件（Model-large.bin）并保存为 `/etc/openclash/Model.bin`，支持 CDN 加速下载。  
 
 适合 dev 版本爱好者。  
 
 ```bash
-curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/install_openclash_dev_update.sh | sh
+wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/install_openclash_dev_update.sh | sh
 ```
 
 ***
@@ -28,7 +30,7 @@ curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rul
 运行脚本后，根据提示自行选择需要写入的去广告规则指令。  
 
 ```bash
-curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules.sh | sh
+wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules.sh | sh
 ```
 
 ***
@@ -38,7 +40,7 @@ curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rul
 **edit_custom_firewall_rules_anti-adn+github520.sh**  
 
 ```bash
-curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_anti-ad+github520.sh | sh
+wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_anti-ad+github520.sh | sh
 ```
 
 ***
@@ -48,7 +50,7 @@ curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rul
 **edit_custom_firewall_rules_adblockfilters+github520.sh**  
   
 ```bash
-curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters+github520.sh | sh
+wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters+github520.sh | sh
 ```
 
 ***
@@ -58,7 +60,7 @@ curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rul
 **edit_custom_firewall_rules_adblockfilters-modified+github520.sh**  
 
 ```bash
-curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters-modified+github520.sh | sh
+wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_adblockfilters-modified+github520.sh | sh
 ```
 
 ***
@@ -70,5 +72,5 @@ curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rul
 一键写入“开发者选项”中的 Github520 Hosts 拉取指令  
 
 ```bash
-curl -sSL -4 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_github520.sh | sh
+wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_github520.sh | sh
 ```
