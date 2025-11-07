@@ -195,6 +195,8 @@ DOMAIN-SUFFIX,ft07.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 个人博客 / add by Telegram user: Skyllar / Date: 2025-11-07 23:43:59
+DOMAIN-SUFFIX,cheriexsky.love
 # 搜索引擎 / add by Telegram user: EvedayOneCat / Date: 2025-11-07 20:47:01
 DOMAIN-SUFFIX,bing.com
 # 专业网站 / add by Telegram user: Aaa / Date: 2025-11-05 16:33:52
