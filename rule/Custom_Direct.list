@@ -195,6 +195,17 @@ DOMAIN-SUFFIX,ft07.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+
+
+
+
+
+# 2025.11.13 分类整理完毕
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
 # add by Telegram user: young / Date: 2025-11-12 18:25:51
 DOMAIN-SUFFIX,xxir.com
 # add by Telegram user: Aethersailor / Date: 2025-11-12 09:09:28
@@ -205,8 +216,6 @@ DOMAIN-SUFFIX,coffee-iot.com
 DOMAIN-SUFFIX,3dwhere.com
 # 个人博客 / add by Telegram user: Skyllar / Date: 2025-11-07 23:43:59
 DOMAIN-SUFFIX,cheriexsky.love
-# 搜索引擎 / add by Telegram user: EvedayOneCat / Date: 2025-11-07 20:47:01
-DOMAIN-SUFFIX,bing.com
 # 专业网站 / add by Telegram user: Aaa / Date: 2025-11-05 16:33:52
 DOMAIN-SUFFIX,kaijiejinrong.com
 # add by Telegram user: young / Date: 2025-11-03 23:58:00
@@ -219,17 +228,6 @@ DOMAIN-SUFFIX,dskj-ops.com
 DOMAIN-SUFFIX,jfjt.cc
 # add by Telegram user: 尼古拉斯 / Date: 2025-11-02 10:53:57
 DOMAIN-SUFFIX,atticus.vip
-
-
-
-
-# 2025.11.1 分类整理完毕
-
-# ---------------------------------------
-# 以下域名已提交 PR
-
-# PR 至 felixonmars/dnsmasq-china-list
-
 # add by Telegram user: Aethersailor / Date: 2025-10-19 12:38:07
 DOMAIN-SUFFIX,gootho.com
 # 小熊猫c＋＋ IDE / add by Telegram user: y / Date: 2025-10-31 22:16:45
