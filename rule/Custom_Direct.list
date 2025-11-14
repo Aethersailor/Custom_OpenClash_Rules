@@ -198,6 +198,8 @@ DOMAIN-SUFFIX,ft07.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# add by Telegram user: lu / Date: 2025-11-14 21:02:21
+DOMAIN-SUFFIX,nicezhuanye.com
 # 中国资讯门户 / add by Telegram user: Joe / Date: 2025-11-14 11:14:30
 DOMAIN-SUFFIX,chinatle.com
 # 阿里云服务 / add by Telegram user: 哆啦A梦 / Date: 2025-11-14 11:00:52
