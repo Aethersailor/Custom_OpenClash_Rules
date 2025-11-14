@@ -141,6 +141,9 @@ DOMAIN-SUFFIX,hsbc.com.hk
 # 中国银行香港，如果走代理，会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:33:44
 DOMAIN-SUFFIX,bochk.com
 
+# 其他
+# Server酱
+DOMAIN-SUFFIX,sct.ftqq.com
 # 机器人添加域名
 # 以下域名由用户通过机器人添加，无备案且 NS 不属于中国大陆，或解析结果不属于中国大陆
 
