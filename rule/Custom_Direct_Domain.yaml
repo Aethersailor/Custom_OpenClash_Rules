@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 339
+# TOTAL: 340
 
 payload:
   - '*m-team*'
@@ -342,4 +342,5 @@ payload:
   - '+.zjxhedu.com'
   - '+.znnu.com'
   - '+.znztv.com'
+  - '+.ztytech.com'
   - '+.zuobiao.press'
