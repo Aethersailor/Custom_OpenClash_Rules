@@ -198,6 +198,8 @@ DOMAIN-SUFFIX,ft07.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# bark默认服务器的域名 / add by Telegram user: Shu / Date: 2025-11-15 18:41:59
+DOMAIN-SUFFIX,day.app
 # 大象駕駛 / add by Telegram user: Joe / Date: 2025-11-15 15:05:31
 DOMAIN-SUFFIX,yixc.com
 # 表答 / add by Telegram user: Joe / Date: 2025-11-14 21:24:45
