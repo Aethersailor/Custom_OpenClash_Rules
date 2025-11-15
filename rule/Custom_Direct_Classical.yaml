@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 343
+# TOTAL: 344
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -342,6 +342,7 @@ payload:
   - DOMAIN-SUFFIX,zjxhedu.com
   - DOMAIN-SUFFIX,znnu.com
   - DOMAIN-SUFFIX,znztv.com
+  - DOMAIN-SUFFIX,ztytech.com
   - DOMAIN-SUFFIX,zuobiao.press
   - IP-CIDR,108.174.48.100/32,no-resolve
   - IP-CIDR,218.78.7.16/32,no-resolve
