@@ -198,6 +198,8 @@ DOMAIN-SUFFIX,ft07.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# easytier服务 / add by Telegram user: hvccff / Date: 2025-11-17 08:22:05
+DOMAIN-SUFFIX,easytier.top
 # add by Telegram user: Aethersailor / Date: 2025-11-16 18:39:46
 DOMAIN-SUFFIX,tulipsport.com
 # add by Telegram user: Aethersailor / Date: 2025-11-16 18:28:47
