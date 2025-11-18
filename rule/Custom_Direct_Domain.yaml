@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 344
+# TOTAL: 345
 
 payload:
   - '*m-team*'
@@ -109,6 +109,7 @@ payload:
   - '+.fssbcc.top'
   - '+.fsytss.com'
   - '+.ft07.com'
+  - '+.fuziche.com'
   - '+.fzvcolco.com'
   - '+.fzwqq.com'
   - '+.gaishitongshu.com'
