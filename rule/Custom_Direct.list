@@ -144,6 +144,7 @@ DOMAIN-SUFFIX,bochk.com
 # 其他
 # Server酱
 DOMAIN-SUFFIX,sct.ftqq.com
+
 # 机器人添加域名
 # 以下域名由用户通过机器人添加，无备案且 NS 不属于中国大陆，或解析结果不属于中国大陆
 
@@ -189,6 +190,10 @@ DOMAIN-SUFFIX,cheshire.top
 # Server酱³ · 极简推送服务 / add by Telegram user: 雪菜 / Date: 2025-10-20 18:34:08
 DOMAIN-SUFFIX,ft07.com
 
+# easytier服务 / add by Telegram user: hvccff / Date: 2025-11-17 08:22:05
+DOMAIN-SUFFIX,easytier.top
+# bark默认服务器的域名 / add by Telegram user: Shu / Date: 2025-11-15 18:41:59
+DOMAIN-SUFFIX,day.app
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -198,6 +203,15 @@ DOMAIN-SUFFIX,ft07.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+
+
+# 2025.11.21 分类整理完毕
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
+
 # 电费电量计算器 - 老工具 / add by Telegram user: 哆啦A梦 / Date: 2025-11-21 11:06:35
 DOMAIN-SUFFIX,laogongju.com
 # 电费计算器-在线工具 / add by Telegram user: 哆啦A梦 / Date: 2025-11-21 11:05:50
@@ -212,16 +226,12 @@ DOMAIN-SUFFIX,hdbz.net
 DOMAIN-SUFFIX,fuziche.com
 # 极客网站 / add by Telegram user: cook / Date: 2025-11-18 19:31:59
 DOMAIN-SUFFIX,ham.xin
-# easytier服务 / add by Telegram user: hvccff / Date: 2025-11-17 08:22:05
-DOMAIN-SUFFIX,easytier.top
 # add by Telegram user: Aethersailor / Date: 2025-11-16 18:39:46
 DOMAIN-SUFFIX,tulipsport.com
 # add by Telegram user: Aethersailor / Date: 2025-11-16 18:28:47
 DOMAIN-SUFFIX,3d-apollo.com
 # add by Telegram user: lu / Date: 2025-11-15 20:39:15
 DOMAIN-SUFFIX,ztytech.com
-# bark默认服务器的域名 / add by Telegram user: Shu / Date: 2025-11-15 18:41:59
-DOMAIN-SUFFIX,day.app
 # 大象駕駛 / add by Telegram user: Joe / Date: 2025-11-15 15:05:31
 DOMAIN-SUFFIX,yixc.com
 # 表答 / add by Telegram user: Joe / Date: 2025-11-14 21:24:45
@@ -234,17 +244,6 @@ DOMAIN-SUFFIX,chinatle.com
 DOMAIN-SUFFIX,opentrust.net
 # 长白山景区网站 / add by Telegram user: Coco / Date: 2025-11-13 17:55:27
 DOMAIN-SUFFIX,aichangbaishan.com
-
-
-
-
-
-# 2025.11.13 分类整理完毕
-
-# ---------------------------------------
-# 以下域名已提交 PR
-
-# PR 至 felixonmars/dnsmasq-china-list
 # add by Telegram user: young / Date: 2025-11-12 18:25:51
 DOMAIN-SUFFIX,xxir.com
 # add by Telegram user: Aethersailor / Date: 2025-11-12 09:09:28
