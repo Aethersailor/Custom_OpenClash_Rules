@@ -198,6 +198,8 @@ DOMAIN-SUFFIX,ft07.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 电费电量计算器 - 老工具 / add by Telegram user: 哆啦A梦 / Date: 2025-11-21 11:06:35
+DOMAIN-SUFFIX,laogongju.com
 # 电费计算器-在线工具 / add by Telegram user: 哆啦A梦 / Date: 2025-11-21 11:05:50
 DOMAIN-SUFFIX,itptg.com
 # add by Telegram user: Aethersailor / Date: 2025-11-19 13:19:54
