@@ -80,7 +80,7 @@ DOMAIN-SUFFIX,flingtrainer.com
 # 媒体类规则
 # Emby 小雅 相关
 DOMAIN-SUFFIX,ddsrem.com
-DOMAIN-SUFFIX,ipinfo.io
+#DOMAIN-SUFFIX,ipinfo.io
 DOMAIN-SUFFIX,ggbond.org
 DOMAIN-SUFFIX,nn.ci
 DOMAIN-SUFFIX,wwwh.eu.org
