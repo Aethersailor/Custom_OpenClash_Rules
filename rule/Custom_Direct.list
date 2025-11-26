@@ -203,6 +203,8 @@ DOMAIN-SUFFIX,day.app
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 金融数据 / add by Telegram user: ai / Date: 2025-11-26 14:33:09
+DOMAIN-SUFFIX,topwd.top
 # add by Telegram user: Waldo / Date: 2025-11-26 09:36:29
 DOMAIN-SUFFIX,zsytit.com
 # add by Telegram user: Aethersailor / Date: 2025-11-24 00:04:50
