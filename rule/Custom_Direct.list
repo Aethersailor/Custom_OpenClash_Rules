@@ -184,6 +184,10 @@ DOMAIN-SUFFIX,nhk.or.jp
 DOMAIN-SUFFIX,tozi-cn.top
 # girigirilove在线追番网站 / add by Telegram user: 真怪誕呀 / Date: 2025-08-23 17:26:28
 DOMAIN-SUFFIX,girigirilove.com
+# 金融数据 / add by Telegram user: ai / Date: 2025-11-26 14:33:09
+DOMAIN-SUFFIX,topwd.top
+# 视频 / add by Telegram user: siri / Date: 2025-11-23 13:05:05
+DOMAIN-SUFFIX,qmeng.top
 
 # 个人导航网站及游戏站点 / add by Telegram user: Char / Date: 2025-10-28 00:00:59
 DOMAIN-SUFFIX,cheshire.top
@@ -203,18 +207,8 @@ DOMAIN-SUFFIX,day.app
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# 金融数据 / add by Telegram user: ai / Date: 2025-11-26 14:33:09
-DOMAIN-SUFFIX,topwd.top
-# add by Telegram user: Waldo / Date: 2025-11-26 09:36:29
-DOMAIN-SUFFIX,zsytit.com
-# add by Telegram user: Aethersailor / Date: 2025-11-24 00:04:50
-DOMAIN-SUFFIX,jh96095.com
-# 视频 / add by Telegram user: siri / Date: 2025-11-23 13:05:05
-DOMAIN-SUFFIX,qmeng.top
-# 学习报名网站 / add by Telegram user: 阿 / Date: 2025-11-23 11:00:14
-DOMAIN-SUFFIX,hzqsn.com
-# 星愿浏览器官方网站 / add by Telegram user: ai / Date: 2025-11-22 00:07:50
-DOMAIN-SUFFIX,twinkstar.com
+
+
 
 
 # 2025.11.21 分类整理完毕
@@ -224,6 +218,14 @@ DOMAIN-SUFFIX,twinkstar.com
 
 # PR 至 felixonmars/dnsmasq-china-list
 
+# add by Telegram user: Waldo / Date: 2025-11-26 09:36:29
+DOMAIN-SUFFIX,zsytit.com
+# add by Telegram user: Aethersailor / Date: 2025-11-24 00:04:50
+DOMAIN-SUFFIX,jh96095.com
+# 学习报名网站 / add by Telegram user: 阿 / Date: 2025-11-23 11:00:14
+DOMAIN-SUFFIX,hzqsn.com
+# 星愿浏览器官方网站 / add by Telegram user: ai / Date: 2025-11-22 00:07:50
+DOMAIN-SUFFIX,twinkstar.com
 # 电费电量计算器 - 老工具 / add by Telegram user: 哆啦A梦 / Date: 2025-11-21 11:06:35
 DOMAIN-SUFFIX,laogongju.com
 # 电费计算器-在线工具 / add by Telegram user: 哆啦A梦 / Date: 2025-11-21 11:05:50
