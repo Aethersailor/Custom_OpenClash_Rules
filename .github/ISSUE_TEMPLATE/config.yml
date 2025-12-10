@@ -14,7 +14,3 @@ contact_links:
     url: hhttps://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82
     about: 请参考 Wiki 中的对应章节
     
-  - name: 本项目后端服务转换问题
-    url: https://github.com/asdlokj1qpi233/subconverter/issues
-    about: 本项目后端使用 asdlokj1qpi233/subconverter 进行部署，如果遇到转换出的节点信息错误的情况，请至 asdlokj1qpi233/subconverter 的仓库进行反馈
-    
