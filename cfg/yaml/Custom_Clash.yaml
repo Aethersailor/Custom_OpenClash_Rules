@@ -845,8 +845,10 @@ proxy-groups:
 rules:
 - "GEOSITE,private,🎯 全球直连"
 - "GEOIP,private,🎯 全球直连,no-resolve"
-- "RULE-SET,Custom_Direct,🎯 全球直连"
-- "RULE-SET,Custom_Proxy,🚀 手动选择"
+- "RULE-SET,Custom_Direct_Domain,🎯 全球直连"
+- "RULE-SET,Custom_Direct_IP,🎯 全球直连"
+- "RULE-SET,Custom_Proxy_Domain,🚀 手动选择"
+- "RULE-SET,Custom_Proxy_IP,🚀 手动选择"
 - "GEOSITE,google-cn,🎯 全球直连"
 - "GEOSITE,category-games@cn,🎯 全球直连"
 - "RULE-SET,Steam_CDN,🎯 全球直连"
@@ -898,20 +900,36 @@ rule-providers:
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Port_Direct.yaml"
     proxy: DIRECT
 
-  Custom_Direct:
+  Custom_Direct_Domain:
+    behavior: domain
+    interval: 10800
+    path: ./rule_provider/Custom_Direct_Classical.yaml
+    type: http
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.yaml"
+    proxy: DIRECT
+
+  Custom_Direct_IP:
     behavior: classical
     interval: 10800
     path: ./rule_provider/Custom_Direct_Classical.yaml
     type: http
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical.yaml"
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_IP.yaml"
     proxy: DIRECT
 
-  Custom_Proxy:
+  Custom_Proxy_Domain:
+    behavior: domain
+    interval: 10800
+    path: ./rule_provider/Custom_Proxy_Classical.yaml
+    type: http
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.yaml"
+    proxy: DIRECT
+
+  Custom_Proxy_IP:
     behavior: classical
     interval: 10800
     path: ./rule_provider/Custom_Proxy_Classical.yaml
     type: http
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical.yaml"
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical_IP.yaml"
     proxy: DIRECT
 
   Steam_CDN:
