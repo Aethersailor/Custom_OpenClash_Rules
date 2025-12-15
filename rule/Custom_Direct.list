@@ -138,6 +138,9 @@ DOMAIN-SUFFIX,manfuz.co
 # 金融类
 # 汇丰香港，走代理会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:35:06
 DOMAIN-SUFFIX,hsbc.com.hk
+# 汇丰银行
+DOMAIN-SUFFIX,liveperson.net
+DOMAIN-SUFFIX,we-stats.com
 # 中国银行香港，如果走代理，会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:33:44
 DOMAIN-SUFFIX,bochk.com
 
