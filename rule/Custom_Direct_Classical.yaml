@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 371
+# TOTAL: 373
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -214,6 +214,7 @@ payload:
   - DOMAIN-SUFFIX,leelen.com
   - DOMAIN-SUFFIX,letaoedu.com
   - DOMAIN-SUFFIX,liunn.com
+  - DOMAIN-SUFFIX,liveperson.net
   - DOMAIN-SUFFIX,longmenshuju.com
   - DOMAIN-SUFFIX,lsbj365.com
   - DOMAIN-SUFFIX,lyihub.com
@@ -327,6 +328,7 @@ payload:
   - DOMAIN-SUFFIX,vgogbuy.com
   - DOMAIN-SUFFIX,vv1865.com
   - DOMAIN-SUFFIX,warmheart.top
+  - DOMAIN-SUFFIX,we-stats.com
   - DOMAIN-SUFFIX,webs.vc
   - DOMAIN-SUFFIX,wenyi188.com
   - DOMAIN-SUFFIX,wewillpro.com
