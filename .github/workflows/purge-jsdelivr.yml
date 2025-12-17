@@ -12,42 +12,66 @@ on:
 
   workflow_dispatch:  # 支持手动触发
 
-# 添加并发控制，取消重复任务
-concurrency:
-  group: purge-jsdelivr-cache
-  cancel-in-progress: true
-
 jobs:
   purge-jsdelivr:
     runs-on: ubuntu-latest
-    # 添加静默设置，无论成功失败都不发送通知
     continue-on-error: true
-    # 禁用所有通知
     defaults:
       run:
         shell: bash
 
     steps:
-      - name: Wait for 1 minute before purging
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
+      - name: Soft Debounce (Wait & Check)
+        env:
+          CURRENT_SHA: ${{ github.sha }}
         run: |
-          echo "Waiting for 1 minute before purging cache..."
-          echo "This allows time for multiple changes to be batched together."
-          echo "If another purge task is triggered during this time, this one will be cancelled."
+          echo "Current Commit SHA: $CURRENT_SHA"
+          echo "Waiting for 60 seconds to batch multiple changes..."
           
+          # 倒计时
           for i in {60..1}; do
-            echo "Countdown: $i seconds remaining..."
-            sleep 1
+             # 仅每10秒打印一次日志防止刷屏
+             if (( i % 10 == 0 )); then
+               echo "$i seconds remaining..."
+             fi
+             sleep 1
           done
           
-          echo "Countdown finished. Proceeding with cache purge..."
-        # 添加取消处理，静默退出
-        if: ${{ !cancelled() }}
+          echo "Fetching latest remote info..."
+          git fetch origin main
+          LATEST_SHA=$(git rev-parse origin/main)
+          
+          echo "Latest Remote SHA: $LATEST_SHA"
+          
+          if [ "$CURRENT_SHA" != "$LATEST_SHA" ]; then
+            echo "⚠️ A newer commit ($LATEST_SHA) has been detected."
+            echo "✅ Skipping this run gracefully to avoid 'Cancelled' notification."
+            exit 0
+          else
+            echo "✅ This is still the latest commit. Proceeding with purge..."
+          fi
 
       - name: Purge jsDelivr Cache
-        if: ${{ !cancelled() }}
-        env:
-          REPO: Aethersailor/Custom_OpenClash_Rules
+        # 上一步如果 exit 0 了，这里依然会执行吗？
+        # exit 0 代表成功，所以这里需要再次判断，或者把 purge 逻辑放在同一个 step 里。
+        # 为了逻辑清晰，我们把 purge 整合到上面的脚本里，或者使用 outputs。
+        # 最简单的方法：把 purge 逻辑放到同一个 run block 或者使用 if condition based on step outcome.
+        # 但 shell exit 0 会结束 step 继续下一个。
+        # 我们可以利用一个文件标记。
         run: |
+          git fetch origin main
+          LATEST_SHA=$(git rev-parse origin/main)
+          if [ "${{ github.sha }}" != "$LATEST_SHA" ]; then
+            echo "Skipping purge step as newer commit exists."
+            exit 0
+          fi
+          
+          REPO="Aethersailor/Custom_OpenClash_Rules"
           echo "Purging jsDelivr cache for $REPO"
 
           for i in {1..3}; do
