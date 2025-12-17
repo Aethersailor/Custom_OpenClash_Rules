@@ -143,6 +143,8 @@ DOMAIN-SUFFIX,liveperson.net
 DOMAIN-SUFFIX,we-stats.com
 # 中国银行香港，如果走代理，会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:33:44
 DOMAIN-SUFFIX,bochk.com
+# 汇丰 / add by Telegram user: FengNinger / Date: 2025-12-14 10:04:00
+DOMAIN-SUFFIX,vv1865.com
 
 # 其他
 # Server酱
@@ -214,28 +216,39 @@ DOMAIN-SUFFIX,yyshub.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# 购物 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-16 20:26:12
-DOMAIN-SUFFIX,epark.cc
-# 购物 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-16 20:25:09
-DOMAIN-SUFFIX,shuinfo.com
-# 小说网站 / add by Telegram user: 楉笙 / Date: 2025-12-15 21:46:50
-DOMAIN-SUFFIX,aaawz.cc
-# 汇丰 / add by Telegram user: FengNinger / Date: 2025-12-14 10:04:00
-DOMAIN-SUFFIX,vv1865.com
-# 通信厂商官网 / add by Telegram user: Animi / Date: 2025-12-13 12:50:40
-DOMAIN-SUFFIX,mifon.com
-# 深圳第一健康机构网站 / add by Telegram user: Animi / Date: 2025-12-13 00:42:45
-DOMAIN-SUFFIX,thmnet.com
 
 
 
-# 2025.12.8 分类整理完毕
+
+# 2025.12.17 分类整理完毕
 
 # ---------------------------------------
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
 
+# 购物 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-16 20:26:12
+DOMAIN-SUFFIX,epark.cc
+# 购物 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-16 20:25:09
+DOMAIN-SUFFIX,shuinfo.com
+# 小说网站 / add by Telegram user: 楉笙 / Date: 2025-12-15 21:46:50
+DOMAIN-SUFFIX,aaawz.cc
+# 通信厂商官网 / add by Telegram user: Animi / Date: 2025-12-13 12:50:40
+DOMAIN-SUFFIX,mifon.com
+# 深圳第一健康机构网站 / add by Telegram user: Animi / Date: 2025-12-13 00:42:45
+DOMAIN-SUFFIX,thmnet.com
+
+
+# PR 至 v2fly/domain-list-community
+
+
+
+# ---------------------------------------
+# =======================================
+
+# 以下域名已被 GeoSite 上游项目收录，定期删除
+
+# 以下域名已被收录，计划于 2025.12.5 删除
 # add by Telegram user: Aethersailor / Date: 2025-12-08 14:59:40
 DOMAIN-SUFFIX,zhituwujie.com
 # 百度网盘解析 / add by Telegram user: x / Date: 2025-12-07 18:19:35
@@ -350,18 +363,6 @@ DOMAIN-SUFFIX,hzlawyer.net
 DOMAIN-SUFFIX,xinghaiwaimai.com
 # add by Telegram user: Aethersailor / Date: 2025-10-20 19:15:45
 DOMAIN-SUFFIX,86656.net
-
-
-# PR 至 v2fly/domain-list-community
-
-
-
-# ---------------------------------------
-# =======================================
-
-# 以下域名已被 GeoSite 上游项目收录，定期删除
-
-# 以下域名已被收录，计划于 2025.12.5 删除
 # 鸿蒙出境易
 DOMAIN-SUFFIX,chujingapp.com
 # add by Telegram user: Coco / Date: 2025-07-23 22:58:43
