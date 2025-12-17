@@ -91,7 +91,7 @@ else
 fi
 
 # 3. 安装依赖
-print_step "步骤 3/8: 检查并安装依赖"
+print_step "步骤 3/8: 检查并安装依赖 [${FIREWALL_TYPE:-Null}]"
 
 if [ -n "$FIREWALL_TYPE" ]; then
     if [ "$FIREWALL_TYPE" = "nftables" ]; then
@@ -100,7 +100,7 @@ if [ -n "$FIREWALL_TYPE" ]; then
         DEPENDENCIES="bash iptables dnsmasq-full curl ca-bundle ipset ip-full iptables-mod-tproxy iptables-mod-extra ruby ruby-yaml kmod-tun kmod-inet-diag unzip luci-compat luci luci-base"
     fi
 
-    echo -e "$INFO 正在安装 OpenClash 运行所需依赖..."
+    echo -e "$INFO 正在准备 ${G}$FIREWALL_TYPE${N} 环境运行 OpenClash 所需的依赖..."
     echo -e "$INFO 目标依赖列表: ${W}$DEPENDENCIES${N}"
     echo
 
