@@ -1,5 +1,9 @@
 name: Reject CFG Directory PRs
 
+permissions:
+  contents: read
+  pull-requests: write
+
 on:
   pull_request:
     types: [opened, synchronize, reopened]
