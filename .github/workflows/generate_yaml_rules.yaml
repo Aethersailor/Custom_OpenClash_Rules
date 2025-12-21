@@ -32,8 +32,7 @@ jobs:
           gunzip "mihomo-linux-amd64-${MIHOMO_VERSION}.gz"
           chmod +x "mihomo-linux-amd64-${MIHOMO_VERSION}"
           sudo mv "mihomo-linux-amd64-${MIHOMO_VERSION}" /usr/local/bin/mihomo
-          echo "mihomo installed successfully:"
-          mihomo version
+          echo "mihomo ${MIHOMO_VERSION} installed successfully"
 
       - name: Generate YAML from LIST files
         run: |
