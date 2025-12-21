@@ -2,7 +2,7 @@
 
 <p align="center">
 	<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=flat">
-	<img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Aethersailor/Custom_OpenClash_Rules?style=flat">
+	<img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/Aethersailor/Custom_OpenClash_Rules?style=flat">
 	<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/t/Aethersailor/Custom_OpenClash_Rules?style=flat">
 	<img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=online&down_message=offline&style=flat&label=backend">
 	<a href="https://t.me/custom_openclash_rules">
