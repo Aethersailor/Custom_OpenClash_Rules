@@ -24,6 +24,17 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Download mihomo
+        run: |
+          MIHOMO_VERSION="v1.19.18"
+          echo "Downloading mihomo ${MIHOMO_VERSION}..."
+          wget -q "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/mihomo-linux-amd64-${MIHOMO_VERSION}.gz"
+          gunzip "mihomo-linux-amd64-${MIHOMO_VERSION}.gz"
+          chmod +x "mihomo-linux-amd64-${MIHOMO_VERSION}"
+          sudo mv "mihomo-linux-amd64-${MIHOMO_VERSION}" /usr/local/bin/mihomo
+          echo "mihomo installed successfully:"
+          mihomo version
+
       - name: Generate YAML from LIST files
         run: |
           FILES=("Custom_Direct" "Custom_Proxy" "Steam_CDN")
@@ -71,6 +82,60 @@ jobs:
             generate_and_commit "$classical_yaml_file" "$classical_rules"
             generate_and_commit "$classical_ip_yaml_file" "$classical_ip_rules"
 
+          done
+
+      - name: Convert YAML to MRS
+        run: |
+          echo "Converting YAML files to MRS format..."
+          
+          # Convert Domain YAML files
+          for yaml_file in rule/*_Domain.yaml; do
+            mrs_file="${yaml_file%.yaml}.mrs"
+            echo "Converting $yaml_file to $mrs_file (domain behavior)"
+            mihomo convert-ruleset domain yaml "$yaml_file" "$mrs_file"
+            
+            if [ -f "$mrs_file" ]; then
+              echo "✓ Generated $mrs_file"
+              
+              # Commit each MRS file individually
+              if [[ -n $(git status --porcelain "$mrs_file") ]]; then
+                git add "$mrs_file"
+                git commit -m "Generate $(basename "$mrs_file") from $(basename "$yaml_file")"
+              else
+                echo "No changes in ${mrs_file}, skip commit."
+              fi
+            else
+              echo "✗ Failed to generate $mrs_file"
+              exit 1
+            fi
+          done
+          
+          # Convert IP YAML files (exclude Classical_IP)
+          for yaml_file in rule/*_IP.yaml; do
+            # Skip Classical_IP files
+            if [[ "$yaml_file" == *"_Classical_IP.yaml" ]]; then
+              echo "Skipping $yaml_file (Classical format not supported in MRS)"
+              continue
+            fi
+            
+            mrs_file="${yaml_file%.yaml}.mrs"
+            echo "Converting $yaml_file to $mrs_file (ipcidr behavior)"
+            mihomo convert-ruleset ipcidr yaml "$yaml_file" "$mrs_file"
+            
+            if [ -f "$mrs_file" ]; then
+              echo "✓ Generated $mrs_file"
+              
+              # Commit each MRS file individually
+              if [[ -n $(git status --porcelain "$mrs_file") ]]; then
+                git add "$mrs_file"
+                git commit -m "Generate $(basename "$mrs_file") from $(basename "$yaml_file")"
+              else
+                echo "No changes in ${mrs_file}, skip commit."
+              fi
+            else
+              echo "✗ Failed to generate $mrs_file"
+              exit 1
+            fi
           done
 
       - name: Push changes
