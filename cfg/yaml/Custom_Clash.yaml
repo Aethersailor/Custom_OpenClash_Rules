@@ -903,7 +903,7 @@ rule-providers:
   Custom_Direct_Domain:
     behavior: domain
     interval: 10800
-    path: ./rule_provider/Custom_Direct_Classical.yaml
+    path: ./rule_provider/Custom_Direct_Domain.yaml
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.yaml"
     proxy: DIRECT
@@ -911,7 +911,7 @@ rule-providers:
   Custom_Direct_IP:
     behavior: classical
     interval: 10800
-    path: ./rule_provider/Custom_Direct_Classical.yaml
+    path: ./rule_provider/Custom_Direct_Classical_IP.yaml
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_IP.yaml"
     proxy: DIRECT
@@ -919,7 +919,7 @@ rule-providers:
   Custom_Proxy_Domain:
     behavior: domain
     interval: 10800
-    path: ./rule_provider/Custom_Proxy_Classical.yaml
+    path: ./rule_provider/Custom_Proxy_Domain.yaml
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.yaml"
     proxy: DIRECT
@@ -927,7 +927,7 @@ rule-providers:
   Custom_Proxy_IP:
     behavior: classical
     interval: 10800
-    path: ./rule_provider/Custom_Proxy_Classical.yaml
+    path: ./rule_provider/Custom_Proxy_Classical_IP.yaml
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical_IP.yaml"
     proxy: DIRECT
