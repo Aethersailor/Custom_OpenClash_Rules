@@ -898,15 +898,15 @@ rule-providers:
     path: ./rule_provider/Custom_Port_Direct.yaml
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Port_Direct.yaml"
-    proxy: DIRECT
+    format: yaml
 
   Custom_Direct_Domain:
     behavior: domain
     interval: 10800
     path: ./rule_provider/Custom_Direct_Domain.yaml
     type: http
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.yaml"
-    proxy: DIRECT
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.mrs"
+    format: mrs
 
   Custom_Direct_IP:
     behavior: classical
@@ -914,15 +914,15 @@ rule-providers:
     path: ./rule_provider/Custom_Direct_Classical_IP.yaml
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_IP.yaml"
-    proxy: DIRECT
+    format: yaml
 
   Custom_Proxy_Domain:
     behavior: domain
     interval: 10800
     path: ./rule_provider/Custom_Proxy_Domain.yaml
     type: http
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.yaml"
-    proxy: DIRECT
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.mrs"
+    format: mrs
 
   Custom_Proxy_IP:
     behavior: classical
@@ -930,7 +930,7 @@ rule-providers:
     path: ./rule_provider/Custom_Proxy_Classical_IP.yaml
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical_IP.yaml"
-    proxy: DIRECT
+    format: yaml
 
   Steam_CDN:
     behavior: classical
@@ -938,6 +938,4 @@ rule-providers:
     path: ./rule_provider/Steam_CDN_Classical.yaml
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_Classical.yaml"
-    proxy: DIRECT
-    
-
+    format: yaml
