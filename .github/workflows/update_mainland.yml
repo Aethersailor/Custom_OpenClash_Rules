@@ -37,7 +37,7 @@ jobs:
 
         # 判断是否有变更，只有在有变更时才提交
         if ! git diff --cached --quiet; then
-          git commit -m "Update Custom_Clash_Mainland.ini based on Custom_Clash.ini"
+          git commit -m "chore: update Custom_Clash_Mainland.ini based on Custom_Clash.ini"
           git pull --rebase origin main
           git push origin main
         else
