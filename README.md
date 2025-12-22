@@ -272,9 +272,12 @@ Traffic、GB、Expire
 ### 🧩 内核
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
 
-### 🗂 模板
+### 🗂 订阅转换模板
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
+
+### ⚙️ 远程覆写配置
+- [Giveupmoon/OpenClash_Overwrite](https://github.com/Giveupmoon/OpenClash_Overwrite)
 
 ### 🛣 分流规则
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
