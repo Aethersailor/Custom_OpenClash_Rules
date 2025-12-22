@@ -10,3 +10,9 @@
 | Steam_CDN.list | Steam 国内下载 CDN 地址规则 |
 | Ozon.list | 国外电商网站 Ozon 规则 |
 | HBO.list | HBO 补充规则 |
+
+---
+
+## 归档文件夹
+
+`archived/` 文件夹包含已弃用的规则文件，保留用于历史参考。详情请查看 [archived/README.md](archived/README.md)。

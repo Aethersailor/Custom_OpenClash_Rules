@@ -32,3 +32,9 @@ Custom_Full_Clash.ini
 ```
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_Full.ini
 ```
+
+---
+
+## 归档文件夹
+
+`archived/` 文件夹包含已弃用的配置文件，保留用于历史参考。详情请查看 [archived/README.md](archived/README.md)。
