@@ -74,3 +74,9 @@ wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@
 ```bash
 wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/edit_custom_firewall_rules_github520.sh | sh
 ```
+
+---
+
+## 归档文件夹
+
+`archived/` 文件夹包含已弃用的脚本文件，保留用于历史参考。详情请查看 [archived/README.md](archived/README.md)。
