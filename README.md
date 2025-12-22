@@ -233,13 +233,10 @@ https://api.asailor.org/sub
 - 🔄 部分节点支持 FullCone 全锥形 NAT
 - 🎮 支持 UDP 转发和游戏加速
 - 🆓 支持试用
-- 💬 工单支持简体中文沟通且客服反应迅速
 
 注册链接：[SSRDOG 注册](https://st1.hosbb.com/#/register?code=FnSb4oWM)  (链接包含 aff 代码，感谢支持！介意 aff 可自行去除代码)
 ```
 优惠码：Custom_OpenClash_Rules
-使用范畴：轻度，标准，企业（月，季，半年，1年）
-使用须知：每帐号仅1次使用机会
 ```
 本项目订阅模板的节点地区分类即参考了该机场的节点地区进行分类。
 
