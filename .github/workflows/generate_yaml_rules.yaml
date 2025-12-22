@@ -127,7 +127,7 @@ jobs:
               # Commit each MRS file individually
               if [[ -n $(git status --porcelain "$mrs_file") ]]; then
                 git add "$mrs_file"
-                git commit -m "Generate $(basename "$mrs_file") from $(basename "$yaml_file")"
+                git commit -m "chore(rules): generate $(basename "$mrs_file") from $(basename "$yaml_file")"
               else
                 echo "No changes in ${mrs_file}, skip commit."
               fi
