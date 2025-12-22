@@ -258,7 +258,7 @@ Traffic、GB、Expire
 ## 🤝 贡献者
 
 <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Aethersailor/Custom_OpenClash_Rules" />
+  <img src="https://contrib.rocks/image?repo=Aethersailor/Custom_OpenClash_Rules&anon=1" />
 </a>
 
 ---
