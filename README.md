@@ -172,7 +172,7 @@
 
 ---
 
-### 🌐关于 IPv6
+### 🌐 关于 IPv6
 
 通过正确设置 OpenWrt 的 IPv6 功能以及 OpenClash，即可实现 OpenWrt 主路由下的 IPv6 和 OpenClash 的完美兼容。在实现 IPv6 国内外分流代理的同时，还能完美通过 IPv6-Test 的国内和国外镜像站点测试。
 
