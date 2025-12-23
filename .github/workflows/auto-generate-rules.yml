@@ -1,4 +1,4 @@
-name: Generate YAML Rules
+name: Auto generate rules
 
 on:
   push:
