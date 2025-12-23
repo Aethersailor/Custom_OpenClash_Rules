@@ -427,8 +427,8 @@ if [ "$CORE_TYPE" = "Smart" ]; then
       echo -e "$INFO 开始使用 GitHub 镜像加速站点下载 ${MODEL_VERSION} (文件较大，请耐心等待)..."
       echo
       
-      # 重试机制：最多尝试 3 次
-      MAX_RETRIES=3
+      # 重试机制：最多尝试 5 次
+      MAX_RETRIES=5
       RETRY_COUNT=0
       DOWNLOAD_SUCCESS=0
       
@@ -465,7 +465,7 @@ if [ "$CORE_TYPE" = "Smart" ]; then
       else
         echo -e "$ERR 下载失败（已重试 $MAX_RETRIES 次）。"
         [ -f "$TMP_MODEL" ] && rm -f "$TMP_MODEL"
-        exit 1
+        echo -e "$WARN Smart 内核将以基础模式运行（无 LGBM 模型）。"
       fi
     fi
   else
