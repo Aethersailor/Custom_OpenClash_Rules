@@ -31,13 +31,16 @@ wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@
 **示例输出：**
 ```text
 # ARM64 设备
-arm64
+linux-arm64
 
 # x86_64 支持 AVX2 的设备
-amd64-v3
+linux-amd64-v3
 
-# MIPS 设备
-mips64le
+# MIPS 硬浮点设备
+linux-mips-hardfloat
+
+# LoongArch ABI2 设备
+linux-loong64-abi2
 ```
 
 ---
