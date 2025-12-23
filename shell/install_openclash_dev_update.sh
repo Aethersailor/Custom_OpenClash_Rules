@@ -437,9 +437,9 @@ if [ "$CORE_TYPE" = "Smart" ]; then
         # -C - : 断点续传
         # --retry 3 : 连接失败时重试 3 次
         # --retry-delay 2 : 重试间隔 2 秒
+        # --progress-bar : 简洁的进度条模式（仅显示进度条和百分比）
         # --http2 : 启用 HTTP/2
-        # 默认输出模式会显示：下载速度、已下载大小、总大小、进度百分比、剩余时间
-        curl -C - -L --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 1200 --insecure --http2 -o "$TMP_MODEL" "$MODEL_URL"
+        curl -C - -L --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 1200 --insecure --http2 --progress-bar -o "$TMP_MODEL" "$MODEL_URL"
         
         if [ $? -eq 0 ] && [ -s "$TMP_MODEL" ]; then
           DOWNLOAD_SUCCESS=1
@@ -483,13 +483,13 @@ print_step "步骤 9/10: 更新数据库与规则资源"
 update_res() {
     NAME=$1
     SCRIPT=$2
-    echo -e "$INFO 正在更新 $NAME..."
+    echo -e "${INFO} 正在更新 ${NAME}..."
     $SCRIPT
     if [ $? -eq 0 ]; then
-        echo -e "$OK $NAME 更新完成。"
+        echo -e "${OK}   ${NAME} 更新完成。"
         echo
     else
-        echo -e "$ERR $NAME 更新失败。"
+        echo -e "${ERR} ${NAME} 更新失败。"
         exit 1
     fi
 }
@@ -500,13 +500,13 @@ update_res "GeoSite 数据库" "/usr/share/openclash/openclash_geosite.sh"
 update_res "GeoASN 数据库" "/usr/share/openclash/openclash_geoasn.sh"
 update_res "大陆 IP 白名单" "/usr/share/openclash/openclash_chnroute.sh"
 
-echo -e "$INFO 正在更新订阅..."
+echo -e "${INFO} 正在更新订阅..."
 /usr/share/openclash/openclash.sh
 if [ $? -ne 0 ]; then
-    echo -e "$ERR 订阅更新失败，请检查日志。"
+    echo -e "${ERR} 订阅更新失败，请检查日志。"
     exit 1
 fi
-echo -e "$OK 订阅更新完成。"
+echo -e "${OK}   订阅更新完成。"
 sleep 1
 
 # 10. 启动
