@@ -68,9 +68,10 @@ else
     echo -e "$INFO 请确保在支持的系统上运行此脚本。"
     exit 1
 fi
+sleep 1
 
 # 2. 检查防火墙架构
-print_step "步骤 2/8: 检查防火墙架构"
+print_step "步骤 2/10: 检查防火墙架构"
 FIREWALL_TYPE=""
 if command -v fw4 >/dev/null 2>&1; then
     echo -e "$OK 检测到防火墙：${G}fw4 (nftables)${N}"
@@ -89,9 +90,163 @@ else
        echo -e "$WARN 未检测到已知防火墙架构"
     fi
 fi
+sleep 1
 
-# 3. 安装依赖
-print_step "步骤 3/8: 检查并安装依赖 [${FIREWALL_TYPE:-Null}]"
+# 3. 检查 OpenClash 安装状态
+print_step "步骤 3/10: 检查 OpenClash 安装状态"
+if [ "$PKG_MGR" = "opkg" ]; then
+    # opkg list-installed 输出格式: luci-app-openclash - 0.47.036-1
+    OPENCLASH_VERSION=$(opkg list-installed luci-app-openclash 2>/dev/null | awk '{print $3}')
+elif [ "$PKG_MGR" = "apk" ]; then
+    # apk list -I 输出格式: luci-app-openclash-0.47.036 noarch {...} [installed]
+    OPENCLASH_VERSION=$(apk list -I 2>/dev/null | grep "^luci-app-openclash-" | sed -E 's/^luci-app-openclash-([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+fi
+
+if [ -n "$OPENCLASH_VERSION" ]; then
+    echo -e "$OK OpenClash 已安装，当前版本：${G}$OPENCLASH_VERSION${N}"
+else
+    echo -e "$INFO OpenClash 未安装，将在后续步骤中进行安装。"
+fi
+sleep 1
+
+# 4. 检查并配置 core_version
+print_step "步骤 4/10: 检查并配置 core_version"
+CORE_VERSION=$(uci get openclash.config.core_version 2>/dev/null)
+
+# 检查是否需要重新检测架构
+NEED_DETECT=0
+if [ -z "$CORE_VERSION" ]; then
+    echo -e "$INFO core_version 未配置，正在检测 CPU 架构..."
+    NEED_DETECT=1
+elif echo "$CORE_VERSION" | grep -qE '^linux-amd64'; then
+    echo -e "$INFO 检测到 x86 架构配置：${G}$CORE_VERSION${N}"
+    echo -e "$INFO 正在重新检测以确保使用最优微架构版本..."
+    NEED_DETECT=1
+else
+    echo -e "$OK core_version 已配置：${G}$CORE_VERSION${N}"
+fi
+
+if [ $NEED_DETECT -eq 1 ]; then
+    # 检测 MIPS 浮点类型
+    detect_mips_float() {
+        if grep -q "FPU.*yes" /proc/cpuinfo 2>/dev/null; then
+            echo "hardfloat"
+        else
+            echo "softfloat"
+        fi
+    }
+    
+    # 检测 LoongArch ABI 版本
+    detect_loongarch_abi() {
+        kernel_ver=$(uname -r | cut -d. -f1,2)
+        major=$(echo "$kernel_ver" | cut -d. -f1)
+        minor=$(echo "$kernel_ver" | cut -d. -f2)
+        
+        if [ "$major" -gt 5 ] || ([ "$major" -eq 5 ] && [ "$minor" -ge 19 ]); then
+            echo "abi2"
+        else
+            echo "abi1"
+        fi
+    }
+    
+    # 架构名称映射函数
+    map_arch() {
+        local arch="$1"
+        local result=""
+        
+        case "$arch" in
+            x86_64)
+                result="amd64"
+                ;;
+            i386|i686)
+                result="386"
+                ;;
+            aarch64|arm64)
+                result="arm64"
+                ;;
+            armv7l|armv7)
+                result="armv7"
+                ;;
+            armv6l|armv6)
+                result="armv6"
+                ;;
+            armv5tel|armv5)
+                result="armv5"
+                ;;
+            mips64)
+                result="mips64"
+                ;;
+            mips64el)
+                result="mips64le"
+                ;;
+            mips)
+                result="mips-$(detect_mips_float)"
+                ;;
+            mipsel)
+                result="mipsle-$(detect_mips_float)"
+                ;;
+            loongarch64)
+                result="loong64-$(detect_loongarch_abi)"
+                ;;
+            riscv64)
+                result="riscv64"
+                ;;
+            s390x)
+                result="s390x"
+                ;;
+            *)
+                result="$arch"
+                ;;
+        esac
+        
+        echo "linux-$result"
+    }
+    
+    # 判断 CPU 架构
+    arch=$(uname -m)
+    if [ "$arch" != "x86_64" ]; then
+        DETECTED_ARCH=$(map_arch "$arch")
+    else
+        # x86_64 架构，读取 CPU flags
+        flags=$(grep -m1 -o -E 'flags\s*:.*' /proc/cpuinfo | cut -d: -f2)
+        
+        # 判断 v4 (AVX512)
+        if echo "$flags" | grep -qE 'avx512f'; then
+            DETECTED_ARCH="linux-amd64-v4"
+        # 判断 v3 (AVX/AVX2 等)
+        elif echo "$flags" | grep -qE 'avx' && \
+             echo "$flags" | grep -qE 'avx2' && \
+             echo "$flags" | grep -qE 'bmi1' && \
+             echo "$flags" | grep -qE 'bmi2'; then
+            DETECTED_ARCH="linux-amd64-v3"
+        # 判断 v2 (SSE4.2 / SSE3 / POPCNT 等)
+        elif echo "$flags" | grep -qE 'sse4_2' && \
+             echo "$flags" | grep -qE 'sse4_1' && \
+             echo "$flags" | grep -qE 'ssse3' && \
+             echo "$flags" | grep -qE 'sse3' && \
+             echo "$flags" | grep -qE 'popcnt'; then
+            DETECTED_ARCH="linux-amd64-v2"
+        else
+            DETECTED_ARCH="linux-amd64-v1"
+        fi
+    fi
+    
+    echo -e "$OK 检测到 CPU 架构：${G}$DETECTED_ARCH${N}"
+    
+    # 如果检测结果与现有配置不同，则更新
+    if [ "$DETECTED_ARCH" != "$CORE_VERSION" ]; then
+        echo -e "$INFO 正在更新 core_version 配置..."
+        uci set openclash.config.core_version="$DETECTED_ARCH"
+        uci commit openclash
+        echo -e "$OK core_version 配置已更新：${Y}$CORE_VERSION${N} → ${G}$DETECTED_ARCH${N}"
+    else
+        echo -e "$OK 当前配置已是最优版本，无需更新。"
+    fi
+fi
+sleep 1
+
+# 5. 安装依赖
+print_step "步骤 5/10: 检查并安装依赖 [${FIREWALL_TYPE:-Null}]"
 
 if [ -n "$FIREWALL_TYPE" ]; then
     if [ "$FIREWALL_TYPE" = "nftables" ]; then
@@ -115,9 +270,10 @@ else
     echo -e "$WARN 由于未检测到已知防火墙架构，跳过依赖安装步骤。"
     echo -e "$INFO 请自行确保系统已安装 OpenClash 所需的依赖。"
 fi
+sleep 1
 
-# 4. 下载并安装 OpenClash
-print_step "步骤 4/8: 下载并安装 OpenClash Dev"
+# 6. 下载并安装 OpenClash
+print_step "步骤 6/10: 下载并安装 OpenClash Dev"
 echo -e "$INFO 正在获取版本信息..."
 JSON_OUTPUT=$(wget -qO- "$REPO_API_URL")
 FILE_NAME=$(echo "$JSON_OUTPUT" \
@@ -156,9 +312,10 @@ if [ $RET -ne 0 ]; then
 fi
 echo
 echo -e "$OK OpenClash Dev 安装成功！"
+sleep 1
 
-# 5. 加载个性化配置
-print_step "步骤 5/8: 加载个性化配置"
+# 7. 加载个性化配置
+print_step "步骤 7/10: 加载个性化配置"
 if [ -f /etc/config/openclash-set ]; then
   echo -e "$INFO 检测到预设文件 ${W}/etc/config/openclash-set${N}"
   echo -e "$INFO 正在执行..."
@@ -173,9 +330,10 @@ if [ -f /etc/config/openclash-set ]; then
 else
   echo -e "$INFO 未检测到预设文件，跳过。"
 fi
+sleep 1
 
-# 6. 配置 OpenClash
-print_step "步骤 6/8: 初始化配置与内核更新"
+# 8. 配置 OpenClash
+print_step "步骤 8/10: 初始化配置与内核更新"
 echo -e "$INFO 配置更新分支为 Dev，启用 jsdelivr 加速..."
 uci set openclash.config.release_branch=dev
 uci set openclash.config.skip_safe_path_check=1
@@ -199,59 +357,128 @@ if [ "$CORE_TYPE" = "Smart" ]; then
   echo -e "$INFO 检测到 Smart 内核模式，正在配置..."
   uci set openclash.config.auto_smart_switch='1'
   uci set openclash.config.lgbm_auto_update='1'
-  uci set openclash.config.lgbm_custom_url='https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin'
   uci commit openclash
-
-  echo
-  echo -e "$INFO 准备更新 Smart 模型 (Model-large.bin)..."
-  TMP_MODEL="/tmp/Model-large.bin"
-  TARGET_DIR="/etc/openclash"
-  TARGET_FILE="$TARGET_DIR/Model.bin"
-  MODEL_URL="https://gh-proxy.com/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model-large.bin"
-  DOMAIN="gh-proxy.com"
-
-  mkdir -p "$TARGET_DIR"
   
-  if ! command -v curl >/dev/null 2>&1; then
-      echo -e "$ERR 未找到 curl。"
-      exit 1
-  fi
-
-  echo -e "$INFO 使用阿里云 DoH 解析 ${W}$DOMAIN${N}..."
-  RESOLVED_IP=$(curl -s "https://223.5.5.5/resolve?name=$DOMAIN&type=A" | grep -oE '"data":"[0-9]{1,3}(\.[0-9]{1,3}){3}"' | cut -d'"' -f4 | head -n 1)
+  # 检查用户是否开启了 LGBM 模型
+  LGBM_ENABLED=$(uci get openclash.config.smart_enable_lgbm 2>/dev/null)
   
-  if [ -z "$RESOLVED_IP" ]; then
-      RESOLVED_IP=$(curl -s "https://223.6.6.6/resolve?name=$DOMAIN&type=A" | grep -oE '"data":"[0-9]{1,3}(\.[0-9]{1,3}){3}"' | cut -d'"' -f4 | head -n 1)
-  fi
-
-  CURL_ARGS="-L --fail --retry 3 --connect-timeout 30 --max-time 600 --insecure"
-  
-  if [ -n "$RESOLVED_IP" ]; then
-      echo -e "$OK DoH 解析成功: ${G}$RESOLVED_IP${N}"
-      CURL_ARGS="$CURL_ARGS --resolve $DOMAIN:443:$RESOLVED_IP"
+  if [ "$LGBM_ENABLED" = "1" ]; then
+    echo -e "$OK 检测到 LGBM 模型已开启，准备下载..."
+    echo
+    
+    # 检测剩余空间（单位：KB）
+    AVAILABLE_SPACE=$(df /etc/openclash 2>/dev/null | awk 'NR==2 {print $4}')
+    if [ -z "$AVAILABLE_SPACE" ]; then
+      AVAILABLE_SPACE=$(df / | awk 'NR==2 {print $4}')
+    fi
+    
+    # 转换为 MB
+    AVAILABLE_MB=$((AVAILABLE_SPACE / 1024))
+    echo -e "$INFO 检测到可用空间：${G}${AVAILABLE_MB} MB${N}"
+    
+    # 根据空间选择模型版本
+    if [ $AVAILABLE_MB -gt 31 ]; then
+      MODEL_VERSION="完整版 (Model-large.bin)"
+      MODEL_FILENAME="Model-large.bin"
+      MODEL_URL_SUFFIX="Model-large.bin"
+      echo -e "$OK 空间充足，将下载${G}完整版${N}模型 (~30MB)"
+    elif [ $AVAILABLE_MB -gt 14 ]; then
+      MODEL_VERSION="中等版 (Model-middle.bin)"
+      MODEL_FILENAME="Model-middle.bin"
+      MODEL_URL_SUFFIX="Model-middle.bin"
+      echo -e "$INFO 空间有限，将下载${Y}中等版${N}模型 (~13MB)"
+    elif [ $AVAILABLE_MB -gt 5 ]; then
+      MODEL_VERSION="轻量版 (Model.bin)"
+      MODEL_FILENAME="Model.bin"
+      MODEL_URL_SUFFIX="Model.bin"
+      echo -e "$WARN 空间紧张，将下载${Y}轻量版${N}模型 (~4MB)"
+    else
+      echo -e "$ERR 可用空间不足 5MB，无法下载任何版本的 LGBM 模型。"
+      echo -e "$INFO 正在自动关闭 LGBM 模型功能..."
+      uci set openclash.config.smart_enable_lgbm='0'
+      uci commit openclash
+      echo -e "$WARN LGBM 模型已关闭，Smart 内核将以基础模式运行。"
+      MODEL_VERSION=""
+    fi
+    
+    # 如果选择了模型，则下载
+    if [ -n "$MODEL_VERSION" ]; then
+      # 更新 UCI 配置
+      MODEL_CUSTOM_URL="https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/${MODEL_URL_SUFFIX}"
+      uci set openclash.config.lgbm_custom_url="$MODEL_CUSTOM_URL"
+      uci commit openclash
+      echo -e "$INFO 已更新模型 URL 配置：${W}${MODEL_URL_SUFFIX}${N}"
+      echo
+      
+      # 准备下载
+      TMP_MODEL="/tmp/${MODEL_FILENAME}"
+      TARGET_DIR="/etc/openclash"
+      TARGET_FILE="$TARGET_DIR/Model.bin"
+      MODEL_URL="https://gh-proxy.com/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/${MODEL_URL_SUFFIX}"
+      
+      mkdir -p "$TARGET_DIR"
+      
+      
+      if ! command -v curl >/dev/null 2>&1; then
+          echo -e "$ERR 未找到 curl。"
+          exit 1
+      fi
+      
+      echo -e "$INFO 开始下载 ${MODEL_VERSION} (文件较大，请耐心等待)..."
+      echo
+      
+      # 重试机制：最多尝试 3 次
+      MAX_RETRIES=3
+      RETRY_COUNT=0
+      DOWNLOAD_SUCCESS=0
+      
+      while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+        # 下载参数：
+        # -C - : 断点续传
+        # --retry 3 : 连接失败时重试 3 次
+        # --retry-delay 2 : 重试间隔 2 秒
+        # --http2 : 启用 HTTP/2
+        # 默认输出模式会显示：下载速度、已下载大小、总大小、进度百分比、剩余时间
+        curl -C - -L --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 1200 --insecure --http2 -o "$TMP_MODEL" "$MODEL_URL"
+        
+        if [ $? -eq 0 ] && [ -s "$TMP_MODEL" ]; then
+          DOWNLOAD_SUCCESS=1
+          break
+        else
+          RETRY_COUNT=$((RETRY_COUNT + 1))
+          if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+            echo
+            echo -e "$WARN 下载失败，正在重试 ($RETRY_COUNT/$MAX_RETRIES)..."
+            sleep 2
+            echo
+          fi
+        fi
+      done
+      
+      echo
+      
+      if [ $DOWNLOAD_SUCCESS -eq 1 ]; then
+        echo -e "$OK 下载成功。"
+        mv -f "$TMP_MODEL" "$TARGET_FILE"
+        chmod 644 "$TARGET_FILE"
+        echo -e "$OK Smart LGBM 模型 (${MODEL_VERSION}) 更新完成。"
+      else
+        echo -e "$ERR 下载失败（已重试 $MAX_RETRIES 次）。"
+        [ -f "$TMP_MODEL" ] && rm -f "$TMP_MODEL"
+        exit 1
+      fi
+    fi
   else
-      echo -e "$WARN DoH 解析失败，将使用系统 DNS..."
+    echo -e "$INFO LGBM 模型未开启，跳过模型下载。"
+    echo -e "$INFO Smart 内核将以基础模式运行。"
   fi
-
-  echo -e "$INFO 开始下载模型..."
-  curl $CURL_ARGS -o "$TMP_MODEL" "$MODEL_URL"
-  
-  if [ $? -eq 0 ] && [ -s "$TMP_MODEL" ]; then
-    echo -e "$OK 下载成功。"
-    mv -f "$TMP_MODEL" "$TARGET_FILE"
-    chmod 644 "$TARGET_FILE"
-  else
-    echo -e "$ERR 下载失败。"
-    [ -f "$TMP_MODEL" ] && rm -f "$TMP_MODEL"
-    exit 1
-  fi
-  echo -e "$OK Smart 模型更新完成。"
 else
   echo -e "$INFO Smart 内核未开启，跳过模型更新。"
 fi
+sleep 1
 
-# 7. 更新数据库与规则
-print_step "步骤 7/8: 更新数据库与规则资源"
+# 9. 更新数据库与规则
+print_step "步骤 9/10: 更新数据库与规则资源"
 
 update_res() {
     NAME=$1
@@ -280,14 +507,16 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 echo -e "$OK 订阅更新完成。"
+sleep 1
 
-# 8. 启动
-print_step "步骤 8/8: 启动服务"
+# 10. 启动
+print_step "步骤 10/10: 启动服务"
 echo -e "$INFO 设置开机自启并启动 OpenClash..."
 uci set openclash.config.enable='1'
 uci commit openclash
 /etc/init.d/openclash restart >/dev/null 2>&1
 echo -e "$OK OpenClash 启动指令已发送。"
+sleep 1
 
 echo
 print_line
