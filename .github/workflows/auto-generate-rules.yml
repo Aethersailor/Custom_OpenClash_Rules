@@ -6,6 +6,9 @@ on:
       - 'rule/*.list'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   generate-rules:
     runs-on: ubuntu-latest

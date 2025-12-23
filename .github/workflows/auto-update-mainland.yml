@@ -6,6 +6,9 @@ on:
       - cfg/Custom_Clash.ini
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update-mainland:
     runs-on: ubuntu-latest

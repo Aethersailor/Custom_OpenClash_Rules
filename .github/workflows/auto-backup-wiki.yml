@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: '*/30 * * * *'
 
+permissions:
+  contents: write
+
 jobs:
   backup-wiki-root:
     runs-on: ubuntu-latest
