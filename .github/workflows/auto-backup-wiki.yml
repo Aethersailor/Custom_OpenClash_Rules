@@ -1,4 +1,4 @@
-name: Backup Wiki
+name: Auto backup Wiki
 
 on:
   workflow_dispatch:
