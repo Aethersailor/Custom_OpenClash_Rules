@@ -9,11 +9,11 @@ C='\033[1;36m' # Cyan
 W='\033[1;37m' # White
 N='\033[0m'    # No Color
 
-# 定义符号
-INFO="${B}[INFO]${N}"
-WARN="${Y}[WARN]${N}"
+# 定义符号（统一宽度为7字符，确保输出对齐）
+INFO="${B}[INFO] ${N}"
+WARN="${Y}[WARN] ${N}"
 ERR="${R}[ERROR]${N}"
-OK="${G}[OK]${N}"
+OK="${G}[OK]   ${N}"
 
 # 打印分界线函数
 print_line() {
@@ -486,7 +486,7 @@ update_res() {
     echo -e "${INFO} 正在更新 ${NAME}..."
     $SCRIPT
     if [ $? -eq 0 ]; then
-        echo -e "${OK}   ${NAME} 更新完成。"
+        echo -e "${OK} ${NAME} 更新完成。"
         echo
     else
         echo -e "${ERR} ${NAME} 更新失败。"
@@ -506,7 +506,7 @@ if [ $? -ne 0 ]; then
     echo -e "${ERR} 订阅更新失败，请检查日志。"
     exit 1
 fi
-echo -e "${OK}   订阅更新完成。"
+echo -e "${OK} 订阅更新完成。"
 sleep 1
 
 # 10. 启动
