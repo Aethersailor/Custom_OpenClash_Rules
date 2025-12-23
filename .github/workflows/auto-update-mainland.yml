@@ -1,4 +1,4 @@
-name: Update Custom_Clash_Mainland.ini
+name: Auto update mainland config
 
 on:
   push:
