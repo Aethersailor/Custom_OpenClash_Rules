@@ -414,7 +414,7 @@ if [ "$CORE_TYPE" = "Smart" ]; then
       TMP_MODEL="/tmp/${MODEL_FILENAME}"
       TARGET_DIR="/etc/openclash"
       TARGET_FILE="$TARGET_DIR/Model.bin"
-      MODEL_URL="https://gh-proxy.com/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/${MODEL_URL_SUFFIX}"
+      MODEL_URL="https://github-proxy.asailor.org/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/${MODEL_URL_SUFFIX}"
       
       mkdir -p "$TARGET_DIR"
       
@@ -424,7 +424,7 @@ if [ "$CORE_TYPE" = "Smart" ]; then
           exit 1
       fi
       
-      echo -e "$INFO 开始下载 ${MODEL_VERSION} (文件较大，请耐心等待)..."
+      echo -e "$INFO 开始使用 GitHub 镜像加速站点下载 ${MODEL_VERSION} (文件较大，请耐心等待)..."
       echo
       
       # 重试机制：最多尝试 3 次
