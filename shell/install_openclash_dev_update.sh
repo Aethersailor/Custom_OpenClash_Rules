@@ -1,26 +1,39 @@
 #!/bin/sh
+# ================================================================
+# Custom_OpenClash_Rules 自动安装脚本
+# 项目地址: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# 功能: 自动安装/更新 OpenClash Dev 版本及全套配置
+# ================================================================
 
-# 定义颜色
-R='\033[1;31m' # Red
-G='\033[1;32m' # Green
-Y='\033[1;33m' # Yellow
-B='\033[1;34m' # Blue
-C='\033[1;36m' # Cyan
-W='\033[1;37m' # White
-N='\033[0m'    # No Color
+# ================================================================
+# 颜色定义
+# ================================================================
+R='\033[1;31m' # 红色
+G='\033[1;32m' # 绿色
+Y='\033[1;33m' # 黄色
+B='\033[1;34m' # 蓝色
+C='\033[1;36m' # 青色
+W='\033[1;37m' # 白色
+N='\033[0m'    # 重置
 
-# 定义符号（统一宽度为7字符，确保输出对齐）
-INFO="${B}[INFO] ${N}"
-WARN="${Y}[WARN] ${N}"
-ERR="${R}[ERROR]${N}"
-OK="${G}[OK]   ${N}"
+# ================================================================
+# 提示符号定义（使用 ASCII 符号，确保对齐）
+# ================================================================
+INFO="${B}[i]${N}"
+WARN="${Y}[!]${N}"
+ERR="${R}[✗]${N}"
+OK="${G}[✓]${N}"
 
-# 打印分界线函数
+# ================================================================
+# 工具函数定义
+# ================================================================
+
+# 函数: 打印分界线
 print_line() {
     echo -e "${C}================================================================${N}"
 }
 
-# 打印步骤标题函数
+# 函数: 打印步骤标题
 print_step() {
     echo
     print_line
@@ -28,7 +41,7 @@ print_step() {
     print_line
 }
 
-# 打印欢迎信息
+# 函数: 打印欢迎信息
 logo() {
     clear
     echo -e "${C}################################################################${N}"
@@ -42,7 +55,9 @@ logo() {
     sleep 1
 }
 
-# 定义变量
+# ================================================================
+# 全局变量定义
+# ================================================================
 REPO_API_URL="https://api.github.com/repos/vernesong/OpenClash/contents/dev?ref=package"
 RAW_FILE_PREFIX="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@refs/heads/package/dev"
 
@@ -52,7 +67,7 @@ echo -e "${INFO} 即将安装/升级插件至最新 dev 版本，并更新所有
 sleep 1
 
 # 1. 检查包管理器
-print_step "步骤 1/8: 检查系统包管理器"
+print_step "步骤 1/10: 检查系统包管理器"
 if command -v opkg >/dev/null 2>&1; then
     PKG_MGR="opkg"
     EXT="ipk"
@@ -109,8 +124,183 @@ else
 fi
 sleep 1
 
-# 4. 检查并配置 core_version
-print_step "步骤 4/10: 检查并配置 core_version"
+# 4. 安装依赖
+print_step "步骤 4/10: 检查并安装依赖 [${FIREWALL_TYPE:-Null}]"
+
+if [ -n "$FIREWALL_TYPE" ]; then
+    if [ "$FIREWALL_TYPE" = "nftables" ]; then
+        DEPENDENCIES="bash dnsmasq-full curl ca-bundle ip-full ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base"
+    else
+        DEPENDENCIES="bash iptables dnsmasq-full curl ca-bundle ipset ip-full iptables-mod-tproxy iptables-mod-extra ruby ruby-yaml kmod-tun kmod-inet-diag unzip luci-compat luci luci-base"
+    fi
+
+    echo -e "$INFO 正在准备 ${G}$FIREWALL_TYPE${N} 环境运行 OpenClash 所需的依赖..."
+    echo -e "$INFO 目标依赖列表: ${W}$DEPENDENCIES${N}"
+    echo
+
+    if [ "$PKG_MGR" = "opkg" ]; then
+        opkg install $DEPENDENCIES
+    elif [ "$PKG_MGR" = "apk" ]; then
+        apk add $DEPENDENCIES
+    fi
+    echo
+    echo -e "$OK 依赖安装检查完成。"
+else
+    echo -e "$WARN 由于未检测到已知防火墙架构，跳过依赖安装步骤。"
+    echo -e "$INFO 请自行确保系统已安装 OpenClash 所需的依赖。"
+fi
+sleep 1
+
+# ================================================================
+# 步骤 5: 获取 GitHub Hosts 信息
+# ================================================================
+# GitHub Hosts 相关变量
+GITHUB_HOSTS_URL="https://raw.hellogithub.com/hosts"
+GITHUB_HOSTS_CACHE="/tmp/github_hosts_cache.txt"
+API_GITHUB_IP=""
+GITHUB_COM_IP=""
+
+# 函数: 获取 GitHub Hosts 文件
+# 功能: 从 hellogithub.com 获取 GitHub 域名的 IP 映射以应对 DNS 污染
+get_github_hosts() {
+    echo -e "$INFO 正在获取 GitHub 域名解析信息以应对 DNS 污染..."
+    
+    # 使用 curl 下载 hosts 文件到缓存（依赖安装后 curl 已可用）
+    if curl -sL -m 10 -o "$GITHUB_HOSTS_CACHE" "$GITHUB_HOSTS_URL" 2>/dev/null && [ -s "$GITHUB_HOSTS_CACHE" ]; then
+        echo -e "$OK GitHub Hosts 信息获取成功。"
+        
+        # 解析 api.github.com 的 IP
+        API_GITHUB_IP=$(grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+[[:space:]]+api\.github\.com' "$GITHUB_HOSTS_CACHE" | awk '{print $1}' | head -n 1)
+        
+        # 解析 github.com 的 IP
+        GITHUB_COM_IP=$(grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+[[:space:]]+github\.com' "$GITHUB_HOSTS_CACHE" | awk '{print $1}' | head -n 1)
+        
+        if [ -n "$API_GITHUB_IP" ]; then
+            echo -e "$OK 解析到 api.github.com: ${G}${API_GITHUB_IP}${N}"
+        fi
+        
+        if [ -n "$GITHUB_COM_IP" ]; then
+            echo -e "$OK 解析到 github.com: ${G}${GITHUB_COM_IP}${N}"
+        fi
+        
+        return 0
+    else
+        echo -e "$WARN 无法获取 GitHub Hosts 信息，将使用默认 DNS 解析。"
+        return 1
+    fi
+}
+
+print_step "步骤 5/10: 获取 GitHub Hosts 信息"
+get_github_hosts
+sleep 1
+
+# ================================================================
+# 步骤 6: 下载并安装 OpenClash Dev
+# ================================================================
+print_step "步骤 6/10: 下载并安装 OpenClash Dev"
+
+echo -e "$INFO 正在获取版本信息..."
+
+JSON_OUTPUT=""
+
+# 如果解析到了 api.github.com 的 IP，优先使用 curl --resolve 强制域名解析
+if [ -n "$API_GITHUB_IP" ]; then
+    echo -e "$INFO 使用解析的 IP (${G}${API_GITHUB_IP}${N}) 访问 GitHub API..."
+    JSON_OUTPUT=$(curl -sL --connect-timeout 10 --resolve "api.github.com:443:${API_GITHUB_IP}" "$REPO_API_URL" 2>/dev/null)
+    
+    # 检查是否成功获取到数据
+    if [ -z "$JSON_OUTPUT" ] || ! echo "$JSON_OUTPUT" | grep -q "\"name\""; then
+        echo -e "$WARN IP 访问失败，尝试使用反代访问..."
+        PROXY_API_URL="https://github-proxy.asailor.org/${REPO_API_URL}"
+        JSON_OUTPUT=$(curl -sL --connect-timeout 10 "$PROXY_API_URL" 2>/dev/null)
+    fi
+else
+    # 没有获取到 IP，直接使用反代
+    echo -e "$INFO 使用反代访问 GitHub API..."
+    PROXY_API_URL="https://github-proxy.asailor.org/${REPO_API_URL}"
+    JSON_OUTPUT=$(curl -sL --connect-timeout 10 "$PROXY_API_URL" 2>/dev/null)
+fi
+FILE_NAME=$(echo "$JSON_OUTPUT" \
+    | grep -oE '"name":\s*"[^\"]+\.'"$EXT"'"' \
+    | sed -E 's/.*"([^\"]+)".*/\1/' \
+    | head -n 1)
+
+if [ -z "$FILE_NAME" ]; then
+    echo -e "$ERR 未在官方仓库找到 .$EXT 文件，请检查网络。"
+    exit 1
+fi
+
+echo -e "$INFO 发现最新版本：${G}$FILE_NAME${N}"
+JSDELIVR_URL="$RAW_FILE_PREFIX/$FILE_NAME"
+GITHUB_RAW_URL="https://raw.githubusercontent.com/vernesong/OpenClash/package/dev/$FILE_NAME"
+PROXY_URL="https://github-proxy.asailor.org/${GITHUB_RAW_URL}"
+TEMP_FILE="openclash.$EXT"
+echo
+
+DOWNLOAD_SUCCESS=0
+
+# 下载 OpenClash 安装包（优先级: jsDelivr CDN > GitHub IP > 反代）
+echo -e "$INFO 开始使用 jsDelivr CDN 下载..."
+
+curl -C - -sL --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 600 -o "$TEMP_FILE" "$JSDELIVR_URL"
+
+if [ $? -eq 0 ] && [ -s "$TEMP_FILE" ]; then
+  DOWNLOAD_SUCCESS=1
+else
+  echo -e "$WARN jsDelivr CDN 下载失败。"
+fi
+
+# 尝试使用 GitHub 原始地址（配合 IP）
+if [ $DOWNLOAD_SUCCESS -eq 0 ] && [ -n "$GITHUB_COM_IP" ]; then
+  echo -e "$INFO 尝试使用 GitHub 原始地址下载 (通过解析的 IP)..."
+  
+  curl -C - -sL --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 600 \
+    --resolve "raw.githubusercontent.com:443:${GITHUB_COM_IP}" \
+    -o "$TEMP_FILE" "$GITHUB_RAW_URL"
+  
+  if [ $? -eq 0 ] && [ -s "$TEMP_FILE" ]; then
+    DOWNLOAD_SUCCESS=1
+  else
+    echo -e "$WARN GitHub 原始地址下载失败。"
+  fi
+fi
+
+# 尝试使用反代
+if [ $DOWNLOAD_SUCCESS -eq 0 ]; then
+  echo -e "$INFO 尝试使用反代下载..."
+  
+  curl -C - -sL --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 600 -o "$TEMP_FILE" "$PROXY_URL"
+  
+  if [ $? -eq 0 ] && [ -s "$TEMP_FILE" ]; then
+    DOWNLOAD_SUCCESS=1
+  fi
+fi
+
+echo
+
+if [ $DOWNLOAD_SUCCESS -eq 0 ]; then
+    echo -e "$ERR 下载失败（jsDelivr CDN、GitHub 原始地址和反代均失败）。"
+    exit 1
+fi
+echo -e "$OK OpenClash 安装包下载成功。"
+
+echo -e "$INFO 正在安装..."
+$INSTALL_CMD "$TEMP_FILE"
+RET=$?
+rm -f "$TEMP_FILE"
+
+if [ $RET -ne 0 ]; then
+    echo -e "$ERR 安装失败，请检查系统环境。"
+    exit 1
+fi
+echo
+echo -e "$OK OpenClash Dev 安装成功！"
+sleep 1
+
+# ================================================================  
+# 步骤 7: 检查并配置 core_version
+# ================================================================
+print_step "步骤 7/10: 检查并配置 core_version"
 CORE_VERSION=$(uci get openclash.config.core_version 2>/dev/null)
 
 # 检查是否需要重新检测架构
@@ -245,94 +435,9 @@ if [ $NEED_DETECT -eq 1 ]; then
 fi
 sleep 1
 
-# 5. 安装依赖
-print_step "步骤 5/10: 检查并安装依赖 [${FIREWALL_TYPE:-Null}]"
-
-if [ -n "$FIREWALL_TYPE" ]; then
-    if [ "$FIREWALL_TYPE" = "nftables" ]; then
-        DEPENDENCIES="bash dnsmasq-full curl ca-bundle ip-full ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base"
-    else
-        DEPENDENCIES="bash iptables dnsmasq-full curl ca-bundle ipset ip-full iptables-mod-tproxy iptables-mod-extra ruby ruby-yaml kmod-tun kmod-inet-diag unzip luci-compat luci luci-base"
-    fi
-
-    echo -e "$INFO 正在准备 ${G}$FIREWALL_TYPE${N} 环境运行 OpenClash 所需的依赖..."
-    echo -e "$INFO 目标依赖列表: ${W}$DEPENDENCIES${N}"
-    echo
-
-    if [ "$PKG_MGR" = "opkg" ]; then
-        opkg install $DEPENDENCIES
-    elif [ "$PKG_MGR" = "apk" ]; then
-        apk add $DEPENDENCIES
-    fi
-    echo
-    echo -e "$OK 依赖安装检查完成。"
-else
-    echo -e "$WARN 由于未检测到已知防火墙架构，跳过依赖安装步骤。"
-    echo -e "$INFO 请自行确保系统已安装 OpenClash 所需的依赖。"
-fi
-sleep 1
-
-# 6. 下载并安装 OpenClash
-print_step "步骤 6/10: 下载并安装 OpenClash Dev"
-echo -e "$INFO 正在获取版本信息..."
-JSON_OUTPUT=$(wget -qO- "$REPO_API_URL")
-FILE_NAME=$(echo "$JSON_OUTPUT" \
-    | grep -oE '"name":\s*"[^\"]+\.'"$EXT"'"' \
-    | sed -E 's/.*"([^\"]+)".*/\1/' \
-    | head -n 1)
-
-if [ -z "$FILE_NAME" ]; then
-    echo -e "$ERR 未在官方仓库找到 .$EXT 文件，请检查网络。"
-    exit 1
-fi
-
-echo -e "$INFO 发现最新版本：${G}$FILE_NAME${N}"
-DOWNLOAD_URL="$RAW_FILE_PREFIX/$FILE_NAME"
-TEMP_FILE="openclash.$EXT"
-echo
-
-echo -e "$INFO 开始下载..."
-wget --show-progress --progress=bar:force:noscroll -O "$TEMP_FILE" "$DOWNLOAD_URL" 2>/dev/null || wget -O "$TEMP_FILE" "$DOWNLOAD_URL"
-
-if [ $? -ne 0 ]; then
-    echo -e "$ERR 下载失败。"
-    exit 1
-fi
-echo -e "$OK 下载完成。"
-echo
-
-echo -e "$INFO 正在安装..."
-$INSTALL_CMD "$TEMP_FILE"
-RET=$?
-rm -f "$TEMP_FILE"
-
-if [ $RET -ne 0 ]; then
-    echo -e "$ERR 安装失败，请检查系统环境。"
-    exit 1
-fi
-echo
-echo -e "$OK OpenClash Dev 安装成功！"
-sleep 1
-
-# 7. 加载个性化配置
-print_step "步骤 7/10: 加载个性化配置"
-if [ -f /etc/config/openclash-set ]; then
-  echo -e "$INFO 检测到预设文件 ${W}/etc/config/openclash-set${N}"
-  echo -e "$INFO 正在执行..."
-  echo
-  sh /etc/config/openclash-set
-  if [ $? -ne 0 ]; then
-    echo -e "$ERR 加载个性化配置出错。"
-    exit 1
-  fi
-  echo
-  echo -e "$OK 个性化配置加载完成。"
-else
-  echo -e "$INFO 未检测到预设文件，跳过。"
-fi
-sleep 1
-
-# 8. 配置 OpenClash
+# ================================================================
+# 步骤 8: 初始化配置与内核更新
+# ================================================================
 print_step "步骤 8/10: 初始化配置与内核更新"
 echo -e "$INFO 配置更新分支为 Dev，启用 jsdelivr 加速..."
 uci set openclash.config.release_branch=dev
@@ -340,7 +445,6 @@ uci set openclash.config.skip_safe_path_check=1
 uci set openclash.config.github_address_mod='https://testingcf.jsdelivr.net/'
 uci commit openclash
 echo -e "$OK 基础配置更新完成。"
-echo
 
 echo -e "$INFO 正在调用内部脚本更新内核..."
 /usr/share/openclash/openclash_core.sh
@@ -349,7 +453,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 echo -e "$OK 内核更新完成。"
-echo
 
 # Smart 内核逻辑
 CORE_TYPE=$(uci get openclash.config.core_type 2>/dev/null)
@@ -414,8 +517,6 @@ if [ "$CORE_TYPE" = "Smart" ]; then
       TMP_MODEL="/tmp/${MODEL_FILENAME}"
       TARGET_DIR="/etc/openclash"
       TARGET_FILE="$TARGET_DIR/Model.bin"
-      MODEL_URL="https://github-proxy.asailor.org/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/${MODEL_URL_SUFFIX}"
-      
       mkdir -p "$TARGET_DIR"
       
       
@@ -424,48 +525,71 @@ if [ "$CORE_TYPE" = "Smart" ]; then
           exit 1
       fi
       
-      echo -e "$INFO 开始使用 GitHub 镜像加速站点下载 ${MODEL_VERSION} (文件较大，请耐心等待)..."
-      echo
-      
-      # 重试机制：最多尝试 5 次
-      MAX_RETRIES=5
-      RETRY_COUNT=0
       DOWNLOAD_SUCCESS=0
+      DIRECT_URL="https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/${MODEL_URL_SUFFIX}"
+      MIRROR_URL="https://github-proxy.asailor.org/https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/${MODEL_URL_SUFFIX}"
       
-      while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-        # 下载参数：
+      # Smart 模型下载（优先级: 反代镜像站 > GitHub IP）
+      echo -e "$INFO 开始使用反代镜像站下载 ${MODEL_VERSION} (文件较大，请耐心等待)..."
+      
+      # 重试机制: 最多 3 次
+      MAX_MIRROR_RETRIES=3
+      RETRY_COUNT=0
+      
+      while [ $RETRY_COUNT -lt $MAX_MIRROR_RETRIES ]; do
+        # curl 下载参数
         # -C - : 断点续传
         # --retry 3 : 连接失败时重试 3 次
         # --retry-delay 2 : 重试间隔 2 秒
         # --progress-bar : 简洁的进度条模式（仅显示进度条和百分比）
         # --http2 : 启用 HTTP/2
-        curl -C - -L --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 1200 --insecure --http2 --progress-bar -o "$TMP_MODEL" "$MODEL_URL"
+        curl -C - -sL --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 1200 --insecure --http2 -o "$TMP_MODEL" "$MIRROR_URL"
         
         if [ $? -eq 0 ] && [ -s "$TMP_MODEL" ]; then
           DOWNLOAD_SUCCESS=1
           break
         else
           RETRY_COUNT=$((RETRY_COUNT + 1))
-          if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+          if [ $RETRY_COUNT -lt $MAX_MIRROR_RETRIES ]; then
             echo
-            echo -e "$WARN 下载失败，正在重试 ($RETRY_COUNT/$MAX_RETRIES)..."
+            echo -e "$WARN 镜像站下载失败，正在重试 ($RETRY_COUNT/$MAX_MIRROR_RETRIES)..."
             sleep 2
             echo
           fi
         fi
       done
       
-      echo
+      if [ $DOWNLOAD_SUCCESS -eq 1 ]; then
+        echo
+      else
+        echo -e "$WARN 反代镜像站下载失败。"
+      fi
+      
+      # 尝试使用 GitHub 直链（配合 IP）
+      if [ $DOWNLOAD_SUCCESS -eq 0 ] && [ -n "$GITHUB_COM_IP" ]; then
+        echo -e "$INFO 尝试使用 GitHub 直链下载 (通过解析的 IP)..."
+        
+        # 使用 curl 的 --resolve 参数强制使用解析到的 IP
+        curl -C - -sL --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 1200 --insecure --http2 \
+          --resolve "github.com:443:${GITHUB_COM_IP}" \
+          -o "$TMP_MODEL" "$DIRECT_URL"
+        
+        if [ $? -eq 0 ] && [ -s "$TMP_MODEL" ]; then
+          DOWNLOAD_SUCCESS=1
+        fi
+      fi
+
       
       if [ $DOWNLOAD_SUCCESS -eq 1 ]; then
-        echo -e "$OK 下载成功。"
+        echo -e "$OK Smart LGBM 模型下载成功。"
         mv -f "$TMP_MODEL" "$TARGET_FILE"
         chmod 644 "$TARGET_FILE"
         echo -e "$OK Smart LGBM 模型 (${MODEL_VERSION}) 更新完成。"
       else
-        echo -e "$ERR 下载失败（已重试 $MAX_RETRIES 次）。"
+        echo -e "$ERR 下载失败（GitHub 直链和镜像站均失败）。"
         [ -f "$TMP_MODEL" ] && rm -f "$TMP_MODEL"
-        echo -e "$WARN Smart 内核将以基础模式运行（无 LGBM 模型）。"
+        echo -e "$ERR Smart 内核需要 LGBM 模型才能正常工作，脚本将退出。"
+        exit 1
       fi
     fi
   else
@@ -477,8 +601,10 @@ else
 fi
 sleep 1
 
-# 9. 更新数据库与规则
-print_step "步骤 9/10: 更新数据库与规则资源"
+# ================================================================
+# 步骤 9: 更新数据库与订阅
+# ================================================================
+print_step "步骤 9/10: 更新数据库与订阅"
 
 update_res() {
     NAME=$1
@@ -501,15 +627,37 @@ update_res "GeoASN 数据库" "/usr/share/openclash/openclash_geoasn.sh"
 update_res "大陆 IP 白名单" "/usr/share/openclash/openclash_chnroute.sh"
 
 echo -e "${INFO} 正在更新订阅..."
-/usr/share/openclash/openclash.sh
-if [ $? -ne 0 ]; then
+
+# 捕获脚本输出，成功时不显示，失败时显示
+SUBSCRIPTION_OUTPUT=$(/usr/share/openclash/openclash.sh 2>&1)
+SUBSCRIPTION_STATUS=$?
+
+if [ $SUBSCRIPTION_STATUS -ne 0 ]; then
+    echo "$SUBSCRIPTION_OUTPUT"
     echo -e "${ERR} 订阅更新失败，请检查日志。"
     exit 1
 fi
 echo -e "${OK} 订阅更新完成。"
+
+# 加载个性化配置（如果存在）
+if [ -f /etc/config/openclash-set ]; then
+  echo
+  echo -e "$INFO 检测到预设文件 ${W}/etc/config/openclash-set${N}"
+  echo -e "$INFO 正在执行..."
+  echo
+  sh /etc/config/openclash-set
+  if [ $? -ne 0 ]; then
+    echo -e "$ERR 加载个性化配置出错。"
+    exit 1
+  fi
+  echo
+  echo -e "$OK 个性化配置加载完成。"
+fi
 sleep 1
 
-# 10. 启动
+# ================================================================
+# 步骤 10: 启动服务
+# ================================================================
 print_step "步骤 10/10: 启动服务"
 echo -e "$INFO 设置开机自启并启动 OpenClash..."
 uci set openclash.config.enable='1'
