@@ -664,6 +664,49 @@ uci set openclash.config.enable='1'
 uci commit openclash
 /etc/init.d/openclash restart >/dev/null 2>&1
 echo -e "$OK OpenClash 启动指令已发送。"
+
+# 等待并检查启动状态
+echo -e "$INFO 正在等待 OpenClash 启动..."
+MAX_WAIT=60  # 最多等待60秒
+WAIT_COUNT=0
+START_FAILED=0
+
+while [ $WAIT_COUNT -lt $MAX_WAIT ]; do
+  sleep 2
+  WAIT_COUNT=$((WAIT_COUNT + 2))
+  
+  # 获取服务状态
+  STATUS_OUTPUT=$(/etc/init.d/openclash status 2>/dev/null)
+  
+  # 检查是否已成功启动
+  if echo "$STATUS_OUTPUT" | grep -q "running"; then
+    echo
+    echo -e "$OK OpenClash 启动成功！"
+    break
+  fi
+  
+  # 检查是否为明确的失败状态
+  if echo "$STATUS_OUTPUT" | grep -qE "(inactive|dead|failed|stopped)"; then
+    echo
+    echo -e "$ERR 检测到 OpenClash 启动失败（状态: inactive/stopped）。"
+    echo -e "$INFO 请到 LuCI 界面查看插件日志和内核日志以排查问题。"
+    START_FAILED=1
+    break
+  fi
+  
+  # 每10秒显示一次进度
+  if [ $((WAIT_COUNT % 10)) -eq 0 ]; then
+    echo -e "$INFO 已等待 ${WAIT_COUNT}/${MAX_WAIT} 秒..."
+  fi
+done
+
+# 启动超时判断
+if [ $START_FAILED -eq 0 ] && [ $WAIT_COUNT -ge $MAX_WAIT ]; then
+  echo
+  echo -e "$WARN OpenClash 启动超时（60秒）。"
+  echo -e "$INFO 请到 LuCI 界面查看插件日志和内核日志。"
+  echo -e "$INFO 或手动重启 OpenClash 服务。"
+fi
 sleep 1
 
 echo
