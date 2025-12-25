@@ -1,0 +1,23 @@
+name: Sync with Upstream
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天凌晨 0 点运行（可调整频率，如每小时 '0 * * * *'）
+  workflow_dispatch:  # 支持手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync upstream changes
+        uses: aormsby/fork-sync-with-upstream-action@v3.4
+        with:
+          target_sync_branch: main  # 你的 fork 主分支（通常是 main 或 master）
+          upstream_sync_branch: main  # 上游仓库主分支
+          upstream_sync_repo: 原仓库拥有者/仓库名  # 示例: originalowner/originalrepo
+          # 如果上游仓库是私有的，需要额外设置 token（见 Action 文档）
