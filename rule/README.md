@@ -25,11 +25,12 @@
 
 | 后缀 / 扩展名 | 格式类型 | 适用场景 |
 | :--- | :--- | :--- |
-| **`.list`** | 原始文本列表 | 适用于 OpenClash `策略组` 引用或作为基础源文件。 |
-| **`_Classical.yaml`** | Classical Provider | 适用于 Clash Premium / Mihomo 的 `rule-providers`。 |
-| **`_Domain.yaml`** | 仅域名规则 | 仅包含 `DOMAIN` 类规则，用于特定分流需求。 |
-| **`_IP.yaml`** | 仅 IP 规则 | 仅包含 `IP-CIDR` 类规则，用于特定分流需求。 |
-| **`.mrs`** | Mihomo 二进制 | 专为 Mihomo (Meta) 内核设计的编译格式，加载速度极快。 |
+| **`.list`** | 原始文本列表 | 适用于 `Subconverter` 引用。 |
+| **`_Classical.yaml`** | Classical | 域名/IP 混合规则，适用于 `rule-providers`。 |
+| **`_Classical_IP.yaml`** | Classical (Pure IP) | Classical 类型纯 IP 规则，适用于 `rule-providers`。 |
+| **`_Domain.yaml`** | Domain | Domain 类型纯域名规则。 |
+| **`_IP.yaml`** | IP-CIDR | IP-CIDR 类型纯 IP 规则。 |
+| **`.mrs`** | Mihomo Binary | 二进制格式纯域名规则，Mihomo (Meta) 专用。 |
 
 ---
 
