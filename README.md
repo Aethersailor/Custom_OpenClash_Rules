@@ -1,6 +1,6 @@
 <h1 align="center">
   🚀 OpenClash 保姆级设置方案<br>
-  ⠀⠀&<br>
+  &<br>
   🛡️ 全分组防泄漏订阅转换规则
 </h1>
 
@@ -16,7 +16,7 @@
   <img src="https://img.shields.io/badge/dynamic/json?style=flat&label=group&logo=telegram&query=$.data.totalSubs&url=https%3A%2F%2Fapi.spencerwoo.com%2Fsubstats%2F%3Fsource%3Dtelegram%26queryKey%3Dcustom_openclash_rules_group" alt="Telegram">
  </a>
 </p>
-<p align="center"><b>✨ 让你更优雅的使用 OpenClash ✨</b></p>
+<p align="center"><b>✨ 让你更优雅地使用 OpenClash ✨</b></p>
 
 ---
 
@@ -72,7 +72,7 @@
 > **声明事项：**
 >
 > - 本项目编写于 2024 年 4 月，为非盈利项目。转载本项目内容请注明本项目的仓库地址，感谢合作！
-> - **本项目仅为维护者个人经验的一个总结性示例，不具备权威性，并非 OpenClash 的唯一使用方式。**
+> - **本项目仅为维护者个人经验的总结性示例，不具权威性，并非 OpenClash 的唯一使用方式。**
 > - **本项目没有任何 YouTube 频道，也未在 YouTube 上传任何"教学视频"。**
 > - **本项目没有"借鉴"任何其他的教程或视频，如果你使用他人提供的教程或模板出现问题，请勿在本项目的 issue 或 TG 群组中提问，感谢配合。**
 > - **本项目有部分内容适合新手小白，但不代表维护者对小白有任何帮助义务。**
@@ -97,7 +97,7 @@
 
 本项目的订阅转换模板是参考 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master) 等规则的订阅模板进行了魔改和完善而来，分流数据基于 GeoSite。
 
-**按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，配合本项目的订阅转换模板对 OpenClash 进行配置，即可实现以下特性，更优雅的使用你的 OpenClash：**
+**按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，配合本项目的订阅转换模板对 OpenClash 进行配置，即可实现以下特性，更优雅地使用你的 OpenClash：**
 
 - 🚀 **优化的 DNS 设置，闪电般的国内访问速度**
   > 国内域名采用运营商 DNS 解析，域名和 IP 均绕过 OpenClash 内核并返回真实 IP，让 OpenClash 对国内访问的影响降低到几乎为零。
@@ -255,7 +255,7 @@ https://api.asailor.org/sub
 
 > "SSRDOG（SG）是一個追求可靠、安全、高效、且高性價比的互聯網接入方案國際研發團隊，為您提供最安全的網絡加速服務！"
 
-项目维护者长期使用的一家机场，价格和流量都比较适中，搭配本项目的设置方案以及订阅模板使用，体验保证拉满。
+项目维护者长期使用的一家机场，价格和流量都比较适中，搭配本项目的设置方案及订阅模板使用，体验保证拉满。
 
 **机场特性：**
 
