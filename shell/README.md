@@ -7,7 +7,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Shell-Bash-4EAA25?style=flat&logo=gnu-bash&logoColor=white" alt="Bash">
   <img src="https://img.shields.io/badge/System-OpenWrt-0055AA?style=flat&logo=openwrt&logoColor=white" alt="OpenWrt">
-  <img src="https://img.shields.io/badge/License-GPLv3-red?style=flat&logo=gnu&logoColor=white" alt="License">
+  <img src="https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey?style=flat&logo=creativecommons&logoColor=white" alt="License">
 </p>
 
 ---
