@@ -32,8 +32,10 @@ jobs:
         run: |
           echo "LINK_MAP_START" > link_map.txt
 
-          grep -E '^[0-9]+\.\s*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
-            num=$(echo "$line" | sed -E 's/^([0-9]+)\..*/\1/')
+          count=0
+          grep -E '^\s*###\s*.*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
+            count=$((count+1))
+            num=$count
             raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
             filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
 
@@ -71,8 +73,10 @@ jobs:
 
       - name: Parse Home.md and copy listed files with replacements
         run: |
-          grep -E '^[0-9]+\.\s*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
-            num=$(echo "$line" | sed -E 's/^([0-9]+)\..*/\1/')
+          count=0
+          grep -E '^\s*###\s*.*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
+            count=$((count+1))
+            num=$count
             raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
             filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
 
