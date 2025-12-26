@@ -1,0 +1,53 @@
+name: Auto Update Game CDN Rules
+
+on:
+  schedule:
+    # 每周日 UTC 00:00 运行（北京时间周日 08:00）
+    - cron: '0 0 * * 0'
+  workflow_dispatch:  # 支持手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  update-game-cdn:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Generate Game_Download_CDN.list
+        run: |
+          echo "::group::Running generation script"
+          python py/generate_game_cdn.py
+          echo "::endgroup::"
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet rule/Game_Download_CDN.list; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected in Game_Download_CDN.list"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in Game_Download_CDN.list"
+          fi
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add rule/Game_Download_CDN.list
+          git commit -m "chore(rule): auto-update Game_Download_CDN.list from upstream"
+          git push
+      
+      - name: No changes
+        if: steps.check_changes.outputs.changed == 'false'
+        run: echo "✓ Game_Download_CDN.list is already up to date"
