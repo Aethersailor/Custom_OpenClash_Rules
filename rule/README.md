@@ -24,7 +24,7 @@
 
 | 后缀 / 扩展名 | 格式类型 | 适用场景 |
 | :--- | :--- | :--- |
-| **`.list`** | 原始文本列表 | 适用于 `Subconverter` 引用。 |
+| **`.list`** | 原始规则列表 | 适用于 `Subconverter` 引用。 |
 | **`_Classical.yaml`** | Classical | 域名/IP 混合规则，适用于 `rule-providers`。 |
 | **`_Classical_IP.yaml`** | Classical (Pure IP) | Classical 类型纯 IP 规则，适用于 `rule-providers`。 |
 | **`_Domain.yaml`** | Domain | Domain 类型纯域名规则，适用于 `rule-providers`。 |
@@ -34,9 +34,9 @@
 > [!TIP]
 > **关于性能的补充说明**
 >
-> 1. **规则遍历性能 (Matching Performance)**: `Domain` / `IP-CIDR` > `Classical`
+> 1. **规则遍历性能**: `Domain` / `IP-CIDR` > `Classical`
 >     * 内核对纯类型的 `Domain` (域名树) 和 `IP-CIDR` (Radix 树) 做了深度优化，查询效率远高于混合型的 `Classical`。
-> 2. **加载速度 (Loading Speed)**: `.mrs` > `.yaml` / `.list`
+> 2. **加载速度**: `.mrs` > `.yaml` / `.list`
 >     * `.mrs` 和 `.yaml` 的区别主要在于**启动/重载速度**。二进制格式 (.mrs) 省去了文本解析开销，能极大缩短加载时间。
 >     * **注意**: 文件格式**不影响**规则遍历性能。一旦规则加载进内存，性能只取决于规则类型（第 1 点）。
 
