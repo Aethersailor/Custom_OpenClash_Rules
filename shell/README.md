@@ -18,7 +18,7 @@
 | :--- | :--- | :--- |
 | [**check_cpu_version.sh**](#-check_cpu_versionsh) | 🔍 CPU 架构与指令集深度检测 | `Multi-Arch` |
 | [**install_openclash_dev.sh**](#-install_openclash_devsh) | 📦 OpenClash Dev 极速基础安装 | `OpenWrt` |
-| [**install_openclash_dev_update.sh**](#-install_openclash_dev_updatesh) | 🚀 全自动化智能安装/更新/修复 | `OpenWrt` |
+| [**install_openclash_dev_update.sh**](#-install_openclash_dev_updatesh) | 🚀 全自动化安装/更新/修复 | `OpenWrt` |
 
 ---
 
@@ -106,8 +106,8 @@ wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@
 
 **核心特性：**
 
-- ✅ **🛡️ 防火墙自适应依赖**：智能识别系统防火墙类型（`nftables` / `iptables`），精准安装所需的特定依赖包（如 `kmod-nft-tproxy` vs `iptables-mod-tproxy`）。
-- ✅ **🧠 Smart 内核空间自适应**：在启用 Smart 内核时，自动检测 `/etc/openclash` 剩余空间，智能选择下载 **Large** (30MB+)、**Middle** 或 **Small** 模型，空间极度不足时自动关闭功能，防止爆盘。
+- ✅ **🛡️ 防火墙自适应依赖**：自动识别系统防火墙类型（`nftables` / `iptables`），精准安装所需的特定依赖包（如 `kmod-nft-tproxy` vs `iptables-mod-tproxy`）。
+- ✅ **🧠 Smart 内核空间自适应**：在启用 Smart 内核时，自动检测 `/etc/openclash` 剩余空间，自动选择下载 **Large** (30MB+)、**Middle** 或 **Small** 模型，空间极度不足时自动关闭功能，防止爆盘。
 - ✅ **🌐 抗 DNS 污染下载**：内置 GitHub Hosts 获取逻辑，配合 **jsDelivr CDN** -> **解析 IP 直连** -> **反代镜像** 的三级重试机制，极大提高下载成功率。
 - ✅ **⚙️ 全资源同步**：一次运行，同步更新 Meta 内核、GeoIP/GeoSite/GeoASN 数据库、大陆白名单及订阅文件。
 - ✅ **🧩 个性化扩展**：支持加载 `/etc/config/openclash-set` 用户自定义脚本。
