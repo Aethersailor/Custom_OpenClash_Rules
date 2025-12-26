@@ -207,6 +207,8 @@ DOMAIN-SUFFIX,day.app
 
 # 阴阳师工具 / add by Telegram user: 奶茶 / Date: 2025-11-30 15:30:08
 DOMAIN-SUFFIX,yyshub.top
+# CDN / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-17 11:16:00
+DOMAIN-SUFFIX,bunny.net
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -216,8 +218,18 @@ DOMAIN-SUFFIX,yyshub.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# 水弹玩具论坛 / add by Telegram user: kisigrant / Date: 2025-12-26 00:39:03
-DOMAIN-SUFFIX,sdgun.net
+
+
+
+
+
+
+# 2025.12.26 分类整理完毕
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
 # add by Telegram user: Aethersailor / Date: 2025-12-22 11:49:20
 DOMAIN-SUFFIX,hhtvc.com
 # add by Telegram user: Aethersailor / Date: 2025-12-22 11:37:14
@@ -240,19 +252,6 @@ DOMAIN-SUFFIX,eagsen.com
 DOMAIN-SUFFIX,ycjintou.com
 # add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-17 21:15:29
 DOMAIN-SUFFIX,weshape3d.com
-# CDN / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-17 11:16:00
-DOMAIN-SUFFIX,bunny.net
-
-
-
-
-# 2025.12.17 分类整理完毕
-
-# ---------------------------------------
-# 以下域名已提交 PR
-
-# PR 至 felixonmars/dnsmasq-china-list
-
 # 购物 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-16 20:26:12
 DOMAIN-SUFFIX,epark.cc
 # 购物 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-16 20:25:09
