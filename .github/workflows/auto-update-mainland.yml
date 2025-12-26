@@ -19,13 +19,8 @@ jobs:
         ref: main
         fetch-depth: 0
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
-
     - name: Generate Custom_Clash_Mainland.ini
-      run: python py/generate_mainland.py
+      run: cp -f cfg/Custom_Clash.ini cfg/Custom_Clash_Mainland.ini
 
     - name: Commit and push changes
       env:
