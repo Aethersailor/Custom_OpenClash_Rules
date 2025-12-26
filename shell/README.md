@@ -16,7 +16,7 @@
 
 | 脚本名称 | 功能简介 | 适用架构 |
 | :--- | :--- | :--- |
-| [**check_cpu_version.sh**](#-check_cpu_versionsh) | 🔍 CPU 架构与指令集深度检测 | `Multi-Arch` |
+| [**check_cpu_version.sh**](#-check_cpu_versionsh) | 🔍 CPU 架构与指令集检测 | `Multi-Arch` |
 | [**install_openclash_dev.sh**](#-install_openclash_devsh) | 📦 OpenClash Dev 极速基础安装 | `OpenWrt` |
 | [**install_openclash_dev_update.sh**](#-install_openclash_dev_updatesh) | 🚀 全自动化安装/更新/修复 | `OpenWrt` |
 
@@ -30,11 +30,11 @@
 </p>
 
 **功能说明：**  
-该脚本并非简单的 `uname -m` 封装，而是深入读取 `/proc/cpuinfo` 和内核信息，通过解析 CPU Flags、FPU 状态及 ABI 版本，输出标准化的内核版本名称。这对于确保 OpenClash 下载正确版本的 Meta 内核至关重要。
+该脚本通过读取 `/proc/cpuinfo` 和内核信息，解析 CPU Flags、FPU 状态及 ABI 版本，输出标准化的内核版本名称。这有助于 OpenClash 下载正确版本的 Meta 内核。
 
 **核心特性：**
 
-- ✅ **微架构识别 (x86_64)**：精准识别 `AVX512` (v4)、`AVX2` (v3)、`SSE4.2` (v2) 等指令集，拒绝通用版带来的性能损失。
+- ✅ **微架构识别 (x86_64)**：识别 `AVX512` (v4)、`AVX2` (v3)、`SSE4.2` (v2) 等指令集。
 - ✅ **MIPS 浮点检测**：自动检测硬件 FPU 状态以区分 `hardfloat` / `softfloat`。
 - ✅ **LoongArch ABI**：根据内核版本自动判断 `abi1` / `abi2`。
 - ✅ **通用映射**：自动处理 `aarch64` → `arm64` 等常见别名映射。
@@ -72,7 +72,7 @@ linux-mips-hardfloat
 </p>
 
 **功能说明：**  
-轻量级的 OpenClash Dev 版本安装工具。它仅关注最核心的任务：**安装插件本体**并**更新 Meta 内核**。代码逻辑精简，适合在网络环境良好且依赖已完备的情况下快速部署。
+OpenClash Dev 版本安装工具。仅包含**安装插件本体**并**更新 Meta 内核**的功能。适合在网络环境良好且依赖已完备的情况下使用。
 
 **核心特性：**
 
@@ -102,7 +102,7 @@ wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@
 </p>
 
 **功能说明：**  
-这是维护者倾力打造的 **终极安装脚本**。它集成了环境诊断、抗 DNS 污染、多重下载保障、空间自适应等高级逻辑，旨在提供“一键无忧”的部署体验。无论你是首次安装还是日常维护，运行它都是最佳选择。
+全功能安装脚本。集成了环境诊断、抗 DNS 污染、多重下载保障、空间自适应等逻辑。适合首次安装或日常维护。
 
 **核心特性：**
 
