@@ -218,6 +218,8 @@ DOMAIN-SUFFIX,bunny.net
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 国内某设计类网站 / add by Telegram user: 2. / Date: 2025-12-28 00:26:19
+DOMAIN-SUFFIX,aigodlike.com
 # iOS旧版App服务 / add by Telegram user: 雪菜 / Date: 2025-12-27 11:39:43
 DOMAIN-SUFFIX,timbrd.com
 # aicoding / add by Telegram user: Makka / Date: 2025-12-27 10:11:32
