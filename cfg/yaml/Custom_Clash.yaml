@@ -1,3 +1,6 @@
+# Custom_OpenClash_Rules
+# YAML 配置文件
+# 注释部分由 AI 补充，可能存在错误，请自行甄别！
 # ==================== 端口配置 Port Configuration ====================
 # HTTP 代理端口，用于处理 HTTP 协议流量
 port: 7890
@@ -164,7 +167,7 @@ dns:
     - geosite:cn  # 中国大陆域名（使用 GeoSite 数据）
   # Fake-IP 过滤模式：blacklist（黑名单）/ whitelist（白名单）
   fake-ip-filter-mode: blacklist
-  # 是否遵循规则（false 表示所有 DNS 查询都通过 nameserver）
+  # 是否遵循规则（false 表示所有 DNS 查询都通过直连查询，不经过代理规则）
   respect-rules: false
   # 主 DNS 服务器列表（用于实际域名解析）
   nameserver:
