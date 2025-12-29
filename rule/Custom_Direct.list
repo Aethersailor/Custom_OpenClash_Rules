@@ -149,6 +149,8 @@ DOMAIN-SUFFIX,vv1865.com
 # 其他
 # Server酱
 DOMAIN-SUFFIX,sct.ftqq.com
+# 爱普生打印机
+DOMAIN-SUFFIX,p01.epsonconnect.com
 
 # 机器人添加域名
 # 以下域名由用户通过机器人添加，无备案且 NS 不属于中国大陆，或解析结果不属于中国大陆
