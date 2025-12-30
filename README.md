@@ -229,13 +229,14 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 ```
 https://api.asailor.org/sub
 ```
-> [!NOTE]
+> [!TIP]
 > 填写 `https://api.asailor.org/sub`、`https://api.asailor.org`、`api.asailor.org` 均可正常调用后端。
 
 填写进`配置订阅信息 > 订阅转换服务地址`中即可生效。
 
 > [!IMPORTANT]
-> 本项目后端使用深度二次开发的改进版后端 [Subconverter-Extended](https://github.com/Aethersailor/SubConverter-Extended)，不连接机场不读取节点，解决了传统后端使用时的痛点，极大的提高了兼容性。
+> 本项目后端使用深度二次开发的改进版后端 [Subconverter-Extended](https://github.com/Aethersailor/SubConverter-Extended)。  
+> 后端不连接机场，不去读取节点，解决了传统后端使用时的所有痛点，极大的提高了兼容性。
 
 ---
 
