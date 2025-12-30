@@ -224,16 +224,18 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=%E5%9C%A8%E7%BA%BF&down_message=%E7%A6%BB%E7%BA%BF&style=for-the-badge&label=%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81)
 
-如果 OpenClash 自带的订阅转换服务全部不可用，你可以使用本项目提供的订阅转换服务地址：
+有许多机场会屏蔽使用后端，如果 OpenClash 自带的订阅转换服务全部不可用，你可以使用本项目提供的订阅转换服务地址：
 
 ```
 https://api.asailor.org/sub
 ```
+> [!NOTE]
+> 填写 `https://api.asailor.org/sub`、`https://api.asailor.org`、`api.asailor.org` 均可正常调用后端。
 
 填写进`配置订阅信息 > 订阅转换服务地址`中即可生效。
 
-> [!NOTE]
-> 本项目后端服务使用 [asdlokj1qpi233/subconverter](https://github.com/asdlokj1qpi233/subconverter) 进行部署。
+> [!IMPORTANT]
+> 本项目后端使用深度二次开发的改进版后端 [Subconverter-Extended](https://github.com/Aethersailor/SubConverter-Extended)，不连接机场不读取节点，解决了传统后端使用时的痛点，极大的提高了兼容性。
 
 ---
 
@@ -361,8 +363,7 @@ https://api.asailor.org/sub
 
 ### 🔄 订阅转换后端
 
-- [asdlokj1qpi233/subconverter](https://github.com/asdlokj1qpi233/subconverter)
-- [Aethersailor/subconverter](https://github.com/Aethersailor/subconverter)
+- [Aethersailor/Subconverter-Extended](https://github.com/Aethersailor/SubConverter-Extended)
 
 ### 🧰 工具
 
