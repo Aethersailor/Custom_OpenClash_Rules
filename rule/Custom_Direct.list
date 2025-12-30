@@ -220,6 +220,8 @@ DOMAIN-SUFFIX,bunny.net
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 视频网站 / add by Telegram user: 哈Lay / Date: 2025-12-30 19:45:33
+DOMAIN-SUFFIX,gaze.run
 # 社区 / add by Telegram user: 哈Lay / Date: 2025-12-29 12:54:22
 DOMAIN-SUFFIX,a0d.top
 # 游戏资讯网站 / add by Telegram user: 麦香鸡 / Date: 2025-12-28 14:36:02
