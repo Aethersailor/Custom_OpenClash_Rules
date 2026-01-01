@@ -540,3 +540,5 @@ DOMAIN-SUFFIX,steam.naeu.qtlglb.com
 DOMAIN-SUFFIX,steam.ru.qtlglb.com
 # Steam - 游戏下载(非中国下载区)[edgecast]
 DOMAIN-SUFFIX,edge.steam-dns.top.comcast.net
+# playstation 下载
+# [UNSUPPORTED] domain:dl.playstation.net
