@@ -8,6 +8,9 @@ on:
       - cfg/Custom_Clash.ini  # 源文件更新时触发
   workflow_dispatch:           # 手动触发
 
+permissions:
+  contents: read
+
 jobs:
   sync-and-modify:
     if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
