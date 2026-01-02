@@ -221,6 +221,8 @@ DOMAIN-SUFFIX,bunny.net
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 北京公交地铁APP："亿通行" / add by Telegram user: zero / Date: 2026-01-02 23:03:30
+DOMAIN-SUFFIX,easytomessage.com
 # add by Telegram user: Aethersailor / Date: 2026-01-02 16:29:48
 DOMAIN-SUFFIX,shanghai-parking.com
 # 影视站 / add by Telegram user: 哈Lay / Date: 2026-01-02 15:26:38
