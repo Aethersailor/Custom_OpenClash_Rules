@@ -117,6 +117,6 @@ jobs:
 
           if ! git diff --cached --quiet; then
             commit_time=$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')
-            git commit -m "chore(wiki): auto backup Wiki at ${commit_time} UTC+8" --author="Aethersailor <22260104+Aethersailor@users.noreply.github.com>"
+            git commit -m "chore(wiki): auto backup Wiki at ${commit_time} UTC+8" --author="${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>"
             git push
           fi
