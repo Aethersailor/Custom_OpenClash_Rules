@@ -1,53 +1,33 @@
-name: 模板错判上报
-description: 上报你在模板中发现的 BUG
-title: '[模板错误]'
+name: 🐛 模板错判上报 (Template Bug)
+description: 上报你在模板规则中发现的错误 (Bug report for template rules)
+title: '[模板错误] 简要描述问题'
 labels: 'bug'
 
 body:
   - type: checkboxes
     id: verify_steps
     attributes:
-      label: Verify Steps
+      label: 前置确认 (Pre-check)
       description: |
-        在提交之前，请确认：
+        提交前请确认以下事项，以减少无效沟通：
       options:
-        - label: 我已经在 [Issue Tracker](……/) 中找过我要提出的问题
+        - label: 我已在 [Issue Tracker](https://github.com/Aethersailor/Custom_OpenClash_Rules/issues) 中搜索过类似问题
           required: true
-        - label: 我已经尝试通过观察日志、观察面板、检查 dns 解析流程等方式自行排查故障
+        - label: **我确认这确实是本项目模板文件导致的规则分流错误**
           required: true
-        - label: 我知晓订阅转换模板只是一个订阅转换后端使用的模板，具有普适性
+        - label: 我使用的是 OpenWrt/ImmortalWrt 官方固件或官方 ImageBuilder，非第三方修改版
           required: true
-        - label: 我知晓本项目提供订阅转换模板，只影响分流
+        - label: 我使用的是最新版本的 OpenClash 和核心
           required: true
-        - label: 我知晓本项目订阅转换模板引用的是第三方上游规则，其是否更新与本项目无关
+        - label: 我已阅读 [Wiki 故障排除](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4) 章节但未能解决
           required: true
-        - label: 我知晓本项目有非常多的用户，而我的问题很有可能是个例
-          required: true
-        - label: 我使用的是 OpenWrt/ImmortalWrt 官方发布的固件或官方 ImageBuilder 生成的固件，非第三方编译版本
-          required: true
-        - label: 我部署的是主路由网络架构，而非旁路由
-          required: true
-        - label: 我使用的是最新的 dev 版本 OpenClash 和内核
-          required: true
-        - label: 我已经完全按照 Wiki 中的方案对 OpenClash 进行设置
-          required: true
-        - label: 我已经完全阅读了 Wiki 中的[故障排除](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4)章节
-          required: true
-        - label: 我确认这确实是本项目模板文件导致的问题
-          required: true
-        - label: 我已经尝试换用本项目提供的订阅转换后端服务
-          required: true
-        - label: 我有能力协助开发并解决此问题
-          required: false
-        - label: 我提交的**是无意义的**质疑或提问
-          required: false
 
   - type: input
     id: openclash_version
     attributes:
       label: OpenClash Version
       description: |
-        OpenClash 版本号
+        例如：v0.45.169-beta
       placeholder: "v0.0.0-beta"
     validations:
       required: true
@@ -55,7 +35,7 @@ body:
   - type: dropdown
     id: bug_ini
     attributes:
-      label: 存在问题的模板文件
+      label: 涉及的模板文件 (Problematic File)
       description: |
         发现问题所在的模板
       multiple: true
@@ -71,28 +51,26 @@ body:
   - type: textarea
     id: describe_bug
     attributes:
-      label: 描述模板存在的 BUG
+      label: Bug 描述 (Description)
       description: |
-        对 Bug 本身清晰而简洁的描述
+        请清晰描述规则错误的行为。例如：“域名 exmaple.com 应该走代理，但被直连了”。
     validations:
       required: true
 
   - type: textarea
     id: describe_phenomenon
     attributes:
-      label: 描述模板 BUG 导致的故障现象
+      label: 故障复现 (Reproduction)
       description: |
-        对故障现象清晰而简洁的描述
+        描述如何复现该问题，或提供相关的日志片段。
     validations:
       required: true
 
   - type: textarea
     id: describe_solution
     attributes:
-      label: 我提供的解决方案
+      label: 建议修复方案 (Optional)
       description: |
-        提供你认为可行的解决方案
+        如果你知道如何修复此问题，请提供建议。
     validations:
-      required: true
-
-
+      required: false

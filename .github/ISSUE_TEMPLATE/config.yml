@@ -2,19 +2,19 @@ blank_issues_enabled: false
 
 contact_links:
 
-  - name: 我不确定是什么问题 | 我的问题不属于上述选项 | 我想讨论某个问题 | 我有一些建议
-    url: https://github.com/Aethersailor/Custom_OpenClash_Rules/discussions/new/choose
-    about: 点击跳转 Discussions 发布
-    
-  - name: 新手小白求助
+  - name: 💡 新手小白求助 (Newbie Help)
     url: https://github.com/Aethersailor/Custom_OpenClash_Rules/discussions/new?category=q-a
-    about: 点击跳转 Discussions 发布 Q&A，等待有缘人的帮助
+    about: 寻求帮助或咨询非代码缺陷问题，请前往 Discussions 发布 Q&A。
     
-  - name: 我想让某个网站走代理或者不走代理
-    url: hhttps://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82
-    about: 请参考 Wiki 中的对应章节
+  - name: 💬 讨论与建议 (Discussions)
+    url: https://github.com/Aethersailor/Custom_OpenClash_Rules/discussions/new/choose
+    about: 参与讨论或提出项目建议。
+
+  - name: ✨ 个性化需求 (Personal Request)
+    url: https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82
+    about: 关于特定网站走代理或直连的需求，请查阅通过 Wiki 自行解决。
     
-  - name: 本项目后端服务转换问题
-    url: https://github.com/asdlokj1qpi233/subconverter/issues
-    about: 本项目后端使用 asdlokj1qpi233/subconverter 进行部署，如果遇到转换出的节点信息错误的情况，请至 asdlokj1qpi233/subconverter 的仓库进行反馈
+  - name: 🔄 后端服务转换问题 (Backend Issue)
+    url: https://github.com/Aethersailor/SubConverter-Extended/issues
+    about: 转换结果异常或后端引擎报错，请前往 SubConverter-Extended 仓库反馈。
     

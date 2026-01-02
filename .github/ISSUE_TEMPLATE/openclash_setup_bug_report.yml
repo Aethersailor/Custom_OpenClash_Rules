@@ -1,43 +1,31 @@
-name: OpenClash 设置方案错判上报
-description: 上报你在 OpenClash 设置方案中发现的问题
-title: '[OpenClash 设置方案错误]'
+name: 📘 OpenClash 设置文档错误 (OpenClash Doc Issue)
+description: 上报 OpenClash 设置文档中的逻辑错误或过时信息
+title: '[文档错误] OpenClash 设置方案问题'
 labels: 'documentation'
 
 body:
   - type: checkboxes
     id: verify_steps
     attributes:
-      label: Verify Steps
+      label: 前置确认 (Pre-check)
       description: |
-        在提交之前，请确认：
+        提交前请确认以下事项：
       options:
-        - label: 我已经在 [Issue Tracker](……/) 中找过我要提出的问题
+        - label: 我已在 [Issue Tracker](https://github.com/Aethersailor/Custom_OpenClash_Rules/issues) 中搜索过类似问题
           required: true
-        - label: 我已经尝试通过观察日志、观察面板、检查 dns 解析流程等方式自行排查故障
+        - label: 我使用的是 OpenWrt/ImmortalWrt 官方固件（非第三方编译版）
           required: true
-        - label: 我使用的是 OpenWrt/ImmortalWrt 官方发布固件或官方 ImageBuilder 生成的固件，非第三方编译版本
+        - label: 我使用的是最新版本的 OpenClash (Dev) 和核心
           required: true
-        - label: 我部署的是主路由网络架构，而非旁路由
+        - label: **我确认问题来源于“设置方案文档”本身，而非网络环境或操作失误**
           required: true
-        - label: 我使用的是最新的 dev 版本 OpenClash 和内核
-          required: true
-        - label: 我确定自己完全按照 Wiki 中的设置方案进行了设置
-          required: true
-        - label: 我知晓开发者已经完全检查过设置的可用性。
-          required: true
-        - label: 我确认我遇到的现象，确实是设置方案的 BUG 导致的
-          required: true
-        - label: 我有能力协助开发并解决此问题
-          required: false
-        - label: 我提交的是无意义的质疑或提问
-          required: false
 
   - type: input
     id: openclash_version
     attributes:
       label: OpenClash Version
       description: |
-        OpenClash 版本号
+        例如：v0.45.169-beta
       placeholder: "v0.0.0-beta"
     validations:
       required: true
@@ -45,27 +33,26 @@ body:
   - type: textarea
     id: describe_bug
     attributes:
-      label: 描述设置方案存在的问题
+      label: 文档问题描述 (Description)
       description: |
-        对 Bug 本身清晰而简洁的描述
+        指出现有 Wiki 文档中错误或不合理的地方。
     validations:
       required: true
 
   - type: textarea
     id: describe_phenomenon
     attributes:
-      label: 描述设置方案问题导致的故障现象
+      label: 导致后果 (Consequence)
       description: |
-        对故障现象清晰而简洁的描述
+        按照当前文档设置后会出现什么问题？
     validations:
       required: true
 
   - type: textarea
     id: describe_solution
     attributes:
-      label: 我提供的解决方案
+      label: 修正建议 (Optional)
       description: |
-        提供你认为可行的解决方案
+        如果你有更好的配置方案，欢迎分享。
     validations:
-      required: true
-
+      required: false
