@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 402
+# TOTAL: 403
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -105,6 +105,7 @@ payload:
   - DOMAIN-SUFFIX,dushe1.app
   - DOMAIN-SUFFIX,eagsen.com
   - DOMAIN-SUFFIX,easytier.top
+  - DOMAIN-SUFFIX,easytomessage.com
   - DOMAIN-SUFFIX,einfo-tech.com
   - DOMAIN-SUFFIX,englibrary.com
   - DOMAIN-SUFFIX,epark.cc
