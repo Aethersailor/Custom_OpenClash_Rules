@@ -6,6 +6,9 @@ on:
     paths:
       - 'doc/**'
 
+permissions:
+  contents: write
+
 jobs:
   sync-to-wiki:
     if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
