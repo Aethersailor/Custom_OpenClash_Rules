@@ -45,13 +45,13 @@ print_step() {
 # 函数: 打印欢迎信息
 logo() {
     clear
-    echo
-    print_line
-    echo -e "${W}       Custom_OpenClash_Rules Auto Installer${N}"
-    echo -e "${W}  https://github.com/Aethersailor/Custom_OpenClash_Rules${N}"
-    print_line
-    echo
-    echo -e "${W}OpenClash Dev 在线全自动化安装与更新脚本${N}"
+    echo -e "${C}################################################################${N}"
+    echo -e "${C}#                                                              #${N}"
+    echo -e "${C}#              Custom_OpenClash_Rules Auto Installer           #${N}"
+    echo -e "${C}#     https://github.com/Aethersailor/Custom_OpenClash_Rules   #${N}"
+    echo -e "${C}#                                                              #${N}"
+    echo -e "${C}################################################################${N}"
+    echo -e "${W}* OpenClash Dev 在线全自动化安装与更新脚本${N}"
     echo
     sleep 1
 }
@@ -723,13 +723,5 @@ sleep 1
 
 echo
 print_line
-echo -e "${G}脚本运行完毕！${N}"
-print_line
-echo
-echo -e "  ${OK} OpenClash Dev 版本已安装/更新"
-echo -e "  ${OK} 内核与数据库已更新"
-echo -e "  ${OK} 服务已启动"
-echo
-LAN_IP=$(uci get network.lan.ipaddr 2>/dev/null || echo "192.168.1.1")
-echo -e "  ${INFO} LuCI 访问: ${W}http://${LAN_IP}/cgi-bin/luci/admin/services/openclash${N}"
+echo -e "${G}[OK] 脚本运行完毕！${N}"
 echo
