@@ -46,12 +46,12 @@ print_step() {
 logo() {
     clear
     echo
-    echo -e "${C}╔══════════════════════════════════════════════════════════════╗${N}"
-    echo -e "${C}║${N}                                                              ${C}║${N}"
-    echo -e "${C}║${W}        Custom_OpenClash_Rules Auto Installer              ${C}║${N}"
-    echo -e "${C}║${W}   https://github.com/Aethersailor/Custom_OpenClash_Rules  ${C}║${N}"
-    echo -e "${C}║${N}                                                              ${C}║${N}"
-    echo -e "${C}╚══════════════════════════════════════════════════════════════╝${N}"
+    echo -e "${C}+----------------------------------------------------------------+${N}"
+    echo -e "${C}|                                                                |${N}"
+    echo -e "${C}|${W}          Custom_OpenClash_Rules Auto Installer              ${C}|${N}"
+    echo -e "${C}|${W}     https://github.com/Aethersailor/Custom_OpenClash_Rules  ${C}|${N}"
+    echo -e "${C}|                                                                |${N}"
+    echo -e "${C}+----------------------------------------------------------------+${N}"
     echo
     echo -e "  ${W}OpenClash Dev 在线全自动化安装与更新脚本${N}"
     echo
@@ -60,7 +60,7 @@ logo() {
 
 # 函数: 打印表格分隔线
 print_table_line() {
-    echo -e "${C}  ──────────────────────────────────────────────────${N}"
+    echo -e "${C}  ----------------------------------------------------${N}"
 }
 
 # 函数: 打印表格行
@@ -68,7 +68,8 @@ print_table_row() {
     local label="$1"
     local value="$2"
     local status="$3"
-    printf "  %-20s %-24s %s\n" "$label" "$value" "$status"
+    # 使用 echo -e 而不是 printf，以正确处理 ANSI 转义序列
+    echo -e "  ${label}\t\t${value}\t\t${status}"
 }
 
 # ================================================================
@@ -760,9 +761,9 @@ fi
 sleep 1
 
 echo
-echo -e "${G}╔══════════════════════════════════════════════════════════════╗${N}"
-echo -e "${G}║                      脚本运行完毕！                          ║${N}"
-echo -e "${G}╚══════════════════════════════════════════════════════════════╝${N}"
+echo -e "${G}+----------------------------------------------------------------+${N}"
+echo -e "${G}|                      脚本运行完毕！                           |${N}"
+echo -e "${G}+----------------------------------------------------------------+${N}"
 echo
 echo -e "  ${OK} OpenClash Dev 版本已安装/更新"
 echo -e "  ${OK} 内核与数据库已更新"
