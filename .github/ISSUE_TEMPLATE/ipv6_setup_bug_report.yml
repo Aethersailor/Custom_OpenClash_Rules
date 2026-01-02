@@ -1,15 +1,14 @@
 name: 📘 IPv6 设置文档错误 (IPv6 Doc Issue)
 description: 上报 IPv6 设置文档中的逻辑错误或过时信息
 title: '[文档错误] IPv6 设置方案问题'
-labels: 'documentation'
+labels: ["documentation"]
 
 body:
   - type: checkboxes
     id: verify_steps
     attributes:
       label: 前置确认 (Pre-check)
-      description: |
-        提交前请确认以下事项：
+      description: 提交前请确认以下事项：
       options:
         - label: 我已在 [Issue Tracker](https://github.com/Aethersailor/Custom_OpenClash_Rules/issues) 中搜索过类似问题
           required: true
@@ -17,15 +16,14 @@ body:
           required: true
         - label: 我确认网络环境满足 IPv6-PD 要求
           required: true
-        - label: **我确认问题来源于“设置方案文档”本身，而非网络环境或操作失误**
+        - label: "**我确认问题来源于“设置方案文档”本身，而非网络环境或操作失误**"
           required: true
 
   - type: textarea
     id: describe_bug
     attributes:
       label: 文档问题描述 (Description)
-      description: |
-        指出现有 Wiki 文档中错误或不合理的地方。
+      description: 指出现有 Wiki 文档中错误或不合理的地方。
     validations:
       required: true
 
@@ -33,8 +31,7 @@ body:
     id: describe_phenomenon
     attributes:
       label: 导致后果 (Consequence)
-      description: |
-        按照当前文档设置后会出现什么问题？
+      description: 按照当前文档设置后会出现什么问题？
     validations:
       required: true
 
@@ -42,7 +39,6 @@ body:
     id: describe_solution
     attributes:
       label: 修正建议 (Optional)
-      description: |
-        如果你有更好的配置方案，欢迎分享。
+      description: 如果你有更好的配置方案，欢迎分享。
     validations:
       required: false
