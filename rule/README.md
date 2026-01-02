@@ -1,8 +1,6 @@
 <h1 align="center">
-  🛡️ Custom Rules
+  🎯 个人维护的轻量级规则碎片 🎯
 </h1>
-
-<p align="center"><b>🎯 个人维护的轻量级规则碎片 🎯</b></p>
 
 这里存放本项目使用的 OpenClash / Clash 规则集合。
 
@@ -45,5 +43,5 @@
 ## 📂 归档文件
 
 > [!NOTE]
-> `archived/` 文件夹包含已弃用的历史规则文件（如旧版去广告规则等）。
+> `archived/` 文件夹包含已弃用的历史规则文件。
 > 详情请查阅 [📜 Archived README](archived/README.md)
