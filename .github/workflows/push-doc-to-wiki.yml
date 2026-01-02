@@ -8,6 +8,7 @@ on:
 
 jobs:
   sync-to-wiki:
+    if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +19,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git clone https://x-access-token:${TOKEN}@github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git _wiki
+          git clone https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.wiki.git _wiki
 
       - name: Prepare doc directory in wiki repository
         run: |

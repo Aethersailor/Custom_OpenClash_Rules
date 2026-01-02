@@ -76,7 +76,7 @@ jobs:
             exit 0
           fi
           
-          REPO="Aethersailor/Custom_OpenClash_Rules"
+          REPO="${{ github.repository }}"
           echo "Purging jsDelivr cache for $REPO"
 
           for i in {1..3}; do
