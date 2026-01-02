@@ -45,7 +45,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add rule/Game_Download_CDN.list
-          git commit -m "chore(rule): auto-update Game_Download_CDN.list from upstream" --author="${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>"
+          git commit -m "chore(rule): auto-update Game_Download_CDN.list from upstream"
           git push
       
       - name: No changes
