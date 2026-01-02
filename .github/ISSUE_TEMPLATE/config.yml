@@ -11,7 +11,7 @@ contact_links:
     about: 参与讨论或提出项目建议。
 
   - name: ✨ 个性化需求 (Personal Request)
-    url: https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82
+    url: https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#2-%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82
     about: 关于特定网站走代理或直连的需求，请查阅通过 Wiki 自行解决。
     
   - name: 🔄 后端服务转换问题 (Backend Issue)

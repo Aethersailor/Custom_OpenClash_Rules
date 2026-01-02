@@ -1,38 +1,35 @@
 name: ✨ 增加规则或分组 (Add Rule/Group)
 description: 请求增加新的规则或分流策略组
 title: '[规则需] 增加 xxx 规则/分组'
-labels: 'enhancement'
+labels: ["enhancement"]
 
 body:
   - type: checkboxes
     id: verify_steps
     attributes:
       label: 前置确认 (Pre-check)
-      description: |
-        提交前请确认：
+      description: 提交前请确认：
       options:
         - label: 我确认当前模板中不包含此规则或分组
           required: true
         - label: 我知晓仅有 Full 模板支持自由扩展规则
           required: true
-        - label: **我可以提供该规则对应的可靠上游源**
+        - label: "**我可以提供该规则对应的可靠上游源**"
           required: true
 
   - type: input
     id: rule_name
     attributes:
       label: 规则/分组名称 (Target Name)
-      description: |
-        例如：Paypal, OpenAI, Anime
+      description: 例如：Paypal, OpenAI, Anime
     validations:
       required: true
- 
+
   - type: input
     id: source_link
     attributes:
       label: 上游规则链接 (Upstream Source)
-      description: |
-        必填。请提供可靠的规则源链接（如 Github URL）。
+      description: 必填。请提供可靠的规则源链接（如 Github URL）。
     validations:
       required: true
 
@@ -40,7 +37,6 @@ body:
     id: benefit
     attributes:
       label: 补充说明 (Context)
-      description: |
-        简述添加该规则的必要性或使用场景。
+      description: 简述添加该规则的必要性或使用场景。
     validations:
       required: false
