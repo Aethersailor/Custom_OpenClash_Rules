@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   backup-wiki-root:
+    if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +21,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git clone https://x-access-token:${TOKEN}@github.com/Aethersailor/Custom_OpenClash_Rules.wiki.git _wiki
+          git clone https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.wiki.git _wiki
 
       - name: Clean old wiki backup
         run: |
@@ -40,7 +41,7 @@ jobs:
             filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
 
             # 只替换页面部分，不自动附加锚点
-            echo "https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/${raw_url}|${num}.${filename}.md" >> link_map.txt
+            echo "https://github.com/${{ github.repository }}/wiki/${raw_url}|${num}.${filename}.md" >> link_map.txt
           done
 
           echo "LINK_MAP_END" >> link_map.txt

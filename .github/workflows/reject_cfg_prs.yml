@@ -28,7 +28,7 @@ jobs:
           elif [[ "${{ github.event.pull_request.user.login }}" == "github-actions[bot]" ]]; then
             echo "is_allowed=true" >> $GITHUB_OUTPUT
             echo "reason=github_actions" >> $GITHUB_OUTPUT
-          elif [[ "${{ github.event.pull_request.user.login }}" == "Aethersailor" ]]; then
+          elif [[ "${{ github.event.pull_request.user.login }}" == "${{ github.repository_owner }}" ]]; then
             echo "is_allowed=true" >> $GITHUB_OUTPUT
             echo "reason=repository_owner" >> $GITHUB_OUTPUT
           else
@@ -38,8 +38,8 @@ jobs:
           
           echo "PR author: ${{ github.event.pull_request.user.login }}"
           echo "Changed cfg files: $changed_files"
-          echo "Is allowed: ${{ steps.check-actor.outputs.is_allowed }}"
-          echo "Reason: ${{ steps.check-actor.outputs.reason }}"
+          echo "Is allowed debug: $is_allowed"
+          echo "Reason debug: $reason"
 
       - name: Reject unauthorized PRs
         if: steps.check-actor.outputs.is_allowed == 'false'
