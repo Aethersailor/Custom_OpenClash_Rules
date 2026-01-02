@@ -12,6 +12,8 @@ jobs:
   sync-and-modify:
     if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       # Step 1: 检出源仓库
       - name: Checkout Source Repo
