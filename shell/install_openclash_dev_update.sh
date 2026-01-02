@@ -23,6 +23,7 @@ INFO="${B}[i]${N}"
 WARN="${Y}[!]${N}"
 ERR="${R}[✗]${N}"
 OK="${G}[✓]${N}"
+ARROW="${C}  →${N}"  # 子步骤箭头
 
 # ================================================================
 # 工具函数定义
@@ -44,15 +45,30 @@ print_step() {
 # 函数: 打印欢迎信息
 logo() {
     clear
-    echo -e "${C}################################################################${N}"
-    echo -e "${C}#                                                              #${N}"
-    echo -e "${C}#              Custom_OpenClash_Rules Auto Installer           #${N}"
-    echo -e "${C}#     https://github.com/Aethersailor/Custom_OpenClash_Rules   #${N}"
-    echo -e "${C}#                                                              #${N}"
-    echo -e "${C}################################################################${N}"
-    echo -e "${W}* OpenClash Dev 在线全自动化安装与更新脚本${N}"
+    echo
+    echo -e "${C}╔══════════════════════════════════════════════════════════════╗${N}"
+    echo -e "${C}║${N}                                                              ${C}║${N}"
+    echo -e "${C}║${W}        Custom_OpenClash_Rules Auto Installer              ${C}║${N}"
+    echo -e "${C}║${W}   https://github.com/Aethersailor/Custom_OpenClash_Rules  ${C}║${N}"
+    echo -e "${C}║${N}                                                              ${C}║${N}"
+    echo -e "${C}╚══════════════════════════════════════════════════════════════╝${N}"
+    echo
+    echo -e "  ${W}OpenClash Dev 在线全自动化安装与更新脚本${N}"
     echo
     sleep 1
+}
+
+# 函数: 打印表格分隔线
+print_table_line() {
+    echo -e "${C}  ──────────────────────────────────────────────────${N}"
+}
+
+# 函数: 打印表格行
+print_table_row() {
+    local label="$1"
+    local value="$2"
+    local status="$3"
+    printf "  %-20s %-24s %s\n" "$label" "$value" "$status"
 }
 
 # ================================================================
@@ -66,66 +82,100 @@ echo -e "${INFO} 开始运行..."
 echo -e "${INFO} 即将安装/升级插件至最新 dev 版本，并更新所有配套资源。"
 sleep 1
 
-# 1. 检查包管理器
-print_step "步骤 1/10: 检查系统包管理器"
+# 1. 系统环境检测（合并包管理器、防火墙、OpenClash 状态检查）
+print_step "步骤 1/8: 系统环境检测"
+
+echo
+echo -e "  ${W}检测项目               结果                     状态${N}"
+print_table_line
+
+# 检测包管理器
+PKG_MGR=""
+EXT=""
+INSTALL_CMD=""
+PKG_MGR_DISPLAY=""
+PKG_MGR_STATUS=""
+
 if command -v opkg >/dev/null 2>&1; then
     PKG_MGR="opkg"
     EXT="ipk"
     INSTALL_CMD="opkg install --force-reinstall"
-    echo -e "$OK 检测到包管理器：${G}OPKG (OpenWrt)${N}"
+    PKG_MGR_DISPLAY="OPKG (OpenWrt)"
+    PKG_MGR_STATUS="${G}[✓]${N}"
 elif command -v apk >/dev/null 2>&1; then
     PKG_MGR="apk"
     EXT="apk"
     INSTALL_CMD="apk add -q --force-overwrite --clean-protected --allow-untrusted"
-    echo -e "$OK 检测到包管理器：${G}APK (OpenWrt Snapshot)${N}"
+    PKG_MGR_DISPLAY="APK (Snapshot)"
+    PKG_MGR_STATUS="${G}[✓]${N}"
 else
-    echo -e "$ERR 未检测到支持的包管理器 (opkg/apk)"
-    echo -e "$INFO 请确保在支持的系统上运行此脚本。"
-    exit 1
+    PKG_MGR_DISPLAY="未检测到"
+    PKG_MGR_STATUS="${R}[✗]${N}"
 fi
-sleep 1
+print_table_row "包管理器" "$PKG_MGR_DISPLAY" "$PKG_MGR_STATUS"
 
-# 2. 检查防火墙架构
-print_step "步骤 2/10: 检查防火墙架构"
+# 检测防火墙架构
 FIREWALL_TYPE=""
-if command -v fw4 >/dev/null 2>&1; then
-    echo -e "$OK 检测到防火墙：${G}fw4 (nftables)${N}"
-    FIREWALL_TYPE="nftables"
-elif command -v fw3 >/dev/null 2>&1; then
-    echo -e "$OK 检测到防火墙：${G}fw3 (iptables)${N}"
-    FIREWALL_TYPE="iptables"
-else
-    if command -v nft >/dev/null 2>&1; then
-       echo -e "$OK 检测到防火墙：${G}nftables${N}"
-       FIREWALL_TYPE="nftables"
-    elif command -v iptables >/dev/null 2>&1; then
-       echo -e "$OK 检测到防火墙：${G}iptables${N}"
-       FIREWALL_TYPE="iptables"
-    else
-       echo -e "$WARN 未检测到已知防火墙架构"
-    fi
-fi
-sleep 1
+FIREWALL_DISPLAY=""
+FIREWALL_STATUS=""
 
-# 3. 检查 OpenClash 安装状态
-print_step "步骤 3/10: 检查 OpenClash 安装状态"
+if command -v fw4 >/dev/null 2>&1; then
+    FIREWALL_TYPE="nftables"
+    FIREWALL_DISPLAY="fw4 (nftables)"
+    FIREWALL_STATUS="${G}[✓]${N}"
+elif command -v fw3 >/dev/null 2>&1; then
+    FIREWALL_TYPE="iptables"
+    FIREWALL_DISPLAY="fw3 (iptables)"
+    FIREWALL_STATUS="${G}[✓]${N}"
+elif command -v nft >/dev/null 2>&1; then
+    FIREWALL_TYPE="nftables"
+    FIREWALL_DISPLAY="nftables"
+    FIREWALL_STATUS="${G}[✓]${N}"
+elif command -v iptables >/dev/null 2>&1; then
+    FIREWALL_TYPE="iptables"
+    FIREWALL_DISPLAY="iptables"
+    FIREWALL_STATUS="${G}[✓]${N}"
+else
+    FIREWALL_DISPLAY="未检测到"
+    FIREWALL_STATUS="${Y}[!]${N}"
+fi
+print_table_row "防火墙架构" "$FIREWALL_DISPLAY" "$FIREWALL_STATUS"
+
+# 检测 OpenClash 安装状态
+OPENCLASH_VERSION=""
+OC_DISPLAY=""
+OC_STATUS=""
+
 if [ "$PKG_MGR" = "opkg" ]; then
-    # opkg list-installed 输出格式: luci-app-openclash - 0.47.036-1
     OPENCLASH_VERSION=$(opkg list-installed luci-app-openclash 2>/dev/null | awk '{print $3}')
 elif [ "$PKG_MGR" = "apk" ]; then
-    # apk list -I 输出格式: luci-app-openclash-0.47.036 noarch {...} [installed]
     OPENCLASH_VERSION=$(apk list -I 2>/dev/null | grep "^luci-app-openclash-" | sed -E 's/^luci-app-openclash-([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
 fi
 
 if [ -n "$OPENCLASH_VERSION" ]; then
-    echo -e "$OK OpenClash 已安装，当前版本：${G}$OPENCLASH_VERSION${N}"
+    OC_DISPLAY="已安装 v$OPENCLASH_VERSION"
+    OC_STATUS="${G}[✓]${N}"
 else
-    echo -e "$INFO OpenClash 未安装，将在后续步骤中进行安装。"
+    OC_DISPLAY="未安装"
+    OC_STATUS="${B}[i]${N}"
 fi
+print_table_row "OpenClash 状态" "$OC_DISPLAY" "$OC_STATUS"
+
+print_table_line
+echo
+
+# 检查包管理器是否可用
+if [ -z "$PKG_MGR" ]; then
+    echo -e "$ERR 未检测到支持的包管理器 (opkg/apk)"
+    echo -e "$INFO 请确保在支持的系统上运行此脚本。"
+    exit 1
+fi
+
+echo -e "$OK 系统环境检测完成"
 sleep 1
 
 # 4. 安装依赖
-print_step "步骤 4/10: 检查并安装依赖 [${FIREWALL_TYPE:-Null}]"
+print_step "步骤 2/8: 检查并安装依赖 [${FIREWALL_TYPE:-Null}]"
 
 if [ -n "$FIREWALL_TYPE" ]; then
     if [ "$FIREWALL_TYPE" = "nftables" ]; then
@@ -152,7 +202,7 @@ fi
 sleep 1
 
 # ================================================================
-# 步骤 5: 获取 GitHub Hosts 信息
+# 步骤 3: 获取 GitHub Hosts 信息
 # ================================================================
 # GitHub Hosts 相关变量
 GITHUB_HOSTS_URL="https://raw.hellogithub.com/hosts"
@@ -190,14 +240,14 @@ get_github_hosts() {
     fi
 }
 
-print_step "步骤 5/10: 获取 GitHub Hosts 信息"
+print_step "步骤 3/8: 获取 GitHub Hosts 信息"
 get_github_hosts
 sleep 1
 
 # ================================================================
-# 步骤 6: 下载并安装 OpenClash Dev
+# 步骤 4: 下载并安装 OpenClash Dev
 # ================================================================
-print_step "步骤 6/10: 下载并安装 OpenClash Dev"
+print_step "步骤 4/8: 下载并安装 OpenClash Dev"
 
 echo -e "$INFO 正在获取版本信息..."
 
@@ -298,9 +348,9 @@ echo -e "$OK OpenClash Dev 安装成功！"
 sleep 1
 
 # ================================================================  
-# 步骤 7: 检查并配置 core_version
+# 步骤 5: 检查并配置 core_version
 # ================================================================
-print_step "步骤 7/10: 检查并配置 core_version"
+print_step "步骤 5/8: 检查并配置 core_version"
 CORE_VERSION=$(uci get openclash.config.core_version 2>/dev/null)
 
 # 检查是否需要重新检测架构
@@ -436,9 +486,9 @@ fi
 sleep 1
 
 # ================================================================
-# 步骤 8: 初始化配置与内核更新
+# 步骤 6: 初始化配置与内核更新
 # ================================================================
-print_step "步骤 8/10: 初始化配置与内核更新"
+print_step "步骤 6/8: 初始化配置与内核更新"
 echo -e "$INFO 配置更新分支为 Dev，启用 jsdelivr 加速..."
 uci set openclash.config.release_branch=dev
 uci set openclash.config.skip_safe_path_check=1
@@ -602,9 +652,9 @@ fi
 sleep 1
 
 # ================================================================
-# 步骤 9: 更新数据库与订阅
+# 步骤 7: 更新数据库与订阅
 # ================================================================
-print_step "步骤 9/10: 更新数据库与订阅"
+print_step "步骤 7/8: 更新数据库与订阅"
 
 update_res() {
     NAME=$1
@@ -656,9 +706,9 @@ fi
 sleep 1
 
 # ================================================================
-# 步骤 10: 启动服务
+# 步骤 8: 启动服务
 # ================================================================
-print_step "步骤 10/10: 启动服务"
+print_step "步骤 8/8: 启动服务"
 echo -e "$INFO 设置开机自启并启动 OpenClash..."
 uci set openclash.config.enable='1'
 uci commit openclash
@@ -710,6 +760,14 @@ fi
 sleep 1
 
 echo
-print_line
-echo -e "${G}[OK] 脚本运行完毕！${N}"
+echo -e "${G}╔══════════════════════════════════════════════════════════════╗${N}"
+echo -e "${G}║                      脚本运行完毕！                          ║${N}"
+echo -e "${G}╚══════════════════════════════════════════════════════════════╝${N}"
+echo
+echo -e "  ${OK} OpenClash Dev 版本已安装/更新"
+echo -e "  ${OK} 内核与数据库已更新"
+echo -e "  ${OK} 服务已启动"
+echo
+LAN_IP=$(uci get network.lan.ipaddr 2>/dev/null || echo "192.168.1.1")
+echo -e "  ${INFO} LuCI 访问: ${W}http://${LAN_IP}/cgi-bin/luci/admin/services/openclash${N}"
 echo
