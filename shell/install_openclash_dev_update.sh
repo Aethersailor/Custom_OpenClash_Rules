@@ -46,30 +46,14 @@ print_step() {
 logo() {
     clear
     echo
-    echo -e "${C}+----------------------------------------------------------------+${N}"
-    echo -e "${C}|                                                                |${N}"
-    echo -e "${C}|${W}          Custom_OpenClash_Rules Auto Installer              ${C}|${N}"
-    echo -e "${C}|${W}     https://github.com/Aethersailor/Custom_OpenClash_Rules  ${C}|${N}"
-    echo -e "${C}|                                                                |${N}"
-    echo -e "${C}+----------------------------------------------------------------+${N}"
+    print_line
+    echo -e "${W}       Custom_OpenClash_Rules Auto Installer${N}"
+    echo -e "${W}  https://github.com/Aethersailor/Custom_OpenClash_Rules${N}"
+    print_line
     echo
-    echo -e "  ${W}OpenClash Dev 在线全自动化安装与更新脚本${N}"
+    echo -e "${W}OpenClash Dev 在线全自动化安装与更新脚本${N}"
     echo
     sleep 1
-}
-
-# 函数: 打印表格分隔线
-print_table_line() {
-    echo -e "${C}  ----------------------------------------------------${N}"
-}
-
-# 函数: 打印表格行
-print_table_row() {
-    local label="$1"
-    local value="$2"
-    local status="$3"
-    # 使用 echo -e 而不是 printf，以正确处理 ANSI 转义序列
-    echo -e "  ${label}\t\t${value}\t\t${status}"
 }
 
 # ================================================================
@@ -85,67 +69,48 @@ sleep 1
 
 # 1. 系统环境检测（合并包管理器、防火墙、OpenClash 状态检查）
 print_step "步骤 1/8: 系统环境检测"
-
 echo
-echo -e "  ${W}检测项目               结果                     状态${N}"
-print_table_line
 
 # 检测包管理器
 PKG_MGR=""
 EXT=""
 INSTALL_CMD=""
-PKG_MGR_DISPLAY=""
-PKG_MGR_STATUS=""
 
 if command -v opkg >/dev/null 2>&1; then
     PKG_MGR="opkg"
     EXT="ipk"
     INSTALL_CMD="opkg install --force-reinstall"
-    PKG_MGR_DISPLAY="OPKG (OpenWrt)"
-    PKG_MGR_STATUS="${G}[✓]${N}"
+    echo -e "$OK 包管理器: ${G}OPKG (OpenWrt)${N}"
 elif command -v apk >/dev/null 2>&1; then
     PKG_MGR="apk"
     EXT="apk"
     INSTALL_CMD="apk add -q --force-overwrite --clean-protected --allow-untrusted"
-    PKG_MGR_DISPLAY="APK (Snapshot)"
-    PKG_MGR_STATUS="${G}[✓]${N}"
+    echo -e "$OK 包管理器: ${G}APK (Snapshot)${N}"
 else
-    PKG_MGR_DISPLAY="未检测到"
-    PKG_MGR_STATUS="${R}[✗]${N}"
+    echo -e "$ERR 包管理器: ${R}未检测到${N}"
 fi
-print_table_row "包管理器" "$PKG_MGR_DISPLAY" "$PKG_MGR_STATUS"
 
 # 检测防火墙架构
 FIREWALL_TYPE=""
-FIREWALL_DISPLAY=""
-FIREWALL_STATUS=""
 
 if command -v fw4 >/dev/null 2>&1; then
     FIREWALL_TYPE="nftables"
-    FIREWALL_DISPLAY="fw4 (nftables)"
-    FIREWALL_STATUS="${G}[✓]${N}"
+    echo -e "$OK 防火墙: ${G}fw4 (nftables)${N}"
 elif command -v fw3 >/dev/null 2>&1; then
     FIREWALL_TYPE="iptables"
-    FIREWALL_DISPLAY="fw3 (iptables)"
-    FIREWALL_STATUS="${G}[✓]${N}"
+    echo -e "$OK 防火墙: ${G}fw3 (iptables)${N}"
 elif command -v nft >/dev/null 2>&1; then
     FIREWALL_TYPE="nftables"
-    FIREWALL_DISPLAY="nftables"
-    FIREWALL_STATUS="${G}[✓]${N}"
+    echo -e "$OK 防火墙: ${G}nftables${N}"
 elif command -v iptables >/dev/null 2>&1; then
     FIREWALL_TYPE="iptables"
-    FIREWALL_DISPLAY="iptables"
-    FIREWALL_STATUS="${G}[✓]${N}"
+    echo -e "$OK 防火墙: ${G}iptables${N}"
 else
-    FIREWALL_DISPLAY="未检测到"
-    FIREWALL_STATUS="${Y}[!]${N}"
+    echo -e "$WARN 防火墙: ${Y}未检测到${N}"
 fi
-print_table_row "防火墙架构" "$FIREWALL_DISPLAY" "$FIREWALL_STATUS"
 
 # 检测 OpenClash 安装状态
 OPENCLASH_VERSION=""
-OC_DISPLAY=""
-OC_STATUS=""
 
 if [ "$PKG_MGR" = "opkg" ]; then
     OPENCLASH_VERSION=$(opkg list-installed luci-app-openclash 2>/dev/null | awk '{print $3}')
@@ -154,15 +119,11 @@ elif [ "$PKG_MGR" = "apk" ]; then
 fi
 
 if [ -n "$OPENCLASH_VERSION" ]; then
-    OC_DISPLAY="已安装 v$OPENCLASH_VERSION"
-    OC_STATUS="${G}[✓]${N}"
+    echo -e "$OK OpenClash: ${G}已安装 v$OPENCLASH_VERSION${N}"
 else
-    OC_DISPLAY="未安装"
-    OC_STATUS="${B}[i]${N}"
+    echo -e "$INFO OpenClash: ${W}未安装${N}"
 fi
-print_table_row "OpenClash 状态" "$OC_DISPLAY" "$OC_STATUS"
 
-print_table_line
 echo
 
 # 检查包管理器是否可用
@@ -761,9 +722,9 @@ fi
 sleep 1
 
 echo
-echo -e "${G}+----------------------------------------------------------------+${N}"
-echo -e "${G}|                      脚本运行完毕！                           |${N}"
-echo -e "${G}+----------------------------------------------------------------+${N}"
+print_line
+echo -e "${G}脚本运行完毕！${N}"
+print_line
 echo
 echo -e "  ${OK} OpenClash Dev 版本已安装/更新"
 echo -e "  ${OK} 内核与数据库已更新"
