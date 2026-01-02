@@ -34,9 +34,6 @@ proxy-providers:
     path: ./proxy_provider/provider1.yaml # 本地缓存路径
     proxy: DIRECT  # 下载订阅时使用的代理策略
     header:  # 自定义 HTTP 请求头
-      User-Agent:
-      - "clash.meta"
-      - "mihomo/1.18.3"
     health-check:  # 节点健康检查
       enable: true
       interval: 600  # 检查间隔（秒）
