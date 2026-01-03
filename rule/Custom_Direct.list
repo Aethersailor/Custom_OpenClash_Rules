@@ -221,6 +221,8 @@ DOMAIN-SUFFIX,bunny.net
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 酷咖游戏官网 / add by Telegram user: kisigrant / Date: 2026-01-03 20:40:43
+DOMAIN-SUFFIX,cocav.com
 # 酷友社 / add by Telegram user: zero / Date: 2026-01-03 12:27:09
 DOMAIN-SUFFIX,d4ctech.com
 # 个人网站 / add by Telegram user: Awt / Date: 2026-01-03 00:58:13
