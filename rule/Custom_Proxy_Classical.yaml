@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Proxy.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Proxy.list
-# TOTAL: 17
+# TOTAL: 18
 
 payload:
   - DOMAIN-SUFFIX,7pzzv.us
@@ -11,6 +11,7 @@ payload:
   - DOMAIN-SUFFIX,dmhy.org
   - DOMAIN-SUFFIX,googleapis.cn
   - DOMAIN-SUFFIX,hoyolab.com
+  - DOMAIN-SUFFIX,hoyoverse.com
   - DOMAIN-SUFFIX,ip.sb
   - DOMAIN-SUFFIX,ipify.org
   - DOMAIN-SUFFIX,mtalk.google.com
