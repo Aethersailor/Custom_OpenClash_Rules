@@ -20,6 +20,8 @@ on:
 jobs:
   purge-jsdelivr:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     continue-on-error: true
     defaults:
       run:
