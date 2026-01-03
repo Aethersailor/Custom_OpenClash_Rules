@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Proxy.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Proxy.list
-# TOTAL: 15
+# TOTAL: 16
 
 payload:
   - '+.7pzzv.us'
@@ -11,6 +11,7 @@ payload:
   - '+.dmhy.org'
   - '+.googleapis.cn'
   - '+.hoyolab.com'
+  - '+.hoyoverse.com'
   - '+.ip.sb'
   - '+.ipify.org'
   - '+.mtalk.google.com'
