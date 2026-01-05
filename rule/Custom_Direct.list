@@ -221,6 +221,8 @@ DOMAIN-SUFFIX,bunny.net
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# add by Telegram user: Aethersailor / Date: 2026-01-05 11:18:51
+DOMAIN-SUFFIX,scnyw.com
 # add by Telegram user: Aethersailor / Date: 2026-01-05 10:59:31
 DOMAIN-SUFFIX,cgicop.com
 # add by Telegram user: IllIllIlIl / Date: 2026-01-05 09:31:45
