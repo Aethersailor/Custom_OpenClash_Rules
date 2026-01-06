@@ -1,8 +1,8 @@
-## 远程覆写配置文件已归档
+# 远程覆写配置文件已归档
 
 ⚠️ **注意**：本目录下的远程覆写配置文件（`Custom_Overwrite.conf` 和 `Custom_Overwrite_NoIPv6.conf`）已于 2025-12-24 归档至 `archived` 子目录，不再维护。
 
-### 推荐配置方式
+## 推荐配置方式
 
 请使用以下方式配置 OpenClash：
 

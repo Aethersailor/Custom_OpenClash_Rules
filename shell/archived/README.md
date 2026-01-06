@@ -5,7 +5,7 @@
 ## 文件说明
 
 | 文件名 | 说明 | 弃用原因 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | `edit_custom_firewall_rules.sh` | 选择性写入去广告命令脚本 | 已整合到新版脚本中 |
 | `edit_custom_firewall_rules_adblockfilters+github520.sh` | AdblockFilters + GitHub520 规则写入脚本 | 维护成本高，使用频率低 |
 | `edit_custom_firewall_rules_adblockfilters-modified+github520.sh` | 修改版 AdblockFilters + GitHub520 规则写入脚本 | 维护成本高，使用频率低 |
