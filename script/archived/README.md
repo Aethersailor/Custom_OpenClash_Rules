@@ -7,7 +7,7 @@
 包含广告过滤规则文本文件，原用于配合防火墙脚本使用。
 
 | 文件名 | 说明 |
-|:---|:---|
+| :--- | :--- |
 | `AWAvenue-Ads+github520.txt` | AWAvenue 广告规则 + GitHub520 加速 |
 | `adblockfilters+github520.txt` | AdblockFilters 规则 + GitHub520 加速 |
 | `adblockfilters-modified+github520.txt` | 修改版 AdblockFilters 规则 + GitHub520 加速 |
@@ -16,6 +16,7 @@
 ## 弃用原因
 
 这些脚本已不再主动维护，原因包括：
+
 1. 功能重复或已集成到其他工具
 2. 使用频率较低
 3. 维护成本较高

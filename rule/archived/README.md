@@ -5,7 +5,7 @@
 ## 文件说明
 
 | 文件名 | 说明 | 弃用原因 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | `Emby.list` | Emby 媒体服务器规则 | 已合并至 GeoSite 上游 |
 | `Game_Download_CDN.list` | 主流游戏平台下载 CDN 规则 | 已合并至 GeoSite 上游 |
 | `HBO_fix.list` | HBO 补充修复规则 | 已合并至 GeoSite 上游 |
