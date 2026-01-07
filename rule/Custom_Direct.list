@@ -221,6 +221,8 @@ DOMAIN-SUFFIX,bunny.net
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 视频网站 / add by Telegram user: 哈Lay / Date: 2026-01-07 19:18:30
+DOMAIN-SUFFIX,8kc.top
 # add by Telegram user: hlly / Date: 2026-01-06 22:51:31
 DOMAIN-SUFFIX,kcbd.top
 # 视频网站 / add by Telegram user: 哈Lay / Date: 2026-01-06 21:13:37
