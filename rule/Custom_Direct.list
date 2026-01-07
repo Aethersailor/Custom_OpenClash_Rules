@@ -221,6 +221,8 @@ DOMAIN-SUFFIX,bunny.net
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 软件官网 / add by Telegram user: 哈Lay / Date: 2026-01-07 21:32:03
+DOMAIN-SUFFIX,passnat.com
 # 博客 / add by Telegram user: 哈Lay / Date: 2026-01-07 21:31:37
 DOMAIN-SUFFIX,zmis.me
 # 视频网站 / add by Telegram user: 哈Lay / Date: 2026-01-07 19:18:30
