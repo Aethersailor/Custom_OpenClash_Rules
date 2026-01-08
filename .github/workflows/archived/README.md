@@ -5,7 +5,7 @@
 ## 文件说明
 
 | 文件名 | 说明 | 弃用原因 |
-|:---|:---|:---|
+| :--- | :--- | :--- |
 | `generate_smart.yml` | 生成 Smart 分流规则配置 | OpenClash 已更新 Smart 覆写功能，此工作流已无必要 |
 | `generate_smart_gfw.yml` | 生成 Smart GFW 规则配置 | OpenClash 已更新 Smart 覆写功能，此工作流已无必要 |
 
