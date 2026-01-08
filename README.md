@@ -69,6 +69,8 @@
 > - **Telegram Channel**: [Custom_OpenClash_Rules | 通知频道](https://t.me/custom_openclash_rules)
 > - **Telegram Group**: [Custom_OpenClash_Rules | 交流群](https://t.me/custom_openclash_rules_group)
 
+<!-- -->
+
 > [!TIP]
 > **❓ 如遇问题，请先阅读以下内容：**
 >
@@ -189,6 +191,8 @@
 > [!TIP]
 > [Rule-Bot](https://github.com/Aethersailor/Rule-Bot) 是维护者的另一个开源项目，如果你自行维护了规则文件的话，可以使用 Rule-Bot 方便的实现域名的自动化检测和添加。
 
+<!-- -->
+
 > [!NOTE]
 > 维护者会定期将收集到的国内冷门域名向上游规则进行 PR。
 
@@ -232,7 +236,7 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 
 如果你的`订阅转换服务地址`下拉列表中没有本项目的后端，说明你当前使用的并非最新版 dev 版本的 OpenClash，你可以手动填写后端地址：
 
-```
+```text
 https://api.asailor.org/sub
 ```
 
@@ -299,6 +303,8 @@ https://api.asailor.org/sub
 > [!WARNING]
 > ⚠️ **仅作推荐，维护者和推荐机场无任何关系，不对机场服务质量进行任何担保。**
 
+<!-- -->
+
 > [!TIP]
 > **节点过滤建议：**
 >
@@ -307,6 +313,8 @@ https://api.asailor.org/sub
 > ```text
 > Traffic、GB、Expire、11、12、13、14、15
 > ```
+
+<!-- -->
 
 > 若不使用 IPv6 功能，建议只需屏蔽如下节点关键词：
 >
@@ -321,7 +329,7 @@ https://api.asailor.org/sub
 ## 🤝 贡献者
 
 <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Aethersailor/Custom_OpenClash_Rules&anon=1" />
+  <img src="https://contrib.rocks/image?repo=Aethersailor/Custom_OpenClash_Rules&anon=1" alt="贡献者列表" />
 </a>
 
 ---
@@ -389,9 +397,9 @@ https://api.asailor.org/sub
 
 ## 📝 许可
 
-[![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
+[![CC-BY-SA-4.0 许可证](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
 
-**CC-BY-SA-4.0**
+### CC-BY-SA-4.0
 
 ---
 

@@ -25,8 +25,8 @@
 ## 🔍 **check_cpu_version.sh**
 
 <p>
-  <img src="https://img.shields.io/badge/Function-CPU_Detect-blue?style=flat-square">
-  <img src="https://img.shields.io/badge/Arch-Multi--Arch-orange?style=flat-square">
+  <img src="https://img.shields.io/badge/Function-CPU_Detect-blue?style=flat-square" alt="Function: CPU Detect">
+  <img src="https://img.shields.io/badge/Arch-Multi--Arch-orange?style=flat-square" alt="Arch: Multi-Arch">
 </p>
 
 **功能说明：**  
@@ -66,9 +66,9 @@ linux-mips-hardfloat
 ## 📦 **install_openclash_dev.sh**
 
 <p>
-  <img src="https://img.shields.io/badge/Function-Install-green?style=flat-square">
-  <img src="https://img.shields.io/badge/Edition-Basic-lightgrey?style=flat-square">
-  <img src="https://img.shields.io/badge/Manager-OPKG%2FAPK-blueviolet?style=flat-square">
+  <img src="https://img.shields.io/badge/Function-Install-green?style=flat-square" alt="Function: Install">
+  <img src="https://img.shields.io/badge/Edition-Basic-lightgrey?style=flat-square" alt="Edition: Basic">
+  <img src="https://img.shields.io/badge/Manager-OPKG%2FAPK-blueviolet?style=flat-square" alt="Manager: OPKG/APK">
 </p>
 
 **功能说明：**  
@@ -96,9 +96,9 @@ wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@
 ## 🚀 **install_openclash_dev_update.sh**
 
 <p>
-  <img src="https://img.shields.io/badge/Function-Full_Update-brightgreen?style=flat-square">
-  <img src="https://img.shields.io/badge/Edition-Ultimate-gold?style=flat-square">
-  <img src="https://img.shields.io/badge/Feature-Smart_Core-ff69b4?style=flat-square">
+  <img src="https://img.shields.io/badge/Function-Full_Update-brightgreen?style=flat-square" alt="Function: Full Update">
+  <img src="https://img.shields.io/badge/Edition-Ultimate-gold?style=flat-square" alt="Edition: Ultimate">
+  <img src="https://img.shields.io/badge/Feature-Smart_Core-ff69b4?style=flat-square" alt="Feature: Smart Core">
 </p>
 
 **功能说明：**  
