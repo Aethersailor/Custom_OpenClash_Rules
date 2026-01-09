@@ -390,8 +390,6 @@ https://api.asailor.org/sub
 ### 🔖 其他
 
 - [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/)
-- [OpenAI/ChatGPT](https://chatgpt.com/)
-- [Anysphere/Cursor](https://cursor.com/downloads)
 
 ---
 
