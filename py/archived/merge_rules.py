@@ -61,7 +61,7 @@ def write_output(domain_rules, domain_suffix_rules, domain_keyword_rules, ip_cid
             f.write(f"DOMAIN,{rule}\n")
         for rule in sorted(domain_keyword_rules):
             f.write(f"DOMAIN-KEYWORD,{rule}\n")
-        for cidr in sorted(ip_cidr_rules, key=lambda x: str(x)):
+        for cidr in sorted(ip_cidr_rules, key=str):
             f.write(f"IP-CIDR,{cidr}\n")
 
 # 主函数
