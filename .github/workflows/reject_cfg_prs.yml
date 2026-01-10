@@ -146,10 +146,15 @@ jobs:
           fi
 
       - name: Show PR Details
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
         run: |
-          echo "PR Number: ${{ github.event.pull_request.number }}"
-          echo "PR Title: ${{ github.event.pull_request.title }}"
-          echo "PR Author: ${{ github.event.pull_request.user.login }}"
-          echo "PR URL: ${{ github.event.pull_request.html_url }}"
+          echo "PR Number: $PR_NUMBER"
+          echo "PR Title: $PR_TITLE"
+          echo "PR Author: $PR_AUTHOR"
+          echo "PR URL: $PR_URL"
           echo "Changed Files:"
           gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path' 
