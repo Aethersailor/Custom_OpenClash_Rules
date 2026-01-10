@@ -20,7 +20,7 @@ jobs:
     steps:
       # Step 1: 检出源仓库
       - name: Checkout Source Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       # Step 2: 克隆目标仓库
       - name: Clone Target Repo
