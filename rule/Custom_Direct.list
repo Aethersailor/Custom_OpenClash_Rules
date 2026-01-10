@@ -212,6 +212,24 @@ DOMAIN-SUFFIX,day.app
 DOMAIN-SUFFIX,yyshub.top
 # CDN / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-17 11:16:00
 DOMAIN-SUFFIX,bunny.net
+# 视频网站 / add by Telegram user: 哈Lay / Date: 2026-01-07 19:18:30
+DOMAIN-SUFFIX,8kc.top
+# add by Telegram user: hlly / Date: 2026-01-06 22:51:31
+DOMAIN-SUFFIX,kcbd.top
+# 视频网站 / add by Telegram user: 哈Lay / Date: 2026-01-06 21:13:37
+DOMAIN-SUFFIX,theluyuan.com
+# add by Telegram user: IllIllIlIl / Date: 2026-01-05 08:54:12
+DOMAIN-SUFFIX,cmbc.run
+# 个人网站 / add by Telegram user: Awt / Date: 2026-01-03 00:58:13
+DOMAIN-SUFFIX,awstme.top
+# 北京公交地铁APP："亿通行" / add by Telegram user: zero / Date: 2026-01-02 23:03:30
+DOMAIN-SUFFIX,easytomessage.com
+# iOS旧版App服务 / add by Telegram user: 雪菜 / Date: 2025-12-27 11:39:43
+DOMAIN-SUFFIX,timbrd.com
+# aicoding / add by Telegram user: Makka / Date: 2025-12-27 10:11:32
+DOMAIN-SUFFIX,anyrouter.top
+# 社区 / add by Telegram user: 哈Lay / Date: 2025-12-29 12:54:22
+DOMAIN-SUFFIX,a0d.top
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -221,16 +239,23 @@ DOMAIN-SUFFIX,bunny.net
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+
+
+
+
+
+
+
+# 2026.1.11 分类整理完毕
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
 # 软件官网 / add by Telegram user: 哈Lay / Date: 2026-01-07 21:32:03
 DOMAIN-SUFFIX,passnat.com
 # 博客 / add by Telegram user: 哈Lay / Date: 2026-01-07 21:31:37
 DOMAIN-SUFFIX,zmis.me
-# 视频网站 / add by Telegram user: 哈Lay / Date: 2026-01-07 19:18:30
-DOMAIN-SUFFIX,8kc.top
-# add by Telegram user: hlly / Date: 2026-01-06 22:51:31
-DOMAIN-SUFFIX,kcbd.top
-# 视频网站 / add by Telegram user: 哈Lay / Date: 2026-01-06 21:13:37
-DOMAIN-SUFFIX,theluyuan.com
 # 公务行 / add by Telegram user: 哈Lay / Date: 2026-01-06 17:37:14
 DOMAIN-SUFFIX,gpetrip.com
 # 公务网 / add by Telegram user: 哈Lay / Date: 2026-01-06 17:36:23
@@ -243,18 +268,12 @@ DOMAIN-SUFFIX,cgicop.com
 DOMAIN-SUFFIX,ts3.ink
 # add by Telegram user: IllIllIlIl / Date: 2026-01-05 08:57:51
 DOMAIN-SUFFIX,xn--cesw6hd3s99f.com
-# add by Telegram user: IllIllIlIl / Date: 2026-01-05 08:54:12
-DOMAIN-SUFFIX,cmbc.run
 # add by Telegram user: 哈Lay / Date: 2026-01-03 21:57:08
 DOMAIN-SUFFIX,xiaoxia.vip
 # 酷咖游戏官网 / add by Telegram user: kisigrant / Date: 2026-01-03 20:40:43
 DOMAIN-SUFFIX,cocav.com
 # 酷友社 / add by Telegram user: zero / Date: 2026-01-03 12:27:09
 DOMAIN-SUFFIX,d4ctech.com
-# 个人网站 / add by Telegram user: Awt / Date: 2026-01-03 00:58:13
-DOMAIN-SUFFIX,awstme.top
-# 北京公交地铁APP："亿通行" / add by Telegram user: zero / Date: 2026-01-02 23:03:30
-DOMAIN-SUFFIX,easytomessage.com
 # add by Telegram user: Aethersailor / Date: 2026-01-02 16:29:48
 DOMAIN-SUFFIX,shanghai-parking.com
 # 影视站 / add by Telegram user: 哈Lay / Date: 2026-01-02 15:26:38
@@ -267,30 +286,12 @@ DOMAIN-SUFFIX,gegeselect.hk
 DOMAIN-SUFFIX,xiwang.com
 # 视频网站 / add by Telegram user: 哈Lay / Date: 2025-12-30 19:45:33
 DOMAIN-SUFFIX,gaze.run
-# 社区 / add by Telegram user: 哈Lay / Date: 2025-12-29 12:54:22
-DOMAIN-SUFFIX,a0d.top
 # 游戏资讯网站 / add by Telegram user: 麦香鸡 / Date: 2025-12-28 14:36:02
 DOMAIN-SUFFIX,aqtwwx.net
 # 国内某设计类网站 / add by Telegram user: 2. / Date: 2025-12-28 00:26:57
 DOMAIN-SUFFIX,acggit.com
 # 国内某设计类网站 / add by Telegram user: 2. / Date: 2025-12-28 00:26:19
 DOMAIN-SUFFIX,aigodlike.com
-# iOS旧版App服务 / add by Telegram user: 雪菜 / Date: 2025-12-27 11:39:43
-DOMAIN-SUFFIX,timbrd.com
-# aicoding / add by Telegram user: Makka / Date: 2025-12-27 10:11:32
-DOMAIN-SUFFIX,anyrouter.top
-
-
-
-
-
-
-# 2025.12.26 分类整理完毕
-
-# ---------------------------------------
-# 以下域名已提交 PR
-
-# PR 至 felixonmars/dnsmasq-china-list
 # add by Telegram user: Aethersailor / Date: 2025-12-22 11:49:20
 DOMAIN-SUFFIX,hhtvc.com
 # add by Telegram user: Aethersailor / Date: 2025-12-22 11:37:14
