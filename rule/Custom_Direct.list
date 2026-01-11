@@ -239,6 +239,16 @@ DOMAIN-SUFFIX,a0d.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:42:55
+DOMAIN-SUFFIX,scratch5.com
+# 米思齐官网 / add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:41:54
+DOMAIN-SUFFIX,mixly.org
+# 铁威马NAS远程访问服务 / add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:40:12
+DOMAIN-SUFFIX,tnas.link
+# 铁威马官网 / add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:39:01
+DOMAIN-SUFFIX,terra-master.com
+# 铁威马NAS远程访问服务 / add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:36:32
+DOMAIN-SUFFIX,tnas.online
 
 
 
