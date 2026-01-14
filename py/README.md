@@ -1,8 +1,6 @@
-<h1 align="center">
-  🐍 Python Scripts
-</h1>
+# 🐍 Python Scripts
 
-<p align="center"><b>🛠️ 项目辅助与维护脚本 🛠️</b></p>
+## 🛠️ 项目辅助与维护脚本 🛠️
 
 这里存放项目使用的 Python 维护脚本（如规则处理、文件合并等）。
 
