@@ -11,4 +11,5 @@
 
 ## 📂 目录结构
 
+- **[generate_game_cdn.py](generate_game_cdn.py)**: 自动从 v2fly/domain-list-community 上游下载并生成 `Game_Download_CDN.list` 规则文件。
 - **`archived/`**: 存放已废弃或不再使用的历史脚本。[查看详情](archived/README.md)
