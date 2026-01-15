@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 425
+# TOTAL: 427
 
 payload:
   - '*m-team*'
@@ -99,6 +99,7 @@ payload:
   - '+.dhub.kubesre.xyz'
   - '+.dingdingzn.com'
   - '+.diyiedu.com'
+  - '+.dnshe.com'
   - '+.docker.1panel.live'
   - '+.docker.kejilion.pro'
   - '+.docker.unsee.tech'
@@ -306,6 +307,7 @@ payload:
   - '+.qiaoxuesi.com'
   - '+.qinglue.com'
   - '+.qmeng.top'
+  - '+.rayws.top'
   - '+.redenmc.com'
   - '+.registry.dockermirror.com'
   - '+.rewards.bing.com'
