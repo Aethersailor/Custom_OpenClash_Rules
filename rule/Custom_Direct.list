@@ -8,6 +8,9 @@
 # ImmortalWrt 相关
 DOMAIN-SUFFIX,immortalwrt.org
 DOMAIN-SUFFIX,kyarucloud.moe
+# Tailscale
+DOMAIN-SUFFIX,tailscale.com
+SRC-PORT,41641
 # GitHub 反代 CDN
 DOMAIN-SUFFIX,gh-proxy.com
 DOMAIN-SUFFIX,gh.con.sh
