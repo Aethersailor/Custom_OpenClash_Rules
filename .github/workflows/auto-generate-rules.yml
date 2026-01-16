@@ -52,11 +52,14 @@ jobs:
             domain_rules=$(grep -E '^(DOMAIN,|DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^DOMAIN-SUFFIX,(.+)/  - '+.\1'/" | sed -E "s/^DOMAIN-KEYWORD,(.+)/  - '*\1*'/" | sed -E "s/^DOMAIN,(.+)/  - '\1'/" | sort)
             ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - '\1'/" | sed -E "s/^IP,([^,]+).*/  - '\1'/" | sort)
 
-            classical_rules=$(grep -E '^(DOMAIN,|DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^(.*)/  - \1/" | sort)
+            classical_rules=$(grep -E '^(DOMAIN,|DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD|SRC-PORT)' "$list_file" | sed -E "s/^(.*)/  - \1/" | sort)
             classical_rules+=$'\n'
             classical_rules+=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sort)
 
-            classical_ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sort)
+            classical_ip_rules=$({
+              grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/"
+              grep -E '^SRC-PORT' "$list_file" | sed -E "s/^(.*)/  - \1/"
+            } | sort)
 
             generate_and_commit() {
               file="$1"
