@@ -1,0 +1,16 @@
+site_name: Wiki
+site_url: https://aethersailor.github.io/<REPO>/
+docs_dir: wiki
+theme:
+  name: material
+plugins:
+  - search
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - admonition
+  - def_list
+  - footnotes
+  - attr_list
+  - md_in_html
