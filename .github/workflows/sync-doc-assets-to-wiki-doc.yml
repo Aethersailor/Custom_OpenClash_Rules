@@ -1,0 +1,35 @@
+name: Sync doc assets to wiki/doc
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'doc/**'
+
+permissions:
+  contents: write
+
+jobs:
+  sync-doc-assets:
+    if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v6
+
+      - name: Sync doc assets into wiki/doc
+        run: |
+          mkdir -p wiki/doc
+          rsync -av --delete --exclude '*.md' doc/ wiki/doc/
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add wiki/doc
+
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(doc): sync doc assets to wiki"
+            git push
+          fi

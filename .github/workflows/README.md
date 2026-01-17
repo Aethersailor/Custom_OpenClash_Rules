@@ -15,6 +15,7 @@
 | **[dependabot-auto-merge.yml](dependabot-auto-merge.yml)** | 自动合并带有 `automerge` 标签的 Dependabot PR | Dependabot PR 打开/更新 |
 | **[purge-jsdelivr.yml](purge-jsdelivr.yml)** | 自动刷新 jsDelivr CDN 缓存，并实现防抖（60 秒等待批量合并提交） | `cfg/`, `rule/`, `game_rule/`, `shell/`, `overwrite/` 变更 / 手动触发 |
 | **[push-doc-to-wiki.yml](push-doc-to-wiki.yml)** | 将 `doc/` 目录内容同步到 GitHub Wiki 的 `doc/` 目录 | `doc/**` 变更 / 手动触发 |
+| **[sync-doc-assets-to-wiki-doc.yml](sync-doc-assets-to-wiki-doc.yml)** | 将 `doc/` 目录中的非 Markdown 资源同步到 `wiki/doc/` 供 Pages 使用 | `doc/**` 变更 / 手动触发 |
 | **[sync_custom_clash.yml](sync_custom_clash.yml)** | 同步 `Custom_Clash.ini` 到衍生项目 `Custom_Clash_Rules`，并调整分流规则 | `cfg/Custom_Clash.ini` 变更 / 手动触发 |
 
 ## 📂 子目录
