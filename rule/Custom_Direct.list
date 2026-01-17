@@ -237,6 +237,14 @@ DOMAIN-SUFFIX,anyrouter.top
 DOMAIN-SUFFIX,a0d.top
 # 微信小程序
 DOMAIN-SUFFIX,wxdw.top
+# add by Telegram user: 哈Lay / Date: 2026-01-14 18:11:07
+DOMAIN-SUFFIX,rayws.top
+# dnshe免费域名 / add by Telegram user: r / Date: 2026-01-14 17:48:56
+DOMAIN-SUFFIX,dnshe.com
+# 博客 / add by Telegram user: 哈Lay / Date: 2026-01-13 23:37:24
+DOMAIN-SUFFIX,lg3000.top
+# add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:42:55
+DOMAIN-SUFFIX,scratch5.com
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -246,16 +254,16 @@ DOMAIN-SUFFIX,wxdw.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# add by Telegram user: Aethersailor / Date: 2026-01-18 06:19:29
-DOMAIN-SUFFIX,ahqian.com
-# add by Telegram user: Aethersailor / Date: 2026-01-18 06:19:11
-DOMAIN-SUFFIX,17vin.com
-# add by Telegram user: 哈Lay / Date: 2026-01-14 18:11:07
-DOMAIN-SUFFIX,rayws.top
-# dnshe免费域名 / add by Telegram user: r / Date: 2026-01-14 17:48:56
-DOMAIN-SUFFIX,dnshe.com
-# 博客 / add by Telegram user: 哈Lay / Date: 2026-01-13 23:37:24
-DOMAIN-SUFFIX,lg3000.top
+
+
+
+# 2026.1.18 分类整理完毕
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
+
 # 星耀充值 / add by Telegram user: r / Date: 2026-01-13 19:50:19
 DOMAIN-SUFFIX,xingyaozhilian.com
 # 小倍养基 / add by Telegram user: Mairs / Date: 2026-01-13 17:11:39
@@ -264,8 +272,6 @@ DOMAIN-SUFFIX,xiaobeiyangji.com
 DOMAIN-SUFFIX,xbcloudprint.com
 # 轩辕的编程宇宙 / add by Telegram user: Mayfly / Date: 2026-01-12 20:44:53
 DOMAIN-SUFFIX,xuanyuancode.com
-# add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:42:55
-DOMAIN-SUFFIX,scratch5.com
 # 米思齐官网 / add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:41:54
 DOMAIN-SUFFIX,mixly.org
 # 铁威马NAS远程访问服务 / add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:40:12
@@ -274,21 +280,6 @@ DOMAIN-SUFFIX,tnas.link
 DOMAIN-SUFFIX,terra-master.com
 # 铁威马NAS远程访问服务 / add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:36:32
 DOMAIN-SUFFIX,tnas.online
-
-
-
-
-
-
-
-# 2026.1.11 分类整理完毕
-
-# ---------------------------------------
-# 以下域名已提交 PR
-
-# PR 至 felixonmars/dnsmasq-china-list
-
-
 
 # PR 至 v2fly/domain-list-community
 
