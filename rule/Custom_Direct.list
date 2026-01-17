@@ -121,6 +121,8 @@ DOMAIN-SUFFIX,plushk2.younoyes.com
 DOMAIN-SUFFIX,plushk3.younoyes.com
 # 视频网站 / add by Telegram user: jiro / Date:2025-07-22 12:04:55
 DOMAIN-SUFFIX,dushe1.app
+# Mursor IPTV 直播源
+DOMAIN-SUFFIX,ottiptv.cc
 
 # 游戏类规则
 # 红警重聚 Reunion 2023
