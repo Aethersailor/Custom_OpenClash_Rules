@@ -1,5 +1,7 @@
 (() => {
   const INTERNAL_PAGE_RE = /^(?:\\d+)\\.(.+)$/;
+  const RAW_BASE = "https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/";
+  const DOC_PATH_RE = /^(?:\\.\\/|\\.\\.\\/)*doc\\/(.+)$/;
 
   const buildPageMap = () => {
     const map = new Map();
@@ -94,9 +96,32 @@
     });
   };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", rewriteWikiLinks);
-  } else {
+  const rewriteDocImages = () => {
+    const images = document.querySelectorAll("img[src]");
+    images.forEach((img) => {
+      const rawSrc = img.getAttribute("src");
+      if (!rawSrc || /^(?:[a-z]+:)?\\/\\//i.test(rawSrc)) {
+        return;
+      }
+
+      const match = rawSrc.match(DOC_PATH_RE);
+      if (!match) {
+        return;
+      }
+
+      const docPath = match[1].replace(/^\\/+/, "");
+      img.setAttribute("src", `${RAW_BASE}doc/${docPath}`);
+    });
+  };
+
+  const rewriteAll = () => {
     rewriteWikiLinks();
+    rewriteDocImages();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", rewriteAll);
+  } else {
+    rewriteAll();
   }
 })();
