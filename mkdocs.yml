@@ -26,3 +26,5 @@ markdown_extensions:
   - footnotes
   - attr_list
   - md_in_html
+extra_javascript:
+  - assets/wiki-link-rewrite.js
