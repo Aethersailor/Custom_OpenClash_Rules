@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 437
+# TOTAL: 441
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -49,6 +49,7 @@ payload:
   - DOMAIN-SUFFIX,anycubic.com
   - DOMAIN-SUFFIX,anyrouter.top
   - DOMAIN-SUFFIX,api.myip.com
+  - DOMAIN-SUFFIX,apm-log-upload-os.hoyoverse.com
   - DOMAIN-SUFFIX,aqtwwx.net
   - DOMAIN-SUFFIX,armvm.com
   - DOMAIN-SUFFIX,atticus.vip
@@ -261,6 +262,7 @@ payload:
   - DOMAIN-SUFFIX,micu.hk
   - DOMAIN-SUFFIX,mifeng.plus
   - DOMAIN-SUFFIX,mifon.com
+  - DOMAIN-SUFFIX,minor-api-os.hoyoverse.com
   - DOMAIN-SUFFIX,mixly.org
   - DOMAIN-SUFFIX,mobai.sbs
   - DOMAIN-SUFFIX,modelscope.net
@@ -324,6 +326,7 @@ payload:
   - DOMAIN-SUFFIX,scnyw.com
   - DOMAIN-SUFFIX,scratch5.com
   - DOMAIN-SUFFIX,sct.ftqq.com
+  - DOMAIN-SUFFIX,sdk-log-upload-os.hoyoverse.com
   - DOMAIN-SUFFIX,seaflysoft.com
   - DOMAIN-SUFFIX,seedpace.com
   - DOMAIN-SUFFIX,sgtv.ii00.cc
@@ -436,6 +439,7 @@ payload:
   - DOMAIN-SUFFIX,zsytit.com
   - DOMAIN-SUFFIX,ztytech.com
   - DOMAIN-SUFFIX,zuobiao.press
+  - DOMAIN-SUFFIX,zzz-log-upload-os.hoyoverse.com
   - SRC-PORT,41641
   - IP-CIDR,108.174.48.100/32,no-resolve
   - IP-CIDR,218.78.7.16/32,no-resolve
