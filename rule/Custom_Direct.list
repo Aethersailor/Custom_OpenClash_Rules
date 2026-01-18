@@ -129,6 +129,12 @@ DOMAIN-SUFFIX,ottiptv.cc
 IP-CIDR,108.174.48.100/32,no-resolve
 # 雀魂麻将
 DOMAIN-SUFFIX,game.maj-soul.com
+# hoyoverse.com
+DOMAIN-SUFFIX,apm-log-upload-os.hoyoverse.com
+DOMAIN-SUFFIX,sdk-log-upload-os.hoyoverse.com
+DOMAIN-SUFFIX,zzz-log-upload-os.hoyoverse.com
+DOMAIN-SUFFIX,minor-api-os.hoyoverse.com
+
 
 # 软件类规则
 # 软件及服务 / add by Telegram user: rl / Date: 2025-08-14 09:47:11
