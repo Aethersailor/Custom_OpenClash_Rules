@@ -14,11 +14,22 @@ on:
       - '!**/README.md'
       - '!README.md'
 
+  workflow_run:
+    workflows:
+      - Auto generate rules
+      - Auto update mainland config
+      - Auto Update Game CDN Rules
+      - Sync and Modify Custom_Clash.ini
+    types:
+      - completed
 
   workflow_dispatch:  # 支持手动触发
 
 jobs:
   purge-jsdelivr:
+    if: |
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+      (github.event_name != 'workflow_run' && github.actor != 'github-actions[bot]')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -31,15 +42,39 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0 
+          fetch-depth: 0
 
       - name: Soft Debounce (Wait & Check)
+        id: debounce
         env:
           CURRENT_SHA: ${{ github.sha }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
+          echo "Event: $EVENT_NAME"
+
+          if [ "$EVENT_NAME" = "workflow_run" ]; then
+            echo "Workflow run head SHA: $HEAD_SHA"
+            echo "Fetching latest remote info..."
+            git fetch origin main
+            LATEST_SHA=$(git rev-parse origin/main)
+
+            echo "Latest Remote SHA: $LATEST_SHA"
+
+            if [ "$LATEST_SHA" = "$HEAD_SHA" ]; then
+              echo "No new commit since workflow completed. Skipping purge."
+              echo "should_purge=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            echo "New commit detected after workflow run. Proceeding with purge."
+            echo "should_purge=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
           echo "Current Commit SHA: $CURRENT_SHA"
           echo "Waiting for 60 seconds to batch multiple changes..."
-          
+
           # 倒计时
           for i in {60..1}; do
              # 仅每10秒打印一次日志防止刷屏
@@ -48,36 +83,26 @@ jobs:
              fi
              sleep 1
           done
-          
+
           echo "Fetching latest remote info..."
           git fetch origin main
           LATEST_SHA=$(git rev-parse origin/main)
-          
+
           echo "Latest Remote SHA: $LATEST_SHA"
-          
+
           if [ "$CURRENT_SHA" != "$LATEST_SHA" ]; then
-            echo "⚠️ A newer commit ($LATEST_SHA) has been detected."
-            echo "✅ Skipping this run gracefully to avoid 'Cancelled' notification."
+            echo "A newer commit ($LATEST_SHA) has been detected."
+            echo "Skipping this run to avoid redundant purge."
+            echo "should_purge=false" >> "$GITHUB_OUTPUT"
             exit 0
           else
-            echo "✅ This is still the latest commit. Proceeding with purge..."
+            echo "This is still the latest commit. Proceeding with purge..."
+            echo "should_purge=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Purge jsDelivr Cache
-        # 上一步如果 exit 0 了，这里依然会执行吗？
-        # exit 0 代表成功，所以这里需要再次判断，或者把 purge 逻辑放在同一个 step 里。
-        # 为了逻辑清晰，我们把 purge 整合到上面的脚本里，或者使用 outputs。
-        # 最简单的方法：把 purge 逻辑放到同一个 run block 或者使用 if condition based on step outcome.
-        # 但 shell exit 0 会结束 step 继续下一个。
-        # 我们可以利用一个文件标记。
+        if: steps.debounce.outputs.should_purge == 'true'
         run: |
-          git fetch origin main
-          LATEST_SHA=$(git rev-parse origin/main)
-          if [ "${{ github.sha }}" != "$LATEST_SHA" ]; then
-            echo "Skipping purge step as newer commit exists."
-            exit 0
-          fi
-          
           REPO="${{ github.repository }}"
           echo "Purging jsDelivr cache for $REPO"
 
