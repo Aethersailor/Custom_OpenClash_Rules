@@ -1,0 +1,4 @@
+[submodule "overwrite/OpenClash_Overwrite"]
+	path = overwrite/OpenClash_Overwrite
+	url = https://github.com/Giveupmoon/OpenClash_Overwrite
+	branch = main
