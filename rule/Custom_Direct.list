@@ -90,6 +90,8 @@ DOMAIN-SUFFIX,nn.ci
 DOMAIN-SUFFIX,wwwh.eu.org
 DOMAIN-SUFFIX,1996999.xyz
 # Emby 直连
+# 守候网络
+DOMAIN-SUFFIX,server2.cn2gias.uk
 # MeFun
 IP-CIDR,218.78.7.16/32,no-resolve
 IP-CIDR,98.126.27.164/32,no-resolve
