@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 443
+# TOTAL: 444
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -330,6 +330,7 @@ payload:
   - DOMAIN-SUFFIX,sdk-log-upload-os.hoyoverse.com
   - DOMAIN-SUFFIX,seaflysoft.com
   - DOMAIN-SUFFIX,seedpace.com
+  - DOMAIN-SUFFIX,server2.cn2gias.uk
   - DOMAIN-SUFFIX,sgtv.ii00.cc
   - DOMAIN-SUFFIX,shanghai-parking.com
   - DOMAIN-SUFFIX,shineacc.com
