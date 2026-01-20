@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 438
+# TOTAL: 439
 
 payload:
   - '*m-team*'
@@ -330,6 +330,7 @@ payload:
   - '+.sdk-log-upload-os.hoyoverse.com'
   - '+.seaflysoft.com'
   - '+.seedpace.com'
+  - '+.server2.cn2gias.uk'
   - '+.sgtv.ii00.cc'
   - '+.shanghai-parking.com'
   - '+.shineacc.com'
