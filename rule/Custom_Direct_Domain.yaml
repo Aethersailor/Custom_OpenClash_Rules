@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 439
+# TOTAL: 440
 
 payload:
   - '*m-team*'
@@ -51,6 +51,7 @@ payload:
   - '+.api.myip.com'
   - '+.apm-log-upload-os.hoyoverse.com'
   - '+.aqtwwx.net'
+  - '+.argotunnel.com'
   - '+.armvm.com'
   - '+.atticus.vip'
   - '+.awstme.top'
