@@ -263,6 +263,8 @@ DOMAIN-SUFFIX,scratch5.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 冰山数据 / add by Telegram user: Mairs / Date: 2026-01-22 17:51:23
+DOMAIN-SUFFIX,bingshandashu.com
 # add by Telegram user: Mairs / Date: 2026-01-22 17:50:54
 DOMAIN-SUFFIX,wologic.net
 # add by Telegram user: Mairs / Date: 2026-01-22 17:50:39
