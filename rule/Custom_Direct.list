@@ -11,6 +11,8 @@ DOMAIN-SUFFIX,kyarucloud.moe
 # Tailscale
 DOMAIN-SUFFIX,tailscale.com
 SRC-PORT,41641
+# Cloudflare Tunnel
+DOMAIN-SUFFIX,argotunnel.com
 # GitHub 反代 CDN
 DOMAIN-SUFFIX,gh-proxy.com
 DOMAIN-SUFFIX,gh.con.sh
@@ -63,7 +65,6 @@ DOMAIN-SUFFIX,msftncsi.com
 # Kaspersky
 DOMAIN-SUFFIX,kaspersky.com
 DOMAIN-SUFFIX,kaspersky-labs.com
-
 # Akamai CDN
 DOMAIN-SUFFIX,akamaihd.net
 DOMAIN-SUFFIX,akamaized.net
