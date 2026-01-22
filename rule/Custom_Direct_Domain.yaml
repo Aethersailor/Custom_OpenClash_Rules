@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 444
+# TOTAL: 445
 
 payload:
   - '*m-team*'
@@ -268,6 +268,7 @@ payload:
   - '+.mifeng.plus'
   - '+.mifon.com'
   - '+.minor-api-os.hoyoverse.com'
+  - '+.misea.top'
   - '+.mixly.org'
   - '+.mobai.sbs'
   - '+.modelscope.net'
