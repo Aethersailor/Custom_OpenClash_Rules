@@ -263,6 +263,8 @@ DOMAIN-SUFFIX,scratch5.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 万家乐 / add by Telegram user: Mairs / Date: 2026-01-22 17:52:18
+DOMAIN-SUFFIX,machtalk.net
 # 一财有看投 / add by Telegram user: Mairs / Date: 2026-01-22 17:52:01
 DOMAIN-SUFFIX,yicaiykt.com
 # 冰山数据 / add by Telegram user: Mairs / Date: 2026-01-22 17:51:23
