@@ -263,6 +263,8 @@ DOMAIN-SUFFIX,scratch5.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 和风天气 API / add by Telegram user: Mairs / Date: 2026-01-22 17:47:47
+DOMAIN-SUFFIX,qweatherapi.com
 # 先锋学霸 / add by Telegram user: Mairs / Date: 2026-01-22 17:46:58
 DOMAIN-SUFFIX,axuex.top
 # add by Telegram user: Mairs / Date: 2026-01-22 17:46:08
