@@ -254,6 +254,12 @@ DOMAIN-SUFFIX,dnshe.com
 DOMAIN-SUFFIX,lg3000.top
 # add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:42:55
 DOMAIN-SUFFIX,scratch5.com
+# 播客 / add by Telegram user: Mairs / Date: 2026-01-22 17:49:33
+DOMAIN-SUFFIX,meiyitou.top
+# add by Telegram user: Mairs / Date: 2026-01-22 17:48:05
+DOMAIN-SUFFIX,misea.top
+# 先锋学霸 / add by Telegram user: Mairs / Date: 2026-01-22 17:46:58
+DOMAIN-SUFFIX,axuex.top
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -263,6 +269,17 @@ DOMAIN-SUFFIX,scratch5.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+
+
+
+
+# 2026.1.22 分类整理完毕
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
+
 # add by Telegram user: Mairs / Date: 2026-01-22 17:59:20
 DOMAIN-SUFFIX,tcp.mk
 # add by Telegram user: Mairs / Date: 2026-01-22 17:58:29
@@ -301,18 +318,12 @@ DOMAIN-SUFFIX,hiwms.com
 DOMAIN-SUFFIX,nodcloud.com
 # 北京教委 / add by Telegram user: Mairs / Date: 2026-01-22 17:50:02
 DOMAIN-SUFFIX,bjtzeduyun.com
-# 播客 / add by Telegram user: Mairs / Date: 2026-01-22 17:49:33
-DOMAIN-SUFFIX,meiyitou.top
 # add by Telegram user: Mairs / Date: 2026-01-22 17:48:42
 DOMAIN-SUFFIX,enyugame.net
 # add by Telegram user: Mairs / Date: 2026-01-22 17:48:20
 DOMAIN-SUFFIX,kancaibao.com
-# add by Telegram user: Mairs / Date: 2026-01-22 17:48:05
-DOMAIN-SUFFIX,misea.top
 # 和风天气 API / add by Telegram user: Mairs / Date: 2026-01-22 17:47:47
 DOMAIN-SUFFIX,qweatherapi.com
-# 先锋学霸 / add by Telegram user: Mairs / Date: 2026-01-22 17:46:58
-DOMAIN-SUFFIX,axuex.top
 # add by Telegram user: Mairs / Date: 2026-01-22 17:46:08
 DOMAIN-SUFFIX,functorz.com
 # 斑斑低代码 / add by Telegram user: Mairs / Date: 2026-01-22 17:45:45
@@ -325,16 +336,6 @@ DOMAIN-SUFFIX,cc.cd
 DOMAIN-SUFFIX,meoof-pet.com
 # 上海车又在信息技术有限公司 / add by Telegram user: Evan / Date: 2026-01-18 14:24:13
 DOMAIN-SUFFIX,cyouzai.com
-
-
-
-# 2026.1.18 分类整理完毕
-
-# ---------------------------------------
-# 以下域名已提交 PR
-
-# PR 至 felixonmars/dnsmasq-china-list
-
 # 星耀充值 / add by Telegram user: r / Date: 2026-01-13 19:50:19
 DOMAIN-SUFFIX,xingyaozhilian.com
 # 小倍养基 / add by Telegram user: Mairs / Date: 2026-01-13 17:11:39
