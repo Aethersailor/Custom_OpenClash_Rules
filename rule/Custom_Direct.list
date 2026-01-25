@@ -269,21 +269,22 @@ DOMAIN-SUFFIX,axuex.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# 教育网站 / add by Telegram user: Awt / Date: 2026-01-25 13:16:28
-DOMAIN-SUFFIX,harbourmooc.com
-# add by Telegram user: r / Date: 2026-01-23 16:13:33
-DOMAIN-SUFFIX,zqin758.xyz
-DOMAIN-SUFFIX,nanshe-tech.com
 
 
 
-# 2026.1.22 分类整理完毕
+
+# 2026.1.25 分类整理完毕
 
 # ---------------------------------------
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
-
+# 教育网站 / add by Telegram user: Awt / Date: 2026-01-25 13:16:28
+DOMAIN-SUFFIX,harbourmooc.com
+# add by Telegram user: r / Date: 2026-01-23 16:13:33
+DOMAIN-SUFFIX,zqin758.xyz
+# https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/355
+DOMAIN-SUFFIX,nanshe-tech.com
 # add by Telegram user: Mairs / Date: 2026-01-22 17:59:20
 DOMAIN-SUFFIX,tcp.mk
 # add by Telegram user: Mairs / Date: 2026-01-22 17:58:29
