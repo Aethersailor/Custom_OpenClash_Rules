@@ -269,6 +269,8 @@ DOMAIN-SUFFIX,axuex.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# nat 类型检测 / add by Telegram user: 一只 / Date: 2026-01-26 21:02:18
+DOMAIN-SUFFIX,natchecker.com
 # add by Telegram user: 蛋中央 / Date: 2026-01-26 20:34:21
 DOMAIN-SUFFIX,mchuiji.com
 # add by Telegram user: 蛋中央 / Date: 2026-01-26 20:08:51
