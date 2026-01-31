@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 484
+# TOTAL: 485
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -300,6 +300,7 @@ payload:
   - DOMAIN-SUFFIX,mykuaidi.com
   - DOMAIN-SUFFIX,myshopex.com
   - DOMAIN-SUFFIX,naixi.com
+  - DOMAIN-SUFFIX,nanhuabx.com
   - DOMAIN-SUFFIX,nanshe-tech.com
   - DOMAIN-SUFFIX,natchecker.com
   - DOMAIN-SUFFIX,neihang.net
