@@ -269,6 +269,8 @@ DOMAIN-SUFFIX,axuex.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 港话通 / add by Telegram user: 真怪誕呀 / Date: 2026-02-03 19:00:10
+DOMAIN-SUFFIX,hkchat.app
 # 舒达app域名 / add by Telegram user: 闻西 / Date: 2026-02-02 15:01:12
 DOMAIN-SUFFIX,aidream.website
 # 乖淘app / add by Telegram user: 闻西 / Date: 2026-02-02 14:58:30
