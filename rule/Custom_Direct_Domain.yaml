@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 493
+# TOTAL: 494
 
 payload:
   - '*m-team*'
@@ -60,6 +60,7 @@ payload:
   - '+.aqtwwx.net'
   - '+.argotunnel.com'
   - '+.armvm.com'
+  - '+.asgardion.space'
   - '+.atticus.vip'
   - '+.awstme.top'
   - '+.axuex.top'
