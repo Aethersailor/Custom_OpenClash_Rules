@@ -1,6 +1,6 @@
 # 归档的配置文件
 
-本文件夹包含已弃用但保留用于历史参考的订阅转换模板配置文件。
+本文件夹包含已弃用但保留用于历史参考的配置模板文件。
 
 ## 文件说明
 
@@ -8,7 +8,7 @@
 | :--- | :--- | :--- |
 | `Custom_Clash_Smart.ini` | Smart 分流规则模板 | OpenClash 已更新 Smart 覆写功能，该模板已无必要 |
 | `Custom_Clash_Smart_Full.ini` | Smart 重度分流规则模板 | OpenClash 已更新 Smart 覆写功能，该模板已无必要 |
-| `Custom_Clash_Smart_GFW.ini` | Smart GFW 规则模板 | OpenClash 已更新 Smart 覆写功能，该模板已无必要 |
+| `Custom_Clash_Smart_GFW.ini` | Smart 精简规则模板 | OpenClash 已更新 Smart 覆写功能，该模板已无必要 |
 | `Custom_Clash_Smart_Lite.ini` | Smart 轻量规则模板 | OpenClash 已更新 Smart 覆写功能，该模板已无必要 |
 
 ## 历史说明
