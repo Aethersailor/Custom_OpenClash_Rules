@@ -7,7 +7,7 @@
 | 文件名 | 描述 | 弃用原因 |
 | :--- | :--- | :--- |
 | **[generate_smart.yml](generate_smart.yml)** | 从标准 INI 模板生成 Smart 内核专用模板（替换 `url-test` 为 `smart`） | OpenClash 已更新 Smart 覆写功能，此工作流已无必要 |
-| **[generate_smart_gfw.yml](generate_smart_gfw.yml)** | 从 GFW 模板生成 Smart GFW 专用模板 | OpenClash 已更新 Smart 覆写功能，此工作流已无必要 |
+| **[generate_smart_gfw.yml](generate_smart_gfw.yml)** | 从精简模板生成 Smart 专用模板 | OpenClash 已更新 Smart 覆写功能，此工作流已无必要 |
 | **[reject_cfg_prs.yml](reject_cfg_prs.yml)** | 自动拒绝非授权用户对 `/cfg` 目录的 PR（保护配置文件完整性） | 目前处于停用状态，按需恢复 |
 
 > [!NOTE]
