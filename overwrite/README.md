@@ -6,7 +6,7 @@
 
 请使用以下方式配置 OpenClash：
 
-1. **首选方案**：按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，配合[订阅转换模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)进行配置
+1. **首选方案**：按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，配合[配置模板（INI）](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)进行配置
 2. **远程覆写**：如需使用远程覆写配置文件，推荐使用 [Giveupmoon/OpenClash_Overwrite](https://github.com/Giveupmoon/OpenClash_Overwrite)
 3. **参考配置**：查看 `cfg/yaml/Custom_Clash.yaml` 作为完整的配置文件参考
 
