@@ -8,7 +8,7 @@
 
 这两个配置文件已过时，不再维护。建议使用以下方式进行配置：
 
-1. **推荐方式**：按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，配合订阅转换模板进行配置
+1. **推荐方式**：按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，配合配置模板（INI）进行配置
 2. **替代方案**：使用 `cfg/yaml/Custom_Clash.yaml` 作为完整的配置文件参考
 
 ## 归档文件列表
