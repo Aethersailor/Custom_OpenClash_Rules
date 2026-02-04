@@ -11,8 +11,8 @@
 | 规则文件 | 类型 | 功能说明 |
 | :--- | :---: | :--- |
 | [**Custom_Direct.list**](Custom_Direct.list) | <img src="https://img.shields.io/badge/Mode-DIRECT-green?style=flat-square" alt="DIRECT"> | 🎯 **直连规则**：包含一些需要直连的冷门域名。 |
-| [**Custom_Proxy.list**](Custom_Proxy.list) | <img src="https://img.shields.io/badge/Mode-PROXY-blue?style=flat-square" alt="PROXY"> | 🚀 **代理规则**：包含一些需要代理的冷门域名。 |
-| [**Steam_CDN.list**](Steam_CDN.list) | <img src="https://img.shields.io/badge/Mode-DIRECT-green?style=flat-square" alt="DIRECT"> | 🎮 **Steam CDN**：精确匹配 Steam 下载服务器，确保 Steam 下载流量不走代理。 |
+| [**Custom_Proxy.list**](Custom_Proxy.list) | <img src="https://img.shields.io/badge/Mode-PROXY-blue?style=flat-square" alt="PROXY"> | 🚀 **非直连规则**：包含一些需要经由出站策略处理的冷门域名。 |
+| [**Steam_CDN.list**](Steam_CDN.list) | <img src="https://img.shields.io/badge/Mode-DIRECT-green?style=flat-square" alt="DIRECT"> | 🎮 **Steam CDN**：精确匹配 Steam 下载服务器，确保 Steam 下载流量尽量不经由出站策略。 |
 
 ---
 
