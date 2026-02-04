@@ -2,7 +2,7 @@
 
 ## 1.1. 本项目方案如何使用 Smart 内核  
 
-Smart 内核是 OpenClash 作者 vernesong 推出的魔改版内核，支持 Smart 节点分组功能，有点类似 Load-balance（负载均衡）节点分组，更加智能化。
+Smart 内核是 OpenClash 作者 vernesong 推出的魔改版内核，支持 Smart 出站项分组功能，类似 Load-balance（负载均衡）出站项分组，更加智能化。
 
 内核特性：<https://github.com/vernesong/OpenClash/releases/tag/mihomo>  
 
