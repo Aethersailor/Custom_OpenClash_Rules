@@ -13,6 +13,7 @@ DOMAIN-SUFFIX,tailscale.com
 SRC-PORT,41641
 # Cloudflare Tunnel
 DOMAIN-SUFFIX,argotunnel.com
+SRC-PORT,7844
 # GitHub 反代 CDN
 DOMAIN-SUFFIX,gh-proxy.com
 DOMAIN-SUFFIX,gh.con.sh
