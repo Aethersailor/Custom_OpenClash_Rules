@@ -13,7 +13,9 @@ DOMAIN-SUFFIX,tailscale.com
 SRC-PORT,41641
 # Cloudflare Tunnel
 DOMAIN-SUFFIX,argotunnel.com
-SRC-PORT,7844
+IP-CIDR,198.41.192.0/24,no-resolve
+IP-CIDR,198.41.200.0/24,no-resolve
+DST-PORT,7844
 # GitHub 反代 CDN
 DOMAIN-SUFFIX,gh-proxy.com
 DOMAIN-SUFFIX,gh.con.sh
