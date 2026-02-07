@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 5
+# TOTAL: 6
 
 payload:
   - IP-CIDR,108.174.48.100/32,no-resolve
@@ -9,3 +9,4 @@ payload:
   - IP-CIDR,5.5.5.5/32,no-resolve
   - IP-CIDR,98.126.27.164/32,no-resolve
   - SRC-PORT,41641
+  - SRC-PORT,7844
