@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 504
+# TOTAL: 505
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -503,8 +503,9 @@ payload:
   - DOMAIN-SUFFIX,zuobiao.press
   - DOMAIN-SUFFIX,zzz-log-upload-os.hoyoverse.com
   - SRC-PORT,41641
-  - SRC-PORT,7844
   - IP-CIDR,108.174.48.100/32,no-resolve
+  - IP-CIDR,198.41.192.0/24,no-resolve
+  - IP-CIDR,198.41.200.0/24,no-resolve
   - IP-CIDR,218.78.7.16/32,no-resolve
   - IP-CIDR,5.5.5.5/32,no-resolve
   - IP-CIDR,98.126.27.164/32,no-resolve
