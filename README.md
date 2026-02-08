@@ -61,12 +61,6 @@
 
 ---
 
-> [!IMPORTANT]
-> - **Telegram Channel**: [Custom_OpenClash_Rules | 通知频道](https://t.me/custom_openclash_rules)
-> - **Telegram Group**: [Custom_OpenClash_Rules | 交流群](https://t.me/custom_openclash_rules_group)
-
----
-
 > [!NOTE]
 > **声明事项：**
 >
