@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 503
+# TOTAL: 504
 
 payload:
   - '*m-team*'
@@ -68,6 +68,7 @@ payload:
   - '+.banban.work'
   - '+.bangumi.tv'
   - '+.bdcb.cc'
+  - '+.beautifulcarrot.com'
   - '+.belimked.com'
   - '+.bgm.tv'
   - '+.biandangroup.com'
