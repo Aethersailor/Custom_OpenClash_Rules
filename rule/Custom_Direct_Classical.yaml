@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 513
+# TOTAL: 514
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -433,6 +433,7 @@ payload:
   - DOMAIN-SUFFIX,ugdocker.link
   - DOMAIN-SUFFIX,ulife.group
   - DOMAIN-SUFFIX,us.ci
+  - DOMAIN-SUFFIX,vanjee.net
   - DOMAIN-SUFFIX,vbkhk.com
   - DOMAIN-SUFFIX,vbkr.com
   - DOMAIN-SUFFIX,vbkrhk.com
