@@ -6,5 +6,3 @@
 payload:
   - SRC-PORT,41641
   - DST-PORT,41641
-  - SRC-PORT,3478
-  - DST-PORT,3478
