@@ -1,0 +1,24 @@
+# Generated from rule/Encrypted_DNS.list
+# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
+# TOTAL: 17
+
+payload:
+
+  - IP-CIDR,1.0.0.1/32,no-resolve
+  - IP-CIDR,1.1.1.1/32,no-resolve
+  - IP-CIDR,101.102.103.104/32,no-resolve
+  - IP-CIDR,149.112.112.112/32,no-resolve
+  - IP-CIDR,185.222.222.222/32,no-resolve
+  - IP-CIDR,208.67.220.220/32,no-resolve
+  - IP-CIDR,208.67.222.222/32,no-resolve
+  - IP-CIDR,4.2.2.1/32,no-resolve
+  - IP-CIDR,4.2.2.2/32,no-resolve
+  - IP-CIDR,45.11.45.11/32,no-resolve
+  - IP-CIDR,8.8.4.4/32,no-resolve
+  - IP-CIDR,8.8.8.8/32,no-resolve
+  - IP-CIDR,9.9.9.9/32,no-resolve
+  - IP-CIDR,94.140.14.14/32,no-resolve
+  - IP-CIDR,94.140.14.15/32,no-resolve
+  - IP-CIDR,94.140.15.15/32,no-resolve
+  - IP-CIDR,94.140.15.16/32,no-resolve
