@@ -39,7 +39,7 @@ jobs:
 
       - name: Generate YAML from LIST files
         run: |
-          FILES=("Custom_Direct" "Custom_Proxy" "Steam_CDN")
+          FILES=("Custom_Direct" "Custom_Proxy" "Steam_CDN" "Encrypted_DNS")
 
           for base_name in "${FILES[@]}"; do
             list_file="rule/${base_name}.list"
@@ -95,6 +95,11 @@ jobs:
           
           # Convert Domain YAML files
           for yaml_file in rule/*_Domain.yaml; do
+            if ! grep -q '^  - ' "$yaml_file"; then
+              echo "Skipping $yaml_file (no domain rules)"
+              continue
+            fi
+
             mrs_file="${yaml_file%.yaml}.mrs"
             echo "Converting $yaml_file to $mrs_file (domain behavior)"
             mihomo convert-ruleset domain yaml "$yaml_file" "$mrs_file"
@@ -120,6 +125,11 @@ jobs:
             # Skip Classical_IP files
             if [[ "$yaml_file" == *"_Classical_IP.yaml" ]]; then
               echo "Skipping $yaml_file (Classical format not supported in MRS)"
+              continue
+            fi
+
+            if ! grep -q '^  - ' "$yaml_file"; then
+              echo "Skipping $yaml_file (no IP rules)"
               continue
             fi
             
