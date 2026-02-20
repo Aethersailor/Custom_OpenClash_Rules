@@ -1,0 +1,23 @@
+# Generated from rule/Encrypted_DNS.list
+# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
+# TOTAL: 17
+
+payload:
+  - '1.0.0.1/32'
+  - '1.1.1.1/32'
+  - '101.102.103.104/32'
+  - '149.112.112.112/32'
+  - '185.222.222.222/32'
+  - '208.67.220.220/32'
+  - '208.67.222.222/32'
+  - '4.2.2.1/32'
+  - '4.2.2.2/32'
+  - '45.11.45.11/32'
+  - '8.8.4.4/32'
+  - '8.8.8.8/32'
+  - '9.9.9.9/32'
+  - '94.140.14.14/32'
+  - '94.140.14.15/32'
+  - '94.140.15.15/32'
+  - '94.140.15.16/32'
