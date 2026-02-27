@@ -70,7 +70,7 @@ DOMAIN-SUFFIX,kaspersky.com
 DOMAIN-SUFFIX,kaspersky-labs.com
 # Akamai CDN
 DOMAIN-SUFFIX,akamaihd.net
-DOMAIN-SUFFIX,akamaized.net
+# DOMAIN-SUFFIX,akamaized.net
 # FinalShell
 IP-CIDR,5.5.5.5/32,no-resolve
 # UniGetUI
