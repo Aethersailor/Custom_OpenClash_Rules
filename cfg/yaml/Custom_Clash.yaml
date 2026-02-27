@@ -610,7 +610,6 @@ rules:
 - "GEOSITE,category-communication,💬 即时通讯"  # 即时通讯
 - "GEOSITE,category-social-media-!cn,🌐 社交媒体"  # 国外社交媒体
 - "GEOSITE,openai,🤖 ChatGPT"  # OpenAI
-- "GEOSITE,bing,🤖 Copilot"  # Microsoft Copilot
 - "GEOSITE,category-ai-!cn,🤖 AI服务"  # AI服务
 - "GEOSITE,github,🚀 GitHub"  # GitHub
 - "GEOSITE,category-speedtest,🚀 测速工具"  # 测速工具
