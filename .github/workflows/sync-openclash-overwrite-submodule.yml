@@ -10,6 +10,7 @@ permissions:
 
 env:
   TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
+  TARGET_OVERWRITE_BRANCH: ${{ (vars.TARGET_OVERWRITE_BRANCH != '' && vars.TARGET_OVERWRITE_BRANCH) || 'main' }}
 
 jobs:
   sync-submodule:
@@ -26,6 +27,28 @@ jobs:
         run: |
           git -C overwrite/OpenClash_Overwrite fetch origin main
           git -C overwrite/OpenClash_Overwrite checkout -B main origin/main
+
+      - name: Sync issue templates to OpenClash_Overwrite
+        env:
+          TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
+        run: |
+          if [ -z "${TARGET_REPO_TOKEN}" ]; then
+            echo "TARGET_REPO_TOKEN is not configured, skip syncing issue templates."
+            exit 0
+          fi
+
+          mkdir -p overwrite/OpenClash_Overwrite/.github/ISSUE_TEMPLATE
+          rsync -av --delete .github/ISSUE_TEMPLATE/ overwrite/OpenClash_Overwrite/.github/ISSUE_TEMPLATE/
+
+          if [ -n "$(git -C overwrite/OpenClash_Overwrite status --porcelain)" ]; then
+            git -C overwrite/OpenClash_Overwrite config user.name "github-actions[bot]"
+            git -C overwrite/OpenClash_Overwrite config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git -C overwrite/OpenClash_Overwrite add .github/ISSUE_TEMPLATE
+            git -C overwrite/OpenClash_Overwrite commit -m "chore(github): sync issue templates from Custom_OpenClash_Rules"
+            git -C overwrite/OpenClash_Overwrite push "https://${TARGET_REPO_TOKEN}@github.com/Giveupmoon/OpenClash_Overwrite.git" "HEAD:${TARGET_OVERWRITE_BRANCH}"
+          else
+            echo "No issue template changes to sync."
+          fi
 
       - name: Commit and push if needed
         run: |
