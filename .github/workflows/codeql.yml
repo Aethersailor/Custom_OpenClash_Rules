@@ -2,9 +2,7 @@ name: "CodeQL Advanced"
 
 on:
   push:
-    branches: ["main"]
   pull_request:
-    branches: ["main"]
   schedule:
     - cron: "17 2 * * *"
   workflow_dispatch:
@@ -21,6 +19,11 @@ concurrency:
 
 jobs:
   analyze:
+    if: |
+      (github.event_name == 'push' && github.ref_name == ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main')) ||
+      (github.event_name == 'pull_request' && github.base_ref == ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main')) ||
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch'
     name: Analyze (${{ matrix.language }})
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
     strategy:
@@ -35,6 +38,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
+          ref: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main') || github.ref }}
           fetch-depth: 2
 
       - name: Initialize CodeQL

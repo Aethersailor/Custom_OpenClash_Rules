@@ -2,7 +2,6 @@ name: Deploy MkDocs to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -16,10 +15,13 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'push' || github.ref_name == ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main') || github.ref }}
 
       - name: Setup Python
         uses: actions/setup-python@v6
