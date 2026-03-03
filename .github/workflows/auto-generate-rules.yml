@@ -9,13 +9,20 @@ on:
 permissions:
   contents: write
 
+env:
+  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
+
 jobs:
   generate-rules:
+    if: github.event_name != 'push' || github.ref_name == ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main')
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          ref: ${{ env.TARGET_BRANCH }}
+          fetch-depth: 0
 
       - name: Set Git identity
         run: |
@@ -68,7 +75,7 @@ jobs:
 
               echo "# Generated from ${list_file}" > "$file"
               echo "# REPO: https://github.com/${{ github.repository }}" >> "$file"
-              echo "# SOURCE: https://github.com/${{ github.repository }}/blob/main/${list_file}" >> "$file"
+              echo "# SOURCE: https://github.com/${{ github.repository }}/blob/${TARGET_BRANCH}/${list_file}" >> "$file"
               echo "# TOTAL: ${total}" >> "$file"
               echo "" >> "$file"
               echo "payload:" >> "$file"
@@ -157,8 +164,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [[ -n $(git log origin/main..HEAD) ]]; then
-            git push origin HEAD:main
-          else
-            echo "No new commits to push."
-          fi
+          git push origin "HEAD:${TARGET_BRANCH}"

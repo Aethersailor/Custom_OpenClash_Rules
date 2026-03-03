@@ -9,14 +9,20 @@ on:
 permissions:
   contents: write
 
+env:
+  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
+
 jobs:
   sync-to-wiki:
-    if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
+    if: github.repository == 'Aethersailor/Custom_OpenClash_Rules' && (github.event_name != 'push' || github.ref_name == ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main'))
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main repository
+      - name: Checkout working repository branch
         uses: actions/checkout@v6
+        with:
+          ref: ${{ env.TARGET_BRANCH }}
+          fetch-depth: 0
 
       - name: Clone wiki repository with auth
         env:

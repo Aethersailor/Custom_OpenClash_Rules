@@ -42,7 +42,8 @@
 **使用命令：**
 
 ```bash
-wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/check_cpu_version.sh | sh
+RULES_BRANCH="${RULES_BRANCH:-main}"
+wget -qO- "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/check_cpu_version.sh" | sh
 ```
 
 <details>
@@ -88,7 +89,8 @@ OpenClash Dev 版本安装工具。仅包含**安装插件本体**并**更新 Me
 **使用命令：**
 
 ```bash
-wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/install_openclash_dev.sh | sh
+RULES_BRANCH="${RULES_BRANCH:-main}"
+wget -qO- "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev.sh" | sh
 ```
 
 ---
@@ -122,7 +124,8 @@ wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@
 **使用命令：**
 
 ```bash
-wget -qO- https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/shell/install_openclash_dev_update.sh | sh
+RULES_BRANCH="${RULES_BRANCH:-main}"
+wget -qO- "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev_update.sh" | sh
 ```
 
 ---

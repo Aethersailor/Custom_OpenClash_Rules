@@ -9,14 +9,18 @@ on:
 permissions:
   contents: write
 
+env:
+  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
+
 jobs:
   update-mainland:
+    if: github.event_name != 'push' || github.ref_name == ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main')
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repository
       uses: actions/checkout@v6
       with:
-        ref: main
+        ref: ${{ env.TARGET_BRANCH }}
         fetch-depth: 0
 
     - name: Generate Custom_Clash_Mainland.ini
@@ -30,14 +34,13 @@ jobs:
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add cfg/Custom_Clash_Mainland.ini
 
-        # 确保在 main 分支
-        git checkout main
-
         # 判断是否有变更，只有在有变更时才提交
         if ! git diff --cached --quiet; then
           git commit -m "chore: update Custom_Clash_Mainland.ini based on Custom_Clash.ini"
-          git pull --rebase origin main
-          git push origin main
+          if git ls-remote --exit-code --heads origin "$TARGET_BRANCH" >/dev/null 2>&1; then
+            git pull --rebase origin "$TARGET_BRANCH"
+          fi
+          git push origin "HEAD:$TARGET_BRANCH"
         else
           echo "No changes to commit."
         fi

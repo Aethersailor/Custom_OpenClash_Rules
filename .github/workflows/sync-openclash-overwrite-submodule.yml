@@ -8,6 +8,9 @@ on:
 permissions:
   contents: write
 
+env:
+  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
+
 jobs:
   sync-submodule:
     runs-on: ubuntu-latest
@@ -15,6 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
+          ref: ${{ env.TARGET_BRANCH }}
           fetch-depth: 0
           submodules: true
 
@@ -30,7 +34,7 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add overwrite/OpenClash_Overwrite
             git commit -m "chore(overwrite): bump OpenClash_Overwrite submodule"
-            git push origin HEAD:main
+            git push origin "HEAD:${TARGET_BRANCH}"
           else
             echo "No changes to commit."
           fi
