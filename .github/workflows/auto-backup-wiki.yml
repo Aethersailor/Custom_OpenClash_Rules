@@ -1,0 +1,129 @@
+name: Auto backup Wiki
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
+
+permissions:
+  contents: write
+
+env:
+  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
+
+jobs:
+  backup-wiki-root:
+    if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout working repository branch
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.TARGET_BRANCH }}
+          fetch-depth: 0
+
+      - name: Clone wiki repository with auth
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.wiki.git _wiki
+
+      - name: Clean old wiki backup
+        run: |
+          mkdir -p wiki
+          find wiki -type f -name "*.md" -delete
+
+      - name: Build link replacement map
+        id: build-map
+        run: |
+          echo "LINK_MAP_START" > link_map.txt
+
+          count=0
+          grep -E '^\s*###\s*.*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
+            count=$((count+1))
+            num=$count
+            raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
+            filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
+
+            # 只替换页面部分，不自动附加锚点
+            echo "https://github.com/${{ github.repository }}/wiki/${raw_url}|${num}.${filename}.md" >> link_map.txt
+          done
+
+          echo "LINK_MAP_END" >> link_map.txt
+          echo "==== Link Map ===="
+          cat link_map.txt
+
+      - name: Copy Home.md to wiki/README.md with replacements
+        run: |
+          cp _wiki/Home.md wiki/README.md
+
+          # 替换 doc 路径
+          sed -i 's#](doc/#](../doc/#g' wiki/README.md
+
+          # 替换 wiki 页面链接
+          while IFS='|' read -r src dst; do
+            [[ "$src" == LINK_MAP_START ]] && continue
+            [[ "$src" == LINK_MAP_END ]] && continue
+            echo "Replacing $src → $dst in README.md"
+
+            # 转义链接中的特殊字符
+            src_escaped=$(printf '%s\n' "$src" | sed 's/[\/&]/\\&/g')
+            dst_escaped=$(printf '%s\n' "$dst" | sed 's/[\/&]/\\&/g')
+
+            # 普通页面链接
+            sed -i "s~${src_escaped}~${dst_escaped}~g" wiki/README.md
+
+            # 带 # 锚点的链接
+            sed -i "s~${src_escaped}#~${dst_escaped}#~g" wiki/README.md
+          done < link_map.txt
+
+      - name: Parse Home.md and copy listed files with replacements
+        run: |
+          count=0
+          grep -E '^\s*###\s*.*\[.*\]\(.*\)' _wiki/Home.md | while read -r line; do
+            count=$((count+1))
+            num=$count
+            raw_url=$(echo "$line" | sed -E 's/.*\/wiki\/([^)]*).*/\1/')
+            filename=$(python3 -c "import urllib.parse; print(urllib.parse.unquote('$raw_url'))")
+
+            src_file="_wiki/${filename}.md"
+            dst_file="wiki/${num}.${filename}.md"
+
+            echo "Processing: $src_file → $dst_file"
+
+            if [ -f "$src_file" ]; then
+              cp "$src_file" "$dst_file"
+
+              # 替换 doc 路径
+              sed -i 's#](doc/#](../doc/#g' "$dst_file"
+
+              # 替换 wiki 页面链接
+              while IFS='|' read -r src dst; do
+                [[ "$src" == LINK_MAP_START ]] && continue
+                [[ "$src" == LINK_MAP_END ]] && continue
+                echo "Replacing $src → $dst in $dst_file"
+
+                src_escaped=$(printf '%s\n' "$src" | sed 's/[\/&]/\\&/g')
+                dst_escaped=$(printf '%s\n' "$dst" | sed 's/[\/&]/\\&/g')
+
+                sed -i "s~${src_escaped}~${dst_escaped}~g" "$dst_file"
+                sed -i "s~${src_escaped}#~${dst_escaped}#~g" "$dst_file"
+              done < link_map.txt
+
+            else
+              echo "Warning: File not found: $src_file"
+            fi
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add wiki
+
+          if ! git diff --cached --quiet; then
+            commit_time=$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')
+            git commit -m "chore(wiki): auto backup Wiki at ${commit_time} UTC+8"
+            git push
+          fi

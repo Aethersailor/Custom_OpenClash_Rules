@@ -1,0 +1,139 @@
+name: Purge jsDelivr Cache
+
+on:
+  push:
+    paths:
+      - 'cfg/**'
+      - 'rule/**'
+      - 'game_rule/**'
+      - 'shell/**'
+      - 'overwrite/**'
+      - '!**/archived/**'
+      - '!**/README.md'
+      - '!README.md'
+
+  workflow_run:
+    workflows:
+      - Auto generate rules
+      - Auto update mainland config
+      - Auto Update Game CDN Rules
+      - Sync and Modify Custom_Clash.ini
+    types:
+      - completed
+
+  workflow_dispatch:  # 支持手动触发
+
+env:
+  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
+
+jobs:
+  purge-jsdelivr:
+    if: |
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+      (
+        github.event_name != 'workflow_run' &&
+        github.actor != 'github-actions[bot]' &&
+        (github.event_name != 'push' || github.ref_name == ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main'))
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    continue-on-error: true
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Soft Debounce (Wait & Check)
+        id: debounce
+        env:
+          CURRENT_SHA: ${{ github.sha }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          EVENT_NAME: ${{ github.event_name }}
+          TARGET_BRANCH: ${{ env.TARGET_BRANCH }}
+        run: |
+          echo "Event: $EVENT_NAME"
+          echo "Target branch: $TARGET_BRANCH"
+
+          if ! git ls-remote --exit-code --heads origin "$TARGET_BRANCH" >/dev/null 2>&1; then
+            echo "Remote branch '$TARGET_BRANCH' not found. Skipping purge."
+            echo "should_purge=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [ "$EVENT_NAME" = "workflow_run" ]; then
+            echo "Workflow run head SHA: $HEAD_SHA"
+            echo "Fetching latest remote info..."
+            git fetch origin "$TARGET_BRANCH"
+            LATEST_SHA=$(git rev-parse "origin/$TARGET_BRANCH")
+
+            echo "Latest Remote SHA: $LATEST_SHA"
+
+            if [ "$LATEST_SHA" = "$HEAD_SHA" ]; then
+              echo "No new commit since workflow completed. Skipping purge."
+              echo "should_purge=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            echo "New commit detected after workflow run. Proceeding with purge."
+            echo "should_purge=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "Current Commit SHA: $CURRENT_SHA"
+          echo "Waiting for 60 seconds to batch multiple changes..."
+
+          # 倒计时
+          for i in {60..1}; do
+             # 仅每10秒打印一次日志防止刷屏
+             if (( i % 10 == 0 )); then
+               echo "$i seconds remaining..."
+             fi
+             sleep 1
+          done
+
+          echo "Fetching latest remote info..."
+          git fetch origin "$TARGET_BRANCH"
+          LATEST_SHA=$(git rev-parse "origin/$TARGET_BRANCH")
+
+          echo "Latest Remote SHA: $LATEST_SHA"
+
+          if [ "$CURRENT_SHA" != "$LATEST_SHA" ]; then
+            echo "A newer commit ($LATEST_SHA) has been detected."
+            echo "Skipping this run to avoid redundant purge."
+            echo "should_purge=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          else
+            echo "This is still the latest commit. Proceeding with purge..."
+            echo "should_purge=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Purge jsDelivr Cache
+        if: steps.debounce.outputs.should_purge == 'true'
+        run: |
+          REPO="${{ github.repository }}"
+          echo "Purging jsDelivr cache for $REPO"
+
+          for i in {1..3}; do
+            echo "Attempt $i: Purging..."
+            result=$(curl -s -X GET "https://purge.jsdelivr.net/gh/${REPO}")
+            echo "$result"
+
+            if echo "$result" | grep -q '"status": "finished"'; then
+              echo "Purge succeeded."
+              break
+            else
+              echo "Purge failed, retrying in 5s..."
+              sleep 5
+            fi
+
+            if [ "$i" -eq 3 ]; then
+              echo "Purge failed after 3 attempts."
+              exit 1
+            fi
+          done
