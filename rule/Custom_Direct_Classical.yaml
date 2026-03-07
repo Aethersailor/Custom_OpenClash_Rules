@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 531
+# TOTAL: 532
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -345,6 +345,7 @@ payload:
   - DOMAIN-SUFFIX,onebuygz.com
   - DOMAIN-SUFFIX,onetools.top
   - DOMAIN-SUFFIX,opentrust.net
+  - DOMAIN-SUFFIX,osbdf.com
   - DOMAIN-SUFFIX,ottai.com
   - DOMAIN-SUFFIX,ottiptv.cc
   - DOMAIN-SUFFIX,ourschool.cc
