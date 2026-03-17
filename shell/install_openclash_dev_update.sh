@@ -151,8 +151,14 @@ if [ -n "$FIREWALL_TYPE" ]; then
     echo
 
     if [ "$PKG_MGR" = "opkg" ]; then
+		sed -e 's,https://downloads.immortalwrt.org,https://mirror.nju.edu.cn/immortalwrt,g' \
+    -e 's,https://mirrors.vsean.net/openwrt,https://mirror.nju.edu.cn/immortalwrt,g' \
+    -i.bak /etc/opkg/distfeeds.conf
         opkg install $DEPENDENCIES
     elif [ "$PKG_MGR" = "apk" ]; then
+		sed -e 's,https://downloads.immortalwrt.org,https://mirror.nju.edu.cn/immortalwrt,g' \
+    -e 's,https://mirrors.vsean.net/openwrt,https://mirror.nju.edu.cn/immortalwrt,g' \
+    -i.bak /etc/apk/repositories.d/distfeeds.list
         apk add $DEPENDENCIES
     fi
     echo
