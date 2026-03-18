@@ -221,12 +221,10 @@ DOMAIN-SUFFIX,xkkapk.com
 DOMAIN-SUFFIX,cheshire.top
 # Server酱³ · 极简推送服务 / add by Telegram user: 雪菜 / Date: 2025-10-20 18:34:08
 DOMAIN-SUFFIX,ft07.com
-
 # easytier服务 / add by Telegram user: hvccff / Date: 2025-11-17 08:22:05
 DOMAIN-SUFFIX,easytier.top
 # bark默认服务器的域名 / add by Telegram user: Shu / Date: 2025-11-15 18:41:59
 DOMAIN-SUFFIX,day.app
-
 # 阴阳师工具 / add by Telegram user: 奶茶 / Date: 2025-11-30 15:30:08
 DOMAIN-SUFFIX,yyshub.top
 # CDN / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-17 11:16:00
@@ -265,6 +263,36 @@ DOMAIN-SUFFIX,meiyitou.top
 DOMAIN-SUFFIX,misea.top
 # 先锋学霸 / add by Telegram user: Mairs / Date: 2026-01-22 17:46:58
 DOMAIN-SUFFIX,axuex.top
+# add by Telegram user:  / Date: 2026-03-10 00:15:44
+DOMAIN-SUFFIX,hutaoyun.top
+# add by Telegram user:  / Date: 2026-03-10 00:15:38
+DOMAIN-SUFFIX,0734cn.top
+# add by Telegram user:  / Date: 2026-03-10 00:12:14
+DOMAIN-SUFFIX,xfltd.org
+# HAP Store / add by Telegram user: y / Date: 2026-03-07 10:06:39
+DOMAIN-SUFFIX,osbdf.com
+# add by Telegram user: Aethersailor / Date: 2026-03-05 10:48:07
+DOMAIN-SUFFIX,00333118.com
+# 学校官网 / add by Telegram user: More / Date: 2026-02-14 23:15:33
+DOMAIN-SUFFIX,jzagile.com
+# 博查 AI / add by Telegram user: 嘿嘿 / Date: 2026-02-13 13:59:38
+DOMAIN-SUFFIX,bochaai.com
+# 神烦.网络验证平台 / add by Telegram user: choner / Date: 2026-02-13 13:46:11
+DOMAIN-SUFFIX,91shenfan.com
+# 官方云任务平台 / add by Telegram user: More / Date: 2026-02-12 23:29:49
+DOMAIN-SUFFIX,onetools.top
+# 游戏PP / add by Telegram user: 雪菜 / Date: 2026-02-06 13:45:01
+DOMAIN-SUFFIX,gamepp.com
+# Astral个人博客 / add by Telegram user: Astral / Date: 2026-02-04 11:15:26
+DOMAIN-SUFFIX,asgardion.space
+# 自用 / add by Telegram user: along / Date: 2026-01-31 19:38:38
+DOMAIN-SUFFIX,alonginwind.to
+# 自用 / add by Telegram user: along / Date: 2026-01-31 19:37:29
+DOMAIN-SUFFIX,alonginwind.eu.org
+# 共享账号出售平台 / add by Telegram user: abcd / Date: 2026-01-31 00:13:30
+DOMAIN-SUFFIX,hezuvip.com
+# ios 固件下载
+DOMAIN-SUFFIX,iosgujian.com
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -274,6 +302,14 @@ DOMAIN-SUFFIX,axuex.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+
+
+# 2026.3.18 分类整理完毕
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# PR 至 felixonmars/dnsmasq-china-list
 # add by Telegram user: Mairs / Date: 2026-03-17 09:33:34
 DOMAIN-SUFFIX,zhangleglobal.com
 # add by Telegram user: Mairs / Date: 2026-03-17 09:21:58
@@ -300,12 +336,6 @@ DOMAIN-SUFFIX,419g.com
 DOMAIN-SUFFIX,ijingyi.com
 # add by Telegram user: Mairs / Date: 2026-03-10 17:42:57
 DOMAIN-SUFFIX,excelbbx.net
-# add by Telegram user:  / Date: 2026-03-10 00:15:44
-DOMAIN-SUFFIX,hutaoyun.top
-# add by Telegram user:  / Date: 2026-03-10 00:15:38
-DOMAIN-SUFFIX,0734cn.top
-# add by Telegram user:  / Date: 2026-03-10 00:12:14
-DOMAIN-SUFFIX,xfltd.org
 # add by Telegram user: GSTZero / Date: 2026-03-09 20:22:59
 DOMAIN-SUFFIX,2mcnxs.cc
 # add by Telegram user: 777 / Date: 2026-03-09 18:36:42
@@ -320,14 +350,10 @@ DOMAIN-SUFFIX,zysou.com
 DOMAIN-SUFFIX,tmallyc.com
 # add by Telegram user: y / Date: 2026-03-07 10:08:17
 DOMAIN-SUFFIX,betahub.tech
-# HAP Store / add by Telegram user: y / Date: 2026-03-07 10:06:39
-DOMAIN-SUFFIX,osbdf.com
 # add by Telegram user: Mairs / Date: 2026-03-06 12:04:21
 DOMAIN-SUFFIX,wwwwqq.com
 # 小说网站 / add by Telegram user: Zero / Date: 2026-03-05 22:37:16
 DOMAIN-SUFFIX,4xiaoshuo.org
-# add by Telegram user: Aethersailor / Date: 2026-03-05 10:48:07
-DOMAIN-SUFFIX,00333118.com
 # 特力科技 / add by Telegram user: Evan / Date: 2026-02-28 10:00:18
 DOMAIN-SUFFIX,z-tek.com
 # 小说网站 / add by Telegram user: 晨曦 / Date: 2026-02-27 22:26:08
@@ -344,14 +370,6 @@ DOMAIN-SUFFIX,et0731.com
 DOMAIN-SUFFIX,gvgoo.com
 # 晋江中医院 / add by Telegram user: 嘿嘿 / Date: 2026-02-19 12:42:55
 DOMAIN-SUFFIX,jjzyy.org
-# 学校官网 / add by Telegram user: More / Date: 2026-02-14 23:15:33
-DOMAIN-SUFFIX,jzagile.com
-# 博查 AI / add by Telegram user: 嘿嘿 / Date: 2026-02-13 13:59:38
-DOMAIN-SUFFIX,bochaai.com
-# 神烦.网络验证平台 / add by Telegram user: choner / Date: 2026-02-13 13:46:11
-DOMAIN-SUFFIX,91shenfan.com
-# 官方云任务平台 / add by Telegram user: More / Date: 2026-02-12 23:29:49
-DOMAIN-SUFFIX,onetools.top
 # add by Telegram user: Mairs / Date: 2026-02-12 17:16:27
 DOMAIN-SUFFIX,melecode.com
 # apple发票 / add by Telegram user: More / Date: 2026-02-12 14:13:43
@@ -380,12 +398,8 @@ DOMAIN-SUFFIX,xingaochengtai.com
 DOMAIN-SUFFIX,qiaoqiaoyun.com
 # 在线LaTeX公式编辑器 / add by Telegram user: 真怪誕呀 / Date: 2026-02-07 01:01:20
 DOMAIN-SUFFIX,latexlive.com
-# 游戏PP / add by Telegram user: 雪菜 / Date: 2026-02-06 13:45:01
-DOMAIN-SUFFIX,gamepp.com
 # add by Telegram user: Aethersailor / Date: 2026-02-04 16:59:37
 DOMAIN-SUFFIX,giomeru.com
-# Astral个人博客 / add by Telegram user: Astral / Date: 2026-02-04 11:15:26
-DOMAIN-SUFFIX,asgardion.space
 # 港话通 / add by Telegram user: 真怪誕呀 / Date: 2026-02-03 19:00:10
 DOMAIN-SUFFIX,hkchat.app
 # 舒达app域名 / add by Telegram user: 闻西 / Date: 2026-02-02 15:01:12
@@ -402,16 +416,10 @@ DOMAIN-SUFFIX,pkghund.com
 DOMAIN-SUFFIX,htkgsx.com
 # add by Telegram user: X_X233 / Date: 2026-02-01 15:36:09
 DOMAIN-SUFFIX,hangnakeji.com
-# 自用 / add by Telegram user: along / Date: 2026-01-31 19:38:38
-DOMAIN-SUFFIX,alonginwind.top
-# 自用 / add by Telegram user: along / Date: 2026-01-31 19:37:29
-DOMAIN-SUFFIX,alonginwind.eu.org
 # 云平台 / add by Telegram user: along / Date: 2026-01-31 19:27:59
 DOMAIN-SUFFIX,shuangqingtech.com
 # add by Telegram user: Evan / Date: 2026-01-31 13:18:47
 DOMAIN-SUFFIX,nanhuabx.com
-# 共享账号出售平台 / add by Telegram user: abcd / Date: 2026-01-31 00:13:30
-DOMAIN-SUFFIX,hezuvip.com
 # 主机游戏模拟器软件服务器 / add by Telegram user: abcd / Date: 2026-01-30 23:18:06
 DOMAIN-SUFFIX,ponyemu.com
 # 高校教务系统 / add by Telegram user: abcd / Date: 2026-01-30 23:13:44
@@ -428,17 +436,8 @@ DOMAIN-SUFFIX,natchecker.com
 DOMAIN-SUFFIX,mchuiji.com
 # add by Telegram user: 蛋中央 / Date: 2026-01-26 20:08:51
 DOMAIN-SUFFIX,mcxyzt.cc
-# ios 固件下载
-DOMAIN-SUFFIX,iosgujian.com
 # 手游无期迷途官网
 DOMAIN-SUFFIX,aisnogames.com
-
-# 2026.1.25 分类整理完毕
-
-# ---------------------------------------
-# 以下域名已提交 PR
-
-# PR 至 felixonmars/dnsmasq-china-list
 # 教育网站 / add by Telegram user: Awt / Date: 2026-01-25 13:16:28
 DOMAIN-SUFFIX,harbourmooc.com
 # add by Telegram user: r / Date: 2026-01-23 16:13:33
