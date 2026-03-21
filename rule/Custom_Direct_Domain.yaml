@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 551
+# TOTAL: 552
 
 payload:
   - '*m-team*'
@@ -483,6 +483,7 @@ payload:
   - '+.wenyi188.com'
   - '+.weshape3d.com'
   - '+.wewillpro.com'
+  - '+.wildfirechat.net'
   - '+.wjx.top'
   - '+.wlcdn88.com'
   - '+.wologic.net'
