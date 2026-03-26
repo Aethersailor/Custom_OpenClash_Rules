@@ -293,6 +293,14 @@ DOMAIN-SUFFIX,alonginwind.eu.org
 DOMAIN-SUFFIX,hezuvip.com
 # ios 固件下载
 DOMAIN-SUFFIX,iosgujian.com
+# add by Telegram user: Coco / Date: 2026-03-25 01:04:28
+DOMAIN-SUFFIX,anytocopy.com
+# openkylin / add by Telegram user: y / Date: 2026-03-22 00:13:07
+DOMAIN-SUFFIX,openkylin.top
+# add by Telegram user: Mairs / Date: 2026-03-21 13:18:16
+DOMAIN-SUFFIX,wildfirechat.net
+# add by Telegram user: Mairs / Date: 2026-03-21 12:57:11
+DOMAIN-SUFFIX,xgzb.top
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -302,30 +310,23 @@ DOMAIN-SUFFIX,iosgujian.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# 开盘红app是大陆地区很活的股票财经软件 / add by Telegram user: 🥝🥝🥝混个脸熟 / Date: 2026-03-26 15:52:39
-DOMAIN-SUFFIX,kaipanhong.com
-# add by Telegram user: Coco / Date: 2026-03-25 01:04:28
-DOMAIN-SUFFIX,anytocopy.com
-# campustop网课 / add by Telegram user: along / Date: 2026-03-24 18:24:12
-DOMAIN-SUFFIX,talk-cloud.net
-# openkylin / add by Telegram user: y / Date: 2026-03-22 00:13:07
-DOMAIN-SUFFIX,openkylin.top
-# traderecord3680.xyz / add by Telegram user: Bin / Date: 2026-03-21 22:59:08
-DOMAIN-SUFFIX,chessease.net
-# add by Telegram user: Mairs / Date: 2026-03-21 13:18:16
-DOMAIN-SUFFIX,wildfirechat.net
-# add by Telegram user: Mairs / Date: 2026-03-21 12:57:11
-DOMAIN-SUFFIX,xgzb.top
-# add by Telegram user: Mairs / Date: 2026-03-21 12:00:24
-DOMAIN-SUFFIX,boxim.online
 
 
-# 2026.3.18 分类整理完毕
+
+# 2026.3.26 分类整理完毕
 
 # ---------------------------------------
 # 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
+# 开盘红app是大陆地区很活的股票财经软件 / add by Telegram user: 🥝🥝🥝混个脸熟 / Date: 2026-03-26 15:52:39
+DOMAIN-SUFFIX,kaipanhong.com
+# campustop网课 / add by Telegram user: along / Date: 2026-03-24 18:24:12
+DOMAIN-SUFFIX,talk-cloud.net
+# traderecord3680.xyz / add by Telegram user: Bin / Date: 2026-03-21 22:59:08
+DOMAIN-SUFFIX,chessease.net
+# add by Telegram user: Mairs / Date: 2026-03-21 12:00:24
+DOMAIN-SUFFIX,boxim.online
 # add by Telegram user: Mairs / Date: 2026-03-17 09:33:34
 DOMAIN-SUFFIX,zhangleglobal.com
 # add by Telegram user: Mairs / Date: 2026-03-17 09:21:58
