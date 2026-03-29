@@ -586,8 +586,8 @@ proxy-groups:
     tolerance: 50
 
   - name: "🎯 全球直连"
-    type: select
-    url: https://cp.cloudflare.com/generate_204
+    type: url-test
+    url: http://wifi.vivo.com.cn/generate_204
     proxies:
       - DIRECT
 
@@ -596,51 +596,53 @@ proxy-groups:
 # GEOSITE=域名分类,GEOIP=IP归属,RULE-SET=外部规则集,MATCH=兜底规则
 # no-resolve=不进行DNS解析直接匹配IP（提高性能，避免DNS泄露）
 rules:
-- "GEOSITE,private,🎯 全球直连"  # 私有域名
-- "GEOIP,private,🎯 全球直连,no-resolve"  # 私有IP
-- "RULE-SET,Custom_Direct_Domain,🎯 全球直连"  # 自定义直连域名
-- "RULE-SET,Custom_Direct_IP,🎯 全球直连"  # 自定义直连IP
-- "RULE-SET,Custom_Proxy_Domain,🚀 手动选择"  # 自定义代理域名
-- "RULE-SET,Custom_Proxy_IP,🚀 手动选择"  # 自定义代理IP
-- "GEOSITE,google-cn,🎯 全球直连"  # Google中国服务
-- "GEOSITE,category-games@cn,🎯 全球直连"  # 国内游戏
-- "RULE-SET,Steam_CDN,🎯 全球直连"  # Steam CDN
-- "GEOSITE,category-game-platforms-download,🎯 全球直连"  # 游戏平台下载
-- "GEOSITE,category-public-tracker,🎯 全球直连"  # BT Tracker
-- "GEOSITE,category-communication,💬 即时通讯"  # 即时通讯
-- "GEOSITE,category-social-media-!cn,🌐 社交媒体"  # 国外社交媒体
-- "GEOSITE,openai,🤖 ChatGPT"  # OpenAI
-- "GEOSITE,category-ai-!cn,🤖 AI服务"  # AI服务
-- "GEOSITE,github,🚀 GitHub"  # GitHub
-- "GEOSITE,category-speedtest,🚀 测速工具"  # 测速工具
-- "GEOSITE,steam,🎮 Steam"  # Steam
-- "GEOSITE,youtube,📹 YouTube"  # YouTube
-- "GEOSITE,apple-tvplus,🎥 AppleTV+"  # Apple TV+
-- "GEOSITE,apple,🍎 苹果服务"  # 苹果服务
-- "GEOSITE,microsoft,Ⓜ️ 微软服务"  # 微软服务
-- "GEOSITE,googlefcm,📢 谷歌FCM"  # Google FCM推送
-- "GEOSITE,google,🇬 谷歌服务"  # Google服务
-- "GEOSITE,tiktok,🎶 TikTok"  # TikTok
-- "GEOSITE,netflix,🎥 Netflix"  # Netflix
-- "GEOSITE,disney,🎥 DisneyPlus"  # Disney+
-- "GEOSITE,hbo,🎥 HBO"  # HBO
-- "GEOSITE,primevideo,🎥 PrimeVideo"  # Prime Video
-- "GEOSITE,category-emby,🎥 Emby"  # Emby
-- "GEOSITE,spotify,🎻 Spotify"  # Spotify
-- "GEOSITE,bahamut,📺 Bahamut"  # 巴哈姆特
-- "GEOSITE,category-games,🎮 游戏平台"  # 游戏平台
-- "GEOSITE,category-entertainment,🌎 国外媒体"  # 国外媒体
-- "GEOSITE,category-ecommerce,🛒 国外电商"  # 国外电商
-- "GEOSITE,gfw,🚀 手动选择"  # GFW列表
-- "GEOIP,telegram,💬 即时通讯,no-resolve"  # Telegram IP
-- "GEOIP,twitter,🌐 社交媒体,no-resolve"  # Twitter IP
-- "GEOIP,facebook,🌐 社交媒体,no-resolve"  # Facebook IP
-- "GEOIP,google,🇬 谷歌服务,no-resolve"  # Google IP
-- "GEOIP,netflix,🎥 Netflix,no-resolve"  # Netflix IP
-- "GEOSITE,cn,🎯 全球直连"  # 中国域名
-- "GEOIP,cn,🎯 全球直连,no-resolve"  # 中国IP
-- "RULE-SET,Custom_Port_Direct,🔀 非标端口"  # 非标端口
-- "MATCH,🐟 漏网之鱼"  # 兜底规则
+  - "GEOSITE,private,🎯 全球直连"  # 私有域名
+  - "GEOIP,private,🎯 全球直连,no-resolve"  # 私有IP
+  - "RULE-SET,Custom_Direct_Domain,🎯 全球直连"  # 自定义直连域名
+  - "RULE-SET,Custom_Direct_IP,🎯 全球直连,no-resolve"  # 自定义直连IP
+  - "RULE-SET,Custom_Direct_Port,🎯 全球直连"  # 自定义直连端口
+  - "RULE-SET,Custom_Proxy_Domain,🚀 手动选择"  # 自定义代理域名
+  - "RULE-SET,Custom_Proxy_IP,🚀 手动选择,no-resolve"  # 自定义代理IP
+  - "GEOSITE,google-cn,🎯 全球直连"  # Google中国服务
+  - "GEOSITE,category-games@cn,🎯 全球直连"  # 国内游戏
+  - "RULE-SET,Steam_CDN_Domain,🎯 全球直连"  # Steam CDN
+  - "RULE-SET,Steam_CDN_IP,🎯 全球直连,no-resolve"  # Steam CDN
+  - "GEOSITE,category-game-platforms-download,🎯 全球直连"  # 游戏平台下载
+  - "GEOSITE,category-public-tracker,🎯 全球直连"  # BT Tracker
+  - "GEOSITE,category-communication,💬 即时通讯"  # 即时通讯
+  - "GEOSITE,category-social-media-!cn,🌐 社交媒体"  # 国外社交媒体
+  - "GEOSITE,openai,🤖 ChatGPT"  # OpenAI
+  - "GEOSITE,category-ai-!cn,🤖 AI服务"  # AI服务
+  - "GEOSITE,github,🚀 GitHub"  # GitHub
+  - "GEOSITE,category-speedtest,🚀 测速工具"  # 测速工具
+  - "GEOSITE,steam,🎮 Steam"  # Steam
+  - "GEOSITE,youtube,📹 YouTube"  # YouTube
+  - "GEOSITE,apple-tvplus,🎥 AppleTV+"  # Apple TV+
+  - "GEOSITE,apple,🍎 苹果服务"  # 苹果服务
+  - "GEOSITE,microsoft,Ⓜ️ 微软服务"  # 微软服务
+  - "GEOSITE,googlefcm,📢 谷歌FCM"  # Google FCM推送
+  - "GEOSITE,google,🇬 谷歌服务"  # Google服务
+  - "GEOSITE,tiktok,🎶 TikTok"  # TikTok
+  - "GEOSITE,netflix,🎥 Netflix"  # Netflix
+  - "GEOSITE,disney,🎥 DisneyPlus"  # Disney+
+  - "GEOSITE,hbo,🎥 HBO"  # HBO
+  - "GEOSITE,primevideo,🎥 PrimeVideo"  # Prime Video
+  - "GEOSITE,category-emby,🎥 Emby"  # Emby
+  - "GEOSITE,spotify,🎻 Spotify"  # Spotify
+  - "GEOSITE,bahamut,📺 Bahamut"  # 巴哈姆特
+  - "GEOSITE,category-games,🎮 游戏平台"  # 游戏平台
+  - "GEOSITE,category-entertainment,🌎 国外媒体"  # 国外媒体
+  - "GEOSITE,category-ecommerce,🛒 国外电商"  # 国外电商
+  - "GEOSITE,gfw,🚀 手动选择"  # GFW列表
+  - "GEOIP,telegram,💬 即时通讯,no-resolve"  # Telegram IP
+  - "GEOIP,twitter,🌐 社交媒体,no-resolve"  # Twitter IP
+  - "GEOIP,facebook,🌐 社交媒体,no-resolve"  # Facebook IP
+  - "GEOIP,google,🇬 谷歌服务,no-resolve"  # Google IP
+  - "GEOIP,netflix,🎥 Netflix,no-resolve"  # Netflix IP
+  - "GEOSITE,cn,🎯 全球直连"  # 中国域名
+  - "GEOIP,cn,🎯 全球直连,no-resolve"  # 中国IP
+  - "RULE-SET,Custom_Port_Direct,🔀 非标端口"  # 非标端口
+  - "MATCH,🐟 漏网之鱼"  # 兜底规则
 
 # ==================== 规则提供者 Rule Providers ====================
 # 从外部URL加载规则集。behavior: domain=域名,ipcidr=IP,classical=混合
@@ -649,7 +651,6 @@ rule-providers:
   Custom_Port_Direct:
     behavior: classical  # 混合类型（包含多种规则）
     interval: 10800  # 3小时
-    path: ./rule_provider/Custom_Port_Direct.yaml
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Port_Direct.yaml"
     format: yaml
@@ -657,39 +658,48 @@ rule-providers:
   Custom_Direct_Domain:
     behavior: domain  # 仅域名
     interval: 10800
-    path: ./rule_provider/Custom_Direct_Domain.yaml
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.mrs"
     format: mrs  # 二进制格式
 
   Custom_Direct_IP:
-    behavior: classical  # 混合类型
+    behavior: ipcidr  # 仅 IP
     interval: 10800  # 3小时
-    path: ./rule_provider/Custom_Direct_Classical_IP.yaml
     type: http
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_IP.yaml"
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_IP.mrs"
+    format: mrs  # 二进制格式
+
+  Custom_Direct_Port:
+    behavior: classical  # 混合类型（包含多种规则）
+    interval: 10800  # 3小时
+    type: http
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_Port.yaml"
     format: yaml
 
   Custom_Proxy_Domain:
     behavior: domain  # 仅域名
     interval: 10800  # 3小时
-    path: ./rule_provider/Custom_Proxy_Domain.yaml
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.mrs"
     format: mrs  # 二进制格式
 
   Custom_Proxy_IP:
-    behavior: classical  # 混合类型
+    behavior: ipcidr  # 仅 IP
     interval: 10800  # 3小时
-    path: ./rule_provider/Custom_Proxy_Classical_IP.yaml
     type: http
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical_IP.yaml"
-    format: yaml
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_IP.mrs"
+    format: mrs  # 二进制格式
 
   Steam_CDN:
-    behavior: classical  # Steam CDN下载服务器（直连获得更快速度）
+    behavior: domain  # Steam CDN下载服务器（直连获得更快速度）
     interval: 10800  # 3小时
-    path: ./rule_provider/Steam_CDN_Classical.yaml
     type: http
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_Classical.yaml"
-    format: yaml
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_Domain.mrs"
+    format: mrs  # 二进制格式
+
+  Steam_CDN:
+    behavior: ipcidr  # Steam CDN下载服务器（直连获得更快速度）
+    interval: 10800  # 3小时
+    type: http
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_IP.mrs"
+    format: mrs  # 二进制格式
