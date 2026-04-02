@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout working repository branch
+      - name: Checkout main branch for wiki backup
         uses: actions/checkout@v6
         with:
-          ref: ${{ env.TARGET_BRANCH }}
+          ref: main
           fetch-depth: 0
 
       - name: Clone wiki repository with auth
@@ -125,5 +125,5 @@ jobs:
           if ! git diff --cached --quiet; then
             commit_time=$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')
             git commit -m "chore(wiki): auto backup Wiki at ${commit_time} UTC+8"
-            git push
+            git push origin main
           fi
