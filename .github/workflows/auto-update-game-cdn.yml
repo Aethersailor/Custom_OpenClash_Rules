@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout repository
+      - name: Checkout main branch
         uses: actions/checkout@v6
         with:
-          ref: ${{ env.TARGET_BRANCH }}
+          ref: main
           fetch-depth: 0
       
       - name: Set up Python
@@ -52,7 +52,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add rule/Game_Download_CDN.list
           git commit -m "chore(rule): auto-update Game_Download_CDN.list from upstream"
-          git push
+          git push origin main
       
       - name: No changes
         if: steps.check_changes.outputs.changed == 'false'
