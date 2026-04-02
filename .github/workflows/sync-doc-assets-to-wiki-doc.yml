@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout working repository branch
+      - name: Checkout main branch
         uses: actions/checkout@v6
         with:
-          ref: ${{ env.TARGET_BRANCH }}
+          ref: main
           fetch-depth: 0
 
       - name: Sync doc assets into wiki/doc
@@ -37,5 +37,5 @@ jobs:
 
           if ! git diff --cached --quiet; then
             git commit -m "chore(doc): sync doc assets to wiki"
-            git push
+            git push origin main
           fi

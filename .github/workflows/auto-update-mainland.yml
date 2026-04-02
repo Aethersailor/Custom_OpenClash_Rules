@@ -20,7 +20,7 @@ jobs:
     - name: Check out the repository
       uses: actions/checkout@v6
       with:
-        ref: ${{ env.TARGET_BRANCH }}
+        ref: main
         fetch-depth: 0
 
     - name: Generate Custom_Clash_Mainland.ini
@@ -37,10 +37,10 @@ jobs:
         # 判断是否有变更，只有在有变更时才提交
         if ! git diff --cached --quiet; then
           git commit -m "chore: update Custom_Clash_Mainland.ini based on Custom_Clash.ini"
-          if git ls-remote --exit-code --heads origin "$TARGET_BRANCH" >/dev/null 2>&1; then
-            git pull --rebase origin "$TARGET_BRANCH"
+          if git ls-remote --exit-code --heads origin main > /dev/null 2>&1; then
+            git pull --rebase origin main
           fi
-          git push origin "HEAD:$TARGET_BRANCH"
+          git push origin HEAD:main
         else
           echo "No changes to commit."
         fi
