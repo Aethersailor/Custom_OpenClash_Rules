@@ -311,6 +311,8 @@ DOMAIN-SUFFIX,xgzb.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# DaoCloud 镜像 / add by Telegram user: 真怪誕呀 / Date: 2026-04-04 17:30:11
+DOMAIN-SUFFIX,daocloud.vip
 # 视频 / add by Telegram user: Man / Date: 2026-03-31 23:25:12
 DOMAIN-SUFFIX,66990000.xyz
 # 视频 / add by Telegram user: Man / Date: 2026-03-31 23:22:47
