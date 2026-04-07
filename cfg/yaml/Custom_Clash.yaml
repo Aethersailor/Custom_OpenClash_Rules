@@ -168,8 +168,11 @@ dns:
   respect-rules: false
   # 主 DNS 服务器列表（用于实际域名解析）
   nameserver:
+    - https://dns.alidns.com/dns-query#h3=true  # 阿里云 DoH，启用 DoH3
     - https://doh.pub/dns-query  # 腾讯 DoH
-    - https://dns.alidns.com/dns-query  # 阿里云 DoH
+  default-nameserver:
+    - tls://1.12.12.12
+    - tls://120.53.53.53
 
 # ==================== 代理策略组 Proxy Groups ====================
 # 策略组：定义不同用途的代理策略，可在规则中引用
