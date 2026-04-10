@@ -570,6 +570,15 @@ DOMAIN-SUFFIX,terra-master.com
 DOMAIN-SUFFIX,tnas.online
 
 # PR 至 v2fly/domain-list-community.
+
+
+
+
+# ---------------------------------------
+# =======================================
+
+# 以下域名已被 GeoSite 上游项目收录，定期删除
+
 # 我的世界服务器 / add by Telegram user: 💡💡 / Date: 2025-09-12 12:44:33
 DOMAIN-SUFFIX,zctnet.top
 # 金融数据 / add by Telegram user: ai / Date: 2025-11-26 14:33:09
@@ -614,14 +623,6 @@ DOMAIN-SUFFIX,91shenfan.com
 DOMAIN-SUFFIX,gamepp.com
 # 博查 AI / add by Telegram user: 嘿嘿 / Date: 2026-02-13 13:59:38
 DOMAIN-SUFFIX,bochaai.com
-
-
-
-# ---------------------------------------
-# =======================================
-
-# 以下域名已被 GeoSite 上游项目收录，定期删除
-
 # 软件官网 / add by Telegram user: 哈Lay / Date: 2026-01-07 21:32:03
 DOMAIN-SUFFIX,passnat.com
 # 博客 / add by Telegram user: 哈Lay / Date: 2026-01-07 21:31:37
