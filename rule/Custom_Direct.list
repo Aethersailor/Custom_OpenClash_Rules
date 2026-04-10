@@ -325,6 +325,8 @@ DOMAIN-SUFFIX,vbkr.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# add by Telegram user: 嘿嘿 / Date: 2026-04-10 20:52:28
+DOMAIN-SUFFIX,meloong.com
 
 # 2026.4.9 分类整理完毕
 
