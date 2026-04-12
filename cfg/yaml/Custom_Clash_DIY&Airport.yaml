@@ -1,0 +1,609 @@
+# Custom_Clash_DIY&Airport.yaml
+
+# 适用环境：优质线路全解锁自建节点+备用机场
+# 主要规则基于 GeoSite + GeoIP，补充规则来自本项目仓库
+
+# 仅提供代理组、策略组等参数内容
+# DNS、IPv6 等参数不做配置，请根据自己实际情况，使用客户端覆写功能添加，或手动填写
+# 可搭配本项目 wiki 中的设置教程使用
+
+# 不要启用 fallback 服务器！！
+# 本配置文件默认阻断所有海外加密 DNS 连接，以配合自建节点的 DNS 解锁功能
+# 在 OpenClash 下使用务必开启绕过中国大陆功能，否则将无法使用国内 DOH 服务器
+
+# 遵循 mihomo 官方配置范例格式，如需修改，请参考官方完整配置范例
+
+# 使用机器人自行添加冷门直连域名：https://t.me/asailor_rulebot
+
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+
+proxy-providers:
+# 机场订阅
+  Airport:
+    type: http
+    url: 填写你的机场订阅地址
+    interval: 1800
+    # 若无法直连拉取，则删去下方 proxy: DIRECT
+    proxy: DIRECT
+    path: ./proxy_provider/Airport.yaml
+    health-check:
+      enable: true
+      url: https://cp.cloudflare.com/generate_204
+      interval: 120
+    override:
+      skip-cert-verify: false
+      udp: true
+
+# 自建节点
+# 我使用 substore 下发自建节点的订阅信息，你也可以手动填写节点参数
+  Private:
+    type: http
+    url: 填写你的自建节点订阅地址
+    interval: 1800
+    proxy: DIRECT
+    path: ./proxy_provider/Private.yaml
+    health-check:
+      enable: true
+      url: https://cp.cloudflare.com/generate_204
+      interval: 300
+
+# 线路优先原则：一切分流优先走自建节点，并在自建节点上完成全部解锁
+# 若自建节点不可用，则根据线路可用性，按照特定地区顺序自动回落机场对应的节点分组
+# 媒体类分流优先新加坡区，其余分流优先港区
+# 默认使用 fallback + urltest，如需使用 smart，请启用覆写设置中 smart 替换 urltest 的功能
+
+proxy-groups:
+  - name: 手动选择
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 香港节点
+      - 新加坡节点
+      - 日本节点
+      - 美国节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: 即时通讯
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    type: fallback
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 香港节点
+      - 新加坡节点
+      - 日本节点
+      - 美国节点
+      - 台湾节点
+      - 韩国节点
+      - 全球直连
+
+  - name: 社交媒体
+    type: fallback
+    icon: https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/SNS.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 香港节点
+      - 新加坡节点
+      - 日本节点
+      - 美国节点
+      - 台湾节点
+      - 韩国节点
+      - 全球直连
+
+  - name: GitHub
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 香港节点
+      - 新加坡节点
+      - 日本节点
+      - 美国节点
+      - 台湾节点
+      - 韩国节点
+      - 全球直连
+
+  - name: AI服务
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bot.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 新加坡节点
+      - 日本节点
+      - 美国节点
+      - 香港节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: TikTok
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 美国节点
+      - 香港节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: YouTube
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 新加坡节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: Netflix
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 新加坡节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: DisneyPlus
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 新加坡节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: HBO
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HBO.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 新加坡节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: PrimeVideo
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Prime_Video.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 新加坡节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: AppleTV+
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_TV_Plus.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 新加坡节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: Emby
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
+      - 韩国节点
+      - 全球直连
+
+  - name: Spotify
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: 国外媒体
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ForeignMedia.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 新加坡节点
+      - 香港节点
+      - 日本节点
+      - 美国节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: 国外电商
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
+      - 韩国节点
+      - 全球直连
+
+  - name: 谷歌FCM
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 香港节点
+      - 新加坡节点
+      - 日本节点
+      - 美国节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: 谷歌服务
+    type: fallback
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 新加坡节点
+      - 日本节点
+      - 香港节点
+      - 美国节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: 苹果服务
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
+    proxies:
+      - 全球直连
+      - 自建节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: 微软服务
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
+    proxies:
+      - 全球直连
+      - 自建节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: 游戏平台
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png
+    proxies:
+      - 全球直连
+      - 自建节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: Steam
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Steam.png
+    proxies:
+      - 自建节点
+      - 香港节点
+      - 新加坡节点
+      - 日本节点
+      - 美国节点
+      - 台湾节点
+      - 韩国节点
+      - 全球直连
+
+  - name: 测速工具
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png
+    proxies:
+      - 全球直连
+      - 自建节点
+      - 香港节点
+      - 美国节点
+      - 日本节点
+      - 新加坡节点
+      - 台湾节点
+      - 韩国节点
+
+  - name: 漏网之鱼
+    type: fallback
+    icon: https://github.com/DustinWin/ruleset_geodata/releases/download/icons/match.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 60
+    proxies:
+      - 自建节点
+      - 香港节点
+      - 新加坡节点
+      - 美国节点
+      - 日本节点
+      - 台湾节点
+      - 韩国节点
+      - 全球直连
+
+  - name: 非标端口
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
+    proxies:
+      - 漏网之鱼
+      - 全球直连
+
+  - name: 自建节点
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Server.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 120
+    tolerance: 20
+    use:
+      - Private
+
+  - name: 香港节点
+    type: url-test
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 120
+    tolerance: 20
+    use:
+      - Airport
+    filter: (🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌)
+
+  - name: 美国节点
+    type: url-test
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 120
+    tolerance: 20
+    use:
+      - Airport
+    filter: (🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC)
+
+  - name: 日本节点
+    type: url-test
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 120
+    tolerance: 20
+    use:
+      - Airport
+    filter: (🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI)
+
+  - name: 新加坡节点
+    type: url-test
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 120
+    tolerance: 20
+    use:
+      - Airport
+    filter: (🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN)
+
+  - name: 台湾节点
+    type: url-test
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 120
+    tolerance: 20
+    use:
+      - Airport
+    filter: (🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC)
+
+  - name: 韩国节点
+    type: url-test
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
+    url: https://cp.cloudflare.com/generate_204
+    interval: 120
+    tolerance: 20
+    use:
+      - Airport
+    filter: (🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)
+
+  - name: 全球直连
+    type: select
+    icon: https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/DIRECT.png
+    url: http://wifi.vivo.com.cn/generate_204
+    interval: 60
+    proxies:
+      - DIRECT
+
+rules:
+  - GEOSITE,private,全球直连
+  - GEOIP,private,全球直连,no-resolve
+  - DST-PORT,853,REJECT # 阻断 DOT 连接
+  - GEOSITE,category-doh,REJECT # 阻断域名类 DOH 连接
+  - RULE-SET,Encrypted_DNS_IP,REJECT,no-resolve # 阻断海外 IP 类 DOH 连接
+  - RULE-SET,rule_direct_domain,全球直连
+  - RULE-SET,rule_direct_ip,全球直连,no-resolve
+  - RULE-SET,rule_direct_classical,全球直连
+  - RULE-SET,Custom_Direct_Domain,全球直连
+  - RULE-SET,Custom_Direct_IP,全球直连,no-resolve
+  - RULE-SET,Custom_Direct_Port,全球直连
+  - RULE-SET,Custom_Proxy_Domain,手动选择
+  - RULE-SET,Custom_Proxy_IP,手动选择,no-resolve
+  - GEOSITE,google-cn,全球直连
+  - GEOSITE,category-games@cn,全球直连
+  - RULE-SET,Steam_CDN_Domain,全球直连
+  - RULE-SET,Steam_CDN_IP,全球直连,no-resolve
+  - GEOSITE,category-game-platforms-download,全球直连
+  - GEOSITE,category-public-tracker,全球直连
+  - GEOSITE,category-communication,即时通讯
+  - GEOSITE,category-social-media-!cn,社交媒体
+  - GEOSITE,category-ai-!cn,AI服务
+  - GEOSITE,github,GitHub
+  - GEOSITE,category-speedtest,测速工具
+  - GEOSITE,steam,Steam
+  - GEOSITE,youtube,YouTube
+  - GEOSITE,apple-tvplus,AppleTV+
+  - GEOSITE,apple,苹果服务
+  - GEOSITE,microsoft,微软服务
+  - GEOSITE,googlefcm,谷歌FCM
+  - GEOSITE,google,谷歌服务
+  - GEOSITE,tiktok,TikTok
+  - GEOSITE,netflix,Netflix
+  - GEOSITE,disney,DisneyPlus
+  - GEOSITE,hbo,HBO
+  - GEOSITE,primevideo,PrimeVideo
+  - GEOSITE,category-emby,Emby
+  - GEOSITE,spotify,Spotify
+  - GEOSITE,category-games,游戏平台
+  - GEOSITE,category-entertainment,国外媒体
+  - GEOSITE,category-ecommerce,国外电商
+  - GEOSITE,gfw,手动选择
+  - GEOIP,telegram,即时通讯,no-resolve
+  - GEOIP,twitter,社交媒体,no-resolve
+  - GEOIP,facebook,社交媒体,no-resolve
+  - GEOIP,google,谷歌服务,no-resolve
+  - GEOIP,netflix,Netflix,no-resolve
+  - GEOSITE,cn,全球直连
+  - GEOIP,cn,全球直连,no-resolve
+  - RULE-SET,Custom_Port_Direct,非标端口
+  - MATCH,漏网之鱼
+
+rule-providers:
+  Custom_Direct_Domain:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.mrs
+    interval: 900
+  Custom_Direct_IP:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_IP.mrs
+    interval: 900
+  Custom_Direct_Port:
+    type: http
+    behavior: classical
+    format: yaml
+    url: https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_Port.yaml
+    interval: 900
+  Custom_Proxy_Domain:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.mrs
+    interval: 900
+  Custom_Proxy_IP:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_IP.mrs
+    interval: 900
+  Steam_CDN_Domain:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_Domain.mrs
+    interval: 900
+  Steam_CDN_IP:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_IP.mrs
+    interval: 900
+  Encrypted_DNS_IP:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Encrypted_DNS_IP.mrs
+    interval: 900
+  Custom_Port_Direct:
+    type: http
+    behavior: classical
+    url: https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Port_Direct.yaml
+    interval: 900
+  rule_direct_domain:
+    type: inline
+    behavior: domain
+    payload:
+      # 自己需要补充其他需要直连的域名
+      # - '+.example.com'
+  rule_direct_ip:
+    type: inline
+    behavior: ipcidr
+    payload:
+      # 自己需要补充其他需要直连的 IP
+      - '123.123.123.123/32'
+  rule_direct_classical:
+    type: inline
+    behavior: classical
+    payload:
+      # 自己需要补充其他直连规则
+      # 例如局域网下载机的来源地址
+      - SRC-PORT,41641 # 某些需要直连的来源端口
+      - DST-PORT,41641 # 某些需要直连的目标端口
+      - SRC-IP-CIDR,192.168.1.101/32 # 局域网下载机地址
