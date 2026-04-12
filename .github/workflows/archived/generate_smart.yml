@@ -1,0 +1,107 @@
+name: Generate Smart INI Files
+
+on:
+  push:
+    paths:
+      - cfg/Custom_Clash.ini
+      - cfg/Custom_Clash_Full.ini
+      - cfg/Custom_Clash_GFW.ini
+      - cfg/Custom_Clash_Lite.ini
+
+  workflow_dispatch:
+
+jobs:
+  generate-smart:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Process ini files and generate smart versions
+        run: |
+          echo "Start processing ini files..."
+
+          FILES_TO_PROCESS=(
+            "cfg/Custom_Clash.ini:cfg/Custom_Clash_Smart.ini"
+            "cfg/Custom_Clash_Full.ini:cfg/Custom_Clash_Smart_Full.ini"
+            "cfg/Custom_Clash_Lite.ini:cfg/Custom_Clash_Smart_Lite.ini"
+            "cfg/Custom_Clash_SSRDOG.ini:cfg/Custom_Clash_Smart_SSRDOG.ini"
+          )
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Pull latest changes to avoid conflicts
+          git pull origin main
+
+          commit_flag=0
+          changed_files=()
+
+          for pair in "${FILES_TO_PROCESS[@]}"; do
+            input_file="${pair%%:*}"
+            output_file="${pair##*:}"
+
+            if [[ -f "$input_file" ]]; then
+              echo "Processing $input_file -> $output_file"
+
+              # 第一轮处理：直接复制文件（不再删除任何分组）
+              cp "$input_file" "$output_file.tmp"
+
+              # 第二轮处理：插入注释
+              awk '{print} /^;节点地区分组/ {print ";Smart 内核专用模板"}' "$output_file.tmp" > "$output_file.tmp2"
+
+              # 第三轮处理：替换url-test为smart
+              sed 's/url-test/smart/g' "$output_file.tmp2" > "$output_file.tmp3"
+
+              # 第四轮处理：替换smart行末尾的参数
+              sed 's/`300,,50$/`300`uselightgbm=true`collectdata=false`strategy=sticky-sessions`policy-priority=""/g' "$output_file.tmp3" > "$output_file.tmp4"
+
+              # 第五轮处理：替换节点和地区为智能
+              sed 's/节点`/智能`/g; s/地区`/智能`/g' "$output_file.tmp4" > "$output_file.tmp5"
+
+              # 第六轮处理：替换自动选择为自动智能
+              sed 's/自动选择/自动智能/g' "$output_file.tmp5" > "$output_file"
+
+              rm "$output_file.tmp" "$output_file.tmp2" "$output_file.tmp3" "$output_file.tmp4" "$output_file.tmp5"
+
+              echo "Generated $output_file"
+
+              # Check if file has changes
+              if ! git diff --quiet "$output_file"; then
+                git add "$output_file"
+                changed_files+=("$output_file")
+                commit_flag=1
+              else
+                echo "No changes detected in $output_file, skipping."
+              fi
+
+            else
+              echo "Warning: $input_file does not exist, skipping"
+            fi
+          done
+
+          if [[ "$commit_flag" -eq 1 ]]; then
+            echo "Committing changes for files: ${changed_files[*]}"
+            
+            # Create commit message for each changed file
+            commit_message=""
+            for file in "${changed_files[@]}"; do
+              base_name=$(basename "$file")
+              input_name=$(basename "${file/_Smart./.}")
+              if [[ -z "$commit_message" ]]; then
+                commit_message="Generate $base_name based on $input_name"
+              else
+                commit_message="$commit_message, $base_name based on $input_name"
+              fi
+            done
+            
+            git commit -m "$commit_message"
+            
+            echo "Pushing changes..."
+            git push origin main
+          else
+            echo "No changes to commit or push."
+          fi

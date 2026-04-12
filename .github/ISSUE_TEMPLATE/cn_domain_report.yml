@@ -1,0 +1,35 @@
+name: 🌏 国内冷门域名上报 (CN Domain Report)
+description: 上报被误判为代理的国内域名
+title: '[国内域名] 域名 example.com'
+labels: 'enhancement'
+
+body:
+  - type: checkboxes
+    id: verify_steps
+    attributes:
+      label: 前置确认 (Pre-check)
+      description: |
+        提交前请确认：
+      options:
+        - label: 我确认该域名实际的解析结果为中国大陆 IP
+          required: true
+        - label: 我确认该域名未命中任何现有规则，导致走了漏网之鱼
+          required: true
+
+  - type: textarea
+    id: cn_domain
+    attributes:
+      label: 域名列表 (Domains)
+      description: |
+        列出需要添加的国内域名，每行一个。
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 解析证据 (Evidence)
+      description: |
+        提供域名的 DNS 解析结果或相关截图，证明其为国内服务。
+    validations:
+      required: true

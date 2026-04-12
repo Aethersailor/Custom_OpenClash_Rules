@@ -1,0 +1,45 @@
+name: Sync OpenClash_Overwrite Submodule
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
+  TARGET_OVERWRITE_BRANCH: ${{ (vars.TARGET_OVERWRITE_BRANCH != '' && vars.TARGET_OVERWRITE_BRANCH) || 'main' }}
+
+jobs:
+  sync-submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+          submodules: true
+
+      - name: Update submodule
+        run: |
+          git submodule update --init --remote overwrite/OpenClash_Overwrite
+          # 确保 submodule 位于 main 分支
+          git -C overwrite/OpenClash_Overwrite checkout main || git -C overwrite/OpenClash_Overwrite checkout -b main
+
+
+      - name: Commit and push if needed
+        run: |
+          if [ -n "$(git status --porcelain overwrite/OpenClash_Overwrite)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add overwrite/OpenClash_Overwrite
+            git commit -m "chore(overwrite): bump OpenClash_Overwrite submodule"
+            # 使用 pull --rebase 防止多人同时 push 导致的冲突
+            git pull --rebase origin main
+            git push origin HEAD:main
+          else
+            echo "No changes to commit."
+          fi

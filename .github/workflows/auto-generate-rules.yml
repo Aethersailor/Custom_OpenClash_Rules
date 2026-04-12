@@ -1,0 +1,167 @@
+name: Auto generate rules
+
+on:
+  push:
+    paths:
+      - 'rule/*.list'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
+
+jobs:
+  generate-rules:
+    if: github.event_name != 'push' || github.ref_name == ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.TARGET_BRANCH }}
+          fetch-depth: 0
+
+      - name: Set Git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+
+      - name: Download mihomo
+        run: |
+          MIHOMO_VERSION="v1.19.18"
+          echo "Downloading mihomo ${MIHOMO_VERSION}..."
+          wget -q "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/mihomo-linux-amd64-${MIHOMO_VERSION}.gz"
+          gunzip "mihomo-linux-amd64-${MIHOMO_VERSION}.gz"
+          chmod +x "mihomo-linux-amd64-${MIHOMO_VERSION}"
+          sudo mv "mihomo-linux-amd64-${MIHOMO_VERSION}" /usr/local/bin/mihomo
+          echo "mihomo ${MIHOMO_VERSION} installed successfully"
+
+      - name: Generate YAML from LIST files
+        run: |
+          FILES=("Custom_Direct" "Custom_Proxy" "Steam_CDN" "Encrypted_DNS")
+
+          for base_name in "${FILES[@]}"; do
+            list_file="rule/${base_name}.list"
+
+            domain_yaml_file="rule/${base_name}_Domain.yaml"
+            ip_yaml_file="rule/${base_name}_IP.yaml"
+            classical_yaml_file="rule/${base_name}_Classical.yaml"
+            classical_ip_yaml_file="rule/${base_name}_Classical_IP.yaml"
+
+            domain_rules=$(grep -E '^(DOMAIN,|DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD)' "$list_file" | sed -E "s/^DOMAIN-SUFFIX,(.+)/  - '+.\1'/" | sed -E "s/^DOMAIN-KEYWORD,(.+)/  - '*\1*'/" | sed -E "s/^DOMAIN,(.+)/  - '\1'/" | sort)
+            ip_rules=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - '\1'/" | sed -E "s/^IP,([^,]+).*/  - '\1'/" | sort)
+
+            classical_rules=$(grep -E '^(DOMAIN,|DOMAIN-|DOMAIN-SUFFIX|DOMAIN-KEYWORD|SRC-PORT)' "$list_file" | sed -E "s/^(.*)/  - \1/" | sort)
+            classical_rules+=$'\n'
+            classical_rules+=$(grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sort)
+
+            classical_ip_rules=$({
+              grep -E '^(IP-|IP-CIDR)' "$list_file" | sed -E "s/^IP-CIDR,([^,]+).*/  - IP-CIDR,\1,no-resolve/" | sed -E "s/^IP,([^,]+).*/  - IP-CIDR,\1,no-resolve/"
+              grep -E '^SRC-PORT' "$list_file" | sed -E "s/^(.*)/  - \1/"
+            } | sort)
+
+            generate_and_commit() {
+              file="$1"
+              content="$2"
+              total=$(echo "$content" | grep -c '  - ' || true)
+
+              echo "# Generated from ${list_file}" > "$file"
+              echo "# REPO: https://github.com/${{ github.repository }}" >> "$file"
+              echo "# SOURCE: https://github.com/${{ github.repository }}/blob/${TARGET_BRANCH}/${list_file}" >> "$file"
+              echo "# TOTAL: ${total}" >> "$file"
+              echo "" >> "$file"
+              echo "payload:" >> "$file"
+              echo "$content" >> "$file"
+
+              if [[ -n $(git status --porcelain "$file") ]]; then
+                git add "$file"
+                git commit -m "chore(rules): auto generate $(basename "$file") from $(basename "$list_file")"
+              else
+                echo "No changes in ${file}, skip commit."
+              fi
+            }
+
+            generate_and_commit "$domain_yaml_file" "$domain_rules"
+            generate_and_commit "$ip_yaml_file" "$ip_rules"
+            generate_and_commit "$classical_yaml_file" "$classical_rules"
+            generate_and_commit "$classical_ip_yaml_file" "$classical_ip_rules"
+
+          done
+
+      - name: Convert YAML to MRS
+        run: |
+          echo "Converting YAML files to MRS format..."
+          
+          # Convert Domain YAML files
+          for yaml_file in rule/*_Domain.yaml; do
+            if ! grep -q '^  - ' "$yaml_file"; then
+              echo "Skipping $yaml_file (no domain rules)"
+              continue
+            fi
+
+            mrs_file="${yaml_file%.yaml}.mrs"
+            echo "Converting $yaml_file to $mrs_file (domain behavior)"
+            mihomo convert-ruleset domain yaml "$yaml_file" "$mrs_file"
+            
+            if [ -f "$mrs_file" ]; then
+              echo "✓ Generated $mrs_file"
+              
+              # Commit each MRS file individually
+              if [[ -n $(git status --porcelain "$mrs_file") ]]; then
+                git add "$mrs_file"
+                git commit -m "chore(rules): auto generate $(basename "$mrs_file") from $(basename "$yaml_file")"
+              else
+                echo "No changes in ${mrs_file}, skip commit."
+              fi
+            else
+              echo "✗ Failed to generate $mrs_file"
+              exit 1
+            fi
+          done
+          
+          # Convert IP YAML files (exclude Classical_IP)
+          for yaml_file in rule/*_IP.yaml; do
+            # Skip Classical_IP files
+            if [[ "$yaml_file" == *"_Classical_IP.yaml" ]]; then
+              echo "Skipping $yaml_file (Classical format not supported in MRS)"
+              continue
+            fi
+
+            if ! grep -q '^  - ' "$yaml_file"; then
+              echo "Skipping $yaml_file (no IP rules)"
+              continue
+            fi
+            
+            mrs_file="${yaml_file%.yaml}.mrs"
+            echo "Converting $yaml_file to $mrs_file (ipcidr behavior)"
+            mihomo convert-ruleset ipcidr yaml "$yaml_file" "$mrs_file"
+            
+            if [ -f "$mrs_file" ]; then
+              echo "✓ Generated $mrs_file"
+              
+              # Commit each MRS file individually
+              if [[ -n $(git status --porcelain "$mrs_file") ]]; then
+                git add "$mrs_file"
+                git commit -m "chore(rules): auto generate $(basename "$mrs_file") from $(basename "$yaml_file")"
+              else
+                echo "No changes in ${mrs_file}, skip commit."
+              fi
+            else
+              echo "✗ Failed to generate $mrs_file"
+              exit 1
+            fi
+          done
+
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push origin "HEAD:${TARGET_BRANCH}"
