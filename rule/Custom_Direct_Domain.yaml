@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 574
+# TOTAL: 575
 
 payload:
   - '*m-team*'
@@ -475,6 +475,7 @@ payload:
   - '+.tmallyc.com'
   - '+.tnas.link'
   - '+.tnas.online'
+  - '+.tongkask.com'
   - '+.tool56.com'
   - '+.topwd.top'
   - '+.tozi-cn.top'
