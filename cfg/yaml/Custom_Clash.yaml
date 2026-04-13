@@ -149,10 +149,6 @@ dns:
   listen: 0.0.0.0:7874
   # 是否解析 IPv6 地址
   ipv6: true
-  # 默认 DNS 服务器（用于解析其他 DNS 服务器的域名），必须使用 IP 地址或支持 DoT 的服务器
-  default-nameserver:
-    - 114.114.114.114  # 114 公共 DNS
-    - tls://223.5.5.5:853  # 阿里云 DoT
   # DNS 增强模式：fake-ip（虚假 IP）/ redir-host（真实 IP），fake-ip 模式性能更好
   enhanced-mode: fake-ip
   # Fake-IP 地址池范围（私有地址段，不会与真实 IP 冲突）
@@ -170,6 +166,7 @@ dns:
   nameserver:
     - https://dns.alidns.com/dns-query#h3=true  # 阿里云 DoH，启用 DoH3
     - https://doh.pub/dns-query  # 腾讯 DoH
+  # 默认 DNS 服务器（用于解析其他 DNS 服务器的域名）
   default-nameserver:
     - tls://1.12.12.12
     - tls://120.53.53.53
