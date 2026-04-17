@@ -326,6 +326,8 @@ DOMAIN-SUFFIX,jsj.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# emby服务器 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2026-04-17 10:47:10
+DOMAIN-SUFFIX,miraiemby.com
 # add by Telegram user: Coco / Date: 2026-04-15 02:22:09
 DOMAIN-SUFFIX,zhiexa.com
 # add by Telegram user: along / Date: 2026-04-14 13:08:15
