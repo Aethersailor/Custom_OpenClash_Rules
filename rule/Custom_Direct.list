@@ -326,6 +326,8 @@ DOMAIN-SUFFIX,jsj.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 光鸭网盘 / add by Telegram user: XI / Date: 2026-04-19 01:55:14
+DOMAIN-SUFFIX,guangyapan.com
 # add by Telegram user: Aethersailor / Date: 2026-04-17 11:53:23
 DOMAIN-SUFFIX,acepanel.net
 # emby服务器 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2026-04-17 10:47:10
