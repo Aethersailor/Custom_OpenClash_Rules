@@ -326,29 +326,10 @@ DOMAIN-SUFFIX,jsj.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
-# 塔吉多 / add by Telegram user: 雪菜 / Date: 2026-04-20 00:23:55
-DOMAIN-SUFFIX,tajiduo.com
-# 光鸭网盘 / add by Telegram user: XI / Date: 2026-04-19 01:55:14
-DOMAIN-SUFFIX,guangyapan.com
-# add by Telegram user: Aethersailor / Date: 2026-04-17 11:53:23
-DOMAIN-SUFFIX,acepanel.net
-# emby服务器 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2026-04-17 10:47:10
-DOMAIN-SUFFIX,miraiemby.com
-# add by Telegram user: Coco / Date: 2026-04-15 02:22:09
-DOMAIN-SUFFIX,zhiexa.com
-# add by Telegram user: along / Date: 2026-04-14 13:08:15
-DOMAIN-SUFFIX,alonginwind.top
-# 少女前线2追放官方游戏论坛 / add by Telegram user: cysr214 / Date: 2026-04-14 03:05:00
-DOMAIN-SUFFIX,exiliumgf.com
-# skillhub的api域名 / add by Telegram user: 美 / Date: 2026-04-13 14:25:07
-DOMAIN-SUFFIX,lightmake.site
-# add by Telegram user: yz / Date: 2026-04-12 21:34:46
-DOMAIN-SUFFIX,cone-x.com
-# 南京市江宁水务集团小程序 / add by Telegram user: 法兰西 / Date: 2026-04-12 19:47:44
-DOMAIN-SUFFIX,jiangningwater.com
 
 
-# 2026.4.12 分类整理完毕
+
+# 2026.4.20 分类整理完毕
 
 
 
@@ -605,7 +586,26 @@ DOMAIN-SUFFIX,tnas.online
 
 # PR 至 v2fly/domain-list-community.
 
-
+# 塔吉多 / add by Telegram user: 雪菜 / Date: 2026-04-20 00:23:55
+DOMAIN-SUFFIX,tajiduo.com
+# 光鸭网盘 / add by Telegram user: XI / Date: 2026-04-19 01:55:14
+DOMAIN-SUFFIX,guangyapan.com
+# add by Telegram user: Aethersailor / Date: 2026-04-17 11:53:23
+DOMAIN-SUFFIX,acepanel.net
+# emby服务器 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2026-04-17 10:47:10
+DOMAIN-SUFFIX,miraiemby.com
+# add by Telegram user: Coco / Date: 2026-04-15 02:22:09
+DOMAIN-SUFFIX,zhiexa.com
+# add by Telegram user: along / Date: 2026-04-14 13:08:15
+DOMAIN-SUFFIX,alonginwind.top
+# 少女前线2追放官方游戏论坛 / add by Telegram user: cysr214 / Date: 2026-04-14 03:05:00
+DOMAIN-SUFFIX,exiliumgf.com
+# skillhub的api域名 / add by Telegram user: 美 / Date: 2026-04-13 14:25:07
+DOMAIN-SUFFIX,lightmake.site
+# add by Telegram user: yz / Date: 2026-04-12 21:34:46
+DOMAIN-SUFFIX,cone-x.com
+# 南京市江宁水务集团小程序 / add by Telegram user: 法兰西 / Date: 2026-04-12 19:47:44
+DOMAIN-SUFFIX,jiangningwater.com
 
 
 # ---------------------------------------
