@@ -25,8 +25,9 @@ jobs:
 
       - name: Update submodule
         run: |
-          git -C overwrite/OpenClash_Overwrite fetch origin main
-          git -C overwrite/OpenClash_Overwrite checkout -B main origin/main
+          git submodule update --init --remote overwrite/OpenClash_Overwrite
+          # 确保 submodule 位于 main 分支
+          git -C overwrite/OpenClash_Overwrite checkout main || git -C overwrite/OpenClash_Overwrite checkout -b main
 
       - name: Sync issue templates to OpenClash_Overwrite
         env:
@@ -52,11 +53,13 @@ jobs:
 
       - name: Commit and push if needed
         run: |
-          if [ -n "$(git status --porcelain)" ]; then
+          if [ -n "$(git status --porcelain overwrite/OpenClash_Overwrite)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add overwrite/OpenClash_Overwrite
             git commit -m "chore(overwrite): bump OpenClash_Overwrite submodule"
+            # 使用 pull --rebase 防止多人同时 push 导致的冲突
+            git pull --rebase origin main
             git push origin HEAD:main
           else
             echo "No changes to commit."
