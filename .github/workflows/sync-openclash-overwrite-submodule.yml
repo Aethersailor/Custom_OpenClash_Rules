@@ -46,7 +46,7 @@ jobs:
             git -C overwrite/OpenClash_Overwrite config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git -C overwrite/OpenClash_Overwrite add .github/ISSUE_TEMPLATE
             git -C overwrite/OpenClash_Overwrite commit -m "chore(github): sync issue templates from Custom_OpenClash_Rules"
-            git -C overwrite/OpenClash_Overwrite push "https://${TARGET_REPO_TOKEN}@github.com/Giveupmoon/OpenClash_Overwrite.git" "HEAD:${TARGET_OVERWRITE_BRANCH}"
+            git -C overwrite/OpenClash_Overwrite -c http.https://github.com/.extraheader= push "https://${TARGET_REPO_TOKEN}@github.com/Giveupmoon/OpenClash_Overwrite.git" "HEAD:${TARGET_OVERWRITE_BRANCH}"
           else
             echo "No issue template changes to sync."
           fi
