@@ -690,14 +690,14 @@ rule-providers:
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_IP.mrs"
     format: mrs  # 二进制格式
 
-  Steam_CDN:
+  Steam_CDN_Domain:
     behavior: domain  # Steam CDN下载服务器（直连获得更快速度）
     interval: 10800  # 3小时
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_Domain.mrs"
     format: mrs  # 二进制格式
 
-  Steam_CDN:
+  Steam_CDN_IP:
     behavior: ipcidr  # Steam CDN下载服务器（直连获得更快速度）
     interval: 10800  # 3小时
     type: http
