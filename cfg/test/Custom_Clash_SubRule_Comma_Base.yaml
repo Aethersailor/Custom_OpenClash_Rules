@@ -1,0 +1,14 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+proxies: ~
+proxy-groups: ~
+rules: ~
+sub-rules:
+  udp-route:
+    - NETWORK,UDP,🎯 全球直连
