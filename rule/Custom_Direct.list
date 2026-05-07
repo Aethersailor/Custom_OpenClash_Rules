@@ -373,6 +373,14 @@ DOMAIN-SUFFIX,4kgj.com
 
 # PR 至 v2fly/domain-list-community.
 
+
+
+
+# ---------------------------------------
+# =======================================
+
+# 以下域名已被 GeoSite 上游项目收录
+
 # 塔吉多 / add by Telegram user: 雪菜 / Date: 2026-04-20 00:23:55
 DOMAIN-SUFFIX,tajiduo.com
 # 光鸭网盘 / add by Telegram user: XI / Date: 2026-04-19 01:55:14
@@ -393,13 +401,6 @@ DOMAIN-SUFFIX,lightmake.site
 DOMAIN-SUFFIX,cone-x.com
 # 南京市江宁水务集团小程序 / add by Telegram user: 法兰西 / Date: 2026-04-12 19:47:44
 DOMAIN-SUFFIX,jiangningwater.com
-
-
-# ---------------------------------------
-# =======================================
-
-# 以下域名已被 GeoSite 上游项目收录，定期删除
-
 # add by Telegram user: Aethersailor / Date: 2026-04-12 15:43:11
 DOMAIN-SUFFIX,tongkask.com
 # add by Telegram user: Aethersailor / Date: 2026-04-12 15:40:00
