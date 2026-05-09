@@ -44,7 +44,7 @@ logo() {
 
 # 定义变量
 REPO_API_URL="https://api.github.com/repos/vernesong/OpenClash/contents/dev?ref=package"
-RAW_FILE_PREFIX="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@refs/heads/package/dev"
+RAW_FILE_PREFIX="https://cdn.jsdelivr.net/gh/vernesong/OpenClash@refs/heads/package/dev"
 
 logo
 echo -e "${INFO} 开始运行..."
@@ -115,7 +115,7 @@ print_step "步骤 3/4: 初始化配置"
 echo -e "$INFO 配置更新分支为 Dev，启用 jsdelivr 加速..."
 uci set openclash.config.release_branch=dev
 uci set openclash.config.skip_safe_path_check=1
-uci set openclash.config.github_address_mod='https://testingcf.jsdelivr.net/'
+uci set openclash.config.github_address_mod='https://cdn.jsdelivr.net/'
 uci commit openclash
 echo -e "$OK 基础配置更新完成。"
 echo
