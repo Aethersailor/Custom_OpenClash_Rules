@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 604
+# TOTAL: 605
 
 payload:
   - '*m-team*'
@@ -395,6 +395,7 @@ payload:
   - '+.onebuygz.com'
   - '+.onetoken.sh'
   - '+.onetools.top'
+  - '+.openappfilter.com'
   - '+.openkylin.top'
   - '+.opentrust.net'
   - '+.osbdf.com'
