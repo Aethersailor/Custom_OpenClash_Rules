@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 606
+# TOTAL: 608
 
 payload:
   - '*m-team*'
@@ -295,6 +295,7 @@ payload:
   - '+.ilucky.net'
   - '+.imacos.top'
   - '+.immortalwrt.org'
+  - '+.infini-fantasy.com'
   - '+.iosgujian.com'
   - '+.iot889.com'
   - '+.iotrix.net'
@@ -341,6 +342,7 @@ payload:
   - '+.letaoedu.com'
   - '+.lg3000.top'
   - '+.lightmake.site'
+  - '+.linka2a.net'
   - '+.liunn.com'
   - '+.liveperson.net'
   - '+.longmenshuju.com'
