@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 616
+# TOTAL: 617
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -495,6 +495,7 @@ payload:
   - DOMAIN-SUFFIX,tcy365.net
   - DOMAIN-SUFFIX,tdrgame.top
   - DOMAIN-SUFFIX,terra-master.com
+  - DOMAIN-SUFFIX,tggfl.com
   - DOMAIN-SUFFIX,theluyuan.com
   - DOMAIN-SUFFIX,thinkerride.com
   - DOMAIN-SUFFIX,thmnet.com
