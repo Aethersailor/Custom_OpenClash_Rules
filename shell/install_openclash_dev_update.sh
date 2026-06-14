@@ -257,7 +257,7 @@ echo
 
 DOWNLOAD_SUCCESS=0
 
-# 下载 OpenClash 安装包（优先级: jsDelivr CDN > GitHub IP > 反代）
+# 下载 OpenClash 安装包（优先级: jsDelivr CDN > 反代 > GitHub IP）
 echo -e "$INFO 开始使用 jsDelivr CDN 下载..."
 
 curl -C - -sL --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 600 -o "$TEMP_FILE" "$JSDELIVR_URL"
@@ -266,6 +266,19 @@ if [ $? -eq 0 ] && [ -s "$TEMP_FILE" ]; then
   DOWNLOAD_SUCCESS=1
 else
   echo -e "$WARN jsDelivr CDN 下载失败。"
+fi
+
+# 尝试使用反代
+if [ $DOWNLOAD_SUCCESS -eq 0 ]; then
+  echo -e "$INFO 尝试使用反代下载..."
+  
+  curl -C - -sL --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 600 -o "$TEMP_FILE" "$PROXY_URL"
+  
+  if [ $? -eq 0 ] && [ -s "$TEMP_FILE" ]; then
+    DOWNLOAD_SUCCESS=1
+  else
+    echo -e "$WARN 反代下载失败。"
+  fi
 fi
 
 # 尝试使用 GitHub 原始地址（配合 IP）
@@ -283,21 +296,10 @@ if [ $DOWNLOAD_SUCCESS -eq 0 ] && [ -n "$GITHUB_COM_IP" ]; then
   fi
 fi
 
-# 尝试使用反代
-if [ $DOWNLOAD_SUCCESS -eq 0 ]; then
-  echo -e "$INFO 尝试使用反代下载..."
-  
-  curl -C - -sL --fail --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 600 -o "$TEMP_FILE" "$PROXY_URL"
-  
-  if [ $? -eq 0 ] && [ -s "$TEMP_FILE" ]; then
-    DOWNLOAD_SUCCESS=1
-  fi
-fi
-
 echo
 
 if [ $DOWNLOAD_SUCCESS -eq 0 ]; then
-    echo -e "$ERR 下载失败（jsDelivr CDN、GitHub 原始地址和反代均失败）。"
+    echo -e "$ERR 下载失败（jsDelivr CDN、反代和 GitHub 原始地址均失败）。"
     exit 1
 fi
 echo -e "$OK OpenClash 安装包下载成功。"
