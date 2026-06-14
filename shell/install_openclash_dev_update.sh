@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # ================================================================
 # Custom_OpenClash_Rules 自动安装脚本
 # 项目地址: https://github.com/Aethersailor/Custom_OpenClash_Rules
@@ -626,9 +626,14 @@ print_step "步骤 7/8: 更新数据库与订阅"
 
 update_res() {
     NAME=$1
-    SCRIPT=$2
+    shift
     echo -e "${INFO} 正在更新 ${NAME}..."
-    $SCRIPT
+    if [ "$#" -eq 0 ] || [ ! -f "$1" ]; then
+        echo -e "${ERR} ${NAME} 更新脚本不存在：${W}${1:-未指定}${N}"
+        exit 1
+    fi
+
+    "$@"
     if [ $? -eq 0 ]; then
         echo -e "${OK} ${NAME} 更新完成。"
         echo
@@ -638,10 +643,19 @@ update_res() {
     fi
 }
 
-update_res "GeoIP Dat 数据库" "/usr/share/openclash/openclash_geoip.sh"
-update_res "GeoIP MMDB 数据库" "/usr/share/openclash/openclash_ipdb.sh"
-update_res "GeoSite 数据库" "/usr/share/openclash/openclash_geosite.sh"
-update_res "GeoASN 数据库" "/usr/share/openclash/openclash_geoasn.sh"
+GEO_UPDATE_SCRIPT="/usr/share/openclash/openclash_geo.sh"
+
+if [ -f "$GEO_UPDATE_SCRIPT" ]; then
+    # 新版 OpenClash 使用统一入口更新全部 Geo 数据库
+    update_res "GeoIP Dat、GeoIP MMDB、GeoSite、GeoASN 数据库" "$GEO_UPDATE_SCRIPT" all
+else
+    # 兼容仍使用独立数据库更新脚本的旧版 OpenClash
+    update_res "GeoIP Dat 数据库" "/usr/share/openclash/openclash_geoip.sh"
+    update_res "GeoIP MMDB 数据库" "/usr/share/openclash/openclash_ipdb.sh"
+    update_res "GeoSite 数据库" "/usr/share/openclash/openclash_geosite.sh"
+    update_res "GeoASN 数据库" "/usr/share/openclash/openclash_geoasn.sh"
+fi
+
 update_res "大陆 IP 白名单" "/usr/share/openclash/openclash_chnroute.sh"
 
 echo -e "${INFO} 正在更新订阅..."
