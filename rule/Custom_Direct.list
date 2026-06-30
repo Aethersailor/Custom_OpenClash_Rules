@@ -135,10 +135,7 @@ DOMAIN-SUFFIX,epg.v1.mk
 DOMAIN-SUFFIX,epg.aptv.app
 DOMAIN-SUFFIX,gdcucc.v1.mk
 
-# Bangumi番组计划
-DOMAIN-SUFFIX,bgm.tv
 DOMAIN-SUFFIX,chii.in
-DOMAIN-SUFFIX,bangumi.tv
 
 # 肥羊 All in One
 DOMAIN-SUFFIX,freetv.top
