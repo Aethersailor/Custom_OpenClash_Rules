@@ -25,8 +25,8 @@ usage() {
   -h, --help 显示帮助
 
 当前内核为最新内核时，脚本会清理全部旧内核及其对应 headers。
-默认模式会先显示完整计划和 APT 模拟结果，然后要求输入 PURGE 才会执行。
-脚本不会自动重启、不会直接删除文件，也不会执行 autoremove。
+默认模式会先显示完整计划和 APT 模拟结果，然后要求输入 y 才会执行。
+脚本不会自动重启，也不会执行不限定范围的 autoremove。
 EOF
 }
 
@@ -84,7 +84,7 @@ require_command() {
     command -v "$1" >/dev/null 2>&1 || die "缺少必需命令: $1"
 }
 
-for command_name in apt-get apt-mark dpkg dpkg-query grep sort uname; do
+for command_name in apt-get apt-mark dpkg dpkg-query find grep rm sort uname; do
     require_command "$command_name"
 done
 
@@ -109,6 +109,7 @@ fi
 
 declare -a INSTALLED_PACKAGES=()
 declare -A INSTALLED_ABI_SET=()
+declare -A COMPONENT_ABI_SET=()
 declare -A IMAGE_PACKAGES_BY_ABI=()
 declare -A INSTALLED_PACKAGE_BY_BASE=()
 declare -A PROTECTED_ABIS=()
@@ -142,19 +143,30 @@ while IFS=$'\t' read -r package status; do
     package_without_arch=${package%%:*}
     INSTALLED_PACKAGE_BY_BASE["$package_without_arch"]=$package
     abi=''
+    component_abi=''
 
     if ((PVE_MODE)); then
         if [[ $package_without_arch =~ ^proxmox-kernel-([0-9].*-pve)(-signed)?$ ]]; then
             abi=${BASH_REMATCH[1]}
         elif [[ $package_without_arch =~ ^pve-kernel-([0-9].*-pve)$ ]]; then
             abi=${BASH_REMATCH[1]}
+        elif [[ $package_without_arch =~ ^(proxmox-headers|pve-headers)-([0-9].*-pve)$ ]]; then
+            component_abi=${BASH_REMATCH[2]}
         fi
     elif [[ $package_without_arch =~ ^linux-image-(unsigned-)?([0-9].*)$ ]]; then
         abi=${BASH_REMATCH[2]}
+    elif [[ $package_without_arch =~ ^linux-(base|binary|modules|modules-extra)-([0-9].*)$ ]]; then
+        component_abi=${BASH_REMATCH[2]}
+    elif [[ $package_without_arch =~ ^linux-headers-([0-9].*)$ ]]; then
+        component_abi=${BASH_REMATCH[1]}
+        [[ $package_without_arch == *-common ]] && component_abi=''
     fi
 
     if [[ -n $abi ]]; then
         add_image_package "$abi" "$package"
+        COMPONENT_ABI_SET["$abi"]=1
+    elif [[ -n $component_abi ]]; then
+        COMPONENT_ABI_SET["$component_abi"]=1
     fi
 done < <(dpkg-query -W -f='${binary:Package}\t${db:Status-Status}\n')
 
@@ -238,7 +250,7 @@ packages_for_abi() {
     local package package_without_arch depends relation dependency
     local -a dependency_relations=()
 
-    printf '%s' "${IMAGE_PACKAGES_BY_ABI[$abi]}"
+    printf '%s' "${IMAGE_PACKAGES_BY_ABI[$abi]-}"
     for package in "${INSTALLED_PACKAGES[@]}"; do
         package_without_arch=${package%%:*}
         case "$package_without_arch" in
@@ -257,20 +269,44 @@ packages_for_abi() {
                     fi
                 done
                 ;;
+            "linux-base-$abi"|"linux-binary-$abi"|\
             "linux-modules-$abi"|"linux-modules-extra-$abi"|\
             "proxmox-headers-$abi"|"pve-headers-$abi")
                 printf '%s\n' "$package"
+                ;;
+            linux-headers-*-common)
+                dependency=${package_without_arch#linux-headers-}
+                dependency=${dependency%-common}
+                if [[ $abi == "$dependency"-* ]]; then
+                    printf '%s\n' "$package"
+                fi
                 ;;
         esac
     done
 }
 
+declare -A CLEANUP_ABI_SET=()
 for abi in "${INSTALLED_ABIS[@]}"; do
-    [[ -n ${PROTECTED_ABIS[$abi]+x} ]] && continue
+    [[ $abi == "$RUNNING_KERNEL" ]] || CLEANUP_ABI_SET["$abi"]=1
+done
+for abi in "${!COMPONENT_ABI_SET[@]}"; do
+    if [[ $abi != "$RUNNING_KERNEL" ]] &&
+        dpkg --compare-versions "$abi" lt "$RUNNING_KERNEL"; then
+        CLEANUP_ABI_SET["$abi"]=1
+    fi
+done
+
+declare -a CLEANUP_ABIS=()
+if ((${#CLEANUP_ABI_SET[@]} > 0)); then
+    mapfile -t CLEANUP_ABIS < <(printf '%s\n' "${!CLEANUP_ABI_SET[@]}" | sort -V)
+fi
+
+for abi in "${CLEANUP_ABIS[@]}"; do
     while IFS= read -r package; do
         [[ -n $package ]] || continue
         if [[ -n ${HELD_PACKAGES[${package%%:*}]+x} ]]; then
             protect_abi "$abi" "包已 hold: ${package%%:*}"
+            warn "旧内核 ABI $abi 包含 hold 软件包，已跳过。"
             break
         fi
     done < <(packages_for_abi "$abi")
@@ -291,7 +327,7 @@ done
     die "当前运行内核缺少 /lib/modules/$RUNNING_KERNEL，拒绝清理。"
 
 declare -a CANDIDATE_ABIS=()
-for abi in "${INSTALLED_ABIS[@]}"; do
+for abi in "${CLEANUP_ABIS[@]}"; do
     [[ -n ${PROTECTED_ABIS[$abi]+x} ]] || CANDIDATE_ABIS+=("$abi")
 done
 
@@ -303,6 +339,7 @@ fi
 declare -a CANDIDATE_PACKAGES=()
 declare -A CANDIDATE_PACKAGE_SET=()
 
+declare -a remaining_boot_files=()
 for abi in "${CANDIDATE_ABIS[@]}"; do
     while IFS= read -r package; do
         [[ -n $package ]] || continue
@@ -376,10 +413,10 @@ fi
 [[ -r /dev/tty && -w /dev/tty ]] ||
     die "执行模式需要交互式终端；无人值守环境请使用 --dry-run。"
 
-printf '\n%s最后确认：输入 PURGE 执行以上精确清理，其他输入均取消: %s' \
+printf '\n%s是否执行以上精确清理？[y/N]: %s' \
     "$RED" "$NC" >/dev/tty
 IFS= read -r confirmation </dev/tty || die "无法读取确认输入。"
-if [[ $confirmation != PURGE ]]; then
+if [[ ! $confirmation =~ ^[Yy]$ ]]; then
     printf '操作已取消，系统未被修改。\n'
     exit 0
 fi
@@ -395,6 +432,71 @@ validate_apt_simulation "$FINAL_APT_SIMULATION"
 
 info '正在通过 APT purge 已确认的软件包...'
 DEBIAN_FRONTEND=noninteractive apt-get purge -y -- "${CANDIDATE_PACKAGES[@]}"
+
+path_has_installed_owner() {
+    local target=$1
+    local ownership owners owner owner_status
+    local -a owner_list=()
+
+    while IFS= read -r ownership; do
+        [[ $ownership == *': '* ]] || continue
+        owners=${ownership%%: *}
+        IFS=',' read -r -a owner_list <<<"$owners"
+        for owner in "${owner_list[@]}"; do
+            owner=${owner#"${owner%%[![:space:]]*}"}
+            owner=${owner%"${owner##*[![:space:]]}"}
+            owner_status=$(dpkg-query -W -f='${db:Status-Status}' "$owner" 2>/dev/null || true)
+            [[ $owner_status == installed ]] && return 0
+        done
+    done < <(dpkg-query -S "$target" 2>/dev/null || true)
+
+    return 1
+}
+
+cleanup_abi_residues() {
+    local abi=$1
+    local target module_dir
+    local -a boot_residues=()
+
+    [[ $abi != "$RUNNING_KERNEL" ]] ||
+        die "内部安全检查失败：拒绝清理当前内核 $abi。"
+    [[ -n ${CLEANUP_ABI_SET[$abi]+x} ]] ||
+        die "内部安全检查失败：$abi 不在旧内核集合中。"
+
+    shopt -s nullglob
+    boot_residues=(
+        /boot/config-"$abi" /boot/config-"$abi".*
+        /boot/initrd.img-"$abi" /boot/initrd.img-"$abi".*
+        /boot/System.map-"$abi" /boot/System.map-"$abi".*
+        /boot/symvers-"$abi" /boot/symvers-"$abi".*
+        /boot/vmlinuz-"$abi" /boot/vmlinuz-"$abi".*
+    )
+    shopt -u nullglob
+
+    for target in "${boot_residues[@]}"; do
+        [[ -f $target || -L $target ]] ||
+            die "拒绝删除非普通文件残留: $target"
+        path_has_installed_owner "$target" &&
+            die "残留仍由已安装软件包拥有，拒绝删除: $target"
+        rm -f -- "$target"
+    done
+
+    module_dir=/lib/modules/"$abi"
+    if [[ -e $module_dir || -L $module_dir ]]; then
+        [[ -d $module_dir && ! -L $module_dir ]] ||
+            die "拒绝删除异常模块路径: $module_dir"
+        while IFS= read -r -d '' target; do
+            path_has_installed_owner "$target" &&
+                die "模块残留仍由已安装软件包拥有，拒绝删除: $target"
+        done < <(find -P "$module_dir" -xdev -mindepth 1 -print0)
+        rm -rf --one-file-system -- "$module_dir"
+    fi
+}
+
+info '正在清理已确认无软件包归属的旧内核生成残留...'
+for abi in "${CANDIDATE_ABIS[@]}"; do
+    cleanup_abi_residues "$abi"
+done
 
 if ((PVE_MODE)) && [[ -s /etc/kernel/proxmox-boot-uuids ]]; then
     info '正在同步 Proxmox EFI System Partitions...'
@@ -423,19 +525,22 @@ if [[ -n $(dpkg --audit) ]]; then
     die "清理后 dpkg 审计发现异常，请立即检查包管理器状态。"
 fi
 
-printf '\n%s旧内核软件包已安全清理并通过关键校验。%s\n' "$GREEN" "$NC"
-printf '为避免误删其他自动安装的软件包，本脚本未执行 apt autoremove。\n'
-
-residue_found=0
 for abi in "${CANDIDATE_ABIS[@]}"; do
-    for path in /boot/vmlinuz-"$abi" /boot/initrd.img-"$abi" /lib/modules/"$abi"; do
-        if [[ -e $path ]]; then
-            warn "发现未自动删除的残留: $path"
-            residue_found=1
-        fi
-    done
+    shopt -s nullglob
+    remaining_boot_files=(
+        /boot/config-"$abi" /boot/config-"$abi".*
+        /boot/initrd.img-"$abi" /boot/initrd.img-"$abi".*
+        /boot/System.map-"$abi" /boot/System.map-"$abi".*
+        /boot/symvers-"$abi" /boot/symvers-"$abi".*
+        /boot/vmlinuz-"$abi" /boot/vmlinuz-"$abi".*
+    )
+    shopt -u nullglob
+    ((${#remaining_boot_files[@]} == 0)) ||
+        die "清理后校验失败：/boot 中仍有 $abi 残留。"
+    [[ ! -e /lib/modules/$abi && ! -L /lib/modules/$abi ]] ||
+        die "清理后校验失败：/lib/modules/$abi 仍然存在。"
 done
 
-if ((residue_found)); then
-    warn "残留文件未被直接删除，请先确认其包归属后再人工处理。"
-fi
+printf '\n%s旧内核、对应 headers 及生成残留已完整清理并通过校验。%s\n' \
+    "$GREEN" "$NC"
+printf '为避免扩大删除范围，本脚本未执行 apt autoremove。\n'
