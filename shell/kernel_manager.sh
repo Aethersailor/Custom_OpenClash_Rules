@@ -453,6 +453,26 @@ path_has_installed_owner() {
     return 1
 }
 
+list_existing_boot_residues() {
+    local abi=$1
+    local target
+    local -a candidates=()
+
+    shopt -s nullglob
+    candidates=(
+        /boot/config-"$abi" /boot/config-"$abi".*
+        /boot/initrd.img-"$abi" /boot/initrd.img-"$abi".*
+        /boot/System.map-"$abi" /boot/System.map-"$abi".*
+        /boot/symvers-"$abi" /boot/symvers-"$abi".*
+        /boot/vmlinuz-"$abi" /boot/vmlinuz-"$abi".*
+    )
+    shopt -u nullglob
+
+    for target in "${candidates[@]}"; do
+        [[ -e $target || -L $target ]] && printf '%s\0' "$target"
+    done
+}
+
 cleanup_abi_residues() {
     local abi=$1
     local target module_dir
@@ -463,17 +483,12 @@ cleanup_abi_residues() {
     [[ -n ${CLEANUP_ABI_SET[$abi]+x} ]] ||
         die "内部安全检查失败：$abi 不在旧内核集合中。"
 
-    shopt -s nullglob
-    boot_residues=(
-        /boot/config-"$abi" /boot/config-"$abi".*
-        /boot/initrd.img-"$abi" /boot/initrd.img-"$abi".*
-        /boot/System.map-"$abi" /boot/System.map-"$abi".*
-        /boot/symvers-"$abi" /boot/symvers-"$abi".*
-        /boot/vmlinuz-"$abi" /boot/vmlinuz-"$abi".*
-    )
-    shopt -u nullglob
+    while IFS= read -r -d '' target; do
+        boot_residues+=("$target")
+    done < <(list_existing_boot_residues "$abi")
 
     for target in "${boot_residues[@]}"; do
+        [[ -e $target || -L $target ]] || continue
         [[ -f $target || -L $target ]] ||
             die "拒绝删除非普通文件残留: $target"
         path_has_installed_owner "$target" &&
@@ -526,15 +541,10 @@ if [[ -n $(dpkg --audit) ]]; then
 fi
 
 for abi in "${CANDIDATE_ABIS[@]}"; do
-    shopt -s nullglob
-    remaining_boot_files=(
-        /boot/config-"$abi" /boot/config-"$abi".*
-        /boot/initrd.img-"$abi" /boot/initrd.img-"$abi".*
-        /boot/System.map-"$abi" /boot/System.map-"$abi".*
-        /boot/symvers-"$abi" /boot/symvers-"$abi".*
-        /boot/vmlinuz-"$abi" /boot/vmlinuz-"$abi".*
-    )
-    shopt -u nullglob
+    remaining_boot_files=()
+    while IFS= read -r -d '' target; do
+        remaining_boot_files+=("$target")
+    done < <(list_existing_boot_residues "$abi")
     ((${#remaining_boot_files[@]} == 0)) ||
         die "清理后校验失败：/boot 中仍有 $abi 残留。"
     [[ ! -e /lib/modules/$abi && ! -L /lib/modules/$abi ]] ||
