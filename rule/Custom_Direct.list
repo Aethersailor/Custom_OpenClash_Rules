@@ -311,7 +311,22 @@ DOMAIN-SUFFIX,vbkr.com
 
 # add by Telegram user: 嘿嘿 / Date: 2026-04-11 08:08:32
 DOMAIN-SUFFIX,jsj.top
-
+# add by Telegram user: Evan / Date: 2026-07-05 10:09:41
+DOMAIN-SUFFIX,yunqin.online
+# 操作系统网站 / add by Telegram user: young / Date: 2026-06-02 18:02:31
+DOMAIN-SUFFIX,xiuxitong.com
+# 打印服务 / add by Telegram user: Shady / Date: 2026-06-18 13:42:23
+DOMAIN-SUFFIX,tluyou.com
+# 个人网站 / add by Telegram user: Harry / Date: 2026-07-03 22:51:54
+DOMAIN-SUFFIX,inetlab.top
+# 返利APP / add by Telegram user: 西索 / Date: 2026-05-25 12:06:21
+DOMAIN-SUFFIX,haofanhuoban.com
+# add by Telegram user: suiyu / Date: 2026-05-24 20:55:39
+DOMAIN-SUFFIX,terrabbs.ink
+# 视频流api / add by Telegram user: Nobody / Date: 2026-05-18 00:52:48
+DOMAIN-SUFFIX,yingshi.dog
+# 中转api / add by Telegram user: 美 / Date: 2026-05-15 21:45:11
+DOMAIN-SUFFIX,code-relay.com
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -321,50 +336,42 @@ DOMAIN-SUFFIX,jsj.top
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+
+# 2026.7.8 分类整理完毕
+
+
+
+# ---------------------------------------
+# 以下域名已提交 PR
+
+# force add by Admin: Aethersailor / Date: 2026-06-01 00:27:14
+DOMAIN-SUFFIX,ugnas.cloud
+# 中转api / add by Telegram user: 美 / Date: 2026-06-12 08:03:48
+DOMAIN-SUFFIX,kldai.vip
+# add by Telegram user: Coco / Date: 2026-06-07 17:28:21
+DOMAIN-SUFFIX,mystery0.vip
 # 专业网站 / add by Telegram user: Aaa / Date: 2026-07-08 14:00:16
 DOMAIN-SUFFIX,baicaf.com
 # add by Telegram user: Norma / Date: 2026-07-07 23:48:49
 DOMAIN-SUFFIX,thispx.com
-# add by Telegram user: Evan / Date: 2026-07-05 10:09:41
-DOMAIN-SUFFIX,yunqin.online
-# 个人网站 / add by Telegram user: Harry / Date: 2026-07-03 22:51:54
-DOMAIN-SUFFIX,inetlab.top
 # Raz伴学 / add by Telegram user: along / Date: 2026-06-24 22:14:45
 DOMAIN-SUFFIX,listenai.com
 # 小程序 / add by Telegram user: 哈Lay / Date: 2026-06-21 17:10:29
 DOMAIN-SUFFIX,dcshfu.com
-# 打印服务 / add by Telegram user: Shady / Date: 2026-06-18 13:42:23
-DOMAIN-SUFFIX,tluyou.com
-# 中转api / add by Telegram user: 美 / Date: 2026-06-12 08:03:48
-DOMAIN-SUFFIX,kldai.vip
 # 印条 / add by Telegram user: Coco / Date: 2026-06-08 02:24:28
 DOMAIN-SUFFIX,hprtupgrade.com
-# add by Telegram user: Coco / Date: 2026-06-07 17:28:21
-DOMAIN-SUFFIX,mystery0.vip
-# 操作系统网站 / add by Telegram user: young / Date: 2026-06-02 18:02:31
-DOMAIN-SUFFIX,xiuxitong.com
 # add by Telegram user: IllIllIlIl / Date: 2026-06-01 16:02:45
 DOMAIN-SUFFIX,iposl.com
-# force add by Admin: Aethersailor / Date: 2026-06-01 00:27:14
-DOMAIN-SUFFIX,ugnas.cloud
-# 返利APP / add by Telegram user: 西索 / Date: 2026-05-25 12:06:21
-DOMAIN-SUFFIX,haofanhuoban.com
 # 微信公众号，连锁网吧 / add by Telegram user: 西索 / Date: 2026-05-25 12:05:47
 DOMAIN-SUFFIX,tmwanba.com
-# add by Telegram user: suiyu / Date: 2026-05-24 20:55:39
-DOMAIN-SUFFIX,terrabbs.ink
 # add by Telegram user: Evan / Date: 2026-05-24 11:30:41
 DOMAIN-SUFFIX,indeedpower.com
 # 米村拌饭 / add by Telegram user: along / Date: 2026-05-22 18:21:01
 DOMAIN-SUFFIX,micun.com
 # 奇妙快传 / add by Telegram user: y / Date: 2026-05-22 12:47:34
 DOMAIN-SUFFIX,share123.top
-# 视频流api / add by Telegram user: Nobody / Date: 2026-05-18 00:52:48
-DOMAIN-SUFFIX,yingshi.dog
 # 萨雷安科技——FF14游戏论坛 / add by Telegram user: cysr214 / Date: 2026-05-17 01:24:36
 DOMAIN-SUFFIX,tggfl.com
-# 中转api / add by Telegram user: 美 / Date: 2026-05-15 21:45:11
-DOMAIN-SUFFIX,code-relay.com
 # add by Telegram user: FngJia / Date: 2026-05-14 15:45:19
 DOMAIN-SUFFIX,gifpay.com
 # 某个有趣的网站 / add by Telegram user: Constas / Date: 2026-05-10 06:55:27
@@ -413,15 +420,6 @@ DOMAIN-SUFFIX,ccw.site
 DOMAIN-SUFFIX,sy1.top
 # add by Telegram user: kaixin_321 / Date: 2026-04-20 22:35:43
 DOMAIN-SUFFIX,4kgj.com
-
-
-
-# 2026.4.20 分类整理完毕
-
-
-
-# ---------------------------------------
-# 以下域名已提交 PR
 
 # PR 至 felixonmars/dnsmasq-china-list
 
