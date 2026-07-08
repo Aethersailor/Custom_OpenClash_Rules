@@ -209,6 +209,12 @@ DOMAIN-SUFFIX,manfuz.co
 # pt站劳教所 / add by Telegram user: kevin / Date: 2025-09-22 14:35:53
 DOMAIN-SUFFIX,ptlgs.org
 
+# 手机淘宝临时修复
+IP-CIDR,47.246.99.0/24,no-resolve
+IP-CIDR,47.246.103.0/24,no-resolve
+IP-CIDR,47.246.177.0/24,no-resolve
+IP-CIDR,47.246.180.0/24,no-resolve
+
 # ==============================================
 
 # 金融类
