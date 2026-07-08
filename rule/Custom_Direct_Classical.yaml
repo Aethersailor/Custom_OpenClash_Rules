@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 630
+# TOTAL: 633
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -297,6 +297,7 @@ payload:
   - DOMAIN-SUFFIX,imacos.top
   - DOMAIN-SUFFIX,immortalwrt.org
   - DOMAIN-SUFFIX,indeedpower.com
+  - DOMAIN-SUFFIX,inetlab.top
   - DOMAIN-SUFFIX,infini-fantasy.com
   - DOMAIN-SUFFIX,iosgujian.com
   - DOMAIN-SUFFIX,iot889.com
@@ -506,6 +507,7 @@ payload:
   - DOMAIN-SUFFIX,tggfl.com
   - DOMAIN-SUFFIX,theluyuan.com
   - DOMAIN-SUFFIX,thinkerride.com
+  - DOMAIN-SUFFIX,thispx.com
   - DOMAIN-SUFFIX,thmnet.com
   - DOMAIN-SUFFIX,tianlala.com
   - DOMAIN-SUFFIX,timbrd.com
@@ -600,6 +602,7 @@ payload:
   - DOMAIN-SUFFIX,yongyu.xyz
   - DOMAIN-SUFFIX,yooc.me
   - DOMAIN-SUFFIX,youzhiyouxing.com
+  - DOMAIN-SUFFIX,yunqin.online
   - DOMAIN-SUFFIX,yunzuoye.net
   - DOMAIN-SUFFIX,yyshub.top
   - DOMAIN-SUFFIX,yzcsoft.com
