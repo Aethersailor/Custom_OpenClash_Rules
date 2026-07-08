@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 623
+# TOTAL: 626
 
 payload:
   - '*m-team*'
@@ -297,6 +297,7 @@ payload:
   - '+.imacos.top'
   - '+.immortalwrt.org'
   - '+.indeedpower.com'
+  - '+.inetlab.top'
   - '+.infini-fantasy.com'
   - '+.iosgujian.com'
   - '+.iot889.com'
@@ -506,6 +507,7 @@ payload:
   - '+.tggfl.com'
   - '+.theluyuan.com'
   - '+.thinkerride.com'
+  - '+.thispx.com'
   - '+.thmnet.com'
   - '+.tianlala.com'
   - '+.timbrd.com'
@@ -600,6 +602,7 @@ payload:
   - '+.yongyu.xyz'
   - '+.yooc.me'
   - '+.youzhiyouxing.com'
+  - '+.yunqin.online'
   - '+.yunzuoye.net'
   - '+.yyshub.top'
   - '+.yzcsoft.com'
