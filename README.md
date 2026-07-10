@@ -287,11 +287,11 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 
 ## ⭐ 记录
 
-<a href="https://www.star-history.com/#Aethersailor/Custom_OpenClash_Rules&Date">
+<a href="https://www.star-history.com/?type=date&repos=Aethersailor%2FCustom_OpenClash_Rules">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Aethersailor/Custom_OpenClash_Rules&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Aethersailor/Custom_OpenClash_Rules&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Aethersailor/Custom_OpenClash_Rules&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Aethersailor/Custom_OpenClash_Rules&type=date&theme=dark&legend=top-left&sealed_token=MKm7YwOVc0pV9U5_8NNcWxy7TfMXQJX9Sx_5CziHynkxvvxrf34YBIbzKjcZop9Cx2FSf8RDSVUwBRxhJ9dlw3zEsZ0TwSgm6a1VIbpHr589LJuTjeBVmQ" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Aethersailor/Custom_OpenClash_Rules&type=date&legend=top-left&sealed_token=MKm7YwOVc0pV9U5_8NNcWxy7TfMXQJX9Sx_5CziHynkxvvxrf34YBIbzKjcZop9Cx2FSf8RDSVUwBRxhJ9dlw3zEsZ0TwSgm6a1VIbpHr589LJuTjeBVmQ" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Aethersailor/Custom_OpenClash_Rules&type=date&legend=top-left&sealed_token=MKm7YwOVc0pV9U5_8NNcWxy7TfMXQJX9Sx_5CziHynkxvvxrf34YBIbzKjcZop9Cx2FSf8RDSVUwBRxhJ9dlw3zEsZ0TwSgm6a1VIbpHr589LJuTjeBVmQ" />
  </picture>
 </a>
 
