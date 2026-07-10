@@ -2,6 +2,8 @@ name: Auto update mainland config
 
 on:
   push:
+    branches:
+      - main
     paths:
       - cfg/Custom_Clash.ini
   workflow_dispatch:
@@ -9,12 +11,8 @@ on:
 permissions:
   contents: write
 
-env:
-  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
-
 jobs:
   update-mainland:
-    if: github.event_name != 'push' || github.ref_name == ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main')
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repository

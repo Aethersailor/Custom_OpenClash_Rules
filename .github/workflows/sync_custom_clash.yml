@@ -2,6 +2,8 @@ name: Sync and Modify Custom_Clash.ini
 
 on:
   push:
+    branches:
+      - main
     paths:
       - cfg/Custom_Clash.ini  # 源文件更新时触发
   workflow_dispatch:           # 手动触发
@@ -10,12 +12,11 @@ permissions:
   contents: read
 
 env:
-  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
   TARGET_REPO_BRANCH: ${{ (vars.TARGET_REPO_BRANCH != '' && vars.TARGET_REPO_BRANCH) || 'main' }}
 
 jobs:
   sync-and-modify:
-    if: github.repository == 'Aethersailor/Custom_OpenClash_Rules' && (github.event_name != 'push' || github.ref_name == ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main'))
+    if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -24,7 +25,7 @@ jobs:
       - name: Checkout Source Repo
         uses: actions/checkout@v6
         with:
-          ref: ${{ env.TARGET_BRANCH }}
+          ref: main
           fetch-depth: 0
 
       # Step 2: 克隆目标仓库

@@ -2,6 +2,8 @@ name: Purge jsDelivr Cache
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'cfg/**'
       - 'rule/**'
@@ -20,20 +22,24 @@ on:
       - Sync and Modify Custom_Clash.ini
     types:
       - completed
+    branches:
+      - main
 
   workflow_dispatch:  # 支持手动触发
-
-env:
-  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
 
 jobs:
   purge-jsdelivr:
     if: |
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+      (
+        github.event_name == 'workflow_run' &&
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.head_repository.full_name == github.repository &&
+        github.event.workflow_run.head_branch == 'main'
+      ) ||
       (
         github.event_name != 'workflow_run' &&
         github.actor != 'github-actions[bot]' &&
-        (github.event_name != 'push' || github.ref_name == ((vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main'))
+        (github.event_name != 'push' || github.ref_name == 'main')
       )
     runs-on: ubuntu-latest
     permissions:
@@ -47,21 +53,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Soft Debounce (Wait & Check)
         id: debounce
         env:
-          CURRENT_SHA: ${{ github.sha }}
           HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           EVENT_NAME: ${{ github.event_name }}
-          TARGET_BRANCH: ${{ env.TARGET_BRANCH }}
         run: |
+          CURRENT_SHA=$(git rev-parse HEAD)
           echo "Event: $EVENT_NAME"
-          echo "Target branch: $TARGET_BRANCH"
+          echo "Target branch: main"
 
-          if ! git ls-remote --exit-code --heads origin "$TARGET_BRANCH" >/dev/null 2>&1; then
-            echo "Remote branch '$TARGET_BRANCH' not found. Skipping purge."
+          if ! git ls-remote --exit-code --heads origin main >/dev/null 2>&1; then
+            echo "Remote branch 'main' not found. Skipping purge."
             echo "should_purge=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -69,8 +75,8 @@ jobs:
           if [ "$EVENT_NAME" = "workflow_run" ]; then
             echo "Workflow run head SHA: $HEAD_SHA"
             echo "Fetching latest remote info..."
-            git fetch origin "$TARGET_BRANCH"
-            LATEST_SHA=$(git rev-parse "origin/$TARGET_BRANCH")
+            git fetch origin main
+            LATEST_SHA=$(git rev-parse origin/main)
 
             echo "Latest Remote SHA: $LATEST_SHA"
 
@@ -98,8 +104,8 @@ jobs:
           done
 
           echo "Fetching latest remote info..."
-          git fetch origin "$TARGET_BRANCH"
-          LATEST_SHA=$(git rev-parse "origin/$TARGET_BRANCH")
+          git fetch origin main
+          LATEST_SHA=$(git rev-parse origin/main)
 
           echo "Latest Remote SHA: $LATEST_SHA"
 
