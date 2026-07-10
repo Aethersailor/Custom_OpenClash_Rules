@@ -8,9 +8,6 @@ on:
 permissions:
   contents: write
 
-env:
-  TARGET_BRANCH: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch) || ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name) || (vars.WORK_BRANCH != '' && vars.WORK_BRANCH) || 'main' }}
-
 jobs:
   backup-wiki-root:
     if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
