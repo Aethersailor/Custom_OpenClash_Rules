@@ -21,18 +21,26 @@ jobs:
 
       - name: Update submodule
         run: |
-          git submodule update --init --remote overwrite/OpenClash_Overwrite
-          # 确保 submodule 位于 main 分支
-          git -C overwrite/OpenClash_Overwrite checkout main || git -C overwrite/OpenClash_Overwrite checkout -b main
+          submodule_paths=(
+            "overwrite/OpenClash_Overwrite"
+            "cfg/yaml/OpenClash_Overwrite"
+          )
 
+          # .gitmodules 中两个入口均跟踪 main，同步后会指向同一最新提交
+          git submodule update --init --remote --checkout "${submodule_paths[@]}"
 
       - name: Commit and push if needed
         run: |
-          if [ -n "$(git status --porcelain overwrite/OpenClash_Overwrite)" ]; then
+          submodule_paths=(
+            "overwrite/OpenClash_Overwrite"
+            "cfg/yaml/OpenClash_Overwrite"
+          )
+
+          if [ -n "$(git status --porcelain -- "${submodule_paths[@]}")" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add overwrite/OpenClash_Overwrite
-            git commit -m "chore(overwrite): bump OpenClash_Overwrite submodule"
+            git add -- "${submodule_paths[@]}"
+            git commit -m "chore(overwrite): sync OpenClash_Overwrite submodules"
             # 使用 pull --rebase 防止多人同时 push 导致的冲突
             git pull --rebase origin main
             git push origin HEAD:main

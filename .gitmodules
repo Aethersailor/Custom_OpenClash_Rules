@@ -2,3 +2,7 @@
 	path = overwrite/OpenClash_Overwrite
 	url = https://github.com/Giveupmoon/OpenClash_Overwrite
 	branch = main
+[submodule "cfg/yaml/OpenClash_Overwrite"]
+	path = cfg/yaml/OpenClash_Overwrite
+	url = https://github.com/Giveupmoon/OpenClash_Overwrite
+	branch = main
