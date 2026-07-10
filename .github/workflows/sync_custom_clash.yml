@@ -31,7 +31,7 @@ jobs:
       # Step 2: 克隆目标仓库
       - name: Clone Target Repo
         run: |
-          git clone https://github.com/Aethersailor/Custom_Clash_Rules.git target-repo
+          git clone --branch "${TARGET_REPO_BRANCH}" --single-branch https://github.com/Aethersailor/Custom_Clash_Rules.git target-repo
           cd target-repo
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
