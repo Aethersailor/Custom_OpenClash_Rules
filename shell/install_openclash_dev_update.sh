@@ -20,7 +20,7 @@ OK="${G}[+]${N}"
 
 REPO_API_URL="https://api.github.com/repos/vernesong/OpenClash/contents/dev?ref=package"
 MODEL_API_URL="https://api.github.com/repos/vernesong/mihomo/releases/tags/LightGBM-Model"
-JSDELIVR_PACKAGE_PREFIX="https://cdn.jsdelivr.net/gh/vernesong/OpenClash@refs/heads/package/dev"
+JSDELIVR_PACKAGE_PREFIX="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@refs/heads/package/dev"
 RAW_PACKAGE_PREFIX="https://raw.githubusercontent.com/vernesong/OpenClash/package/dev"
 GH_PROXY_PREFIX="https://v6.gh-proxy.org/"
 GITHUB_HOSTS_URL="https://raw.hellogithub.com/hosts"
@@ -102,7 +102,7 @@ cleanup() {
     trap - EXIT INT TERM HUP
     restore_feed
     if [ "$RESTORE_GITHUB_MOD" -eq 1 ] && command -v uci >/dev/null 2>&1; then
-        uci set openclash.config.github_address_mod="${ORIGINAL_GITHUB_MOD:-https://cdn.jsdelivr.net/}" 2>/dev/null || true
+        uci set openclash.config.github_address_mod="${ORIGINAL_GITHUB_MOD:-https://testingcf.jsdelivr.net/}" 2>/dev/null || true
         uci commit openclash 2>/dev/null || true
     fi
     [ -n "$TMP_DIR" ] && rm -rf "$TMP_DIR"
@@ -524,7 +524,7 @@ core_asset_exists() {
         core_dir="meta"
     fi
 
-    jsdelivr_url="https://cdn.jsdelivr.net/gh/vernesong/OpenClash@core/${release_branch}/${core_dir}/clash-${core_arch}.tar.gz"
+    jsdelivr_url="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@core/${release_branch}/${core_dir}/clash-${core_arch}.tar.gz"
     raw_url="https://raw.githubusercontent.com/vernesong/OpenClash/core/${release_branch}/${core_dir}/clash-${core_arch}.tar.gz"
     proxy_url="${GH_PROXY_PREFIX}${raw_url}"
 
@@ -599,7 +599,7 @@ update_core() {
     [ -x "$core_script" ] || die "内核更新脚本不存在：$core_script"
 
     core_type=$(get_effective_core_type)
-    for source in "https://cdn.jsdelivr.net/" "$GH_PROXY_PREFIX" "0"; do
+    for source in "https://testingcf.jsdelivr.net/" "$GH_PROXY_PREFIX" "0"; do
         rm -f /tmp/clash_last_version
         log_info "更新 $core_type 内核，下载源：$source"
         "$core_script" "$core_type" "$source" >/dev/null 2>&1 || true
@@ -799,13 +799,13 @@ update_geo_databases() {
         original_source=$(uci -q get openclash.config.github_address_mod)
         ORIGINAL_GITHUB_MOD=$original_source
         RESTORE_GITHUB_MOD=1
-        for source in "https://cdn.jsdelivr.net/" "$GH_PROXY_PREFIX" "0"; do
+        for source in "https://testingcf.jsdelivr.net/" "$GH_PROXY_PREFIX" "0"; do
             uci set openclash.config.github_address_mod="$source" ||
                 die "无法切换 Geo 数据库下载源。"
             uci commit openclash || die "无法提交 Geo 数据库下载源。"
             log_info "更新 Geo 数据库，下载源：$source"
             if run_geo_update_once "$geo_script" all; then
-                uci set openclash.config.github_address_mod="${original_source:-https://cdn.jsdelivr.net/}" ||
+                uci set openclash.config.github_address_mod="${original_source:-https://testingcf.jsdelivr.net/}" ||
                     die "无法恢复 GitHub 下载源。"
                 uci commit openclash || die "无法提交 GitHub 下载源。"
                 RESTORE_GITHUB_MOD=0
@@ -814,7 +814,7 @@ update_geo_databases() {
             fi
             log_warn "Geo 数据库更新失败，切换下载源。"
         done
-        uci set openclash.config.github_address_mod="${original_source:-https://cdn.jsdelivr.net/}" ||
+        uci set openclash.config.github_address_mod="${original_source:-https://testingcf.jsdelivr.net/}" ||
             die "无法恢复 GitHub 下载源。"
         uci commit openclash || die "无法提交 GitHub 下载源。"
         RESTORE_GITHUB_MOD=0
@@ -979,7 +979,7 @@ main() {
         die "无法配置 OpenClash Dev 分支。"
     uci set openclash.config.skip_safe_path_check='1' ||
         die "无法配置安全路径检查选项。"
-    uci set openclash.config.github_address_mod='https://cdn.jsdelivr.net/' ||
+    uci set openclash.config.github_address_mod='https://testingcf.jsdelivr.net/' ||
         die "无法配置 GitHub 下载源。"
     uci commit openclash || die "基础配置提交失败。"
     configure_core_arch

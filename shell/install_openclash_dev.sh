@@ -2,7 +2,7 @@
 # ================================================================
 # Custom_OpenClash_Rules OpenClash Dev 更新脚本
 # 项目地址: https://github.com/Aethersailor/Custom_OpenClash_Rules
-# 功能: 仅安装/更新 OpenClash Dev 插件包及其内核
+# 功能: 检查依赖后安装/更新 OpenClash Dev 插件包及内核，并验证服务启动
 # ================================================================
 
 R='\033[1;31m'
@@ -19,17 +19,23 @@ ERR="${R}[x]${N}"
 OK="${G}[+]${N}"
 
 REPO_API_URL="https://api.github.com/repos/vernesong/OpenClash/contents/dev?ref=package"
-JSDELIVR_PACKAGE_PREFIX="https://cdn.jsdelivr.net/gh/vernesong/OpenClash@refs/heads/package/dev"
+JSDELIVR_PACKAGE_PREFIX="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@refs/heads/package/dev"
 RAW_PACKAGE_PREFIX="https://raw.githubusercontent.com/vernesong/OpenClash/package/dev"
 GH_PROXY_PREFIX="https://v6.gh-proxy.org/"
 
 OPENCLASH_SHARE_DIR="${OPENCLASH_SHARE_DIR:-/usr/share/openclash}"
 OPENCLASH_ETC_DIR="${OPENCLASH_ETC_DIR:-/etc/openclash}"
+OPENCLASH_INIT="${OPENCLASH_INIT:-/etc/init.d/openclash}"
 
 PKG_MGR=""
 EXT=""
+FIREWALL_TYPE=""
+DEPENDENCIES=""
 TMP_DIR=""
 LOCK_DIR="${LOCK_DIR:-/tmp/install_openclash_dev.lock}"
+FEED_FILE=""
+FEED_BACKUP=""
+FEED_CHANGED=0
 
 print_line() {
     printf '%b\n' "${C}================================================================${N}"
@@ -74,9 +80,17 @@ logo() {
     printf '%b\n\n' "${W}* OpenClash Dev 插件与内核更新脚本${N}"
 }
 
+restore_feed() {
+    if [ "$FEED_CHANGED" -eq 1 ] && [ -n "$FEED_FILE" ] && [ -f "$FEED_BACKUP" ]; then
+        cp -p "$FEED_BACKUP" "$FEED_FILE" 2>/dev/null || true
+        FEED_CHANGED=0
+    fi
+}
+
 cleanup() {
     status=$?
     trap - EXIT INT TERM HUP
+    restore_feed
     [ -n "$TMP_DIR" ] && rm -rf "$TMP_DIR"
     rm -f "$LOCK_DIR/pid" 2>/dev/null || true
     rmdir "$LOCK_DIR" 2>/dev/null || true
@@ -115,12 +129,89 @@ detect_environment() {
         die "未检测到支持的包管理器（opkg/apk）。"
     fi
 
+    if command -v fw4 >/dev/null 2>&1 || command -v nft >/dev/null 2>&1; then
+        FIREWALL_TYPE="nftables"
+        DEPENDENCIES="bash dnsmasq-full curl ca-bundle ip-full ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base coreutils-sha1sum"
+    elif command -v fw3 >/dev/null 2>&1 || command -v iptables >/dev/null 2>&1; then
+        FIREWALL_TYPE="iptables"
+        DEPENDENCIES="bash iptables dnsmasq-full curl ca-bundle ipset ip-full iptables-mod-tproxy iptables-mod-extra ruby ruby-yaml kmod-tun kmod-inet-diag unzip luci-compat luci luci-base coreutils-sha1sum"
+    else
+        die "未检测到支持的防火墙架构（fw4/nftables 或 fw3/iptables）。"
+    fi
+
     log_ok "包管理器：$PKG_MGR"
+    log_ok "防火墙：$FIREWALL_TYPE"
+}
+
+package_update() {
+    if [ "$PKG_MGR" = "opkg" ]; then
+        opkg update
+    else
+        apk update
+    fi
+}
+
+package_install_dependencies() {
+    set -f
+    # Intentional split: dependency names are stored as a whitespace list.
+    # shellcheck disable=SC2086
+    set -- $DEPENDENCIES
+    set +f
+    if [ "$PKG_MGR" = "opkg" ]; then
+        opkg install "$@"
+    else
+        apk add "$@"
+    fi
+}
+
+set_feed_file() {
+    if [ "$PKG_MGR" = "opkg" ]; then
+        FEED_FILE="/etc/opkg/distfeeds.conf"
+    else
+        FEED_FILE="/etc/apk/repositories.d/distfeeds.list"
+    fi
+}
+
+enable_temporary_nju_mirror() {
+    set_feed_file
+    [ -f "$FEED_FILE" ] || return 1
+
+    FEED_BACKUP="$TMP_DIR/distfeeds.original"
+    feed_candidate="$TMP_DIR/distfeeds.nju"
+    cp -p "$FEED_FILE" "$FEED_BACKUP" || return 1
+    sed \
+        -e 's,https://downloads\.immortalwrt\.org,https://mirror.nju.edu.cn/immortalwrt,g' \
+        -e 's,https://mirrors\.vsean\.net/openwrt,https://mirror.nju.edu.cn/immortalwrt,g' \
+        "$FEED_BACKUP" >"$feed_candidate" || return 1
+    cmp -s "$FEED_BACKUP" "$feed_candidate" && return 1
+    FEED_CHANGED=1
+    cp "$feed_candidate" "$FEED_FILE" || {
+        restore_feed
+        return 1
+    }
+}
+
+install_dependencies() {
+    log_info "更新软件源并检查/安装 OpenClash 依赖..."
+    if package_update && package_install_dependencies; then
+        log_ok "软件源更新及依赖检查完成。"
+        return 0
+    fi
+
+    log_warn "默认软件源处理失败，临时切换至南京大学镜像重试。"
+    enable_temporary_nju_mirror || die "无法准备临时镜像配置。"
+
+    if ! package_update || ! package_install_dependencies; then
+        die "依赖检查或安装失败，请检查软件源和系统版本。"
+    fi
+
+    restore_feed
+    log_ok "依赖检查完成，系统软件源已恢复。"
 }
 
 check_required_commands() {
     missing=""
-    for cmd in awk sed curl wc mktemp uci uname grep; do
+    for cmd in awk sed grep curl sha1sum wc mktemp uci uname ruby; do
         command -v "$cmd" >/dev/null 2>&1 || missing="$missing $cmd"
     done
     [ -z "$missing" ] || die "缺少必要命令：$missing"
@@ -362,7 +453,7 @@ core_asset_exists() {
     core_arch=$1
     core_type=$(get_effective_core_type)
     [ "$core_type" = "Smart" ] && core_dir="smart" || core_dir="meta"
-    jsdelivr_url="https://cdn.jsdelivr.net/gh/vernesong/OpenClash@core/dev/${core_dir}/clash-${core_arch}.tar.gz"
+    jsdelivr_url="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@core/dev/${core_dir}/clash-${core_arch}.tar.gz"
     raw_url="https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/${core_dir}/clash-${core_arch}.tar.gz"
     proxy_url="${GH_PROXY_PREFIX}${raw_url}"
 
@@ -415,7 +506,7 @@ update_core() {
     [ -x "$core_script" ] || die "内核更新脚本不存在：$core_script"
 
     core_type=$(get_effective_core_type)
-    for source in "https://cdn.jsdelivr.net/" "$GH_PROXY_PREFIX" "0"; do
+    for source in "https://testingcf.jsdelivr.net/" "$GH_PROXY_PREFIX" "0"; do
         rm -f /tmp/clash_last_version
         log_info "更新 $core_type 内核，下载源：$source"
         "$core_script" "$core_type" "$source" >/dev/null 2>&1 || true
@@ -430,16 +521,47 @@ update_core() {
     die "$core_type 内核更新失败。"
 }
 
+start_openclash() {
+    [ -x "$OPENCLASH_INIT" ] || die "OpenClash 服务脚本不存在：$OPENCLASH_INIT"
+
+    uci set openclash.config.enable='1' || die "无法启用 OpenClash 配置。"
+    uci commit openclash || die "无法提交 OpenClash 启用状态。"
+    "$OPENCLASH_INIT" enable >/dev/null 2>&1 ||
+        die "设置 OpenClash 开机自启失败。"
+    "$OPENCLASH_INIT" restart >/dev/null 2>&1 ||
+        die "OpenClash 重启命令执行失败。"
+
+    waited=0
+    while [ "$waited" -lt 90 ]; do
+        sleep 3
+        waited=$((waited + 3))
+        status=$("$OPENCLASH_INIT" status 2>/dev/null)
+        if printf '%s\n' "$status" | grep -q 'running' && pidof clash >/dev/null 2>&1; then
+            log_ok "OpenClash 启动成功。"
+            return 0
+        fi
+        if printf '%s\n' "$status" | grep -qE 'inactive|dead|failed|stopped'; then
+            die "OpenClash 启动失败，服务状态：$status"
+        fi
+        [ $((waited % 15)) -eq 0 ] && log_info "等待 OpenClash 启动：${waited}/90 秒"
+    done
+
+    die "OpenClash 启动超时。"
+}
+
 main() {
     logo
-    log_info "本脚本仅安装 OpenClash Dev 插件包并更新内核；仅写入内核更新所需的 Dev 分支和架构配置。"
+    log_info "即将检查依赖、安装 OpenClash Dev 插件包、更新内核并验证服务启动。"
     init_runtime
 
-    print_step "步骤 1/4: 检查运行环境"
+    print_step "步骤 1/6: 检查运行环境"
     detect_environment
+
+    print_step "步骤 2/6: 更新软件源并检查依赖"
+    install_dependencies
     check_required_commands
 
-    print_step "步骤 2/4: 下载并安装 OpenClash Dev 插件包"
+    print_step "步骤 3/6: 下载并安装 OpenClash Dev 插件包"
     package_json="$TMP_DIR/package.json"
     fetch_api_json "$REPO_API_URL" "$package_json" || die "无法获取 OpenClash Dev 包元数据。"
     metadata=$(parse_package_metadata "$package_json")
@@ -462,15 +584,18 @@ main() {
         die "安装后版本不匹配：目标 $target_version，实际 ${installed:-未知}"
     log_ok "OpenClash Dev v$installed 插件包安装完成。"
 
-    print_step "步骤 3/4: 配置 Dev 内核架构"
+    print_step "步骤 4/6: 配置 Dev 内核架构"
     configure_core_arch
 
-    print_step "步骤 4/4: 更新 OpenClash 内核"
+    print_step "步骤 5/6: 更新 OpenClash 内核"
     update_core
+
+    print_step "步骤 6/6: 启动并验证 OpenClash"
+    start_openclash
 
     printf '\n'
     print_line
-    printf '%b\n' "${G}[OK] OpenClash Dev 插件包和内核更新完成。${N}"
+    printf '%b\n' "${G}[OK] OpenClash Dev 插件包、内核及服务更新完成。${N}"
 }
 
 if [ "${OPENCLASH_INSTALLER_LIB_ONLY:-0}" != "1" ]; then
