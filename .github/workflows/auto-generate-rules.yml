@@ -66,7 +66,7 @@ jobs:
               grep -E '^SRC-PORT' "$list_file" | sed -E "s/^(.*)/  - \1/"
             } | sort)
 
-            generate_and_commit() {
+            generate_yaml() {
               file="$1"
               content="$2"
               total=$(echo "$content" | grep -c '  - ' || true)
@@ -78,19 +78,12 @@ jobs:
               echo "" >> "$file"
               echo "payload:" >> "$file"
               echo "$content" >> "$file"
-
-              if [[ -n $(git status --porcelain "$file") ]]; then
-                git add "$file"
-                git commit -m "chore(rules): auto generate $(basename "$file") from $(basename "$list_file")"
-              else
-                echo "No changes in ${file}, skip commit."
-              fi
             }
 
-            generate_and_commit "$domain_yaml_file" "$domain_rules"
-            generate_and_commit "$ip_yaml_file" "$ip_rules"
-            generate_and_commit "$classical_yaml_file" "$classical_rules"
-            generate_and_commit "$classical_ip_yaml_file" "$classical_ip_rules"
+            generate_yaml "$domain_yaml_file" "$domain_rules"
+            generate_yaml "$ip_yaml_file" "$ip_rules"
+            generate_yaml "$classical_yaml_file" "$classical_rules"
+            generate_yaml "$classical_ip_yaml_file" "$classical_ip_rules"
 
           done
 
@@ -111,14 +104,6 @@ jobs:
             
             if [ -f "$mrs_file" ]; then
               echo "✓ Generated $mrs_file"
-              
-              # Commit each MRS file individually
-              if [[ -n $(git status --porcelain "$mrs_file") ]]; then
-                git add "$mrs_file"
-                git commit -m "chore(rules): auto generate $(basename "$mrs_file") from $(basename "$yaml_file")"
-              else
-                echo "No changes in ${mrs_file}, skip commit."
-              fi
             else
               echo "✗ Failed to generate $mrs_file"
               exit 1
@@ -144,22 +129,22 @@ jobs:
             
             if [ -f "$mrs_file" ]; then
               echo "✓ Generated $mrs_file"
-              
-              # Commit each MRS file individually
-              if [[ -n $(git status --porcelain "$mrs_file") ]]; then
-                git add "$mrs_file"
-                git commit -m "chore(rules): auto generate $(basename "$mrs_file") from $(basename "$yaml_file")"
-              else
-                echo "No changes in ${mrs_file}, skip commit."
-              fi
             else
               echo "✗ Failed to generate $mrs_file"
               exit 1
             fi
           done
 
-      - name: Push changes
+      - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git add -- rule/*.yaml rule/*.mrs
+
+          if git diff --cached --quiet; then
+            echo "No generated rule changes, skip commit and push."
+            exit 0
+          fi
+
+          git commit -m "chore(rules): auto generate derived rule files"
           git push origin HEAD:main
