@@ -263,7 +263,8 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 
 ### 🔄 订阅转换后端
 
-- [Aethersailor/Subconverter-Extended](https://github.com/Aethersailor/SubConverter-Extended)
+- [Aethersailor/SubConverter-Extended](https://github.com/Aethersailor/SubConverter-Extended)
+- [Aethersailor/subconverter](https://github.com/Aethersailor/subconverter)
 
 ### 🧰 工具
 
