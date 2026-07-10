@@ -342,6 +342,8 @@ DOMAIN-SUFFIX,code-relay.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 资源 / add by Telegram user: More / Date: 2026-07-10 10:46:50
+DOMAIN-SUFFIX,365wp.top
 # 游戏数据查询网站 / add by Telegram user: diamond / Date: 2026-07-10 03:16:44
 DOMAIN-SUFFIX,csqaq.com
 # 云游戏云电脑 / add by Telegram user: 林 / Date: 2026-07-09 22:45:21
