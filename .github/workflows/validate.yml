@@ -1,0 +1,89 @@
+name: Validate repository
+
+on:
+  push:
+    branches:
+      - main
+    # Source-list pushes are validated after Auto generate rules publishes the
+    # matching YAML/MRS commit. Pull requests still validate source and derived
+    # files together before merge.
+    paths-ignore:
+      - 'rule/*.list'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          submodules: true
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13'
+
+      - name: Download and verify Mihomo
+        env:
+          MIHOMO_VERSION: v1.19.18
+          MIHOMO_SHA256: bbad6c9fa6322d870e94aab34b54097ffc880829be8fd804de79543d87f1f8e5
+        run: |
+          archive="mihomo-linux-amd64-${MIHOMO_VERSION}.gz"
+          wget -q "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/${archive}"
+          printf '%s  %s\n' "$MIHOMO_SHA256" "$archive" | sha256sum --check --strict
+          gunzip "$archive"
+          install -m 0755 "${archive%.gz}" "$RUNNER_TEMP/mihomo"
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+
+      - name: Download and verify static analysis tools
+        env:
+          SHELLCHECK_VERSION: v0.11.0
+          SHELLCHECK_SHA256: 8c3be12b05d5c177a04c29e3c78ce89ac86f1595681cab149b65b97c4e227198
+          ACTIONLINT_VERSION: 1.7.12
+          ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
+        run: |
+          shellcheck_archive="shellcheck-${SHELLCHECK_VERSION}.linux.x86_64.tar.xz"
+          actionlint_archive="actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          wget -q "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION}/${shellcheck_archive}"
+          wget -q "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/${actionlint_archive}"
+          printf '%s  %s\n' "$SHELLCHECK_SHA256" "$shellcheck_archive" | sha256sum --check --strict
+          printf '%s  %s\n' "$ACTIONLINT_SHA256" "$actionlint_archive" | sha256sum --check --strict
+          tar -xJf "$shellcheck_archive"
+          tar -xzf "$actionlint_archive"
+          install -m 0755 "shellcheck-${SHELLCHECK_VERSION}/shellcheck" "$RUNNER_TEMP/shellcheck"
+          install -m 0755 actionlint "$RUNNER_TEMP/actionlint"
+
+      - name: Validate scripts and generated rules
+        run: |
+          sh -n shell/check_cpu_version.sh
+          sh -n shell/install_openclash_dev.sh
+          sh -n shell/install_openclash_dev_update.sh
+          shellcheck --shell=sh shell/check_cpu_version.sh shell/install_openclash_dev.sh shell/install_openclash_dev_update.sh tests/test_cpu_arch.sh
+          actionlint .github/workflows/*.yml
+          sh tests/test_cpu_arch.sh
+          python -m unittest discover -s tests -v
+          python py/generate_rules.py --check --mihomo mihomo
+
+      - name: Validate complete Mihomo templates
+        run: |
+          for config in cfg/yaml/*.yaml; do
+            mihomo -t -d "$RUNNER_TEMP/mihomo-config" -f "$config"
+          done
+
+      - name: Build documentation site
+        run: |
+          python -m pip install --requirement requirements-docs.txt
+          mkdocs build --clean --site-dir "$RUNNER_TEMP/site"

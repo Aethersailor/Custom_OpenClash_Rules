@@ -11,12 +11,15 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: main-writers
+
 jobs:
   update-mainland:
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       with:
         ref: main
         fetch-depth: 0
