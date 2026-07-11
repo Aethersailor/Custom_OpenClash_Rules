@@ -9,6 +9,7 @@ on:
       - 'doc/**'
 
 permissions:
+  actions: write
   contents: write
 
 concurrency:
@@ -41,4 +42,7 @@ jobs:
             git commit -m "chore(doc): sync doc assets to wiki"
             git pull --rebase origin main
             git push origin HEAD:main
+            gh workflow run pages.yml --ref main
           fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

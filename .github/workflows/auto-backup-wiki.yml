@@ -6,6 +6,7 @@ on:
     - cron: '*/30 * * * *'
 
 permissions:
+  actions: write
   contents: write
 
 concurrency:
@@ -127,4 +128,7 @@ jobs:
             git commit -m "chore(wiki): auto backup Wiki at ${commit_time} UTC+8"
             git pull --rebase origin main
             git push origin HEAD:main
+            gh workflow run pages.yml --ref main
           fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
