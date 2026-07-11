@@ -34,7 +34,7 @@
 
 **核心特性：**
 
-- ✅ **微架构识别 (x86_64)**：识别 `AVX512` (v4)、`AVX2` (v3)、`SSE4.2` (v2) 等指令集。
+- ✅ **微架构识别 (x86_64)**：按 OpenClash 当前发布的内核资源识别 `AVX2` (v3)、`SSE4.2` (v2) 与通用 (v1) 版本。
 - ✅ **MIPS 浮点检测**：自动检测硬件 FPU 状态以区分 `hardfloat` / `softfloat`。
 - ✅ **LoongArch ABI**：根据内核版本自动判断 `abi1` / `abi2`。
 - ✅ **通用映射**：自动处理 `aarch64` → `arm64` 等常见别名映射。
@@ -43,7 +43,7 @@
 
 ```bash
 RULES_BRANCH="${RULES_BRANCH:-main}"
-wget -qO- "https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/check_cpu_version.sh" | sh
+wget -qO- "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/check_cpu_version.sh" | sh
 ```
 
 <details>
@@ -73,24 +73,26 @@ linux-mips-hardfloat
 </p>
 
 **功能说明：**  
-OpenClash Dev 版本安装工具。仅包含**安装插件本体**并**更新 Meta 内核**的功能。适合在网络环境良好且依赖已完备的情况下使用。
+OpenClash Dev 版本轻量安装工具。脚本会检查系统环境、更新软件源并补齐依赖，然后安装**插件本体**、更新 **Meta/Smart 内核**并验证 OpenClash 能够正常启动。它不会执行完整脚本中的 Geo 数据库、大陆 IP 白名单、订阅和用户预设更新。
 
 **核心特性：**
 
 - ✅ **双包管理器支持**：自动适配 `OPKG` (OpenWrt) 和 `APK` (Snapshot)。
+- ✅ **软件源与依赖修复**：默认源失败时临时切换镜像，完成后恢复原配置。
 - ✅ **内核自动更新**：安装完成后立即调用内部脚本更新 Meta 内核，无需二次操作。
 - ✅ **配置初始化**：自动切换至 Dev 更新分支并配置下载源（如 jsDelivr）。
+- ✅ **启动验证**：更新后重启 OpenClash，同时检查服务状态与内核进程。
 
 **使用场景：**
 
 - 仅需安装插件本体和内核，不需要更新 GeoIP 等数据库。
-- 修复已损坏的 OpenClash 安装。
+- 修复依赖或软件源异常后的 OpenClash 安装。
 
 **使用命令：**
 
 ```bash
 RULES_BRANCH="${RULES_BRANCH:-main}"
-wget -qO- "https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev.sh" | sh
+wget -qO- "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev.sh" | sh
 ```
 
 ---
@@ -125,7 +127,7 @@ wget -qO- "https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/
 
 ```bash
 RULES_BRANCH="${RULES_BRANCH:-main}"
-wget -qO- "https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev_update.sh" | sh
+wget -qO- "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev_update.sh" | sh
 ```
 
 ---
