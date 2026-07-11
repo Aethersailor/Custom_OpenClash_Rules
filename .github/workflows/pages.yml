@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    # MkDocs 仅以 wiki/ 为文档源，规则数据变更不需要重新部署站点。
+    paths:
+      - 'wiki/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
