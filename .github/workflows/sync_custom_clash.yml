@@ -78,7 +78,7 @@ jobs:
           git add cfg/Custom_Clash.ini
           if ! git diff --cached --quiet; then
             git commit -m "Update Custom_Clash.ini based on upstream"
-            git push https://$TARGET_REPO_TOKEN@github.com/Aethersailor/Custom_Clash_Rules.git "HEAD:${TARGET_REPO_BRANCH}"
+            git push "https://${TARGET_REPO_TOKEN}@github.com/Aethersailor/Custom_Clash_Rules.git" "HEAD:${TARGET_REPO_BRANCH}"
           else
             echo "No changes to commit."
           fi

@@ -41,10 +41,10 @@ jobs:
         id: check_changes
         run: |
           if git diff --quiet rule/Game_Download_CDN.list; then
-            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No changes detected in Game_Download_CDN.list"
           else
-            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "changed=true" >> "$GITHUB_OUTPUT"
             echo "Changes detected in Game_Download_CDN.list"
           fi
       
