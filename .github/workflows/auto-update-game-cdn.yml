@@ -9,19 +9,22 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: main-writers
+
 jobs:
   update-game-cdn:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: main
           fetch-depth: 0
       
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.11'
       
@@ -29,6 +32,9 @@ jobs:
         run: |
           echo "::group::Running generation script"
           python py/generate_game_cdn.py
+          python -m unittest -v \
+            tests.test_rule_generation.GameCdnConversionTests \
+            tests.test_rule_generation.RepositoryGenerationTests.test_game_cdn_file_has_only_supported_unique_rules
           echo "::endgroup::"
       
       - name: Check for changes
@@ -49,7 +55,8 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add rule/Game_Download_CDN.list
           git commit -m "chore(rule): auto-update Game_Download_CDN.list from upstream"
-          git push origin main
+          git pull --rebase origin main
+          git push origin HEAD:main
       
       - name: No changes
         if: steps.check_changes.outputs.changed == 'false'
