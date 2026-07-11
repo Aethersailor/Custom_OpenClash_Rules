@@ -3,8 +3,13 @@ name: "CodeQL Advanced"
 on:
   push:
     branches: ["main"]
+    # 规则文本不是 CodeQL 的分析对象；代码和工作流改动仍会触发扫描。
+    paths-ignore:
+      - "rule/**"
   pull_request:
     branches: ["main"]
+    paths-ignore:
+      - "rule/**"
   schedule:
     - cron: "17 2 * * *"
   workflow_dispatch:

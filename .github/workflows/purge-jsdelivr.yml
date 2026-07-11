@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - 'cfg/**'
-      - 'rule/**'
       - 'game_rule/**'
       - 'shell/**'
       - 'overwrite/**'
@@ -74,19 +73,9 @@ jobs:
 
           if [ "$EVENT_NAME" = "workflow_run" ]; then
             echo "Workflow run head SHA: $HEAD_SHA"
-            echo "Fetching latest remote info..."
-            git fetch origin main
-            LATEST_SHA=$(git rev-parse origin/main)
-
-            echo "Latest Remote SHA: $LATEST_SHA"
-
-            if [ "$LATEST_SHA" = "$HEAD_SHA" ]; then
-              echo "No new commit since workflow completed. Skipping purge."
-              echo "should_purge=false" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-
-            echo "New commit detected after workflow run. Proceeding with purge."
+            echo "The source workflow completed successfully; purging the latest main content."
+            # 规则提交由 Auto generate rules 完成后统一触发此处，避免对源文件和
+            # 生成产物分别清理两次。即使没有生成文件变化，源规则本身也需要刷新缓存。
             echo "should_purge=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
