@@ -29,6 +29,9 @@
 | **`_IP.yaml`** | IP-CIDR | IP-CIDR 类型纯 IP 规则，适用于 `rule-providers`。 |
 | **`.mrs`** | Mihomo Binary | 二进制格式纯域名规则，适用于 `rule-providers`。 |
 
+> [!IMPORTANT]
+> MRS 只适用于纯 `Domain` 或纯 `IP-CIDR` provider。Classical、端口及其他混合规则只生成 YAML，不转换为 MRS。当预留 provider 暂时没有规则时，YAML 使用 `payload: []`，并保留已有空 MRS 占位文件，以便日后加入规则时自动重建。
+
 > [!TIP]
 > **关于性能的补充说明**
 >
