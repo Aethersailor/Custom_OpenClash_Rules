@@ -59,9 +59,6 @@ jobs:
         run: |
           cp _wiki/Home.md wiki/README.md
 
-          # 替换 doc 路径
-          sed -i 's#](doc/#](../doc/#g' wiki/README.md
-
           # 替换 wiki 页面链接
           while IFS='|' read -r src dst; do
             [[ "$src" == LINK_MAP_START ]] && continue
@@ -95,9 +92,6 @@ jobs:
 
             if [ -f "$src_file" ]; then
               cp "$src_file" "$dst_file"
-
-              # 替换 doc 路径
-              sed -i 's#](doc/#](../doc/#g' "$dst_file"
 
               # 替换 wiki 页面链接
               while IFS='|' read -r src dst; do
