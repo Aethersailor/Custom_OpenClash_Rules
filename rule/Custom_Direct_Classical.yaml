@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 647
+# TOTAL: 648
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -555,6 +555,7 @@ payload:
   - DOMAIN-SUFFIX,we-stats.com
   - DOMAIN-SUFFIX,webs.vc
   - DOMAIN-SUFFIX,wenyi188.com
+  - DOMAIN-SUFFIX,wera.eu.org
   - DOMAIN-SUFFIX,weshape3d.com
   - DOMAIN-SUFFIX,wewillpro.com
   - DOMAIN-SUFFIX,wildfirechat.net
