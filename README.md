@@ -230,6 +230,7 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 ### 🧩 内核
 
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
+- [vernesong/mihomo](https://github.com/vernesong/mihomo)
 
 ### 🗂 配置模板
 
