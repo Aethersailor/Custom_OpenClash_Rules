@@ -32,9 +32,7 @@ jobs:
         run: |
           echo "::group::Running generation script"
           python py/generate_game_cdn.py
-          python -m unittest -v \
-            tests.test_rule_generation.GameCdnConversionTests \
-            tests.test_rule_generation.RepositoryGenerationTests.test_game_cdn_file_has_only_supported_unique_rules
+          python py/generate_game_cdn.py --check
           echo "::endgroup::"
       
       - name: Check for changes

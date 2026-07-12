@@ -71,10 +71,10 @@ jobs:
           sh -n shell/check_cpu_version.sh
           sh -n shell/install_openclash_dev.sh
           sh -n shell/install_openclash_dev_update.sh
-          shellcheck --shell=sh shell/check_cpu_version.sh shell/install_openclash_dev.sh shell/install_openclash_dev_update.sh tests/test_cpu_arch.sh
+          shellcheck --shell=sh shell/check_cpu_version.sh shell/install_openclash_dev.sh shell/install_openclash_dev_update.sh
           actionlint .github/workflows/*.yml
-          sh tests/test_cpu_arch.sh
-          python -m unittest discover -s tests -v
+          sh shell/check_cpu_version.sh --self-check
+          python py/generate_game_cdn.py --check
           python py/generate_rules.py --check --mihomo mihomo
 
       - name: Validate complete Mihomo templates

@@ -5,12 +5,15 @@
 从 v2fly/domain-list-community 上游文件转换为 Clash .list 格式
 """
 
+import argparse
 import urllib.request
+from collections import Counter
 from pathlib import Path
 
 # 配置
 UPSTREAM_URL = "https://raw.githubusercontent.com/v2fly/domain-list-community/refs/heads/master/data/category-game-platforms-download"
 OUTPUT_FILE = Path(__file__).parent.parent / "rule" / "Game_Download_CDN.list"
+ALLOWED_RULE_PREFIXES = ("DOMAIN,", "DOMAIN-SUFFIX,", "DOMAIN-KEYWORD,", "DOMAIN-REGEX,")
 
 
 def download_upstream() -> str:
@@ -80,6 +83,48 @@ def generate_rules(upstream_content: str) -> list[str]:
     return rules
 
 
+def validate_rules(lines: list[str]) -> None:
+    """校验转换后的 Clash 规则格式与唯一性。"""
+    rules = [line for line in lines if line and not line.startswith(("#", ";"))]
+    invalid = [rule for rule in rules if not rule.startswith(ALLOWED_RULE_PREFIXES)]
+    duplicates = [rule for rule, count in Counter(rules).items() if count > 1]
+    if not rules:
+        raise ValueError("没有生成任何游戏 CDN 规则。")
+    if invalid:
+        raise ValueError(f"包含无效 Clash 规则：{invalid[:5]}")
+    if duplicates:
+        raise ValueError(f"包含重复规则：{duplicates[:5]}")
+
+
+def run_self_check() -> None:
+    """检查上游格式映射、属性清理与去重逻辑。"""
+    cases = {
+        "example.com": "DOMAIN-SUFFIX,example.com",
+        "domain:example.com @cn": "DOMAIN-SUFFIX,example.com",
+        "full:www.example.com": "DOMAIN,www.example.com",
+        "keyword:example": "DOMAIN-KEYWORD,example",
+        r"regexp:^example\.com$": r"DOMAIN-REGEX,^example\.com$",
+    }
+    for source, expected in cases.items():
+        actual = convert_line(source)
+        if actual != expected:
+            raise AssertionError(f"{source!r}: expected {expected!r}, got {actual!r}")
+
+    converted = generate_rules(
+        "# group\nexample.com @cn\nexample.com # duplicate\nfull:www.example.com\n"
+    )
+    expected = ["# group", "DOMAIN-SUFFIX,example.com", "DOMAIN,www.example.com"]
+    if converted != expected:
+        raise AssertionError(f"属性清理或去重结果异常：{converted!r}")
+
+    try:
+        convert_line("include:another-list")
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("未展开的 include 规则应当失败。")
+
+
 def read_header() -> list[str]:
     """读取原文件的前 N 行注释头"""
     if not OUTPUT_FILE.exists():
@@ -123,10 +168,25 @@ def write_output(header: list[str], rules: list[str]):
     print(f"[OK] 规则总数: {len([r for r in rules if r and not r.startswith('#')])} 条")
 
 
-def main():
+def validate_output_file() -> None:
+    lines = OUTPUT_FILE.read_text(encoding="utf-8-sig").splitlines()
+    validate_rules(lines)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--check", action="store_true", help="仅校验转换逻辑和已生成文件")
+    args = parser.parse_args()
+
     print("=" * 60)
     print("Game_Download_CDN.list 自动生成工具")
     print("=" * 60)
+
+    run_self_check()
+    if args.check:
+        validate_output_file()
+        print("[OK] 转换逻辑和已生成文件校验通过。")
+        return 0
     
     # 1. 下载上游文件
     upstream_content = download_upstream()
@@ -134,17 +194,20 @@ def main():
     # 2. 转换规则
     print("[i] 正在转换规则格式...")
     rules = generate_rules(upstream_content)
+    validate_rules(rules)
     
     # 3. 读取原文件头部
     header = read_header()
     
     # 4. 写入文件
     write_output(header, rules)
+    validate_output_file()
     
     print("=" * 60)
     print("[OK] 生成完成！")
     print("=" * 60)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

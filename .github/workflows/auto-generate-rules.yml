@@ -52,9 +52,7 @@ jobs:
         run: python py/generate_rules.py --mihomo mihomo
 
       - name: Test generation and conversion logic
-        run: |
-          python -m unittest discover -s tests -v
-          python py/generate_rules.py --check --mihomo mihomo
+        run: python py/generate_rules.py --check --mihomo mihomo
 
       - name: Commit and push changes
         run: |
