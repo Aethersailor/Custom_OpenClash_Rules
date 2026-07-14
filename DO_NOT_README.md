@@ -1,8 +1,20 @@
 <h1 align="center">
-  🚀 OpenClash 配置方案<br>
-  &<br>
-  🛡️ 分流规则与防泄漏配置模板
+  🚀 OpenClash 配置方案
 </h1>
+
+<p align="center"><b>🛡️ 分流规则与防泄漏配置模板</b></p>
+
+<p align="center">
+  <a href="README.md">English</a>
+  &nbsp;|&nbsp;
+  <b>简体中文</b>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki">📖 配置 Wiki</a>
+  &nbsp;•&nbsp;
+  <a href="https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini">🧩 订阅转换模板</a>
+</p>
 
 <p align="center">
  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=flat">
@@ -20,7 +32,7 @@
   &nbsp;•&nbsp;
   <a href="#%EF%B8%8F-特别声明">⚠️ 声明</a>
   &nbsp;•&nbsp;
-  <a href="#-本项目设置方案及转换模板介绍">📝 方案</a>
+  <a href="#-本项目设置方案及订阅转换模板介绍">📝 方案</a>
   &nbsp;•&nbsp;
   <a href="#%EF%B8%8F-使用方法">🛠️ 用法</a>
   &nbsp;•&nbsp;
@@ -47,11 +59,14 @@
 
 > 🧩 **彻底告别手搓配置和多个插件套娃的繁琐设置方法，保证零基础小白也能轻松看懂。**
 
-按照本项目的 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，搭配本项目的[订阅转换模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)，花费数分钟对 OpenClash 进行设置，无需套娃其他工具，仅依靠 OpenClash 自身即可实现更稳健的 DNS 策略与分流功能，同时配合 Dnsmasq 可实现无需第三方插件的广告拦截，并且完美兼容 IPv6。
+按照本项目的 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 中的设置方案，搭配本项目的[订阅转换模板](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini)，花费数分钟对 OpenClash 进行设置，无需套娃其他工具，仅依靠 OpenClash 自身即可实现更稳健的 DNS 策略与分流功能，并且完美兼容 IPv6。本项目曾提供基于 Dnsmasq 的广告拦截示例，但该功能目前已停用，详见下文说明。
 
 同时也提供基于 OpenClash 远程覆写功能的配置示例。
 
 欢迎 ⭐star！
+
+> [!NOTE]
+> 项目 Wiki 目前仅提供中文版本；英文 README 中的所有 Wiki 链接均会按预期打开现有中文文档。
 
 ---
 
@@ -298,4 +313,4 @@ OpenWrt 的 IPv6 设置方案见本项目的 Wiki：[OpenWrt-IPv6-设置方案](
 
 ## 📊 数据统计
 
-![Alt](https://repobeats.axiom.co/api/embed/0d7d55da94670a4766aa0fb8ccd03c7abc9e8464.svg "Repobeats analytics image")  
+![仓库活动统计](https://repobeats.axiom.co/api/embed/0d7d55da94670a4766aa0fb8ccd03c7abc9e8464.svg "Repobeats analytics image")

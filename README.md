@@ -1,8 +1,20 @@
 <h1 align="center">
-  🚀 OpenClash Configuration Guide<br>
-  &<br>
-  🛡️ Traffic Routing Rules and DNS Leak-Prevention Templates
+  🚀 OpenClash Configuration Guide
 </h1>
+
+<p align="center"><b>🛡️ Traffic Routing Rules and DNS Leak-Prevention Templates</b></p>
+
+<p align="center">
+  <b>English</b>
+  &nbsp;|&nbsp;
+  <a href="DO_NOT_README.md">简体中文</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki">📖 Configuration Wiki (Chinese)</a>
+  &nbsp;•&nbsp;
+  <a href="https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini">🧩 Subscription Conversion Template</a>
+</p>
 
 <p align="center">
  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=flat">
@@ -47,11 +59,14 @@ This project demonstrates how to configure OpenClash for more stable and maintai
 
 > 🧩 **Say goodbye to tedious hand-written configurations and stacks of nested plugins. The guide is designed to be easy to follow even for complete beginners.**
 
-By following the configuration guide in this project's [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) and using the project's [subscription conversion template](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini), you can configure OpenClash in just a few minutes. Without stacking it with other tools, OpenClash alone can provide more robust DNS policies and traffic routing. Together with Dnsmasq, it can also block ads without third-party plugins and remains fully compatible with IPv6.
+By following the configuration guide in this project's [Wiki (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) and using the project's [subscription conversion template](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini), you can configure OpenClash in just a few minutes. Without stacking it with other tools, OpenClash alone can provide more robust DNS policies and traffic routing while remaining fully compatible with IPv6. The project previously provided a Dnsmasq-based ad-blocking example, but that feature is currently disabled; see the notice below for details.
 
 The project also provides configuration examples based on OpenClash's remote override feature.
 
 Stars ⭐ are welcome!
+
+> [!NOTE]
+> The project Wiki is currently available in Chinese only. All English README links to the Wiki intentionally open the existing Chinese documentation.
 
 ---
 
@@ -69,13 +84,13 @@ Stars ⭐ are welcome!
 ## ⚠️ Special Disclaimer
 
 > [!WARNING]
-> **Terms of Use:**
+> **Usage Notice:**
 >
 > 1. This project is intended solely for technical study and research concerning the OpenWrt operating system and its OpenClash plugin. Its content consists of neutral technical implementation examples and experimental materials and is not directed toward any specific use case or purpose.
 > 2. Before accessing, using, or copying any content from this project, users must independently confirm that doing so is permitted by the laws and regulations of their location and all relevant jurisdictions. The relevant content must be deleted within 24 hours after study and research.
 > 3. This project's content must not be used for any purpose that violates applicable laws or regulations. Users must independently comply with the laws and regulations of their location and all relevant jurisdictions, including those of the People's Republic of China. Within the territory of the People's Republic of China, this project's content must not be used to obtain or disseminate unlawful information from outside the country whose access or distribution is legally restricted or blocked, or to engage in similar conduct.
 > 4. This project neither provides nor concerns any equipment, software, tools, network connections, or services. The project maintainer does not produce, sell, or provide related equipment, software, tools, or technical services, nor does the maintainer provide technical support, assistance, or any other form of help to any individual or organization for obtaining or disseminating information whose access or distribution is legally restricted or blocked, or for circumventing regulatory systems.
-> 5. Any individual or organization is solely responsible for conduct arising from its direct or indirect use of this project's content and bears all corresponding legal liability. The project maintainer does not participate in users' specific conduct and assumes no responsibility for their purposes, methods, or resulting consequences, including any form of joint or secondary liability.
+> 5. Any individual or organization is solely responsible for conduct arising from its direct or indirect use of this project's content and bears all corresponding legal liability. The project maintainer does not participate in users' specific conduct and assumes no responsibility for their purposes, methods, or resulting consequences, including joint and several liability of any kind.
 > 6. Any modification, secondary development, integration, distribution, or other derivative activity based on this project's content is the independent act of the relevant individual or organization and is unrelated to this project or its maintainer. Any resulting legal liability is borne solely by the party performing such activity.
 > 7. This project discourages any form of reproduction, republication, or secondary dissemination. Reproducing, republishing, or redistributing this project's content on any platform within mainland China is strictly prohibited.
 > 8. No reproduction, republication, or secondary dissemination may imply endorsement of the reproduced content by this project or its maintainer. Any legal risk arising from the reproduction, dissemination, or use of this project's content is borne solely by the party performing the relevant act and is unrelated to this project or its maintainer.
@@ -87,13 +102,13 @@ Stars ⭐ are welcome!
 
 This project's configuration templates were refined with reference to rule templates such as [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master). Traffic-routing data is based on GeoSite.
 
-**Configure OpenClash by following the guide in this project's [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) and using the project's subscription conversion templates. You will gain the following features for a more elegant OpenClash experience:**
+**Configure OpenClash by following the guide in this project's [Wiki (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) and using the project's subscription conversion templates. You will gain the following features for a more elegant OpenClash experience:**
 
 - 🚀 **Optimized DNS settings that minimize the impact on direct connections**
-  > Local sites are resolved through the ISP's DNS servers. Domains and IP addresses in the example local region (CN) bypass the OpenClash core and return their real IP addresses, minimizing OpenClash's impact on direct access.
+  > Domains and IP addresses in the selected region (CN in this example) are resolved through the ISP's DNS servers, bypass the OpenClash core, and return their real IP addresses, minimizing OpenClash's impact on direct access.
 
 - 🛡️ **Reduced risk of DNS resolution failures and leaks, with no additional plugins required**
-  > For sites that are not directly connected, DNS resolution and access can be performed at the outbound side according to routing rules, with supporting policies to reduce the risk of leaks.
+  > For destinations not routed directly, DNS resolution and access can be handled by the selected outbound according to routing rules, with accompanying policies reducing the risk of leaks.
 
 - 🧩 **No more nested configurations**
   > Avoid the complexity of combining multiple DNS plugins. All features are implemented through OpenClash alone, and direct-access sites remain reachable even if OpenClash stops working.
@@ -132,7 +147,7 @@ This project's configuration templates were refined with reference to rule templ
 > - This project's configuration guide uses OpenClash's `Fake-IP` mode and does not apply to Redir-Host mode.
 > - The intended behavior depends on OpenClash's “Bypass Mainland China” feature.
 
-Configure OpenClash by following the relevant section of the project Wiki: [OpenClash Configuration Guide](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)
+Configure OpenClash by following the relevant section of the project Wiki: [OpenClash Configuration Guide (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)
 
 The guide includes instructions for using this project's subscription conversion templates. Select the rule template you need as described.
 
@@ -154,7 +169,7 @@ If you need remote override configuration files, refer to [Giveupmoon/OpenClash_
 > [!NOTE]
 > This project was created for the maintainer's own use, and personal time is limited. Updates are therefore made when time permits, and customized modification services are not provided.
 
-For implementation details concerning customization, refer to the corresponding Wiki section: [Customization Requests](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82)
+For implementation details concerning customization, refer to the corresponding Wiki section: [Customization Requests (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82)
 
 ### 🈸 Adding Less Common Direct-Access Domains
 
@@ -178,7 +193,7 @@ You may also visit [COCR RULE BOT](https://telegram.me/asailor_rulebot) and add 
 
 ~~This project uses OpenClash's “Developer Options” feature to implement ad filtering without relying on third-party plugins.~~
 
-~~For configuration details, see the Wiki guide: [Ad-Blocking Configuration Guide](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%97%A0%E6%8F%92%E4%BB%B6%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)~~
+~~For configuration details, see the Wiki guide: [Ad-Blocking Configuration Guide (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%97%A0%E6%8F%92%E4%BB%B6%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)~~
 
 ~~The guide provides examples for both Dnsmasq-format and hosts-format configurations. You may copy them directly or use any other ad-filtering rules that meet the relevant format requirements.~~
 
@@ -190,13 +205,13 @@ You may also visit [COCR RULE BOT](https://telegram.me/asailor_rulebot) and add 
 
 By configuring IPv6 in OpenWrt and OpenClash correctly, you can achieve better compatibility between IPv6 and OpenClash when OpenWrt is used as the main router, while supporting traffic routing and connectivity tests in IPv6 environments.
 
-See this project's Wiki for the OpenWrt IPv6 configuration guide: [OpenWrt IPv6 Configuration Guide](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案)
+See this project's Wiki for the OpenWrt IPv6 configuration guide: [OpenWrt IPv6 Configuration Guide (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案)
 
 ---
 
 ### ❓ No Internet Access? Incorrect Traffic Routing? Some Websites Do Not Open? OpenClash Does Not Start?
 
-If you encounter a problem, refer to the [Troubleshooting section of the Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4), which provides solutions to common issues.
+If you encounter a problem, refer to the [Troubleshooting section of the Wiki (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4), which provides solutions to common issues.
 
 > [!TIP]
 > 🛠️ This project's configuration guide has been validated by many users and generally has no structural issues. To avoid wasting time, we recommend looking elsewhere first when diagnosing problems. Issues affecting particular applications or services may involve many factors and are not necessarily related to the templates themselves.
@@ -298,4 +313,4 @@ Listed in no particular order.
 
 ## 📊 Statistics
 
-![Alt](https://repobeats.axiom.co/api/embed/0d7d55da94670a4766aa0fb8ccd03c7abc9e8464.svg "Repobeats analytics image")
+![Repository activity statistics](https://repobeats.axiom.co/api/embed/0d7d55da94670a4766aa0fb8ccd03c7abc9e8464.svg "Repobeats analytics image")
