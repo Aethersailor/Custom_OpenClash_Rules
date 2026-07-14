@@ -18,10 +18,14 @@ WARN="${Y}[!]${N}"
 ERR="${R}[x]${N}"
 OK="${G}[+]${N}"
 
-REPO_API_URL="https://api.github.com/repos/vernesong/OpenClash/contents/dev?ref=package"
-JSDELIVR_PACKAGE_PREFIX="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@refs/heads/package/dev"
-RAW_PACKAGE_PREFIX="https://raw.githubusercontent.com/vernesong/OpenClash/package/dev"
+OPENCLASH_REPO_URL="https://github.com/vernesong/OpenClash.git"
+PACKAGE_REF="refs/heads/package"
+GIT_REFS_URL="${OPENCLASH_REPO_URL}/info/refs?service=git-upload-pack"
+JSDELIVR_METADATA_PREFIX="https://data.jsdelivr.com/v1/package/gh/vernesong/OpenClash@"
+JSDELIVR_PACKAGE_PREFIX="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@"
+RAW_PACKAGE_PREFIX="https://raw.githubusercontent.com/vernesong/OpenClash"
 GH_PROXY_PREFIX="https://v6.gh-proxy.org/"
+PACKAGE_RESOLVE_RETRIES="${PACKAGE_RESOLVE_RETRIES:-3}"
 
 OPENCLASH_SHARE_DIR="${OPENCLASH_SHARE_DIR:-/usr/share/openclash}"
 OPENCLASH_ETC_DIR="${OPENCLASH_ETC_DIR:-/etc/openclash}"
@@ -36,6 +40,8 @@ LOCK_DIR="${LOCK_DIR:-/tmp/install_openclash_dev.lock}"
 FEED_FILE=""
 FEED_BACKUP=""
 FEED_CHANGED=0
+PACKAGE_COMMIT=""
+PACKAGE_TARGET_VERSION=""
 
 print_line() {
     printf '%b\n' "${C}================================================================${N}"
@@ -131,10 +137,10 @@ detect_environment() {
 
     if command -v fw4 >/dev/null 2>&1 || command -v nft >/dev/null 2>&1; then
         FIREWALL_TYPE="nftables"
-        DEPENDENCIES="bash dnsmasq-full curl ca-bundle ip-full ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base coreutils-sha1sum"
+        DEPENDENCIES="bash dnsmasq-full curl ca-bundle ip-full ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base coreutils-sha256sum"
     elif command -v fw3 >/dev/null 2>&1 || command -v iptables >/dev/null 2>&1; then
         FIREWALL_TYPE="iptables"
-        DEPENDENCIES="bash iptables dnsmasq-full curl ca-bundle ipset ip-full iptables-mod-tproxy iptables-mod-extra ruby ruby-yaml kmod-tun kmod-inet-diag unzip luci-compat luci luci-base coreutils-sha1sum"
+        DEPENDENCIES="bash iptables dnsmasq-full curl ca-bundle ipset ip-full iptables-mod-tproxy iptables-mod-extra ruby ruby-yaml kmod-tun kmod-inet-diag unzip luci-compat luci luci-base coreutils-sha256sum"
     else
         die "未检测到支持的防火墙架构（fw4/nftables 或 fw3/iptables）。"
     fi
@@ -211,7 +217,7 @@ install_dependencies() {
 
 check_required_commands() {
     missing=""
-    for cmd in awk sed grep curl sha1sum wc mktemp uci uname ruby; do
+    for cmd in awk sed grep curl sha256sum wc mktemp uci uname ruby; do
         command -v "$cmd" >/dev/null 2>&1 || missing="$missing $cmd"
     done
     [ -z "$missing" ] || die "缺少必要命令：$missing"
@@ -226,12 +232,52 @@ curl_download() {
         -o "$output" "$url"
 }
 
-fetch_api_json() {
-    url=$1
-    output=$2
+fetch_package_branch_sha() {
+    refs_file="$TMP_DIR/package-refs"
+    rm -f "$refs_file"
 
-    curl_download "$output" "$url" ||
-        curl_download "$output" "${GH_PROXY_PREFIX}${url}"
+    curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 120 \
+        -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \
+        -o "$refs_file" "$GIT_REFS_URL" || return 1
+    grep -aq '# service=git-upload-pack' "$refs_file" || return 1
+
+    sha=$(awk -v ref="$PACKAGE_REF" '
+        {
+            marker=" " ref
+            pos=index($0, marker)
+            if (pos > 40) {
+                candidate=substr($0, pos - 40, 40)
+                if (length(candidate) == 40 && candidate !~ /[^0-9a-f]/) {
+                    print candidate
+                    exit
+                }
+            }
+        }
+    ' "$refs_file")
+    case "$sha" in
+        '' | *[!0-9a-f]*) return 1 ;;
+    esac
+    [ "${#sha}" -eq 40 ] || return 1
+    printf '%s\n' "$sha"
+}
+
+download_commit_file() {
+    commit=$1
+    path=$2
+    output=$3
+    raw_url="${RAW_PACKAGE_PREFIX}/${commit}/dev/${path}"
+    jsdelivr_url="${JSDELIVR_PACKAGE_PREFIX}${commit}/dev/${path}"
+    proxy_url="${GH_PROXY_PREFIX}${raw_url}"
+
+    curl_download "$output" "$raw_url" ||
+        curl_download "$output" "$jsdelivr_url" ||
+        curl_download "$output" "$proxy_url"
+}
+
+fetch_package_metadata() {
+    commit=$1
+    output=$2
+    curl_download "$output" "${JSDELIVR_METADATA_PREFIX}${commit}/flat"
 }
 
 parse_package_metadata() {
@@ -243,25 +289,55 @@ parse_package_metadata() {
             name=$0
             sub(/^.*"name":[[:space:]]*"/, "", name)
             sub(/".*$/, "", name)
-            selected=(substr(name, length(name) - length(suffix) + 1) == suffix)
+            hash=""
+            size=""
+            selected=(index(name, "/dev/luci-app-openclash") == 1 &&
+                substr(name, length(name) - length(suffix) + 1) == suffix)
         }
-        selected && /"sha":/ {
-            sha=$0
-            sub(/^.*"sha":[[:space:]]*"/, "", sha)
-            sub(/".*$/, "", sha)
+        selected && /"hash":/ {
+            hash=$0
+            sub(/^.*"hash":[[:space:]]*"/, "", hash)
+            sub(/".*$/, "", hash)
         }
         selected && /"size":/ {
             size=$0
             sub(/^.*"size":[[:space:]]*/, "", size)
             sub(/[^0-9].*$/, "", size)
-        }
-        selected && /"download_url":/ {
-            if (name != "" && sha != "" && size != "") {
-                print name "|" sha "|" size
+            if (name != "" && hash != "" && size != "") {
+                sub(/^\/dev\//, "", name)
+                print name "|" hash "|" size
                 exit
             }
         }
     ' "$json_file"
+}
+
+parse_package_version() {
+    sed -n '1s/^v\([0-9][0-9.]*[0-9]\)\r*$/\1/p' "$1"
+}
+
+resolve_package_metadata() {
+    commit=$1
+    metadata_file="$TMP_DIR/package-metadata.json"
+    version_file="$TMP_DIR/package-version"
+
+    if fetch_package_metadata "$commit" "$metadata_file"; then
+        metadata=$(parse_package_metadata "$metadata_file")
+        if [ -n "$metadata" ]; then
+            printf '%s\n' "$metadata"
+            return 0
+        fi
+    fi
+
+    download_commit_file "$commit" version "$version_file" || return 1
+    version=$(parse_package_version "$version_file")
+    [ -n "$version" ] || return 1
+    case "$EXT" in
+        apk) file_name="luci-app-openclash-${version}.apk" ;;
+        ipk) file_name="luci-app-openclash_${version}_all.ipk" ;;
+        *) return 1 ;;
+    esac
+    printf '%s||\n' "$file_name"
 }
 
 verify_file_size() {
@@ -271,76 +347,105 @@ verify_file_size() {
     [ -n "$actual" ] && [ "$actual" = "$expected" ]
 }
 
-verify_git_blob() {
+verify_sha256_base64() {
     file=$1
-    expected_sha=$2
-    command -v sha1sum >/dev/null 2>&1 || return 2
-
-    size=$(wc -c <"$file" 2>/dev/null | tr -d ' ')
-    actual_sha=$( {
-        printf 'blob %s\0' "$size"
-        cat "$file"
-    } | sha1sum | awk '{print $1}')
-    [ -n "$actual_sha" ] && [ "$actual_sha" = "$expected_sha" ]
+    expected_base64=$2
+    expected_hex=$(ruby -e 'print ARGV[0].unpack1("m0").unpack1("H*")' \
+        "$expected_base64" 2>/dev/null) || return 1
+    actual_hex=$(sha256sum "$file" | awk '{print $1}')
+    [ "${#expected_hex}" -eq 64 ] && [ "$actual_hex" = "$expected_hex" ]
 }
 
 verify_package_file() {
     file=$1
     expected_size=$2
-    expected_sha=$3
+    expected_hash=$3
 
     [ -s "$file" ] || return 1
-    verify_file_size "$file" "$expected_size" || return 1
-    verify_git_blob "$file" "$expected_sha"
-    verify_status=$?
-    if [ "$verify_status" -eq 0 ]; then
-        return 0
+    [ -z "$expected_size" ] || verify_file_size "$file" "$expected_size" || return 1
+    [ -z "$expected_hash" ] || verify_sha256_base64 "$file" "$expected_hash" || return 1
+
+    if [ "$PKG_MGR" = "opkg" ]; then
+        opkg --noaction install "$file" >/dev/null 2>&1
+    else
+        apk add -s -q --force-overwrite --clean-protected --allow-untrusted \
+            "$file" >/dev/null 2>&1
     fi
-    case "$verify_status" in
-        2)
-            log_warn "未找到 sha1sum，已仅按 GitHub 元数据中的文件大小校验安装包。"
-            return 0
-            ;;
-        *)
-            return 1
-            ;;
-    esac
 }
 
 download_openclash_package() {
-    file_name=$1
-    expected_size=$2
-    expected_sha=$3
-    output=$4
+    commit=$1
+    file_name=$2
+    expected_size=$3
+    expected_hash=$4
+    output=$5
 
-    jsdelivr_url="${JSDELIVR_PACKAGE_PREFIX}/${file_name}"
-    raw_url="${RAW_PACKAGE_PREFIX}/${file_name}"
+    raw_url="${RAW_PACKAGE_PREFIX}/${commit}/dev/${file_name}"
+    jsdelivr_url="${JSDELIVR_PACKAGE_PREFIX}${commit}/dev/${file_name}"
     proxy_url="${GH_PROXY_PREFIX}${raw_url}"
 
-    log_info "下载顺序：jsDelivr → 反代 → GitHub Raw"
+    log_info "下载顺序：GitHub Raw → jsDelivr → 反代（均锁定提交 $commit）"
+
+    log_info "尝试从 GitHub Raw 下载..."
+    if curl_download "$output" "$raw_url" &&
+        verify_package_file "$output" "$expected_size" "$expected_hash"; then
+        log_ok "GitHub Raw 下载和校验成功。"
+        return 0
+    fi
 
     log_info "尝试从 jsDelivr 下载..."
     if curl_download "$output" "$jsdelivr_url" &&
-        verify_package_file "$output" "$expected_size" "$expected_sha"; then
+        verify_package_file "$output" "$expected_size" "$expected_hash"; then
         log_ok "jsDelivr 下载和校验成功。"
         return 0
     fi
 
     log_info "尝试从反代下载..."
     if curl_download "$output" "$proxy_url" &&
-        verify_package_file "$output" "$expected_size" "$expected_sha"; then
+        verify_package_file "$output" "$expected_size" "$expected_hash"; then
         log_ok "反代下载和校验成功。"
         return 0
     fi
 
-    log_info "尝试从 GitHub Raw 下载..."
-    if curl_download "$output" "$raw_url" &&
-        verify_package_file "$output" "$expected_size" "$expected_sha"; then
-        log_ok "GitHub Raw 下载和校验成功。"
-        return 0
-    fi
-
     rm -f "$output"
+    return 1
+}
+
+prepare_latest_package() {
+    output=$1
+    attempt=1
+
+    while [ "$attempt" -le "$PACKAGE_RESOLVE_RETRIES" ]; do
+        before=$(fetch_package_branch_sha) || return 1
+        log_info "官方 package 分支提交：$before"
+
+        metadata=$(resolve_package_metadata "$before") || return 1
+        file_name=${metadata%%|*}
+        rest=${metadata#*|}
+        expected_hash=${rest%%|*}
+        expected_size=${rest#*|}
+        target_version=$(extract_version_from_filename "$file_name")
+        [ -n "$target_version" ] || return 1
+
+        if [ -z "$expected_hash" ] || [ -z "$expected_size" ]; then
+            log_warn "提交已锁定，但校验元数据不可用，将使用官方提交直链和包管理器结构校验。"
+        fi
+
+        download_openclash_package "$before" "$file_name" \
+            "$expected_size" "$expected_hash" "$output" || return 1
+
+        after=$(fetch_package_branch_sha) || return 1
+        if [ "$before" = "$after" ]; then
+            PACKAGE_COMMIT=$before
+            PACKAGE_TARGET_VERSION=$target_version
+            return 0
+        fi
+
+        log_warn "下载期间官方 package 分支已从 $before 更新为 $after，重新获取最新版。"
+        rm -f "$output"
+        attempt=$((attempt + 1))
+    done
+
     return 1
 }
 
@@ -352,6 +457,31 @@ install_openclash_package() {
     else
         apk add -q --force-overwrite --clean-protected --allow-untrusted "$package_file"
     fi
+}
+
+install_latest_openclash_package() {
+    package_file=$1
+    install_round=1
+
+    while [ "$install_round" -le "$PACKAGE_RESOLVE_RETRIES" ]; do
+        prepare_latest_package "$package_file" || return 1
+        target_version=$PACKAGE_TARGET_VERSION
+        install_openclash_package "$package_file" || return 1
+
+        installed=$(get_installed_version)
+        [ "$installed" = "$target_version" ] || return 1
+
+        final_commit=$(fetch_package_branch_sha) || return 1
+        if [ "$final_commit" = "$PACKAGE_COMMIT" ]; then
+            log_ok "OpenClash Dev v$installed 插件包安装完成（提交 $PACKAGE_COMMIT）。"
+            return 0
+        fi
+
+        log_warn "安装期间官方 package 分支已从 $PACKAGE_COMMIT 更新为 $final_commit，继续安装最新版。"
+        install_round=$((install_round + 1))
+    done
+
+    return 1
 }
 
 extract_version_from_filename() {
@@ -562,27 +692,9 @@ main() {
     check_required_commands
 
     print_step "步骤 3/6: 下载并安装 OpenClash Dev 插件包"
-    package_json="$TMP_DIR/package.json"
-    fetch_api_json "$REPO_API_URL" "$package_json" || die "无法获取 OpenClash Dev 包元数据。"
-    metadata=$(parse_package_metadata "$package_json")
-    [ -n "$metadata" ] || die "未在官方仓库找到 .$EXT 安装包。"
-
-    file_name=${metadata%%|*}
-    rest=${metadata#*|}
-    expected_sha=${rest%%|*}
-    expected_size=${rest#*|}
-    target_version=$(extract_version_from_filename "$file_name")
-    [ -n "$target_version" ] || die "无法从文件名解析目标版本：$file_name"
-
     package_file="$TMP_DIR/openclash.$EXT"
-    download_openclash_package "$file_name" "$expected_size" "$expected_sha" "$package_file" ||
-        die "所有安装包下载源均失败，或文件校验未通过。"
-    install_openclash_package "$package_file" || die "OpenClash 插件包安装失败。"
-
-    installed=$(get_installed_version)
-    [ "$installed" = "$target_version" ] ||
-        die "安装后版本不匹配：目标 $target_version，实际 ${installed:-未知}"
-    log_ok "OpenClash Dev v$installed 插件包安装完成。"
+    install_latest_openclash_package "$package_file" ||
+        die "无法锁定并安装官方 package 分支的最新 .$EXT 安装包。"
 
     print_step "步骤 4/6: 配置 Dev 内核架构"
     configure_core_arch
