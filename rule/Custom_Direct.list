@@ -342,6 +342,8 @@ DOMAIN-SUFFIX,code-relay.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 苏州广播电视总台 / add by Telegram user: whsiny / Date: 2026-07-14 19:56:47
+DOMAIN-SUFFIX,51kandianshi.com
 # 瓦力方程官方网站 / add by Telegram user: More / Date: 2026-07-14 15:12:26
 DOMAIN-SUFFIX,wlups.com
 # 广告 / add by Telegram user: morty / Date: 2026-07-12 22:34:03
