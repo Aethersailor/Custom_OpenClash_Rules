@@ -92,7 +92,7 @@ OpenClash Dev 版本轻量安装工具。脚本会检查系统环境、更新软
 
 ```bash
 RULES_BRANCH="${RULES_BRANCH:-main}"
-wget -qO- "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev.sh" | sh
+wget -qO- "https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev.sh" | sh
 ```
 
 ---
@@ -127,7 +127,7 @@ wget -qO- "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules
 
 ```bash
 RULES_BRANCH="${RULES_BRANCH:-main}"
-wget -qO- "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev_update.sh" | sh
+wget -qO- "https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev_update.sh" | sh
 ```
 
 ---
