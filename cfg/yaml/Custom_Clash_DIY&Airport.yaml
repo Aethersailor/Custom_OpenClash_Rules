@@ -14,7 +14,7 @@
 
 # 遵循 mihomo 官方配置范例格式，如需修改，请参考官方完整配置范例
 
-# 使用机器人自行添加冷门直连域名：https://t.me/asailor_rulebot
+# 使用机器人自行添加冷门直连域名：https://telegram.me/asailor_rulebot
 
 port: 7890
 socks-port: 7891

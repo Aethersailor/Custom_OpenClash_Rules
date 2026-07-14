@@ -162,7 +162,7 @@
 
 如希望将少量直连域名纳入仓库规则中，建议通过 GitHub Issues/PR 进行提交与讨论。
 
-也可访问 [COCR RULE BOT](https://t.me/asailor_rulebot) 按照提示添加域名，符合要求的域名会自动添加至本项目的直连规则中。  
+也可访问 [COCR RULE BOT](https://telegram.me/asailor_rulebot) 按照提示添加域名，符合要求的域名会自动添加至本项目的直连规则中。  
 
 > [!NOTE]
 > 维护者会定期将收集到的冷门直连域名向上游规则进行 PR。
