@@ -127,7 +127,7 @@ wget -qO- "https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/
 
 ```bash
 RULES_BRANCH="${RULES_BRANCH:-main}"
-wget -qO- "https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev_update.sh" | sh
+wget -qO- "https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@${RULES_BRANCH}/shell/install_openclash_dev_update.sh" | sh
 ```
 
 ---
