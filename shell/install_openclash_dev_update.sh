@@ -29,6 +29,8 @@ RAW_PACKAGE_PREFIX="https://raw.githubusercontent.com/vernesong/OpenClash"
 GH_PROXY_PREFIX="https://v6.gh-proxy.org/"
 GITHUB_HOSTS_URL="https://raw.hellogithub.com/hosts"
 PACKAGE_RESOLVE_RETRIES="${PACKAGE_RESOLVE_RETRIES:-3}"
+PACKAGE_REF_CONNECT_TIMEOUT="${PACKAGE_REF_CONNECT_TIMEOUT:-8}"
+PACKAGE_REF_MAX_TIME="${PACKAGE_REF_MAX_TIME:-25}"
 
 OPENCLASH_SHARE_DIR="${OPENCLASH_SHARE_DIR:-/usr/share/openclash}"
 OPENCLASH_ETC_DIR="${OPENCLASH_ETC_DIR:-/etc/openclash}"
@@ -289,22 +291,83 @@ curl_download() {
     fi
 }
 
+fetch_package_refs_route() {
+    route=$1
+    output=$2
+    rm -f "$output"
+
+    case "$route" in
+        direct)
+            url=$GIT_REFS_URL
+            resolve_args=""
+            ;;
+        hosts)
+            [ -n "$GITHUB_COM_IP" ] || return 1
+            url=$GIT_REFS_URL
+            resolve_args="github.com:443:$GITHUB_COM_IP"
+            ;;
+        proxy)
+            url="${GH_PROXY_PREFIX}${GIT_REFS_URL}"
+            resolve_args=""
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+
+    if [ -n "$resolve_args" ]; then
+        curl -fsSL --connect-timeout "$PACKAGE_REF_CONNECT_TIMEOUT" \
+            --max-time "$PACKAGE_REF_MAX_TIME" \
+            -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \
+            --resolve "$resolve_args" -o "$output" "$url" 2>/dev/null || return 1
+    else
+        curl -fsSL --connect-timeout "$PACKAGE_REF_CONNECT_TIMEOUT" \
+            --max-time "$PACKAGE_REF_MAX_TIME" \
+            -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \
+            -o "$output" "$url" 2>/dev/null || return 1
+    fi
+    grep -aq '# service=git-upload-pack' "$output"
+}
+
+package_ref_route_label() {
+    case "$1" in
+        direct) printf '%s\n' 'GitHub Smart HTTP 直连' ;;
+        hosts) printf '%s\n' "GitHub Hosts IP（$GITHUB_COM_IP）" ;;
+        proxy) printf '%s\n' 'GitHub Smart HTTP 反代' ;;
+        *) printf '%s\n' "$1" ;;
+    esac
+}
+
 fetch_package_branch_sha() {
     refs_file="$TMP_DIR/package-refs"
-    rm -f "$refs_file"
+    route_file="$TMP_DIR/package-ref-route"
+    selected_route=""
 
-    if [ -n "$GITHUB_COM_IP" ]; then
-        curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 120 \
-            -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \
-            --resolve "github.com:443:$GITHUB_COM_IP" \
-            -o "$refs_file" "$GIT_REFS_URL" || rm -f "$refs_file"
+    if [ -s "$route_file" ]; then
+        cached_route=$(cat "$route_file" 2>/dev/null)
+        if fetch_package_refs_route "$cached_route" "$refs_file"; then
+            selected_route=$cached_route
+        else
+            rm -f "$route_file"
+        fi
     fi
-    if [ ! -s "$refs_file" ]; then
-        curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 120 \
-            -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \
-            -o "$refs_file" "$GIT_REFS_URL" || return 1
+
+    if [ -z "$selected_route" ]; then
+        for route in direct hosts proxy; do
+            [ "$route" != "hosts" ] || [ -n "$GITHUB_COM_IP" ] || continue
+            label=$(package_ref_route_label "$route")
+            log_info "探测官方 package 分支：$label" >&2
+            if fetch_package_refs_route "$route" "$refs_file"; then
+                selected_route=$route
+                printf '%s\n' "$route" >"$route_file"
+                log_ok "官方提交探测路径：$label" >&2
+                break
+            fi
+            log_warn "$label 不可用，切换下一条路径。" >&2
+        done
     fi
-    grep -aq '# service=git-upload-pack' "$refs_file" || return 1
+
+    [ -n "$selected_route" ] || return 1
 
     sha=$(awk -v ref="$PACKAGE_REF" '
         {
@@ -334,9 +397,9 @@ download_commit_file() {
     jsdelivr_url="${JSDELIVR_PACKAGE_PREFIX}${commit}/dev/${path}"
     proxy_url="${GH_PROXY_PREFIX}${raw_url}"
 
-    curl_download "$output" "$raw_url" "raw.githubusercontent.com" "$RAW_GITHUB_IP" ||
-        curl_download "$output" "$jsdelivr_url" ||
-        curl_download "$output" "$proxy_url"
+    curl_download "$output" "$jsdelivr_url" ||
+        curl_download "$output" "$proxy_url" ||
+        curl_download "$output" "$raw_url" "raw.githubusercontent.com" "$RAW_GITHUB_IP"
 }
 
 fetch_package_metadata() {
@@ -449,15 +512,7 @@ download_openclash_package() {
     jsdelivr_url="${JSDELIVR_PACKAGE_PREFIX}${commit}/dev/${file_name}"
     proxy_url="${GH_PROXY_PREFIX}${raw_url}"
 
-    log_info "下载顺序：GitHub Raw → jsDelivr → 反代（均锁定提交 $commit）"
-
-    log_info "尝试从 GitHub Raw 下载..."
-    if curl_download "$output" "$raw_url" "raw.githubusercontent.com" "$RAW_GITHUB_IP" &&
-        verify_package_file "$output" "$expected_size" "$expected_hash"; then
-        log_ok "GitHub Raw 下载和校验成功。"
-        return 0
-    fi
-    log_warn "GitHub Raw 下载或校验失败。"
+    log_info "下载顺序：jsDelivr → 反代 → GitHub Raw（均锁定提交 $commit）"
 
     log_info "尝试从 jsDelivr 下载..."
     if curl_download "$output" "$jsdelivr_url" &&
@@ -473,6 +528,16 @@ download_openclash_package() {
         log_ok "反代下载和校验成功。"
         return 0
     fi
+
+    log_warn "反代下载或校验失败。"
+
+    log_info "尝试从 GitHub Raw 下载..."
+    if curl_download "$output" "$raw_url" "raw.githubusercontent.com" "$RAW_GITHUB_IP" &&
+        verify_package_file "$output" "$expected_size" "$expected_hash"; then
+        log_ok "GitHub Raw 下载和校验成功。"
+        return 0
+    fi
+    log_warn "GitHub Raw 下载或校验失败。"
 
     rm -f "$output"
     return 1
@@ -778,6 +843,7 @@ fetch_model_assets() {
 fetch_remote_file_size() {
     url=$1
     headers_file="$TMP_DIR/remote-headers"
+    proxy_url="${GH_PROXY_PREFIX}${url}"
     rm -f "$headers_file"
 
     if [ -n "$GITHUB_COM_IP" ]; then
@@ -787,7 +853,11 @@ fetch_remote_file_size() {
     fi
     if [ ! -s "$headers_file" ]; then
         curl -fsSIL --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 120 \
-            -o /dev/null -D "$headers_file" "$url" || return 1
+            -o /dev/null -D "$headers_file" "$url" || rm -f "$headers_file"
+    fi
+    if [ ! -s "$headers_file" ]; then
+        curl -fsSIL --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 120 \
+            -o /dev/null -D "$headers_file" "$proxy_url" || return 1
     fi
 
     tr -d '\r' <"$headers_file" | awk '
@@ -837,8 +907,13 @@ update_smart_model() {
     mkdir -p "$OPENCLASH_ETC_DIR" || die "无法创建 OpenClash 数据目录。"
 
     model_assets="$TMP_DIR/model-assets.html"
-    fetch_model_assets "$model_assets" ||
-        die "无法获取 LGBM 模型元数据。"
+    if ! fetch_model_assets "$model_assets"; then
+        if [ -s "$OPENCLASH_ETC_DIR/Model.bin" ]; then
+            log_warn "LGBM 模型元数据暂不可用，保留现有已安装模型。"
+            return 0
+        fi
+        die "无法获取 LGBM 模型元数据，且没有可保留的现有模型。"
+    fi
 
     selected=""
     for candidate in Model-large.bin Model-middle.bin Model.bin; do
@@ -855,10 +930,10 @@ update_smart_model() {
 
     if [ -z "$selected" ]; then
         if [ -s "$OPENCLASH_ETC_DIR/Model.bin" ]; then
-            log_warn "空间不足，保留现有 LGBM 模型。"
+            log_warn "无法取得适配模型大小或空间不足，保留现有 LGBM 模型。"
             return 0
         fi
-        die "空间不足，且没有可保留的 LGBM 模型。"
+        die "无法取得适配模型大小或空间不足，且没有可保留的 LGBM 模型。"
     fi
 
     model_tmp="$TMP_DIR/$selected"
@@ -1044,8 +1119,22 @@ validate_final_config() {
 
     core_path=$(get_core_path)
     [ -x "$core_path" ] || die "OpenClash 内核不存在或不可执行：$core_path"
-    "$core_path" -t -d "$OPENCLASH_ETC_DIR" -f "$config_path" >/dev/null 2>&1 ||
+
+    mihomo_config=$config_path
+    if grep -q 'BEGIN AGE ENCRYPTED FILE' "$config_path" 2>/dev/null; then
+        mihomo_config="$TMP_DIR/final-config.yaml"
+        (
+            umask 077
+            ruby -ryaml -rYAML -I "$OPENCLASH_SHARE_DIR" -E UTF-8 \
+                -e 'data = YAML.load_file(ARGV[0]); File.binwrite(ARGV[1], YAML.original_dump(data))' \
+                "$config_path" "$mihomo_config"
+        ) >/dev/null 2>&1 ||
+            die "最终配置 AGE 解密失败，无法执行 Mihomo 校验。"
+    fi
+
+    "$core_path" -t -d "$OPENCLASH_ETC_DIR" -f "$mihomo_config" >/dev/null 2>&1 ||
         die "最终配置未通过 Mihomo 内核校验。"
+    [ "$mihomo_config" = "$config_path" ] || rm -f "$mihomo_config"
     log_ok "最终配置通过 YAML 和 Mihomo 双重校验。"
 }
 

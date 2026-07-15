@@ -26,6 +26,8 @@ JSDELIVR_PACKAGE_PREFIX="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@"
 RAW_PACKAGE_PREFIX="https://raw.githubusercontent.com/vernesong/OpenClash"
 GH_PROXY_PREFIX="https://v6.gh-proxy.org/"
 PACKAGE_RESOLVE_RETRIES="${PACKAGE_RESOLVE_RETRIES:-3}"
+PACKAGE_REF_CONNECT_TIMEOUT="${PACKAGE_REF_CONNECT_TIMEOUT:-8}"
+PACKAGE_REF_MAX_TIME="${PACKAGE_REF_MAX_TIME:-25}"
 
 OPENCLASH_SHARE_DIR="${OPENCLASH_SHARE_DIR:-/usr/share/openclash}"
 OPENCLASH_ETC_DIR="${OPENCLASH_ETC_DIR:-/etc/openclash}"
@@ -232,14 +234,67 @@ curl_download() {
         -o "$output" "$url"
 }
 
+fetch_package_refs_route() {
+    route=$1
+    output=$2
+    rm -f "$output"
+
+    case "$route" in
+        direct)
+            url=$GIT_REFS_URL
+            ;;
+        proxy)
+            url="${GH_PROXY_PREFIX}${GIT_REFS_URL}"
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+
+    curl -fsSL --connect-timeout "$PACKAGE_REF_CONNECT_TIMEOUT" \
+        --max-time "$PACKAGE_REF_MAX_TIME" \
+        -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \
+        -o "$output" "$url" 2>/dev/null || return 1
+    grep -aq '# service=git-upload-pack' "$output"
+}
+
+package_ref_route_label() {
+    case "$1" in
+        direct) printf '%s\n' 'GitHub Smart HTTP 直连' ;;
+        proxy) printf '%s\n' 'GitHub Smart HTTP 反代' ;;
+        *) printf '%s\n' "$1" ;;
+    esac
+}
+
 fetch_package_branch_sha() {
     refs_file="$TMP_DIR/package-refs"
-    rm -f "$refs_file"
+    route_file="$TMP_DIR/package-ref-route"
+    selected_route=""
 
-    curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 120 \
-        -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \
-        -o "$refs_file" "$GIT_REFS_URL" || return 1
-    grep -aq '# service=git-upload-pack' "$refs_file" || return 1
+    if [ -s "$route_file" ]; then
+        cached_route=$(cat "$route_file" 2>/dev/null)
+        if fetch_package_refs_route "$cached_route" "$refs_file"; then
+            selected_route=$cached_route
+        else
+            rm -f "$route_file"
+        fi
+    fi
+
+    if [ -z "$selected_route" ]; then
+        for route in direct proxy; do
+            label=$(package_ref_route_label "$route")
+            log_info "探测官方 package 分支：$label" >&2
+            if fetch_package_refs_route "$route" "$refs_file"; then
+                selected_route=$route
+                printf '%s\n' "$route" >"$route_file"
+                log_ok "官方提交探测路径：$label" >&2
+                break
+            fi
+            log_warn "$label 不可用，切换下一条路径。" >&2
+        done
+    fi
+
+    [ -n "$selected_route" ] || return 1
 
     sha=$(awk -v ref="$PACKAGE_REF" '
         {
@@ -269,9 +324,9 @@ download_commit_file() {
     jsdelivr_url="${JSDELIVR_PACKAGE_PREFIX}${commit}/dev/${path}"
     proxy_url="${GH_PROXY_PREFIX}${raw_url}"
 
-    curl_download "$output" "$raw_url" ||
-        curl_download "$output" "$jsdelivr_url" ||
-        curl_download "$output" "$proxy_url"
+    curl_download "$output" "$jsdelivr_url" ||
+        curl_download "$output" "$proxy_url" ||
+        curl_download "$output" "$raw_url"
 }
 
 fetch_package_metadata() {
@@ -384,14 +439,7 @@ download_openclash_package() {
     jsdelivr_url="${JSDELIVR_PACKAGE_PREFIX}${commit}/dev/${file_name}"
     proxy_url="${GH_PROXY_PREFIX}${raw_url}"
 
-    log_info "下载顺序：GitHub Raw → jsDelivr → 反代（均锁定提交 $commit）"
-
-    log_info "尝试从 GitHub Raw 下载..."
-    if curl_download "$output" "$raw_url" &&
-        verify_package_file "$output" "$expected_size" "$expected_hash"; then
-        log_ok "GitHub Raw 下载和校验成功。"
-        return 0
-    fi
+    log_info "下载顺序：jsDelivr → 反代 → GitHub Raw（均锁定提交 $commit）"
 
     log_info "尝试从 jsDelivr 下载..."
     if curl_download "$output" "$jsdelivr_url" &&
@@ -404,6 +452,13 @@ download_openclash_package() {
     if curl_download "$output" "$proxy_url" &&
         verify_package_file "$output" "$expected_size" "$expected_hash"; then
         log_ok "反代下载和校验成功。"
+        return 0
+    fi
+
+    log_info "尝试从 GitHub Raw 下载..."
+    if curl_download "$output" "$raw_url" &&
+        verify_package_file "$output" "$expected_size" "$expected_hash"; then
+        log_ok "GitHub Raw 下载和校验成功。"
         return 0
     fi
 
