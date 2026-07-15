@@ -1081,13 +1081,6 @@ update_chnroute() {
     log_ok "大陆 IPv4/IPv6 白名单更新与验证完成。"
 }
 
-validate_yaml_file() {
-    file=$1
-    [ -s "$file" ] || return 1
-    ruby -ryaml -rYAML -I "$OPENCLASH_SHARE_DIR" -E UTF-8 \
-        -e 'YAML.load_file(ARGV[0])' "$file" >/dev/null 2>&1
-}
-
 update_subscriptions() {
     script="$OPENCLASH_SHARE_DIR/openclash.sh"
     [ -x "$script" ] || die "订阅更新脚本不存在：$script"
@@ -1110,32 +1103,6 @@ apply_user_preset() {
     log_info "执行用户个性化配置：$OPENCLASH_PRESET"
     sh "$OPENCLASH_PRESET" || die "用户个性化配置执行失败。"
     log_ok "用户个性化配置覆盖完成。"
-}
-
-validate_final_config() {
-    config_path=$(uci -q get openclash.config.config_path)
-    [ -n "$config_path" ] || die "OpenClash 未配置 config_path。"
-    validate_yaml_file "$config_path" || die "最终配置文件不存在或 YAML 解析失败：$config_path"
-
-    core_path=$(get_core_path)
-    [ -x "$core_path" ] || die "OpenClash 内核不存在或不可执行：$core_path"
-
-    mihomo_config=$config_path
-    if grep -q 'BEGIN AGE ENCRYPTED FILE' "$config_path" 2>/dev/null; then
-        mihomo_config="$TMP_DIR/final-config.yaml"
-        (
-            umask 077
-            ruby -ryaml -rYAML -I "$OPENCLASH_SHARE_DIR" -E UTF-8 \
-                -e 'data = YAML.load_file(ARGV[0]); File.binwrite(ARGV[1], YAML.original_dump(data))' \
-                "$config_path" "$mihomo_config"
-        ) >/dev/null 2>&1 ||
-            die "最终配置 AGE 解密失败，无法执行 Mihomo 校验。"
-    fi
-
-    "$core_path" -t -d "$OPENCLASH_ETC_DIR" -f "$mihomo_config" >/dev/null 2>&1 ||
-        die "最终配置未通过 Mihomo 内核校验。"
-    [ "$mihomo_config" = "$config_path" ] || rm -f "$mihomo_config"
-    log_ok "最终配置通过 YAML 和 Mihomo 双重校验。"
 }
 
 start_openclash() {
@@ -1211,7 +1178,6 @@ main() {
     update_chnroute
     update_subscriptions
     apply_user_preset
-    validate_final_config
 
     print_step "步骤 8/8: 启动并验证服务"
     start_openclash
