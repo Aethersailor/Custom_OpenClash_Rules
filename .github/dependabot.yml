@@ -11,6 +11,10 @@ updates:
     labels:
       - "dependencies"
       - "automerge"
+    groups:
+      codeql-action:
+        patterns:
+          - "github/codeql-action/*"
     commit-message:
       prefix: "chore"
       include: "scope"
