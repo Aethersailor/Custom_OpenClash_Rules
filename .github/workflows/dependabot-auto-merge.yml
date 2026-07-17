@@ -1,81 +1,94 @@
 name: Dependabot auto-merge
 
 on:
-  pull_request_target:
-    types: [opened, reopened, synchronize, ready_for_review, labeled]
+  workflow_run:
+    workflows:
+      - CodeQL Advanced
+      - Validate repository
+    types: [completed]
 
 permissions:
+  actions: read
+  checks: read
   contents: read
   pull-requests: read
 
+concurrency:
+  group: dependabot-automerge-${{ github.event.workflow_run.head_sha }}
+  cancel-in-progress: false
+
 jobs:
-  enable-automerge:
-    if: >-
-      github.event.pull_request.user.login == 'dependabot[bot]' &&
-      (
-        contains(github.event.pull_request.labels.*.name, 'automerge') ||
-        startsWith(github.event.pull_request.head.ref, 'dependabot/github_actions/github/codeql-action/')
-      )
+  merge:
+    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
     steps:
-      - name: Wait for checks and merge
+      - name: Merge after required checks pass
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
-          github-token: ${{ secrets.DEPENDABOT_AUTOMERGE_TOKEN }}
+          github-token: ${{ secrets.GH_PAT }}
           script: |
-            const pr = context.payload.pull_request;
+            const run = context.payload.workflow_run;
+            const prSummary = run.pull_requests?.[0];
+            if (!prSummary) {
+              core.info("The completed workflow is not associated with a pull request.");
+              return;
+            }
+
             const { owner, repo } = context.repo;
+            const { data: pr } = await github.rest.pulls.get({
+              owner,
+              repo,
+              pull_number: prSummary.number,
+            });
+            const labels = pr.labels.map((label) => label.name);
+            const isCodeqlUpdate = pr.head.ref.startsWith(
+              "dependabot/github_actions/github/codeql-action/"
+            );
+            if (
+              pr.user.login !== "dependabot[bot]" ||
+              (!labels.includes("automerge") && !isCodeqlUpdate)
+            ) {
+              core.info(`PR #${pr.number} is not eligible for automatic merge.`);
+              return;
+            }
+            if (pr.state !== "open" || pr.head.sha !== run.head_sha) {
+              core.info(`PR #${pr.number} is closed or no longer points at ${run.head_sha}.`);
+              return;
+            }
+
             const requiredChecks = new Set([
               "Analyze (actions)",
               "Analyze (python)",
               "validate",
             ]);
-
-            for (let attempt = 1; attempt <= 80; attempt++) {
-              const { data } = await github.rest.checks.listForRef({
-                owner,
-                repo,
-                ref: pr.head.sha,
-                filter: "latest",
-                per_page: 100,
-              });
-              const checks = new Map(
-                data.check_runs
-                  .filter((check) => requiredChecks.has(check.name))
-                  .map((check) => [check.name, check])
-              );
-              const failed = [...checks.values()].filter(
-                (check) => check.status === "completed" && check.conclusion !== "success"
-              );
-              if (failed.length > 0) {
-                core.setFailed(
-                  `Required checks failed: ${failed.map((check) => `${check.name}=${check.conclusion}`).join(", ")}`
-                );
-                return;
-              }
-
-              const missing = [...requiredChecks].filter((name) => !checks.has(name));
-              const pending = [...checks.values()].filter((check) => check.status !== "completed");
-              if (missing.length === 0 && pending.length === 0) {
-                break;
-              }
-              if (attempt === 80) {
-                core.setFailed(
-                  `Timed out waiting for checks. Missing: ${missing.join(", ") || "none"}; pending: ${pending.map((check) => check.name).join(", ") || "none"}`
-                );
-                return;
-              }
-              await new Promise((resolve) => setTimeout(resolve, 15000));
-            }
-
-            const { data: current } = await github.rest.pulls.get({
+            const { data } = await github.rest.checks.listForRef({
               owner,
               repo,
-              pull_number: pr.number,
+              ref: pr.head.sha,
+              filter: "latest",
+              per_page: 100,
             });
-            if (current.state !== "open" || current.head.sha !== pr.head.sha) {
-              core.setFailed("Pull request changed while checks were running; refusing a stale merge.");
+            const checks = new Map(
+              data.check_runs
+                .filter((check) => requiredChecks.has(check.name))
+                .map((check) => [check.name, check])
+            );
+            const missing = [...requiredChecks].filter((name) => !checks.has(name));
+            const pending = [...checks.values()].filter((check) => check.status !== "completed");
+            if (missing.length > 0 || pending.length > 0) {
+              core.info(
+                `Waiting for checks. Missing: ${missing.join(", ") || "none"}; pending: ${pending.map((check) => check.name).join(", ") || "none"}`
+              );
+              return;
+            }
+
+            const failed = [...checks.values()].filter(
+              (check) => check.conclusion !== "success"
+            );
+            if (failed.length > 0) {
+              core.setFailed(
+                `Required checks failed: ${failed.map((check) => `${check.name}=${check.conclusion}`).join(", ")}`
+              );
               return;
             }
 
