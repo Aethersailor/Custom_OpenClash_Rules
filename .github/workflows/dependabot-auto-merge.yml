@@ -6,6 +6,8 @@ on:
       - CodeQL Advanced
       - Validate repository
     types: [completed]
+    branches:
+      - 'dependabot/**'
 
 permissions:
   actions: read
