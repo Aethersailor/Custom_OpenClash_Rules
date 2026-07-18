@@ -8,6 +8,7 @@
 | :--- | :--- | :--- |
 | **[auto-backup-wiki.yml](auto-backup-wiki.yml)** | 自动备份 GitHub Wiki 内容到仓库的 `wiki/` 目录，并处理链接替换 | 每 30 分钟 / 手动触发 |
 | **[auto-generate-rules.yml](auto-generate-rules.yml)** | 从 `.list` 规则文件自动生成 `.yaml` 和 `.mrs` 格式的规则集 | `rule/*.list` 变更 / 手动触发 |
+| **[auto-update-encrypted-dns.yml](auto-update-encrypted-dns.yml)** | 从 HaGeZi 和 DNSCrypt 上游自动更新 `Encrypted_DNS.list` | 每日 / 手动触发 |
 | **[auto-update-game-cdn.yml](auto-update-game-cdn.yml)** | 从 v2fly 上游自动更新 `Game_Download_CDN.list` 规则文件 | 每 8 小时 / 手动触发 |
 | **[auto-update-mainland.yml](auto-update-mainland.yml)** | 根据 `Custom_Clash.ini` 自动生成 `Custom_Clash_Mainland.ini` | `cfg/Custom_Clash.ini` 变更 / 手动触发 |
 | **[clean_failed_cancelled_runs.yml](clean_failed_cancelled_runs.yml)** | 清理所有失败或取消的 Workflow 运行记录，并删除自身运行记录 | 手动触发 |

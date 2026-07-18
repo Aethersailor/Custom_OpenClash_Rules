@@ -1,0 +1,76 @@
+name: Auto update encrypted DNS list
+
+on:
+  schedule:
+    # 每天北京时间 03:37 运行（UTC 19:37）
+    - cron: '37 19 * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: write
+
+concurrency:
+  group: main-writers
+
+jobs:
+  update-encrypted-dns:
+    if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13'
+
+      - name: Update and validate Encrypted_DNS.list
+        run: |
+          python py/update_encrypted_dns.py
+          python py/update_encrypted_dns.py --check
+
+      - name: Commit source-list changes
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Another main writer may have finished while sources were being
+          # downloaded. Regenerate from the latest main instead of rebasing a
+          # stale list over newer repository changes.
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            git reset --hard origin/main
+            python py/update_encrypted_dns.py
+            python py/update_encrypted_dns.py --check
+          fi
+
+          if ! git diff --quiet -- . ':(exclude)rule/Encrypted_DNS.list'; then
+            echo "Updater modified files outside rule/Encrypted_DNS.list" >&2
+            git status --short
+            exit 1
+          fi
+
+          git add -- rule/Encrypted_DNS.list
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Encrypted_DNS.list is already up to date."
+            exit 0
+          fi
+
+          git commit -m "chore(rule): auto-update Encrypted_DNS.list"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Generate derived rule files
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run auto-generate-rules.yml --ref main
