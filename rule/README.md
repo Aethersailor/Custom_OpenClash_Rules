@@ -13,7 +13,7 @@
 | [**Custom_Direct.list**](Custom_Direct.list) | <img src="https://img.shields.io/badge/Mode-DIRECT-green?style=flat-square" alt="DIRECT"> | 🎯 **直连规则**：包含一些需要直连的冷门域名。 |
 | [**Custom_Proxy.list**](Custom_Proxy.list) | <img src="https://img.shields.io/badge/Mode-PROXY-blue?style=flat-square" alt="PROXY"> | 🚀 **非直连规则**：包含一些需要经由出站策略处理的冷门域名。 |
 | [**Steam_CDN.list**](Steam_CDN.list) | <img src="https://img.shields.io/badge/Mode-DIRECT-green?style=flat-square" alt="DIRECT"> | 🎮 **Steam CDN**：精确匹配 Steam 下载服务器，确保 Steam 下载流量尽量不经由出站策略。 |
-| [**Encrypted_DNS.list**](Encrypted_DNS.list) | <img src="https://img.shields.io/badge/Mode-REJECT-red?style=flat-square" alt="REJECT"> | 🛡️ **加密 DNS**：汇总加密 DNS 服务的域名和 IP，用于拦截绕过本地 DNS 的连接。 |
+| [**Encrypted_DNS.list**](Encrypted_DNS.list) | <img src="https://img.shields.io/badge/Mode-REJECT-red?style=flat-square" alt="REJECT"> | 🛡️ **加密 DNS**：汇总 HaGeZi、DNSCrypt 与 `geosite:category-doh` 的域名和 IP，用于拦截绕过本地 DNS 的连接。 |
 
 ---
 

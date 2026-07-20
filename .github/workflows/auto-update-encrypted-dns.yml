@@ -33,6 +33,7 @@ jobs:
 
       - name: Update and validate Encrypted_DNS.list
         run: |
+          python -m unittest discover -s py -p 'test_*.py'
           python py/update_encrypted_dns.py
           python py/update_encrypted_dns.py --check
 
@@ -48,6 +49,7 @@ jobs:
           git fetch origin main
           if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
             git reset --hard origin/main
+            python -m unittest discover -s py -p 'test_*.py'
             python py/update_encrypted_dns.py
             python py/update_encrypted_dns.py --check
           fi

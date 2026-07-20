@@ -1,9 +1,13 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 5265
+# TOTAL: 5255
 
 payload:
+  - DOMAIN,dns.cfiec.net
+  - DOMAIN,dns.shaw.ca
+  - DOMAIN,kaitain.restena.lu
+  - DOMAIN,resolver.dnsprivacy.org.uk
   - DOMAIN-SUFFIX,003153.xyz
   - DOMAIN-SUFFIX,0815cloud.de
   - DOMAIN-SUFFIX,0ms.dev
@@ -29,7 +33,6 @@ payload:
   - DOMAIN-SUFFIX,2.dnscrypt-cert.captnemo.in
   - DOMAIN-SUFFIX,2.dnscrypt-cert.dns.seby.io
   - DOMAIN-SUFFIX,2.dnscrypt-cert.ffmuc.net
-  - DOMAIN-SUFFIX,2.dnscrypt-cert.opendns.com
   - DOMAIN-SUFFIX,2.dnscrypt-cert.pumplex.com
   - DOMAIN-SUFFIX,2.dnscrypt-cert.quad9.net
   - DOMAIN-SUFFIX,2.dnscrypt-cert.shield-2.dnsbycomodo.com
@@ -1350,7 +1353,6 @@ payload:
   - DOMAIN-SUFFIX,dns.netvpn.net
   - DOMAIN-SUFFIX,dns.neubsi.at
   - DOMAIN-SUFFIX,dns.neutopia.org
-  - DOMAIN-SUFFIX,dns.nextdns.io
   - DOMAIN-SUFFIX,dns.nguyendn.com
   - DOMAIN-SUFFIX,dns.nhtsky.com
   - DOMAIN-SUFFIX,dns.niccoli.cc
@@ -1385,7 +1387,6 @@ payload:
   - DOMAIN-SUFFIX,dns.olpploiopkuyhiopsfrt.info
   - DOMAIN-SUFFIX,dns.omada.cafe
   - DOMAIN-SUFFIX,dns.omee4.ru
-  - DOMAIN-SUFFIX,dns.opendns.com
   - DOMAIN-SUFFIX,dns.opendoh.com
   - DOMAIN-SUFFIX,dns.ord.chriswang.work
   - DOMAIN-SUFFIX,dns.oryxlabs.com
@@ -1704,7 +1705,6 @@ payload:
   - DOMAIN-SUFFIX,dns1.klcd.eu
   - DOMAIN-SUFFIX,dns1.kostydenis.me
   - DOMAIN-SUFFIX,dns1.luan.contact
-  - DOMAIN-SUFFIX,dns1.nextdns.io
   - DOMAIN-SUFFIX,dns1.nhgnet.de
   - DOMAIN-SUFFIX,dns1.nielsdb.be
   - DOMAIN-SUFFIX,dns1.nordvpn.com
@@ -1747,7 +1747,6 @@ payload:
   - DOMAIN-SUFFIX,dns2.klcd.eu
   - DOMAIN-SUFFIX,dns2.kloiber.co.at
   - DOMAIN-SUFFIX,dns2.lezainski.com
-  - DOMAIN-SUFFIX,dns2.nextdns.io
   - DOMAIN-SUFFIX,dns2.nhgnet.de
   - DOMAIN-SUFFIX,dns2.nordvpn.com
   - DOMAIN-SUFFIX,dns2.nubecita.biz
@@ -1944,7 +1943,6 @@ payload:
   - DOMAIN-SUFFIX,doh.nukys.ca
   - DOMAIN-SUFFIX,doh.oco-lae.my.id
   - DOMAIN-SUFFIX,doh.onedns.net
-  - DOMAIN-SUFFIX,doh.opendns.com
   - DOMAIN-SUFFIX,doh.palapa.net.id
   - DOMAIN-SUFFIX,doh.phdns1.lonet.org
   - DOMAIN-SUFFIX,doh.phdns2.lonet.org
@@ -2078,7 +2076,6 @@ payload:
   - DOMAIN-SUFFIX,ebpmc.tplinkdns.com
   - DOMAIN-SUFFIX,ecs-doh.dnswarden.com
   - DOMAIN-SUFFIX,edgar.tobkar.net
-  - DOMAIN-SUFFIX,edge.nextdns.io
   - DOMAIN-SUFFIX,edgy-dns.com
   - DOMAIN-SUFFIX,egorovna.su
   - DOMAIN-SUFFIX,egshe.myqnapcloud.com
@@ -2112,7 +2109,6 @@ payload:
   - DOMAIN-SUFFIX,family.dot.dns.yandex.net
   - DOMAIN-SUFFIX,family.mydns.network
   - DOMAIN-SUFFIX,family.rabbitdns.org
-  - DOMAIN-SUFFIX,familyshield.opendns.com
   - DOMAIN-SUFFIX,fanscloud.net
   - DOMAIN-SUFFIX,faradns.net
   - DOMAIN-SUFFIX,faradns2.net
@@ -2665,6 +2661,7 @@ payload:
   - DOMAIN-SUFFIX,next.atomix.in
   - DOMAIN-SUFFIX,next.miao.ninja
   - DOMAIN-SUFFIX,nextcloud.d-alahmad.de
+  - DOMAIN-SUFFIX,nextdns.io
   - DOMAIN-SUFFIX,nfnvr.noiselink.com
   - DOMAIN-SUFFIX,ngk81hc.tplinkdns.com
   - DOMAIN-SUFFIX,nickcan.xyz
@@ -2768,6 +2765,7 @@ payload:
   - DOMAIN-SUFFIX,open-resolver1.unima.ac.id
   - DOMAIN-SUFFIX,openbld.net
   - DOMAIN-SUFFIX,opencdn.jomodns.com
+  - DOMAIN-SUFFIX,opendns.com
   - DOMAIN-SUFFIX,opendns.one
   - DOMAIN-SUFFIX,opennic.i2pd.xyz
   - DOMAIN-SUFFIX,opennic.tenta.io
@@ -2935,19 +2933,13 @@ payload:
   - DOMAIN-SUFFIX,resolver.rferee.dev
   - DOMAIN-SUFFIX,resolver.sunet.se
   - DOMAIN-SUFFIX,resolver.unstoppable.io
-  - DOMAIN-SUFFIX,resolver1-fs.opendns.com
   - DOMAIN-SUFFIX,resolver1.absolight.net
   - DOMAIN-SUFFIX,resolver1.amlegion.org
   - DOMAIN-SUFFIX,resolver1.dyndnsinternetguide.com
   - DOMAIN-SUFFIX,resolver1.hosting-cloud.net
-  - DOMAIN-SUFFIX,resolver1.ipv6-sandbox.opendns.com
-  - DOMAIN-SUFFIX,resolver1.opendns.com
-  - DOMAIN-SUFFIX,resolver2-fs.opendns.com
   - DOMAIN-SUFFIX,resolver2.absolight.net
   - DOMAIN-SUFFIX,resolver2.dyndnsinternetguide.com
   - DOMAIN-SUFFIX,resolver2.hosting-cloud.net
-  - DOMAIN-SUFFIX,resolver2.ipv6-sandbox.opendns.com
-  - DOMAIN-SUFFIX,resolver2.opendns.com
   - DOMAIN-SUFFIX,resolver3.absolight.net
   - DOMAIN-SUFFIX,resolver4.dns.openinternet.io
   - DOMAIN-SUFFIX,resolvers-cn.httpdns.aliyuncs.com
@@ -3000,7 +2992,6 @@ payload:
   - DOMAIN-SUFFIX,safeservedns.com
   - DOMAIN-SUFFIX,salvadoserver.duckdns.org
   - DOMAIN-SUFFIX,sams.adg.siudzinski.net
-  - DOMAIN-SUFFIX,sandbox.opendns.com
   - DOMAIN-SUFFIX,sanns.aniuo.com
   - DOMAIN-SUFFIX,sarawut.ddns.net
   - DOMAIN-SUFFIX,sascha-rabold.de
@@ -3098,7 +3089,6 @@ payload:
   - DOMAIN-SUFFIX,ssytnik.de
   - DOMAIN-SUFFIX,st.flyzhouyc.win
   - DOMAIN-SUFFIX,standard.mask.ad
-  - DOMAIN-SUFFIX,steering.nextdns.io
   - DOMAIN-SUFFIX,stella.clae.net
   - DOMAIN-SUFFIX,sterlingharris.com
   - DOMAIN-SUFFIX,sto01.dnscry.pt

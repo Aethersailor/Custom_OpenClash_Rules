@@ -55,6 +55,8 @@ def parse_list(path: Path) -> RuleFamily:
         elif rule_type == "DOMAIN-KEYWORD":
             domains.append(f"*{parts[1]}*")
             classical_non_ip.append(rule)
+        elif rule_type == "DOMAIN-REGEX":
+            classical_non_ip.append(rule)
         elif rule_type in {"IP-CIDR", "IP-CIDR6"}:
             try:
                 network = ipaddress.ip_network(parts[1], strict=False)
@@ -96,7 +98,8 @@ def render_yaml(source: Path, payload: tuple[str, ...], quoted: bool) -> str:
         lines.append("payload:")
         for rule in payload:
             escaped = rule.replace("'", "''")
-            lines.append(f"  - '{escaped}'" if quoted else f"  - {rule}")
+            needs_quotes = quoted or rule.startswith("DOMAIN-REGEX,")
+            lines.append(f"  - '{escaped}'" if needs_quotes else f"  - {rule}")
     return "\n".join(lines) + "\n"
 
 
