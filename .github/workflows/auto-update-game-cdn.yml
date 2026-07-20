@@ -2,11 +2,12 @@ name: Auto Update Game CDN Rules
 
 on:
   schedule:
-    # 每 8 小时运行一次（UTC 0:00, 8:00, 16:00）
-    - cron: '0 */8 * * *'
+    # 每天北京时间 10:13 运行（UTC 02:13）
+    - cron: '13 2 * * *'
   workflow_dispatch:  # 支持手动触发
 
 permissions:
+  actions: write
   contents: write
 
 concurrency:
@@ -55,6 +56,12 @@ jobs:
           git commit -m "chore(rule): auto-update Game_Download_CDN.list from upstream"
           git pull --rebase origin main
           git push origin HEAD:main
+
+      - name: Purge jsDelivr cache after update
+        if: steps.check_changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run purge-jsdelivr.yml --ref main
       
       - name: No changes
         if: steps.check_changes.outputs.changed == 'false'

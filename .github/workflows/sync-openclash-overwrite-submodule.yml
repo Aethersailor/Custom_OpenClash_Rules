@@ -2,7 +2,8 @@ name: Sync OpenClash_Overwrite Submodule
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    # 上游通常不是高频更新，每天同步一次即可。
+    - cron: "41 1 * * *"
   workflow_dispatch:
 
 permissions:

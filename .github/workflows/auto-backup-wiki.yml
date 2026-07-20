@@ -3,7 +3,8 @@ name: Auto backup Wiki
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/30 * * * *'
+    # GitHub Wiki 没有可供 Actions 直接订阅的变更事件，保留低频轮询作为兜底。
+    - cron: '17 */2 * * *'
 
 permissions:
   actions: write

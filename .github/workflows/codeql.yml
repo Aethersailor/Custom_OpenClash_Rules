@@ -3,15 +3,22 @@ name: "CodeQL Advanced"
 on:
   push:
     branches: ["main"]
-    # 规则文本不是 CodeQL 的分析对象；代码和工作流改动仍会触发扫描。
-    paths-ignore:
-      - "rule/**"
+    # CodeQL 仅分析 Actions 与 Python；配置、规则和 Wiki 变更无需扫描。
+    paths:
+      - ".github/workflows/**"
+      - ".github/dependabot.yml"
+      - "py/**"
+      - "requirements*.txt"
   pull_request:
     branches: ["main"]
-    paths-ignore:
-      - "rule/**"
+    paths:
+      - ".github/workflows/**"
+      - ".github/dependabot.yml"
+      - "py/**"
+      - "requirements*.txt"
   schedule:
-    - cron: "17 2 * * *"
+    # 每周日执行一次完整扫描；代码与工作流变更仍会即时扫描。
+    - cron: "17 2 * * 0"
   workflow_dispatch:
 
 permissions:

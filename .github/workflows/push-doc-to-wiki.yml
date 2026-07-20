@@ -9,6 +9,7 @@ on:
       - 'doc/**'
 
 permissions:
+  actions: write
   contents: write
 
 jobs:
@@ -48,4 +49,8 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "Sync doc from main repository"
             git push
+            # 立即把更新后的 Wiki 回写到主仓库，并由备份工作流部署 Pages。
+            gh workflow run auto-backup-wiki.yml --ref main
           fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
