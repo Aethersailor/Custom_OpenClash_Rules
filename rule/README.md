@@ -13,21 +13,23 @@
 | [**Custom_Direct.list**](Custom_Direct.list) | <img src="https://img.shields.io/badge/Mode-DIRECT-green?style=flat-square" alt="DIRECT"> | 🎯 **直连规则**：包含一些需要直连的冷门域名。 |
 | [**Custom_Proxy.list**](Custom_Proxy.list) | <img src="https://img.shields.io/badge/Mode-PROXY-blue?style=flat-square" alt="PROXY"> | 🚀 **非直连规则**：包含一些需要经由出站策略处理的冷门域名。 |
 | [**Steam_CDN.list**](Steam_CDN.list) | <img src="https://img.shields.io/badge/Mode-DIRECT-green?style=flat-square" alt="DIRECT"> | 🎮 **Steam CDN**：精确匹配 Steam 下载服务器，确保 Steam 下载流量尽量不经由出站策略。 |
+| [**Encrypted_DNS.list**](Encrypted_DNS.list) | <img src="https://img.shields.io/badge/Mode-REJECT-red?style=flat-square" alt="REJECT"> | 🛡️ **加密 DNS**：汇总加密 DNS 服务的域名和 IP，用于拦截绕过本地 DNS 的连接。 |
 
 ---
 
 ## 🧩 文件格式说明
 
-本仓库提供多种格式的变体：
+`Custom_Direct.list`、`Custom_Proxy.list`、`Steam_CDN.list` 和 `Encrypted_DNS.list` 是派生规则的源文件。仓库会根据其中的规则类型自动生成以下变体：
 
 | 后缀 / 扩展名 | 格式类型 | 适用场景 |
 | :--- | :--- | :--- |
 | **`.list`** | 原始规则列表 | 适用于 `Subconverter` 引用。 |
 | **`_Classical.yaml`** | Classical | 域名/IP 混合规则，适用于 `rule-providers`。 |
-| **`_Classical_IP.yaml`** | Classical (Pure IP) | Classical 类型纯 IP 规则，适用于 `rule-providers`。 |
+| **`_Classical_IP.yaml`** | Classical (IP / Port) | Classical 类型 IP 与端口规则，适用于 `rule-providers`。 |
+| **`_Classical_Port.yaml`** | Classical (Pure Port) | Classical 类型纯端口规则，适用于 `rule-providers`；目前仅为 `Custom_Direct` 生成。 |
 | **`_Domain.yaml`** | Domain | Domain 类型纯域名规则，适用于 `rule-providers`。 |
 | **`_IP.yaml`** | IP-CIDR | IP-CIDR 类型纯 IP 规则，适用于 `rule-providers`。 |
-| **`.mrs`** | Mihomo Binary | 二进制格式纯域名规则，适用于 `rule-providers`。 |
+| **`.mrs`** | Mihomo Binary | Domain 或 IP-CIDR 类型的 Mihomo 二进制规则，适用于 `rule-providers`。 |
 
 > [!IMPORTANT]
 > MRS 只适用于纯 `Domain` 或纯 `IP-CIDR` provider。Classical、端口及其他混合规则只生成 YAML，不转换为 MRS。当预留 provider 暂时没有规则时，YAML 使用 `payload: []`，并保留已有空 MRS 占位文件，以便日后加入规则时自动重建。
