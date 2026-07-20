@@ -30,6 +30,7 @@ updates:
     rebase-strategy: "auto"
     labels:
       - "dependencies"
+      - "automerge"
     commit-message:
       prefix: "chore"
       include: "scope"
