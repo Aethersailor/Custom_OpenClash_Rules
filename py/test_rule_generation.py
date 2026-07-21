@@ -2,7 +2,6 @@ import ipaddress
 import tempfile
 import unittest
 from pathlib import Path
-from unittest import mock
 
 import generate_rules
 import update_encrypted_dns
@@ -38,7 +37,7 @@ class GeoSiteConversionTests(unittest.TestCase):
     rules:
       - "domain:also-ignored.example"
 """
-        with mock.patch.object(update_encrypted_dns, "MIN_GEOSITE_RULES", 4):
+        with unittest.mock.patch.object(update_encrypted_dns, "MIN_GEOSITE_RULES", 4):
             rules = update_encrypted_dns.parse_geosite_plain(content)
         self.assertEqual(
             rules,
