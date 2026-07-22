@@ -6,6 +6,7 @@ on:
     # CodeQL 仅分析 Actions 与 Python；配置、规则和 Wiki 变更无需扫描。
     paths:
       - ".github/workflows/**"
+      - ".github/scripts/**"
       - ".github/dependabot.yml"
       - "py/**"
       - "requirements*.txt"
@@ -13,6 +14,7 @@ on:
     branches: ["main"]
     paths:
       - ".github/workflows/**"
+      - ".github/scripts/**"
       - ".github/dependabot.yml"
       - "py/**"
       - "requirements*.txt"

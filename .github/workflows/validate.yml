@@ -8,7 +8,10 @@ on:
     # matching YAML/MRS commit. Pull requests still validate source and derived
     # files together before merge.
     paths-ignore:
-      - 'rule/*.list'
+      - 'rule/Custom_Direct.list'
+      - 'rule/Custom_Proxy.list'
+      - 'rule/Steam_CDN.list'
+      - 'rule/Encrypted_DNS.list'
   pull_request:
     branches:
       - main
@@ -71,10 +74,16 @@ jobs:
           sh -n shell/check_cpu_version.sh
           sh -n shell/install_openclash_dev.sh
           sh -n shell/install_openclash_dev_update.sh
-          shellcheck --shell=sh shell/check_cpu_version.sh shell/install_openclash_dev.sh shell/install_openclash_dev_update.sh
+          sh -n .github/scripts/test_installers.sh
+          shellcheck --shell=sh shell/check_cpu_version.sh shell/install_openclash_dev.sh shell/install_openclash_dev_update.sh .github/scripts/test_installers.sh
           actionlint .github/workflows/*.yml
           sh shell/check_cpu_version.sh --self-check
           python -m unittest discover -s py -p 'test_*.py'
+          python -m unittest discover -s .github/scripts -p 'test_*.py'
+          node --check script/sub-store/sub-store-ipv6-egress-filter.js
+          node --test .github/scripts/sub_store_ipv6_filter.test.cjs
+          sh .github/scripts/test_installers.sh
+          python py/sync_installer_common.py --check
           python py/generate_game_cdn.py --check
           python py/update_encrypted_dns.py --check
           python py/generate_rules.py --check --mihomo mihomo

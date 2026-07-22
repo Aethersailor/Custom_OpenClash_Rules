@@ -419,3 +419,8 @@ async function operator(proxies = [], targetPlatform, context) {
     }
   }
 }
+
+// Sub-Store evaluates this file as a script and does not define `module`.
+// Exporting only in Node.js keeps the public script behavior unchanged while
+// allowing the filtering contract to be exercised in CI.
+if (typeof module !== 'undefined') module.exports = { operator }

@@ -7,6 +7,7 @@ on:
     paths:
       - 'cfg/**'
       - 'game_rule/**'
+      - 'script/**'
       - 'shell/**'
       - 'overwrite/**'
       - '!**/archived/**'

@@ -1,4 +1,7 @@
 #!/bin/sh
+
+# Shared helper bodies are contract-checked against the lightweight installer by
+# py/test_installer_contract.py. Keep public scripts self-contained for curl | sh.
 # ================================================================
 # Custom_OpenClash_Rules 自动安装脚本
 # 项目地址: https://github.com/Aethersailor/Custom_OpenClash_Rules
