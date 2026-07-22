@@ -26,6 +26,8 @@
   <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=online&down_message=offline&style=flat&label=backend">
 </p>
 
+<p align="center"><b>✨ 让你更优雅地使用 OpenClash ✨</b></p>
+
 ---
 
 ## 📖 关于本项目

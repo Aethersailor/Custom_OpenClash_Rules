@@ -1,8 +1,8 @@
 <h1 align="center">
-  🚀 OpenClash Configuration Guide
+  🚀 Custom_OpenClash_Rules
 </h1>
 
-<p align="center"><b>🛡️ Traffic Routing Rules and DNS Leak-Prevention Templates</b></p>
+<p align="center"><b>OpenClash configuration, rule fragments, utilities, and override resources</b></p>
 
 <p align="center">
   <b>English</b>
@@ -11,73 +11,125 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki">📖 Configuration Wiki (Chinese)</a>
+  <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki">📖 Project Wiki</a>
   &nbsp;•&nbsp;
-  <a href="https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini">🧩 Subscription Conversion Template</a>
+  <a href="cfg/">🧩 Configuration Resources</a>
+  &nbsp;•&nbsp;
+  <a href="rule/">🗂️ Rule Fragments</a>
 </p>
 
 <p align="center">
- <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=flat">
- <img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/Aethersailor/Custom_OpenClash_Rules?style=flat">
- <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/t/Aethersailor/Custom_OpenClash_Rules?style=flat">
- <img alt="OpenClash" src="https://img.shields.io/badge/OpenClash-integrated-brightgreen?style=flat">
- <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=online&down_message=offline&style=flat&label=backend">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Aethersailor/Custom_OpenClash_Rules?style=flat">
+  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/Aethersailor/Custom_OpenClash_Rules?style=flat">
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/t/Aethersailor/Custom_OpenClash_Rules?style=flat">
+  <img alt="OpenClash" src="https://img.shields.io/badge/OpenClash-resources-brightgreen?style=flat">
+  <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=online&down_message=offline&style=flat&label=backend">
 </p>
+
 <p align="center"><b>✨ A More Elegant Way to Use OpenClash ✨</b></p>
-
----
-
-<p align="center">
-  <a href="#-about-this-project">📖 About</a>
-  &nbsp;•&nbsp;
-  <a href="#%EF%B8%8F-special-disclaimer">⚠️ Disclaimer</a>
-  &nbsp;•&nbsp;
-  <a href="#-configuration-guide-and-subscription-conversion-templates">📝 Features</a>
-  &nbsp;•&nbsp;
-  <a href="#%EF%B8%8F-how-to-use">🛠️ Usage</a>
-  &nbsp;•&nbsp;
-  <a href="#-additional-notes">💡 Notes</a>
-  &nbsp;•&nbsp;
-  <a href="#-contributors">🤝 Contributors</a>
-  &nbsp;•&nbsp;
-  <a href="#-acknowledgements">🙏 Thanks</a>
-  &nbsp;•&nbsp;
-  <a href="#-license">📝 License</a>
-</p>
 
 ---
 
 ## 📖 About This Project
 
-> ⭐ **This project provides an illustrated configuration guide and example rules/templates for [OpenClash](https://github.com/vernesong/OpenClash).**
+**Custom_OpenClash_Rules** is a resource repository built around [OpenClash](https://github.com/vernesong/OpenClash).
 
-This project brings together a reusable configuration approach and practical examples while avoiding unnecessary layers of nested configuration wherever possible.
+It provides OpenClash configuration guidance, subscription-conversion templates, YAML examples, rule fragments, utility scripts, override resources, and related documentation to make OpenClash easier to deploy, maintain, and adjust.
 
-[OpenClash](https://github.com/vernesong/OpenClash) is a commonly used OpenWrt plugin for rule-based network traffic routing and outbound policies. It can process traffic according to rules and work with DNS policies to reduce the risk of DNS leaks.
-
-This project demonstrates how to configure OpenClash for more stable and maintainable transparent traffic routing, with an emphasis on DNS leak prevention, rule-based routing, and everyday usability—without requiring additional plugins.
-
-> 🧩 **Say goodbye to tedious hand-written configurations and stacks of nested plugins. The guide is designed to be easy to follow even for complete beginners.**
-
-By following the configuration guide in this project's [Wiki (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) and using the project's [subscription conversion template](https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/cfg/Custom_Clash.ini), you can configure OpenClash in just a few minutes. Without stacking it with other tools, OpenClash alone can provide more robust DNS policies and traffic routing while remaining fully compatible with IPv6. The project previously provided a Dnsmasq-based ad-blocking example, but that feature is currently disabled; see the notice below for details.
-
-The project also provides configuration examples based on OpenClash's remote override feature.
-
-Stars ⭐ are welcome!
+The root README serves only as the project homepage and resource navigator. For individual files, their purposes, differences, and usage instructions, refer to the README in the corresponding directory or the project Wiki.
 
 > [!NOTE]
-> The project Wiki is currently available in Chinese only. All English README links to the Wiki intentionally open the existing Chinese documentation.
+> The project Wiki is currently available in Chinese only.
 
 ---
 
+## 🚀 Quick Start
+
+| Need | Recommended entry |
+| --- | --- |
+| Configure or understand OpenClash for the first time | [Project Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) |
+| Use subscription-conversion templates or YAML examples | [`cfg/`](cfg/) |
+| Add rules to an existing configuration | [`rule/`](rule/) |
+| Use OpenClash-related utility scripts | [`shell/`](shell/) |
+| Use remote override resources | [`overwrite/`](overwrite/) |
+| Troubleshoot common problems | [Troubleshooting](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4) |
+
+---
+
+## 🧭 Project Resources
+
+### 📚 Configuration Guides and Documentation
+
+The project Wiki is one of the repository's two core components. It provides a complete configuration approach for OpenWrt and OpenClash rather than merely listing individual settings. The documentation explains how related options interact, why they are configured, and what effects they may have, helping users deploy and maintain OpenClash with an understanding of the underlying design.
+
+The guide follows the practical OpenClash workflow and focuses on:
+
+- **OpenClash fundamentals and transparent traffic routing**: Establishes a complete usage framework around `Fake-IP` mode, traffic interception, rule matching, and policy selection.
+- **DNS strategy and leak-risk control**: Explains the resolution paths used by direct and non-direct traffic, with the aim of reducing unnecessary DNS detours, resolution failures, and leak risks.
+- **Direct-access optimization**: Uses features such as OpenClash's “Bypass Mainland China” option so that suitable domains and IP addresses can retain local resolution and direct access, reducing unnecessary processing of direct traffic by OpenClash.
+- **IPv6 configuration and compatibility**: Provides an approach for configuring IPv6 in OpenWrt and OpenClash while preserving IPv6 connectivity and applying the intended routing policies.
+- **Troubleshooting and supplementary guides**: Covers common problems such as OpenClash startup failures, network interruptions, unexpected traffic routing, and inaccessible websites, together with related notes and tutorials.
+
+The overall approach is designed to rely primarily on OpenClash's own capabilities and avoid unnecessary stacks of DNS plugins. Most operations can be completed through the OpenClash LuCI interface. The Wiki can therefore serve both as a first-time setup guide and as a reference for later troubleshooting and configuration optimization.
+
+> [!TIP]
+> New users should read the Wiki before selecting a configuration resource below. The Wiki explains why the settings are designed this way, while the configuration resources provide reusable implementations.
+
+**Entry:** [Project Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki)
+
+### 🧩 Configuration Resources
+
+The `cfg/` directory is the repository's other core component. It converts the configuration approach described in the Wiki into reusable resources. The directory contains subscription-conversion templates, YAML configuration examples, and supporting documentation for users who want to generate an OpenClash configuration quickly or adapt an existing configuration.
+
+These resources focus on:
+
+- **Subscription conversion and configuration generation**: Organizes node subscriptions into structures suitable for OpenClash, reducing the need to write and maintain configurations manually.
+- **Policy designs with different levels of complexity**: Provides configurations with different priorities, balancing policy-group coverage, ease of use, and maintenance cost.
+- **Routing for common services and applications**: Organizes policy groups and rules for commonly used services, applications, and platforms while retaining room for further customization.
+- **Alignment with the Wiki's configuration approach**: Designs the configurations around `Fake-IP`, DNS strategy, direct access, and rule-based routing so they can be used together with the project Wiki.
+- **Rule and data update capabilities**: References upstream rules and GEO data to reduce the cost of manually maintaining time-sensitive datasets. Some configurations also apply differentiated handling to scenarios such as downloads and gaming platforms.
+- **YAML configuration references**: Provides complete configuration-structure examples for understanding OpenClash configuration files and for use as a foundation when building or modifying a configuration.
+
+The root README does not enumerate individual templates or configuration files. Refer to the README in `cfg/` for each configuration's purpose, differences, usage links, and precautions.
+
+**Entry:** [`cfg/`](cfg/)
+
+### 🗂️ Rule Fragments
+
+Rule fragments that can be added selectively to an existing configuration. General and game-related rules are treated as a single resource category; consult the directory documentation for their classification and usage.
+
+**Entry:** [`rule/`](rule/)
+
+### 🛠️ Utility Scripts
+
+Scripts related to OpenClash installation, updates, detection, and maintenance.
+
+**Entry:** [`shell/`](shell/)
+
+### ⚙️ Override Resources
+
+Resources and documentation for OpenClash remote overrides. This directory references an externally maintained project; consult its directory documentation and upstream repository for details.
+
+**Entry:** [`overwrite/`](overwrite/)
+
+---
+
+## 🎯 Project Scope
+
+This repository primarily targets OpenWrt and OpenClash environments. It does not provide general-purpose configuration support for other clients or operating systems.
+
+The project is a collection of the maintainer's personal experience and technical materials. It does not provide customized configurations, bespoke development, or one-to-one technical support.
+
+---
+
+## 🈸 Submitting Direct-Access Domains
+
+For a small number of direct-access domains, using OpenClash custom rules is recommended first.
+
+Domains suitable for inclusion in this project may be submitted through GitHub Issues, Pull Requests, or [COCR RULE BOT](https://telegram.me/asailor_rulebot).
+
 > [!NOTE]
-> **Statement:**
->
-> - This project was created in April 2024 as a non-profit collection of technical research and practical experience.
-> - **The content reflects only the maintainer's personal experience and is intended for technical exchange. It is not authoritative and does not represent the only or officially recommended way to use OpenClash.**
-> - **This project does not operate any YouTube channel and has not published tutorials or instructional videos of any kind on YouTube or any other video platform.**
-> - **This project's content was not compiled or adapted from third-party tutorials or videos. If you encounter problems after using tutorials, templates, or configuration files from other sources, please do not report them in this project's Issues or Discussions.**
-> - **Some parts of this project may be written in relatively accessible language, but this does not constitute a commitment to teach, guide, or support any particular group of users, nor is the maintainer obligated to provide such assistance.**
+> Where appropriate, the maintainer may submit collected entries to relevant upstream rule projects.
 
 ---
 
@@ -96,131 +148,12 @@ Stars ⭐ are welcome!
 > 8. No reproduction, republication, or secondary dissemination may imply endorsement of the reproduced content by this project or its maintainer. Any legal risk arising from the reproduction, dissemination, or use of this project's content is borne solely by the party performing the relevant act and is unrelated to this project or its maintainer.
 > 9. The project maintainer reserves the right to revise or supplement this disclaimer at any time. Any individual or organization that uses, copies, or accesses this project's content is deemed to have read and accepted this disclaimer.
 
----
-
-## 📝 Configuration Guide and Subscription Conversion Templates
-
-This project's configuration templates were refined with reference to rule templates such as [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master). Traffic-routing data is based on GeoSite.
-
-**Configure OpenClash by following the guide in this project's [Wiki (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) and using the project's subscription conversion templates. You will gain the following features for a more elegant OpenClash experience:**
-
-- 🚀 **Optimized DNS settings that minimize the impact on direct connections**
-  > Domains and IP addresses in the selected region (CN in this example) are resolved through the ISP's DNS servers, bypass the OpenClash core, and return their real IP addresses, minimizing OpenClash's impact on direct access.
-
-- 🛡️ **Reduced risk of DNS resolution failures and leaks, with no additional plugins required**
-  > For destinations not routed directly, DNS resolution and access can be handled by the selected outbound according to routing rules, with accompanying policies reducing the risk of leaks.
-
-- 🧩 **No more nested configurations**
-  > Avoid the complexity of combining multiple DNS plugins. All features are implemented through OpenClash alone, and direct-access sites remain reachable even if OpenClash stops working.
-
-- 🖱️ **Beginner-friendly setup**
-  > The entire process is completed in the OpenClash interface. A few minutes of clicking, copying, and pasting are all that is required—no manual configuration authoring and no file uploads.
-
-- 🗂️ **A rich selection of traffic-routing policy groups**
-  > Multiple rule templates provide traffic-routing policy groups for common applications and services, including media, AI tools, e-commerce, and gaming platforms. Simplified rule variants are also available.
-
-- ⚡ **Traffic routing with automatic latency-based selection**
-  > Automatically selects low-latency outbound options, reducing the need for manual switching.
-
-- 🎮 **Optimized Steam access**
-  > Steam download traffic is routed separately from other Steam traffic, allowing downloads to remain on a direct connection even when Steam login traffic uses a proxy.
-
-- 🔄 **Automatic updates for long-term unattended operation**
-  > Once configured, the system can run unattended over the long term. Time-sensitive data—including upstream rule and GEO databases and direct-connection allowlists—is updated automatically on a daily schedule.
-
-- 🌍 **Optimized high-volume downloads**
-  > Provides routing controls for non-standard ports to help prevent high-volume downloads from using non-direct outbound connections. Download-traffic optimization options reduce unnecessary outbound traffic consumption.
-
-- ~~🚫 **Ad blocking and hosts-based acceleration**~~ *(temporarily disabled)*
-  > ~~Uses OpenClash together with the system's built-in Dnsmasq to provide ad filtering and hosts-based acceleration, with automatic daily updates and support for multiple rule lists. (Optional)~~
-
-- 🧩 **Handling for less common direct-access domains**
-  > Adds direct-connection rules for selected niche websites. The maintainer periodically submits collected domains to upstream rule projects based on user feedback.
-
----
-
-## 🛠️ How to Use
-
-> [!IMPORTANT]
-> **Important:**
->
-> - This project's configuration guide uses OpenClash's `Fake-IP` mode and does not apply to Redir-Host mode.
-> - The intended behavior depends on OpenClash's “Bypass Mainland China” feature.
-
-Configure OpenClash by following the relevant section of the project Wiki: [OpenClash Configuration Guide (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-设置方案)
-
-The guide includes instructions for using this project's subscription conversion templates. Select the rule template you need as described.
-
-The guide is highly detailed; simply follow each step in order. Every setting is configured through OpenClash's LuCI interface.
-
-If you need remote override configuration files, refer to [Giveupmoon/OpenClash_Overwrite](https://github.com/Giveupmoon/OpenClash_Overwrite).
-
-> [!TIP]
-> **📝 Reading Recommendation:**
->
-> The configuration guide is lengthy, so read it carefully, word by word. Skipping material may cause you to miss a critical step and encounter problems. The guide also explains the principles behind many settings to help beginners understand and learn.
-
----
-
-## 💡 Additional Notes
-
-### 🎨 Customization Requests
-
 > [!NOTE]
-> This project was created for the maintainer's own use, and personal time is limited. Updates are therefore made when time permits, and customized modification services are not provided.
-
-For implementation details concerning customization, refer to the corresponding Wiki section: [Customization Requests (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82)
-
-### 🈸 Adding Less Common Direct-Access Domains
-
-If you need to add a small number of uncommon domains that should use a direct connection, we recommend inserting the relevant entries through OpenClash's custom-rules feature.
-
-If you would like a small number of direct-access domains to be included in the repository's rules, submit and discuss them through a GitHub Issue or pull request.
-
-You may also visit [COCR RULE BOT](https://telegram.me/asailor_rulebot) and add domains by following its prompts. Domains that meet the requirements will automatically be added to this project's direct-connection rules.
-
-> [!NOTE]
-> The maintainer periodically submits collected less common direct-access domains to upstream rule projects through pull requests.
-
----
-
-### ~~🚫 Ad Filtering~~
-
-<details>
-<summary>Click to view the deprecated ad-filtering instructions</summary>
-
-> **2025-07-22**: This feature has been found to potentially cause Dnsmasq failures. Please keep it disabled for now.
-
-~~This project uses OpenClash's “Developer Options” feature to implement ad filtering without relying on third-party plugins.~~
-
-~~For configuration details, see the Wiki guide: [Ad-Blocking Configuration Guide (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%97%A0%E6%8F%92%E4%BB%B6%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)~~
-
-~~The guide provides examples for both Dnsmasq-format and hosts-format configurations. You may copy them directly or use any other ad-filtering rules that meet the relevant format requirements.~~
-
-</details>
-
----
-
-### 🌐 IPv6
-
-By configuring IPv6 in OpenWrt and OpenClash correctly, you can achieve better compatibility between IPv6 and OpenClash when OpenWrt is used as the main router, while supporting traffic routing and connectivity tests in IPv6 environments.
-
-See this project's Wiki for the OpenWrt IPv6 configuration guide: [OpenWrt IPv6 Configuration Guide (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenWrt-IPv6-设置方案)
-
----
-
-### ❓ No Internet Access? Incorrect Traffic Routing? Some Websites Do Not Open? OpenClash Does Not Start?
-
-If you encounter a problem, refer to the [Troubleshooting section of the Wiki (Chinese)](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4), which provides solutions to common issues.
-
-> [!TIP]
-> 🛠️ This project's configuration guide has been validated by many users and generally has no structural issues. To avoid wasting time, we recommend looking elsewhere first when diagnosing problems. Issues affecting particular applications or services may involve many factors and are not necessarily related to the templates themselves.
-
----
-
-### 💻 Other Environments
-
-This repository discusses only OpenWrt/OpenClash environments. For other clients or operating systems, consult the documentation of the relevant projects.
+> - This project was created in April 2024 as a non-profit collection of technical research and practical experience.
+> - The content reflects only the maintainer's personal experience. It is intended for technical exchange, is not authoritative, and does not represent the only or officially recommended way to use OpenClash.
+> - This project does not operate any YouTube channel and has not published tutorials or instructional videos on YouTube or any other video platform.
+> - This project's content was not compiled or adapted from third-party tutorials or videos. Problems caused by tutorials, templates, or configuration files from other sources should not be reported in this project's Issues or Discussions.
+> - Accessible wording does not constitute a commitment to teach, guide, or support any particular group of users.
 
 ---
 
@@ -234,30 +167,14 @@ This repository discusses only OpenWrt/OpenClash environments. For other clients
 
 ## 🙏 Acknowledgements
 
-**This project uses or references the following:**
-
-Listed in no particular order.
-
-### 🔌 Plugin
+This project uses or references the following projects and resources, listed in no particular order:
 
 - [vernesong/OpenClash](https://github.com/vernesong/OpenClash)
-
-### 🧩 Cores
-
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
 - [vernesong/mihomo](https://github.com/vernesong/mihomo)
-
-### 🗂 Configuration Templates
-
 - [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR)
 - [TraderWukong/demo](https://github.com/TraderWukong/demo)
-
-### ⚙️ Remote Override Configuration
-
 - [Giveupmoon/OpenClash_Overwrite](https://github.com/Giveupmoon/OpenClash_Overwrite)
-
-### 🛣 Traffic-Routing Rules
-
 - [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
 - [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community)
 - [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list)
@@ -265,30 +182,15 @@ Listed in no particular order.
 - [dogfight360/UsbEAm](https://www.dogfight360.com/blog/18627/)
 - [ddgksf2013/ddgksf2013](https://github.com/ddgksf2013/ddgksf2013)
 - [mottzz87/crules](https://github.com/mottzz87/crules)
-
-### 🚫 Ad-Filtering Rules
-
 - [217heidai/adblockfilters](https://github.com/217heidai/adblockfilters)
 - [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
 - [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)
 - [Aethersailor/adblockfilters-modified](https://github.com/Aethersailor/adblockfilters-modified)
-
-### ⚡ Acceleration Rules
-
 - [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520)
-
-### 🔄 Subscription Conversion Backends
-
 - [Aethersailor/SubConverter-Extended](https://github.com/Aethersailor/SubConverter-Extended)
 - [Aethersailor/subconverter](https://github.com/Aethersailor/subconverter)
-
-### 🧰 Tools
-
 - [Aethersailor/Rule-Bot](https://github.com/Aethersailor/Rule-Bot)
 - [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool)
-
-### 🔖 Other
-
 - [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/)
 
 ---
@@ -304,11 +206,11 @@ Listed in no particular order.
 ## ⭐ Star History
 
 <a href="https://www.star-history.com/?type=date&repos=Aethersailor%2FCustom_OpenClash_Rules">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Aethersailor/Custom_OpenClash_Rules&type=date&theme=dark&legend=top-left&sealed_token=KgyG45jTJUPgFZV5k7dmTUTfLIaXaAF26vhZeTaPSFKCmZPtkd_hgbiZfQW8vpJOPWaaWn6VIJ3OJ0ILrsaYU4MyTPP7dilAo2uO6_Bylsyc4h25_Mc9og" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Aethersailor/Custom_OpenClash_Rules&type=date&legend=top-left&sealed_token=KgyG45jTJUPgFZV5k7dmTUTfLIaXaAF26vhZeTaPSFKCmZPtkd_hgbiZfQW8vpJOPWaaWn6VIJ3OJ0ILrsaYU4MyTPP7dilAo2uO6_Bylsyc4h25_Mc9og" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Aethersailor/Custom_OpenClash_Rules&type=date&legend=top-left&sealed_token=KgyG45jTJUPgFZV5k7dmTUTfLIaXaAF26vhZeTaPSFKCmZPtkd_hgbiZfQW8vpJOPWaaWn6VIJ3OJ0ILrsaYU4MyTPP7dilAo2uO6_Bylsyc4h25_Mc9og" />
- </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Aethersailor/Custom_OpenClash_Rules&type=date&theme=dark&legend=top-left&sealed_token=KgyG45jTJUPgFZV5k7dmTUTfLIaXaAF26vhZeTaPSFKCmZPtkd_hgbiZfQW8vpJOPWaaWn6VIJ3OJ0ILrsaYU4MyTPP7dilAo2uO6_Bylsyc4h25_Mc9og" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Aethersailor/Custom_OpenClash_Rules&type=date&legend=top-left&sealed_token=KgyG45jTJUPgFZV5k7dmTUTfLIaXaAF26vhZeTaPSFKCmZPtkd_hgbiZfQW8vpJOPWaaWn6VIJ3OJ0ILrsaYU4MyTPP7dilAo2uO6_Bylsyc4h25_Mc9og" />
+    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Aethersailor/Custom_OpenClash_Rules&type=date&legend=top-left&sealed_token=KgyG45jTJUPgFZV5k7dmTUTfLIaXaAF26vhZeTaPSFKCmZPtkd_hgbiZfQW8vpJOPWaaWn6VIJ3OJ0ILrsaYU4MyTPP7dilAo2uO6_Bylsyc4h25_Mc9og" />
+  </picture>
 </a>
 
 ## 📊 Statistics
