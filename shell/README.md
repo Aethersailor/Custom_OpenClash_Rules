@@ -1,139 +1,136 @@
-<h1 align="center">
-  🐚 Utility Scripts
-</h1>
+# OpenClash 实用脚本
 
-<p align="center"><b>✨ 方便、快捷、标准化的 OpenClash 维护脚本 ✨</b></p>
+本目录提供 OpenClash 安装、更新和 CPU 架构检测脚本。所有公开使用命令均固定读取本仓库 `main` 分支，普通用户无需预设变量、手动选择分支或传入其他参数。
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Shell-Bash-4EAA25?style=flat&logo=gnu-bash&logoColor=white" alt="Bash">
-  <img src="https://img.shields.io/badge/System-OpenWrt-0055AA?style=flat&logo=openwrt&logoColor=white" alt="OpenWrt">
-  <img src="https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey?style=flat&logo=creativecommons&logoColor=white" alt="License">
-</p>
+## 快速开始
 
----
+安装命令采用“下载成功后再执行”的形式：下载失败时不会继续运行空脚本，下载后的文件也便于在执行前自行检查。
 
-## 📑 脚本索引
+### 完整安装或更新（推荐）
 
-| 脚本名称 | 功能简介 | 适用架构 |
-| :--- | :--- | :--- |
-| [**check_cpu_version.sh**](#-check_cpu_versionsh) | 🔍 CPU 架构与指令集检测 | `Multi-Arch` |
-| [**install_openclash_dev.sh**](#-install_openclash_devsh) | 📦 OpenClash Dev 极速基础安装 | `OpenWrt` |
-| [**install_openclash_dev_update.sh**](#-install_openclash_dev_updatesh) | 🚀 全自动化安装/更新/修复 | `OpenWrt` |
+适合首次安装、固件升级后恢复，以及希望一次完成插件、内核、数据库和订阅更新的用户：
 
----
-
-## 🔍 **check_cpu_version.sh**
-
-<p>
-  <img src="https://img.shields.io/badge/Function-CPU_Detect-blue?style=flat-square" alt="Function: CPU Detect">
-  <img src="https://img.shields.io/badge/Arch-Multi--Arch-orange?style=flat-square" alt="Arch: Multi-Arch">
-</p>
-
-**功能说明：**  
-该脚本通过读取 `/proc/cpuinfo` 和内核信息，解析 CPU Flags、FPU 状态及 ABI 版本，输出标准化的内核版本名称。这有助于 OpenClash 下载正确版本的 Meta 内核。
-
-**核心特性：**
-
-- ✅ **微架构识别 (x86_64)**：按 OpenClash 当前发布的内核资源识别 `AVX2` (v3)、`SSE4.2` (v2) 与通用 (v1) 版本。
-- ✅ **MIPS 浮点检测**：自动检测硬件 FPU 状态以区分 `hardfloat` / `softfloat`。
-- ✅ **LoongArch ABI**：根据内核版本自动判断 `abi1` / `abi2`。
-- ✅ **通用映射**：自动处理 `aarch64` → `arm64` 等常见别名映射。
-
-**使用命令：**
-
-```bash
-RULES_BRANCH="${RULES_BRANCH:-main}"
-wget -qO- "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/check_cpu_version.sh" | sh
+```sh
+wget -O /tmp/install_openclash.sh 'https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/shell/install_openclash_dev_update.sh' && sh /tmp/install_openclash.sh
 ```
 
-<details>
-<summary>📋 点击查看示例输出</summary>
+### 只更新插件和内核
+
+适合只想安装或更新 OpenClash Dev 插件与当前所用内核，不希望脚本更新 Geo 数据库、大陆 IP 白名单和订阅的用户：
+
+```sh
+wget -O /tmp/install_openclash.sh 'https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/shell/install_openclash_dev.sh' && sh /tmp/install_openclash.sh
+```
+
+### 检测 CPU 对应的内核架构
+
+只输出当前设备应使用的 OpenClash 内核架构名称，不修改系统：
+
+```sh
+wget -O /tmp/check_cpu_version.sh 'https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/shell/check_cpu_version.sh' && sh /tmp/check_cpu_version.sh
+```
+
+示例输出：
 
 ```text
-# ARM64 设备
 linux-arm64
-
-# x86_64 支持 AVX2 的设备
 linux-amd64-v3
-
-# MIPS 硬浮点设备
-linux-mips-hardfloat
+linux-mipsle-hardfloat
 ```
 
-</details>
+## 应该使用哪个安装脚本
 
----
+| 处理项目 | `install_openclash_dev.sh` | `install_openclash_dev_update.sh` |
+| --- | :---: | :---: |
+| 检测 OPKG/APK 和防火墙类型 | ✅ | ✅ |
+| 检查并安装 OpenClash 依赖 | ✅ | ✅ |
+| 安装官方 `package` 分支的最新 Dev 插件包 | ✅ | ✅ |
+| 自动识别 CPU 架构并更新 Meta/Smart 内核 | ✅ | ✅ |
+| 启用、重启并验证 OpenClash | ✅ | ✅ |
+| 更新 Smart LGBM 模型 | — | ✅ |
+| 更新 GeoIP、GeoSite、ASN 和 Country 数据库 | — | ✅ |
+| 更新大陆 IPv4/IPv6 白名单 | — | ✅ |
+| 更新已配置的订阅 | — | ✅ |
+| 执行 `/etc/config/openclash-set` 个性化脚本 | — | ✅ |
 
-## 📦 **install_openclash_dev.sh**
+拿不准时使用完整脚本 `install_openclash_dev_update.sh`。如果现有配置和数据均已正常，只想更新 OpenClash 插件与内核，使用精简脚本 `install_openclash_dev.sh`。
 
-<p>
-  <img src="https://img.shields.io/badge/Function-Install-green?style=flat-square" alt="Function: Install">
-  <img src="https://img.shields.io/badge/Edition-Basic-lightgrey?style=flat-square" alt="Edition: Basic">
-  <img src="https://img.shields.io/badge/Manager-OPKG%2FAPK-blueviolet?style=flat-square" alt="Manager: OPKG/APK">
-</p>
+## 运行要求与注意事项
 
-**功能说明：**  
-OpenClash Dev 版本轻量安装工具。脚本会检查系统环境、更新软件源并补齐依赖，然后安装**插件本体**、更新 **Meta/Smart 内核**并验证 OpenClash 能够正常启动。它不会执行完整脚本中的 Geo 数据库、大陆 IP 白名单、订阅和用户预设更新。
+- 请通过 SSH 以 `root` 用户在 OpenWrt 或 ImmortalWrt 中运行；脚本不适用于普通 Debian、Ubuntu 等通用 Linux 系统。
+- 支持 `opkg` 和新版 Snapshot 使用的 `apk`，并自动适配 `fw3/iptables` 与 `fw4/nftables`。
+- 安装脚本会安装缺少的依赖、安装或升级 OpenClash、写入部分 UCI 设置并重启 OpenClash。重要配置请提前备份。
+- 两个安装脚本都会把 OpenClash 更新分支设为 `dev`；完整脚本还会启用 `skip_safe_path_check`，并把默认 GitHub 下载源设为 `https://testingcf.jsdelivr.net/`。
+- 默认软件源不可用时，脚本会临时切换到南京大学镜像重试，并在完成或退出时恢复原软件源配置。
+- 安装包会锁定到执行时官方 `package` 分支的提交，并校验文件大小和 SHA-256，避免分支在下载过程中变化导致文件混用。
+- 脚本会验证下载资源和 OpenClash 服务能否正常启动，但不会检查或改写用户自己的代理配置内容。
+- 安装过程中不要同时运行另一个 OpenClash 安装或更新任务；脚本自带运行锁，检测到重复任务时会退出。
 
-**核心特性：**
+## 脚本说明
 
-- ✅ **双包管理器支持**：自动适配 `OPKG` (OpenWrt) 和 `APK` (Snapshot)。
-- ✅ **软件源与依赖修复**：默认源失败时临时切换镜像，完成后恢复原配置。
-- ✅ **内核自动更新**：安装完成后立即调用内部脚本更新 Meta 内核，无需二次操作。
-- ✅ **配置初始化**：自动切换至 Dev 更新分支并配置下载源（如 jsDelivr）。
-- ✅ **启动验证**：更新后重启 OpenClash，同时检查服务状态与内核进程。
+### `install_openclash_dev_update.sh`
 
-**使用场景：**
+完整安装与维护入口，执行顺序如下：
 
-- 仅需安装插件本体和内核，不需要更新 GeoIP 等数据库。
-- 修复依赖或软件源异常后的 OpenClash 安装。
+1. 检测包管理器、防火墙和现有 OpenClash 版本；
+2. 更新软件源并补齐依赖；
+3. 获取并校验官方 `package` 分支的最新 Dev 安装包；
+4. 将 OpenClash 更新分支设为 `dev`、启用 `skip_safe_path_check`、设置 GitHub 下载源，并写入正确的内核架构；
+5. 更新当前启用的 Meta 或 Smart 内核；
+6. Smart 模式启用 LGBM 时，根据可用空间选择合适的模型并校验；
+7. 更新 Geo 数据库、大陆 IP 白名单和已配置的订阅；
+8. 如存在 `/etc/config/openclash-set`，最后执行该文件中的用户个性化设置；
+9. 启用并重启 OpenClash，确认服务状态和内核进程正常。
 
-**使用命令：**
+脚本不会因为设备未配置订阅而失败；没有订阅时会直接跳过订阅更新。
 
-```bash
-RULES_BRANCH="${RULES_BRANCH:-main}"
-wget -qO- "https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/${RULES_BRANCH}/shell/install_openclash_dev.sh" | sh
+### `install_openclash_dev.sh`
+
+精简安装与更新入口。它仍会完成环境检测、软件源更新、依赖安装、最新 Dev 插件安装、CPU 架构识别、内核更新以及服务启动验证，但不会执行以下操作：
+
+- 更新 Smart LGBM 模型；
+- 更新 Geo 数据库和大陆 IP 白名单；
+- 更新订阅；
+- 执行 `/etc/config/openclash-set`。
+
+因此，“精简”只表示缩小更新范围，并不表示跳过依赖检查、软件源处理或启动验证。
+
+### `check_cpu_version.sh`
+
+读取 `uname -m`、`/proc/cpuinfo`、CPU 指令集、MIPS FPU 状态及 LoongArch 内核版本，输出与 OpenClash 内核资源一致的架构名称。
+
+其中 x86_64 会进一步区分：
+
+- `linux-amd64-v1`：通用 x86_64；
+- `linux-amd64-v2`：支持 SSE4.2 等 v2 指令集；
+- `linux-amd64-v3`：支持 AVX、AVX2、BMI、FMA 等 v3 指令集。
+
+该脚本正常使用时不需要参数。`--self-check` 仅用于仓库维护和回归测试，不是普通用户的安装选项。
+
+## 下载失败时
+
+如果所在网络无法访问 jsDelivr，可把命令中的下载地址替换为 GitHub Raw。例如完整脚本可使用：
+
+```sh
+wget -O /tmp/install_openclash.sh 'https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/shell/install_openclash_dev_update.sh' && sh /tmp/install_openclash.sh
 ```
 
----
+脚本启动后会自行使用多个来源获取 OpenClash 安装包和内核。若仍然失败，请保留终端中的第一条明确错误信息，并同时检查：
 
-## 🚀 **install_openclash_dev_update.sh**
-
-<p>
-  <img src="https://img.shields.io/badge/Function-Full_Update-brightgreen?style=flat-square" alt="Function: Full Update">
-  <img src="https://img.shields.io/badge/Edition-Ultimate-gold?style=flat-square" alt="Edition: Ultimate">
-  <img src="https://img.shields.io/badge/Feature-Smart_Core-ff69b4?style=flat-square" alt="Feature: Smart Core">
-</p>
-
-**功能说明：**  
-全功能安装脚本。集成了环境诊断、多源下载保障、空间自适应等逻辑。适合首次安装或日常维护。
-
-**核心特性：**
-
-- ✅ **🛡️ 防火墙自适应依赖**：自动识别系统防火墙类型（`nftables` / `iptables`），精准安装所需的特定依赖包（如 `kmod-nft-tproxy` vs `iptables-mod-tproxy`）。
-- ✅ **🧠 Smart 内核空间自适应**：在启用 Smart 内核时，自动检测 `/etc/openclash` 剩余空间，自动选择下载 **Large** (30MB+)、**Middle** 或 **Small** 模型，空间极度不足时自动关闭功能，防止爆盘。
-- ✅ **🌐 多源下载回退**：针对网络波动与下载失败，提供多种下载源与重试策略，提高成功率。
-- ✅ **⚙️ 全资源同步**：一次运行，同步更新 Meta 内核、GeoIP/GeoSite/GeoASN 数据库及相关数据文件。
-- ✅ **🧩 个性化扩展**：支持加载 `/etc/config/openclash-set` 用户自定义脚本。
-
-**使用场景：**
-
-- 🆕 **首次安装** (强烈推荐，自动补全依赖)
-- 🔄 **Master 转 Dev** 版本
-- 🛠️ **固件更新后的重装/恢复**
-- 🆙 **日常全量更新**
-
-**使用命令：**
-
-```bash
-RULES_BRANCH="${RULES_BRANCH:-main}"
-wget -qO- "https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@${RULES_BRANCH}/shell/install_openclash_dev_update.sh" | sh
+```sh
+df -h
+date
+opkg update
 ```
 
----
+使用 APK 包管理器的 Snapshot 系统，将最后一条替换为：
 
-## 📂 归档文件
+```sh
+apk update
+```
 
-> [!NOTE]
-> `archived/` 文件夹包含已弃用的旧版脚本，仅供考古。
-> 详情请查阅 [📜 Archived README](archived/README.md)
+OpenClash 运行日志位于 `/tmp/openclash.log`。
+
+## 归档脚本
+
+[`archived/`](archived/) 中的脚本已经停止维护，仅供历史查阅，不建议在当前系统中运行。具体列表和归档原因见 [`archived/README.md`](archived/README.md)。
