@@ -82,7 +82,7 @@ The overall approach is designed to rely primarily on OpenClash's own capabiliti
 The `cfg/` directory is the repository's other core component. It converts the configuration approach described in the Wiki into reusable resources. The directory contains subscription-conversion templates, YAML configuration examples, and supporting documentation for users who want to generate an OpenClash configuration quickly or adapt an existing configuration.
 
 > [!TIP]
-> This project's subscription conversion templates are available directly from OpenClash's built-in template list, so you do not need to enter the template URL manually.
+> The remote URL for this project's subscription conversion template is included in OpenClash's built-in template list, so you can select it directly without entering the URL manually.
 
 These resources focus on:
 
