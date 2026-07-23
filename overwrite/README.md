@@ -277,7 +277,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 优先按照本项目 [Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 完成基础设置，再根据需要使用：
 
-- [`cfg/`](../cfg/) 中的订阅转换模板（已内置在 OpenClash 自带的模板选择列表中）；
+- [`cfg/`](../cfg/) 中的订阅转换模板（已收录于在 OpenClash 内置的模板选择列表中）；
 - [`cfg/yaml/`](../cfg/yaml/) 中的 YAML 配置示例；
 - 本目录中的轻量覆写模块。
 
