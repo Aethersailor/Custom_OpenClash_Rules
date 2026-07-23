@@ -7,9 +7,9 @@
 | 文件名 | 描述 | 触发条件 |
 | :--- | :--- | :--- |
 | **[auto-backup-wiki.yml](auto-backup-wiki.yml)** | 校验 Wiki 目录页和页面完整性后，事务式备份到仓库的 `wiki/` 目录并处理链接替换 | 每 2 小时 / 手动触发 |
-| **[auto-generate-rules.yml](auto-generate-rules.yml)** | 从四个受维护的 `.list` 规则源自动生成 `.yaml` 和 `.mrs` 格式的规则集 | 对应规则源或生成器变更 / 手动触发 |
+| **[auto-generate-rules.yml](auto-generate-rules.yml)** | 从五个 `.list` 规则源统一生成 `.yaml` 和 `.mrs` 格式的派生规则集，包括 `Game_Download_CDN.list` | 对应规则源或生成器变更 / 手动触发 |
 | **[auto-update-encrypted-dns.yml](auto-update-encrypted-dns.yml)** | 从 HaGeZi、DNSCrypt 和编译后的 `geosite:category-doh` 自动更新 `Encrypted_DNS.list` | 每日 / 手动触发 |
-| **[auto-update-game-cdn.yml](auto-update-game-cdn.yml)** | 从 v2fly 上游更新并测试 `Game_Download_CDN.list`，仅提交验证通过且作用域正确的变更 | 每日 / 手动触发 |
+| **[auto-update-game-cdn.yml](auto-update-game-cdn.yml)** | 合并 v2fly 上游与本项目 `Steam_CDN.list`，智能去重后更新 `Game_Download_CDN.list`，再触发统一派生规则生成 | `Steam_CDN.list` 或生成器变更 / 每日 / 手动触发 |
 | **[auto-update-mainland.yml](auto-update-mainland.yml)** | 根据 `Custom_Clash.ini` 自动生成 `Custom_Clash_Mainland.ini` | `cfg/Custom_Clash.ini` 变更 / 手动触发 |
 | **[codeql.yml](codeql.yml)** | CodeQL 代码安全性分析（分析 Actions 和 Python） | 相关代码 Push / Pull Request / 每周 / 手动触发 |
 | **[dependabot-auto-merge.yml](dependabot-auto-merge.yml)** | 自动合并带有 `automerge` 标签的 Dependabot PR | Dependabot PR 打开/更新 |

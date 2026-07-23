@@ -13,7 +13,13 @@ from pathlib import Path
 
 
 REPOSITORY = "Aethersailor/Custom_OpenClash_Rules"
-BASE_NAMES = ("Custom_Direct", "Custom_Proxy", "Steam_CDN", "Encrypted_DNS")
+BASE_NAMES = (
+    "Custom_Direct",
+    "Custom_Proxy",
+    "Steam_CDN",
+    "Encrypted_DNS",
+    "Game_Download_CDN",
+)
 
 
 @dataclass(frozen=True)

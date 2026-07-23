@@ -14,12 +14,13 @@
 | [**Custom_Proxy.list**](Custom_Proxy.list) | <img src="https://img.shields.io/badge/Mode-PROXY-blue?style=flat-square" alt="PROXY"> | 🚀 **非直连规则**：包含一些需要经由出站策略处理的冷门域名。 |
 | [**Steam_CDN.list**](Steam_CDN.list) | <img src="https://img.shields.io/badge/Mode-DIRECT-green?style=flat-square" alt="DIRECT"> | 🎮 **Steam CDN**：精确匹配 Steam 下载服务器，确保 Steam 下载流量尽量不经由出站策略。 |
 | [**Encrypted_DNS.list**](Encrypted_DNS.list) | <img src="https://img.shields.io/badge/Mode-REJECT-red?style=flat-square" alt="REJECT"> | 🛡️ **加密 DNS**：汇总 HaGeZi、DNSCrypt 与 `geosite:category-doh` 的域名和 IP，用于拦截绕过本地 DNS 的连接。 |
+| [**Game_Download_CDN.list**](Game_Download_CDN.list) | <img src="https://img.shields.io/badge/Mode-DIRECT-green?style=flat-square" alt="DIRECT"> | 🎮 **游戏下载 CDN**：自动合并 GeoSite 上游与本项目 `Steam_CDN.list`，作为旧订阅兼容入口并生成统一派生格式。 |
 
 ---
 
 ## 🧩 文件格式说明
 
-`Custom_Direct.list`、`Custom_Proxy.list`、`Steam_CDN.list` 和 `Encrypted_DNS.list` 是派生规则的源文件。仓库会根据其中的规则类型自动生成以下变体：
+`Custom_Direct.list`、`Custom_Proxy.list`、`Steam_CDN.list`、`Encrypted_DNS.list` 和 `Game_Download_CDN.list` 是派生规则的源文件。仓库会根据其中的规则类型自动生成以下变体：
 
 | 后缀 / 扩展名 | 格式类型 | 适用场景 |
 | :--- | :--- | :--- |

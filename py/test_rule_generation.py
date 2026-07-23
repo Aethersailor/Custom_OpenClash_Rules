@@ -145,7 +145,26 @@ class GameCdnGenerationTests(unittest.TestCase):
         )
         self.assertEqual(
             converted,
-            ["# kept", "DOMAIN-SUFFIX,example.com", "DOMAIN,www.example.com"],
+            ["# kept", "DOMAIN-SUFFIX,example.com"],
+        )
+
+    def test_merges_steam_rules_with_semantic_deduplication(self) -> None:
+        converted = generate_game_cdn.generate_rules(
+            "example.com\n",
+            (
+                "DOMAIN,www.example.com\n"
+                "DOMAIN-SUFFIX,EXAMPLE.COM.\n"
+                "IP-CIDR,192.0.2.128/25\n"
+                "IP-CIDR,192.0.2.0/24,no-resolve\n"
+            ),
+        )
+        self.assertEqual(
+            converted,
+            [
+                "DOMAIN-SUFFIX,example.com",
+                generate_game_cdn.STEAM_SOURCE_COMMENT,
+                "IP-CIDR,192.0.2.0/24,no-resolve",
+            ],
         )
 
     def test_rejects_unexpanded_include(self) -> None:

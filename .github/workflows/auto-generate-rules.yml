@@ -9,6 +9,7 @@ on:
       - 'rule/Custom_Proxy.list'
       - 'rule/Steam_CDN.list'
       - 'rule/Encrypted_DNS.list'
+      - 'rule/Game_Download_CDN.list'
       - 'py/generate_rules.py'
   workflow_dispatch:
 

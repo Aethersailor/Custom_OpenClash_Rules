@@ -7,7 +7,7 @@
 | 文件名 | 说明 | 弃用原因 |
 | :--- | :--- | :--- |
 | `Emby.list` | Emby 媒体服务器规则 | 已合并至 GeoSite 上游 |
-| `Game_Download_CDN.list` | 主流游戏平台下载 CDN 规则 | 已合并至 GeoSite 上游 |
+| `Game_Download_CDN.list` | 主流游戏平台下载 CDN 历史规则 | 主规则已合并至 GeoSite；仓库根规则入口现自动合并 GeoSite 与 `Steam_CDN.list` |
 | `HBO_fix.list` | HBO 补充修复规则 | 已合并至 GeoSite 上游 |
 | `Ozon.list` | 俄罗斯电商 Ozon 规则 | 已合并至 GeoSite 上游 |
 

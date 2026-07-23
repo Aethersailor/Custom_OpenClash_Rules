@@ -1,6 +1,12 @@
 name: Auto Update Game CDN Rules
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'rule/Steam_CDN.list'
+      - 'py/generate_game_cdn.py'
   schedule:
     # 每天北京时间 10:13 运行（UTC 02:13）
     - cron: '13 2 * * *'
@@ -66,12 +72,12 @@ jobs:
             exit 0
           fi
 
-          git commit -m "chore(rule): auto-update Game_Download_CDN.list from upstream"
+          git commit -m "chore(rule): auto-update Game_Download_CDN.list from sources"
           git push origin HEAD:main
           echo "published=true" >> "$GITHUB_OUTPUT"
 
-      - name: Purge jsDelivr cache after update
+      - name: Generate derived rule providers after update
         if: steps.publish.outputs.published == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run purge-jsdelivr.yml --repo "${GITHUB_REPOSITORY}" --ref main
+        run: gh workflow run auto-generate-rules.yml --repo "${GITHUB_REPOSITORY}" --ref main
