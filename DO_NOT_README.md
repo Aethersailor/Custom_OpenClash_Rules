@@ -185,6 +185,7 @@
 - [217heidai/adblockfilters](https://github.com/217heidai/adblockfilters)
 - [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD)
 - [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)
+- [hagezi/dns-blocklists](https://github.com/hagezi/dns-blocklists)
 - [Aethersailor/adblockfilters-modified](https://github.com/Aethersailor/adblockfilters-modified)
 - [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520)
 - [Aethersailor/SubConverter-Extended](https://github.com/Aethersailor/SubConverter-Extended)
