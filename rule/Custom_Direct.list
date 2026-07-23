@@ -342,6 +342,8 @@ DOMAIN-SUFFIX,code-relay.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# add by Telegram user: Aethersailor / Date: 2026-07-23 11:27:46
+DOMAIN-SUFFIX,hbymfswz.com
 # add by Telegram user: whsiny / Date: 2026-07-21 19:43:55
 DOMAIN-SUFFIX,crrcgo.cc
 # add by Telegram user: Steven / Date: 2026-07-20 17:28:38
