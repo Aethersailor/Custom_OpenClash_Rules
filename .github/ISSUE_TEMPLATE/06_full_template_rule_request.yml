@@ -1,0 +1,110 @@
+name: ✨ Full 模板新增规则集或策略组
+description: 为 Custom_Clash_Full.ini 提议具有普遍价值的新规则集、服务分组或策略组
+title: "[Full模板需求] "
+labels: ["enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        本模板仅用于 `Custom_Clash_Full.ini` 的通用扩展需求。
+
+        可以提交新的规则集、服务分组或策略组，但需求必须对一类用户具有普遍价值，并具备明确、可靠、可持续维护的规则来源。仅适用于个人订阅、单个站点或特定网络环境的定制分流不属于本项目 Issue 范围。
+
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已检查 `Custom_Clash_Full.ini`、现有规则文件和 Issues，确认没有等价规则集或策略组
+          required: true
+        - label: 我确认该需求仅针对 Full 模板，不要求加入标准版、轻量版或 GFW 版模板
+          required: true
+        - label: 此需求对一类用户具有普遍价值，不是针对我的个人订阅、单个网站或特定网络环境进行定制
+          required: true
+        - label: 我能够提供可靠且可持续维护的上游规则来源，或给出明确、可复核的规则范围
+          required: true
+        - label: 我理解第三方上游规则的准确性、可用性和更新时间不完全由本项目控制
+          required: true
+
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: 需求类型
+      options:
+        - 新增规则集并建立独立策略组
+        - 新增规则集并复用现有策略组
+        - 为现有规则集新增独立策略组
+        - 调整 Full 模板中的现有规则或策略组结构
+        - 新增节点地区、类型或用途筛选组
+        - 其他 Full 模板通用扩展
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: 建议名称
+      description: 填写建议新增或调整的服务、规则集或策略组名称。
+      placeholder: "例如：PayPal、Anime、Private Tracker"
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: 使用场景与普遍价值
+      description: 说明当前 Full 模板为何无法满足、哪些用户会受益，以及为何值得由本项目长期维护。
+    validations:
+      required: true
+
+  - type: textarea
+    id: upstream
+    attributes:
+      label: 上游规则或数据来源
+      description: 每行一个可直接访问的 GitHub 文件、规则项目或官方资料链接。没有现成规则源时，请明确说明可收录的域名、IP、进程或其他规则边界。
+      placeholder: |
+        https://github.com/example/project/...
+        https://raw.githubusercontent.com/example/project/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_design
+    attributes:
+      label: 建议的模板设计
+      description: 说明规则集名称、策略组名称、默认选项、引用顺序、节点筛选关键词及与现有策略组的关系。
+      placeholder: |
+        规则集名称：
+        策略组名称：
+        默认策略：
+        节点筛选：
+        建议插入位置：
+        与现有分组的关系：
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: 典型规则或服务示例
+      description: 提供少量有代表性的域名、IP、应用或服务，便于核实规则范围。请勿提交私人订阅地址或认证信息。
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: 影响与取舍
+      description: 说明可能增加的策略组数量、规则规模、误匹配风险、生成时间或后续维护成本。
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 补充信息
+      description: 可提供参考配置、其他项目的实现方式或初步修改方案。
+    validations:
+      required: false
