@@ -1,0 +1,140 @@
+name: ⚙️ 覆写模块问题
+description: 上报 overwrite 目录中本项目维护的覆写模块无法生效、报错或产生异常配置
+title: "[覆写问题] "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        本模板适用于 `overwrite/` 中由本项目维护的覆写模块。  
+        `overwrite/OpenClash_Overwrite/` 为第三方完整覆写方案，其自身问题请优先向对应上游仓库反馈。
+
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已阅读 `overwrite/README.md` 中该模块的用途、限制、参数和验证方法
+          required: true
+        - label: 我已更新到仓库 `main` 分支中的最新模块，并重新应用配置
+          required: true
+        - label: 我已搜索现有 Issues，确认没有相同或高度相似的问题
+          required: true
+        - label: 我已尽可能停用其他覆写和自定义脚本，单独测试目标模块；若无法隔离，我会在下方说明
+          required: true
+        - label: 我已删除订阅链接、节点、密码、Token 和公网地址等敏感信息
+          required: true
+
+  - type: input
+    id: module
+    attributes:
+      label: 模块文件
+      description: 填写准确的仓库相对路径或完整订阅链接。使用输入框而非固定列表，以兼容未来新增模块。
+      placeholder: "例如：overwrite/Prevent_DNS_Leak.conf"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 模块类别
+      options:
+        - 轻量功能模块
+        - DNS / 规则 / 策略组增强模块
+        - GEO / Chnroute 数据源替换模块
+        - 无法确定
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 版本与运行环境
+      placeholder: |
+        OpenClash：
+        Mihomo：
+        OpenWrt / ImmortalWrt：
+        CPU 架构：
+        配置模式：
+    validations:
+      required: true
+
+  - type: textarea
+    id: parameters
+    attributes:
+      label: 模块参数
+      description: 填写 EN_KEY 等参数；没有参数请填写“无”。涉及地址或凭据时请脱敏。
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: other_overwrites
+    attributes:
+      label: 同时启用的其他覆写或脚本
+      description: 没有请填写“无”；请同时说明目标模块在单独启用时是否仍能复现。
+    validations:
+      required: true
+
+  - type: dropdown
+    id: isolation_result
+    attributes:
+      label: 单独测试结果
+      options:
+        - 仅启用目标模块时仍能复现
+        - 仅启用目标模块时无法复现
+        - 因环境限制无法单独测试
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果
+      description: 根据模块文档，说明应用后应出现的配置或行为。
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+      description: 说明模块未生效、生成错误配置、启动失败或其他异常。
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤
+      description: 从添加模块、填写参数到应用配置，按顺序说明。
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: OpenClash 日志
+      description: 提供模块执行、Ruby 覆写、配置校验或启动阶段的相关完整日志。
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: final_config
+    attributes:
+      label: 最终运行配置片段
+      description: 提供能够证明问题的已脱敏片段，例如 dns、rules、rule-providers、proxy-groups 或 geodata 配置。
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 补充信息
+      description: 可附截图、对比结果或建议修复方式。
+    validations:
+      required: false

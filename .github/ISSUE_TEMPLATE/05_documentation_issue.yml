@@ -1,0 +1,103 @@
+name: 📚 文档错误或过时内容
+description: 上报 README、目录文档或 Wiki 中不准确、过时、缺失或链接失效的内容
+title: "[文档问题] "
+labels: ["documentation"]
+assignees: []
+
+body:
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已搜索现有 Issues，确认没有相同或高度相似的报告
+          required: true
+        - label: 我确认问题来自本仓库文档本身，而不是第三方教程、视频或转载内容
+          required: true
+        - label: 我会提供准确页面、章节和可复核的修正依据
+          required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: 文档范围
+      options:
+        - 项目主页 README / 中文 README
+        - cfg/ 配置资源说明
+        - rule/ 规则文件说明
+        - overwrite/ 覆写模块说明
+        - shell/ 脚本说明
+        - Wiki：OpenClash 设置方案
+        - Wiki：IPv6 设置方案
+        - Wiki：故障排除或其他页面
+        - 其他仓库文档
+    validations:
+      required: true
+
+  - type: input
+    id: page
+    attributes:
+      label: 页面链接或文件路径
+      placeholder: "例如：overwrite/README.md 或具体 Wiki 页面链接"
+    validations:
+      required: true
+
+  - type: input
+    id: section
+    attributes:
+      label: 章节或位置
+      placeholder: "例如：综合 DNS 防泄漏 → 使用须知"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue_type
+    attributes:
+      label: 问题类型
+      options:
+        - 技术描述错误
+        - 内容已经过时
+        - 操作步骤不完整或顺序错误
+        - 表述容易产生歧义
+        - 链接或文件路径失效
+        - 缺少重要限制或风险提示
+        - 拼写、格式或排版问题
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_problem
+    attributes:
+      label: 当前内容与问题
+      description: 请引用必要的短句或概述当前写法，并说明具体哪里不正确。
+    validations:
+      required: true
+
+  - type: textarea
+    id: correction
+    attributes:
+      label: 建议修正
+      description: 给出可直接理解的正确内容、步骤或表述。
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 依据
+      description: 可提供官方文档、上游代码、实际验证结果或相关提交链接。
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 相关环境（如适用）
+      description: 仅当文档问题与版本、网络架构或硬件环境有关时填写。
+      placeholder: |
+        OpenClash：
+        Mihomo：
+        OpenWrt / ImmortalWrt：
+        网络架构：
+    validations:
+      required: false

@@ -1,20 +1,26 @@
 blank_issues_enabled: false
 
 contact_links:
-
-  - name: 💡 新手小白求助 (Newbie Help)
-    url: https://github.com/Aethersailor/Custom_OpenClash_Rules/discussions/new?category=q-a
-    about: 寻求帮助或咨询非代码缺陷问题，请前往 Discussions 发布 Q&A。
-    
-  - name: 💬 讨论与建议 (Discussions)
+  - name: 💬 使用求助与一般讨论
     url: https://github.com/Aethersailor/Custom_OpenClash_Rules/discussions/new/choose
-    about: 参与讨论或提出项目建议。
+    about: 配置咨询、使用方法、个别环境故障或尚未确认属于项目缺陷的问题，请前往 Discussions。
 
-  - name: ✨ 个性化需求 (Personal Request)
+  - name: 🧭 个性化分流需求
     url: https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E#2-%E5%85%B3%E4%BA%8E%E4%B8%AA%E6%80%A7%E5%8C%96%E9%9C%80%E6%B1%82
-    about: 关于特定网站走代理或直连的需求，请查阅通过 Wiki 自行解决。
-    
-  - name: 🔄 后端服务转换问题 (Backend Issue)
-    url: https://github.com/Aethersailor/SubConverter-Extended/issues
-    about: 转换结果异常或后端引擎报错，请前往 SubConverter-Extended 仓库反馈。
-    
+    about: 单个用户、单个网站或特定网络环境的定制分流需求，请先阅读 Wiki 中的说明。
+
+  - name: 🔄 SubConverter-Extended 转换后端问题
+    url: https://github.com/Aethersailor/SubConverter-Extended/issues/new/choose
+    about: 转换接口报错、后端无法访问、转换引擎异常或非模板本身导致的生成失败，请前往转换后端仓库。
+
+  - name: 🧩 OpenClash 插件自身问题
+    url: https://github.com/vernesong/OpenClash/issues/new/choose
+    about: LuCI 页面、插件启动、订阅更新、覆写框架或 OpenClash 自身功能异常，请向 OpenClash 项目反馈。
+
+  - name: 🧰 第三方完整覆写方案问题
+    url: https://github.com/Giveupmoon/OpenClash_Overwrite/issues
+    about: overwrite/OpenClash_Overwrite 中第三方完整覆写方案自身的问题，请优先向其上游项目反馈。
+
+  - name: 🤖 快速提交直连域名
+    url: https://telegram.me/asailor_rulebot
+    about: 仅需提交少量大陆直连域名时，也可以使用 COCR RULE BOT。

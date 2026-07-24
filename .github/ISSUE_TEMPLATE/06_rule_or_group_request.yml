@@ -1,0 +1,103 @@
+name: ✨ 新增规则集或策略组
+description: 建议在订阅转换模板中增加具有普遍价值的规则集、服务分组或策略组
+title: "[规则需求] "
+labels: ["enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        本模板用于对多数用户具有普遍价值的模板扩展。  
+        单个域名直连请使用“提交大陆直连域名”；仅适用于个人环境的定制分流请查看 Issue 选择页中的个性化需求说明。
+
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已检查现有模板、规则和 Issues，确认没有等价功能
+          required: true
+        - label: 此需求具有可说明的普遍使用场景，而不是仅服务于我的个人订阅或网络环境
+          required: true
+        - label: 我能够提供可靠且可持续维护的上游规则来源，或给出明确可实现的规则范围
+          required: true
+        - label: 我理解第三方上游规则的准确性和更新时间不完全由本项目控制
+          required: true
+
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: 需求类型
+      options:
+        - 新增服务或应用规则集
+        - 新增独立策略组
+        - 将现有规则集加入更多模板
+        - 调整现有分组或规则结构
+        - 节点地区 / 类型筛选规则
+        - 其他模板分流能力
+    validations:
+      required: true
+
+  - type: dropdown
+    id: target_templates
+    attributes:
+      label: 建议涉及的模板
+      multiple: true
+      options:
+        - Custom_Clash.ini
+        - Custom_Clash_Lite.ini
+        - Custom_Clash_GFW.ini
+        - Custom_Clash_Full.ini
+        - YAML 配置示例
+        - 暂不确定，由维护者评估
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: 规则集或策略组名称
+      placeholder: "例如：OpenAI、PayPal、Anime"
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: 使用场景与必要性
+      description: 说明当前模板为何无法满足，以及哪些用户会从中受益。
+    validations:
+      required: true
+
+  - type: textarea
+    id: upstream
+    attributes:
+      label: 上游规则或数据来源
+      description: 每行一个可直接访问的 GitHub 文件、规则项目或官方资料链接；没有现成来源时请说明规则边界。
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_design
+    attributes:
+      label: 建议设计
+      description: 说明希望加入哪些规则、策略组关系、默认策略、分组位置或节点筛选关键词。
+    validations:
+      required: true
+
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: 影响与取舍
+      description: 说明可能增加的策略组数量、规则规模、误匹配风险或维护成本。
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 补充信息
+      description: 可提供参考配置、对比项目或其他说明。
+    validations:
+      required: false

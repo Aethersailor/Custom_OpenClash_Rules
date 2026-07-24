@@ -1,0 +1,121 @@
+name: 🧩 配置或模板文件错误
+description: 上报 INI 模板或 YAML 配置示例的语法、结构、生成或加载问题
+title: "[配置错误] "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        适用于 `cfg/*.ini` 和 `cfg/yaml/*.yaml` 本身存在的问题。  
+        转换接口不可用、转换后端报错或 OpenClash 插件自身异常，请使用 Issue 选择页中的专用入口。
+
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已搜索现有 Issues，并使用仓库 `main` 分支中的最新文件重新测试
+          required: true
+        - label: 我确认问题可以定位到本仓库中的具体 INI 或 YAML 文件
+          required: true
+        - label: 我已移除或说明本地修改、自定义脚本、额外覆写及订阅源自带配置的影响
+          required: true
+        - label: 我提交的内容已经删除节点、订阅链接、密码、Token 和公网管理地址等敏感信息
+          required: true
+
+  - type: dropdown
+    id: resource_type
+    attributes:
+      label: 资源类型
+      options:
+        - 订阅转换模板（cfg/*.ini）
+        - YAML 配置示例（cfg/yaml/*.yaml）
+    validations:
+      required: true
+
+  - type: input
+    id: affected_file
+    attributes:
+      label: 涉及的文件
+      description: 填写仓库相对路径或完整 GitHub 文件链接。
+      placeholder: "例如：cfg/Custom_Clash_Full.ini 或 cfg/yaml/Custom_Clash.yaml"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: usage
+    attributes:
+      label: 使用方式
+      options:
+        - OpenClash 内置远程模板链接
+        - 自建 SubConverter / SubConverter-Extended
+        - 直接下载并导入 YAML
+        - 在本地文件基础上修改后使用
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 版本与环境
+      placeholder: |
+        OpenClash：
+        Mihomo：
+        转换后端及版本（如适用）：
+        OpenWrt / ImmortalWrt：
+        CPU 架构：
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题描述
+      description: 说明文件中的具体错误、生成结果或加载失败现象。
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果
+      description: 说明你认为正确的配置结构或行为。
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 最小复现步骤
+      description: 请提供无需私人订阅也能理解和复核的操作步骤。
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 错误日志
+      description: 仅保留与问题直接相关的完整错误段落。
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: config_excerpt
+    attributes:
+      label: 相关配置片段
+      description: 粘贴已脱敏的输入或生成结果；不要提交整个含节点信息的配置。
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 补充信息
+      description: 可附截图、相关提交、上游文档或建议修复方案。
+    validations:
+      required: false
