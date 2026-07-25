@@ -4,7 +4,7 @@
 
 **8 个 `.ini` 模板，以及三种推荐使用路径的总入口**
 
-[推荐流程](#-本项目推荐的使用流程) · [模板列表](#-ini-模板列表) · [版本区别](#-版本区别) · [使用方法](#-使用订阅转换模板) · [远程链接](#-全部模板远程链接)
+[推荐流程](#-本项目推荐的使用流程) · [模板列表](#-ini-模板列表) · [版本区别](#-版本区别) · [使用方法](#-使用订阅转换模板) · [远程链接](#-模板远程链接)
 
 </div>
 
@@ -92,9 +92,9 @@ Fallback 版的主要业务组使用 `fallback`，按候选顺序检测可用性
 
 ## 🔄 使用订阅转换模板
 
-### 方法 A：选择 OpenClash 内置模板
+### 方法 A：直接选择 OpenClash 内置模板（推荐）
 
-适用于 4 个非 Fallback 版本：
+适用于 4 个普通版模板，也是本项目对普通模板的推荐使用方式：
 
 1. 先按 Wiki 完成 OpenClash LuCI 设置。
 2. 进入 OpenClash 订阅管理，新增或编辑订阅。
@@ -105,17 +105,21 @@ Fallback 版的主要业务组使用 `fallback`，按候选顺序检测可用性
 
 这种方式无需下载 `.ini`，也无需手工填写模板 URL。OpenClash 收录的是模板远程链接，模板本身仍由本仓库维护。
 
-### 方法 B：填写自定义模板地址
+### 方法 B：为 Fallback 模板填写自定义地址
 
-适用于全部 8 个模板，尤其是尚未被 OpenClash 收录的 4 个 Fallback 版本：
+适用于尚未被 OpenClash 内置模板列表收录的 4 个 Fallback 版本：
 
 1. 在订阅设置中启用在线订阅转换。
 2. 选择自定义模板。
-3. 从[全部模板远程链接](#-全部模板远程链接)复制 GitHub Raw 或 testingcf 地址。
+3. 从[模板远程链接](#-模板远程链接)复制对应 Fallback 模板的 GitHub Raw 或 testingcf 地址。
 4. 保存并更新订阅。
+5. 检查转换结果、策略组和故障转移行为。
+
+> [!IMPORTANT]
+> 4 个普通模板已经可以直接从 OpenClash 内置列表选择，常规使用不建议再手工填写模板地址。其远程地址仅作为自建转换后端、兼容性排查或内置列表异常时的备用。
 
 > [!TIP]
-> 中国大陆网络环境通常优先尝试 testingcf 地址；GitHub Raw 可作为备用或用于自建转换后端。
+> 中国大陆网络环境通常可优先尝试 testingcf 地址；GitHub Raw 可作为备用。
 
 ### 关于转换后端
 
@@ -123,29 +127,13 @@ Fallback 版的主要业务组使用 `fallback`，按候选顺序检测可用性
 
 `.ini` 文件不能直接上传到 OpenClash 作为运行配置。
 
-## 🔗 全部模板远程链接
+## 🔗 模板远程链接
 
-### 标准版
+### Fallback 模板
 
-- GitHub Raw：
+以下 4 个 Fallback 模板尚未被 OpenClash 内置模板列表收录，使用时需要手工填写自定义模板地址。
 
-  ```text
-  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash.ini
-  ```
-
-- testingcf 加速：
-
-  ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash.ini
-  ```
-
-### 标准 Fallback 版
-
-- GitHub Raw：
-
-  ```text
-  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Fallback.ini
-  ```
+#### 标准 Fallback 版
 
 - testingcf 加速：
 
@@ -153,27 +141,13 @@ Fallback 版的主要业务组使用 `fallback`，按候选顺序检测可用性
   https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Fallback.ini
   ```
 
-### 轻量版
-
 - GitHub Raw：
 
   ```text
-  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Lite.ini
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Fallback.ini
   ```
 
-- testingcf 加速：
-
-  ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Lite.ini
-  ```
-
-### 轻量 Fallback 版
-
-- GitHub Raw：
-
-  ```text
-  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Lite_Fallback.ini
-  ```
+#### 轻量 Fallback 版
 
 - testingcf 加速：
 
@@ -181,27 +155,13 @@ Fallback 版的主要业务组使用 `fallback`，按候选顺序检测可用性
   https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Lite_Fallback.ini
   ```
 
-### 极简 GFW 版
-
 - GitHub Raw：
 
   ```text
-  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_GFW.ini
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Lite_Fallback.ini
   ```
 
-- testingcf 加速：
-
-  ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_GFW.ini
-  ```
-
-### 极简 GFW Fallback 版
-
-- GitHub Raw：
-
-  ```text
-  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_GFW_Fallback.ini
-  ```
+#### 极简 GFW Fallback 版
 
 - testingcf 加速：
 
@@ -209,27 +169,13 @@ Fallback 版的主要业务组使用 `fallback`，按候选顺序检测可用性
   https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_GFW_Fallback.ini
   ```
 
-### 重度分流版
-
 - GitHub Raw：
 
   ```text
-  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Full.ini
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_GFW_Fallback.ini
   ```
 
-- testingcf 加速：
-
-  ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Full.ini
-  ```
-
-### 重度分流 Fallback 版
-
-- GitHub Raw：
-
-  ```text
-  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Full_Fallback.ini
-  ```
+#### 重度分流 Fallback 版
 
 - testingcf 加速：
 
@@ -237,6 +183,79 @@ Fallback 版的主要业务组使用 `fallback`，按候选顺序检测可用性
   https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Full_Fallback.ini
   ```
 
+- GitHub Raw：
+
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Full_Fallback.ini
+  ```
+
+<details>
+<summary><strong>🔗 普通模板备用手工地址</strong></summary>
+
+<br>
+
+> [!NOTE]
+> 以下 4 个普通模板已经被 OpenClash 收录。OpenClash 用户应优先从内置模板列表直接选择，无需手工填写地址。
+>
+> 这些链接主要用于自建 Subconverter、其他订阅转换工具、兼容性排查，或 OpenClash 内置模板列表未正常显示的情况。
+
+### 标准版
+
+- testingcf 加速：
+
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash.ini
+  ```
+
+- GitHub Raw：
+
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash.ini
+  ```
+
+### 轻量版
+
+- testingcf 加速：
+
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Lite.ini
+  ```
+
+- GitHub Raw：
+
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Lite.ini
+  ```
+
+### 极简 GFW 版
+
+- testingcf 加速：
+
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_GFW.ini
+  ```
+
+- GitHub Raw：
+
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_GFW.ini
+  ```
+
+### 重度分流版
+
+- testingcf 加速：
+
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Full.ini
+  ```
+
+- GitHub Raw：
+
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Full.ini
+  ```
+
+</details>
 
 ## 📄 YAML 与远程覆写模块
 
