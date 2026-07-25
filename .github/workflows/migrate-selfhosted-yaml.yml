@@ -41,40 +41,28 @@ jobs:
           manual = source
           manual = manual.replace(
               '# OpenClash 专用最小 YAML 配置文件（自建节点优先 + 机场故障转移版）',
-              '# OpenClash 专用最小 YAML 配置文件（手工自建节点优先 + 机场故障转移版）',
-              1,
-          )
+              '# OpenClash 专用最小 YAML 配置文件（手工自建节点优先 + 机场故障转移版）', 1)
           manual = manual.replace(
               '# 本文件仅定义节点来源、静态节点、策略组、规则提供者与分流规则。',
-              '# 本文件仅定义节点来源、手工填写的静态节点、策略组、规则提供者与分流规则。',
-              1,
-          )
+              '# 本文件仅定义节点来源、手工填写的静态节点、策略组、规则提供者与分流规则。', 1)
           manual = manual.replace(
               '# 固定自建节点作为主要代理出口，provider1 机场订阅作为后备。',
               '# 手工填写的固定自建节点作为主要代理出口，provider1 机场订阅作为后备。\n'
-              '# 如需通过节点订阅或转换后的节点链接加载自建节点，请使用 Custom_Clash_Selfhosted_Provider_Fallback.yaml。',
-              1,
-          )
+              '# 如需通过节点订阅或转换后的节点链接加载自建节点，请使用 Custom_Clash_Selfhosted_Provider_Fallback.yaml。', 1)
           manual_path.write_text(manual, encoding='utf-8', newline='\n')
 
           provider = source
           provider = provider.replace(
               '# OpenClash 专用最小 YAML 配置文件（自建节点优先 + 机场故障转移版）',
-              '# OpenClash 专用最小 YAML 配置文件（自建节点 Provider 优先 + 机场故障转移版）',
-              1,
-          )
+              '# OpenClash 专用最小 YAML 配置文件（自建节点 Provider 优先 + 机场故障转移版）', 1)
           provider = provider.replace(
               '# 本文件仅定义节点来源、静态节点、策略组、规则提供者与分流规则。',
-              '# 本文件仅定义节点来源、策略组、规则提供者与分流规则。',
-              1,
-          )
+              '# 本文件仅定义节点来源、策略组、规则提供者与分流规则。', 1)
           provider = provider.replace(
               '# 固定自建节点作为主要代理出口，provider1 机场订阅作为后备。',
               '# selfhost Provider 中的自建节点作为主要代理出口，provider1 机场订阅作为后备。\n'
               '# selfhost.url 必须指向 Mihomo 可识别的 HTTP 节点订阅；支持 YAML、URI 列表或 Base64 内容。\n'
-              '# 单条节点链接需先转换为可通过 HTTP 获取的订阅地址，再由覆写模块写入 selfhost.url。',
-              1,
-          )
+              '# 单条节点链接需先转换为可通过 HTTP 获取的订阅地址，再由覆写模块写入 selfhost.url。', 1)
           static_start = provider.index('# ==================== 自建节点 Proxies ====================')
           groups_start = provider.index('# ==================== 代理策略组 Proxy Groups ====================')
           provider = provider[:static_start] + provider[groups_start:]
@@ -83,9 +71,7 @@ jobs:
               '# 新增 Provider 后，还需将其加入相关策略组的 use 列表。',
               '# provider1 用于加载机场订阅，selfhost 用于加载自建节点订阅。\n'
               '# 多机场订阅用户可复制 provider1 并依次命名为 provider2、provider3……\n'
-              '# 新增 Provider 后，还需将其加入相关策略组的 use 列表。',
-              1,
-          )
+              '# 新增 Provider 后，还需将其加入相关策略组的 use 列表。', 1)
           selfhost_provider = '''  selfhost:
             type: http
             url: "url"  # 填入自建节点订阅地址，或单条节点链接经转换后得到的订阅地址
@@ -103,9 +89,7 @@ jobs:
               '# 基于标准故障转移版的策略组结构；代理型 fallback 统一优先使用自建节点，机场分组保持原顺序后备。\n'
               '# provider1 仅承载机场订阅；公共节点过滤继续在 Provider 层统一完成。',
               '# 基于标准故障转移版的策略组结构；代理型 fallback 统一优先使用自建节点，机场分组保持原顺序后备。\n'
-              '# selfhost 仅承载自建节点，provider1 仅承载机场订阅；公共机场节点过滤继续在 provider1 层统一完成。',
-              1,
-          )
+              '# selfhost 仅承载自建节点，provider1 仅承载机场订阅；公共机场节点过滤继续在 provider1 层统一完成。', 1)
           old_group = '''  - name: "🏴‍☠️ 自建节点"
             type: url-test
             proxies:
@@ -124,34 +108,24 @@ jobs:
           readme = readme_path.read_text(encoding='utf-8')
           readme = readme.replace(
               '- [`yaml/`](./yaml) 目录中的 `.yaml` 文件是 **可供 Mihomo / OpenClash 使用的完整配置文件**，通过 `proxy-providers` 加载订阅节点。',
-              '- [`yaml/`](./yaml) 目录中的 `.yaml` 文件是 **面向 OpenClash 的最小配置文件**，仅保留节点来源、策略组、规则提供者与分流规则；运行参数由 OpenClash LuCI 管理。',
-              1,
-          )
+              '- [`yaml/`](./yaml) 目录中的 `.yaml` 文件是 **面向 OpenClash 的最小配置文件**，仅保留节点来源、策略组、规则提供者与分流规则；运行参数由 OpenClash LuCI 管理。', 1)
           readme = readme.replace(
               '[`yaml/`](./yaml) 目录提供与上述 8 个 `.ini` 模板对应的完整 YAML 配置：',
-              '[`yaml/`](./yaml) 目录提供与上述 8 个 `.ini` 模板对应的 OpenClash 专用最小 YAML 配置：',
-              1,
-          )
+              '[`yaml/`](./yaml) 目录提供与上述 8 个 `.ini` 模板对应的 OpenClash 专用最小 YAML 配置：', 1)
           readme = readme.replace(
               '此外，`yaml/` 目录中还包含独立的 [`Custom_Clash_DIY&Airport.yaml`](./yaml/Custom_Clash_DIY&Airport.yaml)。该文件用于“自建节点优先、机场节点故障转移”的特定场景，不属于上述 8 个相互对应的常规版本。',
               '此外，`yaml/` 目录还提供两份“自建节点优先、机场节点故障转移”配置：\n\n'
               '- [`Custom_Clash_Selfhosted_Manual_Fallback.yaml`](./yaml/Custom_Clash_Selfhosted_Manual_Fallback.yaml)：直接在 YAML 或覆写模块中填写静态节点参数。\n'
               '- [`Custom_Clash_Selfhosted_Provider_Fallback.yaml`](./yaml/Custom_Clash_Selfhosted_Provider_Fallback.yaml)：通过独立 `selfhost` Proxy Provider 加载自建节点订阅。\n\n'
-              '这两份配置不对应根目录中的 `.ini` 模板。',
-              1,
-          )
+              '这两份配置不对应根目录中的 `.ini` 模板。', 1)
           readme = readme.replace(
               'YAML 配置文件不需要经过订阅转换。文件中已经包含策略组、规则、DNS、嗅探、GeoData 和常用运行参数，并通过 `proxy-providers` 加载节点订阅。',
-              'YAML 配置文件不需要经过订阅转换。文件中仅保留节点来源、策略组、规则提供者和分流规则；端口、DNS、IPv6、TUN、嗅探、GeoData、日志及控制器等运行参数由 OpenClash LuCI 生成。',
-              1,
-          )
+              'YAML 配置文件不需要经过订阅转换。文件中仅保留节点来源、策略组、规则提供者和分流规则；端口、DNS、IPv6、TUN、嗅探、GeoData、日志及控制器等运行参数由 OpenClash LuCI 生成。', 1)
           readme = readme.replace(
               '- 可以直接检查和维护完整配置结构\n- 包含较完整的 Mihomo 运行参数\n- 部分端口、DNS、TUN 和运行参数可能被 OpenClash 设置覆写',
               '- 配置结构精简，不预设 OpenClash LuCI 管理的运行参数\n'
               '- OpenClash LuCI 是端口、DNS、IPv6、TUN、嗅探等运行参数的唯一配置入口\n'
-              '- 规则、策略组与 Provider 仍可通过仓库更新持续维护',
-              1,
-          )
+              '- 规则、策略组与 Provider 仍可通过仓库更新持续维护', 1)
           old_section = '''## 🧩 `Custom_Clash_DIY&Airport.yaml`
 
           [`Custom_Clash_DIY&Airport.yaml`](./yaml/Custom_Clash_DIY&Airport.yaml) 面向以下特定使用场景：
@@ -189,9 +163,7 @@ jobs:
           readme = readme.replace(old_section, new_section, 1)
           readme = readme.replace(
               '- YAML 文件中的订阅地址、端口、DNS、IPv6、TUN 和控制器设置应根据实际环境检查。',
-              '- YAML 文件中的 Provider 地址应按实际情况填写；端口、DNS、IPv6、TUN、嗅探和控制器等运行参数应在 OpenClash LuCI 中配置。',
-              1,
-          )
+              '- YAML 文件中的 Provider 地址应按实际情况填写；端口、DNS、IPv6、TUN、嗅探和控制器等运行参数应在 OpenClash LuCI 中配置。', 1)
           readme_path.write_text(readme, encoding='utf-8', newline='\n')
           source_path.unlink()
           PY
@@ -201,14 +173,10 @@ jobs:
           ruby -e 'require "yaml"; ARGV.each { |file| YAML.load_file(file); puts "Psych OK: #{file}" }' \
             cfg/yaml/Custom_Clash_Selfhosted_Manual_Fallback.yaml \
             cfg/yaml/Custom_Clash_Selfhosted_Provider_Fallback.yaml
-
           python - <<'PY'
           from pathlib import Path
-          import re
-
           manual = Path('cfg/yaml/Custom_Clash_Selfhosted_Manual_Fallback.yaml').read_text(encoding='utf-8')
           provider = Path('cfg/yaml/Custom_Clash_Selfhosted_Provider_Fallback.yaml').read_text(encoding='utf-8')
-
           assert '\nproxies:\n' in manual
           assert '\nproxies:\n' not in provider
           assert '\n  selfhost:\n' in provider
@@ -220,7 +188,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
           git rm -- .github/workflows/migrate-selfhosted-yaml.yml
           git add -- cfg/README.md cfg/yaml/Custom_Clash_Selfhosted_Manual_Fallback.yaml cfg/yaml/Custom_Clash_Selfhosted_Provider_Fallback.yaml cfg/yaml/Custom_Clash_Selfhosted_Fallback.yaml
           git commit -m "feat(config): add self-hosted provider variant"
