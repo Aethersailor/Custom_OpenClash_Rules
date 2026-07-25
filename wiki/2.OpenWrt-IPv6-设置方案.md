@@ -44,7 +44,7 @@
 > [!WARNING]
 > 若不关闭此选项，Dnsmasq 将过滤掉所有域名的 IPv6 解析结果，导致无法访问 IPv6 站点。
 
-![过滤 IPv6 AAAA 记录设置](doc/ipv6/openwrt/pics/v6-7.png)
+<img width="841" height="1062" alt="v6-7" src="https://github.com/user-attachments/assets/6a582b57-e24e-402c-8794-5b9c9d60169d" />
 
 ---
 
@@ -64,16 +64,16 @@
     - 启用 `委托 IPv6 前缀`（**关键步骤**）。
     - `IPv6 首选项` 留空。
 
-![WAN 接口 IPv6 配置](doc/ipv6/openwrt/pics/v6-1.png)
-![WAN 接口委派设置](doc/ipv6/openwrt/pics/v6-2.png)
+<img width="801" height="1253" alt="v6-1" src="https://github.com/user-attachments/assets/f3dc115f-5887-4a23-8b80-2c4c7e5e9982" />
+<img width="743" height="413" alt="v6-2" src="https://github.com/user-attachments/assets/83487aed-d8cf-4e40-90d0-acdaefc5f2ff" />
 
 5. **检查 DHCP**：在 `WAN` 接口的 `DHCP 服务器` > `IPv6 设置` 中，确保所有选项均为 **"已禁用"**。
 
-![WAN 接口 DHCP IPv6 设置](doc/ipv6/openwrt/pics/v6-3.png)
+<img width="718" height="599" alt="v6-3" src="https://github.com/user-attachments/assets/a377bac0-f5a1-4ab3-a5ad-3cab1fd17845" />
 
 6. **验证结果**：保存并应用后，接口列表应自动生成一个虚拟的 `wan_6` 接口，并成功获取 IPv6-PD 地址。
 
-![WAN 接口获取 IPv6-PD](doc/ipv6/openwrt/pics/wan.png)
+<img width="725" height="210" alt="wan" src="https://github.com/user-attachments/assets/a9b47441-dc1d-4661-9096-97558d40922f" />
 
 #### 🅱️ 方案 B：手动创建
 
@@ -87,15 +87,15 @@
 
 2. **创建接口**：新建接口，命名为 `WAN6`，协议选择 `DHCPv6 客户端`，物理接口选择与 WAN 口相同的网卡（如 `eth1`）。
 
-![创建 WAN6 接口](doc/ipv6/openwrt/pics/wan6-1.png)
+<img width="847" height="902" alt="wan6-1" src="https://github.com/user-attachments/assets/641ec277-2510-4749-863e-5b921a351dbf" />
 
 3. **高级设置**：启用 `委托 IPv6 前缀` 和 `IPv6 源路由`。
 
-![WAN6 高级设置](doc/ipv6/openwrt/pics/wan6-2.png)
+<img width="989" height="1246" alt="wan6-2" src="https://github.com/user-attachments/assets/244c7a68-b79a-4824-bfe5-f7992e30f30a" />
 
 4. **验证结果**：保存并应用后，检查 `WAN6` 接口是否获取到了 IPv6-PD 地址。
 
-![WAN6 获取 IPv6-PD 地址](doc/ipv6/openwrt/pics/wan2.png)
+<img width="654" height="108" alt="wan2" src="https://github.com/user-attachments/assets/8af7c1c9-bf85-48e3-af63-f1e80b050bd9" />
 
 > [!TIP]
 > 如果无法获取 PD 地址，请检查是否被上级光猫占用，或联系运营商确认宽带业务是否正常开通 IPv6-PD 功能。
@@ -110,7 +110,7 @@
 
 在 `WAN` (或 `WAN6`) 接口设置中，根据需求决定是否勾选 `委托 IPv6 前缀` 给下级路由。
 
-![委派 IPv6 前缀设置](doc/ipv6/openwrt/pics/v6-4.png)
+<img width="874" height="1240" alt="v6-4" src="https://github.com/user-attachments/assets/af1b52f1-8edb-4816-8c03-d13e524b679f" />
 
 #### 2. 配置地址分配模式
 
@@ -123,7 +123,7 @@ IPv6 地址后缀分配主要有两种方式：
 
 进入 `LAN` 接口 > `高级设置`，在 `IPv6 后缀` 中填入 `eui64`。
 
-![EUI-64 后缀设置](doc/ipv6/openwrt/pics/eui64.png)
+<img width="774" height="335" alt="eui64" src="https://github.com/user-attachments/assets/c9b2b9fc-bfbc-4260-950f-a6b7eb60f5f8" />
 
 > [!NOTE]
 > **为什么要用 EUI-64？**
@@ -142,8 +142,8 @@ IPv6 地址后缀分配主要有两种方式：
 - **NDP 代理**：已禁用
 - **本地 IPv6 DNS 服务器**：**取消勾选**
 
-![LAN 接口 RA 设置](doc/ipv6/openwrt/pics/v6-5.png)
-![LAN 接口 DHCPv6 设置](doc/ipv6/openwrt/pics/v6-6.png)
+<img width="895" height="781" alt="v6-5" src="https://github.com/user-attachments/assets/3428751b-33a6-4b45-bd65-08f978686dc8" />
+<img width="936" height="1025" alt="v6-6" src="https://github.com/user-attachments/assets/b4e663ba-84e1-460d-b134-88a26a77bf8b" />
 
 **核心逻辑说明：**
 我们故意**不通告 IPv6 DNS 地址**，而是强制局域网设备使用路由器的 IPv4 地址（如 `192.168.1.1`）进行 DNS 解析。这可以有效防止客户端的 DNS 请求被 IPv6 DNS 进行抢答，从而导致跳过 OpenClash 的 DNS 分流机制。这也解决了部分系统（如 Win11）偶尔无法通过 IPv6 ULA 地址通信的问题。
@@ -165,7 +165,7 @@ IPv6 地址后缀分配主要有两种方式：
 
 **预期结果**：所有检测项均应显示通过。
 
-![IPv6 连通性测试结果](doc/ipv6/openwrt/pics/ipv6test.png)
+<img width="989" height="511" alt="ipv6test" src="https://github.com/user-attachments/assets/d6d4b7c4-9588-4a8f-8456-91445ed237a7" />
 
 ---
 
@@ -176,8 +176,8 @@ IPv6 地址后缀分配主要有两种方式：
 - **Chrome**: 显示 IP 地址列表
 - **Firefox**: 需在 `about:config` 中设置 `network.dns.preferIPv6` 为 `true` 才能优先使用 IPv6。
 
-![Chrome IPvFoo 扩展](doc/ipv6/openwrt/pics/chrome.png)
-![Firefox 设置](doc/ipv6/openwrt/pics/firefox.png)
+<img width="521" height="355" alt="chrome" src="https://github.com/user-attachments/assets/dec0770f-0494-46de-8602-af9579b27439" />
+<img width="580" height="160" alt="firefox" src="https://github.com/user-attachments/assets/dab1745d-b6e1-4de8-a46e-ca3eff2d0982" />
 
 ---
 
@@ -187,8 +187,8 @@ IPv6 地址后缀分配主要有两种方式：
 
 设置逻辑与上述方案基本一致，以下截图仅供参考：
 
-![LEDE WAN6 设置](doc/ipv6/lede/pics/lede6-1.png)
-![LEDE DHCPv6 设置](doc/ipv6/lede/pics/dhcpv6.png)
+<img width="1066" height="910" alt="lede6-1" src="https://github.com/user-attachments/assets/69fe3efc-8c6d-437d-be47-c0a89f81cf68" />
+<img width="742" height="417" alt="dhcpv6" src="https://github.com/user-attachments/assets/c4f369dd-7eee-4964-981b-7e62ea26d696" />
 
 ---
 
