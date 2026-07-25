@@ -2,7 +2,7 @@
   🚀 Custom_OpenClash_Rules
 </h1>
 
-<p align="center"><b>OpenClash 配置、规则碎片、实用脚本与覆写资源</b></p>
+<p align="center"><b>OpenClash 配置方案、订阅转换模板、配置文件、规则文件、实用脚本与覆写模块资源</b></p>
 
 <p align="center">
   <a href="DO_NOT_README.md">English</a>
@@ -15,7 +15,7 @@
   &nbsp;•&nbsp;
   <a href="cfg/">🧩 配置资源</a>
   &nbsp;•&nbsp;
-  <a href="rule/">🗂️ 规则碎片</a>
+  <a href="rule/">🗂️ 规则文件</a>
 </p>
 
 <p align="center">
@@ -34,7 +34,7 @@
 
 **Custom_OpenClash_Rules** 是一个围绕 [OpenClash](https://github.com/vernesong/OpenClash) 整理和维护的资源仓库。
 
-本项目提供 OpenClash 配置方案、订阅转换模板、YAML 配置示例、规则碎片、实用脚本、覆写资源及相关文档，帮助用户更方便地部署、维护和调整 OpenClash。
+本项目提供 OpenClash 配置方案、订阅转换模板、YAML 配置文件、规则文件、实用脚本、覆写模块资源及相关文档，帮助用户更方便地部署、维护和调整 OpenClash。
 
 根 README 仅作为项目首页和资源导航。各目录中的具体文件、用途、区别及使用方法，请查看对应目录内的 README 或项目 Wiki。
 
@@ -48,10 +48,10 @@
 | 需求 | 建议入口 |
 | --- | --- |
 | 首次配置或系统了解 OpenClash | [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) |
-| 使用订阅转换模板或 YAML 配置示例 | [`cfg/`](cfg/) |
+| 使用订阅转换模板或 YAML 配置 | [`cfg/`](cfg/) |
 | 为现有配置补充规则 | [`rule/`](rule/) |
 | 使用 OpenClash 相关脚本 | [`shell/`](shell/) |
-| 使用远程覆写资源 | [`overwrite/`](overwrite/) |
+| 使用远程覆写模块资源 | [`overwrite/`](overwrite/) |
 | 排查常见故障 | [故障排除](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4) |
 
 ---
@@ -97,9 +97,9 @@
 
 **入口：** [`cfg/`](cfg/)
 
-### 🗂️ 规则碎片
+### 🗂️ 规则文件
 
-提供可按需加入现有配置的规则碎片。普通规则与游戏规则统一视为规则碎片资源，具体分类和使用方式以目录说明为准。
+提供本项目制作的、可按需加入现有配置的各种格式规则文件，具体分类和使用方式以目录说明为准。
 
 **入口：** [`rule/`](rule/)
 
@@ -109,7 +109,7 @@
 
 **入口：** [`shell/`](shell/)
 
-### ⚙️ 覆写资源
+### ⚙️ 覆写模块资源
 
 提供 OpenClash 远程覆写相关资源和说明。本目录引用外部维护项目，具体内容与使用方式请以目录说明及上游项目为准。
 
