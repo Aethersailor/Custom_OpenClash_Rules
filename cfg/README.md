@@ -1,299 +1,272 @@
 <div align="center">
 
-# 🧩 OpenClash 订阅转换模板与 YAML 配置
+# 🧩 OpenClash 订阅转换模板
 
-**两种使用路径，对应的规则与策略组体验保持一致**
+**8 个 `.ini` 模板，以及三种推荐使用路径的总入口**
 
-[目录说明](#-目录说明) · [版本对比](#-版本对比) · [使用订阅转换模板](#-使用-ini-订阅转换模板) · [使用 YAML 配置](#-使用-yaml-配置文件) · [注意事项](#%EF%B8%8F-注意事项)
+[推荐流程](#-本项目推荐的使用流程) · [模板列表](#-ini-模板列表) · [版本区别](#-版本区别) · [使用方法](#-使用订阅转换模板) · [远程链接](#-全部模板远程链接)
 
 </div>
 
 ---
 
 > [!IMPORTANT]
-> 本目录提供两类用途不同的配置文件：
->
-> - 根目录中的 `.ini` 文件是 **订阅转换模板**，由 Subconverter 等转换后端读取，用于生成最终的 Mihomo 配置。
-> - [`yaml/`](./yaml) 目录中的 `.yaml` 文件是 **面向 OpenClash 的最小配置文件**，仅保留节点来源、策略组、规则提供者与分流规则；运行参数由 OpenClash LuCI 管理。
->
-> 两类文件的使用方式不同，不能相互替代；同名版本的规则、策略组和使用体验则尽量保持一致。
+> 本目录根层主要存放 `.ini` **订阅转换模板**。关于最小 YAML 配置、手工导入和自建节点版本，请前往 [`yaml/README.md`](./yaml/README.md)；关于通过覆写模块调用远程 YAML，请前往 [`../overwrite/yaml/README.md`](../overwrite/yaml/README.md)。
+
+
+## 🧭 本项目推荐的使用流程
+
+本项目坚持的 OpenClash 使用方式不是“导入一个文件就结束”，而是：
+
+1. **先配置插件：** 按照项目 Wiki 的 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)，结合自己的网络环境和需求，逐项检查并完成 OpenClash LuCI 页面中的 DNS、IPv6、运行模式、流量接管等设置。
+2. **再三选一：** 从下列三种配置路径中选择一种作为主要使用方式。
+3. **填写必要信息：** 配置订阅地址、自建节点或模块变量。
+4. **最后验收：** 确认配置校验、内核启动、Provider 更新、策略组、DNS、IPv6 和实际分流均正常，再进入日常使用。
+
+> [!IMPORTANT]
+> 三种路径解决的是“如何获得并维护策略组、规则和节点来源”，不能替代 OpenClash LuCI 中的插件设置。建议选择一种主路径，不要在不了解执行顺序和覆盖关系时叠加使用。
+
+### 三种路径怎么选
+
+| 使用路径 | 优点 | 代价与限制 | 推荐人群 |
+| --- | --- | --- | --- |
+| **① 订阅转换 + `.ini` 模板** | 操作最简单；在 OpenClash 中更新和切换订阅方便；无需手工维护 YAML | 依赖所选订阅转换后端的可用性、兼容性和隐私保障；也可以自建转换后端 | 希望省事、经常切换配置的大多数用户 |
+| **② 远程 YAML 覆写模块** | 无需订阅转换；填写模块变量即可下载对应 YAML 并写入订阅；远程文件可随仓库维护更新 | 需要学会 OpenClash 覆写模块的添加、变量填写和排障；远程更新可能改变下一次加载结果 | 希望简单使用 YAML，又不想手工编辑文件的用户 |
+| **③ 下载 YAML 后手工修改并导入** | 自由度最高；配置文件完全由自己控制；不依赖订阅转换后端 | 最复杂、最繁琐；需要理解 YAML、Provider、策略组和规则引用；仓库更新需自行对比迁移 | 熟悉 Mihomo YAML 的高阶用户 |
+
+> [!NOTE]
+> 本项目提供的订阅转换模板和 YAML，均由维护者依据典型场景与使用经验推定设计——通俗地说，包含一定程度的“合理脑补”。它们不可能 100% 贴合每个人的节点、地区、业务和网络环境。需要完全个性化的行为时，请自行编写或深度修改 YAML。
+
+
+## 📁 `.ini` 模板列表
+
+`cfg` 根目录共有 8 个模板，由 4 个普通版及其 Fallback 版组成：
+
+| 版本 | 文件 | OpenClash 内置名称 | 定位 |
+| --- | --- | --- | --- |
+| 标准版 | [`Custom_Clash.ini`](./Custom_Clash.ini) | Aethersailor 规则 标准版 Custom_Clash | 均衡的日常分流，建议多数用户优先选择 |
+| 标准 Fallback 版 | [`Custom_Clash_Fallback.ini`](./Custom_Clash_Fallback.ini) | — | 标准版策略组改为故障转移，减少人工切换 |
+| 轻量版 | [`Custom_Clash_Lite.ini`](./Custom_Clash_Lite.ini) | Aethersailor 规则 轻量版 Custom_Clash_Lite | 减少业务策略组，结构更简洁 |
+| 轻量 Fallback 版 | [`Custom_Clash_Lite_Fallback.ini`](./Custom_Clash_Lite_Fallback.ini) | — | 轻量结构与自动故障转移结合 |
+| 极简 GFW 版 | [`Custom_Clash_GFW.ini`](./Custom_Clash_GFW.ini) | Aethersailor 规则 极简版(GFW) Custom_Clash_GFW | 主要代理 GFW 相关流量，其余默认直连 |
+| 极简 GFW Fallback 版 | [`Custom_Clash_GFW_Fallback.ini`](./Custom_Clash_GFW_Fallback.ini) | — | 极简分流与自动故障转移结合 |
+| 重度分流版 | [`Custom_Clash_Full.ini`](./Custom_Clash_Full.ini) | Aethersailor 规则 重度分流版 Custom_Clash_Full | 更多业务、地区与节点用途分组 |
+| 重度分流 Fallback 版 | [`Custom_Clash_Full_Fallback.ini`](./Custom_Clash_Full_Fallback.ini) | — | 重度分流结构与自动故障转移结合 |
+
+目前只有 4 个**非 Fallback** 模板的远程链接已被 OpenClash 收录，可在内置模板列表中直接选择。4 个 Fallback 模板需要使用自定义模板地址。
+
+## 📊 版本区别
+
+### 标准版 `Custom_Clash`
+
+在常用业务分流、策略组数量和维护成本之间保持平衡，覆盖即时通讯、社交媒体、AI、GitHub、游戏平台、流媒体及常见海外服务。
+
+**建议：** 不确定如何选择时优先使用。
+
+### 轻量版 `Custom_Clash_Lite`
+
+减少独立业务策略组，保留基础代理、直连和常用服务分流。
+
+**建议：** 适合重视简洁、性能和低维护成本的用户。
+
+### 极简 GFW 版 `Custom_Clash_GFW`
+
+主要代理 GFW 列表及相关 IP，其他未命中流量默认直连。
+
+**建议：** 适合只需要基础代理，不需要细粒度业务分流的用户。
+
+### 重度分流版 `Custom_Clash_Full`
+
+提供更多业务策略组、国家和地区节点组，以及家宽、低倍率等节点用途分类。
+
+**建议：** 适合节点丰富并希望精确控制出口的进阶用户。
+
+## 🔁 普通版与 Fallback 版
+
+普通版的主要业务组使用 `select`，便于在面板中手工选择地区组、自动组或具体节点。
+
+Fallback 版的主要业务组使用 `fallback`，按候选顺序检测可用性并自动切换，减少人工干预。
+
+> [!WARNING]
+> `fallback` 只能根据健康检查判断连通性，不能判断节点是否具备特定流媒体、ChatGPT 或其他地区解锁能力。这里的 Fallback 也与 DNS Fallback 无关。
+
+## 🔄 使用订阅转换模板
+
+### 方法 A：选择 OpenClash 内置模板
+
+适用于 4 个非 Fallback 版本：
+
+1. 先按 Wiki 完成 OpenClash LuCI 设置。
+2. 进入 OpenClash 订阅管理，新增或编辑订阅。
+3. 启用在线订阅转换。
+4. 在模板列表中选择对应的 `Aethersailor 规则` 模板。
+5. 保存并更新订阅。
+6. 按本文末尾的验收清单检查运行状态。
+
+这种方式无需下载 `.ini`，也无需手工填写模板 URL。OpenClash 收录的是模板远程链接，模板本身仍由本仓库维护。
+
+### 方法 B：填写自定义模板地址
+
+适用于全部 8 个模板，尤其是尚未被 OpenClash 收录的 4 个 Fallback 版本：
+
+1. 在订阅设置中启用在线订阅转换。
+2. 选择自定义模板。
+3. 从[全部模板远程链接](#-全部模板远程链接)复制 GitHub Raw 或 testingcf 地址。
+4. 保存并更新订阅。
 
 > [!TIP]
-> 目前 8 个 `.ini` 模板中，4 个**非 Fallback 版本的远程链接**已经被 OpenClash 收录，可直接在 OpenClash 内置的订阅转换模板列表中选择。  
-> 4 个 Fallback 版本尚未被收录，使用时需要手工填写对应的远程模板地址。
+> 中国大陆网络环境通常优先尝试 testingcf 地址；GitHub Raw 可作为备用或用于自建转换后端。
 
-## 📁 目录说明
+### 关于转换后端
 
-### `.ini` 订阅转换模板
+订阅转换会将订阅地址和转换参数发送给所选后端。公共后端的稳定性、兼容性和隐私不由本项目控制。重视可靠性或隐私时，可以自建兼容的订阅转换服务。
 
-`cfg` 根目录包含 8 个 `.ini` 文件，由 4 个常规版本及其 Fallback 版本组成：
+`.ini` 文件不能直接上传到 OpenClash 作为运行配置。
 
-| 常规版本 | Fallback 版本 |
-| --- | --- |
-| [`Custom_Clash.ini`](./Custom_Clash.ini) | [`Custom_Clash_Fallback.ini`](./Custom_Clash_Fallback.ini) |
-| [`Custom_Clash_Lite.ini`](./Custom_Clash_Lite.ini) | [`Custom_Clash_Lite_Fallback.ini`](./Custom_Clash_Lite_Fallback.ini) |
-| [`Custom_Clash_GFW.ini`](./Custom_Clash_GFW.ini) | [`Custom_Clash_GFW_Fallback.ini`](./Custom_Clash_GFW_Fallback.ini) |
-| [`Custom_Clash_Full.ini`](./Custom_Clash_Full.ini) | [`Custom_Clash_Full_Fallback.ini`](./Custom_Clash_Full_Fallback.ini) |
-
-这些文件只定义订阅转换所需的规则、策略组及相关参数，本身不是可以直接启动 Mihomo / OpenClash 的完整 YAML 配置。
-
-### `yaml/` 配置文件
-
-[`yaml/`](./yaml) 目录提供与上述 8 个 `.ini` 模板对应的 OpenClash 专用最小 YAML 配置：
-
-| 对应 `.ini` 模板 | YAML 配置文件 |
-| --- | --- |
-| `Custom_Clash.ini` | [`Custom_Clash.yaml`](./yaml/Custom_Clash.yaml) |
-| `Custom_Clash_Fallback.ini` | [`Custom_Clash_Fallback.yaml`](./yaml/Custom_Clash_Fallback.yaml) |
-| `Custom_Clash_Lite.ini` | [`Custom_Clash_Lite.yaml`](./yaml/Custom_Clash_Lite.yaml) |
-| `Custom_Clash_Lite_Fallback.ini` | [`Custom_Clash_Lite_Fallback.yaml`](./yaml/Custom_Clash_Lite_Fallback.yaml) |
-| `Custom_Clash_GFW.ini` | [`Custom_Clash_GFW.yaml`](./yaml/Custom_Clash_GFW.yaml) |
-| `Custom_Clash_GFW_Fallback.ini` | [`Custom_Clash_GFW_Fallback.yaml`](./yaml/Custom_Clash_GFW_Fallback.yaml) |
-| `Custom_Clash_Full.ini` | [`Custom_Clash_Full.yaml`](./yaml/Custom_Clash_Full.yaml) |
-| `Custom_Clash_Full_Fallback.ini` | [`Custom_Clash_Full_Fallback.yaml`](./yaml/Custom_Clash_Full_Fallback.yaml) |
-
-相互对应的 `.ini` 与 `.yaml` 文件会尽量保持以下内容一致：
-
-- 规则内容与排列顺序
-- 策略组名称与用途
-- 节点地区分组
-- 常规版或 Fallback 版的策略行为
-- 各版本的功能定位和实际使用体验
-
-由于 `.ini` 需要经过订阅转换后端生成最终配置，而 YAML 文件本身已经是完整配置，因此两者不会逐字相同。
-
-此外，`yaml/` 目录还提供两份“自建节点优先、机场节点故障转移”配置：
-
-- [`Custom_Clash_Selfhosted_Manual_Fallback.yaml`](./yaml/Custom_Clash_Selfhosted_Manual_Fallback.yaml)：直接在 YAML 或覆写模块中填写静态节点参数。
-- [`Custom_Clash_Selfhosted_Provider_Fallback.yaml`](./yaml/Custom_Clash_Selfhosted_Provider_Fallback.yaml)：通过独立 `selfhost` Proxy Provider 加载自建节点订阅。
-
-这两份配置不对应根目录中的 `.ini` 模板。
-
-## 📊 版本对比
-
-| 版本 | 定位 | 分流复杂度 | 适合用户 |
-| --- | --- | :---: | --- |
-| `Custom_Clash` | 在功能完整度、策略组数量和维护成本之间保持平衡 | 中等 | 绝大多数用户，建议优先选择 |
-| `Custom_Clash_Lite` | 保留基础直连、代理及常用服务分流，减少策略组数量 | 较低 | 不需要大量流媒体解锁或细粒度分流的用户 |
-| `Custom_Clash_GFW` | 主要代理 GFW 列表及相关 IP，其余流量默认直连 | 极低 | 只需要基础代理能力、追求极简结构的用户 |
-| `Custom_Clash_Full` | 提供更多服务、地区和节点用途分组 | 较高 | 节点较多并需要精细控制的进阶用户 |
-
-### ⭐ 标准版：`Custom_Clash`
-
-覆盖常见即时通讯、社交媒体、AI 服务、GitHub、游戏平台、流媒体和海外服务，同时将策略组数量控制在相对合理的范围内。
-
-**适合：** 希望获得较完整的日常分流体验，但不想维护过多策略组的用户。
-
-### ⚡ 轻量版：`Custom_Clash_Lite`
-
-保留基础代理、直连、GitHub、Google、Apple、Microsoft、Steam 和游戏平台等常用分流，减少独立业务策略组。
-
-**适合：** 更重视简洁、性能和易维护性，不需要复杂流媒体分区的用户。
-
-### 🪶 极简版：`Custom_Clash_GFW`
-
-主要将 GFW 列表以及 Telegram、Facebook、Twitter 等相关 IP 流量交给代理，其余未命中流量默认直连。
-
-**适合：** 只需要“受阻流量走代理，其余流量直连”的用户。
-
-### 🧰 重度分流版：`Custom_Clash_Full`
-
-在标准版基础上增加更多独立服务策略组、地区节点组和节点用途分类，可进行更细致的策略控制，但配置规模和维护复杂度也更高。
-
-**适合：** 节点地区丰富，存在家宽、低倍率或特殊用途节点，并且需要针对不同服务精确选路的进阶用户。
-
-## 🔁 常规版与 Fallback 版
-
-每个版本均提供常规版和 Fallback 版，两者的主要区别是业务策略组类型。
-
-### 常规版
-
-常规版的主要业务策略组使用 `select`：
-
-- 可以在 OpenClash 面板中手工选择策略组、地区组或具体节点
-- 可以将自动选择组作为候选项
-- 用户对各业务出口拥有更直接的控制权
-
-### Fallback 版
-
-Fallback 版的主要业务策略组使用 `fallback`：
-
-- 按配置中的候选顺序进行健康检查
-- 自动使用首个可用的策略或节点
-- 当前候选不可用时自动切换到后续候选
-- 更侧重自动故障转移，减少人工切换
-
-> [!NOTE]
-> 此处的 Fallback 是指 Mihomo 的 `fallback` 策略组类型，与 DNS `fallback`、OpenClash 的备用 DNS 服务器或订阅转换后端无关。
-
-## 🔄 使用 `.ini` 订阅转换模板
-
-`.ini` 文件由订阅转换后端读取。转换后端会根据模板中的规则和策略组定义，将原始节点订阅生成完整的 Mihomo YAML 配置。
-
-> [!CAUTION]
-> `.ini` 文件不能直接上传到 OpenClash 作为运行配置。
-
-### 非 Fallback 模板：直接在 OpenClash 中选择
-
-以下 4 个非 Fallback 模板的**远程链接**已经被 OpenClash 收录：
-
-| 模板文件 | OpenClash 内置名称 |
-| --- | --- |
-| [`Custom_Clash.ini`](./Custom_Clash.ini) | `Aethersailor 规则 标准版 Custom_Clash` |
-| [`Custom_Clash_Lite.ini`](./Custom_Clash_Lite.ini) | `Aethersailor 规则 轻量版 Custom_Clash_Lite` |
-| [`Custom_Clash_GFW.ini`](./Custom_Clash_GFW.ini) | `Aethersailor 规则 极简版(GFW) Custom_Clash_GFW` |
-| [`Custom_Clash_Full.ini`](./Custom_Clash_Full.ini) | `Aethersailor 规则 重度分流版 Custom_Clash_Full` |
-
-使用方法：
-
-1. 进入 OpenClash 的订阅管理页面。
-2. 新增订阅，或编辑已有订阅。
-3. 启用 **在线订阅转换**。
-4. 在 OpenClash 内置的 **订阅转换模板** 列表中，选择对应的 `Aethersailor 规则` 模板。
-5. 保存设置并更新订阅配置。
-
-使用这些非 Fallback 模板时，无需下载 `.ini` 文件，也无需手工填写模板地址。
-
-> [!NOTE]
-> OpenClash 收录的是这些模板的远程链接，模板文件本身仍然托管并维护在本仓库中。
-
-### Fallback 模板：手工填写远程地址
-
-以下 4 个 Fallback 模板目前未被 OpenClash 内置列表收录。使用时需要在订阅设置中选择自定义模板，并填写对应地址。
-
-#### 标准 Fallback 版
-
-```text
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Fallback.ini
-```
-
-#### 轻量 Fallback 版
-
-```text
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Lite_Fallback.ini
-```
-
-#### 极简 GFW Fallback 版
-
-```text
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_GFW_Fallback.ini
-```
-
-#### 重度分流 Fallback 版
-
-```text
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Full_Fallback.ini
-```
-
-<details>
-<summary><strong>🔗 非 Fallback 模板的手工地址</strong></summary>
-
-<br>
-
-通常情况下，OpenClash 用户可以直接从内置列表中选择这些模板。以下地址主要用于自建 Subconverter、其他订阅转换工具、特殊调试场景，或 OpenClash 内置列表未正常显示时。
+## 🔗 全部模板远程链接
 
 ### 标准版
 
-```text
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash.ini
-```
+- GitHub Raw：
+
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash.ini
+  ```
+
+- testingcf 加速：
+
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash.ini
+  ```
+
+### 标准 Fallback 版
+
+- GitHub Raw：
+
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Fallback.ini
+  ```
+
+- testingcf 加速：
+
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Fallback.ini
+  ```
 
 ### 轻量版
 
-```text
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Lite.ini
-```
+- GitHub Raw：
 
-### 极简版
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Lite.ini
+  ```
 
-```text
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_GFW.ini
-```
+- testingcf 加速：
+
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Lite.ini
+  ```
+
+### 轻量 Fallback 版
+
+- GitHub Raw：
+
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Lite_Fallback.ini
+  ```
+
+- testingcf 加速：
+
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Lite_Fallback.ini
+  ```
+
+### 极简 GFW 版
+
+- GitHub Raw：
+
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_GFW.ini
+  ```
+
+- testingcf 加速：
+
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_GFW.ini
+  ```
+
+### 极简 GFW Fallback 版
+
+- GitHub Raw：
+
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_GFW_Fallback.ini
+  ```
+
+- testingcf 加速：
+
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_GFW_Fallback.ini
+  ```
 
 ### 重度分流版
 
-```text
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Full.ini
-```
+- GitHub Raw：
 
-</details>
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Full.ini
+  ```
 
-## 📄 使用 YAML 配置文件
+- testingcf 加速：
 
-YAML 配置文件不需要经过订阅转换。文件中仅保留节点来源、策略组、规则提供者和分流规则；端口、DNS、IPv6、TUN、嗅探、GeoData、日志及控制器等运行参数由 OpenClash LuCI 生成。
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Full.ini
+  ```
 
-使用方法：
+### 重度分流 Fallback 版
 
-1. 从 [`yaml/`](./yaml) 目录下载所需版本。
-2. 打开 YAML 文件，找到以下位置：
+- GitHub Raw：
 
-   ```yaml
-   proxy-providers:
-     provider1:
-       url: "url"
-   ```
+  ```text
+  https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Full_Fallback.ini
+  ```
 
-3. 将 `"url"` 替换为自己的节点订阅地址。
-4. 将修改后的 YAML 文件上传到 OpenClash 配置管理页面。
-5. 执行配置检查，选择该配置文件并启动 OpenClash。
+- testingcf 加速：
 
-多订阅用户可以复制 `provider1`，依次命名为 `provider2`、`provider3`，并将新增 Provider 加入各策略组的 `use` 列表。
+  ```text
+  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Full_Fallback.ini
+  ```
 
-> [!WARNING]
-> 订阅地址通常包含访问凭证。不要将填写真实订阅地址后的 YAML 文件上传到公开仓库、公开网盘或公开 Issue。
 
-### YAML 配置的特点
+## 📄 YAML 与远程覆写模块
 
-- 不依赖在线订阅转换后端
-- 节点由 `proxy-providers` 独立更新
-- 配置结构精简，不预设 OpenClash LuCI 管理的运行参数
-- OpenClash LuCI 是端口、DNS、IPv6、TUN、嗅探等运行参数的唯一配置入口
-- 规则、策略组与 Provider 仍可通过仓库更新持续维护
+本目录不重复展开 YAML 文件细节：
 
-## 🧩 自建节点优先配置
+- 查看 8 个常规 YAML、两个自建节点版本和完整参考模板：[`yaml/README.md`](./yaml/README.md)
+- 使用模块变量填写订阅并自动调用远程 YAML：[`../overwrite/yaml/README.md`](../overwrite/yaml/README.md)
 
-两份自建节点配置均以自建线路作为主要出口，并以机场订阅作为故障转移后备。它们使用相同的策略组和分流规则，区别仅在于自建节点的导入方式。
+## ✅ 最终验收
 
-### 手工节点版
+选择任一使用路径后，至少确认：
 
-[`Custom_Clash_Selfhosted_Manual_Fallback.yaml`](./yaml/Custom_Clash_Selfhosted_Manual_Fallback.yaml) 内置一个静态节点示例，适合直接填写 Mihomo 节点参数，或通过覆写模块逐字段替换节点内容。
+- OpenClash 配置检查通过，Mihomo 内核正常启动；
+- 订阅或 Proxy Provider 更新成功，策略组中存在预期节点；
+- 规则集和策略组完整加载，日志无明显转换、下载、覆写或 YAML 错误；
+- 国内直连、海外代理、DNS、IPv6 和流量接管行为符合 Wiki 设置及个人预期；
+- 使用 Fallback 版本时，必要时测试主候选失效后的切换；
+- 保存一份已验证可用的配置作为回退。
 
-### Provider 版
-
-[`Custom_Clash_Selfhosted_Provider_Fallback.yaml`](./yaml/Custom_Clash_Selfhosted_Provider_Fallback.yaml) 使用独立的 `selfhost` Proxy Provider，适合加载以下 HTTP 节点来源：
-
-- Mihomo YAML Provider，内容以 `proxies:` 开头
-- 逐行排列的节点 URI 订阅
-- 上述 URI 订阅的 Base64 编码内容
-
-单条 `vless://`、`hysteria2://`、`tuic://` 等节点链接不能直接作为 HTTP Provider 地址；应先通过可信的本地转换服务生成可访问的订阅 URL，再写入 `selfhost.url`。
-
-> [!WARNING]
-> 自建节点链接通常包含服务器地址和认证凭据。通过公共转换服务处理单条节点链接时，服务端能够看到完整链接；优先使用自建转换服务或自行托管的 Provider 文件。
-
-## ⚠️ 注意事项
-
-- 所有常规模板和 YAML 配置均面向 **Mihomo（Clash Meta）/ OpenClash**。
-- `.ini` 模板会重新生成策略组与规则，不应依赖机场订阅中原有的规则结构。
-- YAML 文件中的 Provider 地址应按实际情况填写；端口、DNS、IPv6、TUN、嗅探和控制器等运行参数应在 OpenClash LuCI 中配置。
-- Fallback 版本依赖健康检查结果；检测地址不可达或网络异常时，可能影响故障转移判断。
-- 节点地区分组依赖节点名称匹配，命名异常的节点可能无法进入预期地区组。
-- 最终生成和运行效果还会受到订阅内容、转换后端、OpenClash 版本、Mihomo 内核、GeoSite / GeoIP 数据以及覆写设置影响。
-- 已自行编写规则、覆写或脚本的用户，应确认其中引用的策略组名称与所选版本一致。
-- 更新配置前建议保留当前可用配置，以便出现兼容性问题时回退。
-- 本项目不提供代理节点、机场订阅或订阅转换服务。
-
-## 📚 配套设置与文档
-
-本目录只提供订阅转换模板和 YAML 配置文件。OpenClash 的 DNS、IPv6、运行模式及其他配套设置，请参阅项目 Wiki：
+## 📚 相关文档
 
 - [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)
+- [`yaml/` 配置文件说明](./yaml/README.md)
+- [`overwrite/yaml/` 远程 YAML 覆写模块](../overwrite/yaml/README.md)
 - [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki)
 
 ---
 
 <div align="center">
 
-模板、配置文件与规则会持续维护，请以仓库 `main` 分支中的最新版本为准。
+请以仓库 `main` 分支中的最新文件为准。
 
 </div>
