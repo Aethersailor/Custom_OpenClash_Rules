@@ -1,14 +1,17 @@
 # Custom_OpenClash_Rules
-# OpenClash 专用最小 YAML 配置文件（自建节点优先 + 机场故障转移版）
+# OpenClash 专用最小 YAML 配置文件（自建节点 Provider 优先 + 机场故障转移版）
 # 项目地址：https://github.com/Aethersailor/Custom_OpenClash_Rules
-# 本文件仅定义节点来源、静态节点、策略组、规则提供者与分流规则。
+# 本文件仅定义节点来源、策略组、规则提供者与分流规则。
 # 端口、运行模式、DNS、IPv6、TUN、嗅探、GeoData、日志及控制器等参数全部由 OpenClash LuCI 管理。
 # 建议先按照项目 Wiki 完成 OpenClash 设置，再加载本配置。
-# 固定自建节点作为主要代理出口，provider1 机场订阅作为后备。
+# selfhost Provider 中的自建节点作为主要代理出口，provider1 机场订阅作为后备。
+# selfhost.url 必须指向 Mihomo 可识别的 HTTP 节点订阅；支持 YAML、URI 列表或 Base64 内容。
+# 单条节点链接需先转换为可通过 HTTP 获取的订阅地址，再由覆写模块写入 selfhost.url。
 # fallback 仅检测连通性，无法判断流媒体或 AI 服务的地区解锁能力。
 
 # ==================== 代理提供者 Proxy Providers ====================
-# provider1 用于加载机场订阅；多订阅用户可复制并依次命名为 provider2、provider3……
+# provider1 用于加载机场订阅，selfhost 用于加载自建节点订阅。
+# 多机场订阅用户可复制 provider1 并依次命名为 provider2、provider3……
 # 新增 Provider 后，还需将其加入相关策略组的 use 列表。
 proxy-providers:
   provider1:
@@ -34,31 +37,19 @@ proxy-providers:
       # additional-prefix: "[provider1]"
       # additional-suffix: "test"
 
-# ==================== 自建节点 Proxies ====================
-# 使用前必须替换 server、port、uuid、servername、public-key 和 short-id。
-# 当前示例参数不对应任何真实服务器；未修改时该节点不可用，fallback 将自动回落机场。
-proxies:
-  - name: "🏴‍☠️ 自建节点 01"
-    type: vless
-    server: selfhost.example.com  # 必须替换为自建服务器地址
-    port: 443 # 按服务端实际端口修改
-    uuid: "00000000-0000-0000-0000-000000000000" # 必须替换为真实 UUID
-    udp: true
-    flow: xtls-rprx-vision
-    packet-encoding: xudp
-    tls: true
-    servername: example.com  # 必须与 Reality 服务端配置一致
-    client-fingerprint: chrome
-    skip-cert-verify: false
-    reality-opts:
-      public-key: "Om7RMGbRUZjtJ9a3caJYod2dVYo-WfJNV5-C_QlvPmw"  # 示例占位值，必须替换
-      short-id: "0123456789abcdef" # 示例占位值，必须替换
-    encryption: ""
-    network: tcp
+  selfhost:
+    type: http
+    url: "url"  # 填入自建节点订阅地址，或单条节点链接经转换后得到的订阅地址
+    interval: 3600  # 订阅更新间隔，单位：秒
+    path: ./proxy_provider/selfhost.yaml
+    proxy: DIRECT  # 下载订阅时使用的策略
+    # 为自建节点统一添加前缀，降低与机场节点重名的概率
+    override:
+      additional-prefix: "🏴‍☠️ "
 
 # ==================== 代理策略组 Proxy Groups ====================
 # 基于标准故障转移版的策略组结构；代理型 fallback 统一优先使用自建节点，机场分组保持原顺序后备。
-# provider1 仅承载机场订阅；公共节点过滤继续在 Provider 层统一完成。
+# selfhost 仅承载自建节点，provider1 仅承载机场订阅；公共机场节点过滤继续在 provider1 层统一完成。
 # fallback 组显式配置健康检查参数，并按候选顺序选择首个可用项。
 proxy-groups:
   - name: "🚀 手动选择"
@@ -82,8 +73,8 @@ proxy-groups:
     expected-status: 204
   - name: "🏴‍☠️ 自建节点"
     type: url-test
-    proxies:
-      - "🏴‍☠️ 自建节点 01"
+    use:
+      - selfhost
     url: https://cp.cloudflare.com/generate_204
     interval: 300
     timeout: 5000
