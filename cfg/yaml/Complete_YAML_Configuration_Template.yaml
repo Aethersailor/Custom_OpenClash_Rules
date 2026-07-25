@@ -1,7 +1,7 @@
 # Custom_OpenClash_Rules
-# OpenClash YAML 配置文件
+# Mihomo YAML 完整配置文件
 # 项目地址：https://github.com/Aethersailor/Custom_OpenClash_Rules
-# 本文件面向 OpenClash 使用；部分运行参数可能被 OpenClash 设置覆写。
+# 本配置文件用于示例目的，演示基于 Custom_Clash.ini 模板生成的 Yaml 完全体，并使用注释解释参数，不建议直接使用。
 
 # ==================== 端口配置 Port Configuration ====================
 # HTTP 代理端口
