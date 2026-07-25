@@ -14,7 +14,7 @@
 > 本目录提供两类用途不同的配置文件：
 >
 > - 根目录中的 `.ini` 文件是 **订阅转换模板**，由 Subconverter 等转换后端读取，用于生成最终的 Mihomo 配置。
-> - [`yaml/`](./yaml) 目录中的 `.yaml` 文件是 **可供 Mihomo / OpenClash 使用的完整配置文件**，通过 `proxy-providers` 加载订阅节点。
+> - [`yaml/`](./yaml) 目录中的 `.yaml` 文件是 **面向 OpenClash 的最小配置文件**，仅保留节点来源、策略组、规则提供者与分流规则；运行参数由 OpenClash LuCI 管理。
 >
 > 两类文件的使用方式不同，不能相互替代；同名版本的规则、策略组和使用体验则尽量保持一致。
 
@@ -39,7 +39,7 @@
 
 ### `yaml/` 配置文件
 
-[`yaml/`](./yaml) 目录提供与上述 8 个 `.ini` 模板对应的完整 YAML 配置：
+[`yaml/`](./yaml) 目录提供与上述 8 个 `.ini` 模板对应的 OpenClash 专用最小 YAML 配置：
 
 | 对应 `.ini` 模板 | YAML 配置文件 |
 | --- | --- |
@@ -62,7 +62,12 @@
 
 由于 `.ini` 需要经过订阅转换后端生成最终配置，而 YAML 文件本身已经是完整配置，因此两者不会逐字相同。
 
-此外，`yaml/` 目录中还包含独立的 [`Custom_Clash_DIY&Airport.yaml`](./yaml/Custom_Clash_DIY&Airport.yaml)。该文件用于“自建节点优先、机场节点故障转移”的特定场景，不属于上述 8 个相互对应的常规版本。
+此外，`yaml/` 目录还提供两份“自建节点优先、机场节点故障转移”配置：
+
+- [`Custom_Clash_Selfhosted_Manual_Fallback.yaml`](./yaml/Custom_Clash_Selfhosted_Manual_Fallback.yaml)：直接在 YAML 或覆写模块中填写静态节点参数。
+- [`Custom_Clash_Selfhosted_Provider_Fallback.yaml`](./yaml/Custom_Clash_Selfhosted_Provider_Fallback.yaml)：通过独立 `selfhost` Proxy Provider 加载自建节点订阅。
+
+这两份配置不对应根目录中的 `.ini` 模板。
 
 ## 📊 版本对比
 
@@ -215,7 +220,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 
 ## 📄 使用 YAML 配置文件
 
-YAML 配置文件不需要经过订阅转换。文件中已经包含策略组、规则、DNS、嗅探、GeoData 和常用运行参数，并通过 `proxy-providers` 加载节点订阅。
+YAML 配置文件不需要经过订阅转换。文件中仅保留节点来源、策略组、规则提供者和分流规则；端口、DNS、IPv6、TUN、嗅探、GeoData、日志及控制器等运行参数由 OpenClash LuCI 生成。
 
 使用方法：
 
@@ -241,26 +246,36 @@ YAML 配置文件不需要经过订阅转换。文件中已经包含策略组、
 
 - 不依赖在线订阅转换后端
 - 节点由 `proxy-providers` 独立更新
-- 可以直接检查和维护完整配置结构
-- 包含较完整的 Mihomo 运行参数
-- 部分端口、DNS、TUN 和运行参数可能被 OpenClash 设置覆写
+- 配置结构精简，不预设 OpenClash LuCI 管理的运行参数
+- OpenClash LuCI 是端口、DNS、IPv6、TUN、嗅探等运行参数的唯一配置入口
+- 规则、策略组与 Provider 仍可通过仓库更新持续维护
 
-## 🧩 `Custom_Clash_DIY&Airport.yaml`
+## 🧩 自建节点优先配置
 
-[`Custom_Clash_DIY&Airport.yaml`](./yaml/Custom_Clash_DIY&Airport.yaml) 面向以下特定使用场景：
+两份自建节点配置均以自建线路作为主要出口，并以机场订阅作为故障转移后备。它们使用相同的策略组和分流规则，区别仅在于自建节点的导入方式。
 
-- 自建节点作为优先出口
-- 机场订阅作为故障转移备用
-- 自建线路承担主要解锁和分流任务
-- 不同业务按照预设地区顺序自动回落
+### 手工节点版
 
-该文件需要分别填写机场订阅和自建节点订阅，并未完整配置所有 DNS、IPv6 等运行参数。它属于独立的进阶配置，不对应根目录中的某个 `.ini` 模板。
+[`Custom_Clash_Selfhosted_Manual_Fallback.yaml`](./yaml/Custom_Clash_Selfhosted_Manual_Fallback.yaml) 内置一个静态节点示例，适合直接填写 Mihomo 节点参数，或通过覆写模块逐字段替换节点内容。
+
+### Provider 版
+
+[`Custom_Clash_Selfhosted_Provider_Fallback.yaml`](./yaml/Custom_Clash_Selfhosted_Provider_Fallback.yaml) 使用独立的 `selfhost` Proxy Provider，适合加载以下 HTTP 节点来源：
+
+- Mihomo YAML Provider，内容以 `proxies:` 开头
+- 逐行排列的节点 URI 订阅
+- 上述 URI 订阅的 Base64 编码内容
+
+单条 `vless://`、`hysteria2://`、`tuic://` 等节点链接不能直接作为 HTTP Provider 地址；应先通过可信的本地转换服务生成可访问的订阅 URL，再写入 `selfhost.url`。
+
+> [!WARNING]
+> 自建节点链接通常包含服务器地址和认证凭据。通过公共转换服务处理单条节点链接时，服务端能够看到完整链接；优先使用自建转换服务或自行托管的 Provider 文件。
 
 ## ⚠️ 注意事项
 
 - 所有常规模板和 YAML 配置均面向 **Mihomo（Clash Meta）/ OpenClash**。
 - `.ini` 模板会重新生成策略组与规则，不应依赖机场订阅中原有的规则结构。
-- YAML 文件中的订阅地址、端口、DNS、IPv6、TUN 和控制器设置应根据实际环境检查。
+- YAML 文件中的 Provider 地址应按实际情况填写；端口、DNS、IPv6、TUN、嗅探和控制器等运行参数应在 OpenClash LuCI 中配置。
 - Fallback 版本依赖健康检查结果；检测地址不可达或网络异常时，可能影响故障转移判断。
 - 节点地区分组依赖节点名称匹配，命名异常的节点可能无法进入预期地区组。
 - 最终生成和运行效果还会受到订阅内容、转换后端、OpenClash 版本、Mihomo 内核、GeoSite / GeoIP 数据以及覆写设置影响。
