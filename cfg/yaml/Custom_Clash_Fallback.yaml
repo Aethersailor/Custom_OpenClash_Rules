@@ -36,7 +36,7 @@ proxy-providers:
 # 策略组候选顺序、分组类型与当前 Custom_Clash_Fallback.ini 保持一致；公共节点过滤在 provider1 层统一完成。
 # fallback 组显式补齐健康检查参数，按候选顺序选择首个可用项。
 proxy-groups:
-  - name: "🚀 手动选择"
+  - name: "🚀 故障转移"
     type: fallback
     proxies:
       - "🇭🇰 香港节点"
@@ -315,7 +315,7 @@ proxy-groups:
     type: fallback
     proxies:
       - "🇼🇸 台湾节点"
-      - "🚀 手动选择"
+      - "🚀 故障转移"
       - "🎯 全球直连"
     exclude-filter: '(?i)(?:🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC)'
     use:
@@ -611,8 +611,8 @@ rules:
   - "RULE-SET,Custom_Direct_Domain,🎯 全球直连"
   - "RULE-SET,Custom_Direct_IP,🎯 全球直连,no-resolve"
   - "RULE-SET,Custom_Direct_Port,🎯 全球直连"
-  - "RULE-SET,Custom_Proxy_Domain,🚀 手动选择"
-  - "RULE-SET,Custom_Proxy_IP,🚀 手动选择,no-resolve"
+  - "RULE-SET,Custom_Proxy_Domain,🚀 故障转移"
+  - "RULE-SET,Custom_Proxy_IP,🚀 故障转移,no-resolve"
   - "GEOSITE,google-cn,🎯 全球直连"
   - "GEOSITE,category-games@cn,🎯 全球直连"
   - "RULE-SET,Steam_CDN_Domain,🎯 全球直连"
@@ -643,7 +643,7 @@ rules:
   - "GEOSITE,category-games,🎮 游戏平台"
   - "GEOSITE,category-entertainment,🌎 国外媒体"
   - "GEOSITE,category-ecommerce,🛒 国外电商"
-  - "GEOSITE,gfw,🚀 手动选择"
+  - "GEOSITE,gfw,🚀 故障转移"
   - "GEOIP,telegram,💬 即时通讯,no-resolve"
   - "GEOIP,twitter,🌐 社交媒体,no-resolve"
   - "GEOIP,facebook,🌐 社交媒体,no-resolve"
