@@ -1,5 +1,5 @@
 # Custom_OpenClash_Rules
-# OpenClash YAML 配置文件（重度分流版）
+# OpenClash YAML 配置文件（重度分流故障转移版）
 # 项目地址：https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 本文件面向 OpenClash 使用；部分运行参数可能被 OpenClash 设置覆写。
 
@@ -168,12 +168,12 @@ dns:
     - tls://120.53.53.53
 
 # ==================== 代理策略组 Proxy Groups ====================
-# 策略组候选顺序、分组类型与当前 Custom_Clash_Full.ini 保持一致；公共节点过滤在 provider1 层统一完成。
+# 策略组候选顺序、分组类型与当前 Custom_Clash_Full_Fallback.ini 保持一致；公共节点过滤在 provider1 层统一完成。
+# fallback 组显式补齐健康检查参数，按候选顺序选择首个可用项。
 proxy-groups:
   - name: "🚀 手动选择"
-    type: select
+    type: fallback
     proxies:
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -190,6 +190,12 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "♻️ 自动选择"
     type: url-test
     use:
@@ -198,10 +204,8 @@ proxy-groups:
     interval: 300
     tolerance: 50
   - name: "💬 即时通讯"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -218,11 +222,15 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🌐 社交媒体"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -239,11 +247,15 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "📞 Talkatone"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -260,11 +272,15 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🚀 GitHub"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -281,16 +297,20 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
       - "🎯 全球直连"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🤖 ChatGPT"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "🇨🇦 加拿大节点"
@@ -303,15 +323,19 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🤖 Copilot"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "🇨🇦 加拿大节点"
@@ -324,15 +348,19 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🤖 AI服务"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "🇨🇦 加拿大节点"
@@ -345,11 +373,15 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🎶 TikTok"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -366,15 +398,19 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "📹 YouTube"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "🇨🇦 加拿大节点"
@@ -387,15 +423,19 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🎥 Netflix"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "🇨🇦 加拿大节点"
@@ -408,15 +448,19 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🎥 DisneyPlus"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "🇨🇦 加拿大节点"
@@ -429,15 +473,19 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🎥 HBO"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "🇨🇦 加拿大节点"
@@ -450,15 +498,19 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🎥 PrimeVideo"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "🇨🇦 加拿大节点"
@@ -471,15 +523,19 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🎥 AppleTV+"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "🇨🇦 加拿大节点"
@@ -492,17 +548,19 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
-      - "🎯 全球直连"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🎥 Emby"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
-      - "🎯 全球直连"
+      - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
-      - "🇸🇬 新加坡节点"
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "🇨🇦 加拿大节点"
@@ -515,16 +573,19 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🎻 Spotify"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
-      - "🎯 全球直连"
+      - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
-      - "🇸🇬 新加坡节点"
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "🇨🇦 加拿大节点"
@@ -537,17 +598,26 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "📺 Bahamut"
-    type: select
+    type: fallback
     proxies:
       - "🇼🇸 台湾节点"
       - "🚀 手动选择"
       - "🎯 全球直连"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🌎 国外媒体"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -564,11 +634,15 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🛒 国外电商"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -585,32 +659,15 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
-  - name: "🪙 加密货币"
-    type: select
-    proxies:
-      - "🚀 手动选择"
       - "♻️ 自动选择"
-      - "🇭🇰 香港节点"
-      - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
-      - "🇸🇬 新加坡节点"
-      - "🇼🇸 台湾节点"
-      - "🇰🇷 韩国节点"
-      - "🇨🇦 加拿大节点"
-      - "🇬🇧 英国节点"
-      - "🇫🇷 法国节点"
-      - "🇩🇪 德国节点"
-      - "🇳🇱 荷兰节点"
-      - "🇹🇷 土耳其节点"
-      - "🇷🇺 俄罗斯节点"
-      - "🌐 其他地区"
-      - "🏠 家宽节点"
-      - "🐢 低倍率节点"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "📢 谷歌FCM"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -627,11 +684,15 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🇬 谷歌服务"
-    type: select
+    type: fallback
     proxies:
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -648,12 +709,16 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🍎 苹果服务"
     type: select
     proxies:
       - "🎯 全球直连"
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -670,12 +735,11 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
   - name: "Ⓜ️ 微软服务"
     type: select
     proxies:
       - "🎯 全球直连"
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -692,12 +756,11 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
   - name: "💾 OneDrive"
     type: select
     proxies:
       - "🎯 全球直连"
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -714,12 +777,11 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
   - name: "💳 PayPal"
     type: select
     proxies:
       - "🎯 全球直连"
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -736,12 +798,11 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
   - name: "🎮 游戏平台"
     type: select
     proxies:
       - "🎯 全球直连"
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -758,12 +819,11 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
   - name: "🎮 Steam"
     type: select
     proxies:
       - "🎯 全球直连"
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -780,8 +840,9 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
   - name: "⏬ PT站点"
-    type: select
+    type: fallback
     proxies:
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
@@ -799,15 +860,17 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
-      - "🚀 手动选择"
       - "♻️ 自动选择"
       - "🎯 全球直连"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🚀 测速工具"
     type: select
     proxies:
       - "🎯 全球直连"
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -824,12 +887,10 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
   - name: "🐟 漏网之鱼"
-    type: select
+    type: fallback
     proxies:
-      - "🎯 全球直连"
-      - "🚀 手动选择"
-      - "♻️ 自动选择"
       - "🇭🇰 香港节点"
       - "🇺🇸 美国节点"
       - "🇯🇵 日本节点"
@@ -846,6 +907,12 @@ proxy-groups:
       - "🌐 其他地区"
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🔀 非标端口"
     type: select
     proxies:

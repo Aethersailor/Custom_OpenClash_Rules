@@ -1,5 +1,5 @@
 # Custom_OpenClash_Rules
-# OpenClash YAML 配置文件（极简 GFW 版）
+# OpenClash YAML 配置文件（极简 GFW 故障转移版）
 # 项目地址：https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 本文件面向 OpenClash 使用；部分运行参数可能被 OpenClash 设置覆写。
 
@@ -168,14 +168,20 @@ dns:
     - tls://120.53.53.53
 
 # ==================== 代理策略组 Proxy Groups ====================
-# 策略组候选顺序、分组类型与当前 Custom_Clash_GFW.ini 保持一致；公共节点过滤在 provider1 层统一完成。
+# 策略组候选顺序、分组类型与当前 Custom_Clash_GFW_Fallback.ini 保持一致；公共节点过滤在 provider1 层统一完成。
+# fallback 组显式补齐健康检查参数，按候选顺序选择首个可用项。
 proxy-groups:
   - name: "🚀 手动选择"
-    type: select
+    type: fallback
     proxies:
       - "♻️ 自动选择"
     use:
       - provider1
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "♻️ 自动选择"
     type: url-test
     use:
