@@ -15,7 +15,7 @@ proxy-providers:
     interval: 3600  # 订阅更新间隔，单位：秒
     path: ./proxy_provider/provider1.yaml
     proxy: DIRECT  # 下载订阅时使用的策略
-    # 在 Provider 层统一排除公告、流量、到期等非节点条目，避免各策略组重复配置
+    # 在 Provider 层统一排除公告、流量、到期等非节点条目
     filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
     header:  # 可选：自定义 HTTP 请求头
     health-check:
@@ -33,13 +33,11 @@ proxy-providers:
       # additional-suffix: "test"
 
 # ==================== 代理策略组 Proxy Groups ====================
-# 策略组候选顺序、分组类型与当前 Custom_Clash_GFW_Fallback.ini 保持一致；公共节点过滤在 provider1 层统一完成。
-# fallback 组显式补齐健康检查参数，按候选顺序选择首个可用项。
+# 故障转移组直接使用 provider1 中的全部有效节点，按订阅中的节点顺序选择首个可用项。
+# 不再嵌套引用同一 Provider 的 url-test 组，避免同一批节点被重复组织。
 proxy-groups:
-  - name: "🚀 手动选择"
+  - name: "🚀 故障转移"
     type: fallback
-    proxies:
-      - "♻️ 自动选择"
     use:
       - provider1
     url: https://cp.cloudflare.com/generate_204
@@ -47,13 +45,7 @@ proxy-groups:
     timeout: 5000
     lazy: false
     expected-status: 204
-  - name: "♻️ 自动选择"
-    type: url-test
-    use:
-      - provider1
-    url: https://cp.cloudflare.com/generate_204
-    interval: 300
-    tolerance: 50
+
   - name: "🎯 全球直连"
     type: url-test
     proxies:
@@ -73,8 +65,8 @@ rule-providers: {}
 # 规则自上而下匹配，命中首条规则后停止。
 # no-resolve 用于 IP 类规则，避免为规则匹配额外触发 DNS 解析。
 rules:
-  - "GEOSITE,gfw,🚀 手动选择"
-  - "GEOIP,telegram,🚀 手动选择,no-resolve"
-  - "GEOIP,facebook,🚀 手动选择,no-resolve"
-  - "GEOIP,twitter,🚀 手动选择,no-resolve"
+  - "GEOSITE,gfw,🚀 故障转移"
+  - "GEOIP,telegram,🚀 故障转移,no-resolve"
+  - "GEOIP,facebook,🚀 故障转移,no-resolve"
+  - "GEOIP,twitter,🚀 故障转移,no-resolve"
   - "MATCH,🎯 全球直连"
