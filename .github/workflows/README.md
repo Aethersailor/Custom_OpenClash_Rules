@@ -15,6 +15,5 @@
 | **[dependabot-auto-merge.yml](dependabot-auto-merge.yml)** | 自动合并带有 `automerge` 标签的 Dependabot PR | Dependabot PR 打开/更新 |
 | **[pages.yml](pages.yml)** | 构建并部署 MkDocs 文档站点到 GitHub Pages | `wiki/**`、`mkdocs.yml` 变更 / 手动触发 |
 | **[purge-jsdelivr.yml](purge-jsdelivr.yml)** | 在规则生成或公开文件变化后刷新 jsDelivr 缓存 | 相关生成工作流完成、公开文件变更 / 手动触发 |
-| **[push-doc-to-wiki.yml](push-doc-to-wiki.yml)** | 将 `doc/` 同步到 GitHub Wiki，并触发 Wiki 备份与 Pages 部署 | `doc/**` 变更 / 手动触发 |
 | **[sync-openclash-overwrite-submodule.yml](sync-openclash-overwrite-submodule.yml)** | 同步两个 `OpenClash_Overwrite` 子模块入口 | 每日 / 手动触发 |
 | **[validate.yml](validate.yml)** | 校验 Shell、Python、Sub-Store、Wiki 备份、规则派生文件、MRS 和完整 Mihomo 模板 | Push / Pull Request / 手动触发 |
