@@ -1,0 +1,222 @@
+name: Temporary game-platform package build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out locked repository revision
+        uses: actions/checkout@v4
+        with:
+          ref: 91e61549535d05c835b943f102d404072f217489
+          fetch-depth: 1
+
+      - name: Install YAML validators
+        run: python -m pip install --disable-pip-version-check pyyaml ruamel.yaml
+
+      - name: Modify and validate templates
+        shell: bash
+        run: |
+          python <<'PY'
+          from __future__ import annotations
+
+          import hashlib
+          import re
+          from pathlib import Path
+
+          import yaml
+          from ruamel.yaml import YAML
+
+          ROOT = Path.cwd()
+          OUT = ROOT / "artifact"
+          FILES = [
+              Path("cfg/Custom_Clash.ini"),
+              Path("cfg/Custom_Clash_Lite.ini"),
+              Path("cfg/Custom_Clash_Full.ini"),
+              Path("cfg/yaml/Custom_Clash.yaml"),
+              Path("cfg/yaml/Custom_Clash_Lite.yaml"),
+              Path("cfg/yaml/Custom_Clash_Full.yaml"),
+          ]
+          EXPECTED_BLOBS = {
+              "cfg/Custom_Clash.ini": "33937c37aced5837fde3aea70af22cbb117259c6",
+              "cfg/Custom_Clash_Lite.ini": "d55027ff81d08b2958d5567c5c274736b8f1ba7c",
+              "cfg/Custom_Clash_Full.ini": "1890cecb4f607c6bd4bc128784b796b5d5f8390c",
+              "cfg/yaml/Custom_Clash.yaml": "7dbcdd408470f691b860fcf0b49f0120a555f832",
+              "cfg/yaml/Custom_Clash_Lite.yaml": "ee0261c4db5fbf0986b27a27de015262bed4439a",
+              "cfg/yaml/Custom_Clash_Full.yaml": "7b09dec464119493c0159f1bfab3e9ea75e9589b",
+          }
+
+          def git_blob_sha(data: bytes) -> str:
+              return hashlib.sha1(f"blob {len(data)}\0".encode() + data).hexdigest()
+
+          def split_line(line: str) -> tuple[str, str]:
+              if line.endswith("\r\n"):
+                  return line[:-2], "\r\n"
+              if line.endswith("\n"):
+                  return line[:-1], "\n"
+              return line, ""
+
+          def transform_ini(text: str, path: str) -> str:
+              lines = text.splitlines(keepends=True)
+              indexes = [i for i, line in enumerate(lines) if line.startswith("custom_proxy_group=🎮 游戏平台`select`")]
+              if len(indexes) != 1:
+                  raise AssertionError(f"{path}: expected one active game-platform group, got {len(indexes)}")
+              i = indexes[0]
+              old, nl = split_line(lines[i])
+              old_filter = old.rsplit("`", 1)[1]
+              if old_filter == ".*":
+                  raise AssertionError(f"{path}: group already exposes all nodes")
+              new = old.rsplit("`", 1)[0] + "`.*"
+              replacement = [
+                  "; 🎮 游戏平台：旧版去重配置，保留用于快速回退。" + nl,
+                  "; 如需恢复，请注释下方当前配置，并取消注释此行。" + nl,
+                  "; " + old + nl,
+                  "; 当前配置：显示订阅 Provider 中的全部有效节点。" + nl,
+                  new + nl,
+              ]
+              result = "".join(lines[:i] + replacement + lines[i + 1:])
+              active = [line for line in result.splitlines() if line.startswith("custom_proxy_group=🎮 游戏平台`select`")]
+              if len(active) != 1 or not active[0].endswith("`.*"):
+                  raise AssertionError(f"{path}: active line validation failed")
+              if result.count("; custom_proxy_group=🎮 游戏平台`select`") != 1:
+                  raise AssertionError(f"{path}: rollback line validation failed")
+              return result
+
+          def transform_yaml(text: str, path: str) -> str:
+              lines = text.splitlines(keepends=True)
+              starts = [i for i, line in enumerate(lines) if line.strip() == '- name: "🎮 游戏平台"' and line.startswith("  -")]
+              if len(starts) != 1:
+                  raise AssertionError(f"{path}: expected one active game-platform group, got {len(starts)}")
+              start = starts[0]
+              next_starts = [i for i in range(start + 1, len(lines)) if lines[i].startswith("  - name: ")]
+              if not next_starts:
+                  raise AssertionError(f"{path}: cannot find group end")
+              next_start = next_starts[0]
+              core_end = next_start
+              while core_end > start and not lines[core_end - 1].strip():
+                  core_end -= 1
+              core = lines[start:core_end]
+              separator = lines[core_end:next_start]
+              exclude_indexes = [i for i, line in enumerate(core) if re.match(r"^\s+exclude-filter:", line)]
+              if len(exclude_indexes) != 1:
+                  raise AssertionError(f"{path}: expected one active exclude-filter")
+              if not any(line.strip() == "- provider1" for line in core):
+                  raise AssertionError(f"{path}: group does not use provider1")
+              _, nl = split_line(core[0])
+              commented = []
+              for line in core:
+                  raw, line_nl = split_line(line)
+                  commented.append(("  # " + raw[2:] if raw.startswith("  ") else "# " + raw) + line_nl)
+              active = [line for i, line in enumerate(core) if i not in exclude_indexes]
+              replacement = [
+                  "  # 🎮 游戏平台：旧版去重配置，保留用于快速回退。" + nl,
+                  "  # 如需恢复，请注释下方当前配置，并取消注释此块。" + nl,
+                  *commented,
+                  "  #" + nl,
+                  "  # 当前配置：显示 provider1 中的全部有效节点。" + nl,
+                  *active,
+                  *separator,
+              ]
+              return "".join(lines[:start] + replacement + lines[next_start:])
+
+          originals = {}
+          outputs = {}
+          for rel in FILES:
+              key = rel.as_posix()
+              data = (ROOT / rel).read_bytes()
+              if git_blob_sha(data) != EXPECTED_BLOBS[key]:
+                  raise AssertionError(f"{key}: source Blob SHA does not match locked repository version")
+              originals[key] = data
+              text = data.decode("utf-8")
+              changed = transform_ini(text, key) if rel.suffix == ".ini" else transform_yaml(text, key)
+              outputs[key] = changed.encode("utf-8")
+
+          OUT.mkdir(parents=True, exist_ok=True)
+          for key, data in outputs.items():
+              dst = OUT / key
+              dst.parent.mkdir(parents=True, exist_ok=True)
+              dst.write_bytes(data)
+
+          ruamel = YAML(typ="safe")
+          for rel in FILES:
+              key = rel.as_posix()
+              if rel.suffix == ".ini":
+                  continue
+              text = outputs[key].decode("utf-8")
+              parsed_a = yaml.safe_load(text)
+              parsed_b = ruamel.load(text)
+              if parsed_a != parsed_b:
+                  raise AssertionError(f"{key}: YAML parser results differ")
+              groups = parsed_a.get("proxy-groups", [])
+              names = [g.get("name") for g in groups]
+              if len(names) != len(set(names)):
+                  raise AssertionError(f"{key}: duplicate active group names")
+              game = [g for g in groups if g.get("name") == "🎮 游戏平台"]
+              if len(game) != 1 or game[0].get("type") != "select":
+                  raise AssertionError(f"{key}: invalid active game-platform group")
+              game = game[0]
+              if "exclude-filter" in game or "provider1" not in (game.get("use") or []):
+                  raise AssertionError(f"{key}: game-platform all-node behavior is invalid")
+              static = {p.get("name") for p in parsed_a.get("proxies", []) if isinstance(p, dict)}
+              known = set(names) | static | {"DIRECT", "REJECT", "REJECT-DROP", "PASS"}
+              for group in groups:
+                  for candidate in group.get("proxies", []) or []:
+                      if candidate not in known:
+                          raise AssertionError(f"{key}: unknown candidate {candidate}")
+                  for provider in group.get("use", []) or []:
+                      if provider not in parsed_a.get("proxy-providers", {}):
+                          raise AssertionError(f"{key}: unknown provider {provider}")
+              for rule in parsed_a.get("rules", []) or []:
+                  parts = [p.strip() for p in str(rule).split(",")]
+                  target = parts[-2] if parts[-1] == "no-resolve" else parts[-1]
+                  if target not in known:
+                      raise AssertionError(f"{key}: unknown rule target {target}")
+              if text.count('# - name: "🎮 游戏平台"') != 1:
+                  raise AssertionError(f"{key}: rollback block count is not one")
+
+          sums = []
+          for key in sorted(outputs):
+              sums.append(f"{hashlib.sha256(outputs[key]).hexdigest()}  {key}")
+          (OUT / "SHA256SUMS.txt").write_text("\n".join(sums) + "\n", encoding="utf-8")
+          (OUT / "SOURCE_BLOBS.txt").write_text(
+              "Repository: Aethersailor/Custom_OpenClash_Rules\n"
+              "Locked commit: 91e61549535d05c835b943f102d404072f217489\n\n"
+              + "\n".join(f"{EXPECTED_BLOBS[k]}  {k}" for k in sorted(EXPECTED_BLOBS)) + "\n",
+              encoding="utf-8",
+          )
+          (OUT / "VALIDATION_REPORT.md").write_text("""# 游戏平台全部节点修改校验报告
+
+## 范围
+
+仅修改标准、Lite、Full 三套非故障转移 INI/YAML，共 6 个文件。GFW、Fallback、自建节点模板未修改。
+
+## 修改
+
+- `🎮 游戏平台` 当前活动配置显示 Provider 中全部有效节点。
+- INI 当前活动行使用 `.*`，旧去重行完整注释保留。
+- YAML 当前活动组移除 `exclude-filter`、保留 `use: provider1`，旧组块完整注释保留。
+- 其他策略组、规则、顺序、Provider 和正则不变。
+
+## 校验
+
+- 源文件 Git Blob SHA 与锁定的远程仓库版本一致。
+- 三个 YAML 均通过 PyYAML 与 ruamel.yaml 双解析且结果一致。
+- 活动策略组唯一，组间候选、Provider 和规则目标引用有效。
+""", encoding="utf-8")
+          PY
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Custom_Clash_Game_Platform_All_Nodes_CurrentRepo_20260726
+          path: artifact/
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 1
