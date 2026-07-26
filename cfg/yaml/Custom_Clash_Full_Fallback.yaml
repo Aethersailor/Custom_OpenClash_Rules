@@ -753,6 +753,28 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
+  - name: "🌍 国外域名"
+    type: select
+    proxies:
+      - "🎯 全球直连"
+      - "🚀 故障转移"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🇨🇦 加拿大节点"
+      - "🇬🇧 英国节点"
+      - "🇫🇷 法国节点"
+      - "🇩🇪 德国节点"
+      - "🇳🇱 荷兰节点"
+      - "🇹🇷 土耳其节点"
+      - "🇷🇺 俄罗斯节点"
+      - "🌐 其他地区"
+      - "🏠 家宽节点"
+      - "🐢 低倍率节点"
   - name: "🐟 漏网之鱼"
     type: fallback
     proxies:
@@ -1027,6 +1049,8 @@ rules:
   - "GEOIP,facebook,🌐 社交媒体,no-resolve"
   - "GEOIP,google,🇬 谷歌服务,no-resolve"
   - "GEOIP,netflix,🎥 Netflix,no-resolve"
+  # GFW 及专用规则未命中的国外域名默认直连，可在策略组中切换代理。
+  - "GEOSITE,geolocation-!cn,🌍 国外域名"
   - "GEOSITE,cn,🎯 全球直连"
   - "GEOIP,cn,🎯 全球直连,no-resolve"
   - "RULE-SET,Nonstandard_Port_Direct,🔀 非标端口"
