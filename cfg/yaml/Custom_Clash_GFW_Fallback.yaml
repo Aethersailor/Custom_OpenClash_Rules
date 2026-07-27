@@ -1,0 +1,72 @@
+# Custom_OpenClash_Rules
+# OpenClash 专用最小 YAML 配置文件（极简 GFW 故障转移版）
+# 项目地址：https://github.com/Aethersailor/Custom_OpenClash_Rules
+# 本文件仅定义节点来源、静态节点、策略组、规则提供者与分流规则。
+# 端口、运行模式、DNS、IPv6、TUN、嗅探、GeoData、日志及控制器等参数全部由 OpenClash LuCI 管理。
+# 建议先按照项目 Wiki 完成 OpenClash 设置，再加载本配置。
+
+# ==================== 代理提供者 Proxy Providers ====================
+# provider1 用于加载机场订阅；多订阅用户可复制并依次命名为 provider2、provider3……
+# 新增 Provider 后，还需将其加入相关策略组的 use 列表。
+proxy-providers:
+  provider1:
+    type: http
+    url: "url"  # 填入订阅链接
+    interval: 3600  # 订阅更新间隔，单位：秒
+    path: ./proxy_provider/provider1.yaml
+    proxy: DIRECT  # 下载订阅时使用的策略
+    # 在 Provider 层统一排除公告、流量、到期等非节点条目
+    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+    header:  # 可选：自定义 HTTP 请求头
+    health-check:
+      enable: true
+      url: https://cp.cloudflare.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: false
+      expected-status: 204
+    override:
+      udp: true
+      # 不建议默认跳过 TLS 证书校验；仅在明确需要兼容特定节点时启用
+      # skip-cert-verify: true
+      # additional-prefix: "[provider1]"
+      # additional-suffix: "test"
+
+# ==================== 代理策略组 Proxy Groups ====================
+# 故障转移组直接使用 provider1 中的全部有效节点，按订阅中的节点顺序选择首个可用项。
+# 不再嵌套引用同一 Provider 的 url-test 组，避免同一批节点被重复组织。
+proxy-groups:
+  - name: "🚀 故障转移"
+    type: fallback
+    use:
+      - provider1
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
+
+  - name: "🎯 全球直连"
+    type: url-test
+    proxies:
+      - DIRECT
+    url: http://wifi.vivo.com.cn/generate_204
+    interval: 300
+    tolerance: 50
+    timeout: 5000
+    lazy: false
+    expected-status: 204
+
+# ==================== 规则提供者 Rule Providers ====================
+# 当前版本不使用远程规则提供者，保留空映射以维持模板结构一致。
+rule-providers: {}
+
+# ==================== 分流规则 Rules ====================
+# 规则自上而下匹配，命中首条规则后停止。
+# no-resolve 用于 IP 类规则，避免为规则匹配额外触发 DNS 解析。
+rules:
+  - "GEOSITE,gfw,🚀 故障转移"
+  - "GEOIP,telegram,🚀 故障转移,no-resolve"
+  - "GEOIP,facebook,🚀 故障转移,no-resolve"
+  - "GEOIP,twitter,🚀 故障转移,no-resolve"
+  - "MATCH,🎯 全球直连"

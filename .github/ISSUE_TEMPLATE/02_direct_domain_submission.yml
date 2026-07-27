@@ -1,0 +1,73 @@
+name: 🌏 提交大陆直连域名
+description: 提交适合加入项目直连规则的冷门域名
+title: "[直连域名] "
+labels: ["enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        本模板仅用于提交适合长期收录到项目直连规则中的域名。  
+        单个用户的临时需求可优先使用 OpenClash 自定义规则；大量域名请考虑提交 Pull Request。
+
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已搜索本仓库规则和现有 Issues，确认这些域名尚未收录
+          required: true
+        - label: 我填写的是域名而不是带路径、参数或认证信息的完整 URL
+          required: true
+        - label: 我已确认这些域名当前未命中合适的直连规则，并被错误交给代理或最终兜底策略
+          required: true
+        - label: 我能够提供可复核的用途、归属、解析或访问证据
+          required: true
+        - label: 我知晓维护者可能将合适的条目提交到相关上游规则项目
+          required: true
+
+  - type: textarea
+    id: domains
+    attributes:
+      label: 域名列表
+      description: 每行一个域名；请尽量提交可归纳的根域名，避免无必要地罗列大量子域名。
+      placeholder: |
+        example.com
+        service.example.net
+    validations:
+      required: true
+
+  - type: textarea
+    id: service
+    attributes:
+      label: 服务说明
+      description: 说明域名对应的网站、应用、设备或业务用途，以及为何适合直连。
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_routing
+    attributes:
+      label: 当前分流情况
+      description: 填写实际命中的规则、规则集和策略。
+      placeholder: "例如：未命中现有规则，最终进入 MATCH/漏网之鱼并走代理"
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 证据
+      description: 可提供 DNS 解析结果、服务归属、连接详情、直连与代理访问差异等可复核信息。
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 补充信息
+      description: 可填写相关官网、上游规则或其他说明。
+    validations:
+      required: false

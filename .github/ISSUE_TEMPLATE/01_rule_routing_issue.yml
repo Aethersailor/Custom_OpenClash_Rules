@@ -1,0 +1,115 @@
+name: 🎯 规则错判或漏匹配
+description: 上报本项目规则、模板或派生规则文件导致的错误分流
+title: "[规则问题] "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        本模板用于已经确认与本仓库规则资源有关的分流错误。  
+        OpenClash 插件故障、转换后端报错、节点不可用或仅发生于个人网络环境的问题，请使用 Issue 选择页中的对应入口。
+
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已搜索现有 Issues，确认没有相同或高度相似的报告
+          required: true
+        - label: 我已更新并重新加载本仓库 `main` 分支中的最新规则或模板
+          required: true
+        - label: 我已通过 Mihomo/OpenClash 面板或日志确认实际命中的规则、规则集和策略，而不是仅凭访问结果推测
+          required: true
+        - label: 我已排除节点失效、DNS 污染、其他覆写、自定义规则和订阅源自带规则造成的影响
+          required: true
+
+  - type: dropdown
+    id: resource_type
+    attributes:
+      label: 涉及的资源类型
+      options:
+        - 订阅转换模板（cfg/*.ini）
+        - YAML 配置示例（cfg/yaml/*.yaml）
+        - 项目维护的源规则（rule/*.list）
+        - 自动生成的 YAML / MRS 规则文件
+        - 覆写模块插入或修改的规则
+        - 无法确定
+    validations:
+      required: true
+
+  - type: input
+    id: affected_file
+    attributes:
+      label: 涉及的文件
+      description: 请填写仓库相对路径或完整 GitHub 文件链接。
+      placeholder: "例如：cfg/Custom_Clash.ini 或 rule/Custom_Direct.list"
+    validations:
+      required: true
+
+  - type: textarea
+    id: target
+    attributes:
+      label: 域名、IP 或服务
+      description: 每行填写一个；请勿粘贴含认证信息、订阅地址或其他隐私数据的完整 URL。
+      placeholder: |
+        example.com
+        203.0.113.0/24
+        某应用或服务名称
+    validations:
+      required: true
+
+  - type: input
+    id: expected
+    attributes:
+      label: 期望的规则与策略
+      placeholder: "例如：应命中 Custom_Direct 并走 DIRECT"
+    validations:
+      required: true
+
+  - type: input
+    id: actual
+    attributes:
+      label: 实际命中的规则与策略
+      placeholder: "例如：命中 MATCH 并走 Proxy"
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 判断依据
+      description: 请提供面板连接详情、命中规则、规则集名称、DNS 解析结果或可复核的日志。
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 运行环境
+      description: 请填写 OpenClash、Mihomo 版本，以及所用模板或配置的获取方式。
+      placeholder: |
+        OpenClash：
+        Mihomo：
+        配置来源：
+        运行模式：
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤
+      description: 从更新配置开始，按顺序说明如何稳定复现。
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 补充信息
+      description: 可附截图、相关上游规则链接或建议修复方式。
+    validations:
+      required: false

@@ -1,12 +1,19 @@
 name: Auto Update Game CDN Rules
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'rule/Steam_CDN.list'
+      - 'py/generate_game_cdn.py'
   schedule:
-    # 每 8 小时运行一次（UTC 0:00, 8:00, 16:00）
-    - cron: '0 */8 * * *'
+    # 每天北京时间 10:13 运行（UTC 02:13）
+    - cron: '13 2 * * *'
   workflow_dispatch:  # 支持手动触发
 
 permissions:
+  actions: write
   contents: write
 
 concurrency:
@@ -18,44 +25,59 @@ jobs:
     
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: main
           fetch-depth: 0
       
       - name: Set up Python
-        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: '3.11'
+          python-version: '3.13'
       
       - name: Generate Game_Download_CDN.list
         run: |
           echo "::group::Running generation script"
+          python -m unittest discover -s py -p 'test_*.py'
           python py/generate_game_cdn.py
           python py/generate_game_cdn.py --check
           echo "::endgroup::"
-      
-      - name: Check for changes
-        id: check_changes
-        run: |
-          if git diff --quiet rule/Game_Download_CDN.list; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "No changes detected in Game_Download_CDN.list"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-            echo "Changes detected in Game_Download_CDN.list"
-          fi
-      
-      - name: Commit and push changes
-        if: steps.check_changes.outputs.changed == 'true'
+
+      - name: Commit and push validated changes
+        id: publish
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+
+          # Rebuild from the latest main if another writer completed while the
+          # upstream data was being downloaded. Never rebase generated output.
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            git reset --hard origin/main
+            python -m unittest discover -s py -p 'test_*.py'
+            python py/generate_game_cdn.py
+            python py/generate_game_cdn.py --check
+          fi
+
+          if ! git diff --quiet -- . ':(exclude)rule/Game_Download_CDN.list'; then
+            echo "Game CDN updater modified unexpected files." >&2
+            git status --short
+            exit 1
+          fi
+
           git add rule/Game_Download_CDN.list
-          git commit -m "chore(rule): auto-update Game_Download_CDN.list from upstream"
-          git pull --rebase origin main
+          if git diff --cached --quiet; then
+            echo "published=false" >> "$GITHUB_OUTPUT"
+            echo "Game_Download_CDN.list is already up to date."
+            exit 0
+          fi
+
+          git commit -m "chore(rule): auto-update Game_Download_CDN.list from sources"
           git push origin HEAD:main
-      
-      - name: No changes
-        if: steps.check_changes.outputs.changed == 'false'
-        run: echo "✓ Game_Download_CDN.list is already up to date"
+          echo "published=true" >> "$GITHUB_OUTPUT"
+
+      - name: Generate derived rule providers after update
+        if: steps.publish.outputs.published == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run auto-generate-rules.yml --repo "${GITHUB_REPOSITORY}" --ref main

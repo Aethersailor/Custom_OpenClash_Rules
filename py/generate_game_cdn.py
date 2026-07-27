@@ -6,14 +6,25 @@
 """
 
 import argparse
+import ipaddress
 import urllib.request
 from collections import Counter
 from pathlib import Path
 
 # 配置
 UPSTREAM_URL = "https://raw.githubusercontent.com/v2fly/domain-list-community/refs/heads/master/data/category-game-platforms-download"
-OUTPUT_FILE = Path(__file__).parent.parent / "rule" / "Game_Download_CDN.list"
-ALLOWED_RULE_PREFIXES = ("DOMAIN,", "DOMAIN-SUFFIX,", "DOMAIN-KEYWORD,", "DOMAIN-REGEX,")
+REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
+STEAM_CDN_FILE = REPOSITORY_ROOT / "rule" / "Steam_CDN.list"
+OUTPUT_FILE = REPOSITORY_ROOT / "rule" / "Game_Download_CDN.list"
+STEAM_SOURCE_COMMENT = "# 以下规则补充自本项目 rule/Steam_CDN.list"
+ALLOWED_RULE_TYPES = {
+    "DOMAIN",
+    "DOMAIN-SUFFIX",
+    "DOMAIN-KEYWORD",
+    "DOMAIN-REGEX",
+    "IP-CIDR",
+    "IP-CIDR6",
+}
 
 
 def download_upstream() -> str:
@@ -63,30 +74,124 @@ def convert_line(line: str) -> str | None:
     return f"{mappings[rule_type]},{value}"
 
 
-def generate_rules(upstream_content: str) -> list[str]:
-    """转换上游内容为 Clash 规则"""
-    rules = []
-    seen = set()
-    pending_comments = []
+def normalize_clash_rule(line: str) -> str:
+    """规范化 Clash 规则，消除大小写、空白、CIDR 写法等表面差异。"""
+    parts = [part.strip() for part in line.split(",")]
+    rule_type = parts[0].upper()
+    if rule_type not in ALLOWED_RULE_TYPES or len(parts) < 2 or not parts[1]:
+        raise ValueError(f"不支持的 Clash 规则格式：{line}")
+
+    value = parts[1]
+    if rule_type in {"DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD"}:
+        value = value.lower().rstrip(".")
+    elif rule_type in {"IP-CIDR", "IP-CIDR6"}:
+        network = ipaddress.ip_network(value, strict=False)
+        expected_type = "IP-CIDR6" if network.version == 6 else "IP-CIDR"
+        if rule_type != expected_type:
+            raise ValueError(f"{value} 应使用 {expected_type}，而不是 {rule_type}")
+        value = str(network)
+        return f"{rule_type},{value},no-resolve"
+
+    return f"{rule_type},{value}"
+
+
+def rule_covers(covering_rule: str, candidate_rule: str) -> bool:
+    """判断前一条规则是否已完整覆盖后一条规则。"""
+    if covering_rule == candidate_rule:
+        return True
+
+    covering_type, covering_value, *_ = covering_rule.split(",")
+    candidate_type, candidate_value, *_ = candidate_rule.split(",")
+
+    if covering_type == "DOMAIN-SUFFIX":
+        if candidate_type == "DOMAIN":
+            return candidate_value == covering_value or candidate_value.endswith(f".{covering_value}")
+        if candidate_type == "DOMAIN-SUFFIX":
+            return candidate_value == covering_value or candidate_value.endswith(f".{covering_value}")
+
+    if covering_type in {"IP-CIDR", "IP-CIDR6"} and candidate_type == covering_type:
+        covering_network = ipaddress.ip_network(covering_value)
+        candidate_network = ipaddress.ip_network(candidate_value)
+        return candidate_network.subnet_of(covering_network)
+
+    return False
+
+
+def deduplicate_rules(*sources: list[str]) -> list[str]:
+    """合并多组规则并按精确值、域名覆盖和 CIDR 覆盖关系去重。"""
+    accepted: list[tuple[list[str], str]] = []
+    for source in sources:
+        pending_comments: list[str] = []
+        for line in source:
+            stripped = line.strip()
+            if not stripped:
+                continue
+            if stripped.startswith(("#", ";")):
+                pending_comments.append(stripped)
+                continue
+
+            candidate = normalize_clash_rule(stripped)
+            if any(rule_covers(existing, candidate) for _, existing in accepted):
+                pending_comments.clear()
+                continue
+
+            accepted = [
+                (comments, existing)
+                for comments, existing in accepted
+                if not rule_covers(candidate, existing)
+            ]
+            accepted.append((pending_comments, candidate))
+            pending_comments = []
+
+    result: list[str] = []
+    for comments, rule in accepted:
+        result.extend(comments)
+        result.append(rule)
+    return result
+
+
+def generate_rules(upstream_content: str, steam_content: str = "") -> list[str]:
+    """转换 v2fly 上游并合并本项目 Steam CDN 补充规则。"""
+    upstream_lines: list[str] = []
     for line in upstream_content.splitlines():
         converted = convert_line(line)
-        if converted and converted.startswith('#'):
-            pending_comments.append(converted)
-        elif converted and converted not in seen:
-            rules.extend(pending_comments)
-            pending_comments.clear()
-            rules.append(converted)
-            seen.add(converted)
-        elif converted:
-            # Drop the comment block belonging only to a duplicate rule.
-            pending_comments.clear()
-    return rules
+        if converted:
+            upstream_lines.append(converted)
+
+    steam_lines = [
+        line
+        for line in steam_content.splitlines()
+        if line.strip() and not line.lstrip().startswith(("#", ";"))
+    ]
+    upstream_rules = deduplicate_rules(upstream_lines)
+    merged_rules = deduplicate_rules(upstream_rules, steam_lines)
+    upstream_values = {
+        normalize_clash_rule(line)
+        for line in upstream_rules
+        if line and not line.startswith(("#", ";"))
+    }
+    steam_values = {normalize_clash_rule(line) for line in steam_lines}
+
+    result: list[str] = []
+    source_comment_added = False
+    for line in merged_rules:
+        if not line.startswith(("#", ";")):
+            normalized = normalize_clash_rule(line)
+            if (
+                not source_comment_added
+                and normalized in steam_values
+                and normalized not in upstream_values
+            ):
+                result.append(STEAM_SOURCE_COMMENT)
+                source_comment_added = True
+        result.append(line)
+    return result
 
 
 def validate_rules(lines: list[str]) -> None:
     """校验转换后的 Clash 规则格式与唯一性。"""
     rules = [line for line in lines if line and not line.startswith(("#", ";"))]
-    invalid = [rule for rule in rules if not rule.startswith(ALLOWED_RULE_PREFIXES)]
+    invalid = [rule for rule in rules if rule.split(",", 1)[0] not in ALLOWED_RULE_TYPES]
     duplicates = [rule for rule, count in Counter(rules).items() if count > 1]
     if not rules:
         raise ValueError("没有生成任何游戏 CDN 规则。")
@@ -111,11 +216,24 @@ def run_self_check() -> None:
             raise AssertionError(f"{source!r}: expected {expected!r}, got {actual!r}")
 
     converted = generate_rules(
-        "# group\nexample.com @cn\nexample.com # duplicate\nfull:www.example.com\n"
+        "# group\nexample.com @cn\nexample.com # duplicate\nfull:www.example.com\n",
+        "DOMAIN,www.example.com\nDOMAIN-SUFFIX,example.com\nIP-CIDR,192.0.2.1/24\n"
     )
-    expected = ["# group", "DOMAIN-SUFFIX,example.com", "DOMAIN,www.example.com"]
+    expected = [
+        "# group",
+        "DOMAIN-SUFFIX,example.com",
+        STEAM_SOURCE_COMMENT,
+        "IP-CIDR,192.0.2.0/24,no-resolve",
+    ]
     if converted != expected:
         raise AssertionError(f"属性清理或去重结果异常：{converted!r}")
+
+    cidr_rules = deduplicate_rules(
+        ["IP-CIDR,192.0.2.128/25"],
+        ["IP-CIDR,192.0.2.0/24,no-resolve"],
+    )
+    if cidr_rules != ["IP-CIDR,192.0.2.0/24,no-resolve"]:
+        raise AssertionError(f"CIDR 覆盖去重结果异常：{cidr_rules!r}")
 
     try:
         convert_line("include:another-list")
@@ -193,7 +311,8 @@ def main() -> int:
     
     # 2. 转换规则
     print("[i] 正在转换规则格式...")
-    rules = generate_rules(upstream_content)
+    steam_content = STEAM_CDN_FILE.read_text(encoding="utf-8-sig")
+    rules = generate_rules(upstream_content, steam_content)
     validate_rules(rules)
     
     # 3. 读取原文件头部

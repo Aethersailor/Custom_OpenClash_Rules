@@ -2,7 +2,8 @@ name: Sync OpenClash_Overwrite Submodule
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    # 上游通常不是高频更新，每天同步一次即可。
+    - cron: "41 1 * * *"
   workflow_dispatch:
 
 permissions:
@@ -16,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main branch
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: main
           fetch-depth: 0

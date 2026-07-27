@@ -1,545 +1,477 @@
 # Custom_OpenClash_Rules
-# YAML 配置文件
-# 注释部分由 AI 补充，可能存在错误，请自行甄别！
-# ==================== 端口配置 Port Configuration ====================
-# HTTP 代理端口，用于处理 HTTP 协议流量
-port: 7890
-# SOCKS5 代理端口，用于处理 SOCKS5 协议流量
-socks-port: 7891
-# 混合端口（HTTP + SOCKS5），同时支持 HTTP 和 SOCKS5 协议
-mixed-port: 7893
-# 透明代理重定向端口（Linux 环境）
-redir-port: 7892
-# TProxy 端口（Linux 环境的透明代理）
-tproxy-port: 7895
-# 是否允许局域网连接，true 表示允许其他设备通过本机代理上网
-allow-lan: true
-# 绑定地址，"*" 表示监听所有网卡，可指定具体 IP
-bind-address: "*"
-# 工作模式：rule（规则模式）/ global（全局模式）/ direct（直连模式）
-mode: rule
-# 是否启用 TCP 并发，可提高连接性能
-tcp-concurrent: true
-# 统一延迟计算，使延迟测试更准确
-unified-delay: true
+# OpenClash 专用最小 YAML 配置文件（标准版）
+# 项目地址：https://github.com/Aethersailor/Custom_OpenClash_Rules
+# 本文件仅定义节点来源、静态节点、策略组、规则提供者与分流规则。
+# 端口、运行模式、DNS、IPv6、TUN、嗅探、GeoData、日志及控制器等参数全部由 OpenClash LuCI 管理。
+# 建议先按照项目 Wiki 完成 OpenClash 设置，再加载本配置。
 
-# ==================== 代理提供者 Proxy Provider ====================
-# 用于从订阅链接获取节点，多机场用户复制整个 provider1 块并改名为 provider2, provider3...
-# 同时在后续所有 proxy-groups 的 use 列表中添加新provider
+# ==================== 代理提供者 Proxy Providers ====================
+# provider1 用于加载机场订阅；多订阅用户可复制并依次命名为 provider2、provider3……
+# 新增 Provider 后，还需将其加入相关策略组的 use 列表。
 proxy-providers:
   provider1:
-    type: http  # 类型：http（从URL获取）或 file（本地文件）
-    url: "url"  # **填入你的订阅链接**
-    interval: 3600  # 订阅更新间隔（秒），3600=1小时
-    path: ./proxy_provider/provider1.yaml # 本地缓存路径
-    proxy: DIRECT  # 下载订阅时使用的代理策略
-    header:  # 自定义 HTTP 请求头
-    health-check:  # 节点健康检查
+    type: http
+    url: "url"  # 填入订阅链接
+    interval: 3600  # 订阅更新间隔，单位：秒
+    path: ./proxy_provider/provider1.yaml
+    proxy: DIRECT  # 下载订阅时使用的策略
+    # 在 Provider 层统一排除公告、流量、到期等非节点条目，避免各策略组重复配置
+    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+    header:  # 可选：自定义 HTTP 请求头
+    health-check:
       enable: true
-      interval: 600  # 检查间隔（秒）
       url: https://cp.cloudflare.com/generate_204
-    override:  # 覆写节点配置
-      skip-cert-verify: true  # 跳过证书验证
-      udp: true  # 启用UDP
-      # additional-prefix: "[provider1]"  # 为节点名添加前缀
-      # additional-suffix: "test"  # 为节点名添加后缀
-
-# ==================== 地理数据库配置 GeoData Configuration ====================
-# 用于 IP 和域名的地理位置及分类判断
-geox-url:
-  # MaxMind 数据库（含中国 IP）
-  mmdb: https://testingcf.jsdelivr.net/gh/alecthw/mmdb_china_ip_list@release/Country.mmdb
-  # GeoIP 数据库
-  geoip: https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat
-  # GeoSite 数据库（域名分类）
-  geosite: https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat
-  # ASN（自治系统号）数据库，用于更精确的 IP 归属判断
-  asn: https://testingcf.jsdelivr.net/gh/xishang0128/geoip@release/GeoLite2-ASN.mmdb
-# 是否自动更新 geodata 数据库
-geo-auto-update: true # 是否自动更新 geodata
-# 更新间隔（小时），24 = 每天更新一次
-geo-update-interval: 24 # 更新间隔，单位：小时
-# 使用 geodata 模式（而非传统的 IP-CIDR 文件）
-geodata-mode: true
-
-# ==================== 日志与控制 ====================
-# 日志级别：silent（静默）/ error（错误）/ warning（警告）/ info（信息）/ debug（调试）
-log-level: info
-# 是否启用 IPv6，true 表示支持 IPv6 流量
-ipv6: true
-# 外部控制器地址，用于 Web UI 和 API 访问，0.0.0.0:9090 表示监听所有网卡的 9090 端口
-external-controller: 0.0.0.0:9090
-
-# ==================== 配置文件存储 Profile ====================
-profile:
-  # 是否保存用户选择的策略组（重启后自动恢复）
-  store-selected: true
-  # 是否保存 Fake-IP 映射表（重启后保留 DNS 缓存）
-  store-fake-ip: true
-
-# ==================== TUN 虚拟网卡配置 ====================
-# TUN 模式可以接管系统全部流量，实现真正的全局代理
-tun:
-  # 是否启用 TUN 模式
-  enable: true
-  # 网络栈：system（系统栈）/ gvisor（内置用户态栈）/ mixed（混合）
-  stack: system
-  # DNS 劫持配置，劫持所有发往 53 端口的 DNS 请求
-  dns-hijack:
-    - 0.0.0.0:53
-  # 自动检测网络接口（OpenClash 环境下应设为 false，由 OpenClash 管理）
-  auto-detect-interface: false
-  # 自动配置路由表（OpenClash 环境下应设为 false）
-  auto-route: false
-  # 自动配置 iptables 重定向（OpenClash 环境下应设为 false）
-  auto-redirect: false
-  # 严格路由模式（OpenClash 环境下应设为 false）
-  strict-route: false
-  # 端点无关 NAT（提高 NAT 类型兼容性，适用于 P2P 和游戏）
-  endpoint-independent-nat: true
-
-# ==================== 流量嗅探器 Sniffer ====================
-# 嗅探器可以通过分析流量内容还原真实域名，提高分流准确性
-sniffer:
-  # 启用嗅探功能
-  enable: true
-  # 使用嗅探结果覆盖连接目标（推荐开启）
-  override-destination: true
-  # 嗅探协议配置
-  sniff:
-    # QUIC 协议嗅探（HTTP/3）
-    QUIC:
-      ports:
-      - 443
-    # TLS 协议嗅探（HTTPS）
-    TLS:
-      ports:
-      - 443  # 标准 HTTPS 端口
-      - 8443  # 常用替代 HTTPS 端口
-    # HTTP 协议嗅探
-    HTTP:
-      ports:
-      - 80  # 标准 HTTP 端口
-      - 8080-8880  # HTTP 常用端口范围
-      override-destination: true
-  # 强制对这些域名进行嗅探（即使已经有目标地址）
-  force-domain:
-    - "+.netflix.com"  # Netflix 主域名
-    - "+.nflxvideo.net"  # Netflix CDN
-    - "+.amazonaws.com"  # AWS 云服务
-    - "+.media.dssott.com"  # Disney+ 流媒体
-  # 跳过对这些域名的嗅探（避免干扰）
-  skip-domain:
-    - "+.apple.com"  # 苹果服务
-    - Mijia Cloud  # 米家云服务
-    - dlg.io.mi.com  # 小米设备通信
-    - "+.oray.com"  # 花生壳服务
-    - "+.sunlogin.net"  # 向日葵远程控制
-    - "+.push.apple.com"  # 苹果推送服务
-  # 解析纯 IP 连接（尝试通过 rDNS 反向解析获得域名）
-  parse-pure-ip: true
-  # 强制 DNS 映射（对纯 IP 连接尝试 DNS 映射）
-  force-dns-mapping: true
-
-# ==================== DNS 配置 ====================
-dns:
-  # 启用内置 DNS 服务器
-  enable: true
-  # DNS 服务器监听地址，0.0.0.0:7874 表示监听所有网卡的 7874 端口
-  listen: 0.0.0.0:7874
-  # 是否解析 IPv6 地址
-  ipv6: true
-  # DNS 增强模式：fake-ip（虚假 IP）/ redir-host（真实 IP），fake-ip 模式性能更好
-  enhanced-mode: fake-ip
-  # Fake-IP 地址池范围（私有地址段，不会与真实 IP 冲突）
-  fake-ip-range: 198.18.0.1/16
-  # Fake-IP 过滤列表（这些域名将返回真实 IP 而非 Fake-IP）
-  fake-ip-filter:
-    - '*.lan'  # 局域网域名
-    - localhost.ptlogin2.qq.com  # QQ 登录域名
-    - geosite:cn  # 中国大陆域名（使用 GeoSite 数据）
-  # Fake-IP 过滤模式：blacklist（黑名单）/ whitelist（白名单）
-  fake-ip-filter-mode: blacklist
-  # 是否遵循规则（false 表示所有 DNS 查询都通过直连查询，不经过代理规则）
-  respect-rules: false
-  # 主 DNS 服务器列表（用于实际域名解析）
-  nameserver:
-    - https://dns.alidns.com/dns-query#h3=true  # 阿里云 DoH，启用 DoH3
-    - https://doh.pub/dns-query  # 腾讯 DoH
-  # 默认 DNS 服务器（用于解析其他 DNS 服务器的域名）
-  default-nameserver:
-    - tls://1.12.12.12
-    - tls://120.53.53.53
+      interval: 300
+      timeout: 5000
+      lazy: false
+      expected-status: 204
+    override:
+      udp: true
+      # 不建议默认跳过 TLS 证书校验；仅在明确需要兼容特定节点时启用
+      # skip-cert-verify: true
+      # additional-prefix: "[provider1]"
+      # additional-suffix: "test"
 
 # ==================== 代理策略组 Proxy Groups ====================
-# 策略组：定义不同用途的代理策略，可在规则中引用
+# 策略组候选项和节点注入逻辑与当前 Custom_Clash.ini 保持一致。
 proxy-groups:
-  # --- 核心策略组 ---
+  # --- 核心与业务策略组 ---
+  # 🚀 手动选择：旧版去重配置，保留用于快速回退。
+  # 如需恢复，请注释下方当前配置，并取消注释此块。
+  # - name: "🚀 手动选择"
+  #   type: select
+  #   proxies:
+  #     - "♻️ 自动选择"
+  #     - "🇭🇰 香港节点"
+  #     - "🇺🇸 美国节点"
+  #     - "🇯🇵 日本节点"
+  #     - "🇸🇬 新加坡节点"
+  #     - "🇼🇸 台湾节点"
+  #     - "🇰🇷 韩国节点"
+  #   exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
+  #   use:
+  #     - provider1
+  #
+  # 当前配置：显示 provider1 中的全部有效节点。
   - name: "🚀 手动选择"
-    type: select  # select=手动选择,url-test=自动测速,fallback=故障转移,load-balance=负载均衡
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 300  # 测试间隔（秒）
-    proxies:  # 包含的子策略列表
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
-    # 节点过滤器（正则表达式），排除包含这些关键词的节点：群、官网、订阅、流量、到期、USED、EXPIRE等
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
-    use:  # 从哪些provider加载节点
-      - provider1  # **多机场用户在此添加provider2, provider3...**
+    type: select
+    proxies:
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    use:
+      - provider1
 
   - name: "♻️ 自动选择"
-    type: url-test  # 自动测速，选择延迟最低的节点
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
-    tolerance: 50  # 容差（毫秒），延迟差异超过此值才切换节点
-    url: "https://cp.cloudflare.com/generate_204"
+    type: url-test
+    url: https://cp.cloudflare.com/generate_204
     interval: 300
+    tolerance: 50
     use:
       - provider1
 
   - name: "💬 即时通讯"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🎯 全球直连"
 
   - name: "🌐 社交媒体"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
-    - "🎯 全球直连"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🎯 全球直连"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🚀 GitHub"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🎯 全球直连"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🎯 全球直连"
 
   - name: "🤖 ChatGPT"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🤖 AI服务"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🎶 TikTok"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "📹 YouTube"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇸🇬 新加坡节点"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🎥 Netflix"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇸🇬 新加坡节点"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🎥 DisneyPlus"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇸🇬 新加坡节点"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🎥 HBO"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇸🇬 新加坡节点"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇼🇸 台湾节点"
-
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🎥 PrimeVideo"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇸🇬 新加坡节点"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🎥 AppleTV+"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇸🇬 新加坡节点"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🎯 全球直连"
+    exclude-filter: '(?i)(?:🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🎥 Emby"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🎯 全球直连"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🎻 Spotify"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🎯 全球直连"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "📺 Bahamut"
     type: select
     proxies:
-    - "🇼🇸 台湾节点"
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🎯 全球直连"
+      - "🇼🇸 台湾节点"
+      - "🚀 手动选择"
+      - "🎯 全球直连"
+    exclude-filter: '(?i)(?:🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC)'
+    use:
+      - provider1
 
   - name: "🌎 国外媒体"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇸🇬 新加坡节点"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🛒 国外电商"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
-    - "🎯 全球直连"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🎯 全球直连"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "📢 谷歌FCM"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
 
   - name: "🇬 谷歌服务"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
+    use:
+      - provider1
 
   - name: "🍎 苹果服务"
     type: select
     proxies:
-    - "🎯 全球直连"
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
+      - "🎯 全球直连"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
+    use:
+      - provider1
 
   - name: "Ⓜ️ 微软服务"
     type: select
     proxies:
-    - "🎯 全球直连"
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
+      - "🎯 全球直连"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
+    use:
+      - provider1
 
+  # 🎮 游戏平台：旧版配置，保留用于快速回退
+  # 如需恢复，请注释下方当前配置，并取消注释旧组块
+#   - name: "🎮 游戏平台"
+#     type: select
+#     proxies:
+#       - "🎯 全球直连"
+#       - "🚀 手动选择"
+#       - "♻️ 自动选择"
+#       - "🇭🇰 香港节点"
+#       - "🇺🇸 美国节点"
+#       - "🇯🇵 日本节点"
+#       - "🇸🇬 新加坡节点"
+#       - "🇼🇸 台湾节点"
+#       - "🇰🇷 韩国节点"
+#     exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
+#     use:
+#       - provider1
 
   - name: "🎮 游戏平台"
     type: select
     proxies:
-    - "🎯 全球直连"
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
+      - "🎯 全球直连"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    use:
+      - provider1
 
   - name: "🎮 Steam"
     type: select
     proxies:
-    - "🎯 全球直连"
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🎯 全球直连"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🚀 测速工具"
     type: select
     proxies:
-    - "🎯 全球直连"
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🎯 全球直连"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🐟 漏网之鱼"
     type: select
     proxies:
-    - "🚀 手动选择"
-    - "♻️ 自动选择"
-    - "🎯 全球直连"
-    - "🇭🇰 香港节点"
-    - "🇺🇸 美国节点"
-    - "🇯🇵 日本节点"
-    - "🇸🇬 新加坡节点"
-    - "🇼🇸 台湾节点"
-    filter: "^(?!.*(DIRECT|直接连接|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic|GB|Expire)).*$"
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🎯 全球直连"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+    exclude-filter: '(?i)(?:🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
 
   - name: "🔀 非标端口"
     type: select
     proxies:
-    - "🐟 漏网之鱼"
-    - "🎯 全球直连"
+      - "🐟 漏网之鱼"
+      - "🎯 全球直连"
 
+  # --- 地区测速策略组 ---
   - name: "🇭🇰 香港节点"
     type: url-test
     url: https://cp.cloudflare.com/generate_204
@@ -585,121 +517,134 @@ proxy-groups:
     interval: 300
     tolerance: 50
 
+  - name: "🇰🇷 韩国节点"
+    type: url-test
+    url: https://cp.cloudflare.com/generate_204
+    filter: '(?i)(🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
+    use:
+      - provider1
+    interval: 300
+    tolerance: 50
+
   - name: "🎯 全球直连"
     type: url-test
-    url: http://wifi.vivo.com.cn/generate_204
     proxies:
       - DIRECT
-
-# ==================== 分流规则 Rules ====================
-# 规则从上到下匹配，匹配到第一条后停止。格式：类型,匹配内容,策略组[,no-resolve]
-# GEOSITE=域名分类,GEOIP=IP归属,RULE-SET=外部规则集,MATCH=兜底规则
-# no-resolve=不进行DNS解析直接匹配IP（提高性能，避免DNS泄露）
-rules:
-  - "GEOSITE,private,🎯 全球直连"  # 私有域名
-  - "GEOIP,private,🎯 全球直连,no-resolve"  # 私有IP
-  - "RULE-SET,Custom_Direct_Domain,🎯 全球直连"  # 自定义直连域名
-  - "RULE-SET,Custom_Direct_IP,🎯 全球直连,no-resolve"  # 自定义直连IP
-  - "RULE-SET,Custom_Direct_Port,🎯 全球直连"  # 自定义直连端口
-  - "RULE-SET,Custom_Proxy_Domain,🚀 手动选择"  # 自定义代理域名
-  - "RULE-SET,Custom_Proxy_IP,🚀 手动选择,no-resolve"  # 自定义代理IP
-  - "GEOSITE,google-cn,🎯 全球直连"  # Google中国服务
-  - "GEOSITE,category-games@cn,🎯 全球直连"  # 国内游戏
-  - "RULE-SET,Steam_CDN_Domain,🎯 全球直连"  # Steam CDN
-  - "RULE-SET,Steam_CDN_IP,🎯 全球直连,no-resolve"  # Steam CDN
-  - "GEOSITE,category-game-platforms-download,🎯 全球直连"  # 游戏平台下载
-  - "GEOSITE,category-public-tracker,🎯 全球直连"  # BT Tracker
-  - "GEOSITE,category-communication,💬 即时通讯"  # 即时通讯
-  - "GEOSITE,category-social-media-!cn,🌐 社交媒体"  # 国外社交媒体
-  - "GEOSITE,openai,🤖 ChatGPT"  # OpenAI
-  - "GEOSITE,category-ai-!cn,🤖 AI服务"  # AI服务
-  - "GEOSITE,github,🚀 GitHub"  # GitHub
-  - "GEOSITE,category-speedtest,🚀 测速工具"  # 测速工具
-  - "GEOSITE,steam,🎮 Steam"  # Steam
-  - "GEOSITE,youtube,📹 YouTube"  # YouTube
-  - "GEOSITE,apple-tvplus,🎥 AppleTV+"  # Apple TV+
-  - "GEOSITE,apple,🍎 苹果服务"  # 苹果服务
-  - "GEOSITE,microsoft,Ⓜ️ 微软服务"  # 微软服务
-  - "GEOSITE,googlefcm,📢 谷歌FCM"  # Google FCM推送
-  - "GEOSITE,google,🇬 谷歌服务"  # Google服务
-  - "GEOSITE,tiktok,🎶 TikTok"  # TikTok
-  - "GEOSITE,netflix,🎥 Netflix"  # Netflix
-  - "GEOSITE,disney,🎥 DisneyPlus"  # Disney+
-  - "GEOSITE,hbo,🎥 HBO"  # HBO
-  - "GEOSITE,primevideo,🎥 PrimeVideo"  # Prime Video
-  - "GEOSITE,category-emby,🎥 Emby"  # Emby
-  - "GEOSITE,spotify,🎻 Spotify"  # Spotify
-  - "GEOSITE,bahamut,📺 Bahamut"  # 巴哈姆特
-  - "GEOSITE,category-games,🎮 游戏平台"  # 游戏平台
-  - "GEOSITE,category-entertainment,🌎 国外媒体"  # 国外媒体
-  - "GEOSITE,category-ecommerce,🛒 国外电商"  # 国外电商
-  - "GEOSITE,gfw,🚀 手动选择"  # GFW列表
-  - "GEOIP,telegram,💬 即时通讯,no-resolve"  # Telegram IP
-  - "GEOIP,twitter,🌐 社交媒体,no-resolve"  # Twitter IP
-  - "GEOIP,facebook,🌐 社交媒体,no-resolve"  # Facebook IP
-  - "GEOIP,google,🇬 谷歌服务,no-resolve"  # Google IP
-  - "GEOIP,netflix,🎥 Netflix,no-resolve"  # Netflix IP
-  - "GEOSITE,cn,🎯 全球直连"  # 中国域名
-  - "GEOIP,cn,🎯 全球直连,no-resolve"  # 中国IP
-  - "RULE-SET,Custom_Port_Direct,🔀 非标端口"  # 非标端口
-  - "MATCH,🐟 漏网之鱼"  # 兜底规则
+    url: http://wifi.vivo.com.cn/generate_204
+    interval: 300
+    timeout: 5000
+    tolerance: 50
+    lazy: false
+    expected-status: 204
 
 # ==================== 规则提供者 Rule Providers ====================
-# 从外部URL加载规则集。behavior: domain=域名,ipcidr=IP,classical=混合
-# interval=更新间隔(秒),format: yaml=文本,mrs=二进制(性能更好)
+# Domain/IP 规则优先使用 MRS；包含端口等复合规则时使用 Classical YAML。
+# 更新周期与 Custom_Clash.ini 保持一致：28800 秒（8 小时）。
 rule-providers:
-  Custom_Port_Direct:
-    behavior: classical  # 混合类型（包含多种规则）
-    interval: 10800  # 3小时
+  Nonstandard_Port_Direct:
+    behavior: classical
+    interval: 28800
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Port_Direct.yaml"
     format: yaml
 
   Custom_Direct_Domain:
-    behavior: domain  # 仅域名
-    interval: 10800
+    behavior: domain
+    interval: 28800
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.mrs"
-    format: mrs  # 二进制格式
+    format: mrs
 
   Custom_Direct_IP:
-    behavior: ipcidr  # 仅 IP
-    interval: 10800  # 3小时
+    behavior: ipcidr
+    interval: 28800
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_IP.mrs"
-    format: mrs  # 二进制格式
+    format: mrs
 
   Custom_Direct_Port:
-    behavior: classical  # 混合类型（包含多种规则）
-    interval: 10800  # 3小时
+    behavior: classical
+    interval: 28800
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_Port.yaml"
     format: yaml
 
   Custom_Proxy_Domain:
-    behavior: domain  # 仅域名
-    interval: 10800  # 3小时
+    behavior: domain
+    interval: 28800
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.mrs"
-    format: mrs  # 二进制格式
+    format: mrs
 
   Custom_Proxy_IP:
-    behavior: ipcidr  # 仅 IP
-    interval: 10800  # 3小时
+    behavior: ipcidr
+    interval: 28800
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_IP.mrs"
-    format: mrs  # 二进制格式
+    format: mrs
 
   Steam_CDN_Domain:
-    behavior: domain  # Steam CDN下载服务器（直连获得更快速度）
-    interval: 10800  # 3小时
+    behavior: domain
+    interval: 28800
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_Domain.mrs"
-    format: mrs  # 二进制格式
+    format: mrs
 
   Steam_CDN_IP:
-    behavior: ipcidr  # Steam CDN下载服务器（直连获得更快速度）
-    interval: 10800  # 3小时
+    behavior: ipcidr
+    interval: 28800
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Steam_CDN_IP.mrs"
-    format: mrs  # 二进制格式
+    format: mrs
+
+# ==================== 分流规则 Rules ====================
+# 规则自上而下匹配，命中首条规则后停止。
+# no-resolve 用于 IP 类规则，避免为规则匹配额外触发 DNS 解析。
+rules:
+  - "GEOSITE,private,🎯 全球直连"
+  - "GEOIP,private,🎯 全球直连,no-resolve"
+  - "RULE-SET,Custom_Direct_Domain,🎯 全球直连"
+  - "RULE-SET,Custom_Direct_IP,🎯 全球直连,no-resolve"
+  - "RULE-SET,Custom_Direct_Port,🎯 全球直连"
+  - "RULE-SET,Custom_Proxy_Domain,🚀 手动选择"
+  - "RULE-SET,Custom_Proxy_IP,🚀 手动选择,no-resolve"
+  - "GEOSITE,google-cn,🎯 全球直连"
+  - "GEOSITE,category-games@cn,🎯 全球直连"
+  - "RULE-SET,Steam_CDN_Domain,🎯 全球直连"
+  - "RULE-SET,Steam_CDN_IP,🎯 全球直连,no-resolve"
+  - "GEOSITE,category-game-platforms-download,🎯 全球直连"
+  - "GEOSITE,category-public-tracker,🎯 全球直连"
+  - "GEOSITE,category-communication,💬 即时通讯"
+  - "GEOSITE,category-social-media-!cn,🌐 社交媒体"
+  - "GEOSITE,openai,🤖 ChatGPT"
+  - "GEOSITE,category-ai-!cn,🤖 AI服务"
+  - "GEOSITE,github,🚀 GitHub"
+  - "GEOSITE,category-speedtest,🚀 测速工具"
+  - "GEOSITE,steam,🎮 Steam"
+  - "GEOSITE,youtube,📹 YouTube"
+  - "GEOSITE,apple-tvplus,🎥 AppleTV+"
+  - "GEOSITE,apple,🍎 苹果服务"
+  - "GEOSITE,microsoft,Ⓜ️ 微软服务"
+  - "GEOSITE,googlefcm,📢 谷歌FCM"
+  - "GEOSITE,google,🇬 谷歌服务"
+  - "GEOSITE,tiktok,🎶 TikTok"
+  - "GEOSITE,netflix,🎥 Netflix"
+  - "GEOSITE,disney,🎥 DisneyPlus"
+  - "GEOSITE,hbo,🎥 HBO"
+  - "GEOSITE,primevideo,🎥 PrimeVideo"
+  - "GEOSITE,category-emby,🎥 Emby"
+  - "GEOSITE,spotify,🎻 Spotify"
+  - "GEOSITE,bahamut,📺 Bahamut"
+  - "GEOSITE,category-games,🎮 游戏平台"
+  - "GEOSITE,category-entertainment,🌎 国外媒体"
+  - "GEOSITE,category-ecommerce,🛒 国外电商"
+  - "GEOSITE,gfw,🚀 手动选择"
+  - "GEOIP,telegram,💬 即时通讯,no-resolve"
+  - "GEOIP,twitter,🌐 社交媒体,no-resolve"
+  - "GEOIP,facebook,🌐 社交媒体,no-resolve"
+  - "GEOIP,google,🇬 谷歌服务,no-resolve"
+  - "GEOIP,netflix,🎥 Netflix,no-resolve"
+  - "GEOSITE,cn,🎯 全球直连"
+  - "GEOIP,cn,🎯 全球直连,no-resolve"
+  - "RULE-SET,Nonstandard_Port_Direct,🔀 非标端口"
+  - "MATCH,🐟 漏网之鱼"

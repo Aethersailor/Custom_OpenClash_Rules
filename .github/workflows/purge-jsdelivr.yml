@@ -7,6 +7,7 @@ on:
     paths:
       - 'cfg/**'
       - 'game_rule/**'
+      - 'script/**'
       - 'shell/**'
       - 'overwrite/**'
       - '!**/archived/**'
@@ -17,8 +18,6 @@ on:
     workflows:
       - Auto generate rules
       - Auto update mainland config
-      - Auto Update Game CDN Rules
-      - Sync and Modify Custom_Clash.ini
     types:
       - completed
     branches:
@@ -35,10 +34,11 @@ jobs:
         github.event.workflow_run.head_repository.full_name == github.repository &&
         github.event.workflow_run.head_branch == 'main'
       ) ||
+      github.event_name == 'workflow_dispatch' ||
       (
-        github.event_name != 'workflow_run' &&
+        github.event_name == 'push' &&
         github.actor != 'github-actions[bot]' &&
-        (github.event_name != 'push' || github.ref_name == 'main')
+        github.ref_name == 'main'
       )
     runs-on: ubuntu-latest
     permissions:
@@ -50,7 +50,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: main
           fetch-depth: 0
@@ -71,9 +71,9 @@ jobs:
             exit 0
           fi
 
-          if [ "$EVENT_NAME" = "workflow_run" ]; then
+          if [ "$EVENT_NAME" = "workflow_run" ] || [ "$EVENT_NAME" = "workflow_dispatch" ]; then
             echo "Workflow run head SHA: $HEAD_SHA"
-            echo "The source workflow completed successfully; purging the latest main content."
+            echo "A source workflow completed or an explicit purge was requested."
             # 规则提交由 Auto generate rules 完成后统一触发此处，避免对源文件和
             # 生成产物分别清理两次。即使没有生成文件变化，源规则本身也需要刷新缓存。
             echo "should_purge=true" >> "$GITHUB_OUTPUT"
