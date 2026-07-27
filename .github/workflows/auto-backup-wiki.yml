@@ -51,8 +51,7 @@ jobs:
           git add wiki
 
           if ! git diff --cached --quiet; then
-            commit_time=$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')
-            git commit -m "chore(wiki): auto backup Wiki at ${commit_time} UTC+8"
+            git commit -m "chore(wiki): auto backup Wiki"
             git pull --rebase origin main
             git push origin HEAD:main
             gh workflow run pages.yml --ref main
