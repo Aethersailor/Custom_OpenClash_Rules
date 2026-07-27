@@ -333,6 +333,8 @@ DOMAIN-SUFFIX,terrabbs.ink
 DOMAIN-SUFFIX,yingshi.dog
 # 中转api / add by Telegram user: 美 / Date: 2026-05-15 21:45:11
 DOMAIN-SUFFIX,code-relay.com
+# 安徽联通
+DOMAIN-SUFFIX,ahlt10010.com
 
 # =======================================
 # 以下是应当直连的冷门国内域名规则
@@ -1439,6 +1441,5 @@ DOMAIN-SUFFIX,sxlljm.com
 #DOMAIN-SUFFIX,winyoungreading.com
 # fnOS
 #DOMAIN-SUFFIX,5ddd.com
-
 
 # 更多已被收录的域名，此处未做保留
