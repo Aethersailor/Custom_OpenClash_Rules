@@ -1,12 +1,7 @@
 #!/bin/sh
 
-# Shared helper bodies are contract-checked against the full installer by
-# py/test_installer_contract.py. Keep public scripts self-contained for curl | sh.
-# ================================================================
-# Custom_OpenClash_Rules OpenClash Dev 更新脚本
-# 项目地址: https://github.com/Aethersailor/Custom_OpenClash_Rules
-# 功能: 检查依赖后安装/更新 OpenClash Dev 插件包及内核，并验证服务启动
-# ================================================================
+# Shared helpers are populated from install_openclash_dev_update.sh by
+# py/sync_installer_common.py. This file remains a standalone public script.
 
 R='\033[1;31m'
 G='\033[1;32m'
@@ -15,38 +10,38 @@ B='\033[1;34m'
 C='\033[1;36m'
 W='\033[1;37m'
 N='\033[0m'
-
 INFO="${B}[i]${N}"
 WARN="${Y}[!]${N}"
 ERR="${R}[x]${N}"
 OK="${G}[+]${N}"
-
 OPENCLASH_REPO_URL="https://github.com/vernesong/OpenClash.git"
 PACKAGE_REF="refs/heads/package"
 GIT_REFS_URL="${OPENCLASH_REPO_URL}/info/refs?service=git-upload-pack"
-JSDELIVR_METADATA_PREFIX="https://data.jsdelivr.com/v1/package/gh/vernesong/OpenClash@"
 JSDELIVR_PACKAGE_PREFIX="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@"
 RAW_PACKAGE_PREFIX="https://raw.githubusercontent.com/vernesong/OpenClash"
 GH_PROXY_PREFIX="https://v6.gh-proxy.org/"
-PACKAGE_RESOLVE_RETRIES="${PACKAGE_RESOLVE_RETRIES:-3}"
+PACKAGE_MAX_ROUNDS="${PACKAGE_MAX_ROUNDS:-2}"
+PACKAGE_MIN_BYTES="${PACKAGE_MIN_BYTES:-262144}"
 PACKAGE_REF_CONNECT_TIMEOUT="${PACKAGE_REF_CONNECT_TIMEOUT:-8}"
 PACKAGE_REF_MAX_TIME="${PACKAGE_REF_MAX_TIME:-25}"
-
 OPENCLASH_SHARE_DIR="${OPENCLASH_SHARE_DIR:-/usr/share/openclash}"
 OPENCLASH_ETC_DIR="${OPENCLASH_ETC_DIR:-/etc/openclash}"
 OPENCLASH_INIT="${OPENCLASH_INIT:-/etc/init.d/openclash}"
-
+OPENCLASH_LOG="${OPENCLASH_LOG:-/tmp/openclash.log}"
+OPENCLASH_PRESET="${OPENCLASH_PRESET:-/etc/config/openclash-set}"
+OS_RELEASE_FILE="${OS_RELEASE_FILE:-/etc/os-release}"
+OPENWRT_RELEASE_FILE="${OPENWRT_RELEASE_FILE:-/etc/openwrt_release}"
 PKG_MGR=""
 EXT=""
 FIREWALL_TYPE=""
+DISTRO_ID=""
 DEPENDENCIES=""
 TMP_DIR=""
 LOCK_DIR="${LOCK_DIR:-/tmp/install_openclash_dev.lock}"
 FEED_FILE=""
 FEED_BACKUP=""
 FEED_CHANGED=0
-PACKAGE_COMMIT=""
-PACKAGE_TARGET_VERSION=""
+PRESERVED_PACKAGE_PATH=""
 
 print_line() {
     printf '%b\n' "${C}================================================================${N}"
@@ -83,26 +78,27 @@ die() {
 logo() {
     command -v clear >/dev/null 2>&1 && clear
     printf '%b\n' "${C}################################################################${N}"
-    printf '%b\n' "${C}#                                                              #${N}"
-    printf '%b\n' "${C}#              Custom_OpenClash_Rules Auto Installer           #${N}"
+    printf '%b\n' "${C}#              Custom_OpenClash_Rules Installer                #${N}"
     printf '%b\n' "${C}#     https://github.com/Aethersailor/Custom_OpenClash_Rules   #${N}"
-    printf '%b\n' "${C}#                                                              #${N}"
     printf '%b\n' "${C}################################################################${N}"
-    printf '%b\n\n' "${W}* OpenClash Dev 插件与内核更新脚本${N}"
+    printf '%b\n\n' "${W}* OpenClash Dev 插件自有覆盖重装流程${N}"
 }
 
 restore_feed() {
-    if [ "$FEED_CHANGED" -eq 1 ] && [ -n "$FEED_FILE" ] && [ -f "$FEED_BACKUP" ]; then
-        cp -p "$FEED_BACKUP" "$FEED_FILE" 2>/dev/null || true
-        FEED_CHANGED=0
-    fi
+    [ "$FEED_CHANGED" -eq 1 ] || return 0
+    [ -n "$FEED_FILE" ] && [ -f "$FEED_BACKUP" ] || return 1
+    cp -p "$FEED_BACKUP" "$FEED_FILE" || return 1
+    FEED_CHANGED=0
+    return 0
 }
 
 cleanup() {
     status=$?
     trap - EXIT INT TERM HUP
-    restore_feed
-    [ -n "$TMP_DIR" ] && rm -rf "$TMP_DIR"
+    restore_feed >/dev/null 2>&1 || true
+    case "$TMP_DIR" in
+        /tmp/openclash-installer.*) rm -rf "$TMP_DIR" ;;
+    esac
     rm -f "$LOCK_DIR/pid" 2>/dev/null || true
     rmdir "$LOCK_DIR" 2>/dev/null || true
     exit "$status"
@@ -114,22 +110,46 @@ init_runtime() {
     if ! mkdir "$LOCK_DIR" 2>/dev/null; then
         lock_pid=$(cat "$LOCK_DIR/pid" 2>/dev/null)
         if [ -n "$lock_pid" ] && kill -0 "$lock_pid" 2>/dev/null; then
-            die "检测到另一个 OpenClash 更新任务正在运行（PID $lock_pid）。"
+            die "检测到另一个安装任务正在运行（PID $lock_pid）。"
         fi
-        rm -rf "$LOCK_DIR"
+        rm -f "$LOCK_DIR/pid" 2>/dev/null || true
+        rmdir "$LOCK_DIR" 2>/dev/null ||
+            die "运行锁目录无法安全清理：$LOCK_DIR"
         mkdir "$LOCK_DIR" 2>/dev/null || die "无法创建运行锁：$LOCK_DIR"
     fi
     printf '%s\n' "$$" >"$LOCK_DIR/pid"
+
     trap cleanup EXIT
     trap 'exit 130' INT
     trap 'exit 143' TERM
     trap 'exit 129' HUP
 
-    TMP_DIR=$(mktemp -d /tmp/openclash-dev-update.XXXXXX 2>/dev/null) ||
+    TMP_DIR=$(mktemp -d /tmp/openclash-installer.XXXXXX 2>/dev/null) ||
         die "无法创建临时目录。"
 }
 
+detect_distribution() {
+    if [ -n "${OPENCLASH_DISTRO_OVERRIDE:-}" ]; then
+        release_text=$OPENCLASH_DISTRO_OVERRIDE
+    else
+        release_text=""
+        [ -f "$OS_RELEASE_FILE" ] &&
+            release_text="$release_text $(cat "$OS_RELEASE_FILE" 2>/dev/null)"
+        [ -f "$OPENWRT_RELEASE_FILE" ] &&
+            release_text="$release_text $(cat "$OPENWRT_RELEASE_FILE" 2>/dev/null)"
+    fi
+
+    release_lower=$(printf '%s\n' "$release_text" | tr '[:upper:]' '[:lower:]')
+    case "$release_lower" in
+        *immortalwrt*) DISTRO_ID="immortalwrt" ;;
+        *openwrt*) DISTRO_ID="openwrt" ;;
+        *) return 1 ;;
+    esac
+}
+
 detect_environment() {
+    detect_distribution || die "无法识别 OpenWrt 或 ImmortalWrt 发行版。"
+
     if command -v opkg >/dev/null 2>&1; then
         PKG_MGR="opkg"
         EXT="ipk"
@@ -140,18 +160,82 @@ detect_environment() {
         die "未检测到支持的包管理器（opkg/apk）。"
     fi
 
+    base_dependencies="bash dnsmasq-full curl ca-bundle ip-full ruby ruby-yaml kmod-tun unzip kmod-inet-diag luci-compat luci luci-base"
     if command -v fw4 >/dev/null 2>&1 || command -v nft >/dev/null 2>&1; then
         FIREWALL_TYPE="nftables"
-        DEPENDENCIES="bash dnsmasq-full curl ca-bundle ip-full ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base coreutils-sha256sum"
+        DEPENDENCIES="$base_dependencies kmod-nft-tproxy"
     elif command -v fw3 >/dev/null 2>&1 || command -v iptables >/dev/null 2>&1; then
         FIREWALL_TYPE="iptables"
-        DEPENDENCIES="bash iptables dnsmasq-full curl ca-bundle ipset ip-full iptables-mod-tproxy iptables-mod-extra ruby ruby-yaml kmod-tun kmod-inet-diag unzip luci-compat luci luci-base coreutils-sha256sum"
+        DEPENDENCIES="$base_dependencies iptables ipset iptables-mod-tproxy iptables-mod-extra"
     else
         die "未检测到支持的防火墙架构（fw4/nftables 或 fw3/iptables）。"
     fi
 
+    log_ok "发行版：$DISTRO_ID"
     log_ok "包管理器：$PKG_MGR"
     log_ok "防火墙：$FIREWALL_TYPE"
+}
+
+select_feed_file() {
+    [ -n "$FEED_FILE" ] && return 0
+    if [ "$PKG_MGR" = "opkg" ]; then
+        FEED_FILE="/etc/opkg/distfeeds.conf"
+    else
+        FEED_FILE="/etc/apk/repositories.d/distfeeds.list"
+    fi
+}
+
+rewrite_feed_to_mirror() {
+    source_file=$1
+    target_file=$2
+
+    case "$DISTRO_ID" in
+        immortalwrt)
+            if ! grep -Fq 'https://downloads.immortalwrt.org' "$source_file" &&
+                ! grep -Fq 'https://mirrors.vsean.net/openwrt' "$source_file" &&
+                ! grep -Fq 'https://mirror.nju.edu.cn/immortalwrt' "$source_file"; then
+                return 1
+            fi
+            sed \
+                -e 's,https://downloads\.immortalwrt\.org,https://mirror.nju.edu.cn/immortalwrt,g' \
+                -e 's,https://mirrors\.vsean\.net/openwrt,https://mirror.nju.edu.cn/immortalwrt,g' \
+                "$source_file" >"$target_file"
+            ;;
+        openwrt)
+            if ! grep -Fq 'https://downloads.openwrt.org' "$source_file" &&
+                ! grep -Fq 'https://mirrors.ustc.edu.cn/openwrt' "$source_file"; then
+                return 1
+            fi
+            sed \
+                -e 's,https://downloads\.openwrt\.org,https://mirrors.ustc.edu.cn/openwrt,g' \
+                "$source_file" >"$target_file"
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+prepare_temporary_feed() {
+    select_feed_file
+    [ -f "$FEED_FILE" ] || return 1
+
+    FEED_BACKUP="$TMP_DIR/distfeeds.original"
+    feed_candidate="$TMP_DIR/distfeeds.mirror"
+    cp -p "$FEED_FILE" "$FEED_BACKUP" || return 1
+    rewrite_feed_to_mirror "$FEED_BACKUP" "$feed_candidate" || return 1
+
+    if cmp -s "$FEED_BACKUP" "$feed_candidate"; then
+        log_info "当前 feed 已使用目标发行版镜像。"
+        return 0
+    fi
+
+    FEED_CHANGED=1
+    cp "$feed_candidate" "$FEED_FILE" || {
+        restore_feed >/dev/null 2>&1 || true
+        return 1
+    }
+    log_ok "依赖安装 feed 已临时切换到 $DISTRO_ID 对应镜像。"
 }
 
 package_update() {
@@ -175,54 +259,25 @@ package_install_dependencies() {
     fi
 }
 
-set_feed_file() {
-    if [ "$PKG_MGR" = "opkg" ]; then
-        FEED_FILE="/etc/opkg/distfeeds.conf"
-    else
-        FEED_FILE="/etc/apk/repositories.d/distfeeds.list"
-    fi
-}
-
-enable_temporary_nju_mirror() {
-    set_feed_file
-    [ -f "$FEED_FILE" ] || return 1
-
-    FEED_BACKUP="$TMP_DIR/distfeeds.original"
-    feed_candidate="$TMP_DIR/distfeeds.nju"
-    cp -p "$FEED_FILE" "$FEED_BACKUP" || return 1
-    sed \
-        -e 's,https://downloads\.immortalwrt\.org,https://mirror.nju.edu.cn/immortalwrt,g' \
-        -e 's,https://mirrors\.vsean\.net/openwrt,https://mirror.nju.edu.cn/immortalwrt,g' \
-        "$FEED_BACKUP" >"$feed_candidate" || return 1
-    cmp -s "$FEED_BACKUP" "$feed_candidate" && return 1
-    FEED_CHANGED=1
-    cp "$feed_candidate" "$FEED_FILE" || {
-        restore_feed
+install_dependencies() {
+    log_info "备份 feed，并在更新索引前直接切换到指定镜像..."
+    prepare_temporary_feed || {
+        restore_feed >/dev/null 2>&1 || true
         return 1
     }
-}
-
-install_dependencies() {
-    log_info "更新软件源并检查/安装 OpenClash 依赖..."
-    if package_update && package_install_dependencies; then
-        log_ok "软件源更新及依赖检查完成。"
-        return 0
-    fi
-
-    log_warn "默认软件源处理失败，临时切换至南京大学镜像重试。"
-    enable_temporary_nju_mirror || die "无法准备临时镜像配置。"
 
     if ! package_update || ! package_install_dependencies; then
-        die "依赖检查或安装失败，请检查软件源和系统版本。"
+        restore_feed >/dev/null 2>&1 || true
+        return 1
     fi
 
-    restore_feed
-    log_ok "依赖检查完成，系统软件源已恢复。"
+    restore_feed || return 1
+    log_ok "依赖安装完成，原始 feed 已完整恢复。"
 }
 
 check_required_commands() {
     missing=""
-    for cmd in awk sed grep curl sha256sum wc mktemp uci uname ruby; do
+    for cmd in awk sed grep curl wc df mktemp uci cp cmp tr; do
         command -v "$cmd" >/dev/null 2>&1 || missing="$missing $cmd"
     done
     [ -z "$missing" ] || die "缺少必要命令：$missing"
@@ -231,42 +286,28 @@ check_required_commands() {
 curl_download() {
     output=$1
     url=$2
-
     rm -f "$output"
-    curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 30 --max-time 1200 \
-        -o "$output" "$url"
+    curl -fsSL --retry 2 --retry-delay 1 \
+        --connect-timeout 10 --max-time 180 \
+        -o "$output" "$url" &&
+        [ -s "$output" ]
 }
 
 fetch_package_refs_route() {
     route=$1
     output=$2
-    rm -f "$output"
-
     case "$route" in
-        direct)
-            url=$GIT_REFS_URL
-            ;;
-        proxy)
-            url="${GH_PROXY_PREFIX}${GIT_REFS_URL}"
-            ;;
-        *)
-            return 1
-            ;;
+        direct) url=$GIT_REFS_URL ;;
+        proxy) url="${GH_PROXY_PREFIX}${GIT_REFS_URL}" ;;
+        *) return 1 ;;
     esac
 
+    rm -f "$output"
     curl -fsSL --connect-timeout "$PACKAGE_REF_CONNECT_TIMEOUT" \
         --max-time "$PACKAGE_REF_MAX_TIME" \
         -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' \
         -o "$output" "$url" 2>/dev/null || return 1
     grep -aq '# service=git-upload-pack' "$output"
-}
-
-package_ref_route_label() {
-    case "$1" in
-        direct) printf '%s\n' 'GitHub Smart HTTP 直连' ;;
-        proxy) printf '%s\n' 'GitHub Smart HTTP 反代' ;;
-        *) printf '%s\n' "$1" ;;
-    esac
 }
 
 fetch_package_branch_sha() {
@@ -285,18 +326,14 @@ fetch_package_branch_sha() {
 
     if [ -z "$selected_route" ]; then
         for route in direct proxy; do
-            label=$(package_ref_route_label "$route")
-            log_info "探测官方 package 分支：$label" >&2
+            log_info "探测官方 package 分支：$route" >&2
             if fetch_package_refs_route "$route" "$refs_file"; then
                 selected_route=$route
                 printf '%s\n' "$route" >"$route_file"
-                log_ok "官方提交探测路径：$label" >&2
                 break
             fi
-            log_warn "$label 不可用，切换下一条路径。" >&2
         done
     fi
-
     [ -n "$selected_route" ] || return 1
 
     sha=$(awk -v ref="$PACKAGE_REF" '
@@ -332,226 +369,69 @@ download_commit_file() {
         curl_download "$output" "$raw_url"
 }
 
-fetch_package_metadata() {
-    commit=$1
-    output=$2
-    curl_download "$output" "${JSDELIVR_METADATA_PREFIX}${commit}/flat"
-}
-
-parse_package_metadata() {
-    json_file=$1
-    suffix=".$EXT"
-
-    awk -v suffix="$suffix" '
-        /"name":/ {
-            name=$0
-            sub(/^.*"name":[[:space:]]*"/, "", name)
-            sub(/".*$/, "", name)
-            hash=""
-            size=""
-            selected=(index(name, "/dev/luci-app-openclash") == 1 &&
-                substr(name, length(name) - length(suffix) + 1) == suffix)
-        }
-        selected && /"hash":/ {
-            hash=$0
-            sub(/^.*"hash":[[:space:]]*"/, "", hash)
-            sub(/".*$/, "", hash)
-        }
-        selected && /"size":/ {
-            size=$0
-            sub(/^.*"size":[[:space:]]*/, "", size)
-            sub(/[^0-9].*$/, "", size)
-            if (name != "" && hash != "" && size != "") {
-                sub(/^\/dev\//, "", name)
-                print name "|" hash "|" size
-                exit
-            }
-        }
-    ' "$json_file"
-}
-
 parse_package_version() {
-    sed -n '1s/^v\([0-9][0-9.]*[0-9]\)\r*$/\1/p' "$1"
+    sed -n \
+        '1s/^v\([0-9][0-9]*\(\.[0-9][0-9]*\)\{1,\}\)\r*$/\1/p' \
+        "$1"
 }
 
-resolve_package_metadata() {
-    commit=$1
-    metadata_file="$TMP_DIR/package-metadata.json"
-    version_file="$TMP_DIR/package-version"
-
-    if fetch_package_metadata "$commit" "$metadata_file"; then
-        metadata=$(parse_package_metadata "$metadata_file")
-        if [ -n "$metadata" ]; then
-            printf '%s\n' "$metadata"
-            return 0
-        fi
-    fi
-
-    download_commit_file "$commit" version "$version_file" || return 1
-    version=$(parse_package_version "$version_file")
-    [ -n "$version" ] || return 1
+package_file_name() {
+    version=$1
     case "$EXT" in
-        apk) file_name="luci-app-openclash-${version}.apk" ;;
-        ipk) file_name="luci-app-openclash_${version}_all.ipk" ;;
+        ipk) printf 'luci-app-openclash_%s_all.ipk\n' "$version" ;;
+        apk) printf 'luci-app-openclash-%s.apk\n' "$version" ;;
         *) return 1 ;;
     esac
-    printf '%s||\n' "$file_name"
 }
 
-verify_file_size() {
-    file=$1
-    expected=$2
-    actual=$(wc -c <"$file" 2>/dev/null | tr -d ' ')
-    [ -n "$actual" ] && [ "$actual" = "$expected" ]
-}
-
-verify_sha256_base64() {
-    file=$1
-    expected_base64=$2
-    expected_hex=$(ruby -e 'print ARGV[0].unpack1("m0").unpack1("H*")' \
-        "$expected_base64" 2>/dev/null) || return 1
-    actual_hex=$(sha256sum "$file" | awk '{print $1}')
-    [ "${#expected_hex}" -eq 64 ] && [ "$actual_hex" = "$expected_hex" ]
+apk_supports_allow_downgrade() {
+    apk add --help 2>&1 | grep -q -- '--allow-downgrade'
 }
 
 verify_package_file() {
     file=$1
-    expected_size=$2
-    expected_hash=$3
-
     [ -s "$file" ] || return 1
-    [ -z "$expected_size" ] || verify_file_size "$file" "$expected_size" || return 1
-    [ -z "$expected_hash" ] || verify_sha256_base64 "$file" "$expected_hash" || return 1
+    actual_size=$(wc -c <"$file" 2>/dev/null | tr -d ' ')
+    [ -n "$actual_size" ] && [ "$actual_size" -ge "$PACKAGE_MIN_BYTES" ] ||
+        return 1
 
     if [ "$PKG_MGR" = "opkg" ]; then
         opkg --noaction install "$file" >/dev/null 2>&1
+    elif apk_supports_allow_downgrade; then
+        apk add -s --force-reinstall --force-overwrite --clean-protected \
+            --allow-untrusted --allow-downgrade "$file" >/dev/null 2>&1
     else
-        apk add -s -q --force-overwrite --clean-protected --allow-untrusted \
-            "$file" >/dev/null 2>&1
+        apk add -s --force-reinstall --force-overwrite --clean-protected \
+            --allow-untrusted "$file" >/dev/null 2>&1
     fi
 }
 
 download_openclash_package() {
     commit=$1
     file_name=$2
-    expected_size=$3
-    expected_hash=$4
-    output=$5
-
+    output=$3
     raw_url="${RAW_PACKAGE_PREFIX}/${commit}/dev/${file_name}"
     jsdelivr_url="${JSDELIVR_PACKAGE_PREFIX}${commit}/dev/${file_name}"
     proxy_url="${GH_PROXY_PREFIX}${raw_url}"
 
-    log_info "下载顺序：jsDelivr → 反代 → GitHub Raw（均锁定提交 $commit）"
-
-    log_info "尝试从 jsDelivr 下载..."
-    if curl_download "$output" "$jsdelivr_url" &&
-        verify_package_file "$output" "$expected_size" "$expected_hash"; then
-        log_ok "jsDelivr 下载和校验成功。"
-        return 0
-    fi
-
-    log_info "尝试从反代下载..."
-    if curl_download "$output" "$proxy_url" &&
-        verify_package_file "$output" "$expected_size" "$expected_hash"; then
-        log_ok "反代下载和校验成功。"
-        return 0
-    fi
-
-    log_info "尝试从 GitHub Raw 下载..."
-    if curl_download "$output" "$raw_url" &&
-        verify_package_file "$output" "$expected_size" "$expected_hash"; then
-        log_ok "GitHub Raw 下载和校验成功。"
-        return 0
-    fi
-
+    log_info "下载顺序：testingcf jsDelivr → v6.gh-proxy → GitHub Raw"
+    for source in "$jsdelivr_url" "$proxy_url" "$raw_url"; do
+        log_info "尝试下载：$source"
+        if curl_download "$output" "$source" &&
+            verify_package_file "$output"; then
+            log_ok "固定提交安装包下载及 dry-run 校验通过。"
+            return 0
+        fi
+        log_warn "当前路径下载或校验失败，尝试下一路径。"
+    done
     rm -f "$output"
     return 1
 }
 
-prepare_latest_package() {
-    output=$1
-    attempt=1
-
-    while [ "$attempt" -le "$PACKAGE_RESOLVE_RETRIES" ]; do
-        before=$(fetch_package_branch_sha) || return 1
-        log_info "官方 package 分支提交：$before"
-
-        metadata=$(resolve_package_metadata "$before") || return 1
-        file_name=${metadata%%|*}
-        rest=${metadata#*|}
-        expected_hash=${rest%%|*}
-        expected_size=${rest#*|}
-        target_version=$(extract_version_from_filename "$file_name")
-        [ -n "$target_version" ] || return 1
-
-        if [ -z "$expected_hash" ] || [ -z "$expected_size" ]; then
-            log_warn "提交已锁定，但校验元数据不可用，将使用官方提交直链和包管理器结构校验。"
-        fi
-
-        download_openclash_package "$before" "$file_name" \
-            "$expected_size" "$expected_hash" "$output" || return 1
-
-        after=$(fetch_package_branch_sha) || return 1
-        if [ "$before" = "$after" ]; then
-            PACKAGE_COMMIT=$before
-            PACKAGE_TARGET_VERSION=$target_version
-            return 0
-        fi
-
-        log_warn "下载期间官方 package 分支已从 $before 更新为 $after，重新获取最新版。"
-        rm -f "$output"
-        attempt=$((attempt + 1))
-    done
-
-    return 1
-}
-
-install_openclash_package() {
-    package_file=$1
-
-    if [ "$PKG_MGR" = "opkg" ]; then
-        opkg install --force-reinstall "$package_file"
-    else
-        apk add -q --force-overwrite --clean-protected --allow-untrusted "$package_file"
-    fi
-}
-
-install_latest_openclash_package() {
-    package_file=$1
-    install_round=1
-
-    while [ "$install_round" -le "$PACKAGE_RESOLVE_RETRIES" ]; do
-        prepare_latest_package "$package_file" || return 1
-        target_version=$PACKAGE_TARGET_VERSION
-        install_openclash_package "$package_file" || return 1
-
-        installed=$(get_installed_version)
-        [ "$installed" = "$target_version" ] || return 1
-
-        final_commit=$(fetch_package_branch_sha) || return 1
-        if [ "$final_commit" = "$PACKAGE_COMMIT" ]; then
-            log_ok "OpenClash Dev v$installed 插件包安装完成（提交 $PACKAGE_COMMIT）。"
-            return 0
-        fi
-
-        log_warn "安装期间官方 package 分支已从 $PACKAGE_COMMIT 更新为 $final_commit，继续安装最新版。"
-        install_round=$((install_round + 1))
-    done
-
-    return 1
-}
-
-extract_version_from_filename() {
-    printf '%s\n' "$1" |
-        sed -n \
-            -e 's/^luci-app-openclash-\([0-9][0-9.]*[0-9]\)\.apk$/\1/p' \
-            -e 's/^luci-app-openclash_\([0-9][0-9.]*[0-9]\)_all\.ipk$/\1/p'
-}
-
 normalize_version() {
     printf '%s\n' "$1" |
-        sed -n 's/^\([0-9][0-9.]*[0-9]\)\(-r[0-9][0-9]*\)\{0,1\}$/\1/p'
+        sed -n \
+            's/^\([0-9][0-9]*\(\.[0-9][0-9]*\)\{1,\}\)\(-r[0-9][0-9]*\)\{0,1\}$/\1/p'
 }
 
 get_installed_version() {
@@ -560,10 +440,91 @@ get_installed_version() {
             awk -F ': ' '/^Version:/{print $2; exit}')
     else
         raw_version=$(apk list -I luci-app-openclash 2>/dev/null |
-            sed -n 's/^luci-app-openclash-\([0-9][0-9.]*\).*/\1/p' |
+            sed -n \
+                's/^luci-app-openclash-\([0-9][0-9]*\(\.[0-9][0-9]*\)\{1,\}\)\(-r[0-9][0-9]*\)\{0,1\}[[:space:]].*$/\1/p' |
             head -n 1)
     fi
     normalize_version "$raw_version"
+}
+
+install_openclash_package() {
+    package_file=$1
+    if [ "$PKG_MGR" = "opkg" ]; then
+        opkg install --force-reinstall "$package_file"
+    elif apk_supports_allow_downgrade; then
+        apk add --force-reinstall --force-overwrite --clean-protected \
+            --allow-untrusted --allow-downgrade "$package_file"
+    else
+        apk add --force-reinstall --force-overwrite --clean-protected \
+            --allow-untrusted "$package_file"
+    fi
+}
+
+preserve_failed_package() {
+    package_file=$1
+    [ -s "$package_file" ] || return 1
+    package_base=$(basename "$package_file")
+    PRESERVED_PACKAGE_PATH="/tmp/${package_base}.failed.$$"
+    cp -p "$package_file" "$PRESERVED_PACKAGE_PATH" || return 1
+
+    log_error "安装包已保留：$PRESERVED_PACKAGE_PATH"
+    if [ "$PKG_MGR" = "opkg" ]; then
+        log_error "可手工执行：opkg install --force-reinstall '$PRESERVED_PACKAGE_PATH'"
+    elif apk_supports_allow_downgrade; then
+        log_error "可手工执行：apk add --force-reinstall --force-overwrite --clean-protected --allow-untrusted --allow-downgrade '$PRESERVED_PACKAGE_PATH'"
+    else
+        log_error "可手工执行：apk add --force-reinstall --force-overwrite --clean-protected --allow-untrusted '$PRESERVED_PACKAGE_PATH'"
+    fi
+}
+
+install_latest_openclash_package() {
+    round=1
+    while [ "$round" -le "$PACKAGE_MAX_ROUNDS" ]; do
+        commit=$(fetch_package_branch_sha) || return 1
+        case "$commit" in
+            '' | *[!0-9a-f]*) return 1 ;;
+        esac
+        [ "${#commit}" -eq 40 ] || return 1
+        log_info "锁定 OpenClash package 提交：$commit"
+
+        version_file="$TMP_DIR/version.$round"
+        download_commit_file "$commit" version "$version_file" || return 1
+        target_version=$(parse_package_version "$version_file")
+        [ -n "$target_version" ] || return 1
+        file_name=$(package_file_name "$target_version") || return 1
+        package_file="$TMP_DIR/$file_name"
+
+        download_openclash_package "$commit" "$file_name" "$package_file" ||
+            return 1
+        if ! install_openclash_package "$package_file"; then
+            preserve_failed_package "$package_file" || true
+            return 1
+        fi
+
+        installed_version=$(get_installed_version)
+        if [ "$installed_version" != "$target_version" ]; then
+            log_error "安装后版本不一致：目标 $target_version，实际 ${installed_version:-未知}。"
+            preserve_failed_package "$package_file" || true
+            return 1
+        fi
+
+        current_commit=$(fetch_package_branch_sha 2>/dev/null || true)
+        if [ -z "$current_commit" ] || [ "$current_commit" = "$commit" ]; then
+            log_ok "OpenClash Dev v$target_version 已覆盖重装并确认版本。"
+            return 0
+        fi
+
+        if [ "$round" -lt "$PACKAGE_MAX_ROUNDS" ]; then
+            log_warn "package 分支安装期间已移动到 $current_commit，最多再执行一轮。"
+            round=$((round + 1))
+            continue
+        fi
+
+        log_warn "package 分支再次移动；当前安装仍是提交 $commit 的完整自洽版本。"
+        log_ok "OpenClash Dev v$target_version 已覆盖重装并确认版本。"
+        return 0
+    done
+    return 1
 }
 
 has_cpu_flag() {
@@ -589,7 +550,6 @@ detect_loongarch_abi() {
     kernel_ver=$(uname -r | cut -d. -f1,2)
     major=${kernel_ver%%.*}
     minor=${kernel_ver#*.}
-
     if [ "$major" -gt 5 ] || { [ "$major" -eq 5 ] && [ "$minor" -ge 19 ]; }; then
         printf '%s\n' "abi2"
     else
@@ -599,7 +559,6 @@ detect_loongarch_abi() {
 
 detect_core_arch() {
     arch=${CPU_ARCH_OVERRIDE:-$(uname -m)}
-
     case "$arch" in
         x86_64)
             CPU_FLAGS=${CPU_FLAGS_OVERRIDE:-$(grep -m1 -E '^flags[[:space:]]*:' /proc/cpuinfo 2>/dev/null | cut -d: -f2)}
@@ -637,135 +596,63 @@ get_effective_core_type() {
     printf '%s\n' "$core_type"
 }
 
-core_asset_exists() {
-    core_arch=$1
-    core_type=$(get_effective_core_type)
-    [ "$core_type" = "Smart" ] && core_dir="smart" || core_dir="meta"
-    jsdelivr_url="https://testingcf.jsdelivr.net/gh/vernesong/OpenClash@core/dev/${core_dir}/clash-${core_arch}.tar.gz"
-    raw_url="https://raw.githubusercontent.com/vernesong/OpenClash/core/dev/${core_dir}/clash-${core_arch}.tar.gz"
-    proxy_url="${GH_PROXY_PREFIX}${raw_url}"
-
-    for asset_url in "$jsdelivr_url" "$proxy_url" "$raw_url"; do
-        if curl -fsIL --retry 2 --connect-timeout 10 --max-time 30 \
-            "$asset_url" >/dev/null 2>&1; then
-            return 0
-        fi
-    done
-    return 1
+configure_base_uci() {
+    detected_arch=$(detect_core_arch) || return 1
+    uci -q batch <<EOF
+set openclash.config.release_branch='dev'
+set openclash.config.github_address_mod='https://testingcf.jsdelivr.net/'
+set openclash.config.core_version='$detected_arch'
+set openclash.config.enable='1'
+EOF
+    uci commit openclash || return 1
+    log_ok "基础 UCI 已写入；内核架构：$detected_arch"
 }
 
-configure_core_arch() {
-    detected=$(detect_core_arch) || die "无法识别当前 CPU 架构。"
-    core_asset_exists "$detected" || die "官方 Dev 仓库中不存在匹配的内核资源：$detected"
-
-    uci set openclash.config.release_branch='dev' || die "无法配置 OpenClash Dev 分支。"
-    uci set openclash.config.core_version="$detected" || die "无法写入 core_version。"
-    uci commit openclash || die "无法提交内核更新配置。"
-    log_ok "Dev 内核架构：$detected"
-}
-
-get_core_path() {
-    small_flash=$(uci -q get openclash.config.small_flash_memory)
-    if [ "$small_flash" = "1" ]; then
-        printf '%s\n' "/tmp/etc/openclash/core/clash_meta"
-    else
-        printf '%s\n' "$OPENCLASH_ETC_DIR/core/clash_meta"
-    fi
-}
-
-verify_core_version() {
-    core_type=$1
-    core_path=$(get_core_path)
-    [ -x "$core_path" ] || return 1
-    [ -s /tmp/clash_last_version ] || return 1
-
-    if [ "$core_type" = "Smart" ]; then
-        expected=$(sed -n '2p' /tmp/clash_last_version)
-    else
-        expected=$(sed -n '1p' /tmp/clash_last_version)
-    fi
-    actual=$("$core_path" -v 2>/dev/null | awk 'NR==1{print $3}')
-
-    [ -n "$expected" ] && [ "$actual" = "$expected" ]
-}
-
-update_core() {
+run_core_update() {
     core_script="$OPENCLASH_SHARE_DIR/openclash_core.sh"
-    [ -x "$core_script" ] || die "内核更新脚本不存在：$core_script"
-
+    [ -x "$core_script" ] || return 1
     core_type=$(get_effective_core_type)
-    for source in "https://testingcf.jsdelivr.net/" "$GH_PROXY_PREFIX" "0"; do
-        rm -f /tmp/clash_last_version
-        log_info "更新 $core_type 内核，下载源：$source"
-        "$core_script" "$core_type" "$source" >/dev/null 2>&1 || true
-
-        if verify_core_version "$core_type"; then
-            log_ok "$core_type 内核版本验证通过。"
-            return 0
-        fi
-        log_warn "$core_type 内核更新或版本验证失败，切换下载源。"
-    done
-
-    die "$core_type 内核更新失败。"
+    log_info "调用 OpenClash 内置内核流程：$core_type"
+    "$core_script" "$core_type" "https://testingcf.jsdelivr.net/" ||
+        log_warn "内置内核脚本返回非零；请查看 $OPENCLASH_LOG。"
+    log_info "内核实际远端更新结果请查看 $OPENCLASH_LOG。"
 }
 
-start_openclash() {
-    [ -x "$OPENCLASH_INIT" ] || die "OpenClash 服务脚本不存在：$OPENCLASH_INIT"
-
-    uci set openclash.config.enable='1' || die "无法启用 OpenClash 配置。"
-    uci commit openclash || die "无法提交 OpenClash 启用状态。"
-    "$OPENCLASH_INIT" enable >/dev/null 2>&1 ||
-        die "设置 OpenClash 开机自启失败。"
-    "$OPENCLASH_INIT" restart >/dev/null 2>&1 ||
-        die "OpenClash 重启命令执行失败。"
-
-    waited=0
-    while [ "$waited" -lt 90 ]; do
-        sleep 3
-        waited=$((waited + 3))
-        status=$("$OPENCLASH_INIT" status 2>/dev/null)
-        if printf '%s\n' "$status" | grep -q 'running' && pidof clash >/dev/null 2>&1; then
-            log_ok "OpenClash 启动成功。"
-            return 0
-        fi
-        if printf '%s\n' "$status" | grep -qE 'inactive|dead|failed|stopped'; then
-            die "OpenClash 启动失败，服务状态：$status"
-        fi
-        [ $((waited % 15)) -eq 0 ] && log_info "等待 OpenClash 启动：${waited}/90 秒"
-    done
-
-    die "OpenClash 启动超时。"
+enable_and_restart_openclash() {
+    [ -x "$OPENCLASH_INIT" ] || return 1
+    uci set openclash.config.enable='1' || return 1
+    uci commit openclash || return 1
+    "$OPENCLASH_INIT" enable || return 1
+    "$OPENCLASH_INIT" restart || return 1
+    log_ok "已启用 OpenClash 开机自启并执行重启命令。"
 }
 
 main() {
     logo
-    log_info "即将检查依赖、安装 OpenClash Dev 插件包、更新内核并验证服务启动。"
+    log_info "将覆盖重装 OpenClash Dev 插件，并调用内置内核更新流程。"
     init_runtime
 
-    print_step "步骤 1/6: 检查运行环境"
+    print_step "步骤 1/4：检测环境并临时切换软件源"
     detect_environment
-
-    print_step "步骤 2/6: 更新软件源并检查依赖"
-    install_dependencies
+    install_dependencies || die "镜像索引更新或依赖安装失败；原始 feed 已恢复。"
     check_required_commands
 
-    print_step "步骤 3/6: 下载并安装 OpenClash Dev 插件包"
-    package_file="$TMP_DIR/openclash.$EXT"
-    install_latest_openclash_package "$package_file" ||
-        die "无法锁定并安装官方 package 分支的最新 .$EXT 安装包。"
+    print_step "步骤 2/4：锁定 package 提交并覆盖重装插件"
+    install_latest_openclash_package ||
+        die "无法锁定、校验或覆盖重装 OpenClash Dev 插件。"
 
-    print_step "步骤 4/6: 配置 Dev 内核架构"
-    configure_core_arch
+    print_step "步骤 3/4：写入基础 UCI 并调用内置内核流程"
+    configure_base_uci || die "OpenClash 基础 UCI 配置失败。"
+    run_core_update || die "OpenClash 内置内核脚本不存在或不可执行。"
 
-    print_step "步骤 5/6: 更新 OpenClash 内核"
-    update_core
+    print_step "步骤 4/4：启用并重启 OpenClash"
+    enable_and_restart_openclash || die "启用或重启 OpenClash 失败。"
 
-    print_step "步骤 6/6: 启动并验证 OpenClash"
-    start_openclash
-
-    printf '\n'
     print_line
-    printf '%b\n' "${G}[OK] OpenClash Dev 插件包、内核及服务更新完成。${N}"
+    log_ok "OpenClash 插件已由安装脚本完成覆盖重装。"
+    log_info "内核及相关资源已调用 OpenClash 内置更新流程。"
+    log_info "实际远端资源更新结果请查看 $OPENCLASH_LOG。"
+    print_line
 }
 
 if [ "${OPENCLASH_INSTALLER_LIB_ONLY:-0}" != "1" ]; then
