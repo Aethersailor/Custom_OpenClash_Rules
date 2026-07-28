@@ -344,6 +344,8 @@ DOMAIN-SUFFIX,ahlt10010.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 浩捷云服务器 / add by Telegram user: Norma / Date: 2026-07-28 23:53:17
+DOMAIN-SUFFIX,haojieyun.com
 # add by Telegram user: cym / Date: 2026-07-28 16:35:37
 DOMAIN-SUFFIX,cym520.top
 # 网课 / add by Telegram user: More / Date: 2026-07-28 15:13:28
