@@ -50,14 +50,9 @@ proxy-groups:
     tolerance: 50
   - name: "🎯 全球直连"
     type: url-test
+    url: http://wifi.vivo.com.cn/generate_204
     proxies:
       - DIRECT
-    url: http://wifi.vivo.com.cn/generate_204
-    interval: 300
-    tolerance: 50
-    timeout: 5000
-    lazy: false
-    expected-status: 204
 
 # ==================== 规则提供者 Rule Providers ====================
 # 当前版本不使用远程规则提供者，保留空映射以维持模板结构一致。

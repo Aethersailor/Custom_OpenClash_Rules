@@ -602,14 +602,9 @@ proxy-groups:
     tolerance: 50
   - name: "🎯 全球直连"
     type: url-test
+    url: http://wifi.vivo.com.cn/generate_204
     proxies:
       - DIRECT
-    url: http://wifi.vivo.com.cn/generate_204
-    interval: 300
-    tolerance: 50
-    timeout: 5000
-    lazy: false
-    expected-status: 204
 
 # ==================== 规则提供者 Rule Providers ====================
 # Domain/IP 规则优先使用 MRS；包含端口等复合规则时使用 Classical YAML。
