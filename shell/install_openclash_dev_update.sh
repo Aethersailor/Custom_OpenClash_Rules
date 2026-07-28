@@ -621,7 +621,7 @@ run_core_update() {
     [ -x "$core_script" ] || return 1
     core_type=$(get_effective_core_type)
     log_info "调用 OpenClash 内置内核流程：$core_type"
-    "$core_script" "$core_type" "https://testingcf.jsdelivr.net/" ||
+    "$core_script" "$core_type" ||
         log_warn "内置内核脚本返回非零；请查看 $OPENCLASH_LOG。"
     log_info "内核实际远端更新结果请查看 $OPENCLASH_LOG。"
 }

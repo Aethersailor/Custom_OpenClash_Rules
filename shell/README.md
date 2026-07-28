@@ -91,12 +91,10 @@ CPU 检测保留 x86_64 v1/v2/v3、x86、ARM、MIPS、LoongArch、RISC-V 和 s39
 插件覆盖重装后，安装器调用：
 
 ```sh
-/usr/share/openclash/openclash_core.sh \
-  "<Meta 或 Smart>" \
-  "https://testingcf.jsdelivr.net/"
+/usr/share/openclash/openclash_core.sh "<Meta 或 Smart>"
 ```
 
-内核类型遵循 OpenClash 当前设置：`smart_enable=1` 时使用 Smart，否则读取 `core_type`，空值默认为 Meta。下载、重试、解压、配置测试、替换和重启决策由 OpenClash 内置脚本负责。
+内核类型遵循 OpenClash 当前设置：`smart_enable=1` 时使用 Smart，否则读取 `core_type`，空值默认为 Meta。安装器不传入第二参数；当前 OpenClash 会将第二参数视为完整内核下载 URL，而 CDN 前缀已通过 `github_address_mod=https://testingcf.jsdelivr.net/` 写入。下载、重试、解压、配置测试、替换和重启决策由 OpenClash 内置脚本负责。
 
 最后两个安装器都执行：
 

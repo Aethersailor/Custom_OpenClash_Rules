@@ -121,6 +121,16 @@ class InstallerContractTests(unittest.TestCase):
             self.assertIn('PACKAGE_MAX_ROUNDS="${PACKAGE_MAX_ROUNDS:-2}"', content)
             self.assertNotIn("OpenClash@package/dev/", content)
 
+    def test_core_update_uses_builtin_url_resolution(self) -> None:
+        expected_call = '"$core_script" "$core_type" ||'
+        invalid_prefix_argument = (
+            '"$core_script" "$core_type" "https://testingcf.jsdelivr.net/"'
+        )
+        for path, content in ((LIGHT, self.light), (FULL, self.full)):
+            with self.subTest(path=path.name):
+                self.assertIn(expected_call, content)
+                self.assertNotIn(invalid_prefix_argument, content)
+
     def test_full_installer_resource_and_smart_contract(self) -> None:
         required = (
             "auto_smart_switch",
