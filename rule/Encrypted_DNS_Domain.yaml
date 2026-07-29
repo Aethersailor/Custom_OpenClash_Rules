@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3410
+# TOTAL: 3412
 
 payload:
   - '+.003153.xyz'
@@ -253,6 +253,7 @@ payload:
   - '+.adguard.myddns.org'
   - '+.adguard.nasaud.info'
   - '+.adguard.neelyha.tk'
+  - '+.adguard.neon0404.space'
   - '+.adguard.netmasc.services'
   - '+.adguard.nielsenhost.dk'
   - '+.adguard.niko-sem.com'
@@ -956,6 +957,7 @@ payload:
   - '+.dns.controld.com'
   - '+.dns.cooluc.com'
   - '+.dns.corefusion.xyz'
+  - '+.dns.criena.net'
   - '+.dns.cryptomize.com'
   - '+.dns.crystalyx.net'
   - '+.dns.csaonline.de'
@@ -1386,7 +1388,6 @@ payload:
   - '+.dns.oryxlabs.com'
   - '+.dns.osmenoga.com'
   - '+.dns.ostfriese.org'
-  - '+.dns.oszx.co'
   - '+.dns.otezz.net'
   - '+.dns.ourvau.lt'
   - '+.dns.p3k.sk'
@@ -2745,6 +2746,7 @@ payload:
   - '+.oci02.at9.eu'
   - '+.oculta.me'
   - '+.odoh-target-noads-se.alekberg.net'
+  - '+.odoh-target-se.alekberg.net'
   - '+.odoh-target.alekberg.net'
   - '+.odvr.nic.cz'
   - '+.office.heimtec.com'
@@ -3303,7 +3305,6 @@ payload:
   - '+.vst-sh-se.mooo.com'
   - '+.vtcuong.site'
   - '+.vte01.dnscry.pt'
-  - '+.vuivn.site'
   - '+.walhalla.freemyip.com'
   - '+.walker.mynetgear.com'
   - '+.wallpap.eu'
@@ -3411,6 +3412,7 @@ payload:
   - '+.zulkas.top'
   - '+.zxcvb.pp.ua'
   - 'dns.cfiec.net'
+  - 'dns.oszx.co'
   - 'dns.shaw.ca'
   - 'kaitain.restena.lu'
   - 'resolver.dnsprivacy.org.uk'
