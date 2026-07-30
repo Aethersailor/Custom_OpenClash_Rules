@@ -78,6 +78,8 @@ Wiki 负责解释“为什么这样配置”，各资源目录负责提供可以
 
 **入口：** [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki)
 
+---
+
 ### 🧩 配置资源
 
 [`cfg/`](cfg/) 用于将上述 Wiki 中的配置思路落实为可直接使用的完整配置资源，具体包括：
@@ -107,6 +109,8 @@ Wiki 负责解释“为什么这样配置”，各资源目录负责提供可以
 - YAML 配置文件：[`cfg/yaml/`](cfg/yaml/)
 - YAML 远程覆写模块：[`overwrite/yaml/`](overwrite/yaml/)
 
+---
+
 ### 🗂️ 规则文件
 
 [`rule/`](rule/) 存放本项目维护的冷门规则及其多格式派生文件，包括自定义直连、代理、Steam CDN、游戏下载 CDN、加密 DNS 等内容。
@@ -118,7 +122,9 @@ Wiki 负责解释“为什么这样配置”，各资源目录负责提供可以
 **入口：** [`rule/`](rule/)
 
 > [!NOTE]
-> 维护者会根据实际情况，将收集到的适合内容向上游相关规则项目提交。
+> 维护者会根据实际情况，将本项目收集到的规则内容向上游相关规则项目提交。
+
+---
 
 ### 🛠️ 实用脚本
 
@@ -128,11 +134,13 @@ Wiki 负责解释“为什么这样配置”，各资源目录负责提供可以
 
 **入口：** [`shell/`](shell/)
 
+---
+
 ### ⚙️ 覆写模块资源
 
 [`overwrite/`](overwrite/) 存放 OpenClash 远程覆写模块及相关资源。
 
-根目录中的单功能模块可用于调整 DNS、规则、`no-resolve`、Rule Provider `format`、游戏下载直连、GeoIP 数据源和大陆 IP 白名单数据源等功能；[`overwrite/yaml/`](overwrite/yaml/) 则存放调用本项目 YAML 配置的远程覆写模块。
+根目录中主要存放单功能的远程覆写模块；[`overwrite/yaml/`](overwrite/yaml/) 则存放调用本项目 YAML 配置的远程覆写模块。
 
 不同模块的修改范围、参数、组合关系和冲突风险，请进入对应目录查看。未来会不断追加其他功能的覆写模块。
 
