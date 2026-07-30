@@ -94,7 +94,7 @@
 | `EN_KEY1` | 指定最终规则使用的现有代理组或代理节点 | 创建并使用 `COCR-DNS-Leak-Guard` |
 | `EN_KEY2` | 指定 `proxy-server-nameserver`，多个地址用英文分号分隔 | 尝试复用有效的 `default-nameserver` |
 
-testingcf：
+jsDelivr CDN：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Prevent_DNS_Leak.conf
@@ -132,7 +132,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 - 将三条阻断规则插入现有规则列表顶部；
 - 保留原有 `rules` 和 `rule-providers`。
 
-testingcf：
+jsDelivr CDN：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Block_Encrypted_DNS.conf
@@ -173,7 +173,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 模块会保留原有规则顺序、策略和其他附加参数，并跳过已经含有 `no-resolve` 或 `src` 的规则。
 
-testingcf：
+jsDelivr CDN：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Add_No_Resolve.conf
@@ -217,7 +217,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 - 识别到受支持扩展名时，会修正已有的错误 `format`；
 - 未识别到 `.mrs`、`.yaml` 或 `.yml` 时保持原配置不变。
 
-testingcf：
+jsDelivr CDN：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Rule_Provider_Format_Fix.conf
@@ -264,7 +264,7 @@ rule-providers:
 - 添加 `GEOSITE,category-game-platforms-download,DIRECT`；
 - 将相关规则插入现有规则列表顶部。
 
-testingcf：
+jsDelivr CDN：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Direct_Game_Download.conf
@@ -292,7 +292,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 - GeoIP MMDB：`Country.mmdb`；
 - GeoIP DAT：`geoip.dat`。
 
-testingcf：
+jsDelivr CDN：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Set_GeoIP_Database_URL.conf
@@ -319,7 +319,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 [`Set_China_IP_Route_URL.conf`](./Set_China_IP_Route_URL.conf) 用于替换 OpenClash 大陆白名单使用的 IPv4 和 IPv6 Chnroute 数据源。
 
-testingcf：
+jsDelivr CDN：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Set_China_IP_Route_URL.conf
