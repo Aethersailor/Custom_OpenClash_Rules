@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3412
+# TOTAL: 3411
 
 payload:
   - '+.003153.xyz'
@@ -957,7 +957,6 @@ payload:
   - '+.dns.controld.com'
   - '+.dns.cooluc.com'
   - '+.dns.corefusion.xyz'
-  - '+.dns.criena.net'
   - '+.dns.cryptomize.com'
   - '+.dns.crystalyx.net'
   - '+.dns.csaonline.de'
