@@ -5,12 +5,6 @@
 <p align="center"><b>OpenClash 配置方案、订阅转换模板、YAML 配置、规则文件、实用脚本与覆写模块资源</b></p>
 
 <p align="center">
-  <a href="DO_NOT_README.md">English</a>
-  &nbsp;|&nbsp;
-  <b>简体中文</b>
-</p>
-
-<p align="center">
   <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki">📖 项目 Wiki</a>
   &nbsp;•&nbsp;
   <a href="cfg/">🧩 配置资源</a>
