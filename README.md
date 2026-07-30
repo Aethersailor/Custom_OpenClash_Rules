@@ -2,7 +2,7 @@
   🚀 Custom_OpenClash_Rules
 </h1>
 
-<p align="center"><b>OpenClash 配置方案、订阅转换模板、配置文件、规则文件、实用脚本与覆写模块资源</b></p>
+<p align="center"><b>OpenClash 配置方案、完整配置资源、规则文件、实用脚本与远程覆写模块</b></p>
 
 <p align="center">
   <a href="DO_NOT_README.md">English</a>
@@ -13,7 +13,11 @@
 <p align="center">
   <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki">📖 项目 Wiki</a>
   &nbsp;•&nbsp;
+  <a href="#-三种完整配置方式">🧭 配置方式</a>
+  &nbsp;•&nbsp;
   <a href="cfg/">🧩 配置资源</a>
+  &nbsp;•&nbsp;
+  <a href="overwrite/">⚙️ 覆写模块</a>
   &nbsp;•&nbsp;
   <a href="rule/">🗂️ 规则文件</a>
 </p>
@@ -32,91 +36,81 @@
 
 ## 📖 关于本项目
 
-**Custom_OpenClash_Rules** 是一个围绕 [OpenClash](https://github.com/vernesong/OpenClash) 整理和维护的资源仓库。
+**Custom_OpenClash_Rules** 是一个围绕 [OpenClash](https://github.com/vernesong/OpenClash) 整理和维护的配置资源仓库。
 
-本项目提供 OpenClash 配置方案、订阅转换模板、YAML 配置文件、规则文件、实用脚本、覆写模块资源及相关文档，帮助用户更方便地部署、维护和调整 OpenClash。
+项目主要提供：
 
-根 README 仅作为项目首页和资源导航。各目录中的具体文件、用途、区别及使用方法，请查看对应目录内的 README 或项目 Wiki。
+- OpenClash 设置方案与故障排查文档；
+- 订阅转换模板、YAML 配置文件及其远程覆写模块；
+- 自定义规则与多格式派生规则；
+- DNS、规则和数据源相关的单功能覆写模块；
+- OpenClash 安装、更新与维护脚本。
+
+> [!IMPORTANT]
+> 完整配置资源主要负责节点来源、策略组、Rule Provider 和分流规则。DNS、IPv6、TUN、嗅探、运行模式、流量接管等插件参数，仍应根据自身环境在 OpenClash LuCI 中完成设置。
+>
+> 首次使用建议先阅读 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)。
 
 > [!NOTE]
 > 项目 Wiki 目前仅提供中文版本。
 
 ---
 
-## 🚀 快速开始
+## 🧭 三种完整配置方式
 
-| 需求 | 建议入口 |
-| --- | --- |
-| 首次配置或系统了解 OpenClash | [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) |
-| 使用订阅转换模板或 YAML 配置 | [`cfg/`](cfg/) |
-| 为现有配置补充规则 | [`rule/`](rule/) |
-| 使用 OpenClash 相关脚本 | [`shell/`](shell/) |
-| 使用远程覆写模块资源 | [`overwrite/`](overwrite/) |
-| 排查常见故障 | [故障排除](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4) |
+本项目提供三种方式加载完整配置。它们的区别在于**配置的获取和维护方式**，而不是分流设计。
+
+> [!IMPORTANT]
+> 选择相同配置版本且未自行修改内容时，三种方式的**策略组结构、规则引用、规则顺序和分流逻辑完全对齐**。
+
+| 使用方式 | 资源入口 | 适合场景 |
+| --- | --- | --- |
+| **订阅转换** | [`cfg/README.md`](cfg/README.md) | 操作最简单，直接在 OpenClash 中更新订阅 |
+| **远程 YAML 覆写模块** | [`overwrite/yaml/README.md`](overwrite/yaml/README.md) | 不使用订阅转换，也不想手工维护 YAML |
+| **下载并导入 YAML** | [`cfg/yaml/README.md`](cfg/yaml/README.md) | 需要固定版本或自行修改配置 |
+
+三种方式通常应当选择一种作为主路径。详细操作、参数和注意事项请进入对应目录查看。
 
 ---
 
-## 🧭 项目资源
+## 🧩 配置资源
 
-### 📚 配置方案与文档
+完整配置资源由三部分组成：
 
-项目 Wiki 是本仓库最核心的内容之一，提供一套围绕 OpenWrt 与 OpenClash 整理的完整配置思路。它并非简单罗列参数，而是结合实际使用场景说明各项设置之间的关系、配置目的及可能产生的影响，帮助用户在理解基本原理的基础上完成部署和维护。
+| 资源 | 位置 | 用途 |
+| --- | --- | --- |
+| **订阅转换模板** | [`cfg/*.ini`](cfg/) | 通过订阅转换生成完整配置 |
+| **YAML 配置文件** | [`cfg/yaml/*.yaml`](cfg/yaml/) | 用于手工导入，也是远程 YAML 模块的调用目标 |
+| **YAML 对应的远程覆写模块** | [`overwrite/yaml/*.conf`](overwrite/yaml/) | 自动下载 YAML、写入订阅并切换配置 |
 
-方案以 OpenClash 的实际使用流程为主线，重点覆盖：
+所有自定义订阅转换模板均已被 OpenClash 收录，常规使用可直接在内置模板列表中选择。
 
-- **OpenClash 基础配置与透明分流**：围绕 `Fake-IP` 模式、流量接管、规则匹配和策略选择，建立完整的 OpenClash 使用框架。
-- **DNS 策略与泄漏风险控制**：说明直连与非直连流量的解析路径，尽量减少不必要的 DNS 绕行、解析异常及泄漏风险。
-- **直连访问优化**：结合 OpenClash 的“绕过中国大陆”等功能，使适合直连的域名与 IP 尽量保持本地解析和直接访问，降低 OpenClash 对直连流量的额外影响。
-- **IPv6 配置与兼容**：提供 OpenWrt 与 OpenClash 的 IPv6 配置思路，帮助用户在保留 IPv6 连通性的同时正确进行分流。
-- **故障排除与补充教程**：整理 OpenClash 无法启动、网络异常、分流不符合预期、部分网站无法访问等常见问题，并提供相关补充说明。
+不同配置版本的定位、普通版与 Fallback 版区别、自建节点配置及详细使用方法，请查看：
 
-整套方案力求主要依靠 OpenClash 自身功能完成配置，避免引入不必要的多层 DNS 插件组合。大部分操作均可通过 OpenClash 的 LuCI 管理界面完成，既可作为初次配置的操作指南，也可作为后续排查和优化配置的参考资料。
+- [`cfg/README.md`](cfg/README.md)
+- [`cfg/yaml/README.md`](cfg/yaml/README.md)
+- [`overwrite/yaml/README.md`](overwrite/yaml/README.md)
 
-> [!TIP]
-> 建议首次使用本项目时先完整阅读 Wiki，再选择下方的配置资源。Wiki 负责说明“为什么这样配置”，配置资源负责提供可复用的落地示例。
+---
 
-**入口：** [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki)
+## 🚀 快速开始
 
-### 🧩 配置资源
+1. 按照 [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 完成 OpenClash 基础设置。
+2. 选择所需的标准、轻量、极简 GFW、重度分流或对应 Fallback 版本。
+3. 从订阅转换、远程 YAML 覆写模块、手工导入 YAML 中选择一种方式。
+4. 配置订阅地址、自建节点或模块变量。
+5. 检查配置校验、内核启动、Provider、策略组、DNS、IPv6、实际分流和日志。
 
-`cfg/` 是本项目另一项核心内容，用于将 Wiki 中的配置思路转化为可直接参考和复用的配置资源。目录内提供订阅转换模板、YAML 配置及配套说明，适合希望快速生成 OpenClash 配置，或需要在现有配置基础上进行调整的用户。
+---
 
-> [!TIP]
-> 本项目订阅转换模板的远程链接已收录于 OpenClash 内置的模板列表，可直接选择，无需手动填写。
+## 📚 其他资源
 
-这些配置资源主要关注以下方面：
-
-- **订阅转换与配置生成**：通过订阅转换模板，将节点订阅整理为适用于 OpenClash 的配置结构，减少手工编写和维护配置的工作量。
-- **不同复杂度的策略设计**：提供定位不同的配置方案，在策略组丰富程度、使用复杂度和维护成本之间进行取舍，便于用户按实际需求选择。
-- **常用服务与应用分流**：围绕常见网络服务、应用和平台组织策略组及规则，并保留进一步扩展和自定义的空间。
-- **与 Wiki 配置思路保持一致**：配置资源围绕 `Fake-IP`、DNS 策略、直连访问和规则分流进行设计，适合与本项目 Wiki 配合使用。
-- **规则及数据更新能力**：通过引用上游规则和 GEO 数据，降低手工维护大量时效性规则的成本；部分配置同时针对下载流量、游戏平台等场景提供差异化处理思路。
-- **YAML 配置参考**：提供完整配置结构示例，便于理解 OpenClash 配置文件的组成，也可作为自行修改和构建配置的基础。
-
-根 README 不逐一列出目录中的具体模板和配置文件。各配置方案的定位、区别、使用地址及注意事项，请以 `cfg/` 目录中的 README 为准。
-
-**入口：** [`cfg/`](cfg/)
-
-### 🗂️ 规则文件
-
-提供本项目制作的、可按需使用的各种格式规则文件，具体分类和使用方式以目录说明为准。
-
-**入口：** [`rule/`](rule/)
-
-> [!TIP]
-> 直连、代理、Steam 规则等文件已加入本项目的分流规则文件
-
-### 🛠️ 实用脚本
-
-提供 OpenClash 安装、更新、检测及维护相关脚本。
-
-**入口：** [`shell/`](shell/)
-
-### ⚙️ 覆写模块资源
-
-提供 OpenClash 远程覆写模块相关资源和说明。本目录引用外部维护项目，具体内容与使用方式请以目录说明及上游项目为准。
-
-**入口：** [`overwrite/`](overwrite/)
+| 资源 | 用途 | 详细说明 |
+| --- | --- | --- |
+| [`overwrite/`](overwrite/) | DNS、规则、`no-resolve`、Provider 格式和数据源等单功能覆写模块 | [`overwrite/README.md`](overwrite/README.md) |
+| [`rule/`](rule/) | 自定义直连、代理、游戏下载、加密 DNS 及多格式派生规则 | [`rule/README.md`](rule/README.md) |
+| [`shell/`](shell/) | OpenClash 安装、更新和架构检测脚本 | [`shell/README.md`](shell/README.md) |
+| [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) | 配置原理、操作方案和故障排查 | [进入 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) |
 
 ---
 
