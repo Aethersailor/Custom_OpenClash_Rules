@@ -13,7 +13,7 @@
 > [!IMPORTANT]
 > 使用本目录模块前，先按照项目 Wiki 的 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)完成 LuCI 设置。模块负责调用远程 YAML 和写入订阅地址，不负责替你配置 DNS、IPv6、TUN、嗅探及其他插件运行参数。
 >
-> 如需了解被调用 YAML 的策略组、规则和版本区别，请先阅读 [`../../cfg/yaml/README.md`](../../cfg/yaml/README.md)。
+> 如需了解被调用 YAML 的策略组、规则和版本区别，请先阅读 [`../../cfg/yaml/`](../../cfg/yaml/)。
 
 ## 🧭 它属于三种路径中的哪一种
 
@@ -76,7 +76,7 @@
 **建议：** 自建节点作为主线路、机场作为后备，且自建节点已经整理为 HTTP Provider 或订阅 URL 时选择。
 
 > [!CAUTION]
-> 手工自建节点版 `Custom_Clash_Selfhosted_Manual_Fallback.yaml` 没有对应通用模块。其协议字段和凭据需要自行编辑，详见 [`../../cfg/yaml/README.md`](../../cfg/yaml/README.md)。
+> 手工自建节点版 `Custom_Clash_Selfhosted_Manual_Fallback.yaml` 没有对应通用模块。其协议字段和凭据需要自行编辑，详见 [`../../cfg/yaml/`](../../cfg/yaml/)。
 
 ## ⚙️ 使用方法
 
@@ -304,9 +304,9 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 ## 📚 相关文档
 
 - [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)
-- [`cfg/` 订阅转换模板与三种路径](../../cfg/README.md)
-- [`cfg/yaml/` YAML 文件详解](../../cfg/yaml/README.md)
-- [`overwrite/` 其他覆写模块](../README.md)
+- [`cfg/` 订阅转换模板与三种路径](../../cfg/)
+- [`cfg/yaml/` YAML 文件详解](../../cfg/yaml/)
+- [`overwrite/` 其他覆写模块](../)
 
 ---
 

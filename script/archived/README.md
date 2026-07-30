@@ -6,7 +6,7 @@
 
 | 路径 | 内容 | 当前状态 |
 | --- | --- | --- |
-| [`ad-block/`](ad-block/README.md) | 曾用于下载广告过滤规则并合并 GitHub520 hosts 加速条目的 shell 示例。 | 已归档，不再维护。 |
+| [`ad-block/`](ad-block/) | 曾用于下载广告过滤规则并合并 GitHub520 hosts 加速条目的 shell 示例。 | 已归档，不再维护。 |
 
 ## 注意事项
 

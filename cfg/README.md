@@ -13,7 +13,7 @@
 > [!IMPORTANT]
 > 本目录根层存放 `.ini` 订阅转换模板。全部 8 个模板均已被 OpenClash 收录，常规使用建议直接在 OpenClash 内置模板列表中选择，无需手工填写模板地址。
 >
-> YAML 配置文件请查看 [`yaml/README.md`](./yaml/README.md)；通过远程覆写模块调用 YAML，请查看 [`../overwrite/yaml/README.md`](../overwrite/yaml/README.md)。
+> YAML 配置文件请查看 [`yaml/`](./yaml/)；通过远程覆写模块调用 YAML，请查看 [`../overwrite/yaml/`](../overwrite/yaml/)。
 
 ## 🔄 使用订阅转换模板
 
@@ -71,8 +71,8 @@ OpenClash 收录的是本仓库模板的远程地址，模板内容仍由本项�
 
 | 方式 | 入口 |
 | --- | --- |
-| 远程 YAML 覆写模块 | [`../overwrite/yaml/README.md`](../overwrite/yaml/README.md) |
-| 下载并手工导入 YAML | [`yaml/README.md`](./yaml/README.md) |
+| 远程 YAML 覆写模块 | [`../overwrite/yaml/`](../overwrite/yaml/) |
+| 下载并手工导入 YAML | [`yaml/`](./yaml/) |
 
 > [!IMPORTANT]
 > 选择相同配置版本且未自行修改内容时，订阅转换、远程 YAML 覆写模块和手工导入 YAML 的**策略组结构、规则引用、规则顺序和分流逻辑完全对齐**。三者的差别仅在配置的获取和维护方式。
@@ -215,8 +215,8 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 ## 📚 相关文档
 
 - [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)
-- [`yaml/` YAML 配置文件](./yaml/README.md)
-- [`overwrite/yaml/` 远程 YAML 覆写模块](../overwrite/yaml/README.md)
+- [`yaml/` YAML 配置文件](./yaml/)
+- [`overwrite/yaml/` 远程 YAML 覆写模块](../overwrite/yaml/)
 - [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki)
 
 ---

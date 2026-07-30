@@ -50,4 +50,4 @@
 
 > [!NOTE]
 > `archived/` 文件夹包含已弃用的历史规则文件。
-> 详情请查阅 [📜 Archived README](archived/README.md)
+> 详情请查阅 [📜 Archived README](archived/)

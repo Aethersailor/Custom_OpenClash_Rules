@@ -22,7 +22,7 @@
 | 位置 | 用途 |
 | --- | --- |
 | 本目录根部的 `.conf` | 本项目维护的单功能远程覆写模块，本文重点介绍 |
-| [`yaml/`](./yaml/) | 存放用于远程调用本项目 YAML 配置文件的覆写模块；文件区别、变量和订阅地址请查看 [`yaml/README.md`](./yaml/README.md) |
+| [`yaml/`](./yaml/) | 存放用于远程调用本项目 YAML 配置文件的覆写模块；文件区别、变量和订阅地址请查看 [`yaml/`](./yaml/) |
 | [`OpenClash_Overwrite/`](./OpenClash_Overwrite/) | 第三方完整覆写方案，具体用法以上游 README 为准 |
 | [`archived/`](./archived/) | 已停止维护的旧版文件，仅供历史参考 |
 
@@ -383,10 +383,10 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 ## 📚 相关文档
 
 - [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)
-- [YAML 配置远程覆写模块](./yaml/README.md)
-- [YAML 配置文件说明](../cfg/yaml/README.md)
-- [订阅转换模板说明](../cfg/README.md)
-- [已归档覆写模块](./archived/README.md)
+- [YAML 配置远程覆写模块](./yaml/)
+- [YAML 配置文件说明](../cfg/yaml/)
+- [订阅转换模板说明](../cfg/)
+- [已归档覆写模块](./archived/)
 
 ---
 

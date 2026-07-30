@@ -13,7 +13,7 @@
 > [!IMPORTANT]
 > 本目录中的正式 YAML 是 **OpenClash 专用最小配置**：主要定义节点来源、静态节点、策略组、Rule Provider 和分流规则。端口、运行模式、DNS、IPv6、TUN、嗅探、GeoData、日志及控制器等参数由 OpenClash LuCI 管理。
 >
-> 请先按 Wiki 配置插件，再选择“远程覆写模块”或“下载 YAML 手工导入”。如需订阅转换模板，请返回 [`../README.md`](../README.md)。
+> 请先按 Wiki 配置插件，再选择“远程覆写模块”或“下载 YAML 手工导入”。如需订阅转换模板，请返回 [`../`](../) 。
 
 
 ## 🧭 本项目推荐的使用流程
@@ -142,7 +142,7 @@
 
 ## 🌐 使用远程覆写模块
 
-不想手工下载和修改 YAML 时，可使用 [`../../overwrite/yaml/README.md`](../../overwrite/yaml/README.md) 中的远程模块：
+不想手工下载和修改 YAML 时，可使用 [`../../overwrite/yaml/`](../../overwrite/yaml/) 中的远程模块：
 
 - 8 个单独模块：固定调用对应常规 YAML；
 - 1 个 8 合 1 模块：通过 `EN_KEY2` 选择 8 个常规 YAML；
@@ -165,8 +165,8 @@
 ## 📚 相关文档
 
 - [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)
-- [`cfg/` 订阅转换模板](../README.md)
-- [`overwrite/yaml/` 远程 YAML 覆写模块](../../overwrite/yaml/README.md)
+- [`cfg/` 订阅转换模板](../)
+- [`overwrite/yaml/` 远程 YAML 覆写模块](../../overwrite/yaml/)
 - [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki)
 
 ---
