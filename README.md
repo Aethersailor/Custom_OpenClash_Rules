@@ -153,6 +153,24 @@ Wiki 负责解释“为什么这样配置”，各资源目录负责提供可以
 
 ---
 
+## 💬 讨论与反馈
+
+### 本项目讨论群组
+
+欢迎加入本项目的 Telegram 讨论群组：[Custom OpenClash Rules](https://t.me/custom_openclash_rules_group)
+
+群组仅用于本仓库相关内容的讨论，包括配置使用、规则反馈、问题排查等。
+
+> [!IMPORTANT]
+> **关于 OpenClash 插件本身的问题，请勿在本群组提问。**
+>
+> 如遇 OpenClash 插件运行异常、安装失败、界面操作等本地使用问题，建议：
+>
+> - 前往 [OpenClash 仓库](https://github.com/vernesong/OpenClash) 提交 Issue；
+> - 或加入 OpenClash 官方 Telegram 讨论群组咨询（可在插件 LuCI 首页点击 Telegram 图标进入）。
+
+---
+
 ## ⚠️ 特别声明
 
 > [!WARNING]
