@@ -1,164 +1,98 @@
 <div align="center">
 
-# 🧩 OpenClash 覆写模块
+# 🧩 OpenClash 远程覆写模块
 
-**功能增强模块、远程 YAML 配置模块与完整覆写方案**
+**按需增强现有配置，不必重写整份 YAML**
 
-[目录结构](#-目录结构) · [推荐使用流程](#-推荐使用流程) · [功能模块](#-功能覆写模块) · [远程 YAML](#-远程-yaml-配置模块) · [使用方法](#%EF%B8%8F-通用使用方法) · [注意事项](#%EF%B8%8F-注意事项)
+[快速选择](#-快速选择) · [使用方法](#%EF%B8%8F-通用使用方法) · [模块说明](#-模块说明) · [组合建议](#-组合与冲突) · [故障排查](#-故障排查)
 
 </div>
 
 ---
 
-本目录收录适用于 OpenClash 的覆写模块及相关资源。不同类型的模块用途并不相同：
-
-- 根目录中的 `.conf` 是**功能覆写模块**，用于向现有配置增加或调整某项功能；
-- [`yaml/`](./yaml/) 中的 `.conf` 是**远程 YAML 配置模块**，用于下载本项目 YAML、写入订阅地址并切换配置；
-- [`OpenClash_Overwrite/`](./OpenClash_Overwrite/) 是第三方完整覆写方案；
-- [`archived/`](./archived/) 保存已经停止维护的旧版文件。
+本目录主要存放由本项目维护的 **OpenClash 远程覆写模块**。这些模块用于在 OpenClash 加载配置时，按需修改规则、DNS、Rule Provider 或插件数据源。
 
 > [!IMPORTANT]
-> 建议先按照项目 Wiki 的 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)，根据自身网络环境检查并完成 OpenClash LuCI 页面中的 DNS、IPv6、运行模式、流量接管及其他插件设置，再选择配置使用路径。
+> 覆写模块只能调整其声明的配置项，不能替代 OpenClash LuCI 页面中的基础设置。
 >
-> 覆写模块不会替代这些 LuCI 设置。模块是否正确执行，也不代表 OpenClash 的最终运行状态一定正确。
+> 建议先按照项目 Wiki 的 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)，结合自身网络环境完成插件设置，再选择需要的覆写模块。
 
-## 📁 目录结构
+## 📁 目录说明
 
-| 目录或文件 | 类型 | 主要用途 |
-| --- | --- | --- |
-| 根目录 `.conf` | 功能覆写模块 | 对已有配置追加 DNS、规则、`no-resolve`、数据源等功能 |
-| [`yaml/`](./yaml/) | 远程 YAML 配置模块 | 调用 [`cfg/yaml/`](../cfg/yaml/) 中的 YAML，写入订阅并自动切换配置 |
-| [`OpenClash_Overwrite/`](./OpenClash_Overwrite/) | 第三方完整覆写方案 | 按上游方案生成或重构策略组、规则、DNS 等配置 |
-| [`archived/`](./archived/) | 已归档资源 | 仅供历史参考，不建议继续部署 |
+| 位置 | 用途 |
+| --- | --- |
+| 本目录根部的 `.conf` | 本项目维护的单功能远程覆写模块，本文重点介绍 |
+| [`yaml/`](./yaml/) | 存放用于远程调用本项目 YAML 配置文件的覆写模块；文件区别、变量和订阅地址请查看 [`yaml/README.md`](./yaml/README.md) |
+| [`OpenClash_Overwrite/`](./OpenClash_Overwrite/) | 第三方完整覆写方案，具体用法以上游 README 为准 |
+| [`archived/`](./archived/) | 已停止维护的旧版文件，仅供历史参考 |
 
 > [!NOTE]
-> `yaml/` 子目录不是一个普通的单功能覆写模块集合。它对应本项目推荐的三种 OpenClash 使用路径之一，负责远程部署完整的策略组与分流配置。
+> `yaml/` 目录中的模块用于下载、填写并切换本项目的 YAML 配置，与本目录根部的单功能增强模块用途不同。此处不重复展开介绍。
 
-## 🧭 推荐使用流程
+## 🚀 快速选择
 
-本项目建议按照以下顺序使用 OpenClash：
+| 模块 | 主要作用 | 影响范围 | 是否需要参数 |
+| --- | --- | --- | :---: |
+| [`Prevent_DNS_Leak.conf`](./Prevent_DNS_Leak.conf) | 综合降低 DNS 泄漏风险 | DNS、规则、最终策略及专用策略组 | 可选 |
+| [`Block_Encrypted_DNS.conf`](./Block_Encrypted_DNS.conf) | 阻断常见 DoH、DoT、DoQ 绕过 | Rule Provider 与前置阻断规则 | 否 |
+| [`Add_No_Resolve.conf`](./Add_No_Resolve.conf) | 为目标 IP 类规则补充 `no-resolve` | `rules` 与 `sub-rules` | 否 |
+| [`Rule_Provider_Format_Fix.conf`](./Rule_Provider_Format_Fix.conf) | 根据文件扩展名补全或修正 Rule Provider 的 `format` | `rule-providers.*.format` | 否 |
+| [`Direct_Game_Download.conf`](./Direct_Game_Download.conf) | 让 Steam CDN 和游戏平台下载流量直连 | Rule Provider 与前置直连规则 | 否 |
+| [`Set_GeoIP_Database_URL.conf`](./Set_GeoIP_Database_URL.conf) | 替换 GeoIP MMDB 与 DAT 数据源 | OpenClash GEO 数据库地址 | 否 |
+| [`Set_China_IP_Route_URL.conf`](./Set_China_IP_Route_URL.conf) | 替换大陆 IPv4、IPv6 白名单数据源 | OpenClash Chnroute 数据源 | 否 |
 
-1. 阅读 Wiki，并根据自身环境完成 OpenClash LuCI 设置；
-2. 从三种配置路径中选择一种；
-3. 根据需要叠加根目录中的功能覆写模块；
-4. 应用配置并重启；
-5. 验收内核、节点、Provider、策略组、规则、DNS、IPv6、流量接管和日志；
-6. 确认稳定后再进入日常使用。
+### 按需求选择
 
-### 三种配置路径
+- 想系统降低 DNS 泄漏风险：使用 `Prevent_DNS_Leak.conf`。
+- 只想阻止终端使用常见加密 DNS 绕过本地 DNS：使用 `Block_Encrypted_DNS.conf`。
+- 只需要给 IP 类规则补充 `no-resolve`：使用 `Add_No_Resolve.conf`。
+- Rule Provider 因缺少或写错 `format` 导致加载失败：使用 `Rule_Provider_Format_Fix.conf`。
+- 希望游戏下载和更新尽量走直连：使用 `Direct_Game_Download.conf`。
+- 只想替换 OpenClash 使用的数据源：选择对应的 `Set_*.conf` 模块。
 
-| 路径 | 优点 | 局限 | 适合用户 |
-| --- | --- | --- | --- |
-| **订阅转换 + `.ini` 模板** | 操作最简单，更新订阅和切换模板方便 | 依赖订阅转换后端；公共后端的可用性和隐私取决于服务提供者 | 希望低成本使用和快速切换配置的用户 |
-| **远程 YAML 配置模块** | 不依赖订阅转换；自动下载 YAML、写入订阅并切换配置 | 需要理解 OpenClash 覆写模块及 `EN_KEY` 参数 | 希望自动化部署 YAML、但不想手工维护文件的用户 |
-| **下载 YAML 手工修改并导入** | 自由度最高，所有 Provider、策略组和规则均可自行调整 | 最复杂、最繁琐，更新时需要自行合并改动 | 熟悉 Mihomo YAML 的进阶用户 |
+## ⚙️ 通用使用方法
 
-详细入口：
+1. 进入 **服务 → OpenClash → 覆写设置 → 覆写模块**。
+2. 新增远程覆写模块。
+3. 模块类型选择 `HTTP`。
+4. 填写便于识别的模块名称。
+5. 从本文复制 testingcf 或 GitHub Raw 订阅地址。
+6. 仅在模块说明要求时填写 `EN_KEY` 参数。
+7. 启用模块并保存设置。
+8. 重新应用配置并启动 OpenClash。
+9. 检查 OpenClash 日志及最终运行配置，确认模块已经生效。
 
-- 订阅转换模板：[`../cfg/README.md`](../cfg/README.md)
-- YAML 配置说明：[`../cfg/yaml/README.md`](../cfg/yaml/README.md)
-- 远程 YAML 模块：[`yaml/README.md`](./yaml/README.md)
+不同 OpenClash 版本的菜单名称可能略有差异。
+
+> [!TIP]
+> testingcf 与 GitHub Raw 指向同一个仓库文件，只需要选择其中一个。testingcf 通常更适合 GitHub Raw 访问质量不佳的网络环境。
 
 > [!WARNING]
-> 上述三种方式是同一配置目标的不同实现路径，通常应当三选一，不要同时让多种路径争夺或反复替换当前配置。
->
-> 根目录中的功能覆写模块属于可选增强项，不算第四种配置路径。
+> 新增、停用或更换模块后，必须重新应用配置。仅显示“模块订阅成功”不代表最终 YAML 校验和 Mihomo 内核启动一定成功。
 
-> [!NOTE]
-> 本项目提供的模板、YAML 和远程 YAML 模块，均基于维护者对典型使用场景的合理推定。它们无法保证完全贴合每位用户的网络、节点和业务需求。需要高度个性化时，应自行修改或编写 YAML。
+## 📦 模块说明
 
-## 🚀 当前可用资源
+### 🛡️ Prevent DNS Leak
 
-| 使用需求 | 推荐资源 | 影响范围 |
-| --- | --- | --- |
-| 通过远程模块部署本项目 YAML | [`yaml/`](./yaml/) | 下载配置、写入订阅、切换当前配置并重启 |
-| 综合降低 DNS 泄漏风险 | [`Prevent_DNS_Leak.conf`](./Prevent_DNS_Leak.conf) | DNS、规则、策略组及 OpenClash 运行参数 |
-| 阻止终端使用常见 DoH、DoT、DoQ 绕过本地 DNS | [`Block_Encrypted_DNS.conf`](./Block_Encrypted_DNS.conf) | Rule Provider 与前置阻断规则 |
-| 为 IP 类规则自动添加 `no-resolve` | [`Add_No_Resolve.conf`](./Add_No_Resolve.conf) | 顶层规则与子规则 |
-| 让 Steam CDN 与游戏平台下载流量直连 | [`Direct_Game_Download.conf`](./Direct_Game_Download.conf) | Rule Provider 与前置直连规则 |
-| 替换 GeoIP MMDB、GeoIP DAT 数据源 | [`Set_GeoIP_Database_URL.conf`](./Set_GeoIP_Database_URL.conf) | OpenClash GEO 数据库地址 |
-| 替换大陆 IPv4、IPv6 白名单数据源 | [`Set_China_IP_Route_URL.conf`](./Set_China_IP_Route_URL.conf) | OpenClash Chnroute 数据源 |
-| 使用第三方完整覆写方案 | [`OpenClash_Overwrite/`](./OpenClash_Overwrite/) | 策略组、规则、DNS、节点选择等多项配置 |
-| 查看停止维护的旧版文件 | [`archived/`](./archived/) | 仅供历史参考 |
+[`Prevent_DNS_Leak.conf`](./Prevent_DNS_Leak.conf) 是影响范围最大的自维护模块，用于通过 DNS 劫持、DNS 上游规则跟随、`no-resolve` 和最终代理兜底降低 DNS 泄漏风险。
 
-## 🌐 远程 YAML 配置模块
+主要操作：
 
-[`yaml/`](./yaml/) 中的模块会：
-
-1. 从本仓库下载指定的 OpenClash 最小 YAML；
-2. 保存到 `/etc/openclash/config/`；
-3. 通过模块变量向 YAML 写入节点订阅地址；
-4. 将下载的 YAML 设为目标配置；
-5. 触发 OpenClash 重新加载。
-
-目前包括：
-
-- 8 个与常规 YAML 一一对应的独立模块；
-- 1 个可通过参数选择版本的 `8 合 1` 模块；
-- 1 个“自建节点 Provider 优先 + 机场故障转移”模块。
-
-普通模块使用：
-
-```text
-EN_KEY1=节点订阅链接
-```
-
-8 合 1模块使用：
-
-```text
-EN_KEY1=节点订阅链接;EN_KEY2=配置名称
-```
-
-自建节点 Provider 模块使用：
-
-```text
-EN_KEY1=机场订阅链接;EN_KEY2=自建节点订阅链接
-```
-
-完整文件清单、配置名称、参数格式、GitHub Raw 与 testingcf 订阅地址，请阅读：
-
-> **[`overwrite/yaml/README.md`](./yaml/README.md)**
-
-对应 YAML 的策略组、规则和版本区别，请阅读：
-
-> **[`cfg/yaml/README.md`](../cfg/yaml/README.md)**
-
-> [!CAUTION]
-> 远程 YAML 模块会下载并覆盖 `/etc/openclash/config/` 中的同名配置文件。若你曾手工修改同名 YAML，启用模块前必须备份，否则本地修改可能被覆盖。
-
-## 🪶 功能覆写模块
-
-根目录中的功能模块用于修改已经加载的配置或 OpenClash 数据源。它们可以配合订阅转换、远程 YAML 或手工 YAML 使用，但应检查修改范围和执行结果。
-
-### 模块关系速览
-
-| 组合 | 建议 |
-| --- | --- |
-| `Prevent_DNS_Leak.conf` + `Block_Encrypted_DNS.conf` | ✅ 可组合。前者处理 OpenClash 内部 DNS 路由与兜底，后者阻断终端常见加密 DNS |
-| `Prevent_DNS_Leak.conf` + `Add_No_Resolve.conf` | ⚠️ 不需要。前者已包含后者的核心处理逻辑 |
-| `Add_No_Resolve.conf` + `Direct_Game_Download.conf` | ✅ 通常可以，游戏下载模块的 IP 规则已经带有 `no-resolve` |
-| 数据源替换模块 + 规则模块 | ✅ 通常可以，修改范围不同 |
-| 远程 YAML 模块 + 功能模块 | ⚠️ 可以尝试，但必须确认执行顺序、字段覆盖和最终运行配置 |
-| 第三方完整覆写方案 + 其他模块 | ⚠️ 必须逐项检查，完整方案可能修改相同的 DNS、规则、策略组或数据源 |
-| 多个完整配置生成方案 | ❌ 不建议同时启用 |
-
-### 🛡️ 综合 DNS 防泄漏
-
-[`Prevent_DNS_Leak.conf`](./Prevent_DNS_Leak.conf) 会联动处理 DNS 劫持、`dns.respect-rules`、IP 类规则 `no-resolve`、最终代理兜底及相关 OpenClash 参数。
-
-主要用途：
-
-- 降低客户端及路由器自身 DNS 请求绕过代理规则的风险；
-- 为 IP 类规则与 `behavior: ipcidr` Rule Provider 补充 `no-resolve`；
-- 将最终 `MATCH` 或 `FINAL` 指向代理目标；
+- 强制使用 `rule` 模式；
+- 启用路由器自身代理和 OpenClash DNS 劫持；
+- 启用 `dns.respect-rules`；
+- 禁止自动追加 WAN DNS 和自动补充 `default-nameserver`；
+- 清除 DNS 列表中的 `system`，关闭 DNS HTTP/3 偏好；
+- 为目标 IP 类规则补充 `no-resolve`；
+- 将最终 `MATCH` / `FINAL` 指向代理目标；
 - 未指定代理目标时创建 `COCR-DNS-Leak-Guard` 策略组。
 
 可选参数：
 
-| 参数 | 用途 |
-| --- | --- |
-| `EN_KEY1` | 指定最终规则使用的代理组或代理节点 |
-| `EN_KEY2` | 指定 `proxy-server-nameserver`，多个地址使用英文分号分隔 |
+| 参数 | 作用 | 留空行为 |
+| --- | --- | --- |
+| `EN_KEY1` | 指定最终规则使用的现有代理组或代理节点 | 创建并使用 `COCR-DNS-Leak-Guard` |
+| `EN_KEY2` | 指定 `proxy-server-nameserver`，多个地址用英文分号分隔 | 尝试复用有效的 `default-nameserver` |
 
 testingcf：
 
@@ -172,16 +106,31 @@ GitHub Raw：
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Prevent_DNS_Leak.conf
 ```
 
-> [!WARNING]
-> 该模块影响范围较大。启用后必须检查最终规则、DNS 配置、专用策略组及 OpenClash 日志。
+验收重点：
 
-### 🚫 阻断加密 DNS
+- `dns.respect-rules: true`；
+- 存在有效的 `proxy-server-nameserver`；
+- DNS 列表中没有 `system`；
+- 目标 IP 类规则带有 `no-resolve`；
+- 最终规则指向预期代理目标；
+- 日志中没有 Ruby 覆写或配置校验错误。
 
-[`Block_Encrypted_DNS.conf`](./Block_Encrypted_DNS.conf) 会：
+> [!CAUTION]
+> 本模块会强制修改 DNS、规则和最终代理策略。启用前应备份当前可用配置，并确认不会与其他 DNS 或最终规则覆写重复。
+
+---
+
+### 🚫 Block Encrypted DNS
+
+[`Block_Encrypted_DNS.conf`](./Block_Encrypted_DNS.conf) 用于阻止局域网终端通过常见 DoH、DoT 或 DoQ 绕过路由器配置的 DNS 服务。
+
+主要操作：
 
 - 阻断 TCP/UDP 目标端口 `853`；
-- 添加加密 DNS 域名与 IP Rule Provider；
-- 将阻断规则插入规则列表顶部。
+- 添加加密 DNS 域名 MRS Rule Provider；
+- 添加加密 DNS IP MRS Rule Provider；
+- 将三条阻断规则插入现有规则列表顶部；
+- 保留原有 `rules` 和 `rule-providers`。
 
 testingcf：
 
@@ -195,18 +144,34 @@ GitHub Raw：
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Block_Encrypted_DNS.conf
 ```
 
-该模块无法识别所有非标准端口、共享 CDN 或经隧道传输的加密 DNS，也不能替代 DNS 劫持、IPv6 DNS 管理和 OpenWrt 防火墙策略。
+验收重点：
 
-### 🧭 自动添加 `no-resolve`
+```yaml
+- DST-PORT,853,REJECT
+- RULE-SET,COCR-Encrypted-DNS-Domain,REJECT
+- RULE-SET,COCR-Encrypted-DNS-IP,REJECT,no-resolve
+```
 
-[`Add_No_Resolve.conf`](./Add_No_Resolve.conf) 用于处理：
+限制：
 
-- `IP-CIDR`
-- `IP-CIDR6`
-- `GEOIP`
-- 引用 `behavior: ipcidr` Rule Provider 的 `RULE-SET`
-- 顶层 `rules`
-- `sub-rules`
+- 无法识别所有非标准端口或尚未收录的加密 DNS；
+- 无法可靠区分共享 CDN 上的全部 DoH 流量；
+- 不负责 DNS 劫持、IPv6 DNS 管理或 OpenWrt 防火墙设置；
+- 可能影响确实需要使用加密 DNS 的企业、校园或自建服务。
+
+---
+
+### 🧭 Add No Resolve
+
+[`Add_No_Resolve.conf`](./Add_No_Resolve.conf) 用于为以下目标 IP 类规则添加 `no-resolve`：
+
+- `IP-CIDR`；
+- `IP-CIDR6`；
+- `GEOIP`；
+- 引用 `behavior: ipcidr` Rule Provider 的 `RULE-SET`；
+- 顶层 `rules` 和 `sub-rules` 中的直接规则。
+
+模块会保留原有规则顺序、策略和其他附加参数，并跳过已经含有 `no-resolve` 或 `src` 的规则。
 
 testingcf：
 
@@ -220,16 +185,84 @@ GitHub Raw：
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Add_No_Resolve.conf
 ```
 
+限制：
+
+- 不修改 Rule Provider 文件内部的规则；
+- 不处理 `behavior: domain` 或 `behavior: classical` 的 Provider；
+- 不解析 `AND`、`OR`、`NOT` 内部嵌套规则；
+- 不处理 `IP-ASN`、`IP-SUFFIX`、`SRC-IP-CIDR` 或 `SRC-GEOIP`。
+
 > [!NOTE]
-> `Prevent_DNS_Leak.conf` 已包含该模块的核心功能，启用前者时不需要再启用本模块。
+> `Prevent_DNS_Leak.conf` 已经包含本模块的核心功能。启用前者时，不需要再启用本模块。
 
-### 🎮 游戏下载直连
+---
 
-[`Direct_Game_Download.conf`](./Direct_Game_Download.conf) 会将：
+### 🧩 Rule Provider Format Fix
 
-- 本项目维护的 Steam CDN 域名规则设为直连；
-- Steam CDN IP 规则设为 `DIRECT,no-resolve`；
-- `GEOSITE,category-game-platforms-download` 设为直连。
+[`Rule_Provider_Format_Fix.conf`](./Rule_Provider_Format_Fix.conf) 用于根据 Rule Provider 的实际文件扩展名，补全或修正 `format` 字段。
+
+判断规则：
+
+| 文件扩展名 | 写入的 `format` |
+| --- | --- |
+| `.mrs` | `mrs` |
+| `.yaml`、`.yml` | `yaml` |
+
+处理逻辑：
+
+- 普通远程 Provider 优先检查 `url`，再检查 `path`；
+- `type: file` 优先检查 `path`，再检查 `url`；
+- 自动忽略 URL 查询参数和 `#fragment`；
+- 扩展名匹配不区分大小写；
+- 识别到受支持扩展名时，会修正已有的错误 `format`；
+- 未识别到 `.mrs`、`.yaml` 或 `.yml` 时保持原配置不变。
+
+testingcf：
+
+```text
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Rule_Provider_Format_Fix.conf
+```
+
+GitHub Raw：
+
+```text
+https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Rule_Provider_Format_Fix.conf
+```
+
+验收示例：
+
+```yaml
+rule-providers:
+  Example-MRS:
+    url: https://example.com/rules/example.mrs
+    format: mrs
+
+  Example-YAML:
+    url: https://example.com/rules/example.yaml?token=example
+    format: yaml
+```
+
+限制：
+
+- 只处理顶层 `rule-providers`；
+- 只识别 `.mrs`、`.yaml` 和 `.yml`；
+- 不修改 `type`、`behavior`、`url` 或 `path`；
+- 不下载并验证文件实际内容；
+- 如果文件扩展名本身与内容不一致，模块仍会按扩展名设置 `format`。
+
+---
+
+### 🎮 Direct Game Download
+
+[`Direct_Game_Download.conf`](./Direct_Game_Download.conf) 用于将游戏下载与更新流量优先设为直连。
+
+主要操作：
+
+- 添加本项目维护的 Steam CDN 域名 Rule Provider；
+- 添加 Steam CDN IP Rule Provider；
+- 将对应域名和 IP 规则设为直连；
+- 添加 `GEOSITE,category-game-platforms-download,DIRECT`；
+- 将相关规则插入现有规则列表顶部。
 
 testingcf：
 
@@ -243,14 +276,21 @@ GitHub Raw：
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Direct_Game_Download.conf
 ```
 
-该模块只处理游戏下载和更新流量，不会将游戏平台登录、商店、社区、云存档或联机流量全部改为直连。
+限制：
 
-### 🌍 替换 GeoIP 数据库地址
+- 只处理游戏下载和更新流量；
+- 不会将登录、商店、社区、云存档或游戏联机全部改为直连；
+- 依赖 Mihomo GeoSite 数据包含 `category-game-platforms-download`；
+- 直连速度仍取决于运营商、DNS 和 CDN 调度结果。
 
-[`Set_GeoIP_Database_URL.conf`](./Set_GeoIP_Database_URL.conf) 用于替换 OpenClash 的：
+---
 
-- `Country.mmdb`
-- `geoip.dat`
+### 🌍 Set GeoIP Database URL
+
+[`Set_GeoIP_Database_URL.conf`](./Set_GeoIP_Database_URL.conf) 用于替换 OpenClash 使用的：
+
+- GeoIP MMDB：`Country.mmdb`；
+- GeoIP DAT：`geoip.dat`。
 
 testingcf：
 
@@ -264,11 +304,20 @@ GitHub Raw：
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Set_GeoIP_Database_URL.conf
 ```
 
-该模块不会自动启用数据库模式、定时更新或修改 GeoSite、ASN、策略组和分流规则。
+模块会同时影响 OpenClash 启动时生成的 `geox-url` 和插件自身的数据库更新流程。
 
-### 🇨🇳 替换大陆 IP 白名单数据源
+限制：
 
-[`Set_China_IP_Route_URL.conf`](./Set_China_IP_Route_URL.conf) 用于替换 OpenClash 大陆 IPv4 与 IPv6 Chnroute 数据源。
+- 不会自动启用 GeoIP DAT 模式；
+- 不会自动开启数据库定时更新；
+- 不修改 GeoSite、GeoASN、规则或策略组；
+- 会覆盖 OpenClash 页面中已有的 GeoIP MMDB 与 DAT 自定义地址。
+
+---
+
+### 🇨🇳 Set China IP Route URL
+
+[`Set_China_IP_Route_URL.conf`](./Set_China_IP_Route_URL.conf) 用于替换 OpenClash 大陆白名单使用的 IPv4 和 IPv6 Chnroute 数据源。
 
 testingcf：
 
@@ -282,105 +331,67 @@ GitHub Raw：
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Set_China_IP_Route_URL.conf
 ```
 
-只有在 OpenClash 已启用相关大陆 IP 白名单功能时，替换后的数据源才会被实际使用。
+限制：
 
-## 🧰 第三方完整覆写方案
+- 不会自动开启“绕过中国大陆 IP”或“回国”模式；
+- 不会自动开启大陆白名单定时更新；
+- 不修改配置文件中的 GeoIP、GeoSite、Rule Provider 或 `geox-url`；
+- 只有相关大陆 IP 白名单功能已经启用时，新数据源才会被实际使用。
 
-[`OpenClash_Overwrite/`](./OpenClash_Overwrite/) 是 [Giveupmoon/OpenClash_Overwrite](https://github.com/Giveupmoon/OpenClash_Overwrite) 的 Git 子模块镜像入口。
+## 🔗 组合与冲突
 
-它可能同时生成或调整：
+| 组合 | 建议 |
+| --- | --- |
+| `Prevent_DNS_Leak.conf` + `Block_Encrypted_DNS.conf` | ✅ 可组合，分别处理 OpenClash 内部 DNS 路由和终端常见加密 DNS |
+| `Prevent_DNS_Leak.conf` + `Add_No_Resolve.conf` | ❌ 不需要，前者已包含 `no-resolve` 处理 |
+| `Rule_Provider_Format_Fix.conf` + 其他单功能模块 | ✅ 通常可以，仅需确认没有故意使用与扩展名不一致的 `format` |
+| `Direct_Game_Download.conf` + 数据源替换模块 | ✅ 通常可以，修改范围不同 |
+| `yaml/` 中的远程 YAML 模块 + 根目录单功能模块 | ⚠️ 可以组合，但应检查模块顺序和最终运行配置 |
+| 第三方完整覆写方案 + 本目录模块 | ⚠️ 必须逐项检查，可能重复修改 DNS、规则、策略组或数据源 |
+| 多个完整覆写方案 | ❌ 不建议同时启用 |
 
-- 策略组
-- 分流规则
-- DNS
-- Rule Provider
-- 节点选择
-- 订阅及环境参数
-- 其他 Mihomo 配置项
-
-具体文件、变量、兼容版本和使用方法，以上游 README 为准。
-
-> [!WARNING]
-> 完整覆写方案影响范围较大，不建议与其他完整配置生成方案同时使用。与本项目功能模块组合时，也必须确认没有重复修改相同字段。
-
-## ⚙️ 通用使用方法
-
-1. 先按照 Wiki 完成 OpenClash LuCI 设置；
-2. 进入 OpenClash 的 **覆写设置** 或 **覆写模块** 页面；
-3. 新增远程覆写模块；
-4. 模块类型选择 `HTTP`；
-5. 填写模块名称和订阅地址；
-6. 按模块说明填写 `EN_KEY` 参数；
-7. 启用模块并保存；
-8. 应用配置并重启 OpenClash；
-9. 检查最终运行配置和日志。
-
-不同 OpenClash 版本的菜单名称可能略有差异。
-
-> [!TIP]
-> 排查模块问题时，可暂时停用其他覆写，只保留目标模块，重新应用配置后确认它能否独立生效。
+当两个模块修改同一字段、同一规则数组或同一策略组时，后执行的模块可能覆盖先执行的结果。不要依赖执行顺序长期维持冲突配置。
 
 ## ✅ 最终验收
 
-不论使用哪种配置路径或功能模块，建议至少确认：
+应用模块后，至少检查：
 
+- 远程模块下载成功；
+- OpenClash 配置检查通过；
 - Mihomo 内核启动成功；
-- 当前配置文件符合预期；
-- 节点与 Proxy Provider 更新成功；
-- 策略组不为空且节点归类正确；
 - Rule Provider 下载和解析成功；
-- DNS 解析、Fake-IP 或 Redir-Host 行为符合 LuCI 设置；
-- IPv4、IPv6 和路由器自身流量按预期接管；
-- 常用国内外服务命中正确策略；
-- OpenClash 日志不存在下载、Ruby、YAML 校验或内核启动错误。
+- 最终运行配置中出现模块预期写入的字段或规则；
+- DNS、IPv4、IPv6 和流量接管仍符合预期；
+- 常用服务的规则命中没有异常；
+- 日志中没有 Ruby、YAML、Provider 或内核错误。
 
-## ❓ 常见问题
+## 🔍 故障排查
 
-### 功能覆写模块会修改远程订阅源吗？
+模块没有生效时，依次检查：
 
-不会。模块只会影响 OpenClash 加载后的配置、最终运行配置或插件使用的数据源。
+1. 模块是否已经启用；
+2. testingcf 或 GitHub Raw 地址是否能够正常下载；
+3. 是否已保存设置并重新应用配置；
+4. `EN_KEY` 参数格式是否正确；
+5. OpenClash 是否支持模块使用的 `[General]`、`[YAML]`、`[Overwrite]` 或 `ruby_edit`；
+6. 是否有其他模块修改同一配置项；
+7. 最终运行配置中是否出现预期结果；
+8. OpenClash 日志是否存在下载、解析、Ruby、配置校验或内核启动错误。
 
-### `yaml/` 模块会修改什么？
-
-它会下载远程 YAML、写入订阅地址、选择目标配置并触发重新加载。它可能覆盖 `/etc/openclash/config/` 中的同名 YAML 文件。
-
-### 多个模块可以同时启用吗？
-
-多数单功能模块可以组合，但必须检查修改范围。多个模块同时修改同一字段、数组、策略组或最终规则时，后执行的结果可能覆盖前面的结果。
-
-### 模块没有生效怎么办？
-
-依次检查：
-
-1. 模块是否启用；
-2. 模块地址是否可以下载；
-3. `EN_KEY` 参数格式是否正确；
-4. 是否已经保存、应用配置并重启；
-5. OpenClash 是否支持模块使用的指令；
-6. 是否存在其他模块覆盖相同字段；
-7. OpenClash 日志是否存在下载、解析、Ruby 或配置校验错误；
-8. 最终运行配置是否出现预期内容。
-
-### testingcf 地址无法访问怎么办？
-
-可临时改用对应的 GitHub Raw 地址。GitHub Raw 在部分网络环境中的可用性也可能不稳定，应优先排查网络和 DNS，而不是长期依赖来源不明的转发服务。
-
-## 📦 已归档资源
-
-[`archived/`](./archived/) 保存已经停止维护的旧版覆写文件，仅供历史参考，不建议继续部署。
+排查冲突时，建议暂时停用其他覆写模块，只保留目标模块重新测试。
 
 ## 📚 相关文档
 
 - [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)
+- [YAML 配置远程覆写模块](./yaml/README.md)
+- [YAML 配置文件说明](../cfg/yaml/README.md)
 - [订阅转换模板说明](../cfg/README.md)
-- [YAML 配置说明](../cfg/yaml/README.md)
-- [远程 YAML 模块说明](./yaml/README.md)
-- [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki)
+- [已归档覆写模块](./archived/README.md)
 
 ---
 
 <div align="center">
 
-覆写模块会持续调整，请以仓库 `main` 分支中的最新文件和说明为准。
+模块功能和兼容性可能随 OpenClash 与 Mihomo 更新而调整，请以仓库 `main` 分支中的最新文件为准。
 
 </div>
