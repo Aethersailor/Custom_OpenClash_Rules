@@ -199,7 +199,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 ### 🧩 Rule Provider Format Fix
 
-[`Rule_Provider_Format_Fix.conf`](./Rule_Provider_Format_Fix.conf) 用于根据 Rule Provider 的实际文件扩展名，补全或修正 `format` 字段。
+[`Rule_Provider_Format_Fix.conf`](./Rule_Provider_Format_Fix.conf) 用于根据 Rule Provider 的实际文件扩展名，补全或修正 `format` 字段。用于解决传统 subconverter 转换出的配置文件中缺少 `format:` 字段的问题。
 
 判断规则：
 
