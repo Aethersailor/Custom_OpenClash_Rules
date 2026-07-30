@@ -2,7 +2,7 @@
   🚀 Custom_OpenClash_Rules
 </h1>
 
-<p align="center"><b>OpenClash 配置方案、完整配置资源、规则文件、实用脚本与远程覆写模块</b></p>
+<p align="center"><b>OpenClash 配置方案、订阅转换模板、YAML 配置、规则文件、实用脚本与覆写模块资源</b></p>
 
 <p align="center">
   <a href="DO_NOT_README.md">English</a>
@@ -13,13 +13,13 @@
 <p align="center">
   <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki">📖 项目 Wiki</a>
   &nbsp;•&nbsp;
-  <a href="#-三种完整配置方式">🧭 配置方式</a>
-  &nbsp;•&nbsp;
   <a href="cfg/">🧩 配置资源</a>
+  &nbsp;•&nbsp;
+  <a href="rule/">🗂️ 规则文件</a>
   &nbsp;•&nbsp;
   <a href="overwrite/">⚙️ 覆写模块</a>
   &nbsp;•&nbsp;
-  <a href="rule/">🗂️ 规则文件</a>
+  <a href="shell/">🛠️ 实用脚本</a>
 </p>
 
 <p align="center">
@@ -36,81 +36,110 @@
 
 ## 📖 关于本项目
 
-**Custom_OpenClash_Rules** 是一个围绕 [OpenClash](https://github.com/vernesong/OpenClash) 整理和维护的配置资源仓库。
+**Custom_OpenClash_Rules** 是一个围绕 [OpenClash](https://github.com/vernesong/OpenClash) 整理和维护的综合资源仓库。
 
-项目主要提供：
+本项目提供 OpenClash 配置方案、订阅转换模板、YAML 配置文件、规则文件、实用脚本、远程覆写模块及相关文档，帮助用户更方便地部署、维护和调整 OpenClash。
 
-- OpenClash 设置方案与故障排查文档；
-- 订阅转换模板、YAML 配置文件及其远程覆写模块；
-- 自定义规则与多格式派生规则；
-- DNS、规则和数据源相关的单功能覆写模块；
-- OpenClash 安装、更新与维护脚本。
-
-> [!IMPORTANT]
-> 完整配置资源主要负责节点来源、策略组、Rule Provider 和分流规则。DNS、IPv6、TUN、嗅探、运行模式、流量接管等插件参数，仍应根据自身环境在 OpenClash LuCI 中完成设置。
->
-> 首次使用建议先阅读 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)。
+根 README 作为项目首页和资源导航，仅介绍各类资源的定位与入口。具体文件、版本区别、参数和使用方法，请进入对应目录查看其自动展示的 README。
 
 > [!NOTE]
 > 项目 Wiki 目前仅提供中文版本。
 
 ---
 
-## 🧭 三种完整配置方式
-
-本项目提供三种方式加载完整配置。它们的区别在于**配置的获取和维护方式**，而不是分流设计。
-
-> [!IMPORTANT]
-> 选择相同配置版本且未自行修改内容时，三种方式的**策略组结构、规则引用、规则顺序和分流逻辑完全对齐**。
-
-| 使用方式 | 资源入口 | 适合场景 |
-| --- | --- | --- |
-| **订阅转换** | [`cfg/README.md`](cfg/README.md) | 操作最简单，直接在 OpenClash 中更新订阅 |
-| **远程 YAML 覆写模块** | [`overwrite/yaml/README.md`](overwrite/yaml/README.md) | 不使用订阅转换，也不想手工维护 YAML |
-| **下载并导入 YAML** | [`cfg/yaml/README.md`](cfg/yaml/README.md) | 需要固定版本或自行修改配置 |
-
-三种方式通常应当选择一种作为主路径。详细操作、参数和注意事项请进入对应目录查看。
-
----
-
-## 🧩 配置资源
-
-完整配置资源由三部分组成：
-
-| 资源 | 位置 | 用途 |
-| --- | --- | --- |
-| **订阅转换模板** | [`cfg/*.ini`](cfg/) | 通过订阅转换生成完整配置 |
-| **YAML 配置文件** | [`cfg/yaml/*.yaml`](cfg/yaml/) | 用于手工导入，也是远程 YAML 模块的调用目标 |
-| **YAML 对应的远程覆写模块** | [`overwrite/yaml/*.conf`](overwrite/yaml/) | 自动下载 YAML、写入订阅并切换配置 |
-
-所有自定义订阅转换模板均已被 OpenClash 收录，常规使用可直接在内置模板列表中选择。
-
-不同配置版本的定位、普通版与 Fallback 版区别、自建节点配置及详细使用方法，请查看：
-
-- [`cfg/README.md`](cfg/README.md)
-- [`cfg/yaml/README.md`](cfg/yaml/README.md)
-- [`overwrite/yaml/README.md`](overwrite/yaml/README.md)
-
----
-
 ## 🚀 快速开始
 
-1. 按照 [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) 完成 OpenClash 基础设置。
-2. 选择所需的标准、轻量、极简 GFW、重度分流或对应 Fallback 版本。
-3. 从订阅转换、远程 YAML 覆写模块、手工导入 YAML 中选择一种方式。
-4. 配置订阅地址、自建节点或模块变量。
-5. 检查配置校验、内核启动、Provider、策略组、DNS、IPv6、实际分流和日志。
+| 需求 | 建议入口 |
+| --- | --- |
+| 首次配置或系统了解 OpenClash | [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) |
+| 使用订阅转换模板、YAML 配置或远程 YAML 配置模块 | [`cfg/`](cfg/) |
+| 为现有配置补充或修正规则 | [`rule/`](rule/) |
+| 使用单功能远程覆写模块 | [`overwrite/`](overwrite/) |
+| 安装、更新或检测 OpenClash | [`shell/`](shell/) |
+| 排查常见故障 | [故障排除](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4) |
 
 ---
 
-## 📚 其他资源
+## 🧭 项目资源
 
-| 资源 | 用途 | 详细说明 |
+### 📚 配置方案与文档
+
+项目 Wiki 是本仓库的核心内容之一，提供一套围绕 OpenWrt 与 OpenClash 整理的完整配置思路。
+
+内容重点包括：
+
+- **OpenClash 基础配置与透明分流**：运行模式、流量接管、规则匹配和策略选择；
+- **DNS 策略与泄漏风险控制**：直连与代理流量的解析路径、DNS 劫持和规则跟随；
+- **直连访问优化**：结合大陆域名与 IP 绕过机制，减少不必要的代理处理；
+- **IPv6 配置与兼容**：在保留 IPv6 连通性的同时正确完成分流与接管；
+- **故障排除与补充教程**：覆盖启动失败、网络异常、规则命中异常等常见问题。
+
+Wiki 负责解释“为什么这样配置”，各资源目录负责提供可以直接使用或修改的落地文件。
+
+**入口：** [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki)
+
+### 🧩 配置资源
+
+[`cfg/`](cfg/) 用于将上述 Wiki 中的配置思路落实为可直接使用的完整配置资源，具体包括：
+
+| 资源 | 所在位置 | 主要用途 |
 | --- | --- | --- |
-| [`overwrite/`](overwrite/) | DNS、规则、`no-resolve`、Provider 格式和数据源等单功能覆写模块 | [`overwrite/README.md`](overwrite/README.md) |
-| [`rule/`](rule/) | 自定义直连、代理、游戏下载、加密 DNS 及多格式派生规则 | [`rule/README.md`](rule/README.md) |
-| [`shell/`](shell/) | OpenClash 安装、更新和架构检测脚本 | [`shell/README.md`](shell/README.md) |
-| [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) | 配置原理、操作方案和故障排查 | [进入 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) |
+| **订阅转换模板** | [`cfg/`](cfg/) | 通过在线订阅转换生成完整 OpenClash 配置 |
+| **YAML 配置文件** | [`cfg/yaml/`](cfg/yaml/) | 下载后手工修改并导入 OpenClash |
+| **YAML 对应的远程覆写模块** | [`overwrite/yaml/`](overwrite/yaml/) | 自动下载对应 YAML、写入订阅并切换配置 |
+
+> [!IMPORTANT]
+> 本项目提供三种完整配置的使用方式：
+>
+> 1. **订阅转换**；
+> 2. **远程 YAML 覆写模块**；
+> 3. **下载 YAML 后手工修改并导入**。
+>
+> 选择相同配置版本且未自行修改内容时，三种方式的**策略组结构、规则引用、规则顺序和分流逻辑完全对齐**，区别仅在于配置的获取和维护方式。
+
+全部自定义订阅转换模板均已收录于 OpenClash 插件内置的订阅转换模板列表，常规用户可直接在 OpenClash 内置模板列表中选择，无需手工填写模板地址。
+
+本项目提供标准版、轻量版、极简 GFW 版、重度分流版及对应 Fallback 版本，并提供自建节点相关 YAML。版本定位、参数、远程地址和详细操作请进入相应目录查看。
+
+**入口：**
+
+- 订阅转换模板：[`cfg/`](cfg/)
+- YAML 配置文件：[`cfg/yaml/`](cfg/yaml/)
+- YAML 远程覆写模块：[`overwrite/yaml/`](overwrite/yaml/)
+
+### 🗂️ 规则文件
+
+[`rule/`](rule/) 存放本项目维护的冷门规则及其多格式派生文件，包括自定义直连、代理、Steam CDN、游戏下载 CDN、加密 DNS 等内容。
+
+规则会根据用途生成 `.list`、Classical YAML、Domain YAML、IP-CIDR YAML 和 MRS 等格式，供订阅转换模板或 Mihomo Rule Provider 使用。
+
+直连规则由全体用户共同参与维护，如希望将符合要求的域名纳入本项目规则，可通过 GitHub Issues、Pull Requests，或访问 [RULE BOT](https://telegram.me/asailor_rulebot) 提交。。
+
+**入口：** [`rule/`](rule/)
+
+> [!NOTE]
+> 维护者会根据实际情况，将收集到的适合内容向上游相关规则项目提交。
+
+### 🛠️ 实用脚本
+
+[`shell/`](shell/) 提供 OpenClash 安装、更新、CPU 架构检测及相关维护脚本，支持 OpenWrt、ImmortalWrt，适配 OPKG 和 APK 包管理器等环境。
+
+脚本可能涉及软件源临时切换、插件覆盖重装、UCI 设置和 OpenClash 内置更新流程。运行前请进入目录阅读完整说明。
+
+**入口：** [`shell/`](shell/)
+
+### ⚙️ 覆写模块资源
+
+[`overwrite/`](overwrite/) 存放 OpenClash 远程覆写模块及相关资源。
+
+根目录中的单功能模块可用于调整 DNS、规则、`no-resolve`、Rule Provider `format`、游戏下载直连、GeoIP 数据源和大陆 IP 白名单数据源等功能；[`overwrite/yaml/`](overwrite/yaml/) 则存放调用本项目 YAML 配置的远程覆写模块。
+
+不同模块的修改范围、参数、组合关系和冲突风险，请进入对应目录查看。未来会不断追加其他功能的覆写模块。
+
+**入口：**
+
+- 单功能覆写模块：[`overwrite/`](overwrite/)
+- YAML 配置远程覆写模块：[`overwrite/yaml/`](overwrite/yaml/)
 
 ---
 
@@ -119,17 +148,6 @@
 本仓库主要面向 OpenWrt 与 OpenClash 使用场景，不提供其他客户端或操作系统的通用配置支持。
 
 本项目为维护者个人使用经验与技术资料的整理，不提供个性化配置、定制开发或一对一技术支持。
-
----
-
-## 🈸 提交直连域名
-
-需要补充少量直连域名时，建议优先使用 OpenClash 的自定义规则功能。
-
-如希望将符合要求的域名纳入本项目，可通过 GitHub Issues、Pull Requests，或访问 [COCR RULE BOT](https://telegram.me/asailor_rulebot) 提交。
-
-> [!NOTE]
-> 维护者会根据实际情况，将收集到的适合内容向相关上游规则项目提交。
 
 ---
 
