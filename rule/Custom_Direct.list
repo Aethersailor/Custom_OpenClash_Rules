@@ -315,6 +315,8 @@ DOMAIN-SUFFIX,vbkr.com
 # 机器人添加域名
 # 以下域名由用户通过机器人添加，无备案且 NS 不属于中国大陆，或解析结果不属于中国大陆，或属于 .cn/.top 域名
 
+# https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/383
+DOMAIN-SUFFIX,xiaomaicn.com
 # add by Telegram user: 嘿嘿 / Date: 2026-04-11 08:08:32
 DOMAIN-SUFFIX,jsj.top
 # add by Telegram user: Evan / Date: 2026-07-05 10:09:41
