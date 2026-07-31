@@ -13,6 +13,7 @@ DOMAIN-SUFFIX,googleapis.cn
 DOMAIN-SUFFIX,xn--ngstr-lra8j.com
 # Google 相关
 DOMAIN-SUFFIX,mtalk.google.com
+DOMAIN-SUFFIX,gstatic.com
 # PS5 STUN
 DOMAIN-SUFFIX,stun.playstation.net
 # 嵌入式相关
