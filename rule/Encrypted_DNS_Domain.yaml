@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3405
+# TOTAL: 3413
 
 payload:
   - '+.003153.xyz'
@@ -633,6 +633,7 @@ payload:
   - '+.chungocoai.name.vn'
   - '+.chynik.duckdns.org'
   - '+.circumitor.de'
+  - '+.cld.996969.xyz'
   - '+.cleanbrowsing.org'
   - '+.clic.eu.org'
   - '+.closetruth.date'
@@ -822,6 +823,7 @@ payload:
   - '+.dns.abhimankolte.com'
   - '+.dns.abppro.ru'
   - '+.dns.adguard.com'
+  - '+.dns.adguarddns.com'
   - '+.dns.adnull.com'
   - '+.dns.adrianlam.com'
   - '+.dns.adriason.co.uk'
@@ -839,6 +841,7 @@ payload:
   - '+.dns.alwynstudio.com.au'
   - '+.dns.amigo-mgn.ru'
   - '+.dns.andreykiv.com'
+  - '+.dns.anitelekom.ru'
   - '+.dns.anne-pierre.fr'
   - '+.dns.anon.no'
   - '+.dns.api.gandi.net'
@@ -2010,6 +2013,7 @@ payload:
   - '+.domain.name'
   - '+.domburg.beruys.com'
   - '+.domeq.waw.pl'
+  - '+.dooh.waterfox.net'
   - '+.door.plasmadancer.ru'
   - '+.dorkanddoodle.duckdns.org'
   - '+.dot-ch.blahdns.com'
@@ -2094,6 +2098,7 @@ payload:
   - '+.f4ckdns.dl4mt.dev'
   - '+.f4f.es'
   - '+.facomunit.ddns.net'
+  - '+.family.adguarddns.com'
   - '+.family.dns.doubleangels.com'
   - '+.family.dns.teknoholistik.com'
   - '+.family.dot.dns.yandex.net'
@@ -2684,6 +2689,7 @@ payload:
   - '+.nrt.core.access.zznet.fun'
   - '+.nrusimha.crabdance.com'
   - '+.ns.00dani.me'
+  - '+.ns.77ll.ru'
   - '+.ns.cd'
   - '+.ns.ciwer.cn'
   - '+.ns.data.haus'
@@ -3186,6 +3192,7 @@ payload:
   - '+.unasw.eu'
   - '+.uncensored-dot.dnswarden.com'
   - '+.uncensoreddns.org'
+  - '+.unfiltered.adguarddns.com'
   - '+.unfiltered.joindns4.eu'
   - '+.unicast.censurfridns.dk'
   - '+.unicast.censurfridns.nu'
@@ -3304,6 +3311,7 @@ payload:
   - '+.wanam.ddns.net'
   - '+.wandana.franklinfamily.au'
   - '+.wantaquddin.com'
+  - '+.waterfox-ohttp-relay.fastly-edge.com'
   - '+.waw01.dnscry.pt'
   - '+.waw02.dnscry.pt'
   - '+.waydnes.ru'
