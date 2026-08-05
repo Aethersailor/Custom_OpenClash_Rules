@@ -109,6 +109,7 @@ jobs:
           sh shell/check_cpu_version.sh --self-check
           python -m unittest discover -s py -p 'test_*.py'
           python -m unittest discover -s .github/scripts -p 'test_*.py'
+          python .github/scripts/jsdelivr_purge.py check-contract --revision HEAD
           sh .github/scripts/test_installers.sh
           python py/sync_installer_common.py --check
           python py/check_config_consistency.py --check

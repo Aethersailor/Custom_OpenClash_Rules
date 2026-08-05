@@ -1,0 +1,46 @@
+{
+  "repository": "Aethersailor/Custom_OpenClash_Rules",
+  "branch": "main",
+  "ref_aliases": [
+    "main",
+    "refs/heads/main"
+  ],
+  "verify_hosts": [
+    "cdn.jsdelivr.net",
+    "testingcf.jsdelivr.net"
+  ],
+  "public_roots": [
+    "cfg",
+    "game_rule",
+    "icon",
+    "overwrite",
+    "rule",
+    "script",
+    "shell"
+  ],
+  "deferred_sources": [
+    "rule/Custom_Direct.list",
+    "rule/Custom_Proxy.list",
+    "rule/Steam_CDN.list",
+    "rule/Encrypted_DNS.list",
+    "rule/Game_Download_CDN.list"
+  ],
+  "generated_suffixes": [
+    "Domain.yaml",
+    "Domain.mrs",
+    "IP.yaml",
+    "IP.mrs",
+    "Classical.yaml",
+    "Classical_IP.yaml",
+    "Classical_Port.yaml"
+  ],
+  "excluded_prefixes": [
+    "overwrite/OpenClash_Overwrite"
+  ],
+  "excluded_path_parts": [
+    "archived"
+  ],
+  "excluded_basenames": [
+    "README.md"
+  ]
+}

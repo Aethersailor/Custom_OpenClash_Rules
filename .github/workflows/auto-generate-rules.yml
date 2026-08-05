@@ -12,6 +12,11 @@ on:
       - 'rule/Game_Download_CDN.list'
       - 'py/generate_rules.py'
   workflow_dispatch:
+    inputs:
+      source_before_sha:
+        description: Source-list parent revision supplied by an updater workflow
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -25,6 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     outputs:
+      purge_base_sha: ${{ steps.publication-range.outputs.purge_base_sha }}
       validation_sha: ${{ steps.publish.outputs.validation_sha }}
 
     steps:
@@ -38,6 +44,28 @@ jobs:
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.13'
+
+      - name: Record source publication range
+        id: publication-range
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_BEFORE: ${{ github.event.before }}
+          REQUEST_BEFORE: ${{ inputs.source_before_sha }}
+        run: |
+          if [ "$EVENT_NAME" = "push" ]; then
+            purge_base_sha="$EVENT_BEFORE"
+          else
+            purge_base_sha="$REQUEST_BEFORE"
+          fi
+
+          if [ -z "$purge_base_sha" ]; then
+            purge_base_sha="$(git rev-parse HEAD^)"
+          elif [ "${purge_base_sha//0/}" != "" ]; then
+            purge_base_sha="$(git rev-parse "${purge_base_sha}^{commit}")"
+          fi
+
+          echo "Source publication base: $purge_base_sha"
+          echo "purge_base_sha=$purge_base_sha" >> "$GITHUB_OUTPUT"
 
       - name: Download and verify Mihomo
         env:
@@ -94,3 +122,16 @@ jobs:
     uses: ./.github/workflows/validate.yml
     with:
       expected_sha: ${{ needs.generate-rules.outputs.validation_sha }}
+
+  # Publish only after the exact final revision has passed the shared validator.
+  # This explicit call also works for GITHUB_TOKEN commits, which emit no push event.
+  purge-generated:
+    needs:
+      - generate-rules
+      - validate-generated
+    permissions:
+      contents: read
+    uses: ./.github/workflows/purge-jsdelivr.yml
+    with:
+      before_sha: ${{ needs.generate-rules.outputs.purge_base_sha }}
+      after_sha: ${{ needs.generate-rules.outputs.validation_sha }}

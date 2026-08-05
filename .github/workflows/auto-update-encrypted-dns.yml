@@ -60,6 +60,7 @@ jobs:
             exit 1
           fi
 
+          source_before_sha="$(git rev-parse HEAD)"
           git add -- rule/Encrypted_DNS.list
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -70,9 +71,14 @@ jobs:
           git commit -m "chore(rule): auto-update Encrypted_DNS.list"
           git push origin HEAD:main
           echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "source_before_sha=$source_before_sha" >> "$GITHUB_OUTPUT"
 
       - name: Generate derived rule files
         if: steps.commit.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run auto-generate-rules.yml --ref main
+        run: |
+          gh workflow run auto-generate-rules.yml \
+            --repo "${GITHUB_REPOSITORY}" \
+            --ref main \
+            -f source_before_sha="${{ steps.commit.outputs.source_before_sha }}"
