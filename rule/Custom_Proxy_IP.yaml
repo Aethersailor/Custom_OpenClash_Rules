@@ -1,6 +1,7 @@
 # Generated from rule/Custom_Proxy.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Proxy.list
-# TOTAL: 0
+# TOTAL: 1
 
-payload: []
+payload:
+  - '207.241.224.2/32'

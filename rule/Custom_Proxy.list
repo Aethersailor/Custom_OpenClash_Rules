@@ -27,6 +27,8 @@ DOMAIN-SUFFIX,cloudsync-prod.s3.us-east-1.amazonaws.com
 DOMAIN-SUFFIX,hoyolab.com
 # OneDrive 网页版
 DOMAIN-SUFFIX,onedrive.live.com
+# Internet Archive
+IP-CIDR,207.241.224.2/32,no-resolve
 # 其他
 DOMAIN-SUFFIX,7pzzv.us
 DOMAIN-SUFFIX,hoyoverse.com
