@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - main
-    # Source-list pushes are validated after Auto generate rules publishes the
-    # matching YAML/MRS commit. Pull requests still validate source and derived
-    # files together before merge.
+    # Source-list pushes are validated by Auto generate rules calling this
+    # reusable workflow with its exact final revision. Pull requests still
+    # validate source and derived files together before merge.
     paths-ignore:
       - 'rule/Custom_Direct.list'
       - 'rule/Custom_Proxy.list'
@@ -17,12 +17,18 @@ on:
     branches:
       - main
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      expected_sha:
+        description: Exact repository revision to validate
+        required: true
+        type: string
 
 permissions:
   contents: read
 
 concurrency:
-  group: validate-${{ github.ref }}
+  group: validate-${{ inputs.expected_sha || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -33,7 +39,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          ref: ${{ inputs.expected_sha || github.sha }}
           submodules: true
+
+      - name: Verify checked out revision
+        env:
+          EXPECTED_SHA: ${{ inputs.expected_sha || github.sha }}
+        run: |
+          actual_sha="$(git rev-parse HEAD)"
+          echo "Expected revision: $EXPECTED_SHA"
+          echo "Checked out revision: $actual_sha"
+          test "$actual_sha" = "$EXPECTED_SHA"
 
       - name: Set up Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0

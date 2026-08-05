@@ -24,6 +24,8 @@ jobs:
   generate-rules:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    outputs:
+      validation_sha: ${{ steps.publish.outputs.validation_sha }}
 
     steps:
       - name: Checkout latest main branch
@@ -56,6 +58,7 @@ jobs:
         run: python py/generate_rules.py --check --mihomo mihomo
 
       - name: Commit and push changes
+        id: publish
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -73,8 +76,21 @@ jobs:
 
           if git diff --cached --quiet; then
             echo "No generated rule changes, skip commit and push."
-            exit 0
+          else
+            git commit -m "chore(rules): auto generate derived rule files"
+            git push origin HEAD:main
           fi
 
-          git commit -m "chore(rules): auto generate derived rule files"
-          git push origin HEAD:main
+          validation_sha="$(git rev-parse HEAD)"
+          echo "Final revision to validate: $validation_sha"
+          echo "validation_sha=$validation_sha" >> "$GITHUB_OUTPUT"
+
+  # GITHUB_TOKEN pushes do not trigger push workflows. Call the shared
+  # validation directly so the final generated revision cannot bypass CI.
+  validate-generated:
+    needs: generate-rules
+    permissions:
+      contents: read
+    uses: ./.github/workflows/validate.yml
+    with:
+      expected_sha: ${{ needs.generate-rules.outputs.validation_sha }}
