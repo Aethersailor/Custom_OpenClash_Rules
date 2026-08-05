@@ -89,10 +89,12 @@ jobs:
           git fetch --no-tags origin main
           published="$(git rev-parse FETCH_HEAD)"
 
-          echo "mode=$mode" >> "$GITHUB_OUTPUT"
-          echo "before=$before" >> "$GITHUB_OUTPUT"
-          echo "after=$after" >> "$GITHUB_OUTPUT"
-          echo "published=$published" >> "$GITHUB_OUTPUT"
+          {
+            echo "mode=$mode"
+            echo "before=$before"
+            echo "after=$after"
+            echo "published=$published"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Purge and verify every changed cache key
         env:
