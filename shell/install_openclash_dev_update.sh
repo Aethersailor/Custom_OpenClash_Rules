@@ -47,9 +47,13 @@ FEED_FILE=""
 FEED_BACKUP=""
 FEED_CHANGED=0
 PRESERVED_PACKAGE_PATH=""
+PACKAGE_EXPECTED_SIZE=""
+PACKAGE_EXPECTED_SHA256=""
 SELECTED_MODEL=""
 SELECTED_MODEL_SIZE=""
 SELECTED_MODEL_URL=""
+SELECTED_MODEL_SHA256=""
+MODEL_METADATA_FILE=""
 
 print_line() {
     printf '%b\n' "${C}================================================================${N}"
@@ -301,6 +305,108 @@ curl_download() {
         [ -s "$output" ]
 }
 
+file_size_bytes() {
+    wc -c <"$1" 2>/dev/null | tr -d ' '
+}
+
+file_sha256() {
+    file=$1
+    digest=""
+    if command -v sha256sum >/dev/null 2>&1; then
+        digest=$(sha256sum "$file" 2>/dev/null | awk '{print tolower($1)}')
+    elif command -v openssl >/dev/null 2>&1; then
+        digest=$(openssl dgst -sha256 "$file" 2>/dev/null |
+            awk '{print tolower($NF)}')
+    else
+        return 1
+    fi
+
+    case "$digest" in
+        *[!0-9a-f]* | '') return 1 ;;
+    esac
+    [ "${#digest}" -eq 64 ] || return 1
+    printf '%s\n' "$digest"
+}
+
+base64_sha256_to_hex() {
+    command -v base64 >/dev/null 2>&1 || return 1
+    command -v od >/dev/null 2>&1 || return 1
+    digest=$(printf '%s' "$1" | base64 -d 2>/dev/null |
+        od -An -tx1 2>/dev/null | tr -d ' \n')
+    case "$digest" in
+        *[!0-9a-f]* | '') return 1 ;;
+    esac
+    [ "${#digest}" -eq 64 ] || return 1
+    printf '%s\n' "$digest"
+}
+
+parse_jsdelivr_package_metadata() {
+    metadata_file=$1
+    file_name=$2
+    tr -d '\r\n\t ' <"$metadata_file" 2>/dev/null |
+        awk -v target="/dev/$file_name" '
+            {
+                key="\"name\":\"" target "\""
+                start=index($0, key)
+                if (!start) exit
+                tail=substr($0, start)
+                remainder=substr(tail, length(key) + 1)
+                next_name=index(remainder, "\"name\":\"")
+                if (next_name) tail=substr(tail, 1, length(key) + next_name - 1)
+
+                hash_marker="\"hash\":\""
+                hash_start=index(tail, hash_marker)
+                if (!hash_start) exit
+                hash_tail=substr(tail, hash_start + length(hash_marker))
+                hash_end=index(hash_tail, "\"")
+                if (!hash_end) exit
+                hash=substr(hash_tail, 1, hash_end - 1)
+
+                size_marker="\"size\":"
+                size_start=index(tail, size_marker)
+                if (!size_start) exit
+                size=substr(tail, size_start + length(size_marker))
+                sub(/[^0-9].*/, "", size)
+                if (size ~ /^[0-9]+$/ && size > 0) print hash, size
+            }
+        '
+}
+
+fetch_package_integrity_metadata() {
+    commit=$1
+    file_name=$2
+    PACKAGE_EXPECTED_SIZE=""
+    PACKAGE_EXPECTED_SHA256=""
+    metadata_file="$TMP_DIR/package-metadata.json"
+    metadata_url="https://data.jsdelivr.com/v1/package/gh/vernesong/OpenClash@${commit}/flat"
+
+    rm -f "$metadata_file"
+    if ! curl -fsSL --connect-timeout "${INTEGRITY_CONNECT_TIMEOUT:-3}" \
+        --max-time "${INTEGRITY_MAX_TIME:-8}" \
+        -H 'Accept: application/json' \
+        -o "$metadata_file" "$metadata_url" 2>/dev/null; then
+        log_info "未获取安装包元数据，继续使用大小下限与包管理器 dry-run 校验。"
+        return 0
+    fi
+
+    metadata=$(parse_jsdelivr_package_metadata "$metadata_file" "$file_name")
+    encoded_hash=${metadata%% *}
+    expected_size=${metadata#* }
+    if [ -z "$metadata" ] || [ "$expected_size" = "$metadata" ]; then
+        log_info "安装包元数据不可解析，继续使用大小下限与包管理器 dry-run 校验。"
+        return 0
+    fi
+
+    PACKAGE_EXPECTED_SIZE=$expected_size
+    if PACKAGE_EXPECTED_SHA256=$(base64_sha256_to_hex "$encoded_hash"); then
+        log_info "已获取固定提交安装包的官方大小与 SHA-256 元数据。"
+    else
+        PACKAGE_EXPECTED_SHA256=""
+        log_info "已获取固定提交安装包大小；设备缺少可用解码工具，跳过 SHA-256。"
+    fi
+    return 0
+}
+
 fetch_package_refs_route() {
     route=$1
     output=$2
@@ -399,9 +505,26 @@ apk_supports_allow_downgrade() {
 verify_package_file() {
     file=$1
     [ -s "$file" ] || return 1
-    actual_size=$(wc -c <"$file" 2>/dev/null | tr -d ' ')
-    [ -n "$actual_size" ] && [ "$actual_size" -ge "$PACKAGE_MIN_BYTES" ] ||
+    actual_size=$(file_size_bytes "$file")
+    if [ -n "${PACKAGE_EXPECTED_SIZE:-}" ]; then
+        if [ "$actual_size" != "$PACKAGE_EXPECTED_SIZE" ]; then
+            log_warn "安装包大小与固定提交元数据不一致。"
+            return 1
+        fi
+    elif [ -z "$actual_size" ] || [ "$actual_size" -lt "$PACKAGE_MIN_BYTES" ]; then
         return 1
+    fi
+
+    if [ -n "${PACKAGE_EXPECTED_SHA256:-}" ]; then
+        if actual_sha256=$(file_sha256 "$file"); then
+            if [ "$actual_sha256" != "$PACKAGE_EXPECTED_SHA256" ]; then
+                log_warn "安装包 SHA-256 与固定提交元数据不一致。"
+                return 1
+            fi
+        else
+            log_info "设备缺少可用 SHA-256 工具，继续执行包管理器 dry-run 校验。"
+        fi
+    fi
 
     if [ "$PKG_MGR" = "opkg" ]; then
         opkg --noaction install "$file" >/dev/null 2>&1
@@ -422,6 +545,7 @@ download_openclash_package() {
     jsdelivr_url="${JSDELIVR_PACKAGE_PREFIX}${commit}/dev/${file_name}"
     proxy_url="${GH_PROXY_PREFIX}${raw_url}"
 
+    fetch_package_integrity_metadata "$commit" "$file_name"
     log_info "下载顺序：testingcf jsDelivr → v6.gh-proxy → GitHub Raw"
     for source in "$jsdelivr_url" "$proxy_url" "$raw_url"; do
         log_info "尝试下载：$source"
@@ -664,6 +788,113 @@ probe_model_size() {
         awk 'tolower($1) == "content-length:" && $2 ~ /^[0-9]+$/ {size=$2} END {if (size > 0) print size}'
 }
 
+parse_model_release_metadata() {
+    metadata_file=$1
+    candidate=$2
+    tr -d '\r\n\t ' <"$metadata_file" 2>/dev/null |
+        awk -v name="$candidate" '
+            {
+                key="\"name\":\"" name "\""
+                start=index($0, key)
+                if (!start) exit
+                tail=substr($0, start)
+                remainder=substr(tail, length(key) + 1)
+                next_name=index(remainder, "\"name\":\"")
+                if (next_name) tail=substr(tail, 1, length(key) + next_name - 1)
+
+                size_marker="\"size\":"
+                size_start=index(tail, size_marker)
+                if (!size_start) exit
+                size=substr(tail, size_start + length(size_marker))
+                sub(/[^0-9].*/, "", size)
+
+                digest_marker="\"digest\":\"sha256:"
+                digest_start=index(tail, digest_marker)
+                if (!digest_start) exit
+                digest_tail=substr(tail, digest_start + length(digest_marker))
+                digest_end=index(digest_tail, "\"")
+                if (!digest_end) exit
+                digest=substr(digest_tail, 1, digest_end - 1)
+
+                if (size ~ /^[0-9]+$/ && size > 0 &&
+                    digest ~ /^[0-9a-f]+$/ && length(digest) == 64) {
+                    print size, digest
+                }
+            }
+        '
+}
+
+fetch_model_release_metadata() {
+    MODEL_METADATA_FILE="$TMP_DIR/model-release.json"
+    rm -f "$MODEL_METADATA_FILE"
+    curl -fsSL --connect-timeout "${INTEGRITY_CONNECT_TIMEOUT:-3}" \
+        --max-time "${INTEGRITY_MAX_TIME:-8}" \
+        -H 'Accept: application/vnd.github+json' \
+        -H 'X-GitHub-Api-Version: 2022-11-28' \
+        -o "$MODEL_METADATA_FILE" \
+        'https://api.github.com/repos/vernesong/mihomo/releases/tags/LightGBM-Model' \
+        2>/dev/null && [ -s "$MODEL_METADATA_FILE" ]
+}
+
+verify_model_file() {
+    file=$1
+    expected_size=$2
+    expected_sha256=$3
+    [ -s "$file" ] || return 1
+    [ "$(file_size_bytes "$file")" = "$expected_size" ] || return 1
+
+    [ -n "$expected_sha256" ] || return 0
+    if actual_sha256=$(file_sha256 "$file"); then
+        [ "$actual_sha256" = "$expected_sha256" ]
+    else
+        log_info "设备缺少可用 SHA-256 工具，LightGBM 继续使用精确大小校验。"
+        return 0
+    fi
+}
+
+curl_model_direct_fallback() {
+    output=$1
+    url=$2
+    rm -f "$output"
+    curl -fsSL --connect-timeout 5 --max-time 60 \
+        -o "$output" "$url" && [ -s "$output" ]
+}
+
+download_selected_model() {
+    output=$1
+    proxy_url="${GH_PROXY_PREFIX}${SELECTED_MODEL_URL}"
+    log_info "优先通过 v6.gh-proxy 下载 LightGBM：$SELECTED_MODEL"
+
+    if ! curl_download "$output" "$proxy_url"; then
+        return 1
+    fi
+    if verify_model_file "$output" "$SELECTED_MODEL_SIZE" \
+        "$SELECTED_MODEL_SHA256"; then
+        return 0
+    fi
+
+    rm -f "$output"
+    [ -n "$SELECTED_MODEL_SHA256" ] || return 1
+    log_warn "代理返回的 LightGBM 与官方元数据不一致，尝试官方直连。"
+    curl_model_direct_fallback "$output" "$SELECTED_MODEL_URL" &&
+        verify_model_file "$output" "$SELECTED_MODEL_SIZE" \
+            "$SELECTED_MODEL_SHA256"
+}
+
+replace_smart_model() {
+    source=$1
+    target=$2
+    target_tmp=$3
+    if ! cp "$source" "$target_tmp" ||
+        ! verify_model_file "$target_tmp" "$SELECTED_MODEL_SIZE" \
+            "$SELECTED_MODEL_SHA256" ||
+        ! chmod 644 "$target_tmp" ||
+        ! mv -f "$target_tmp" "$target"; then
+        rm -f "$target_tmp"
+        return 1
+    fi
+}
+
 available_kb() {
     df -Pk "$1" 2>/dev/null | awk 'NR==2{print $4}'
 }
@@ -684,11 +915,31 @@ select_smart_model() {
     SELECTED_MODEL=""
     SELECTED_MODEL_SIZE=""
     SELECTED_MODEL_URL=""
+    SELECTED_MODEL_SHA256=""
+
+    metadata_available=0
+    if fetch_model_release_metadata; then
+        metadata_available=1
+        log_info "已获取 LightGBM 官方大小与 SHA-256 元数据。"
+    else
+        log_info "LightGBM 官方元数据不可用，继续使用代理大小探测。"
+    fi
 
     for candidate in Model-large.bin Model-middle.bin Model.bin; do
         official_url="${MODEL_OFFICIAL_PREFIX}/${candidate}"
         proxy_url="${GH_PROXY_PREFIX}${official_url}"
-        size=$(probe_model_size "$proxy_url")
+        size=""
+        digest=""
+        if [ "$metadata_available" -eq 1 ]; then
+            metadata=$(parse_model_release_metadata "$MODEL_METADATA_FILE" "$candidate")
+            metadata_size=${metadata%% *}
+            metadata_digest=${metadata#* }
+            if [ -n "$metadata" ] && [ "$metadata_digest" != "$metadata" ]; then
+                size=$metadata_size
+                digest=$metadata_digest
+            fi
+        fi
+        [ -n "$size" ] || size=$(probe_model_size "$proxy_url")
         [ -n "$size" ] || {
             log_warn "无法探测 $candidate 的远端大小，跳过该候选。"
             continue
@@ -697,6 +948,7 @@ select_smart_model() {
             SELECTED_MODEL=$candidate
             SELECTED_MODEL_SIZE=$size
             SELECTED_MODEL_URL=$official_url
+            SELECTED_MODEL_SHA256=$digest
             return 0
         fi
         log_warn "$candidate 所需空间不足，尝试更小模型。"
@@ -722,23 +974,16 @@ update_smart_model() {
         return 0
     fi
 
-    proxy_url="${GH_PROXY_PREFIX}${SELECTED_MODEL_URL}"
     download_tmp="$TMP_DIR/${SELECTED_MODEL}.download"
     target_tmp="${target}.new.$$"
-    log_info "仅通过 v6.gh-proxy 下载 LightGBM：$SELECTED_MODEL"
 
-    if ! curl_download "$download_tmp" "$proxy_url" ||
-        [ "$(wc -c <"$download_tmp" 2>/dev/null | tr -d ' ')" != "$SELECTED_MODEL_SIZE" ]; then
+    if ! download_selected_model "$download_tmp"; then
         rm -f "$download_tmp"
-        log_warn "LightGBM 下载或大小校验失败，保留现有模型。"
+        log_warn "LightGBM 下载或完整性校验失败，保留现有模型。"
         return 0
     fi
 
-    if ! cp "$download_tmp" "$target_tmp" ||
-        [ "$(wc -c <"$target_tmp" 2>/dev/null | tr -d ' ')" != "$SELECTED_MODEL_SIZE" ] ||
-        ! chmod 644 "$target_tmp" ||
-        ! mv -f "$target_tmp" "$target"; then
-        rm -f "$target_tmp"
+    if ! replace_smart_model "$download_tmp" "$target" "$target_tmp"; then
         log_warn "LightGBM 原子替换失败，保留现有模型。"
         return 0
     fi

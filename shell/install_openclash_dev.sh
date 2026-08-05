@@ -42,6 +42,8 @@ FEED_FILE=""
 FEED_BACKUP=""
 FEED_CHANGED=0
 PRESERVED_PACKAGE_PATH=""
+PACKAGE_EXPECTED_SIZE=""
+PACKAGE_EXPECTED_SHA256=""
 
 print_line() {
     printf '%b\n' "${C}================================================================${N}"
@@ -293,6 +295,108 @@ curl_download() {
         [ -s "$output" ]
 }
 
+file_size_bytes() {
+    wc -c <"$1" 2>/dev/null | tr -d ' '
+}
+
+file_sha256() {
+    file=$1
+    digest=""
+    if command -v sha256sum >/dev/null 2>&1; then
+        digest=$(sha256sum "$file" 2>/dev/null | awk '{print tolower($1)}')
+    elif command -v openssl >/dev/null 2>&1; then
+        digest=$(openssl dgst -sha256 "$file" 2>/dev/null |
+            awk '{print tolower($NF)}')
+    else
+        return 1
+    fi
+
+    case "$digest" in
+        *[!0-9a-f]* | '') return 1 ;;
+    esac
+    [ "${#digest}" -eq 64 ] || return 1
+    printf '%s\n' "$digest"
+}
+
+base64_sha256_to_hex() {
+    command -v base64 >/dev/null 2>&1 || return 1
+    command -v od >/dev/null 2>&1 || return 1
+    digest=$(printf '%s' "$1" | base64 -d 2>/dev/null |
+        od -An -tx1 2>/dev/null | tr -d ' \n')
+    case "$digest" in
+        *[!0-9a-f]* | '') return 1 ;;
+    esac
+    [ "${#digest}" -eq 64 ] || return 1
+    printf '%s\n' "$digest"
+}
+
+parse_jsdelivr_package_metadata() {
+    metadata_file=$1
+    file_name=$2
+    tr -d '\r\n\t ' <"$metadata_file" 2>/dev/null |
+        awk -v target="/dev/$file_name" '
+            {
+                key="\"name\":\"" target "\""
+                start=index($0, key)
+                if (!start) exit
+                tail=substr($0, start)
+                remainder=substr(tail, length(key) + 1)
+                next_name=index(remainder, "\"name\":\"")
+                if (next_name) tail=substr(tail, 1, length(key) + next_name - 1)
+
+                hash_marker="\"hash\":\""
+                hash_start=index(tail, hash_marker)
+                if (!hash_start) exit
+                hash_tail=substr(tail, hash_start + length(hash_marker))
+                hash_end=index(hash_tail, "\"")
+                if (!hash_end) exit
+                hash=substr(hash_tail, 1, hash_end - 1)
+
+                size_marker="\"size\":"
+                size_start=index(tail, size_marker)
+                if (!size_start) exit
+                size=substr(tail, size_start + length(size_marker))
+                sub(/[^0-9].*/, "", size)
+                if (size ~ /^[0-9]+$/ && size > 0) print hash, size
+            }
+        '
+}
+
+fetch_package_integrity_metadata() {
+    commit=$1
+    file_name=$2
+    PACKAGE_EXPECTED_SIZE=""
+    PACKAGE_EXPECTED_SHA256=""
+    metadata_file="$TMP_DIR/package-metadata.json"
+    metadata_url="https://data.jsdelivr.com/v1/package/gh/vernesong/OpenClash@${commit}/flat"
+
+    rm -f "$metadata_file"
+    if ! curl -fsSL --connect-timeout "${INTEGRITY_CONNECT_TIMEOUT:-3}" \
+        --max-time "${INTEGRITY_MAX_TIME:-8}" \
+        -H 'Accept: application/json' \
+        -o "$metadata_file" "$metadata_url" 2>/dev/null; then
+        log_info "未获取安装包元数据，继续使用大小下限与包管理器 dry-run 校验。"
+        return 0
+    fi
+
+    metadata=$(parse_jsdelivr_package_metadata "$metadata_file" "$file_name")
+    encoded_hash=${metadata%% *}
+    expected_size=${metadata#* }
+    if [ -z "$metadata" ] || [ "$expected_size" = "$metadata" ]; then
+        log_info "安装包元数据不可解析，继续使用大小下限与包管理器 dry-run 校验。"
+        return 0
+    fi
+
+    PACKAGE_EXPECTED_SIZE=$expected_size
+    if PACKAGE_EXPECTED_SHA256=$(base64_sha256_to_hex "$encoded_hash"); then
+        log_info "已获取固定提交安装包的官方大小与 SHA-256 元数据。"
+    else
+        PACKAGE_EXPECTED_SHA256=""
+        log_info "已获取固定提交安装包大小；设备缺少可用解码工具，跳过 SHA-256。"
+    fi
+    return 0
+}
+
 fetch_package_refs_route() {
     route=$1
     output=$2
@@ -391,9 +495,26 @@ apk_supports_allow_downgrade() {
 verify_package_file() {
     file=$1
     [ -s "$file" ] || return 1
-    actual_size=$(wc -c <"$file" 2>/dev/null | tr -d ' ')
-    [ -n "$actual_size" ] && [ "$actual_size" -ge "$PACKAGE_MIN_BYTES" ] ||
+    actual_size=$(file_size_bytes "$file")
+    if [ -n "${PACKAGE_EXPECTED_SIZE:-}" ]; then
+        if [ "$actual_size" != "$PACKAGE_EXPECTED_SIZE" ]; then
+            log_warn "安装包大小与固定提交元数据不一致。"
+            return 1
+        fi
+    elif [ -z "$actual_size" ] || [ "$actual_size" -lt "$PACKAGE_MIN_BYTES" ]; then
         return 1
+    fi
+
+    if [ -n "${PACKAGE_EXPECTED_SHA256:-}" ]; then
+        if actual_sha256=$(file_sha256 "$file"); then
+            if [ "$actual_sha256" != "$PACKAGE_EXPECTED_SHA256" ]; then
+                log_warn "安装包 SHA-256 与固定提交元数据不一致。"
+                return 1
+            fi
+        else
+            log_info "设备缺少可用 SHA-256 工具，继续执行包管理器 dry-run 校验。"
+        fi
+    fi
 
     if [ "$PKG_MGR" = "opkg" ]; then
         opkg --noaction install "$file" >/dev/null 2>&1
@@ -414,6 +535,7 @@ download_openclash_package() {
     jsdelivr_url="${JSDELIVR_PACKAGE_PREFIX}${commit}/dev/${file_name}"
     proxy_url="${GH_PROXY_PREFIX}${raw_url}"
 
+    fetch_package_integrity_metadata "$commit" "$file_name"
     log_info "下载顺序：testingcf jsDelivr → v6.gh-proxy → GitHub Raw"
     for source in "$jsdelivr_url" "$proxy_url" "$raw_url"; do
         log_info "尝试下载：$source"
