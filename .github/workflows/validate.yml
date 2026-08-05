@@ -111,6 +111,7 @@ jobs:
           python -m unittest discover -s .github/scripts -p 'test_*.py'
           sh .github/scripts/test_installers.sh
           python py/sync_installer_common.py --check
+          python py/check_config_consistency.py --check
           python py/generate_game_cdn.py --check
           python py/update_encrypted_dns.py --check
           python py/generate_rules.py --check --mihomo mihomo

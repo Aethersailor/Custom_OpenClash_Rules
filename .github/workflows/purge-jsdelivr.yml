@@ -17,7 +17,6 @@ on:
   workflow_run:
     workflows:
       - Auto generate rules
-      - Auto update mainland config
     types:
       - completed
     branches:

@@ -530,6 +530,31 @@ proxy-groups:
     timeout: 5000
     lazy: false
     expected-status: 204
+  - name: "🪙 加密货币"
+    type: fallback
+    proxies:
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🇨🇦 加拿大节点"
+      - "🇬🇧 英国节点"
+      - "🇫🇷 法国节点"
+      - "🇩🇪 德国节点"
+      - "🇳🇱 荷兰节点"
+      - "🇹🇷 土耳其节点"
+      - "🇷🇺 俄罗斯节点"
+      - "🌐 其他地区"
+      - "🏠 家宽节点"
+      - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "📢 谷歌FCM"
     type: fallback
     proxies:
@@ -1038,6 +1063,7 @@ rules:
   - "GEOSITE,category-pt,⏬ PT站点"
   - "GEOSITE,paypal,💳 PayPal"
   - "GEOSITE,category-ecommerce,🛒 国外电商"
+  - "GEOSITE,category-cryptocurrency,🪙 加密货币"
   - "GEOSITE,gfw,🚀 故障转移"
   - "GEOIP,telegram,💬 即时通讯,no-resolve"
   - "GEOIP,twitter,🌐 社交媒体,no-resolve"
