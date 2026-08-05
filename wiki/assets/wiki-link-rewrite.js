@@ -1,6 +1,6 @@
 (() => {
-  const INTERNAL_PAGE_RE = /^(?:\\d+)\\.(.+)$/;
-  const DOC_PATH_RE = /^(?:\\.\\/|\\.\\.\\/|\\/)*doc\\/(.+)$/;
+  const INTERNAL_PAGE_RE = /^(?:\d+)\.(.+)$/;
+  const DOC_PATH_RE = /^(?:\.\/|\.\.\/|\/)*doc\/(.+)$/;
 
   const buildPageMap = () => {
     const map = new Map();
@@ -113,7 +113,7 @@
     const images = document.querySelectorAll("img[src]");
     images.forEach((img) => {
       const rawSrc = img.getAttribute("src");
-      if (!rawSrc || /^(?:[a-z]+:)?\\/\\//i.test(rawSrc)) {
+      if (!rawSrc || /^(?:[a-z]+:)?\/\//i.test(rawSrc)) {
         return;
       }
 
@@ -122,7 +122,7 @@
         return;
       }
 
-      const docPath = match[1].replace(/^\\/+/, "");
+      const docPath = match[1].replace(/^\/+/, "");
       let resolved;
       try {
         resolved = new URL(`doc/${docPath}`, siteRoot);
