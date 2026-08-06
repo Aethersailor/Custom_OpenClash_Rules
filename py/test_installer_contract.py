@@ -26,6 +26,7 @@ class InstallerContractTests(unittest.TestCase):
             ["sh", "-c", script],
             cwd=ROOT,
             text=True,
+            encoding="utf-8",
             capture_output=True,
             check=False,
         )
@@ -53,6 +54,7 @@ class InstallerContractTests(unittest.TestCase):
                     ["sh", "-n", str(path)],
                     cwd=ROOT,
                     text=True,
+                    encoding="utf-8",
                     capture_output=True,
                     check=False,
                 )
@@ -122,7 +124,7 @@ class InstallerContractTests(unittest.TestCase):
             self.assertNotIn("OpenClash@package/dev/", content)
 
     def test_core_update_uses_builtin_url_resolution(self) -> None:
-        expected_call = '"$core_script" "$core_type" ||'
+        expected_call = 'run_logged "$core_script" "$core_type"'
         invalid_prefix_argument = (
             '"$core_script" "$core_type" "https://testingcf.jsdelivr.net/"'
         )
@@ -130,6 +132,164 @@ class InstallerContractTests(unittest.TestCase):
             with self.subTest(path=path.name):
                 self.assertIn(expected_call, content)
                 self.assertNotIn(invalid_prefix_argument, content)
+
+    def test_default_ui_is_the_only_user_mode(self) -> None:
+        self.assertIn('INSTALLER_TITLE="OpenClash Dev 插件与内核更新"', self.light)
+        self.assertIn('INSTALLER_TITLE="OpenClash Dev 完整更新"', self.full)
+        self.assertIn("TOTAL_STEPS=5", self.light)
+        self.assertIn("TOTAL_STEPS=7", self.full)
+        common_details = (
+            "发行版",
+            "包管理器",
+            "防火墙",
+            "临时镜像",
+            "固定提交",
+            "目标版本",
+            "安装包",
+            "下载来源",
+            "完整性检查",
+            "CPU / 内核架构",
+            "OpenClash 详细日志",
+            "本次运行日志",
+        )
+        for path, content in ((LIGHT, self.light), (FULL, self.full)):
+            with self.subTest(path=path.name):
+                self.assertIn("[ -t 1 ]", content)
+                self.assertIn("clear 2>/dev/null", content)
+                self.assertNotIn("--verbose", content)
+                self.assertNotIn("--quiet", content)
+                self.assertNotIn("--no-color", content)
+                for detail in common_details:
+                    self.assertIn(detail, content)
+        full_details = (
+            "Smart 设置",
+            "LightGBM",
+            "Geo / Chnroute / 订阅",
+            "用户预设",
+        )
+        for detail in full_details:
+            self.assertIn(detail, self.full)
+
+    def test_non_interactive_ui_has_no_ansi_or_clear_output(self) -> None:
+        result = self.run_sh(
+            self.source_command(LIGHT)
+            + "logo; print_step 1 '检测设备环境'; "
+            + "ui_field '发行版' 'OpenWrt'; log_ok '当前设备环境受支持。'"
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn("\x1b", result.stdout)
+        self.assertNotIn("CLEAR_CALLED", result.stdout)
+        self.assertIn("OpenClash Dev 插件与内核更新", result.stdout)
+        self.assertIn("[1/5] 检测设备环境", result.stdout)
+        self.assertIn("发行版：OpenWrt", result.stdout)
+
+    def _render_successful_main(self, path: Path, *, full: bool) -> str:
+        stubs = (
+            "init_terminal() { :; }; "
+            "init_runtime() { : >\"$INSTALLER_LOG\"; }; "
+            "detect_environment() { "
+            "ui_field '发行版' 'OpenWrt'; ui_field '包管理器' 'apk'; "
+            "ui_field '防火墙' 'nftables'; ui_field '安装包格式' 'APK'; "
+            "log_ok '当前设备环境受支持。'; }; "
+            "install_dependencies() { FEED_RESTORE_RESULT='已恢复为运行前状态'; "
+            "ui_field '临时镜像' '测试镜像'; ui_field '原软件源' \"$FEED_RESTORE_RESULT\"; "
+            "log_ok 'OpenClash 运行环境已准备完成。'; }; "
+            "check_required_commands() { :; }; "
+            "install_latest_openclash_package() { TARGET_VERSION='0.47.999'; "
+            "PACKAGE_SOURCE='jsDelivr'; ui_field '目标版本' \"$TARGET_VERSION\"; "
+            "ui_field '下载来源' \"$PACKAGE_SOURCE\"; "
+            "log_ok 'OpenClash 0.47.999 已安装并完成版本确认。'; }; "
+            "configure_base_uci() { DETECTED_ARCH='linux-amd64-v3'; "
+            "ui_field 'CPU / 内核架构' \"$DETECTED_ARCH\"; }; "
+            "run_core_update() { CORE_TYPE_USED='Smart'; "
+            "CORE_RESULT='内置更新流程已执行'; "
+            "ui_field '内核类型' \"$CORE_TYPE_USED\"; "
+            "log_ok '内核更新流程已交由 OpenClash 处理。'; }; "
+            "enable_and_restart_openclash() { SERVICE_RESULT='已启用并执行重启'; "
+            "ui_field '服务操作' '已执行重启'; "
+            "log_ok 'OpenClash 启用和重启命令执行完成。'; }; "
+        )
+        if full:
+            stubs += (
+                "configure_smart_features() { SMART_RESULT='自动切换已启用'; "
+                "ui_field '自动切换' '已启用'; }; "
+                "update_smart_model() { MODEL_RESULT='Model-large.bin 已更新'; "
+                "ui_field '模型选择' 'Model-large.bin'; "
+                "log_ok 'LightGBM 模型已安全更新。'; }; "
+                "run_full_resource_updates() { "
+                "RESOURCE_RESULT='Geo、地区列表和订阅流程已执行'; "
+                "PRESET_RESULT='未检测到，已跳过'; "
+                "ui_field 'Geo 数据库' '已调用 OpenClash 内置更新流程'; "
+                "log_ok 'OpenClash 相关资源更新流程均已执行。'; }; "
+            )
+        with tempfile.TemporaryDirectory(
+            prefix=".installer-ui-", dir=ROOT
+        ) as temp_name:
+            log_file = Path(temp_name) / "installer.log"
+            result = self.run_sh(
+                self.source_command(path)
+                + f"INSTALLER_LOG={shlex.quote(log_file.as_posix())}; "
+                + stubs
+                + "main"
+            )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn("\x1b", result.stdout)
+        self.assertNotIn("https://", result.stdout)
+        self.assertNotIn("################################################################", result.stdout)
+        return result.stdout
+
+    def test_light_success_output_has_five_steps_and_summary(self) -> None:
+        output = self._render_successful_main(LIGHT, full=False)
+        self.assertIn("[1/5] 检测设备环境", output)
+        self.assertIn("[5/5] 启用并重启 OpenClash", output)
+        self.assertIn("OpenClash 插件：0.47.999，安装并验证成功", output)
+        self.assertIn("内核：Smart，内置更新流程已执行", output)
+
+    def test_full_success_output_has_seven_steps_and_detailed_summary(self) -> None:
+        output = self._render_successful_main(FULL, full=True)
+        self.assertIn("[1/7] 检测设备环境", output)
+        self.assertIn("[7/7] 启用并重启 OpenClash", output)
+        self.assertIn("LightGBM：Model-large.bin 已更新", output)
+        self.assertIn("Geo / Chnroute / 订阅：Geo、地区列表和订阅流程已执行", output)
+
+    def test_failure_automatically_expands_context_and_log_excerpt(self) -> None:
+        with tempfile.TemporaryDirectory(
+            prefix=".installer-ui-", dir=ROOT
+        ) as temp_name:
+            log_file = Path(temp_name) / "installer.log"
+            command = (
+                self.source_command(LIGHT)
+                + f"INSTALLER_LOG={shlex.quote(log_file.as_posix())}; "
+                + ": >\"$INSTALLER_LOG\"; CURRENT_STAGE='获取并安装 OpenClash 插件'; "
+                + "printf '%s\\n' 'curl: connection timed out' >>\"$INSTALLER_LOG\"; "
+                + "die '所有下载来源均未获得有效安装包。'"
+            )
+            result = self.run_sh(command)
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("更新未完成", result.stderr)
+        self.assertIn("失败阶段：获取并安装 OpenClash 插件", result.stderr)
+        self.assertIn("所有下载来源均未获得有效安装包", result.stderr)
+        self.assertIn("curl: connection timed out", result.stderr)
+        self.assertIn("检查网络后重新运行同一条安装命令", result.stderr)
+
+    def test_external_command_output_is_logged_instead_of_flooding_terminal(self) -> None:
+        with tempfile.TemporaryDirectory(
+            prefix=".installer-ui-", dir=ROOT
+        ) as temp_name:
+            log_file = Path(temp_name) / "installer.log"
+            command = (
+                self.source_command(LIGHT)
+                + f"INSTALLER_LOG={shlex.quote(log_file.as_posix())}; "
+                + ": >\"$INSTALLER_LOG\"; "
+                + "run_logged sh -c 'printf raw-package-manager-output'; "
+                + "log_ok '依赖处理完成。'"
+            )
+            result = self.run_sh(command)
+            logged = log_file.read_text(encoding="utf-8")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn("raw-package-manager-output", result.stdout)
+        self.assertIn("依赖处理完成", result.stdout)
+        self.assertIn("raw-package-manager-output", logged)
 
     def test_full_installer_resource_and_smart_contract(self) -> None:
         required = (
@@ -260,6 +420,7 @@ class InstallerContractTests(unittest.TestCase):
             ["sh", str(CPU_CHECK), "--self-check"],
             cwd=ROOT,
             text=True,
+            encoding="utf-8",
             capture_output=True,
             check=False,
         )

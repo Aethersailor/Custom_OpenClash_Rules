@@ -15,12 +15,19 @@ FULL_INSTALLER = ROOT / "shell" / "install_openclash_dev_update.sh"
 
 # The full installer is canonical for every helper used by both entrypoints.
 SHARED_FUNCTIONS = {
+    "init_terminal",
+    "append_log",
     "print_line",
     "print_step",
+    "ui_field",
     "log_info",
     "log_warn",
     "log_error",
     "log_ok",
+    "log_skip",
+    "run_logged",
+    "show_log_excerpt",
+    "print_failure_summary",
     "die",
     "logo",
     "restore_feed",
