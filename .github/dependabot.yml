@@ -12,9 +12,21 @@ updates:
       - "dependencies"
       - "automerge"
     groups:
+      security-updates:
+        applies-to: "security-updates"
+        patterns:
+          - "*"
       codeql-action:
         patterns:
           - "github/codeql-action/*"
+      routine-updates:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "github/codeql-action/*"
+        update-types:
+          - "minor"
+          - "patch"
     commit-message:
       prefix: "chore"
       include: "scope"
@@ -22,8 +34,7 @@ updates:
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "monday"
+      interval: "daily"
       time: "02:50"
       timezone: "Asia/Shanghai"
     open-pull-requests-limit: 5
@@ -31,6 +42,17 @@ updates:
     labels:
       - "dependencies"
       - "automerge"
+    groups:
+      security-updates:
+        applies-to: "security-updates"
+        patterns:
+          - "*"
+      routine-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
     commit-message:
       prefix: "chore"
       include: "scope"

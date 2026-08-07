@@ -4,6 +4,7 @@ on:
   workflow_run:
     workflows:
       - CodeQL Advanced
+      - Dependency Review
       - Validate repository
     types: [completed]
     branches:
@@ -17,12 +18,13 @@ permissions:
 
 concurrency:
   group: dependabot-automerge-${{ github.event.workflow_run.head_sha }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   merge:
     if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Merge after required checks pass
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
@@ -43,12 +45,12 @@ jobs:
               pull_number: prSummary.number,
             });
             const labels = pr.labels.map((label) => label.name);
-            const isCodeqlUpdate = pr.head.ref.startsWith(
-              "dependabot/github_actions/github/codeql-action/"
-            );
             if (
               pr.user.login !== "dependabot[bot]" ||
-              (!labels.includes("automerge") && !isCodeqlUpdate)
+              pr.base.ref !== context.payload.repository.default_branch ||
+              pr.head.repo?.full_name !== `${owner}/${repo}` ||
+              pr.draft ||
+              !labels.includes("automerge")
             ) {
               core.info(`PR #${pr.number} is not eligible for automatic merge.`);
               return;
@@ -61,27 +63,42 @@ jobs:
             const requiredChecks = new Set([
               "Analyze (actions)",
               "Analyze (python)",
+              "CodeQL",
+              "dependency-review",
               "validate",
             ]);
-            const { data } = await github.rest.checks.listForRef({
-              owner,
-              repo,
-              ref: pr.head.sha,
-              filter: "latest",
-              per_page: 100,
-            });
-            const checks = new Map(
-              data.check_runs
-                .filter((check) => requiredChecks.has(check.name))
-                .map((check) => [check.name, check])
-            );
-            const missing = [...requiredChecks].filter((name) => !checks.has(name));
-            const pending = [...checks.values()].filter((check) => check.status !== "completed");
-            if (missing.length > 0 || pending.length > 0) {
-              core.info(
-                `Waiting for checks. Missing: ${missing.join(", ") || "none"}; pending: ${pending.map((check) => check.name).join(", ") || "none"}`
+            const maxAttempts = 30;
+            let checks;
+            for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+              const { data } = await github.rest.checks.listForRef({
+                owner,
+                repo,
+                ref: pr.head.sha,
+                filter: "latest",
+                per_page: 100,
+              });
+              checks = new Map(
+                data.check_runs
+                  .filter((check) => requiredChecks.has(check.name))
+                  .map((check) => [check.name, check])
               );
-              return;
+              const missing = [...requiredChecks].filter((name) => !checks.has(name));
+              const pending = [...checks.values()].filter(
+                (check) => check.status !== "completed"
+              );
+              if (missing.length === 0 && pending.length === 0) {
+                break;
+              }
+              if (attempt === maxAttempts) {
+                core.setFailed(
+                  `Timed out waiting for checks. Missing: ${missing.join(", ") || "none"}; pending: ${pending.map((check) => check.name).join(", ") || "none"}`
+                );
+                return;
+              }
+              core.info(
+                `Waiting for checks (${attempt}/${maxAttempts}). Missing: ${missing.join(", ") || "none"}; pending: ${pending.map((check) => check.name).join(", ") || "none"}`
+              );
+              await new Promise((resolve) => setTimeout(resolve, 10000));
             }
 
             const failed = [...checks.values()].filter(
@@ -91,6 +108,16 @@ jobs:
               core.setFailed(
                 `Required checks failed: ${failed.map((check) => `${check.name}=${check.conclusion}`).join(", ")}`
               );
+              return;
+            }
+
+            const { data: currentPr } = await github.rest.pulls.get({
+              owner,
+              repo,
+              pull_number: pr.number,
+            });
+            if (currentPr.state !== "open" || currentPr.head.sha !== pr.head.sha) {
+              core.info(`PR #${pr.number} changed while checks were running; refusing to merge.`);
               return;
             }
 

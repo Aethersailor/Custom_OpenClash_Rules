@@ -19,8 +19,8 @@ on:
       - "py/**"
       - "requirements*.txt"
   schedule:
-    # 每周日执行一次完整扫描；代码与工作流变更仍会即时扫描。
-    - cron: "17 2 * * 0"
+    # 每日执行一次完整扫描，以尽快获得最新 CodeQL 查询结果。
+    - cron: "17 2 * * *"
   workflow_dispatch:
 
 permissions:
@@ -37,6 +37,7 @@ jobs:
   analyze:
     name: Analyze (${{ matrix.language }})
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -50,6 +51,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 2
+          persist-credentials: false
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@f205ea1c3313d32999d8d6a48b4f6530d4437b38 # v4
