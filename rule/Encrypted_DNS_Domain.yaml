@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3385
+# TOTAL: 3381
 
 payload:
   - '+.003153.xyz'
@@ -1093,7 +1093,6 @@ payload:
   - '+.dns.google'
   - '+.dns.google.com'
   - '+.dns.goshawk22.uk'
-  - '+.dns.green-ping.lol'
   - '+.dns.griffioen.me'
   - '+.dns.grinevich.eu'
   - '+.dns.groupesaintmichel.fr'
@@ -1136,7 +1135,6 @@ payload:
   - '+.dns.huizegunsing.nl'
   - '+.dns.hujiayucc.cn'
   - '+.dns.huseynov.work'
-  - '+.dns.hussainnabil.de'
   - '+.dns.huth.nu'
   - '+.dns.huyizhou.com'
   - '+.dns.hva.li'
@@ -1339,6 +1337,7 @@ payload:
   - '+.dns.neutopia.org'
   - '+.dns.nguyendn.com'
   - '+.dns.nhtsky.com'
+  - '+.dns.nic.in'
   - '+.dns.niccoli.cc'
   - '+.dns.nick-slowinski.de'
   - '+.dns.nicolas.vip'
@@ -1683,7 +1682,6 @@ payload:
   - '+.dns1.gms.net.id'
   - '+.dns1.in-berlin.de'
   - '+.dns1.irumatech.com'
-  - '+.dns1.iwall.cloud'
   - '+.dns1.kla44.de'
   - '+.dns1.klcd.eu'
   - '+.dns1.kostydenis.me'
@@ -1885,7 +1883,6 @@ payload:
   - '+.doh.gcp.pathofgrace.com'
   - '+.doh.greenwood.eu.org'
   - '+.doh.hosterra.tech'
-  - '+.doh.hshkf.com'
   - '+.doh.hugang8.cn'
   - '+.doh.ibr.cs.tu-bs.de'
   - '+.doh.immerda.ch'
@@ -2352,7 +2349,6 @@ payload:
   - '+.incaseineeditoneday.com'
   - '+.ind01.dnscry.pt'
   - '+.ines.zfn.uni-bremen.de'
-  - '+.ingenmannsland.online'
   - '+.inpssh.online'
   - '+.internetsehat.bebasid.com'
   - '+.intertop.link'
