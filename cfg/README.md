@@ -2,7 +2,7 @@
 
 # 🧩 OpenClash 订阅转换模板
 
-**8 个已被 OpenClash 收录的 `.ini` 模板**
+**OpenClash `dev` 版内置的 8 个模板，以及 1 个兼容文件**
 
 [使用方法](#-使用订阅转换模板) · [模板列表](#-模板列表) · [版本区别](#-版本区别) · [其他配置方式](#-其他配置方式) · [备用链接](#-备用远程链接)
 
@@ -11,20 +11,22 @@
 ---
 
 > [!IMPORTANT]
-> 本目录根层存放 `.ini` 订阅转换模板。全部 8 个模板均已被 OpenClash 收录，常规使用建议直接在 OpenClash 内置模板列表中选择，无需手工填写模板地址。
+> 本目录根层存放 `.ini` 订阅转换模板。OpenClash `dev` 版当前已内置全部 8 个模板，包括标准版、轻量版、极简 GFW 版、重度分流版及其 Fallback 版本。旧版如未显示对应条目，可手工填写远程模板地址。
 >
 > YAML 配置文件请查看 [`yaml/`](./yaml/)；通过远程覆写模块调用 YAML，请查看 [`../overwrite/yaml/`](../overwrite/yaml/)。
 
+内置状态可在 OpenClash 上游 `dev` 分支的 [`sub_ini.list`](https://github.com/vernesong/OpenClash/blob/dev/luci-app-openclash/root/usr/share/openclash/res/sub_ini.list) 中核对。不同 OpenClash 分支或版本的内置列表可能不同。
+
 ## 🔄 使用订阅转换模板
 
-1. 先按照项目 Wiki 的 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)完成插件设置。
+1. 先按照项目 Wiki 的 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88) 完成插件设置。
 2. 进入 OpenClash 订阅管理，新增或编辑订阅。
 3. 启用在线订阅转换。
-4. 在模板列表中搜索并选择对应的 `Aethersailor 规则` 模板。
+4. 在模板列表中搜索并选择对应的 `Aethersailor 规则` 模板。如果当前 OpenClash 版本未显示对应条目，则手工填写本文提供的远程模板地址。
 5. 保存并更新订阅。
 6. 检查配置校验、内核启动、Provider、策略组和实际分流。
 
-OpenClash 收录的是本仓库模板的远程地址，模板内容仍由本项目维护。仓库更新后，后续订阅转换会使用最新模板。
+OpenClash `dev` 分支的内置列表已收录本仓库全部 8 个模板的远程地址，模板内容仍由本项目维护。仓库更新后，后续订阅转换会获取对应分支上的当前模板。
 
 > [!NOTE]
 > `.ini` 文件是订阅转换模板，不能直接作为 OpenClash 运行配置上传。
@@ -47,6 +49,8 @@ OpenClash 收录的是本仓库模板的远程地址，模板内容仍由本项�
 | 极简 GFW Fallback 版 | [`Custom_Clash_GFW_Fallback.ini`](./Custom_Clash_GFW_Fallback.ini) | 极简分流与自动故障转移结合 |
 | 重度分流版 | [`Custom_Clash_Full.ini`](./Custom_Clash_Full.ini) | 业务、地区和节点用途分组更丰富 |
 | 重度分流 Fallback 版 | [`Custom_Clash_Full_Fallback.ini`](./Custom_Clash_Full_Fallback.ini) | 重度分流结构与自动故障转移结合 |
+
+[`Custom_Clash_Mainland.ini`](./Custom_Clash_Mainland.ini) 是由工作流从 `Custom_Clash.ini` 自动同步的兼容文件，不是独立配置版本。不要直接修改该文件。
 
 ## 📊 版本区别
 
@@ -75,13 +79,13 @@ OpenClash 收录的是本仓库模板的远程地址，模板内容仍由本项�
 | 下载并手工导入 YAML | [`yaml/`](./yaml/) |
 
 > [!IMPORTANT]
-> 选择相同配置版本且未自行修改内容时，订阅转换、远程 YAML 覆写模块和手工导入 YAML 的**策略组结构、规则引用、规则顺序和分流逻辑完全对齐**。三者的差别仅在配置的获取和维护方式。
+> 本项目按同一套配置设计维护订阅转换、远程 YAML 覆写模块和手工导入 YAML。选择相同版本且未自行修改时，策略组定位、规则顺序和分流逻辑应保持一致；文件结构和加载方式不同，实际结果还会受到订阅转换后端及 OpenClash 版本影响。
 
 三种方式通常选择一种作为主路径，不建议同时反复替换同一份当前配置。
 
 ## 🔗 备用远程链接
 
-常规 OpenClash 用户无需手工填写以下地址。它们主要用于自建订阅转换后端、其他兼容工具、兼容性排查，或内置模板列表异常时备用。
+OpenClash `dev` 版通常可直接从内置列表选择全部 8 个模板。以下地址主要用于旧版 OpenClash、自建订阅转换后端、其他兼容工具、兼容性排查，或内置模板列表异常时备用。
 
 <details>
 <summary><strong>展开查看全部 8 个模板的备用地址</strong></summary>

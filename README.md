@@ -24,15 +24,13 @@
   <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fapi.asailor.org%2Fversion&up_message=online&down_message=offline&style=flat&label=backend">
 </p>
 
-<p align="center"><b>✨ 让你更优雅地使用 OpenClash ✨</b></p>
-
 ---
 
 ## 📖 关于本项目
 
-**Custom_OpenClash_Rules** 是一个围绕 [OpenClash](https://github.com/vernesong/OpenClash) 整理和维护的综合资源仓库。
+**Custom_OpenClash_Rules** 是一个围绕 [OpenClash](https://github.com/vernesong/OpenClash) 维护的配置与扩展资源仓库。
 
-本项目提供 OpenClash 配置方案、订阅转换模板、YAML 配置文件、规则文件、实用脚本、远程覆写模块及相关文档，帮助用户更方便地部署、维护和调整 OpenClash。
+本项目提供 OpenClash 设置文档、订阅转换模板、YAML 配置、规则文件、远程覆写模块及辅助脚本。各类资源可以独立使用；完整配置方案需要结合项目 Wiki 中的 OpenClash LuCI 设置。
 
 根 README 作为项目首页和资源导航，仅介绍各类资源的定位与入口。具体文件、版本区别、参数和使用方法，请进入对应目录查看其自动展示的 README。
 
@@ -48,8 +46,10 @@
 | 首次配置或系统了解 OpenClash | [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) |
 | 使用订阅转换模板、YAML 配置或远程 YAML 配置模块 | [`cfg/`](cfg/) |
 | 为现有配置补充或修正规则 | [`rule/`](rule/) |
+| 使用独立游戏规则 | [`game_rule/`](game_rule/) |
 | 使用单功能远程覆写模块 | [`overwrite/`](overwrite/) |
 | 安装、更新或检测 OpenClash | [`shell/`](shell/) |
+| 筛选支持 IPv6 出站的 Sub-Store 节点 | [`script/sub-store/`](script/sub-store/) |
 | 排查常见故障 | [故障排除](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4) |
 
 ---
@@ -91,9 +91,9 @@ Wiki 负责解释“为什么这样配置”，各资源目录负责提供可以
 > 2. **远程 YAML 覆写模块**；
 > 3. **下载 YAML 后手工修改并导入**。
 >
-> 选择相同配置版本且未自行修改内容时，三种方式的**策略组结构、规则引用、规则顺序和分流逻辑完全对齐**，区别仅在于配置的获取和维护方式。
+> 本项目按同一套配置设计维护三种使用方式。选择相同版本且未自行修改时，策略组定位、规则顺序和分流逻辑应保持一致；文件结构和加载方式不同，实际结果还会受到订阅转换后端及 OpenClash 版本影响。
 
-全部自定义订阅转换模板均已收录于 OpenClash 插件内置的订阅转换模板列表，常规用户可直接在 OpenClash 内置模板列表中选择，无需手工填写模板地址。
+OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包括标准版、轻量版、极简 GFW 版、重度分流版及其 Fallback 版本。旧版如未显示对应条目，可手工填写远程模板地址，具体方法和地址见 [`cfg/`](cfg/)。
 
 本项目提供标准版、轻量版、极简 GFW 版、重度分流版及对应 Fallback 版本，并提供自建节点相关 YAML。版本定位、参数、远程地址和详细操作请进入相应目录查看。
 
@@ -107,11 +107,13 @@ Wiki 负责解释“为什么这样配置”，各资源目录负责提供可以
 
 ### 🗂️ 规则文件
 
-[`rule/`](rule/) 存放本项目维护的冷门规则及其多格式派生文件，包括自定义直连、代理、Steam CDN、游戏下载 CDN、加密 DNS 等内容。
+[`rule/`](rule/) 存放本项目维护的补充规则及其多格式派生文件，包括自定义直连、代理、Steam CDN、游戏下载 CDN、加密 DNS 等内容。
 
-规则会根据用途生成 `.list`、Classical YAML、Domain YAML、IP-CIDR YAML 和 MRS 等格式，供订阅转换模板或 Mihomo Rule Provider 使用。
+目录中的 `.list` 是主要规则来源；工作流据此生成 Classical YAML、Domain YAML、IP-CIDR YAML 和 MRS，供订阅转换模板或 Mihomo Rule Provider 使用。
 
-直连规则由全体用户共同参与维护，如希望将符合要求的域名纳入本项目规则，可通过 GitHub Issues、Pull Requests，或访问 [RULE BOT](https://telegram.me/asailor_rulebot) 提交。。
+直连规则由项目用户共同参与维护。如需提交符合收录条件的域名，可使用 GitHub Issues、Pull Requests 或 [RULE BOT](https://telegram.me/asailor_rulebot)。
+
+[`game_rule/`](game_rule/) 另存放手工整理的独立游戏规则。这些规则不会被主配置或规则生成工作流自动加载，也不保证持续更新；使用前应核对适用区服、更新时间和实际命中情况。
 
 **入口：** [`rule/`](rule/)
 
@@ -122,11 +124,16 @@ Wiki 负责解释“为什么这样配置”，各资源目录负责提供可以
 
 ### 🛠️ 实用脚本
 
-[`shell/`](shell/) 提供 OpenClash 安装、更新、CPU 架构检测及相关维护脚本，支持 OpenWrt、ImmortalWrt，适配 OPKG 和 APK 包管理器等环境。
+[`shell/`](shell/) 提供 OpenClash 安装、更新和 CPU 架构检测脚本，支持 OpenWrt、ImmortalWrt，并适配 OPKG 和 APK 包管理器。
 
 脚本可能涉及软件源临时切换、插件覆盖重装、UCI 设置和 OpenClash 内置更新流程。运行前请进入目录阅读完整说明。
 
-**入口：** [`shell/`](shell/)
+[`script/sub-store/`](script/sub-store/) 提供独立的 Sub-Store IPv6 出站节点过滤器。该脚本不属于 OpenClash 安装流程，也不会被本项目配置自动加载。
+
+**入口：**
+
+- OpenClash 安装与维护脚本：[`shell/`](shell/)
+- Sub-Store 节点过滤器：[`script/sub-store/`](script/sub-store/)
 
 ---
 

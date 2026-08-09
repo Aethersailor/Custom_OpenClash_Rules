@@ -11,7 +11,7 @@
 ---
 
 > [!IMPORTANT]
-> 使用本目录模块前，先按照项目 Wiki 的 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)完成 LuCI 设置。模块负责调用远程 YAML 和写入订阅地址，不负责替你配置 DNS、IPv6、TUN、嗅探及其他插件运行参数。
+> 使用本目录模块前，先按照项目 Wiki 的 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88) 完成 LuCI 设置。模块负责调用远程 YAML 和写入订阅地址，不负责配置 DNS、IPv6、TUN、嗅探及其他插件运行参数。
 >
 > 如需了解被调用 YAML 的策略组、规则和版本区别，请先阅读 [`../../cfg/yaml/`](../../cfg/yaml/)。
 
@@ -53,7 +53,7 @@
 4. 设置订阅信息 URL；
 5. 应用配置并触发 OpenClash 重启。
 
-模块不会修改仓库中的远程 YAML，也不会把你的订阅地址上传回本项目。
+模块不会修改仓库中的远程 YAML，也不会将订阅地址上传回本项目。
 
 ## 🎯 如何选择
 
@@ -141,7 +141,7 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 ## 🔐 隐私与更新行为
 
 - 订阅 URL 通常包含访问凭据，截图、导出配置和分享日志前应脱敏。
-- 模块变量保存在你的 OpenClash 环境中；远程模块文件本身不包含你的订阅。
+- 模块变量保存在本地 OpenClash 环境中；远程模块文件本身不包含订阅地址。
 - 模块每次执行都会获取仓库当前 YAML，远程更新可能在下次应用或重启时生效。
 - 需要固定版本时，应自行托管模块和 YAML，或改用手工下载导入。
 - 同时启用多个会切换 `CONFIG_FILE` 的模块可能相互覆盖，不建议并行启用多个本目录模块。
