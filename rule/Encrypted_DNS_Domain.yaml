@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3381
+# TOTAL: 3378
 
 payload:
   - '+.003153.xyz'
@@ -372,7 +372,6 @@ payload:
   - '+.adh.fastpacefixit.info'
   - '+.adh.olesgroup.com'
   - '+.adhome.2011101.xyz'
-  - '+.adhome.maige.fun'
   - '+.adk.qcloud.work'
   - '+.adl.adfilter.net'
   - '+.adl01.dnscry.pt'
@@ -1265,7 +1264,6 @@ payload:
   - '+.dns.maitrekuc.fr'
   - '+.dns.malhuda.com'
   - '+.dns.mandre.dev'
-  - '+.dns.maolaohei.xyz'
   - '+.dns.maomaovpn.com'
   - '+.dns.marasov.id'
   - '+.dns.marbledfennec.net'
@@ -1724,7 +1722,6 @@ payload:
   - '+.dns2.h0schi.cloud'
   - '+.dns2.idsam.com'
   - '+.dns2.in-berlin.de'
-  - '+.dns2.keinewerbung.me'
   - '+.dns2.klcd.eu'
   - '+.dns2.kloiber.co.at'
   - '+.dns2.lezainski.com'
