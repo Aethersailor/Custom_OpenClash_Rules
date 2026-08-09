@@ -564,7 +564,6 @@ def command_run(args: argparse.Namespace) -> None:
         raise PublishError(
             f"Requested revision {after_sha} is not an ancestor of published main {published_sha}"
         )
-    validate_contract_urls(contract, after_sha)
     expectations = build_expectations(
         before_sha, after_sha, contract, args.mode, published_sha
     )

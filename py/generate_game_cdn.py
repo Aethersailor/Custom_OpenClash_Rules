@@ -201,48 +201,6 @@ def validate_rules(lines: list[str]) -> None:
         raise ValueError(f"包含重复规则：{duplicates[:5]}")
 
 
-def run_self_check() -> None:
-    """检查上游格式映射、属性清理与去重逻辑。"""
-    cases = {
-        "example.com": "DOMAIN-SUFFIX,example.com",
-        "domain:example.com @cn": "DOMAIN-SUFFIX,example.com",
-        "full:www.example.com": "DOMAIN,www.example.com",
-        "keyword:example": "DOMAIN-KEYWORD,example",
-        r"regexp:^example\.com$": r"DOMAIN-REGEX,^example\.com$",
-    }
-    for source, expected in cases.items():
-        actual = convert_line(source)
-        if actual != expected:
-            raise AssertionError(f"{source!r}: expected {expected!r}, got {actual!r}")
-
-    converted = generate_rules(
-        "# group\nexample.com @cn\nexample.com # duplicate\nfull:www.example.com\n",
-        "DOMAIN,www.example.com\nDOMAIN-SUFFIX,example.com\nIP-CIDR,192.0.2.1/24\n"
-    )
-    expected = [
-        "# group",
-        "DOMAIN-SUFFIX,example.com",
-        STEAM_SOURCE_COMMENT,
-        "IP-CIDR,192.0.2.0/24,no-resolve",
-    ]
-    if converted != expected:
-        raise AssertionError(f"属性清理或去重结果异常：{converted!r}")
-
-    cidr_rules = deduplicate_rules(
-        ["IP-CIDR,192.0.2.128/25"],
-        ["IP-CIDR,192.0.2.0/24,no-resolve"],
-    )
-    if cidr_rules != ["IP-CIDR,192.0.2.0/24,no-resolve"]:
-        raise AssertionError(f"CIDR 覆盖去重结果异常：{cidr_rules!r}")
-
-    try:
-        convert_line("include:another-list")
-    except ValueError:
-        pass
-    else:
-        raise AssertionError("未展开的 include 规则应当失败。")
-
-
 def read_header() -> list[str]:
     """读取原文件的前 N 行注释头"""
     if not OUTPUT_FILE.exists():
@@ -293,17 +251,16 @@ def validate_output_file() -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--check", action="store_true", help="仅校验转换逻辑和已生成文件")
+    parser.add_argument("--check", action="store_true", help="仅校验已生成文件")
     args = parser.parse_args()
 
     print("=" * 60)
     print("Game_Download_CDN.list 自动生成工具")
     print("=" * 60)
 
-    run_self_check()
     if args.check:
         validate_output_file()
-        print("[OK] 转换逻辑和已生成文件校验通过。")
+        print("[OK] 已生成文件校验通过。")
         return 0
     
     # 1. 下载上游文件

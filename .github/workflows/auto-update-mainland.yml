@@ -1,0 +1,69 @@
+name: Auto update mainland config
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - cfg/Custom_Clash.ini
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: main-writers
+
+jobs:
+  update-mainland:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.publish.outputs.changed }}
+      before_sha: ${{ steps.publish.outputs.before_sha }}
+      after_sha: ${{ steps.publish.outputs.after_sha }}
+    steps:
+      - name: Checkout latest main branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Generate and publish Mainland compatibility file
+        id: publish
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin main
+          git reset --hard origin/main
+          before_sha="$(git rev-parse HEAD)"
+
+          cp -f cfg/Custom_Clash.ini cfg/Custom_Clash_Mainland.ini
+          git add -- cfg/Custom_Clash_Mainland.ini
+
+          if git diff --cached --quiet; then
+            changed=false
+            after_sha="$before_sha"
+            echo "Custom_Clash_Mainland.ini is already up to date."
+          else
+            git commit -m "chore(config): sync mainland compatibility file"
+            git push origin HEAD:main
+            changed=true
+            after_sha="$(git rev-parse HEAD)"
+          fi
+
+          {
+            echo "changed=$changed"
+            echo "before_sha=$before_sha"
+            echo "after_sha=$after_sha"
+          } >> "$GITHUB_OUTPUT"
+
+  purge-mainland:
+    needs: update-mainland
+    if: needs.update-mainland.outputs.changed == 'true'
+    permissions:
+      contents: read
+    uses: ./.github/workflows/purge-jsdelivr.yml
+    with:
+      before_sha: ${{ needs.update-mainland.outputs.before_sha }}
+      after_sha: ${{ needs.update-mainland.outputs.after_sha }}

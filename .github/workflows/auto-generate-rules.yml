@@ -31,7 +31,7 @@ jobs:
     timeout-minutes: 15
     outputs:
       purge_base_sha: ${{ steps.publication-range.outputs.purge_base_sha }}
-      validation_sha: ${{ steps.publish.outputs.validation_sha }}
+      publication_sha: ${{ steps.publish.outputs.publication_sha }}
 
     steps:
       - name: Checkout latest main branch
@@ -109,29 +109,17 @@ jobs:
             git push origin HEAD:main
           fi
 
-          validation_sha="$(git rev-parse HEAD)"
-          echo "Final revision to validate: $validation_sha"
-          echo "validation_sha=$validation_sha" >> "$GITHUB_OUTPUT"
+          publication_sha="$(git rev-parse HEAD)"
+          echo "Final revision to publish: $publication_sha"
+          echo "publication_sha=$publication_sha" >> "$GITHUB_OUTPUT"
 
-  # GITHUB_TOKEN pushes do not trigger push workflows. Call the shared
-  # validation directly so the final generated revision cannot bypass CI.
-  validate-generated:
-    needs: generate-rules
-    permissions:
-      contents: read
-    uses: ./.github/workflows/validate.yml
-    with:
-      expected_sha: ${{ needs.generate-rules.outputs.validation_sha }}
-
-  # Publish only after the exact final revision has passed the shared validator.
-  # This explicit call also works for GITHUB_TOKEN commits, which emit no push event.
+  # Generation and Mihomo validation already ran against the exact worktree that
+  # was published. Verify the public bytes without re-running unrelated tests.
   purge-generated:
-    needs:
-      - generate-rules
-      - validate-generated
+    needs: generate-rules
     permissions:
       contents: read
     uses: ./.github/workflows/purge-jsdelivr.yml
     with:
       before_sha: ${{ needs.generate-rules.outputs.purge_base_sha }}
-      after_sha: ${{ needs.generate-rules.outputs.validation_sha }}
+      after_sha: ${{ needs.generate-rules.outputs.publication_sha }}

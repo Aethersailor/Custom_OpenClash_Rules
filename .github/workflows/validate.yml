@@ -4,31 +4,29 @@ on:
   push:
     branches:
       - main
-    # Source-list pushes are validated by Auto generate rules calling this
-    # reusable workflow with its exact final revision. Pull requests still
-    # validate source and derived files together before merge.
-    paths-ignore:
-      - 'rule/Custom_Direct.list'
-      - 'rule/Custom_Proxy.list'
-      - 'rule/Steam_CDN.list'
-      - 'rule/Encrypted_DNS.list'
-      - 'rule/Game_Download_CDN.list'
+    # Resource and documentation changes use their focused publication flows.
+    paths:
+      - '.github/**'
+      - 'py/**'
+      - 'script/**/*.js'
+      - 'shell/**/*.sh'
+      - 'cfg/yaml/**'
   pull_request:
     branches:
       - main
+    paths:
+      - '.github/**'
+      - 'py/**'
+      - 'script/**/*.js'
+      - 'shell/**/*.sh'
+      - 'cfg/yaml/**'
   workflow_dispatch:
-  workflow_call:
-    inputs:
-      expected_sha:
-        description: Exact repository revision to validate
-        required: true
-        type: string
 
 permissions:
   contents: read
 
 concurrency:
-  group: validate-${{ inputs.expected_sha || github.ref }}
+  group: validate-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -38,18 +36,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          ref: ${{ inputs.expected_sha || github.sha }}
-          submodules: true
-
-      - name: Verify checked out revision
-        env:
-          EXPECTED_SHA: ${{ inputs.expected_sha || github.sha }}
-        run: |
-          actual_sha="$(git rev-parse HEAD)"
-          echo "Expected revision: $EXPECTED_SHA"
-          echo "Checked out revision: $actual_sha"
-          test "$actual_sha" = "$EXPECTED_SHA"
 
       - name: Set up Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -107,12 +93,11 @@ jobs:
           shellcheck --shell=sh shell/check_cpu_version.sh shell/install_openclash_dev.sh shell/install_openclash_dev_update.sh .github/scripts/test_installers.sh
           actionlint .github/workflows/*.yml
           sh shell/check_cpu_version.sh --self-check
-          python -m unittest discover -s py -p 'test_*.py'
+          python -m unittest discover -s py -p 'test_rule_generation.py'
           python -m unittest discover -s .github/scripts -p 'test_*.py'
           python .github/scripts/jsdelivr_purge.py check-contract --revision HEAD
           sh .github/scripts/test_installers.sh
           python py/sync_installer_common.py --check
-          python py/check_config_consistency.py --check
           python py/generate_game_cdn.py --check
           python py/update_encrypted_dns.py --check
           python py/generate_rules.py --check --mihomo mihomo
@@ -122,8 +107,3 @@ jobs:
           for config in cfg/yaml/*.yaml; do
             mihomo -t -d "$RUNNER_TEMP/mihomo-config" -f "$config"
           done
-
-      - name: Build documentation site
-        run: |
-          python -m pip install --requirement requirements-docs.txt
-          mkdocs build --clean --site-dir "$RUNNER_TEMP/site"

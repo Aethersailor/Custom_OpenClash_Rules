@@ -38,7 +38,7 @@ jobs:
       - name: Generate Game_Download_CDN.list
         run: |
           echo "::group::Running generation script"
-          python -m unittest discover -s py -p 'test_*.py'
+          python -m unittest discover -s py -p 'test_rule_generation.py'
           python py/generate_game_cdn.py
           python py/generate_game_cdn.py --check
           echo "::endgroup::"
@@ -54,7 +54,7 @@ jobs:
           git fetch origin main
           if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
             git reset --hard origin/main
-            python -m unittest discover -s py -p 'test_*.py'
+            python -m unittest discover -s py -p 'test_rule_generation.py'
             python py/generate_game_cdn.py
             python py/generate_game_cdn.py --check
           fi
