@@ -71,15 +71,22 @@ jobs:
           REQUEST_BEFORE: ${{ inputs.before_sha }}
           REQUEST_AFTER: ${{ inputs.after_sha }}
         run: |
-          if [ "$EVENT_NAME" = "push" ]; then
+          if [ -n "$REQUEST_AFTER" ]; then
+            # Explicit reusable/manual ranges must win over the caller's event context.
+            mode="complete"
+            before="$REQUEST_BEFORE"
+            after="$REQUEST_AFTER"
+            if [ -z "$before" ]; then
+              before="$(git rev-parse "${after}^{commit}^")"
+            fi
+          elif [ "$EVENT_NAME" = "push" ]; then
             mode="direct"
             before="$EVENT_BEFORE"
             after="$EVENT_SHA"
           else
-            # Reusable calls happen only after generated-output validation.
             # Manual runs are complete repair ranges and must not defer sources.
             mode="complete"
-            after="${REQUEST_AFTER:-$EVENT_SHA}"
+            after="$EVENT_SHA"
             before="$REQUEST_BEFORE"
             if [ -z "$before" ]; then
               before="$(git rev-parse "${after}^{commit}^")"

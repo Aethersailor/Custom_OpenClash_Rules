@@ -6,8 +6,7 @@
     "refs/heads/main"
   ],
   "verify_hosts": [
-    "cdn.jsdelivr.net",
-    "testingcf.jsdelivr.net"
+    "cdn.jsdelivr.net"
   ],
   "public_roots": [
     "cfg",
