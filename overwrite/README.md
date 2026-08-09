@@ -4,7 +4,7 @@
 
 **按需增强现有配置，不必重写整份 YAML**
 
-[快速选择](#-快速选择) · [使用方法](#%EF%B8%8F-通用使用方法) · [模块说明](#-模块说明) · [组合建议](#-组合与冲突) · [故障排查](#-故障排查)
+[快速选择](#-快速选择) · [使用方法](#overwrite-usage) · [模块说明](#-模块说明) · [组合建议](#-组合与冲突) · [故障排查](#-故障排查)
 
 </div>
 
@@ -13,7 +13,7 @@
 本目录主要存放由本项目维护的 **OpenClash 远程覆写模块**。这些模块用于在 OpenClash 加载配置时，按需修改规则、DNS、Rule Provider 或插件数据源。
 
 > [!IMPORTANT]
-> 覆写模块只能调整其声明的配置项，不能替代 OpenClash LuCI 页面中的基础设置。
+> 覆写模块只能调整其声明的配置项，不能替代 OpenClash LuCI 页面中的插件设置。
 >
 > 建议先按照项目 Wiki 的 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88)，结合自身网络环境完成插件设置，再选择需要的覆写模块。
 
@@ -21,13 +21,13 @@
 
 | 位置 | 用途 |
 | --- | --- |
-| 本目录根部的 `.conf` | 本项目维护的单功能远程覆写模块，本文重点介绍 |
+| 本目录直接存放的 `.conf` | 本项目维护的单功能远程覆写模块，本文重点介绍 |
 | [`yaml/`](./yaml/) | 存放用于远程调用本项目 YAML 配置文件的覆写模块；文件区别、变量和订阅地址请查看 [`yaml/`](./yaml/) |
 | [`OpenClash_Overwrite/`](./OpenClash_Overwrite/) | 第三方完整覆写方案，具体用法以上游 README 为准 |
 | [`archived/`](./archived/) | 已停止维护的旧版文件，仅供历史参考 |
 
 > [!NOTE]
-> `yaml/` 目录中的模块用于下载、填写并切换本项目的 YAML 配置，与本目录根部的单功能增强模块用途不同。此处不重复展开介绍。
+> `yaml/` 目录中的模块用于下载、填写并切换本项目的 YAML 配置，与本目录直接存放的单功能增强模块用途不同。此处不再展开介绍。
 
 ## 🚀 快速选择
 
@@ -50,11 +50,13 @@
 - 希望游戏下载和更新尽量走直连：使用 `Direct_Game_Download.conf`。
 - 只想替换 OpenClash 使用的数据源：选择对应的 `Set_*.conf` 模块。
 
+<a id="overwrite-usage"></a>
+
 ## ⚙️ 通用使用方法
 
-1. 进入 **服务 → OpenClash → 覆写设置 → 覆写模块**。
+1. 进入「服务」→「OpenClash」→「覆写设置」→「覆写模块」。
 2. 新增远程覆写模块。
-3. 模块类型选择 `HTTP`。
+3. 模块类型选择「HTTP」。
 4. 填写便于识别的模块名称。
 5. 从本文复制 testingcf 或 GitHub Raw 订阅地址。
 6. 仅在模块说明要求时填写 `EN_KEY` 参数。
@@ -67,14 +69,16 @@
 > [!TIP]
 > testingcf 与 GitHub Raw 指向同一个仓库文件，只需要选择其中一个。testingcf 通常更适合 GitHub Raw 访问质量不佳的网络环境。
 
+<!-- -->
+
 > [!WARNING]
-> 新增、停用或更换模块后，必须重新应用配置。仅显示“模块订阅成功”不代表最终 YAML 校验和 Mihomo 内核启动一定成功。
+> 新增、停用或更换模块后，必须重新应用配置。仅显示「模块订阅成功」不代表最终 YAML 校验和 Mihomo 内核启动一定成功。
 
 ## 📦 模块说明
 
 ### 🛡️ Prevent DNS Leak
 
-[`Prevent_DNS_Leak.conf`](./Prevent_DNS_Leak.conf) 是影响范围最大的自维护模块，用于通过 DNS 劫持、DNS 上游规则跟随、`no-resolve` 和最终代理兜底降低 DNS 泄漏风险。
+[`Prevent_DNS_Leak.conf`](./Prevent_DNS_Leak.conf) 是本项目自行维护且影响范围最大的模块，用于通过 DNS 劫持、DNS 上游规则跟随、`no-resolve` 以及将最终规则指向代理目标等方式降低 DNS 泄漏风险。
 
 主要操作：
 
@@ -84,7 +88,7 @@
 - 禁止自动追加 WAN DNS 和自动补充 `default-nameserver`；
 - 清除 DNS 列表中的 `system`，关闭 DNS HTTP/3 偏好；
 - 为目标 IP 类规则补充 `no-resolve`；
-- 将最终 `MATCH` / `FINAL` 指向代理目标；
+- 将最终 `MATCH` 或 `FINAL` 指向代理目标；
 - 未指定代理目标时创建 `COCR-DNS-Leak-Guard` 策略组。
 
 可选参数：
@@ -199,7 +203,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 ### 🧩 Rule Provider Format Fix
 
-[`Rule_Provider_Format_Fix.conf`](./Rule_Provider_Format_Fix.conf) 用于根据 Rule Provider 的实际文件扩展名，补全或修正 `format` 字段。用于解决传统 subconverter 转换出的配置文件中缺少 `format:` 字段的问题。
+[`Rule_Provider_Format_Fix.conf`](./Rule_Provider_Format_Fix.conf) 用于根据 Rule Provider 的实际文件扩展名补全或修正 `format` 字段，以解决传统 subconverter 转换出的配置文件缺少 `format:` 字段的问题。
 
 判断规则：
 
@@ -333,7 +337,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 限制：
 
-- 不会自动开启“绕过中国大陆 IP”或“回国”模式；
+- 不会自动开启「绕过中国大陆 IP」或「回国」模式；
 - 不会自动开启大陆白名单定时更新；
 - 不修改配置文件中的 GeoIP、GeoSite、Rule Provider 或 `geox-url`；
 - 只有相关大陆 IP 白名单功能已经启用时，新数据源才会被实际使用。
@@ -342,12 +346,12 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 | 组合 | 建议 |
 | --- | --- |
-| `Prevent_DNS_Leak.conf` + `Block_Encrypted_DNS.conf` | ✅ 可组合，分别处理 OpenClash 内部 DNS 路由和终端常见加密 DNS |
-| `Prevent_DNS_Leak.conf` + `Add_No_Resolve.conf` | ❌ 不需要，前者已包含 `no-resolve` 处理 |
-| `Rule_Provider_Format_Fix.conf` + 其他单功能模块 | ✅ 通常可以，仅需确认没有故意使用与扩展名不一致的 `format` |
-| `Direct_Game_Download.conf` + 数据源替换模块 | ✅ 通常可以，修改范围不同 |
-| `yaml/` 中的远程 YAML 模块 + 根目录单功能模块 | ⚠️ 可以组合，但应检查模块顺序和最终运行配置 |
-| 第三方完整覆写方案 + 本目录模块 | ⚠️ 必须逐项检查，可能重复修改 DNS、规则、策略组或数据源 |
+| `Prevent_DNS_Leak.conf` 与 `Block_Encrypted_DNS.conf` | ✅ 可组合，分别处理 OpenClash 内部 DNS 路由和终端常见加密 DNS |
+| `Prevent_DNS_Leak.conf` 与 `Add_No_Resolve.conf` | ❌ 不需要组合，前者已包含 `no-resolve` 处理 |
+| `Rule_Provider_Format_Fix.conf` 与其他单功能模块 | ✅ 通常可以组合，但需确认没有故意使用与扩展名不一致的 `format` |
+| `Direct_Game_Download.conf` 与数据源替换模块 | ✅ 通常可以组合，两者修改范围不同 |
+| `yaml/` 中的远程 YAML 模块与根目录单功能模块 | ⚠️ 可以组合，但应检查模块顺序和最终运行配置 |
+| 第三方完整覆写方案与本目录模块 | ⚠️ 必须逐项检查，避免重复修改 DNS、规则、策略组或数据源 |
 | 多个完整覆写方案 | ❌ 不建议同时启用 |
 
 当两个模块修改同一字段、同一规则数组或同一策略组时，后执行的模块可能覆盖先执行的结果。不要依赖执行顺序长期维持冲突配置。
@@ -357,12 +361,12 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 应用模块后，至少检查：
 
 - 远程模块下载成功；
-- OpenClash 配置检查通过；
+- OpenClash 配置校验通过；
 - Mihomo 内核启动成功；
 - Rule Provider 下载和解析成功；
 - 最终运行配置中出现模块预期写入的字段或规则；
 - DNS、IPv4、IPv6 和流量接管仍符合预期；
-- 常用服务的规则命中没有异常；
+- 常用服务的规则命中符合预期；
 - 日志中没有 Ruby、YAML、Provider 或内核错误。
 
 ## 🔍 故障排查

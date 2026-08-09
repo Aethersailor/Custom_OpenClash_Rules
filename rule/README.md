@@ -1,6 +1,6 @@
 # 规则文件
 
-本目录存放本项目维护或保留的 OpenClash / Mihomo 规则文件。当前自动生成流程以 5 个 `.list` 文件为来源，生成 YAML 与 MRS Rule Provider；目录中另有少量手工维护或历史兼容文件。
+本目录存放本项目维护或保留的 OpenClash 与 Mihomo 规则文件。当前自动生成流程以 5 个 `.list` 文件为来源，生成 YAML 与 MRS Rule Provider；目录中另有少量人工维护或历史兼容文件。
 
 > [!IMPORTANT]
 > 文件位于本目录中，不代表 OpenClash 会自动加载。是否生效取决于配置中的 `rule-providers` 和 `rules` 引用，以及规则顺序和目标策略。
@@ -11,7 +11,7 @@
 | --- | --- | --- |
 | [`Custom_Direct.list`](Custom_Direct.list) | 本项目收录的补充直连规则 | 用户提交与维护者审核 |
 | [`Custom_Proxy.list`](Custom_Proxy.list) | 本项目收录的补充代理规则 | 用户提交与维护者审核 |
-| [`Steam_CDN.list`](Steam_CDN.list) | Steam 下载 CDN 补充规则 | 手工维护，并参与游戏下载规则合并 |
+| [`Steam_CDN.list`](Steam_CDN.list) | Steam 下载 CDN 补充规则 | 人工维护，并参与游戏下载规则合并 |
 | [`Encrypted_DNS.list`](Encrypted_DNS.list) | HaGeZi、DNSCrypt 与 `geosite:category-doh` 汇总规则 | 工作流定期更新 |
 | [`Game_Download_CDN.list`](Game_Download_CDN.list) | GeoSite 游戏下载规则与 `Steam_CDN.list` 的合并结果 | 工作流定期更新，保留为兼容入口 |
 
@@ -20,7 +20,7 @@
 | 文件名形式 | `behavior` | 内容 |
 | --- | --- | --- |
 | `*_Domain.yaml` | `domain` | 纯域名规则 |
-| `*_IP.yaml` | `ipcidr` | 纯 IPv4 / IPv6 CIDR 规则 |
+| `*_IP.yaml` | `ipcidr` | 纯 IPv4 和 IPv6 CIDR 规则 |
 | `*_Classical.yaml` | `classical` | 域名、IP 和端口等 Classical 规则 |
 | `*_Classical_IP.yaml` | `classical` | IP 与端口规则 |
 | `*_Classical_Port.yaml` | `classical` | 纯端口规则；当前仅为 `Custom_Direct` 生成 |

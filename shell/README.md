@@ -1,6 +1,6 @@
 # OpenClash 实用脚本
 
-本目录提供两个 OpenClash Dev 安装器和一个 CPU 架构检测脚本，支持 OpenWrt、ImmortalWrt、OPKG、APK、fw3/iptables、fw4/nftables，以及 Meta/Smart 内核。
+本目录提供两个 OpenClash `dev` 版安装器和一个 CPU 架构检测脚本，适用于 OpenWrt 和 ImmortalWrt，兼容 `opkg` 与 `apk` 包管理器、`fw3`（基于 `iptables`）与 `fw4`（基于 `nftables`）防火墙，以及 Meta 与 Smart 内核。
 
 ## 快速开始
 
@@ -25,23 +25,23 @@ wget -O /tmp/check_cpu_version.sh 'https://cdn.jsdelivr.net/gh/Aethersailor/Cust
 sh /tmp/check_cpu_version.sh
 ```
 
-请以 `root` 用户运行安装器。安装器会安装软件包、写入少量 OpenClash UCI 设置并重启 OpenClash。
+使用 `root` 用户运行安装器。安装器会安装软件包、写入少量 OpenClash UCI 设置并重启 OpenClash。
 
 ## 终端显示
 
-两个安装器都只有一种默认运行方式，不需要也不提供额外的详细、安静或无颜色参数。用户按上面的命令运行即可看到完整流程。
+两个安装器均采用单一默认运行方式，不提供额外的详细、安静或无颜色参数。按照上述命令运行即可查看完整流程。
 
 在交互式终端中，安装器启动时会清屏一次，然后按固定阶段展示：
 
 - 发行版、包管理器、防火墙和安装包格式；
 - 临时使用的软件源镜像、依赖处理和原软件源恢复状态；
-- 官方 package 分支、短提交、目标版本、安装包名称和实际下载来源；
+- 官方 `package` 分支、短 SHA、目标版本、安装包名称和实际下载来源；
 - 文件大小、SHA-256（可用时）和包管理器安装预检结果；
-- CPU/内核架构、Meta/Smart 类型和 OpenClash 内置流程的调用状态；
+- CPU 与内核架构、Meta 与 Smart 类型和 OpenClash 内置流程的调用状态；
 - 完整安装器中的 Smart、LightGBM、Geo、Chnroute、订阅和用户预设结果；
 - OpenClash 启用、重启以及最终汇总。
 
-包管理器和 OpenClash 内置脚本的大段原始输出不会与上述界面混在一起，而是写入本次运行日志 `/tmp/openclash-installer.<PID>.log`。如果发生备用来源切换，终端会自动说明首选来源、备用来源和最终校验结果；如果安装失败，终端会自动展开失败阶段、原因、软件源恢复状态和日志末尾的关键错误，不需要用户换用另一条命令重新运行。
+包管理器和 OpenClash 内置脚本的大段原始输出不会与上述界面混排，而是写入本次运行日志 `/tmp/openclash-installer.<PID>.log`。如果切换到备用来源，终端会自动说明首选来源、备用来源和最终校验结果。如果安装失败，终端会自动展开失败阶段、原因、软件源恢复状态和日志末尾的关键错误，无需改用其他命令重新运行。
 
 输出被重定向到文件或其他非交互环境时，安装器不会清屏，也不会写入 ANSI 颜色控制字符。
 
@@ -51,11 +51,11 @@ sh /tmp/check_cpu_version.sh
 
 安装器不会先测试用户的原始软件源，也不会等原始源失败后再换源。固定顺序是：
 
-1. 识别 OpenWrt 或 ImmortalWrt，以及 OPKG/APK；
-2. 使用 `cp -p` 备份当前 distfeeds；
+1. 识别 OpenWrt 或 ImmortalWrt，以及 `opkg` 或 `apk`；
+2. 使用 `cp -p` 备份当前 `distfeeds`；
 3. 在任何 `opkg update` 或 `apk update` 之前直接切换到指定镜像；
 4. 更新索引并安装依赖；
-5. 无论成功、失败或收到 INT、TERM、HUP，都恢复运行前的完整 feed。
+5. 无论成功、失败还是收到 INT、TERM、HUP，都恢复运行前的完整软件源配置。
 
 镜像映射如下：
 
@@ -64,20 +64,20 @@ sh /tmp/check_cpu_version.sh
 | ImmortalWrt | `downloads.immortalwrt.org`、`mirrors.vsean.net/openwrt` | `mirror.nju.edu.cn/immortalwrt` |
 | OpenWrt | `downloads.openwrt.org` | `mirrors.ustc.edu.cn/openwrt` |
 
-只替换上述已知基础地址，后续版本、架构和仓库路径保持不变。第三方或自定义 feed 原样保留。发行版已识别但 distfeeds 中没有相应已知地址时，安装器会明确失败，不会猜测地址或静默使用原始源。
+安装器只替换上述已知基础地址，后续版本、架构和仓库路径保持不变。第三方或自定义软件源原样保留。发行版已识别，但 `distfeeds` 中没有相应的已知地址时，安装器会明确失败，不会猜测地址或静默使用原始源。
 
-如果 feed 已经是该发行版的目标镜像，安装器可直接使用；未实际修改的文件不会被多余覆盖。
+如果软件源已经指向该发行版的目标镜像，安装器会直接使用；未实际修改的文件不会被覆盖。
 
 ### 2. 插件本体由安装器自行覆盖重装
 
 两个安装器都不使用 OpenClash 内置的插件更新脚本。无论设备上是否已经安装 OpenClash、是否已经是同一版本，每次执行都会：
 
-1. 通过 Git Smart HTTP 解析官方 `refs/heads/package` 的 40 位 commit SHA；
+1. 通过 Git Smart HTTP 解析官方 `refs/heads/package` 的 40 位提交 SHA；
 2. 锁定该不可变提交；
 3. 从同一提交读取 `dev/version`；
-4. 构造对应的 IPK 或 APK 文件名；
+4. 构造对应的 `.ipk` 或 `.apk` 文件名；
 5. 从同一提交下载安装包；
-6. 检查文件非空和最低大小，并执行包管理器 dry-run；
+6. 检查文件非空且达到最低大小，并执行包管理器预检（dry run）；
 7. 覆盖重装；
 8. 从包管理器读取已安装版本并与目标版本核对。
 
@@ -87,11 +87,11 @@ sh /tmp/check_cpu_version.sh
 2. `https://v6.gh-proxy.org/`
 3. GitHub Raw
 
-三条路径都使用同一个 commit SHA，不使用浮动的 `package/dev` 安装包 URL。package 分支在安装期间移动时最多追加一轮；即使之后再次移动，当前已安装内容仍来自一个完整且自洽的固定提交。
+三条路径都使用同一个提交 SHA，不使用浮动的 `package/dev` 安装包 URL。如果 `package` 分支在安装期间发生移动，安装器最多追加一轮处理；即使分支之后再次移动，当前已安装内容仍来自一个完整且自洽的固定提交。
 
-APK 每次都使用 `--force-reinstall` 覆盖同版本。支持 `--allow-downgrade` 的 APK 版本会同时启用该参数；APK 3 已移除该选项，安装器会使用其支持的显式本地包覆盖方式，避免传入无效参数。
+`apk` 每次都使用 `--force-reinstall` 覆盖同版本。支持 `--allow-downgrade` 的 `apk` 版本会同时启用该参数；`apk` 3 已移除该选项，安装器会使用其支持的显式本地包覆盖方式，避免传入无效参数。
 
-安装或版本确认失败时，安装包会保留在 `/tmp`，终端同时输出手工安装命令。
+安装或版本确认失败时，安装包会保留在 `/tmp`，终端同时输出手动安装命令。
 
 ### 3. 基础 UCI、内核和服务
 
@@ -104,7 +104,7 @@ core_version=<自动检测结果>
 enable=1
 ```
 
-CPU 检测保留 x86_64 v1/v2/v3、x86、ARM、MIPS、LoongArch、RISC-V 和 s390x 的现有覆盖。安装器不在外层探测内核资源，也不做内核版本的二次比较。
+CPU 检测保留 `x86_64` 的 `v1`、`v2`、`v3` 级别，以及 `x86`、ARM、MIPS、LoongArch、RISC-V 和 `s390x` 的现有覆盖范围。安装器不会在外层探测内核资源，也不会再次比较内核版本。
 
 插件覆盖重装后，安装器调用：
 
@@ -138,7 +138,7 @@ auto_smart_switch=1
 lgbm_auto_update=1
 ```
 
-安装器不会替用户开启 `smart_enable_lgbm`。只有用户原本已经设置 `smart_enable_lgbm=1` 时，才会按可用空间从大到小选择：
+安装器不会自动启用 `smart_enable_lgbm`。仅当运行前已经设置 `smart_enable_lgbm=1` 时，安装器才会根据可用空间从大到小选择：
 
 ```text
 Model-large.bin
@@ -146,7 +146,7 @@ Model-middle.bin
 Model.bin
 ```
 
-大小探测和实际下载优先通过 `https://v6.gh-proxy.org/`。如果代理返回内容与可用的官方 SHA-256 元数据不一致，安装器会尝试官方 GitHub 直连；无法完成安全校验时保留旧模型。下载完成且大小一致后，安装器先在目标文件系统创建临时文件，再原子替换现有模型。
+文件大小探测和实际下载优先通过 `https://v6.gh-proxy.org/`。如果代理返回的内容与可用的官方 SHA-256 元数据不一致，安装器会尝试直接访问 GitHub；无法完成安全校验时保留旧模型。下载完成且文件大小一致后，安装器先在目标文件系统中创建临时文件，再原子替换现有模型。
 
 模型安装成功后，`lgbm_custom_url` 写入对应的官方 GitHub 原始模型 URL，不把代理地址永久写入 UCI。
 
@@ -168,7 +168,7 @@ Model.bin
 
 最终汇总会明确区分两类状态：
 
-- 插件本体：安装器已经完成固定提交下载、包管理器 dry-run、覆盖重装和安装后版本确认；
+- 插件本体：安装器已经完成固定提交下载、包管理器预检（dry run）、覆盖重装和安装后版本确认；
 - 内核及其他远端资源：安装器已经调用对应的 OpenClash 内置流程。
 
 内置脚本被调用不代表每个远端资源必然下载成功。内核、Geo、Chnroute、订阅等详细结果请查看：

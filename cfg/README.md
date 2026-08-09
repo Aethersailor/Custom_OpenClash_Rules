@@ -11,7 +11,7 @@
 ---
 
 > [!IMPORTANT]
-> 本目录根层存放 `.ini` 订阅转换模板。OpenClash `dev` 版当前已内置全部 8 个模板，包括标准版、轻量版、极简 GFW 版、重度分流版及其 Fallback 版本。旧版如未显示对应条目，可手工填写远程模板地址。
+> 本目录直接存放 `.ini` 订阅转换模板。OpenClash `dev` 版当前已内置全部 8 个模板，包括标准版、轻量版、极简 GFW 版、重度分流版，以及文件名以 `_Fallback` 结尾的对应故障转移版。旧版如未显示对应条目，可手动填写远程模板地址。
 >
 > YAML 配置文件请查看 [`yaml/`](./yaml/)；通过远程覆写模块调用 YAML，请查看 [`../overwrite/yaml/`](../overwrite/yaml/)。
 
@@ -22,9 +22,9 @@
 1. 先按照项目 Wiki 的 [OpenClash 设置方案](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/OpenClash-%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%A1%88) 完成插件设置。
 2. 进入 OpenClash 订阅管理，新增或编辑订阅。
 3. 启用在线订阅转换。
-4. 在模板列表中搜索并选择对应的 `Aethersailor 规则` 模板。如果当前 OpenClash 版本未显示对应条目，则手工填写本文提供的远程模板地址。
+4. 在模板列表中搜索并选择对应的「Aethersailor 规则」模板。如果当前 OpenClash 版本未显示对应条目，则手动填写本文提供的远程模板地址。
 5. 保存并更新订阅。
-6. 检查配置校验、内核启动、Provider、策略组和实际分流。
+6. 确认配置校验通过，内核、Provider、策略组和实际分流均正常。
 
 OpenClash `dev` 分支的内置列表已收录本仓库全部 8 个模板的远程地址，模板内容仍由本项目维护。仓库更新后，后续订阅转换会获取对应分支上的当前模板。
 
@@ -37,18 +37,18 @@ OpenClash `dev` 分支的内置列表已收录本仓库全部 8 个模板的远�
 
 ## 📁 模板列表
 
-本目录包含 4 个普通版及其 Fallback 版，共 8 个模板：
+本目录包含 4 个普通版及对应的 4 个故障转移版，共 8 个模板：
 
 | 版本 | 文件 | 定位 |
 | --- | --- | --- |
 | 标准版 | [`Custom_Clash.ini`](./Custom_Clash.ini) | 日常分流与复杂度均衡，建议多数用户优先选择 |
-| 标准 Fallback 版 | [`Custom_Clash_Fallback.ini`](./Custom_Clash_Fallback.ini) | 标准版分流结构，主要业务组自动故障转移 |
+| 标准故障转移版 | [`Custom_Clash_Fallback.ini`](./Custom_Clash_Fallback.ini) | 标准版分流结构，主要业务组自动故障转移 |
 | 轻量版 | [`Custom_Clash_Lite.ini`](./Custom_Clash_Lite.ini) | 策略组较少，结构简洁，维护成本较低 |
-| 轻量 Fallback 版 | [`Custom_Clash_Lite_Fallback.ini`](./Custom_Clash_Lite_Fallback.ini) | 轻量结构与自动故障转移结合 |
+| 轻量故障转移版 | [`Custom_Clash_Lite_Fallback.ini`](./Custom_Clash_Lite_Fallback.ini) | 轻量结构与自动故障转移结合 |
 | 极简 GFW 版 | [`Custom_Clash_GFW.ini`](./Custom_Clash_GFW.ini) | 主要处理 GFW 相关流量，其余流量默认直连 |
-| 极简 GFW Fallback 版 | [`Custom_Clash_GFW_Fallback.ini`](./Custom_Clash_GFW_Fallback.ini) | 极简分流与自动故障转移结合 |
+| 极简 GFW 故障转移版 | [`Custom_Clash_GFW_Fallback.ini`](./Custom_Clash_GFW_Fallback.ini) | 极简分流与自动故障转移结合 |
 | 重度分流版 | [`Custom_Clash_Full.ini`](./Custom_Clash_Full.ini) | 业务、地区和节点用途分组更丰富 |
-| 重度分流 Fallback 版 | [`Custom_Clash_Full_Fallback.ini`](./Custom_Clash_Full_Fallback.ini) | 重度分流结构与自动故障转移结合 |
+| 重度分流故障转移版 | [`Custom_Clash_Full_Fallback.ini`](./Custom_Clash_Full_Fallback.ini) | 重度分流结构与自动故障转移结合 |
 
 [`Custom_Clash_Mainland.ini`](./Custom_Clash_Mainland.ini) 是由工作流从 `Custom_Clash.ini` 自动同步的兼容文件，不是独立配置版本。不要直接修改该文件。
 
@@ -61,13 +61,15 @@ OpenClash `dev` 分支的内置列表已收录本仓库全部 8 个模板的远�
 | **极简 GFW 版** | 主要代理 GFW 相关流量 | 只需要基础分流 |
 | **重度分流版** | 业务、地区和节点用途分类最多 | 节点丰富并需要精细选路 |
 
-### 普通版与 Fallback 版
+<a id="普通版与-fallback-版"></a>
 
-- **普通版：** 主要业务策略组使用 `select`，便于手工选择出口。
-- **Fallback 版：** 主要业务策略组使用 `fallback`，按候选顺序检测并自动切换。
+### 普通版与故障转移版
+
+- **普通版：** 主要业务策略组使用 `select`，便于手动选择出口。
+- **故障转移版：** 主要业务策略组使用 `fallback`，按候选顺序检测并自动切换。
 
 > [!WARNING]
-> Fallback 只判断健康检查地址是否可达，不能判断节点是否具备流媒体、AI 服务或特定地区的解锁能力。
+> `fallback` 只判断健康检查地址是否可达，不能判断节点是否具备流媒体、AI 服务或特定地区的解锁能力。
 
 ## 🧭 其他配置方式
 
@@ -76,16 +78,16 @@ OpenClash `dev` 分支的内置列表已收录本仓库全部 8 个模板的远�
 | 方式 | 入口 |
 | --- | --- |
 | 远程 YAML 覆写模块 | [`../overwrite/yaml/`](../overwrite/yaml/) |
-| 下载并手工导入 YAML | [`yaml/`](./yaml/) |
+| 下载并手动导入 YAML | [`yaml/`](./yaml/) |
 
 > [!IMPORTANT]
-> 本项目按同一套配置设计维护订阅转换、远程 YAML 覆写模块和手工导入 YAML。选择相同版本且未自行修改时，策略组定位、规则顺序和分流逻辑应保持一致；文件结构和加载方式不同，实际结果还会受到订阅转换后端及 OpenClash 版本影响。
+> 本项目按同一套配置设计维护订阅转换、远程 YAML 覆写模块和手动导入 YAML。选择相同版本且未自行修改时，策略组定位、规则顺序和分流逻辑应保持一致；文件结构和加载方式不同，实际结果还会受到订阅转换后端及 OpenClash 版本影响。
 
-三种方式通常选择一种作为主路径，不建议同时反复替换同一份当前配置。
+通常应从三种方式中选择一种作为主路径，不建议同时反复替换同一份当前配置。
 
 ## 🔗 备用远程链接
 
-OpenClash `dev` 版通常可直接从内置列表选择全部 8 个模板。以下地址主要用于旧版 OpenClash、自建订阅转换后端、其他兼容工具、兼容性排查，或内置模板列表异常时备用。
+OpenClash `dev` 版通常可直接从内置列表选择全部 8 个模板。以下地址供旧版 OpenClash、自建订阅转换后端和其他兼容工具使用，也可用于兼容性排查或内置模板列表异常时备用。
 
 <details>
 <summary><strong>展开查看全部 8 个模板的备用地址</strong></summary>
@@ -94,27 +96,29 @@ OpenClash `dev` 版通常可直接从内置列表选择全部 8 个模板。以�
 
 ### 标准版
 
-testingcf：
+加速地址（`testingcf.jsdelivr.net`）：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash.ini
 ```
 
-GitHub Raw：
+GitHub Raw 地址：
 
 ```text
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash.ini
 ```
 
-### 标准 Fallback 版
+<a id="标准-fallback-版"></a>
 
-testingcf：
+### 标准故障转移版
+
+加速地址（`testingcf.jsdelivr.net`）：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Fallback.ini
 ```
 
-GitHub Raw：
+GitHub Raw 地址：
 
 ```text
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Fallback.ini
@@ -122,27 +126,29 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 
 ### 轻量版
 
-testingcf：
+加速地址（`testingcf.jsdelivr.net`）：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Lite.ini
 ```
 
-GitHub Raw：
+GitHub Raw 地址：
 
 ```text
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Lite.ini
 ```
 
-### 轻量 Fallback 版
+<a id="轻量-fallback-版"></a>
 
-testingcf：
+### 轻量故障转移版
+
+加速地址（`testingcf.jsdelivr.net`）：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Lite_Fallback.ini
 ```
 
-GitHub Raw：
+GitHub Raw 地址：
 
 ```text
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Lite_Fallback.ini
@@ -150,27 +156,29 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 
 ### 极简 GFW 版
 
-testingcf：
+加速地址（`testingcf.jsdelivr.net`）：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_GFW.ini
 ```
 
-GitHub Raw：
+GitHub Raw 地址：
 
 ```text
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_GFW.ini
 ```
 
-### 极简 GFW Fallback 版
+<a id="极简-gfw-fallback-版"></a>
 
-testingcf：
+### 极简 GFW 故障转移版
+
+加速地址（`testingcf.jsdelivr.net`）：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_GFW_Fallback.ini
 ```
 
-GitHub Raw：
+GitHub Raw 地址：
 
 ```text
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_GFW_Fallback.ini
@@ -178,27 +186,29 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 
 ### 重度分流版
 
-testingcf：
+加速地址（`testingcf.jsdelivr.net`）：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Full.ini
 ```
 
-GitHub Raw：
+GitHub Raw 地址：
 
 ```text
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Full.ini
 ```
 
-### 重度分流 Fallback 版
+<a id="重度分流-fallback-版"></a>
 
-testingcf：
+### 重度分流故障转移版
+
+加速地址（`testingcf.jsdelivr.net`）：
 
 ```text
 https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Full_Fallback.ini
 ```
 
-GitHub Raw：
+GitHub Raw 地址：
 
 ```text
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads/main/cfg/Custom_Clash_Full_Fallback.ini
@@ -210,7 +220,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 
 更新订阅后，至少确认：
 
-- OpenClash 配置检查通过，Mihomo 内核正常启动；
+- OpenClash 配置校验通过，Mihomo 内核正常启动；
 - 节点订阅或 Proxy Provider 更新成功；
 - 策略组、Rule Provider 和规则完整加载；
 - DNS、IPv6、流量接管及实际分流符合预期；
