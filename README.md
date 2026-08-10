@@ -233,7 +233,7 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 | [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) | 游戏下载域名与 `Encrypted_DNS.list` 的 GeoSite 数据来源 |
 | [HaGeZi DNS Blocklists](https://gitlab.com/hagezi/mirror/-/tree/main/dns-blocklists) | `Encrypted_DNS.list` 的加密 DNS 域名与 IP 数据来源 |
 | [DNSCrypt/dnscrypt-resolvers](https://github.com/DNSCrypt/dnscrypt-resolvers) | `Encrypted_DNS.list` 的公共解析器、Relay 与 ODoH 端点来源 |
-| [dogfight360/UsbEAm](https://www.dogfight360.com/blog/18627/) | 游戏下载及 Steam CDN 规则的参考来源 |
+| [dogfight360/UsbEAm](https://www.dogfight360.com/blog/18627/) | 游戏网络地址与下载节点规则的参考工具 |
 
 ### 本项目关联项目
 
@@ -252,7 +252,7 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 | [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list) | 补充直连域名的上游提交目标 |
 | [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) | 完整配置模板中的 GeoIP、GeoSite 数据来源 |
 | [mottzz87/crules](https://github.com/mottzz87/crules) | `Talkatone.list` 的原始规则来源；对应规则已停止更新 |
-| [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool) | 《守望先锋 2》亚服规则的抓取工具 |
+| [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool) | 游戏服务器 IP 规则的抓取与整理工具 |
 | [alecthw/mmdb_china_ip_list](https://github.com/alecthw/mmdb_china_ip_list) | 完整配置模板及历史覆写脚本中的 MMDB 数据来源 |
 | [xishang0128/geoip](https://github.com/xishang0128/geoip) | 完整配置模板及历史覆写脚本中的 GeoASN 数据来源 |
 | [sub-store-org/Sub-Store](https://github.com/sub-store-org/Sub-Store) | `script/sub-store/` 中 IPv6 出站节点过滤器的运行平台 |
