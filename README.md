@@ -256,7 +256,7 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 | [alecthw/mmdb_china_ip_list](https://github.com/alecthw/mmdb_china_ip_list) | 完整配置模板及历史覆写脚本中的 MMDB 数据来源 |
 | [xishang0128/geoip](https://github.com/xishang0128/geoip) | 完整配置模板及历史覆写脚本中的 GeoASN 数据来源 |
 | [sub-store-org/Sub-Store](https://github.com/sub-store-org/Sub-Store) | `script/sub-store/` 中 IPv6 出站节点过滤器的运行平台 |
-| [网易 UU 加速器](https://uu.163.com/) | 《微软模拟飞行 2020》规则的整理来源 |
+| [网易 UU 加速器](https://uu.163.com/) | 游戏网络规则的参考来源 |
 | [217heidai/adblockfilters](https://github.com/217heidai/adblockfilters) | 已归档广告过滤脚本的数据来源 |
 | [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD) | 已归档广告过滤脚本的数据来源 |
 | [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule) | 已归档广告过滤脚本的数据来源 |
