@@ -23,8 +23,19 @@
     "rule/Steam_CDN.list",
     "rule/Encrypted_DNS.list",
     "rule/Game_Download_CDN.list",
-    "game_rule/Microsoft-Flight-Simulator-2020.list",
-    "game_rule/Overwatch2_Asia(Singapore).list"
+    "game_rule/Battlefield-6/All-Servers.list",
+    "game_rule/Battlefield-6/Community-Portal.list",
+    "game_rule/Battlefield-6/Europe.list",
+    "game_rule/Battlefield-6/Hong-Kong-Redsec.list",
+    "game_rule/Battlefield-6/Japan.list",
+    "game_rule/Battlefield-6/Korea.list",
+    "game_rule/Battlefield-6/Middle-East.list",
+    "game_rule/Battlefield-6/Oceania.list",
+    "game_rule/Battlefield-6/Singapore.list",
+    "game_rule/Battlefield-6/South-Africa.list",
+    "game_rule/Battlefield-6/United-States.list",
+    "game_rule/Microsoft-Flight-Simulator-2020/All-Servers.list",
+    "game_rule/Overwatch2/Asia-Singapore.list"
   ],
   "generated_suffixes": [
     "Domain.yaml",

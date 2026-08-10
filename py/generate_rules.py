@@ -116,8 +116,8 @@ def source_paths(root: Path) -> tuple[Path, ...]:
     sources.extend(
         path.relative_to(root)
         for path in sorted(
-            game_rule_directory.glob("*.list"),
-            key=lambda path: path.name.casefold(),
+            game_rule_directory.rglob("*.list"),
+            key=lambda path: path.relative_to(game_rule_directory).as_posix().casefold(),
         )
     )
     return tuple(sources)

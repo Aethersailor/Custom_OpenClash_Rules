@@ -6,6 +6,7 @@ from pathlib import Path
 
 import generate_game_cdn
 import generate_rules
+import extract_uu_game_routes
 import update_encrypted_dns
 
 
@@ -101,6 +102,24 @@ class DomainDeduplicationTests(unittest.TestCase):
 
 
 class DerivedRuleGenerationTests(unittest.TestCase):
+    def test_game_sources_are_discovered_recursively(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "rule").mkdir()
+            for base_name in generate_rules.BASE_NAMES:
+                (root / "rule" / f"{base_name}.list").write_text(
+                    "DOMAIN,example.com\n", encoding="utf-8"
+                )
+            nested = root / "game_rule" / "Example-Game" / "Europe.list"
+            nested.parent.mkdir(parents=True)
+            nested.write_text("IP-CIDR,192.0.2.0/24,no-resolve\n", encoding="utf-8")
+
+            sources = generate_rules.source_paths(root)
+            outputs, _ = generate_rules.textual_outputs(root)
+
+        self.assertIn(Path("game_rule/Example-Game/Europe.list"), sources)
+        self.assertIn(Path("game_rule/Example-Game/Europe_IP.yaml"), outputs)
+
     def test_domain_regex_stays_classical_only(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             source = Path(temporary) / "rules.list"
@@ -122,6 +141,29 @@ class DerivedRuleGenerationTests(unittest.TestCase):
         self.assertIn(
             r"  - 'DOMAIN-REGEX,^dns[0-9]{1,3}\.example\.com$'",
             rendered,
+        )
+
+
+class UuRouteExtractionTests(unittest.TestCase):
+    def test_keeps_only_public_routes_for_the_dominant_uu_gateway(self) -> None:
+        rows = [
+            {"DestinationPrefix": "0.0.0.0/0", "NextHop": "172.19.84.1"},
+            {"DestinationPrefix": "192.168.0.0/16", "NextHop": "172.19.84.1"},
+            {"DestinationPrefix": "1.1.1.0/24", "NextHop": "172.19.84.1"},
+            {"DestinationPrefix": "1.1.1.1/32", "NextHop": "172.19.84.1"},
+            {"DestinationPrefix": "8.8.8.0/24", "NextHop": "172.19.84.1"},
+            {"DestinationPrefix": "9.9.9.0/24", "NextHop": "203.0.113.1"},
+        ]
+
+        networks, gateway, routed_count = extract_uu_game_routes.normalize_routes(
+            rows, minimum_routes=2
+        )
+
+        self.assertEqual(gateway, "172.19.84.1")
+        self.assertEqual(routed_count, 5)
+        self.assertEqual(
+            tuple(str(network) for network in networks),
+            ("1.1.1.0/24", "8.8.8.0/24"),
         )
 
 
