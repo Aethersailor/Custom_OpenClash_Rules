@@ -20,6 +20,7 @@ BASE_NAMES = (
     "Encrypted_DNS",
     "Game_Download_CDN",
 )
+GAME_RULE_DIRECTORY = Path("game_rule")
 
 
 @dataclass(frozen=True)
@@ -109,12 +110,25 @@ def render_yaml(source: Path, payload: tuple[str, ...], quoted: bool) -> str:
     return "\n".join(lines) + "\n"
 
 
+def source_paths(root: Path) -> tuple[Path, ...]:
+    sources = [Path("rule") / f"{base_name}.list" for base_name in BASE_NAMES]
+    game_rule_directory = root / GAME_RULE_DIRECTORY
+    sources.extend(
+        path.relative_to(root)
+        for path in sorted(
+            game_rule_directory.glob("*.list"),
+            key=lambda path: path.name.casefold(),
+        )
+    )
+    return tuple(sources)
+
+
 def textual_outputs(root: Path) -> tuple[dict[Path, str], dict[Path, tuple[str, str]]]:
     outputs: dict[Path, str] = {}
     mrs_inputs: dict[Path, tuple[str, str]] = {}
 
-    for base_name in BASE_NAMES:
-        source = Path("rule") / f"{base_name}.list"
+    for source in source_paths(root):
+        base_name = source.stem
         family = parse_list(root / source)
         variants = {
             "Domain": (family.domain, True),
@@ -122,11 +136,11 @@ def textual_outputs(root: Path) -> tuple[dict[Path, str], dict[Path, tuple[str, 
             "Classical": (family.classical, False),
             "Classical_IP": (family.classical_ip, False),
         }
-        if base_name == "Custom_Direct":
+        if source == Path("rule/Custom_Direct.list"):
             variants["Classical_Port"] = (family.ports, False)
 
         for suffix, (payload, quoted) in variants.items():
-            relative = Path("rule") / f"{base_name}_{suffix}.yaml"
+            relative = source.parent / f"{base_name}_{suffix}.yaml"
             outputs[relative] = render_yaml(source, payload, quoted)
             if suffix == "Domain":
                 mrs_inputs[relative.with_suffix(".mrs")] = ("domain", relative.as_posix())

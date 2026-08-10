@@ -22,7 +22,9 @@
     "rule/Custom_Proxy.list",
     "rule/Steam_CDN.list",
     "rule/Encrypted_DNS.list",
-    "rule/Game_Download_CDN.list"
+    "rule/Game_Download_CDN.list",
+    "game_rule/Microsoft-Flight-Simulator-2020.list",
+    "game_rule/Overwatch2_Asia(Singapore).list"
   ],
   "generated_suffixes": [
     "Domain.yaml",

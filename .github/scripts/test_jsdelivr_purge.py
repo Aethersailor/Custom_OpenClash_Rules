@@ -134,17 +134,15 @@ class ContractTests(unittest.TestCase):
         finally:
             sys.modules.pop(spec.name, None)
 
-        expected_sources = {
-            f"rule/{base_name}.list" for base_name in module.BASE_NAMES
-        }
+        expected_sources = {path.as_posix() for path in module.source_paths(root)}
         self.assertEqual(value.deferred_sources, expected_sources)
 
         outputs, mrs_inputs = module.textual_outputs(root)
         generated_suffixes = set()
         for path in (*outputs, *mrs_inputs):
-            for base_name in module.BASE_NAMES:
-                prefix = f"{base_name}_"
-                if path.name.startswith(prefix):
+            for source in module.source_paths(root):
+                prefix = f"{source.stem}_"
+                if path.parent == source.parent and path.name.startswith(prefix):
                     generated_suffixes.add(path.name[len(prefix) :])
                     break
         self.assertEqual(set(value.generated_suffixes), generated_suffixes)
