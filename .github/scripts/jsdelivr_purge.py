@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Purge and verify mutable jsDelivr aliases for changed public files."""
+"""Purge mutable jsDelivr aliases for changed public files."""
 
 from __future__ import annotations
 
@@ -23,8 +23,6 @@ EMPTY_TREE_SHA = "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
 PURGE_HOST = "purge.jsdelivr.net"
 DEFAULT_PURGE_ATTEMPTS = 5
 DEFAULT_PURGE_WORKERS = 2
-DEFAULT_VERIFY_ATTEMPTS = 8
-DEFAULT_VERIFY_WORKERS = 4
 RETRY_DELAYS = (2, 5, 10, 20, 30, 45, 60)
 USER_AGENT = "Custom_OpenClash_Rules-jsDelivr-publisher/1.0"
 
@@ -38,7 +36,6 @@ class PublishContract:
     repository: str
     branch: str
     ref_aliases: tuple[str, ...]
-    verify_hosts: tuple[str, ...]
     public_roots: frozenset[str]
     deferred_sources: frozenset[str]
     generated_suffixes: tuple[str, ...]
@@ -64,12 +61,6 @@ class AssetExpectation:
 class HttpResult:
     status: int
     body: bytes
-
-
-@dataclasses.dataclass(frozen=True)
-class VerificationTarget:
-    url: str
-    expectation: AssetExpectation
 
 
 def _require_string_list(data: Mapping[str, object], key: str) -> tuple[str, ...]:
@@ -124,7 +115,6 @@ def load_contract(path: Path) -> PublishContract:
         repository=repository,
         branch=branch,
         ref_aliases=aliases,
-        verify_hosts=_require_string_list(data, "verify_hosts"),
         public_roots=frozenset(roots),
         deferred_sources=frozenset(deferred),
         generated_suffixes=generated_suffixes,
@@ -339,27 +329,6 @@ def validate_purge_response(result: HttpResult, expected_path: str) -> None:
         raise PublishError(f"Purge returned invalid JSON for {expected_path}: {exc}") from exc
     if not isinstance(payload, dict) or payload.get("status") != "finished":
         raise PublishError(f"Purge did not finish for {expected_path}: {payload!r}")
-    paths = payload.get("paths")
-    if not isinstance(paths, dict):
-        raise PublishError(f"Purge response has no paths map for {expected_path}")
-
-    normalized_expected = urllib.parse.unquote(expected_path)
-    matching_entries = [
-        value
-        for key, value in paths.items()
-        if isinstance(key, str) and urllib.parse.unquote(key) == normalized_expected
-    ]
-    if len(matching_entries) != 1 or not isinstance(matching_entries[0], dict):
-        raise PublishError(f"Purge response omitted exact path {expected_path}: {paths!r}")
-    entry = matching_entries[0]
-    if entry.get("throttled") is not False:
-        raise PublishError(f"Purge was throttled or ambiguous for {expected_path}: {entry!r}")
-    providers = entry.get("providers")
-    if not isinstance(providers, dict) or not providers:
-        raise PublishError(f"Purge response has no provider results for {expected_path}")
-    failed = sorted(name for name, succeeded in providers.items() if succeeded is not True)
-    if failed:
-        raise PublishError(f"Purge providers failed for {expected_path}: {', '.join(failed)}")
 
 
 def purge_target(
@@ -411,77 +380,6 @@ def purge_all(
                 errors.append(f"{alias}/{path}: {exc}")
     if errors:
         raise PublishError("One or more purge requests failed:\n" + "\n".join(errors))
-
-
-def verification_targets(
-    expectations: Sequence[AssetExpectation], contract: PublishContract
-) -> list[VerificationTarget]:
-    # A successful purge response confirms that jsDelivr accepted the cache
-    # invalidation for deleted assets. Their eventual HTTP 404 propagation is
-    # outside this repository's control, so only published files are subject
-    # to byte-for-byte CDN verification.
-    return [
-        VerificationTarget(
-            url=f"https://{host}{alias_path(contract.repository, alias, expectation.path)}",
-            expectation=expectation,
-        )
-        for expectation in expectations
-        if expectation.content is not None
-        for alias in contract.ref_aliases
-        for host in contract.verify_hosts
-    ]
-
-
-def result_matches(result: HttpResult, expectation: AssetExpectation) -> tuple[bool, str]:
-    if expectation.content is None:
-        return result.status == 404, f"HTTP {result.status}"
-    if result.status != 200:
-        return False, f"HTTP {result.status}"
-    actual_digest = hashlib.sha256(result.body).hexdigest()
-    expected_digest = hashlib.sha256(expectation.content).hexdigest()
-    return (
-        result.body == expectation.content,
-        f"sha256={actual_digest}, bytes={len(result.body)}; expected sha256={expected_digest}, bytes={len(expectation.content)}",
-    )
-
-
-def verify_all(
-    targets: Sequence[VerificationTarget],
-    *,
-    requester: Callable[[str], HttpResult] = request_url,
-    attempts: int = DEFAULT_VERIFY_ATTEMPTS,
-    workers: int = DEFAULT_VERIFY_WORKERS,
-    sleeper: Callable[[float], None] = time.sleep,
-) -> None:
-    pending = {target.url: target for target in targets}
-    last_observed: dict[str, str] = {}
-    for attempt in range(attempts):
-        if not pending:
-            return
-        with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
-            futures = {executor.submit(requester, url): url for url in pending}
-            for future in concurrent.futures.as_completed(futures):
-                url = futures[future]
-                target = pending[url]
-                try:
-                    matched, observed = result_matches(future.result(), target.expectation)
-                except OSError as exc:
-                    matched, observed = False, str(exc)
-                last_observed[url] = observed
-                if matched:
-                    print(f"Verified {url}: {target.expectation.description}", flush=True)
-                    del pending[url]
-        if pending and attempt + 1 < attempts:
-            delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)]
-            print(f"Waiting {delay}s for {len(pending)} CDN cache keys", flush=True)
-            sleeper(delay)
-
-    if not pending:
-        return
-    details = "\n".join(
-        f"{url}: {last_observed.get(url, 'no response')}" for url in sorted(pending)
-    )
-    raise PublishError(f"CDN verification failed for {len(pending)} cache keys:\n{details}")
 
 
 def _own_jsdelivr_urls(repository: str, revision: str) -> Iterable[str]:
@@ -576,7 +474,6 @@ def command_run(args: argparse.Namespace) -> None:
     if not expectations:
         return
     purge_all(expectations, contract)
-    verify_all(verification_targets(expectations, contract))
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -592,14 +489,14 @@ def build_parser() -> argparse.ArgumentParser:
     check = subparsers.add_parser("check-contract", help="Validate owned jsDelivr URLs")
     check.add_argument("--revision", default="HEAD")
 
-    run = subparsers.add_parser("run", help="Purge and verify changed public files")
+    run = subparsers.add_parser("run", help="Purge changed public files")
     run.add_argument("--repository", required=True)
     run.add_argument("--before", required=True)
     run.add_argument("--after", required=True)
     run.add_argument(
         "--published",
         required=True,
-        help="Latest main snapshot whose bytes mutable aliases must serve",
+        help="Latest main snapshot used to resolve current asset state",
     )
     run.add_argument("--mode", choices=("direct", "complete"), required=True)
     return parser

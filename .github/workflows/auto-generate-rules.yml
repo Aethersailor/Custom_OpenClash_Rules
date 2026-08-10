@@ -117,7 +117,7 @@ jobs:
           echo "publication_sha=$publication_sha" >> "$GITHUB_OUTPUT"
 
   # Generation and Mihomo validation already ran against the exact worktree that
-  # was published. Verify the public bytes without re-running unrelated tests.
+  # was published. Purge its changed cache keys without re-running unrelated tests.
   purge-generated:
     needs: generate-rules
     permissions:

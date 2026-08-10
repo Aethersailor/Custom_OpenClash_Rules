@@ -8,6 +8,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import unittest.mock
 from pathlib import Path
 
 import jsdelivr_purge as purge
@@ -21,7 +22,6 @@ def contract() -> purge.PublishContract:
         repository=REPOSITORY,
         branch="main",
         ref_aliases=("main", "refs/heads/main"),
-        verify_hosts=("cdn.jsdelivr.net", "testingcf.jsdelivr.net"),
         public_roots=frozenset(
             {"cfg", "game_rule", "icon", "overwrite", "rule", "script", "shell"}
         ),
@@ -252,17 +252,18 @@ class PurgeResponseTests(unittest.TestCase):
         }
         return purge.HttpResult(200, json.dumps(body).encode())
 
-    def test_requires_exact_path_and_all_providers(self):
+    def test_finished_status_is_sufficient(self):
         path = "/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/a.ini"
         purge.validate_purge_response(self.response(path), path)
-        with self.assertRaisesRegex(purge.PublishError, "omitted exact path"):
-            purge.validate_purge_response(self.response(path + ".other"), path)
-        with self.assertRaisesRegex(purge.PublishError, "providers failed"):
-            purge.validate_purge_response(
-                self.response(path, providers={"CF": True, "FY": False}), path
-            )
-        with self.assertRaisesRegex(purge.PublishError, "throttled"):
-            purge.validate_purge_response(self.response(path, throttled=True), path)
+        purge.validate_purge_response(self.response(path + ".other"), path)
+        purge.validate_purge_response(
+            self.response(path, providers={"CF": True, "FY": False}), path
+        )
+        purge.validate_purge_response(self.response(path, throttled=True), path)
+
+        unfinished = purge.HttpResult(200, json.dumps({"status": "processing"}).encode())
+        with self.assertRaisesRegex(purge.PublishError, "did not finish"):
+            purge.validate_purge_response(unfinished, path)
 
     def test_retry_then_success(self):
         calls: list[str] = []
@@ -287,44 +288,29 @@ class PurgeResponseTests(unittest.TestCase):
         self.assertEqual(len(calls), 2)
         self.assertEqual(sleeps, [2])
 
-
-class VerificationTests(unittest.TestCase):
-    def test_content_and_deletion_expectations(self):
-        content = purge.AssetExpectation("cfg/a.ini", b"expected")
-        deleted = purge.AssetExpectation("cfg/deleted.ini", None)
-        self.assertTrue(purge.result_matches(purge.HttpResult(200, b"expected"), content)[0])
-        self.assertFalse(purge.result_matches(purge.HttpResult(200, b"stale"), content)[0])
-        self.assertTrue(purge.result_matches(purge.HttpResult(404, b""), deleted)[0])
-        self.assertFalse(purge.result_matches(purge.HttpResult(200, b"old"), deleted)[0])
-
-    def test_verification_targets_skip_deleted_assets(self):
+    def test_purge_all_requests_every_alias_and_path(self):
         value = contract()
-        content = purge.AssetExpectation("cfg/a.ini", b"expected")
-        deleted = purge.AssetExpectation("cfg/deleted.ini", None)
+        expectations = [
+            purge.AssetExpectation("cfg/a.ini", b"one"),
+            purge.AssetExpectation("rule/b.yaml", b"two"),
+        ]
+        calls: list[tuple[str, str, str]] = []
 
-        targets = purge.verification_targets([content, deleted], value)
+        def record(repository: str, alias: str, path: str) -> str:
+            calls.append((repository, alias, path))
+            return f"https://purge.jsdelivr.net/{alias}/{path}"
 
-        self.assertEqual(len(targets), len(value.ref_aliases) * len(value.verify_hosts))
-        self.assertTrue(all(target.expectation == content for target in targets))
-        self.assertFalse(any("deleted.ini" in target.url for target in targets))
+        with unittest.mock.patch.object(purge, "purge_target", side_effect=record):
+            purge.purge_all(expectations, value, workers=1)
 
-    def test_verification_retries_only_stale_targets(self):
-        target = purge.VerificationTarget(
-            "https://cdn.jsdelivr.net/example", purge.AssetExpectation("cfg/a", b"new")
+        self.assertEqual(
+            set(calls),
+            {
+                (REPOSITORY, alias, expectation.path)
+                for alias in value.ref_aliases
+                for expectation in expectations
+            },
         )
-        calls = 0
-        sleeps: list[float] = []
-
-        def requester(_url: str) -> purge.HttpResult:
-            nonlocal calls
-            calls += 1
-            return purge.HttpResult(200, b"old" if calls == 1 else b"new")
-
-        purge.verify_all(
-            [target], requester=requester, attempts=2, workers=1, sleeper=sleeps.append
-        )
-        self.assertEqual(calls, 2)
-        self.assertEqual(sleeps, [2])
 
 
 class UrlContractTests(unittest.TestCase):

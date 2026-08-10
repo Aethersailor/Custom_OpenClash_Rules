@@ -5,9 +5,6 @@
     "main",
     "refs/heads/main"
   ],
-  "verify_hosts": [
-    "cdn.jsdelivr.net"
-  ],
   "public_roots": [
     "cfg",
     "game_rule",

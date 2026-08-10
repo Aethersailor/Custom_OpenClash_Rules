@@ -103,7 +103,7 @@ jobs:
             echo "published=$published"
           } >> "$GITHUB_OUTPUT"
 
-      - name: Purge and verify every changed cache key
+      - name: Purge every changed cache key
         env:
           REPOSITORY: ${{ github.repository }}
           BEFORE_SHA: ${{ steps.range.outputs.before }}
