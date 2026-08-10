@@ -244,7 +244,7 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 
 | 项目 | 与本项目的关系 |
 | --- | --- |
-| [Aethersailor/SubConverter-Extended](https://github.com/Aethersailor/SubConverter-Extended) | 本项目推荐使用的订阅转换后端 |
+| [Aethersailor/SubConverter-Extended](https://github.com/Aethersailor/SubConverter-Extended) | 本项目维护的增强型订阅转换后端 |
 | [Aethersailor/subconverter](https://github.com/Aethersailor/subconverter) | 本项目维护的传统订阅转换后端 |
 | [Aethersailor/Rule-Bot](https://github.com/Aethersailor/Rule-Bot) | 自定义规则提交工具 |
 | [Aethersailor/geoip](https://github.com/Aethersailor/geoip) | GeoIP 数据库与中国大陆 IPv4、IPv6 网段来源 |
