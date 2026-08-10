@@ -297,6 +297,17 @@ class VerificationTests(unittest.TestCase):
         self.assertTrue(purge.result_matches(purge.HttpResult(404, b""), deleted)[0])
         self.assertFalse(purge.result_matches(purge.HttpResult(200, b"old"), deleted)[0])
 
+    def test_verification_targets_skip_deleted_assets(self):
+        value = contract()
+        content = purge.AssetExpectation("cfg/a.ini", b"expected")
+        deleted = purge.AssetExpectation("cfg/deleted.ini", None)
+
+        targets = purge.verification_targets([content, deleted], value)
+
+        self.assertEqual(len(targets), len(value.ref_aliases) * len(value.verify_hosts))
+        self.assertTrue(all(target.expectation == content for target in targets))
+        self.assertFalse(any("deleted.ini" in target.url for target in targets))
+
     def test_verification_retries_only_stale_targets(self):
         target = purge.VerificationTarget(
             "https://cdn.jsdelivr.net/example", purge.AssetExpectation("cfg/a", b"new")

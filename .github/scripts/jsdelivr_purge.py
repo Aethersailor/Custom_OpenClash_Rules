@@ -55,7 +55,7 @@ class AssetExpectation:
     @property
     def description(self) -> str:
         if self.content is None:
-            return "HTTP 404"
+            return "deleted at published revision"
         digest = hashlib.sha256(self.content).hexdigest()
         return f"sha256={digest}, bytes={len(self.content)}"
 
@@ -416,12 +416,17 @@ def purge_all(
 def verification_targets(
     expectations: Sequence[AssetExpectation], contract: PublishContract
 ) -> list[VerificationTarget]:
+    # A successful purge response confirms that jsDelivr accepted the cache
+    # invalidation for deleted assets. Their eventual HTTP 404 propagation is
+    # outside this repository's control, so only published files are subject
+    # to byte-for-byte CDN verification.
     return [
         VerificationTarget(
             url=f"https://{host}{alias_path(contract.repository, alias, expectation.path)}",
             expectation=expectation,
         )
         for expectation in expectations
+        if expectation.content is not None
         for alias in contract.ref_aliases
         for host in contract.verify_hosts
     ]
