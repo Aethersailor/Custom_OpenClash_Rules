@@ -7,7 +7,6 @@
   ],
   "public_roots": [
     "cfg",
-    "game_rule",
     "icon",
     "overwrite",
     "rule",

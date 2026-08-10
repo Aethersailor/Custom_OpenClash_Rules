@@ -23,7 +23,7 @@ def contract() -> purge.PublishContract:
         branch="main",
         ref_aliases=("main", "refs/heads/main"),
         public_roots=frozenset(
-            {"cfg", "game_rule", "icon", "overwrite", "rule", "script", "shell"}
+            {"cfg", "icon", "overwrite", "rule", "script", "shell"}
         ),
         deferred_sources=frozenset(
             {
@@ -78,6 +78,7 @@ class ContractTests(unittest.TestCase):
         self.assertTrue(purge.is_public_path("rule/static.yaml", value))
         self.assertTrue(purge.is_public_path("icon/match.png", value))
         self.assertFalse(purge.is_public_path("py/generate_rules.py", value))
+        self.assertFalse(purge.is_public_path("game_rule/legacy.list", value))
         self.assertFalse(purge.is_public_path("rule/archived/old.yaml", value))
         self.assertFalse(purge.is_public_path("rule/game_rule/README.md", value))
         self.assertFalse(
