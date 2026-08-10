@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3378
+# TOTAL: 3374
 
 payload:
   - '+.003153.xyz'
@@ -683,7 +683,6 @@ payload:
   - '+.d.hansj.cc'
   - '+.d.hxhd.cc'
   - '+.d.luwei.date'
-  - '+.d.niaox.com'
   - '+.d.onlyjsmylord.org'
   - '+.d.toairs.com'
   - '+.d.zhanchuraevv.ru'
@@ -1350,7 +1349,6 @@ payload:
   - '+.dns.novali.date'
   - '+.dns.novg.net'
   - '+.dns.npe.bz'
-  - '+.dns.ntccloud.vn'
   - '+.dns.ntr.lol'
   - '+.dns.nubecita.biz'
   - '+.dns.nullgate.net'
@@ -1379,7 +1377,6 @@ payload:
   - '+.dns.p55k.com'
   - '+.dns.pacificmonster.com'
   - '+.dns.paesa.es'
-  - '+.dns.paliska.net'
   - '+.dns.panszelescik.pl'
   - '+.dns.pari.network'
   - '+.dns.pastorov.ru'
@@ -1397,7 +1394,6 @@ payload:
   - '+.dns.pine-home.de'
   - '+.dns.pizzari.me'
   - '+.dns.ploshadi.ru'
-  - '+.dns.pmxu.link'
   - '+.dns.pnh.my.id'
   - '+.dns.pointless.chat'
   - '+.dns.polarwinds.ru'
