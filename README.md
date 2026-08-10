@@ -54,7 +54,7 @@
 | 使用独立游戏规则 | [`game_rule/`](game_rule/) |
 | 使用单功能远程覆写模块 | [`overwrite/`](overwrite/) |
 | 安装、更新或检测 OpenClash | [`shell/`](shell/) |
-| 筛选支持 IPv6 出站的 Sub-Store 节点 | [`script/sub-store/`](script/sub-store/) |
+| 使用 Sub-Store 扩展脚本 | [Sub-Store 脚本](script/sub-store/) |
 | 排查常见故障 | [故障排除](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4) |
 
 ---
@@ -133,12 +133,12 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 
 脚本可能涉及软件源临时切换、插件覆盖重装、UCI 设置和 OpenClash 内置更新流程。运行前请进入目录阅读完整说明。
 
-[`script/sub-store/`](script/sub-store/) 提供独立的 Sub-Store IPv6 出站节点过滤器。该脚本不属于 OpenClash 安装流程，也不会被本项目配置自动加载。
+[Sub-Store 扩展脚本](script/sub-store/) 用于扩展 Sub-Store 的订阅处理能力。相关脚本独立于 OpenClash 安装流程，也不会被本项目配置自动加载。
 
 **入口：**
 
 - OpenClash 安装与维护脚本：[`shell/`](shell/)
-- Sub-Store 节点过滤器：[`script/sub-store/`](script/sub-store/)
+- Sub-Store 扩展脚本：[查看目录](script/sub-store/)
 
 ---
 
