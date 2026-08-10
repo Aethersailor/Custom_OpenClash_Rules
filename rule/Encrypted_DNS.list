@@ -3,9 +3,9 @@
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 加密 DNS 规则
 # AUTO-GENERATED: py/update_encrypted_dns.py
-# SOURCE-DOMAINS: https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/doh-onlydomains.txt
+# SOURCE-DOMAINS: https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/doh-onlydomains.txt
 # SOURCE-GEOSITE: https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat_plain.yml#category-doh
-# SOURCE-IPS: https://raw.githubusercontent.com/hagezi/dns-blocklists/main/ips/doh.txt
+# SOURCE-IPS: https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/ips/doh.txt
 # SOURCE-STAMPS: https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md
 # SOURCE-STAMPS: https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/relays.md
 # SOURCE-STAMPS: https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/odoh-servers.md

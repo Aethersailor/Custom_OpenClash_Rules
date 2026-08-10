@@ -16,8 +16,8 @@ import urllib.request
 from pathlib import Path
 
 
-DOMAIN_URL = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/doh-onlydomains.txt"
-IP_URL = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/ips/doh.txt"
+DOMAIN_URL = "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/wildcard/doh-onlydomains.txt"
+IP_URL = "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/ips/doh.txt"
 # The official compiled plain output already resolves recursive include rules,
 # attribute filters, and affiliations using domain-list-community's own builder.
 GEOSITE_URL = (
