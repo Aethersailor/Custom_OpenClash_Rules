@@ -110,15 +110,25 @@ class DerivedRuleGenerationTests(unittest.TestCase):
                 (root / "rule" / f"{base_name}.list").write_text(
                     "DOMAIN,example.com\n", encoding="utf-8"
                 )
-            nested = root / "game_rule" / "Example-Game" / "Example-Game_Europe.list"
+            nested = (
+                root
+                / "rule"
+                / "game_rule"
+                / "Example-Game"
+                / "Example-Game_Europe.list"
+            )
             nested.parent.mkdir(parents=True)
             nested.write_text("IP-CIDR,192.0.2.0/24,no-resolve\n", encoding="utf-8")
 
             sources = generate_rules.source_paths(root)
             outputs, _ = generate_rules.textual_outputs(root)
 
-        self.assertIn(Path("game_rule/Example-Game/Example-Game_Europe.list"), sources)
-        self.assertIn(Path("game_rule/Example-Game/Example-Game_Europe_IP.yaml"), outputs)
+        self.assertIn(
+            Path("rule/game_rule/Example-Game/Example-Game_Europe.list"), sources
+        )
+        self.assertIn(
+            Path("rule/game_rule/Example-Game/Example-Game_Europe_IP.yaml"), outputs
+        )
 
     def test_domain_regex_stays_classical_only(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

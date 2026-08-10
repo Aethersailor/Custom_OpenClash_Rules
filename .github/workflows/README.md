@@ -9,7 +9,7 @@
 | 文件名 | 描述 | 触发条件 |
 | :--- | :--- | :--- |
 | [`auto-backup-wiki.yml`](auto-backup-wiki.yml) | 校验 Wiki 目录页和页面完整性后，事务式备份到仓库的 `wiki/` 目录并处理链接替换 | 每 2 小时或手动触发 |
-| [`auto-generate-rules.yml`](auto-generate-rules.yml) | 从 `rule/` 和 `game_rule/` 的 `.list` 规则源统一生成 `.yaml` 和 `.mrs` 派生规则，并在精确 SHA 校验成功后调用统一 CDN 发布器 | 对应规则源或生成器变更，或手动触发 |
+| [`auto-generate-rules.yml`](auto-generate-rules.yml) | 从 `rule/` 顶层和 `rule/game_rule/` 的 `.list` 规则源统一生成 `.yaml` 和 `.mrs` 派生规则，并在精确 SHA 校验成功后调用统一 CDN 发布器 | 对应规则源或生成器变更，或手动触发 |
 | [`auto-update-encrypted-dns.yml`](auto-update-encrypted-dns.yml) | 从 HaGeZi、DNSCrypt 和编译后的 `geosite:category-doh` 自动更新 `Encrypted_DNS.list` | 每日或手动触发 |
 | [`auto-update-game-cdn.yml`](auto-update-game-cdn.yml) | 合并 v2fly 上游与本项目 `Steam_CDN.list`，智能去重后更新 `Game_Download_CDN.list`，再触发统一派生规则生成 | `Steam_CDN.list` 或生成器变更、每日或手动触发 |
 | [`auto-update-mainland.yml`](auto-update-mainland.yml) | 将 `Custom_Clash.ini` 同步为兼容文件 `Custom_Clash_Mainland.ini`，并在内容变化时发布 | `Custom_Clash.ini` 变更或手动触发 |

@@ -1,6 +1,6 @@
 # 规则文件
 
-本目录存放本项目维护或保留的 OpenClash 与 Mihomo 规则文件。当前自动生成流程以本目录中的 5 个 `.list` 文件和 `game_rule/` 中的独立游戏规则为来源，生成 YAML 与 MRS Rule Provider；目录中另有少量人工维护或历史兼容文件。
+本目录存放本项目维护或保留的 OpenClash 与 Mihomo 规则文件。当前自动生成流程以本目录顶层的 5 个 `.list` 文件和 [`game_rule/`](game_rule/) 中的独立游戏规则为来源，生成 YAML 与 MRS Rule Provider；目录中另有少量人工维护或历史兼容文件。
 
 > [!IMPORTANT]
 > 文件位于本目录中，不代表 OpenClash 会自动加载。是否生效取决于配置中的 `rule-providers` 和 `rules` 引用，以及规则顺序和目标策略。
@@ -39,7 +39,7 @@ MRS 当前只用于 `domain` 和 `ipcidr` Rule Provider。Classical 与端口规
 | [`Talkatone.list`](Talkatone.list) | 历史兼容 | 已停止更新；当前 Full 配置改用 `geosite:talkatone` |
 | [`archived/`](archived/) | 已归档 | 已停止维护的旧规则，只用于历史参考 |
 
-独立游戏规则位于 [`../game_rule/`](../game_rule/)，并由同一个工作流生成对应的 YAML 与 MRS 派生文件。
+独立游戏规则位于 [`game_rule/`](game_rule/)，并由同一个工作流生成对应的 YAML 与 MRS 派生文件。
 
 ## 修改与验证
 

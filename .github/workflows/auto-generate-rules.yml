@@ -10,7 +10,7 @@ on:
       - 'rule/Steam_CDN.list'
       - 'rule/Encrypted_DNS.list'
       - 'rule/Game_Download_CDN.list'
-      - 'game_rule/**/*.list'
+      - 'rule/game_rule/**/*.list'
       - 'py/generate_rules.py'
   workflow_dispatch:
     inputs:
@@ -102,8 +102,8 @@ jobs:
           fi
 
           git add -- rule/*.yaml rule/*.mrs \
-            ':(glob)game_rule/**/*.yaml' \
-            ':(glob)game_rule/**/*.mrs'
+            ':(glob)rule/game_rule/**/*.yaml' \
+            ':(glob)rule/game_rule/**/*.mrs'
 
           if git diff --cached --quiet; then
             echo "No generated rule changes, skip commit and push."

@@ -51,7 +51,7 @@
 | 首次配置 OpenClash 或系统了解其工作方式 | [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) |
 | 使用订阅转换模板、YAML 配置或远程 YAML 覆写模块 | [`cfg/`](cfg/) |
 | 为现有配置补充或修正规则 | [`rule/`](rule/) |
-| 使用独立游戏规则 | [`game_rule/`](game_rule/) |
+| 使用独立游戏规则 | [`rule/game_rule/`](rule/game_rule/) |
 | 使用单功能远程覆写模块 | [`overwrite/`](overwrite/) |
 | 安装、更新或检测 OpenClash | [`shell/`](shell/) |
 | 使用 Sub-Store 扩展脚本 | [Sub-Store 脚本](script/sub-store/) |
@@ -118,7 +118,7 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 
 直连规则由项目用户共同参与维护。如需提交符合收录条件的域名，可使用 GitHub Issue、Pull Request 或 [RULE BOT](https://telegram.me/asailor_rulebot)。
 
-[`game_rule/`](game_rule/) 另存放人工整理的独立游戏规则。目录中的 `.list` 是规则来源，工作流会自动生成 YAML 和 MRS 派生文件，但不会更新规则内容或将其加载到主配置。使用前应核对适用区服、更新时间和实际命中情况。
+[`rule/game_rule/`](rule/game_rule/) 另存放人工整理的独立游戏规则。目录中的 `.list` 是规则来源，工作流会自动生成 YAML 和 MRS 派生文件，但不会更新规则内容或将其加载到主配置。使用前应核对适用区服、更新时间和实际命中情况。
 
 **入口：** [`rule/`](rule/)
 

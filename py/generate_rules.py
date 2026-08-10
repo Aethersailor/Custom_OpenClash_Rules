@@ -20,7 +20,7 @@ BASE_NAMES = (
     "Encrypted_DNS",
     "Game_Download_CDN",
 )
-GAME_RULE_DIRECTORY = Path("game_rule")
+GAME_RULE_DIRECTORY = Path("rule/game_rule")
 
 
 @dataclass(frozen=True)

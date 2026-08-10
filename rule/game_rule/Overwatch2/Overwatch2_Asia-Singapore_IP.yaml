@@ -1,0 +1,26 @@
+# Generated from rule/game_rule/Overwatch2/Overwatch2_Asia-Singapore.list
+# REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
+# SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/game_rule/Overwatch2/Overwatch2_Asia-Singapore.list
+# TOTAL: 20
+
+payload:
+  - '117.52.26.0/24'
+  - '151.101.66.0/24'
+  - '158.115.196.0/24'
+  - '224.0.0.0/24'
+  - '24.105.45.0/24'
+  - '24.105.60.0/24'
+  - '3.39.15.0/24'
+  - '34.117.122.0/24'
+  - '34.125.163.0/24'
+  - '34.151.251.0/24'
+  - '34.166.106.0/24'
+  - '34.87.7.0/24'
+  - '34.87.92.0/24'
+  - '35.201.91.0/24'
+  - '35.221.64.0/24'
+  - '35.228.14.0/24'
+  - '5.42.160.0/24'
+  - '64.224.25.0/24'
+  - '64.224.27.0/24'
+  - '99.83.136.0/24'

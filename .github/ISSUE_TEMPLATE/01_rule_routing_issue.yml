@@ -32,7 +32,7 @@ body:
       options:
         - 订阅转换模板（cfg/*.ini）
         - YAML 配置示例（cfg/yaml/*.yaml）
-        - 项目维护的源规则（rule/*.list）
+        - 项目维护的源规则（rule/*.list、rule/game_rule/**/*.list）
         - 自动生成的 YAML / MRS 规则文件
         - 覆写模块插入或修改的规则
         - 无法确定

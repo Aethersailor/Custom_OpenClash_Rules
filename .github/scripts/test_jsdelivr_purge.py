@@ -79,7 +79,7 @@ class ContractTests(unittest.TestCase):
         self.assertTrue(purge.is_public_path("icon/match.png", value))
         self.assertFalse(purge.is_public_path("py/generate_rules.py", value))
         self.assertFalse(purge.is_public_path("rule/archived/old.yaml", value))
-        self.assertFalse(purge.is_public_path("game_rule/README.md", value))
+        self.assertFalse(purge.is_public_path("rule/game_rule/README.md", value))
         self.assertFalse(
             purge.is_public_path("overwrite/OpenClash_Overwrite", value)
         )
