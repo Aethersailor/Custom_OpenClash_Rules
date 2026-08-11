@@ -1,0 +1,55 @@
+name: Auto update singbox ALL template
+
+on:
+  schedule:
+    # 每天 UTC 4:00 更新（北京时间 12:00）
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: singbox-writers
+  cancel-in-progress: false
+
+jobs:
+  update-singbox:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate singbox ALL template
+        run: |
+          python3 py/generate_singbox_all.py
+
+      - name: Validate template JSON
+        run: |
+          python3 -c "
+          import json
+          t = json.load(open('singbox/Custom_All.json'))
+          rs = [x['tag'] for x in t['route']['rule_set']]
+          rules = []
+          for r in t['route']['rules']:
+              rules += r.get('rule_set', [])
+          missing = set(rules) - set(rs)
+          assert not missing, f'Missing rule_set refs: {missing}'
+          print(f'OK: {len(rs)} rule_sets, {len(t[\"outbounds\"])} outbounds')
+          "
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add singbox/
+          git diff --cached --quiet || git commit -m "chore(singbox): auto update ALL template [skip ci]"
+          git push

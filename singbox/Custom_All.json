@@ -1,0 +1,474 @@
+{
+ "outbounds": [
+  {
+   "tag": "🚀 节点选择",
+   "type": "selector",
+   "outbounds": [
+    "♻️ 自动选择",
+    "🎯 本地直连",
+    "🇭🇰 香港节点",
+    "🇺🇸 美国节点",
+    "🇯🇵 日本节点",
+    "🇸🇬 新加坡节点",
+    "🇹🇼 台湾节点",
+    "🇰🇷 韩国节点",
+    "🐟 漏网之鱼"
+   ]
+  },
+  {
+   "tag": "♻️ 自动选择",
+   "type": "urltest",
+   "interval": "2m",
+   "use_all_providers": true
+  },
+  {
+   "tag": "🤖 AI 平台",
+   "type": "selector",
+   "outbounds": [
+    "🚀 节点选择",
+    "🎯 本地直连"
+   ]
+  },
+  {
+   "tag": "🎬 奈飞视频",
+   "type": "selector",
+   "outbounds": [
+    "🚀 节点选择",
+    "🎯 本地直连"
+   ]
+  },
+  {
+   "tag": "▶️ 油管视频",
+   "type": "selector",
+   "outbounds": [
+    "🚀 节点选择",
+    "🎯 本地直连"
+   ]
+  },
+  {
+   "tag": "🌍 国际媒体",
+   "type": "selector",
+   "outbounds": [
+    "🚀 节点选择",
+    "🎯 本地直连"
+   ]
+  },
+  {
+   "tag": "🎮 外服游戏",
+   "type": "selector",
+   "outbounds": [
+    "🚀 节点选择",
+    "🎯 本地直连"
+   ]
+  },
+  {
+   "tag": "🦾 Steam平台",
+   "type": "selector",
+   "outbounds": [
+    "🎯 本地直连",
+    "🚀 节点选择"
+   ]
+  },
+  {
+   "tag": "🀄️ 国内流量",
+   "type": "selector",
+   "outbounds": [
+    "🎯 本地直连",
+    "🚀 节点选择"
+   ]
+  },
+  {
+   "tag": "🛑 广告拦截",
+   "type": "selector",
+   "outbounds": [
+    "⛔ 禁止连接",
+    "🎯 本地直连"
+   ]
+  },
+  {
+   "tag": "⛔ 禁止连接",
+   "type": "block"
+  },
+  {
+   "tag": "🎯 本地直连",
+   "type": "direct"
+  },
+  {
+   "tag": "🐟 漏网之鱼",
+   "type": "selector",
+   "outbounds": [
+    "🚀 节点选择",
+    "🎯 本地直连"
+   ]
+  },
+  {
+   "tag": "GLOBAL",
+   "type": "selector",
+   "outbounds": [
+    "🚀 节点选择",
+    "🎯 本地直连"
+   ]
+  },
+  {
+   "tag": "🇭🇰 香港节点",
+   "type": "urltest",
+   "interval": "2m",
+   "use_all_providers": true,
+   "include": "(?i)(🇭🇰|港|hk|hongkong)"
+  },
+  {
+   "tag": "🇺🇸 美国节点",
+   "type": "urltest",
+   "interval": "2m",
+   "use_all_providers": true,
+   "include": "(?i)(🇺🇸|美|us|united)"
+  },
+  {
+   "tag": "🇯🇵 日本节点",
+   "type": "urltest",
+   "interval": "2m",
+   "use_all_providers": true,
+   "include": "(?i)(🇯🇵|日|jp|japan)"
+  },
+  {
+   "tag": "🇸🇬 新加坡节点",
+   "type": "urltest",
+   "interval": "2m",
+   "use_all_providers": true,
+   "include": "(?i)(🇸🇬|新加坡|sg|singapore)"
+  },
+  {
+   "tag": "🇹🇼 台湾节点",
+   "type": "urltest",
+   "interval": "2m",
+   "use_all_providers": true,
+   "include": "(?i)(🇹🇼|台|tw|taiwan)"
+  },
+  {
+   "tag": "🇰🇷 韩国节点",
+   "type": "urltest",
+   "interval": "2m",
+   "use_all_providers": true,
+   "include": "(?i)(🇰🇷|韩|kr|korea)"
+  }
+ ],
+ "route": {
+  "rules": [
+   {
+    "action": "sniff"
+   },
+   {
+    "protocol": "dns",
+    "action": "hijack-dns"
+   },
+   {
+    "ip_is_private": true,
+    "outbound": "🎯 本地直连"
+   },
+   {
+    "protocol": "quic",
+    "action": "reject",
+    "no_drop": true
+   },
+   {
+    "protocol": "bittorrent",
+    "action": "reject"
+   },
+   {
+    "rule_set": [
+     "cn",
+     "cnip"
+    ],
+    "outbound": "🀄️ 国内流量"
+   },
+   {
+    "rule_set": [
+     "ads"
+    ],
+    "outbound": "🛑 广告拦截"
+   },
+   {
+    "rule_set": [
+     "Netflix",
+     "PrimeVideo",
+     "HBO",
+     "Hulu",
+     "AppleTV"
+    ],
+    "outbound": "🎬 奈飞视频"
+   },
+   {
+    "rule_set": [
+     "YouTube"
+    ],
+    "outbound": "▶️ 油管视频"
+   },
+   {
+    "rule_set": [
+     "Disney",
+     "TikTok",
+     "Twitch",
+     "Spotify"
+    ],
+    "outbound": "🌍 国际媒体"
+   },
+   {
+    "rule_set": [
+     "OpenAI",
+     "Anthropic",
+     "Gemini",
+     "Copilot"
+    ],
+    "outbound": "🤖 AI 平台"
+   },
+   {
+    "rule_set": [
+     "Steam"
+    ],
+    "outbound": "🦾 Steam平台"
+   },
+   {
+    "rule_set": [
+     "Epic",
+     "PlayStation",
+     "Xbox",
+     "Nintendo",
+     "Riot"
+    ],
+    "outbound": "🎮 外服游戏"
+   },
+   {
+    "rule_set": [
+     "Google",
+     "Microsoft",
+     "Amazon",
+     "Adobe",
+     "GFW"
+    ],
+    "outbound": "🚀 节点选择"
+   },
+   {
+    "rule_set": [
+     "cn-gfw"
+    ],
+    "outbound": "🚀 节点选择"
+   },
+   {
+    "outbound": "🐟 漏网之鱼"
+   }
+  ],
+  "rule_set": [
+   {
+    "tag": "Netflix",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Netflix.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Netflix/Netflix.srs"
+   },
+   {
+    "tag": "YouTube",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/YouTube.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/YouTube/YouTube.srs"
+   },
+   {
+    "tag": "Disney",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Disney.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Disney/Disney.srs"
+   },
+   {
+    "tag": "PrimeVideo",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/PrimeVideo.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/PrimeVideo/PrimeVideo.srs"
+   },
+   {
+    "tag": "HBO",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/HBO.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/HBO/HBO.srs"
+   },
+   {
+    "tag": "Hulu",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Hulu.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Hulu/Hulu.srs"
+   },
+   {
+    "tag": "AppleTV",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/AppleTV.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/AppleTV/AppleTV.srs"
+   },
+   {
+    "tag": "TikTok",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/TikTok.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/TikTok/TikTok.srs"
+   },
+   {
+    "tag": "Twitch",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Twitch.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Twitch/Twitch.srs"
+   },
+   {
+    "tag": "Spotify",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Spotify.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Spotify/Spotify.srs"
+   },
+   {
+    "tag": "Steam",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Steam.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Steam/Steam.srs"
+   },
+   {
+    "tag": "Epic",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Epic.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Epic/Epic.srs"
+   },
+   {
+    "tag": "PlayStation",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/PlayStation.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/PlayStation/PlayStation.srs"
+   },
+   {
+    "tag": "Xbox",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Xbox.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Xbox/Xbox.srs"
+   },
+   {
+    "tag": "Nintendo",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Nintendo.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Nintendo/Nintendo.srs"
+   },
+   {
+    "tag": "Riot",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Riot.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Riot/Riot.srs"
+   },
+   {
+    "tag": "OpenAI",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/OpenAI.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/OpenAI/OpenAI.srs"
+   },
+   {
+    "tag": "Anthropic",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Anthropic.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Anthropic/Anthropic.srs"
+   },
+   {
+    "tag": "Gemini",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Gemini.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Gemini/Gemini.srs"
+   },
+   {
+    "tag": "Copilot",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Copilot.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Copilot/Copilot.srs"
+   },
+   {
+    "tag": "Google",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Google.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Google/Google.srs"
+   },
+   {
+    "tag": "Apple",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Apple.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Apple/Apple.srs"
+   },
+   {
+    "tag": "Microsoft",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Microsoft.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Microsoft/Microsoft.srs"
+   },
+   {
+    "tag": "Amazon",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Amazon.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Amazon/Amazon.srs"
+   },
+   {
+    "tag": "Adobe",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/Adobe.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/senshinya/singbox_ruleset@main/rule/Adobe/Adobe.srs"
+   },
+   {
+    "tag": "ads",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/ads.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/REIJI007/AdBlock_Rule_For_Sing-box@main/adblock_reject.srs"
+   },
+   {
+    "tag": "GFW",
+    "type": "remote",
+    "format": "source",
+    "path": "./ruleset/GFW.json",
+    "url": "https://testingcf.jsdelivr.net/gh/cmontage/proxyrules-cm@main/Clash/PROXY/GFW.yaml"
+   },
+   {
+    "tag": "cn",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/cn.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/Dreista/sing-box-rule-set-cn@rule-set/accelerated-domains.china.conf.srs"
+   },
+   {
+    "tag": "cnip",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/cnip.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/Dreista/sing-box-rule-set-cn@rule-set/apnic-cn-ipv4.srs"
+   },
+   {
+    "tag": "cn-gfw",
+    "type": "remote",
+    "format": "binary",
+    "path": "./ruleset/cn-gfw.srs",
+    "url": "https://testingcf.jsdelivr.net/gh/Dreista/sing-box-rule-set-cn@rule-set/filter.txt.srs"
+   }
+  ],
+  "final": "🐟 漏网之鱼"
+ }
+}
