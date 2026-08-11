@@ -1,12 +1,13 @@
-# Battlefield 1 Japan Game Rule
+# Battlefield 1 Windows PC Hong Kong Game Rule
 # 《战地风云 1》游戏规则
 # 类型：IPCIDR
 # 作者: Aethersailor
 # 仓库: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 更新日期 2026/08/11
-# 区服：日本
+# 客户端：Windows PC
+# 区服：中国香港
 # 提取方式：UU 加速器 Windows PC 版，路由模式
-# 内容：UU 在该游戏、该区服加速时写入虚拟网卡的目标 IPv4 路由
+# 内容：UU 在该游戏、该客户端、该区服加速时写入虚拟网卡的目标 IPv4 路由
 # 快照：2 次路由模式快照的并集
 # 已过滤本地、专用、保留和被上级网段覆盖的地址，并附加 no-resolve 参数
 
@@ -72,7 +73,6 @@ IP-CIDR,23.3.16.0/24,no-resolve
 IP-CIDR,23.3.196.0/24,no-resolve
 IP-CIDR,23.3.235.0/24,no-resolve
 IP-CIDR,23.8.171.0/24,no-resolve
-IP-CIDR,23.11.38.161/32,no-resolve
 IP-CIDR,23.12.227.0/24,no-resolve
 IP-CIDR,23.15.93.0/24,no-resolve
 IP-CIDR,23.34.61.0/24,no-resolve
@@ -99,14 +99,13 @@ IP-CIDR,23.59.8.0/24,no-resolve
 IP-CIDR,23.59.171.0/24,no-resolve
 IP-CIDR,23.66.146.0/24,no-resolve
 IP-CIDR,23.73.97.0/24,no-resolve
+IP-CIDR,23.77.3.174/32,no-resolve
 IP-CIDR,23.101.16.0/20,no-resolve
 IP-CIDR,23.201.254.0/24,no-resolve
+IP-CIDR,23.202.34.162/32,no-resolve
+IP-CIDR,23.202.34.163/32,no-resolve
 IP-CIDR,23.202.95.0/24,no-resolve
 IP-CIDR,23.211.98.0/24,no-resolve
-IP-CIDR,23.216.153.141/32,no-resolve
-IP-CIDR,23.216.153.149/32,no-resolve
-IP-CIDR,23.216.153.151/32,no-resolve
-IP-CIDR,23.216.153.157/32,no-resolve
 IP-CIDR,23.218.25.0/24,no-resolve
 IP-CIDR,23.219.134.0/24,no-resolve
 IP-CIDR,27.0.0.0/22,no-resolve
@@ -359,6 +358,7 @@ IP-CIDR,63.251.124.0/24,no-resolve
 IP-CIDR,63.251.252.0/24,no-resolve
 IP-CIDR,64.12.245.0/24,no-resolve
 IP-CIDR,64.94.101.0/24,no-resolve
+IP-CIDR,64.233.188.84/32,no-resolve
 IP-CIDR,65.55.57.0/24,no-resolve
 IP-CIDR,65.112.85.0/24,no-resolve
 IP-CIDR,65.197.244.0/24,no-resolve
@@ -443,6 +443,10 @@ IP-CIDR,104.69.237.0/24,no-resolve
 IP-CIDR,104.73.99.0/24,no-resolve
 IP-CIDR,104.76.231.0/24,no-resolve
 IP-CIDR,104.78.98.0/24,no-resolve
+IP-CIDR,104.84.150.175/32,no-resolve
+IP-CIDR,104.84.150.180/32,no-resolve
+IP-CIDR,104.84.150.181/32,no-resolve
+IP-CIDR,104.84.150.196/32,no-resolve
 IP-CIDR,104.91.243.0/24,no-resolve
 IP-CIDR,104.95.193.0/24,no-resolve
 IP-CIDR,104.95.197.0/24,no-resolve
@@ -467,7 +471,6 @@ IP-CIDR,109.200.221.0/24,no-resolve
 IP-CIDR,109.200.222.0/24,no-resolve
 IP-CIDR,116.193.159.0/24,no-resolve
 IP-CIDR,118.140.55.0/24,no-resolve
-IP-CIDR,118.215.183.37/32,no-resolve
 IP-CIDR,119.81.0.0/17,no-resolve
 IP-CIDR,119.81.128.0/18,no-resolve
 IP-CIDR,119.161.22.0/24,no-resolve
@@ -488,7 +491,6 @@ IP-CIDR,134.213.244.0/24,no-resolve
 IP-CIDR,139.99.124.0/24,no-resolve
 IP-CIDR,139.99.125.0/24,no-resolve
 IP-CIDR,139.99.255.0/24,no-resolve
-IP-CIDR,142.251.169.84/32,no-resolve
 IP-CIDR,157.175.0.0/16,no-resolve
 IP-CIDR,157.240.12.0/24,no-resolve
 IP-CIDR,159.153.34.0/24,no-resolve
@@ -515,6 +517,7 @@ IP-CIDR,159.153.244.0/24,no-resolve
 IP-CIDR,162.13.23.0/24,no-resolve
 IP-CIDR,162.13.35.0/24,no-resolve
 IP-CIDR,162.125.32.0/24,no-resolve
+IP-CIDR,162.159.142.9/32,no-resolve
 IP-CIDR,162.244.53.0/24,no-resolve
 IP-CIDR,162.244.55.0/24,no-resolve
 IP-CIDR,162.245.204.0/24,no-resolve
@@ -528,16 +531,9 @@ IP-CIDR,164.177.143.0/24,no-resolve
 IP-CIDR,165.254.105.0/24,no-resolve
 IP-CIDR,168.95.0.0/24,no-resolve
 IP-CIDR,168.95.255.0/24,no-resolve
+IP-CIDR,172.66.2.5/32,no-resolve
 IP-CIDR,172.96.97.0/24,no-resolve
 IP-CIDR,172.107.201.0/24,no-resolve
-IP-CIDR,172.217.112.4/32,no-resolve
-IP-CIDR,172.217.113.4/32,no-resolve
-IP-CIDR,172.217.114.4/32,no-resolve
-IP-CIDR,172.217.115.4/32,no-resolve
-IP-CIDR,172.217.116.4/32,no-resolve
-IP-CIDR,172.217.117.4/32,no-resolve
-IP-CIDR,172.217.118.4/32,no-resolve
-IP-CIDR,172.217.119.4/32,no-resolve
 IP-CIDR,172.230.189.0/24,no-resolve
 IP-CIDR,173.199.0.0/24,no-resolve
 IP-CIDR,173.199.67.0/24,no-resolve
@@ -603,8 +599,6 @@ IP-CIDR,184.24.31.0/24,no-resolve
 IP-CIDR,184.25.0.0/24,no-resolve
 IP-CIDR,184.25.232.0/24,no-resolve
 IP-CIDR,184.27.46.0/24,no-resolve
-IP-CIDR,184.27.185.68/32,no-resolve
-IP-CIDR,184.27.185.92/32,no-resolve
 IP-CIDR,184.50.87.0/24,no-resolve
 IP-CIDR,184.51.198.0/24,no-resolve
 IP-CIDR,184.72.64.0/18,no-resolve

@@ -1,12 +1,13 @@
-# Battlefield 1 All Servers Game Rule
+# Battlefield 1 Windows PC Oceania Game Rule
 # 《战地风云 1》游戏规则
 # 类型：IPCIDR
 # 作者: Aethersailor
 # 仓库: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 更新日期 2026/08/11
-# 区服：智能匹配
+# 客户端：Windows PC
+# 区服：大洋洲
 # 提取方式：UU 加速器 Windows PC 版，路由模式
-# 内容：UU 在该游戏、该区服加速时写入虚拟网卡的目标 IPv4 路由
+# 内容：UU 在该游戏、该客户端、该区服加速时写入虚拟网卡的目标 IPv4 路由
 # 快照：2 次路由模式快照的并集
 # 已过滤本地、专用、保留和被上级网段覆盖的地址，并附加 no-resolve 参数
 
@@ -72,7 +73,7 @@ IP-CIDR,23.3.16.0/24,no-resolve
 IP-CIDR,23.3.196.0/24,no-resolve
 IP-CIDR,23.3.235.0/24,no-resolve
 IP-CIDR,23.8.171.0/24,no-resolve
-IP-CIDR,23.11.32.159/32,no-resolve
+IP-CIDR,23.11.38.161/32,no-resolve
 IP-CIDR,23.12.227.0/24,no-resolve
 IP-CIDR,23.15.93.0/24,no-resolve
 IP-CIDR,23.34.61.0/24,no-resolve
@@ -106,8 +107,8 @@ IP-CIDR,23.201.254.0/24,no-resolve
 IP-CIDR,23.202.95.0/24,no-resolve
 IP-CIDR,23.211.98.0/24,no-resolve
 IP-CIDR,23.216.153.141/32,no-resolve
+IP-CIDR,23.216.153.142/32,no-resolve
 IP-CIDR,23.216.153.149/32,no-resolve
-IP-CIDR,23.216.153.151/32,no-resolve
 IP-CIDR,23.216.153.157/32,no-resolve
 IP-CIDR,23.218.25.0/24,no-resolve
 IP-CIDR,23.219.134.0/24,no-resolve

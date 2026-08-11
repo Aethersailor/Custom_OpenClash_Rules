@@ -1,12 +1,13 @@
-# Battlefield 1 Hong Kong Game Rule
+# Battlefield 1 Windows PC Asia All Regions Game Rule
 # 《战地风云 1》游戏规则
 # 类型：IPCIDR
 # 作者: Aethersailor
 # 仓库: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 更新日期 2026/08/11
-# 区服：中国香港
+# 客户端：Windows PC
+# 区服：亚洲全区匹配
 # 提取方式：UU 加速器 Windows PC 版，路由模式
-# 内容：UU 在该游戏、该区服加速时写入虚拟网卡的目标 IPv4 路由
+# 内容：UU 在该游戏、该客户端、该区服加速时写入虚拟网卡的目标 IPv4 路由
 # 快照：2 次路由模式快照的并集
 # 已过滤本地、专用、保留和被上级网段覆盖的地址，并附加 no-resolve 参数
 
@@ -72,6 +73,7 @@ IP-CIDR,23.3.16.0/24,no-resolve
 IP-CIDR,23.3.196.0/24,no-resolve
 IP-CIDR,23.3.235.0/24,no-resolve
 IP-CIDR,23.8.171.0/24,no-resolve
+IP-CIDR,23.11.38.161/32,no-resolve
 IP-CIDR,23.12.227.0/24,no-resolve
 IP-CIDR,23.15.93.0/24,no-resolve
 IP-CIDR,23.34.61.0/24,no-resolve
@@ -357,7 +359,6 @@ IP-CIDR,63.251.124.0/24,no-resolve
 IP-CIDR,63.251.252.0/24,no-resolve
 IP-CIDR,64.12.245.0/24,no-resolve
 IP-CIDR,64.94.101.0/24,no-resolve
-IP-CIDR,64.233.188.84/32,no-resolve
 IP-CIDR,65.55.57.0/24,no-resolve
 IP-CIDR,65.112.85.0/24,no-resolve
 IP-CIDR,65.197.244.0/24,no-resolve
@@ -390,6 +391,7 @@ IP-CIDR,74.91.121.0/24,no-resolve
 IP-CIDR,74.121.136.0/24,no-resolve
 IP-CIDR,74.121.141.0/24,no-resolve
 IP-CIDR,74.121.143.0/24,no-resolve
+IP-CIDR,74.125.204.84/32,no-resolve
 IP-CIDR,74.251.243.0/24,no-resolve
 IP-CIDR,75.101.128.0/17,no-resolve
 IP-CIDR,78.16.49.0/24,no-resolve
@@ -516,7 +518,6 @@ IP-CIDR,159.153.244.0/24,no-resolve
 IP-CIDR,162.13.23.0/24,no-resolve
 IP-CIDR,162.13.35.0/24,no-resolve
 IP-CIDR,162.125.32.0/24,no-resolve
-IP-CIDR,162.159.142.9/32,no-resolve
 IP-CIDR,162.244.53.0/24,no-resolve
 IP-CIDR,162.244.55.0/24,no-resolve
 IP-CIDR,162.245.204.0/24,no-resolve
@@ -530,7 +531,6 @@ IP-CIDR,164.177.143.0/24,no-resolve
 IP-CIDR,165.254.105.0/24,no-resolve
 IP-CIDR,168.95.0.0/24,no-resolve
 IP-CIDR,168.95.255.0/24,no-resolve
-IP-CIDR,172.66.2.5/32,no-resolve
 IP-CIDR,172.96.97.0/24,no-resolve
 IP-CIDR,172.107.201.0/24,no-resolve
 IP-CIDR,172.230.189.0/24,no-resolve
