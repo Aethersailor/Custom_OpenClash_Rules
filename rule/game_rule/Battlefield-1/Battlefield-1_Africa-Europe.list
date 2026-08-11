@@ -1,13 +1,15 @@
-# Battlefield 1 Europe Game Rule
+# Battlefield 1 Africa and Europe Game Rule
 # 《战地风云 1》游戏规则
 # 类型：IPCIDR
 # 作者: Aethersailor
 # 仓库: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # 更新日期 2026/08/11
-# 区服：欧洲
+# 客户端：Windows PC
+# 区服：非洲、欧洲
 # 提取方式：UU 加速器 Windows PC 版，路由模式
-# 内容：UU 在该游戏、该区服加速时写入虚拟网卡的目标 IPv4 路由
-# 快照：2 次路由模式快照的并集
+# 内容：UU 分别加速该游戏的非洲或欧洲区服时写入虚拟网卡的相同目标 IPv4 路由
+# 快照：非洲和欧洲各 2 次路由模式快照，规范化后的规则完全相同
+# 合并依据：非洲和欧洲的 IP-CIDR 正文逐条完全相同
 # 已过滤本地、专用、保留和被上级网段覆盖的地址，并附加 no-resolve 参数
 
 IP-CIDR,3.24.0.0/14,no-resolve

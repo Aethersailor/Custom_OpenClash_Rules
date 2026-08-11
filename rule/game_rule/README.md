@@ -4,7 +4,7 @@
 
 | 来源文件 | 游戏与范围 | 来源 |
 | --- | --- | --- |
-| [`Battlefield-1/`](Battlefield-1/) | 《战地风云 1》，UU 可选区服 | 从 UU 加速器路由模式逐区提取 |
+| [`Battlefield-1/`](Battlefield-1/) | 《战地风云 1》，UU 可选区服；相同路由区服共用来源文件 | 从 UU 加速器路由模式逐区提取并按相同正文合并 |
 | [`Battlefield-6/`](Battlefield-6/) | 《战地风云 6》，UU 可选区服 | 从 UU 加速器路由模式逐区提取 |
 | [`Microsoft-Flight-Simulator-2020/`](Microsoft-Flight-Simulator-2020/) | 《微软模拟飞行 2020》，全区服 | 从 UU 加速器规则整理 |
 | [`Overwatch2/`](Overwatch2/) | 《守望先锋 2》，亚服（新加坡） | 使用 [`SSTAP_ip_crawl_tool`](https://github.com/oooldtoy/SSTAP_ip_crawl_tool) 抓取并整理 |
