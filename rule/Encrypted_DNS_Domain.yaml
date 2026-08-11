@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3374
+# TOTAL: 3366
 
 payload:
   - '+.003153.xyz'
@@ -301,7 +301,6 @@ payload:
   - '+.adguard.tammi.cc'
   - '+.adguard.taufner.net'
   - '+.adguard.tcpu.io'
-  - '+.adguard.techlike.in'
   - '+.adguard.tetnet.net'
   - '+.adguard.theil.dev'
   - '+.adguard.timoz.fr'
@@ -404,7 +403,6 @@ payload:
   - '+.ag.marschi.de'
   - '+.ag.node15.com'
   - '+.ag.snrka.ru'
-  - '+.ag.ssrahul96.xyz'
   - '+.ag.stepnew.ru'
   - '+.ag.teqilla.tk'
   - '+.ag.wntrmute.net'
@@ -1505,7 +1503,6 @@ payload:
   - '+.dns.soldier.terumi.club'
   - '+.dns.spil.co.id'
   - '+.dns.spirio.fr'
-  - '+.dns.srijan.site'
   - '+.dns.srinivasrao.co.in'
   - '+.dns.sshub.win'
   - '+.dns.sstomp.nl'
@@ -1749,7 +1746,6 @@ payload:
   - '+.dns9.quad9.net'
   - '+.dnsbk.wns.watch'
   - '+.dnsblock.grisumedia.de'
-  - '+.dnsbunker.org'
   - '+.dnscache.e-utp.net'
   - '+.dnscache0.ns71.net'
   - '+.dnscdn.bai0012.com'
@@ -1926,7 +1922,6 @@ payload:
   - '+.doh.ptqy.gitv.tv'
   - '+.doh.pub'
   - '+.doh.pyry.me'
-  - '+.doh.qis.io'
   - '+.doh.quickline.ch'
   - '+.doh.rasmusminde.dk'
   - '+.doh.rezhajul.io'
@@ -2275,7 +2270,6 @@ payload:
   - '+.host.jerry-lee.uk'
   - '+.host8.248.cloudhost.in.th'
   - '+.host94.rheingold.com.ua'
-  - '+.hostdare.qtxd.net'
   - '+.hr.i81.ru'
   - '+.hrsm12181.duckdns.org'
   - '+.hshh.org'
@@ -2679,7 +2673,6 @@ payload:
   - '+.ns1.opennameserver.org'
   - '+.ns1.qquack.org'
   - '+.ns1.recursive.dnsbycomodo.com'
-  - '+.ns1.sc-lezhi.com'
   - '+.ns2.4netguides.org'
   - '+.ns2.flodns.net'
   - '+.ns2.hjk.kr'
@@ -3048,7 +3041,6 @@ payload:
   - '+.sterlingharris.com'
   - '+.sto01.dnscry.pt'
   - '+.sto02.dnscry.pt'
-  - '+.strangerandomdomain1.space'
   - '+.strassmair.org'
   - '+.stratus.bugz.fr'
   - '+.stroveer.hopto.org'
@@ -3293,7 +3285,6 @@ payload:
   - '+.woc.beelstb.biz.id'
   - '+.workcavestl.duckdns.org'
   - '+.wp-test.fvds.ru'
-  - '+.wtbd02.solowalk.top'
   - '+.www.vpn.stroialliance.com'
   - '+.wyx.cloud'
   - '+.x-o-x.duckdns.org'
@@ -3376,5 +3367,6 @@ payload:
   - 'dns.malw.link'
   - 'dns.oszx.co'
   - 'dns.shaw.ca'
+  - 'doh.qis.io'
   - 'kaitain.restena.lu'
   - 'resolver.dnsprivacy.org.uk'
