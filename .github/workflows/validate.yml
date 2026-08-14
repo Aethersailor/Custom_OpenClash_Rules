@@ -17,6 +17,12 @@ on:
     paths:
       - '.github/**'
       - 'py/**'
+      - 'rule/Custom_Direct.list'
+      - 'rule/Custom_Proxy.list'
+      - 'rule/Steam_CDN.list'
+      - 'rule/Encrypted_DNS.list'
+      - 'rule/Game_Download_CDN.list'
+      - 'rule/game_rule/**/*.list'
       - 'script/**/*.js'
       - 'shell/**/*.sh'
       - 'cfg/yaml/**'
@@ -36,6 +42,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -54,17 +62,44 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Download and verify Mihomo
+      - name: Set up pinned Mihomo
+        uses: ./.github/actions/setup-mihomo
+
+      - name: Materialize derived rules for changed sources
+        if: github.event_name != 'workflow_dispatch'
+        shell: bash
         env:
-          MIHOMO_VERSION: v1.19.18
-          MIHOMO_SHA256: bbad6c9fa6322d870e94aab34b54097ffc880829be8fd804de79543d87f1f8e5
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_BEFORE: ${{ github.event.before }}
+          EVENT_SHA: ${{ github.sha }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
-          archive="mihomo-linux-amd64-${MIHOMO_VERSION}.gz"
-          wget -q "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/${archive}"
-          printf '%s  %s\n' "$MIHOMO_SHA256" "$archive" | sha256sum --check --strict
-          gunzip "$archive"
-          install -m 0755 "${archive%.gz}" "$RUNNER_TEMP/mihomo"
-          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            diff_base="$BASE_SHA"
+          elif [ -n "$EVENT_BEFORE" ] && [ "${EVENT_BEFORE//0/}" != "" ]; then
+            diff_base="$EVENT_BEFORE"
+          else
+            diff_base="$(git rev-parse "${EVENT_SHA}^")"
+          fi
+
+          source_pathspecs=(
+            'rule/Custom_Direct.list'
+            'rule/Custom_Proxy.list'
+            'rule/Steam_CDN.list'
+            'rule/Encrypted_DNS.list'
+            'rule/Game_Download_CDN.list'
+            ':(glob)rule/game_rule/**/*.list'
+            'py/generate_rules.py'
+          )
+          if git diff --quiet "$diff_base" "$EVENT_SHA" -- \
+            "${source_pathspecs[@]}"; then
+            echo "No derived-rule source changed."
+            exit 0
+          fi
+
+          echo "Materializing derived rules for validation only."
+          python py/generate_rules.py --mihomo mihomo
 
       - name: Download and verify static analysis tools
         env:
@@ -73,10 +108,19 @@ jobs:
           ACTIONLINT_VERSION: 1.7.12
           ACTIONLINT_SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
         run: |
+          set -euo pipefail
           shellcheck_archive="shellcheck-${SHELLCHECK_VERSION}.linux.x86_64.tar.xz"
           actionlint_archive="actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
-          wget -q "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION}/${shellcheck_archive}"
-          wget -q "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/${actionlint_archive}"
+          curl --fail --location --show-error \
+            --retry 3 --retry-delay 3 --retry-all-errors --retry-max-time 120 \
+            --connect-timeout 15 --max-time 60 \
+            --output "$shellcheck_archive" \
+            "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHECK_VERSION}/${shellcheck_archive}"
+          curl --fail --location --show-error \
+            --retry 3 --retry-delay 3 --retry-all-errors --retry-max-time 120 \
+            --connect-timeout 15 --max-time 60 \
+            --output "$actionlint_archive" \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/${actionlint_archive}"
           printf '%s  %s\n' "$SHELLCHECK_SHA256" "$shellcheck_archive" | sha256sum --check --strict
           printf '%s  %s\n' "$ACTIONLINT_SHA256" "$actionlint_archive" | sha256sum --check --strict
           tar -xJf "$shellcheck_archive"

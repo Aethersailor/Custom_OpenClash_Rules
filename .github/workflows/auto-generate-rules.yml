@@ -1,6 +1,12 @@
 name: Auto generate rules
 
 on:
+  workflow_call:
+    inputs:
+      source_before_sha:
+        description: Source-list parent revision supplied by an updater workflow
+        required: false
+        type: string
   push:
     branches:
       - main
@@ -68,17 +74,8 @@ jobs:
           echo "Source publication base: $purge_base_sha"
           echo "purge_base_sha=$purge_base_sha" >> "$GITHUB_OUTPUT"
 
-      - name: Download and verify Mihomo
-        env:
-          MIHOMO_VERSION: v1.19.18
-          MIHOMO_SHA256: bbad6c9fa6322d870e94aab34b54097ffc880829be8fd804de79543d87f1f8e5
-        run: |
-          archive="mihomo-linux-amd64-${MIHOMO_VERSION}.gz"
-          wget -q "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/${archive}"
-          printf '%s  %s\n' "$MIHOMO_SHA256" "$archive" | sha256sum --check --strict
-          gunzip "$archive"
-          install -m 0755 "${archive%.gz}" "$RUNNER_TEMP/mihomo"
-          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+      - name: Set up pinned Mihomo
+        uses: ./.github/actions/setup-mihomo
 
       - name: Generate YAML and MRS providers
         run: python py/generate_rules.py --mihomo mihomo
@@ -88,31 +85,86 @@ jobs:
 
       - name: Commit and push changes
         id: publish
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Rule-Bot may push while this job is running. Regenerate from the
-          # newest source instead of rebasing stale derived files over it.
-          git fetch origin main
-          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+          generated_pathspecs=(
+            ':(glob)rule/*.yaml'
+            ':(glob)rule/*.mrs'
+            ':(glob)rule/game_rule/**/*.yaml'
+            ':(glob)rule/game_rule/**/*.mrs'
+          )
+          generated_excludes=(
+            ':(exclude,glob)rule/*.yaml'
+            ':(exclude,glob)rule/*.mrs'
+            ':(exclude,glob)rule/game_rule/**/*.yaml'
+            ':(exclude,glob)rule/game_rule/**/*.mrs'
+          )
+          remote_main_sha() {
+            git ls-remote --exit-code origin refs/heads/main |
+              awk 'NR == 1 { print $1 }'
+          }
+
+          publication_sha=""
+          for attempt in 1 2 3; do
+            echo "Generation and publication attempt ${attempt}/3"
+            git fetch --no-tags origin main
             git reset --hard origin/main
             python py/generate_rules.py --mihomo mihomo
             python py/generate_rules.py --check --mihomo mihomo
-          fi
 
-          git add -- rule/*.yaml rule/*.mrs \
-            ':(glob)rule/game_rule/**/*.yaml' \
-            ':(glob)rule/game_rule/**/*.mrs'
+            unexpected_changes="$(
+              git status --short --untracked-files=all -- . \
+                "${generated_excludes[@]}"
+            )"
+            if [ -n "$unexpected_changes" ]; then
+              echo "Generator modified files outside the derived-rule allowlist:" >&2
+              printf '%s\n' "$unexpected_changes" >&2
+              exit 1
+            fi
 
-          if git diff --cached --quiet; then
-            echo "No generated rule changes, skip commit and push."
-          else
+            base_sha="$(git rev-parse HEAD)"
+            git add -A -- "${generated_pathspecs[@]}"
+
+            if git diff --cached --quiet; then
+              remote_sha="$(remote_main_sha)"
+              if [ "$remote_sha" = "$base_sha" ]; then
+                echo "No generated rule changes, skip commit and push."
+                publication_sha="$base_sha"
+                break
+              fi
+              echo "main advanced before the no-op result was confirmed; retrying."
+              continue
+            fi
+
             git commit -m "chore(rules): auto generate derived rule files"
-            git push origin HEAD:main
+            candidate_sha="$(git rev-parse HEAD)"
+            if git push origin HEAD:main; then
+              remote_sha="$(remote_main_sha)"
+              if [ "$remote_sha" = "$candidate_sha" ]; then
+                publication_sha="$candidate_sha"
+                break
+              fi
+              echo "main advanced after publication; regenerating from its new head."
+              continue
+            fi
+
+            remote_sha="$(remote_main_sha)"
+            if [ "$remote_sha" = "$base_sha" ]; then
+              echo "Push failed without a competing main update; refusing to hide the error." >&2
+              exit 1
+            fi
+            echo "Push raced with a newer main revision; regenerating and retrying."
+          done
+
+          if [ -z "$publication_sha" ]; then
+            echo "Could not publish derived rules after 3 attempts." >&2
+            exit 1
           fi
 
-          publication_sha="$(git rev-parse HEAD)"
           echo "Final revision to publish: $publication_sha"
           echo "publication_sha=$publication_sha" >> "$GITHUB_OUTPUT"
 

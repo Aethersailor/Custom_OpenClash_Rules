@@ -21,6 +21,15 @@ BASE_NAMES = (
     "Game_Download_CDN",
 )
 GAME_RULE_DIRECTORY = Path("rule/game_rule")
+GENERATED_HEADER_PREFIX = "# Generated from "
+GENERATED_YAML_SUFFIXES = (
+    "Domain.yaml",
+    "IP.yaml",
+    "Classical.yaml",
+    "Classical_IP.yaml",
+    "Classical_Port.yaml",
+)
+GENERATED_MRS_SUFFIXES = ("Domain.mrs", "IP.mrs")
 
 
 @dataclass(frozen=True)
@@ -157,6 +166,79 @@ def write_text_outputs(root: Path, outputs: dict[Path, str]) -> None:
         destination.write_text(content, encoding="utf-8", newline="\n")
 
 
+def managed_output_paths(root: Path) -> frozenset[Path]:
+    """Return generated files that are safe for this script to remove."""
+    managed: set[Path] = set()
+    rule_root = root / "rule"
+    if not rule_root.exists():
+        return frozenset()
+
+    for destination in rule_root.rglob("*.yaml"):
+        try:
+            with destination.open(encoding="utf-8-sig") as handle:
+                first_line = handle.readline().strip()
+        except OSError:
+            continue
+        if not first_line.startswith(GENERATED_HEADER_PREFIX):
+            continue
+
+        source = Path(first_line.removeprefix(GENERATED_HEADER_PREFIX))
+        if (
+            source.is_absolute()
+            or ".." in source.parts
+            or not source.parts
+            or source.parts[0] != "rule"
+            or source.suffix != ".list"
+        ):
+            continue
+
+        relative = destination.relative_to(root)
+        expected_names = {
+            f"{source.stem}_{suffix}" for suffix in GENERATED_YAML_SUFFIXES
+        }
+        if relative.parent != source.parent or relative.name not in expected_names:
+            continue
+
+        managed.add(relative)
+        for suffix in GENERATED_MRS_SUFFIXES:
+            yaml_suffix = suffix.removesuffix(".mrs") + ".yaml"
+            if relative.name == f"{source.stem}_{yaml_suffix}":
+                mrs_relative = relative.with_suffix(".mrs")
+                if (root / mrs_relative).exists():
+                    managed.add(mrs_relative)
+
+    # Game-rule MRS files are always generated. Include an unpaired leftover
+    # so a manually removed YAML file cannot leave an undeletable binary.
+    game_rule_root = root / GAME_RULE_DIRECTORY
+    if game_rule_root.exists():
+        for destination in game_rule_root.rglob("*.mrs"):
+            if destination.name.endswith(
+                tuple(f"_{suffix}" for suffix in GENERATED_MRS_SUFFIXES)
+            ):
+                managed.add(destination.relative_to(root))
+
+    return frozenset(managed)
+
+
+def orphan_output_paths(
+    root: Path,
+    outputs: dict[Path, str],
+    mrs_inputs: dict[Path, tuple[str, str]],
+) -> tuple[Path, ...]:
+    expected = set(outputs) | set(mrs_inputs)
+    return tuple(
+        sorted(
+            managed_output_paths(root) - expected,
+            key=lambda path: path.as_posix().casefold(),
+        )
+    )
+
+
+def remove_orphan_outputs(root: Path, orphans: tuple[Path, ...]) -> None:
+    for relative in orphans:
+        (root / relative).unlink(missing_ok=True)
+
+
 def yaml_has_rules(content: str) -> bool:
     return any(line.startswith("  - ") for line in content.splitlines())
 
@@ -189,6 +271,8 @@ def build_mrs(
 
 def check_outputs(root: Path, outputs: dict[Path, str], mrs_inputs: dict[Path, tuple[str, str]], mihomo: str | None) -> int:
     failures: list[str] = []
+    for relative in orphan_output_paths(root, outputs, mrs_inputs):
+        failures.append(f"orphan generated file: {relative}")
     for relative, expected in outputs.items():
         destination = root / relative
         if not destination.exists():
@@ -235,10 +319,17 @@ def main() -> int:
     if args.check:
         return check_outputs(root, outputs, mrs_inputs, args.mihomo)
 
+    orphans = orphan_output_paths(root, outputs, mrs_inputs)
+    remove_orphan_outputs(root, orphans)
     write_text_outputs(root, outputs)
     if args.mihomo:
         build_mrs(root, outputs, mrs_inputs, args.mihomo)
-    print("Generated rule YAML files" + (" and non-empty MRS files." if args.mihomo else "."))
+    message = "Generated rule YAML files" + (
+        " and non-empty MRS files." if args.mihomo else "."
+    )
+    if orphans:
+        message += f" Removed {len(orphans)} orphan generated file(s)."
+    print(message)
     return 0
 
 

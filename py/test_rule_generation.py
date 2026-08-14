@@ -153,6 +153,49 @@ class DerivedRuleGenerationTests(unittest.TestCase):
             rendered,
         )
 
+    def test_removes_orphan_generated_game_rule_files(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "rule").mkdir()
+            for base_name in generate_rules.BASE_NAMES:
+                (root / "rule" / f"{base_name}.list").write_text(
+                    "DOMAIN,example.com\n", encoding="utf-8"
+                )
+
+            orphan_directory = root / "rule/game_rule/Removed-Game"
+            orphan_directory.mkdir(parents=True)
+            orphan_yaml = orphan_directory / "Removed-Game_Europe_Domain.yaml"
+            orphan_mrs = orphan_directory / "Removed-Game_Europe_Domain.mrs"
+            orphan_yaml.write_text(
+                "# Generated from "
+                "rule/game_rule/Removed-Game/Removed-Game_Europe.list\n"
+                "payload:\n  - 'example.com'\n",
+                encoding="utf-8",
+            )
+            orphan_mrs.write_bytes(b"orphan")
+
+            outputs, mrs_inputs = generate_rules.textual_outputs(root)
+            orphans = generate_rules.orphan_output_paths(
+                root, outputs, mrs_inputs
+            )
+            generate_rules.remove_orphan_outputs(root, orphans)
+
+        self.assertEqual(
+            set(orphans),
+            {
+                Path(
+                    "rule/game_rule/Removed-Game/"
+                    "Removed-Game_Europe_Domain.yaml"
+                ),
+                Path(
+                    "rule/game_rule/Removed-Game/"
+                    "Removed-Game_Europe_Domain.mrs"
+                ),
+            },
+        )
+        self.assertFalse(orphan_yaml.exists())
+        self.assertFalse(orphan_mrs.exists())
+
 
 class UuRouteExtractionTests(unittest.TestCase):
     def test_keeps_only_public_routes_for_the_dominant_uu_gateway(self) -> None:

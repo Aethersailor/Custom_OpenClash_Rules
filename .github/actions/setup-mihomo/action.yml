@@ -1,0 +1,26 @@
+name: Set up pinned Mihomo
+description: Download the repository-pinned Mihomo binary with bounded retries and verify its checksum
+
+runs:
+  using: composite
+  steps:
+    - name: Download and verify Mihomo
+      shell: bash
+      env:
+        MIHOMO_VERSION: v1.19.18
+        MIHOMO_SHA256: bbad6c9fa6322d870e94aab34b54097ffc880829be8fd804de79543d87f1f8e5
+      run: |
+        set -euo pipefail
+        archive="$RUNNER_TEMP/mihomo-linux-amd64-${MIHOMO_VERSION}.gz"
+        binary="$RUNNER_TEMP/mihomo"
+        url="https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/$(basename "$archive")"
+
+        curl --fail --location --show-error \
+          --retry 3 --retry-delay 3 --retry-all-errors --retry-max-time 120 \
+          --connect-timeout 15 --max-time 60 \
+          --output "$archive" "$url"
+        printf '%s  %s\n' "$MIHOMO_SHA256" "$archive" |
+          sha256sum --check --strict
+        gzip -dc "$archive" > "$binary"
+        chmod 0755 "$binary"
+        echo "$RUNNER_TEMP" >> "$GITHUB_PATH"

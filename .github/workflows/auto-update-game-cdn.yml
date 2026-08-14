@@ -13,15 +13,16 @@ on:
   workflow_dispatch:  # 支持手动触发
 
 permissions:
-  actions: write
   contents: write
-
-concurrency:
-  group: main-writers
 
 jobs:
   update-game-cdn:
     runs-on: ubuntu-latest
+    concurrency:
+      group: main-writers
+    outputs:
+      published: ${{ steps.publish.outputs.published }}
+      source_before_sha: ${{ steps.publish.outputs.source_before_sha }}
     
     steps:
       - name: Checkout main branch
@@ -78,12 +79,11 @@ jobs:
           echo "published=true" >> "$GITHUB_OUTPUT"
           echo "source_before_sha=$source_before_sha" >> "$GITHUB_OUTPUT"
 
-      - name: Generate derived rule providers after update
-        if: steps.publish.outputs.published == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh workflow run auto-generate-rules.yml \
-            --repo "${GITHUB_REPOSITORY}" \
-            --ref main \
-            -f source_before_sha="${{ steps.publish.outputs.source_before_sha }}"
+  generate-derived-rules:
+    needs: update-game-cdn
+    if: needs.update-game-cdn.outputs.published == 'true'
+    permissions:
+      contents: write
+    uses: ./.github/workflows/auto-generate-rules.yml
+    with:
+      source_before_sha: ${{ needs.update-game-cdn.outputs.source_before_sha }}
