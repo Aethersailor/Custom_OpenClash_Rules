@@ -151,6 +151,43 @@ https://raw.example/repository/deadbeef/dev/package.apk'
         "$installer all-mirror mismatch attempts"
 )
 
+run_feed_suite() (
+    installer=$1
+    OPENCLASH_INSTALLER_LIB_ONLY=1
+    export OPENCLASH_INSTALLER_LIB_ONLY
+    # shellcheck disable=SC1090
+    . "$installer"
+
+    temporary=$(mktemp -d)
+    trap 'rm -rf "$temporary"' EXIT HUP INT TERM
+    source_file="$temporary/distfeeds.list"
+    target_file="$temporary/distfeeds.mirror"
+    DISTRO_ID=immortalwrt
+
+    printf '%s\n' \
+        'https://mirrors.cernet.edu.cn/immortalwrt/snapshots/packages/x86_64/base/packages.adb' \
+        >"$source_file"
+    rewrite_feed_to_mirror "$source_file" "$target_file" ||
+        fail "$installer CERNET ImmortalWrt feed acceptance"
+    cmp -s "$source_file" "$target_file" ||
+        fail "$installer CERNET ImmortalWrt feed preservation"
+
+    printf '%s\n' \
+        'https://downloads.immortalwrt.org/snapshots/packages/x86_64/base/packages.adb' \
+        >"$source_file"
+    rewrite_feed_to_mirror "$source_file" "$target_file" ||
+        fail "$installer official ImmortalWrt feed rewrite"
+    grep -Fq \
+        'https://mirror.nju.edu.cn/immortalwrt/snapshots/packages/x86_64/base/packages.adb' \
+        "$target_file" || fail "$installer ImmortalWrt mirror target"
+
+    printf '%s\n' 'https://packages.example.invalid/custom/packages.adb' \
+        >"$source_file"
+    if rewrite_feed_to_mirror "$source_file" "$target_file"; then
+        fail "$installer unknown ImmortalWrt feed rejection"
+    fi
+)
+
 run_model_suite() (
     installer=shell/install_openclash_dev_update.sh
     OPENCLASH_INSTALLER_LIB_ONLY=1
@@ -294,5 +331,7 @@ run_model_suite() (
 
 run_package_suite shell/install_openclash_dev.sh
 run_package_suite shell/install_openclash_dev_update.sh
+run_feed_suite shell/install_openclash_dev.sh
+run_feed_suite shell/install_openclash_dev_update.sh
 run_model_suite
 printf '%s\n' 'Installer behavior contract tests passed.'

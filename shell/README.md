@@ -62,11 +62,12 @@ sh /tmp/check_cpu_version.sh
 | 发行版 | 识别的基础地址 | 本次运行使用的镜像 |
 | --- | --- | --- |
 | ImmortalWrt | `downloads.immortalwrt.org`、`mirrors.vsean.net/openwrt` | `mirror.nju.edu.cn/immortalwrt` |
+| ImmortalWrt | `mirrors.cernet.edu.cn/immortalwrt` | 保持当前 CERNET 镜像 |
 | OpenWrt | `downloads.openwrt.org` | `mirrors.ustc.edu.cn/openwrt` |
 
 安装器只替换上述已知基础地址，后续版本、架构和仓库路径保持不变。第三方或自定义软件源原样保留。发行版已识别，但 `distfeeds` 中没有相应的已知地址时，安装器会明确失败，不会猜测地址或静默使用原始源。
 
-如果软件源已经指向该发行版的目标镜像，安装器会直接使用；未实际修改的文件不会被覆盖。
+如果软件源已经指向该发行版的目标镜像或已识别的 CERNET 镜像，安装器会直接使用；未实际修改的文件不会被覆盖。
 
 ### 2. 插件本体由安装器自行覆盖重装
 

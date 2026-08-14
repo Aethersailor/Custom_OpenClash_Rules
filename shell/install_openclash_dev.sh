@@ -308,6 +308,7 @@ rewrite_feed_to_mirror() {
         immortalwrt)
             if ! grep -Fq 'https://downloads.immortalwrt.org' "$source_file" &&
                 ! grep -Fq 'https://mirrors.vsean.net/openwrt' "$source_file" &&
+                ! grep -Fq 'https://mirrors.cernet.edu.cn/immortalwrt' "$source_file" &&
                 ! grep -Fq 'https://mirror.nju.edu.cn/immortalwrt' "$source_file"; then
                 return 1
             fi
@@ -341,7 +342,13 @@ prepare_temporary_feed() {
     rewrite_feed_to_mirror "$FEED_BACKUP" "$feed_candidate" || return 1
 
     case "$DISTRO_ID" in
-        immortalwrt) FEED_MIRROR_LABEL="南京大学 ImmortalWrt 镜像" ;;
+        immortalwrt)
+            if grep -Fq 'https://mirrors.cernet.edu.cn/immortalwrt' "$feed_candidate"; then
+                FEED_MIRROR_LABEL="CERNET ImmortalWrt 镜像"
+            else
+                FEED_MIRROR_LABEL="南京大学 ImmortalWrt 镜像"
+            fi
+            ;;
         openwrt) FEED_MIRROR_LABEL="中国科学技术大学 OpenWrt 镜像" ;;
     esac
 
