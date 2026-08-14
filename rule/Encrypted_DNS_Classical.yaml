@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 5201
+# TOTAL: 5164
 
 payload:
   - DOMAIN,dns.astracat.ru
@@ -146,7 +146,6 @@ payload:
   - DOMAIN-SUFFIX,adgaurd.lingmont.net
   - DOMAIN-SUFFIX,adgd.fragmentance.ru
   - DOMAIN-SUFFIX,adgh.imtsui.com
-  - DOMAIN-SUFFIX,adgh.xrossj.top
   - DOMAIN-SUFFIX,adghome.charleschan.net
   - DOMAIN-SUFFIX,adghome.ru
   - DOMAIN-SUFFIX,adghs.de
@@ -156,7 +155,6 @@ payload:
   - DOMAIN-SUFFIX,adguard-dns.eu.org
   - DOMAIN-SUFFIX,adguard-home.de
   - DOMAIN-SUFFIX,adguard-home.myddns.me
-  - DOMAIN-SUFFIX,adguard-ironhide.ultima-thule.ru
   - DOMAIN-SUFFIX,adguard-kartoffel.zernico.de
   - DOMAIN-SUFFIX,adguard-koe.dns64.de
   - DOMAIN-SUFFIX,adguard-server.pp.ua
@@ -310,7 +308,6 @@ payload:
   - DOMAIN-SUFFIX,adguard.tammi.cc
   - DOMAIN-SUFFIX,adguard.taufner.net
   - DOMAIN-SUFFIX,adguard.tcpu.io
-  - DOMAIN-SUFFIX,adguard.techlike.in
   - DOMAIN-SUFFIX,adguard.tetnet.net
   - DOMAIN-SUFFIX,adguard.theil.dev
   - DOMAIN-SUFFIX,adguard.timoz.fr
@@ -327,9 +324,7 @@ payload:
   - DOMAIN-SUFFIX,adguard.vozersky.com
   - DOMAIN-SUFFIX,adguard.wallura.eu
   - DOMAIN-SUFFIX,adguard.wifri.space
-  - DOMAIN-SUFFIX,adguard.wild.ro
   - DOMAIN-SUFFIX,adguard.willhotard.com
-  - DOMAIN-SUFFIX,adguard.wirimij.nl
   - DOMAIN-SUFFIX,adguard.x88x.xyz
   - DOMAIN-SUFFIX,adguard.xandersalarie.com
   - DOMAIN-SUFFIX,adguard.yare.hk
@@ -381,7 +376,6 @@ payload:
   - DOMAIN-SUFFIX,adh.fastpacefixit.info
   - DOMAIN-SUFFIX,adh.olesgroup.com
   - DOMAIN-SUFFIX,adhome.2011101.xyz
-  - DOMAIN-SUFFIX,adhome.maige.fun
   - DOMAIN-SUFFIX,adk.qcloud.work
   - DOMAIN-SUFFIX,adl.adfilter.net
   - DOMAIN-SUFFIX,adl01.dnscry.pt
@@ -414,7 +408,6 @@ payload:
   - DOMAIN-SUFFIX,ag.marschi.de
   - DOMAIN-SUFFIX,ag.node15.com
   - DOMAIN-SUFFIX,ag.snrka.ru
-  - DOMAIN-SUFFIX,ag.ssrahul96.xyz
   - DOMAIN-SUFFIX,ag.stepnew.ru
   - DOMAIN-SUFFIX,ag.teqilla.tk
   - DOMAIN-SUFFIX,ag.wntrmute.net
@@ -531,7 +524,6 @@ payload:
   - DOMAIN-SUFFIX,at-wie-w-p-1.nashkan.net
   - DOMAIN-SUFFIX,at.pzhg.me
   - DOMAIN-SUFFIX,atelier.alica.idv.tw
-  - DOMAIN-SUFFIX,ath01.dnscry.pt
   - DOMAIN-SUFFIX,atl01.dnscry.pt
   - DOMAIN-SUFFIX,atlantic.dyn1.de
   - DOMAIN-SUFFIX,atris.cyou
@@ -554,7 +546,6 @@ payload:
   - DOMAIN-SUFFIX,batshitcrazy.ddns.net
   - DOMAIN-SUFFIX,baxtri.ru
   - DOMAIN-SUFFIX,bazooki-infra.dev
-  - DOMAIN-SUFFIX,bcn01.dnscry.pt
   - DOMAIN-SUFFIX,be2aja.my.id
   - DOMAIN-SUFFIX,beacon.dog
   - DOMAIN-SUFFIX,beacon.fengli.love
@@ -594,7 +585,6 @@ payload:
   - DOMAIN-SUFFIX,bne01.dnscry.pt
   - DOMAIN-SUFFIX,bobr.netphoenix.ru
   - DOMAIN-SUFFIX,bobstrecansky.com
-  - DOMAIN-SUFFIX,bog01.dnscry.pt
   - DOMAIN-SUFFIX,bom02.dnscry.pt
   - DOMAIN-SUFFIX,borisov.page
   - DOMAIN-SUFFIX,botclassic.com
@@ -640,7 +630,6 @@ payload:
   - DOMAIN-SUFFIX,chungocoai.name.vn
   - DOMAIN-SUFFIX,chynik.duckdns.org
   - DOMAIN-SUFFIX,circumitor.de
-  - DOMAIN-SUFFIX,cld.996969.xyz
   - DOMAIN-SUFFIX,cleanbrowsing.org
   - DOMAIN-SUFFIX,clic.eu.org
   - DOMAIN-SUFFIX,closetruth.date
@@ -696,7 +685,6 @@ payload:
   - DOMAIN-SUFFIX,d.hansj.cc
   - DOMAIN-SUFFIX,d.hxhd.cc
   - DOMAIN-SUFFIX,d.luwei.date
-  - DOMAIN-SUFFIX,d.niaox.com
   - DOMAIN-SUFFIX,d.onlyjsmylord.org
   - DOMAIN-SUFFIX,d.toairs.com
   - DOMAIN-SUFFIX,d.zhanchuraevv.ru
@@ -829,7 +817,6 @@ payload:
   - DOMAIN-SUFFIX,dns.abhimankolte.com
   - DOMAIN-SUFFIX,dns.abppro.ru
   - DOMAIN-SUFFIX,dns.adguard.com
-  - DOMAIN-SUFFIX,dns.adguarddns.com
   - DOMAIN-SUFFIX,dns.adnull.com
   - DOMAIN-SUFFIX,dns.adrianlam.com
   - DOMAIN-SUFFIX,dns.adriason.co.uk
@@ -847,7 +834,6 @@ payload:
   - DOMAIN-SUFFIX,dns.alwynstudio.com.au
   - DOMAIN-SUFFIX,dns.amigo-mgn.ru
   - DOMAIN-SUFFIX,dns.andreykiv.com
-  - DOMAIN-SUFFIX,dns.anitelekom.ru
   - DOMAIN-SUFFIX,dns.anne-pierre.fr
   - DOMAIN-SUFFIX,dns.anon.no
   - DOMAIN-SUFFIX,dns.api.gandi.net
@@ -927,7 +913,6 @@ payload:
   - DOMAIN-SUFFIX,dns.chalkychalk.com
   - DOMAIN-SUFFIX,dns.chaosen3.co.uk
   - DOMAIN-SUFFIX,dns.charraud.eu
-  - DOMAIN-SUFFIX,dns.chattalk.link
   - DOMAIN-SUFFIX,dns.chenu.ch
   - DOMAIN-SUFFIX,dns.chilimac.net
   - DOMAIN-SUFFIX,dns.chillstice.com
@@ -945,7 +930,6 @@ payload:
   - DOMAIN-SUFFIX,dns.clickhost.xyz
   - DOMAIN-SUFFIX,dns.clickitsolutionsllc.com
   - DOMAIN-SUFFIX,dns.cloud.ionutl.ro
-  - DOMAIN-SUFFIX,dns.cloud88.com.au
   - DOMAIN-SUFFIX,dns.cloudfiction.eu
   - DOMAIN-SUFFIX,dns.cloudflare.com
   - DOMAIN-SUFFIX,dns.cloudseriousshit.com
@@ -970,7 +954,6 @@ payload:
   - DOMAIN-SUFFIX,dns.cwlys.com
   - DOMAIN-SUFFIX,dns.cybertonic.tech
   - DOMAIN-SUFFIX,dns.cynthialabs.net
-  - DOMAIN-SUFFIX,dns.cysynex.cloud
   - DOMAIN-SUFFIX,dns.d365.in
   - DOMAIN-SUFFIX,dns.d4d.moe
   - DOMAIN-SUFFIX,dns.d94.xyz
@@ -1058,7 +1041,6 @@ payload:
   - DOMAIN-SUFFIX,dns.falkenthal.org
   - DOMAIN-SUFFIX,dns.family.fraiss.at
   - DOMAIN-SUFFIX,dns.fancyorg.at
-  - DOMAIN-SUFFIX,dns.farakaft.ir
   - DOMAIN-SUFFIX,dns.farshidhakimy.de
   - DOMAIN-SUFFIX,dns.farshmc.ru
   - DOMAIN-SUFFIX,dns.faze.dev
@@ -1109,7 +1091,6 @@ payload:
   - DOMAIN-SUFFIX,dns.google
   - DOMAIN-SUFFIX,dns.google.com
   - DOMAIN-SUFFIX,dns.goshawk22.uk
-  - DOMAIN-SUFFIX,dns.green-ping.lol
   - DOMAIN-SUFFIX,dns.griffioen.me
   - DOMAIN-SUFFIX,dns.grinevich.eu
   - DOMAIN-SUFFIX,dns.groupesaintmichel.fr
@@ -1152,7 +1133,6 @@ payload:
   - DOMAIN-SUFFIX,dns.huizegunsing.nl
   - DOMAIN-SUFFIX,dns.hujiayucc.cn
   - DOMAIN-SUFFIX,dns.huseynov.work
-  - DOMAIN-SUFFIX,dns.hussainnabil.de
   - DOMAIN-SUFFIX,dns.huth.nu
   - DOMAIN-SUFFIX,dns.huyizhou.com
   - DOMAIN-SUFFIX,dns.hva.li
@@ -1283,7 +1263,6 @@ payload:
   - DOMAIN-SUFFIX,dns.maitrekuc.fr
   - DOMAIN-SUFFIX,dns.malhuda.com
   - DOMAIN-SUFFIX,dns.mandre.dev
-  - DOMAIN-SUFFIX,dns.maolaohei.xyz
   - DOMAIN-SUFFIX,dns.maomaovpn.com
   - DOMAIN-SUFFIX,dns.marasov.id
   - DOMAIN-SUFFIX,dns.marbledfennec.net
@@ -1370,7 +1349,6 @@ payload:
   - DOMAIN-SUFFIX,dns.novali.date
   - DOMAIN-SUFFIX,dns.novg.net
   - DOMAIN-SUFFIX,dns.npe.bz
-  - DOMAIN-SUFFIX,dns.ntccloud.vn
   - DOMAIN-SUFFIX,dns.ntr.lol
   - DOMAIN-SUFFIX,dns.nubecita.biz
   - DOMAIN-SUFFIX,dns.nullgate.net
@@ -1399,7 +1377,6 @@ payload:
   - DOMAIN-SUFFIX,dns.p55k.com
   - DOMAIN-SUFFIX,dns.pacificmonster.com
   - DOMAIN-SUFFIX,dns.paesa.es
-  - DOMAIN-SUFFIX,dns.paliska.net
   - DOMAIN-SUFFIX,dns.panszelescik.pl
   - DOMAIN-SUFFIX,dns.pari.network
   - DOMAIN-SUFFIX,dns.pastorov.ru
@@ -1417,7 +1394,6 @@ payload:
   - DOMAIN-SUFFIX,dns.pine-home.de
   - DOMAIN-SUFFIX,dns.pizzari.me
   - DOMAIN-SUFFIX,dns.ploshadi.ru
-  - DOMAIN-SUFFIX,dns.pmxu.link
   - DOMAIN-SUFFIX,dns.pnh.my.id
   - DOMAIN-SUFFIX,dns.pointless.chat
   - DOMAIN-SUFFIX,dns.polarwinds.ru
@@ -1529,7 +1505,6 @@ payload:
   - DOMAIN-SUFFIX,dns.soldier.terumi.club
   - DOMAIN-SUFFIX,dns.spil.co.id
   - DOMAIN-SUFFIX,dns.spirio.fr
-  - DOMAIN-SUFFIX,dns.srijan.site
   - DOMAIN-SUFFIX,dns.srinivasrao.co.in
   - DOMAIN-SUFFIX,dns.sshub.win
   - DOMAIN-SUFFIX,dns.sstomp.nl
@@ -1565,7 +1540,6 @@ payload:
   - DOMAIN-SUFFIX,dns.technostriker.com
   - DOMAIN-SUFFIX,dns.teckhawk.be
   - DOMAIN-SUFFIX,dns.tefuir0829.cn
-  - DOMAIN-SUFFIX,dns.teknologiku.com
   - DOMAIN-SUFFIX,dns.telekom.de
   - DOMAIN-SUFFIX,dns.tesem.dog
   - DOMAIN-SUFFIX,dns.thebuckners.org
@@ -1619,7 +1593,6 @@ payload:
   - DOMAIN-SUFFIX,dns.vk09.ru
   - DOMAIN-SUFFIX,dns.vlo.cc
   - DOMAIN-SUFFIX,dns.vmath.my.id
-  - DOMAIN-SUFFIX,dns.vmisch.tech
   - DOMAIN-SUFFIX,dns.vod11.xyz
   - DOMAIN-SUFFIX,dns.volsap.ovh
   - DOMAIN-SUFFIX,dns.vpn.i81.ru
@@ -1646,7 +1619,6 @@ payload:
   - DOMAIN-SUFFIX,dns.wns.watch
   - DOMAIN-SUFFIX,dns.woodyli.dev
   - DOMAIN-SUFFIX,dns.wryhf.com
-  - DOMAIN-SUFFIX,dns.x8net.ru
   - DOMAIN-SUFFIX,dns.xcapenet.ru
   - DOMAIN-SUFFIX,dns.xhost.tw
   - DOMAIN-SUFFIX,dns.xinwujiang.cn
@@ -1700,7 +1672,6 @@ payload:
   - DOMAIN-SUFFIX,dns1.gms.net.id
   - DOMAIN-SUFFIX,dns1.in-berlin.de
   - DOMAIN-SUFFIX,dns1.irumatech.com
-  - DOMAIN-SUFFIX,dns1.iwall.cloud
   - DOMAIN-SUFFIX,dns1.kla44.de
   - DOMAIN-SUFFIX,dns1.klcd.eu
   - DOMAIN-SUFFIX,dns1.kostydenis.me
@@ -1743,7 +1714,6 @@ payload:
   - DOMAIN-SUFFIX,dns2.h0schi.cloud
   - DOMAIN-SUFFIX,dns2.idsam.com
   - DOMAIN-SUFFIX,dns2.in-berlin.de
-  - DOMAIN-SUFFIX,dns2.keinewerbung.me
   - DOMAIN-SUFFIX,dns2.klcd.eu
   - DOMAIN-SUFFIX,dns2.kloiber.co.at
   - DOMAIN-SUFFIX,dns2.lezainski.com
@@ -1778,7 +1748,6 @@ payload:
   - DOMAIN-SUFFIX,dnscache.e-utp.net
   - DOMAIN-SUFFIX,dnscache0.ns71.net
   - DOMAIN-SUFFIX,dnscdn.bai0012.com
-  - DOMAIN-SUFFIX,dnscity.org
   - DOMAIN-SUFFIX,dnsdoh.art
   - DOMAIN-SUFFIX,dnsenc.com
   - DOMAIN-SUFFIX,dnsforfamily.com
@@ -1859,7 +1828,6 @@ payload:
   - DOMAIN-SUFFIX,doh.blahdns.com
   - DOMAIN-SUFFIX,doh.blitarian.com
   - DOMAIN-SUFFIX,doh.blockerdns.com
-  - DOMAIN-SUFFIX,doh.boje8.me
   - DOMAIN-SUFFIX,doh.bortzmeyer.fr
   - DOMAIN-SUFFIX,doh.bt.com
   - DOMAIN-SUFFIX,doh.buzz
@@ -1890,7 +1858,6 @@ payload:
   - DOMAIN-SUFFIX,doh.eastus.pi-dns.com
   - DOMAIN-SUFFIX,doh.eddi.net
   - DOMAIN-SUFFIX,doh.edifiels.ru
-  - DOMAIN-SUFFIX,doh.eieidns.com
   - DOMAIN-SUFFIX,doh.ersei.net
   - DOMAIN-SUFFIX,doh.eu.dnswarden.com
   - DOMAIN-SUFFIX,doh.excdn.eu.org
@@ -1904,7 +1871,6 @@ payload:
   - DOMAIN-SUFFIX,doh.gcp.pathofgrace.com
   - DOMAIN-SUFFIX,doh.greenwood.eu.org
   - DOMAIN-SUFFIX,doh.hosterra.tech
-  - DOMAIN-SUFFIX,doh.hshkf.com
   - DOMAIN-SUFFIX,doh.hugang8.cn
   - DOMAIN-SUFFIX,doh.ibr.cs.tu-bs.de
   - DOMAIN-SUFFIX,doh.immerda.ch
@@ -2101,7 +2067,6 @@ payload:
   - DOMAIN-SUFFIX,f4ckdns.dl4mt.dev
   - DOMAIN-SUFFIX,f4f.es
   - DOMAIN-SUFFIX,facomunit.ddns.net
-  - DOMAIN-SUFFIX,family.adguarddns.com
   - DOMAIN-SUFFIX,family.dns.doubleangels.com
   - DOMAIN-SUFFIX,family.dns.teknoholistik.com
   - DOMAIN-SUFFIX,family.dot.dns.yandex.net
@@ -2159,7 +2124,6 @@ payload:
   - DOMAIN-SUFFIX,gaia.plonknet.com
   - DOMAIN-SUFFIX,galileo.math.unipd.it
   - DOMAIN-SUFFIX,gammesfeld.eu
-  - DOMAIN-SUFFIX,gate.blackboxdynamics.io
   - DOMAIN-SUFFIX,gateway.fomichev.cloud
   - DOMAIN-SUFFIX,gauss.pp.ua
   - DOMAIN-SUFFIX,gb-cov-w-f-1.nashkan.net
@@ -2223,7 +2187,6 @@ payload:
   - DOMAIN-SUFFIX,gustamadh.dynv6.net
   - DOMAIN-SUFFIX,gva01.dnscry.pt
   - DOMAIN-SUFFIX,gw1.dns.haynetwork.id
-  - DOMAIN-SUFFIX,gye01.dnscry.pt
   - DOMAIN-SUFFIX,gztech.me
   - DOMAIN-SUFFIX,h.gjrick.tw
   - DOMAIN-SUFFIX,h.ra3.in
@@ -2255,7 +2218,6 @@ payload:
   - DOMAIN-SUFFIX,hk.jason666.top
   - DOMAIN-SUFFIX,hk.reaticle.com
   - DOMAIN-SUFFIX,hk.rslvr.eu
-  - DOMAIN-SUFFIX,hk.yoosoo.cc
   - DOMAIN-SUFFIX,hk154.flyzhouyc.win
   - DOMAIN-SUFFIX,hk2.1833015459.site
   - DOMAIN-SUFFIX,hk2.ooroot.com
@@ -2305,7 +2267,6 @@ payload:
   - DOMAIN-SUFFIX,host.jerry-lee.uk
   - DOMAIN-SUFFIX,host8.248.cloudhost.in.th
   - DOMAIN-SUFFIX,host94.rheingold.com.ua
-  - DOMAIN-SUFFIX,hostdare.qtxd.net
   - DOMAIN-SUFFIX,hr.i81.ru
   - DOMAIN-SUFFIX,hrsm12181.duckdns.org
   - DOMAIN-SUFFIX,hshh.org
@@ -2357,7 +2318,6 @@ payload:
   - DOMAIN-SUFFIX,i-puppy.ru
   - DOMAIN-SUFFIX,i.dns-over-https.tk
   - DOMAIN-SUFFIX,iah01.dnscry.pt
-  - DOMAIN-SUFFIX,iana.tenta.io
   - DOMAIN-SUFFIX,ib.systems
   - DOMAIN-SUFFIX,ibksturm.synology.me
   - DOMAIN-SUFFIX,ibuki.cgnat.net
@@ -2372,7 +2332,6 @@ payload:
   - DOMAIN-SUFFIX,incaseineeditoneday.com
   - DOMAIN-SUFFIX,ind01.dnscry.pt
   - DOMAIN-SUFFIX,ines.zfn.uni-bremen.de
-  - DOMAIN-SUFFIX,ingenmannsland.online
   - DOMAIN-SUFFIX,inpssh.online
   - DOMAIN-SUFFIX,internetsehat.bebasid.com
   - DOMAIN-SUFFIX,intertop.link
@@ -2465,7 +2424,6 @@ payload:
   - DOMAIN-SUFFIX,kids.vietdns.vn
   - DOMAIN-SUFFIX,kihn.org
   - DOMAIN-SUFFIX,kilabit.info
-  - DOMAIN-SUFFIX,killads.vpms.xyz
   - DOMAIN-SUFFIX,kintoun.alves.cc
   - DOMAIN-SUFFIX,kiri.nonexiste.net
   - DOMAIN-SUFFIX,kirov.unicom.cloudns.be
@@ -2534,7 +2492,6 @@ payload:
   - DOMAIN-SUFFIX,look.xshentx.org
   - DOMAIN-SUFFIX,lorc17-dns.komeho.info
   - DOMAIN-SUFFIX,lordsalty.com
-  - DOMAIN-SUFFIX,los01.dnscry.pt
   - DOMAIN-SUFFIX,los02.dnscry.pt
   - DOMAIN-SUFFIX,lothuscorp.com.br
   - DOMAIN-SUFFIX,lslnyjq.uk
@@ -2586,7 +2543,6 @@ payload:
   - DOMAIN-SUFFIX,minilla.store
   - DOMAIN-SUFFIX,mipelinusa.ddns.net
   - DOMAIN-SUFFIX,mipelinusa.duckdns.org
-  - DOMAIN-SUFFIX,mnl01.dnscry.pt
   - DOMAIN-SUFFIX,mnsvless.ikwb.com
   - DOMAIN-SUFFIX,moamao.shop
   - DOMAIN-SUFFIX,moe01.dnscry.pt
@@ -2654,7 +2610,6 @@ payload:
   - DOMAIN-SUFFIX,nextcloud.d-alahmad.de
   - DOMAIN-SUFFIX,nextdns.io
   - DOMAIN-SUFFIX,nfnvr.noiselink.com
-  - DOMAIN-SUFFIX,ngk81hc.tplinkdns.com
   - DOMAIN-SUFFIX,nickcan.xyz
   - DOMAIN-SUFFIX,nicknarayong.ddns.net
   - DOMAIN-SUFFIX,nicko99.duckdns.org
@@ -2687,9 +2642,7 @@ payload:
   - DOMAIN-SUFFIX,nrt.core.access.zznet.fun
   - DOMAIN-SUFFIX,nrusimha.crabdance.com
   - DOMAIN-SUFFIX,ns.00dani.me
-  - DOMAIN-SUFFIX,ns.77ll.ru
   - DOMAIN-SUFFIX,ns.cd
-  - DOMAIN-SUFFIX,ns.ciwer.cn
   - DOMAIN-SUFFIX,ns.data.haus
   - DOMAIN-SUFFIX,ns.dnsviewer.org
   - DOMAIN-SUFFIX,ns.etalk.ai
@@ -2713,7 +2666,6 @@ payload:
   - DOMAIN-SUFFIX,ns1.opennameserver.org
   - DOMAIN-SUFFIX,ns1.qquack.org
   - DOMAIN-SUFFIX,ns1.recursive.dnsbycomodo.com
-  - DOMAIN-SUFFIX,ns1.sc-lezhi.com
   - DOMAIN-SUFFIX,ns2.4netguides.org
   - DOMAIN-SUFFIX,ns2.flodns.net
   - DOMAIN-SUFFIX,ns2.hjk.kr
@@ -2762,7 +2714,6 @@ payload:
   - DOMAIN-SUFFIX,opendns.com
   - DOMAIN-SUFFIX,opendns.one
   - DOMAIN-SUFFIX,opennic.i2pd.xyz
-  - DOMAIN-SUFFIX,opennic.tenta.io
   - DOMAIN-SUFFIX,opennic1.eth-services.de
   - DOMAIN-SUFFIX,opennic2.i2pd.xyz
   - DOMAIN-SUFFIX,oracle001.330k.biz
@@ -2814,7 +2765,6 @@ payload:
   - DOMAIN-SUFFIX,petinom.online
   - DOMAIN-SUFFIX,phantom3c.net
   - DOMAIN-SUFFIX,philqoo.com
-  - DOMAIN-SUFFIX,phl01.dnscry.pt
   - DOMAIN-SUFFIX,phonedns.dr3ff1c13nt.com
   - DOMAIN-SUFFIX,phongg.vn
   - DOMAIN-SUFFIX,phx01.dnscry.pt
@@ -2893,7 +2843,6 @@ payload:
   - DOMAIN-SUFFIX,rdd01.dnscry.pt
   - DOMAIN-SUFFIX,rdjdns.ajraspi.xyz
   - DOMAIN-SUFFIX,rdns.faelix.net
-  - DOMAIN-SUFFIX,rdns2.chancetheitguy.com
   - DOMAIN-SUFFIX,reaplay.ddns.net
   - DOMAIN-SUFFIX,redsea.meetz.pw
   - DOMAIN-SUFFIX,regiopolis.cloud
@@ -3084,7 +3033,6 @@ payload:
   - DOMAIN-SUFFIX,sterlingharris.com
   - DOMAIN-SUFFIX,sto01.dnscry.pt
   - DOMAIN-SUFFIX,sto02.dnscry.pt
-  - DOMAIN-SUFFIX,strangerandomdomain1.space
   - DOMAIN-SUFFIX,strassmair.org
   - DOMAIN-SUFFIX,stratus.bugz.fr
   - DOMAIN-SUFFIX,stroveer.hopto.org
@@ -3137,7 +3085,6 @@ payload:
   - DOMAIN-SUFFIX,tienpham.id.vn
   - DOMAIN-SUFFIX,tiger.dns.qwer.pw
   - DOMAIN-SUFFIX,tigrons.ru
-  - DOMAIN-SUFFIX,timedns.net
   - DOMAIN-SUFFIX,timmes.nl
   - DOMAIN-SUFFIX,tj.jamesxue.xyz
   - DOMAIN-SUFFIX,tk2-404-43267.vs.sakura.ne.jp
@@ -3186,7 +3133,6 @@ payload:
   - DOMAIN-SUFFIX,unasw.eu
   - DOMAIN-SUFFIX,uncensored-dot.dnswarden.com
   - DOMAIN-SUFFIX,uncensoreddns.org
-  - DOMAIN-SUFFIX,unfiltered.adguarddns.com
   - DOMAIN-SUFFIX,unfiltered.joindns4.eu
   - DOMAIN-SUFFIX,unicast.censurfridns.dk
   - DOMAIN-SUFFIX,unicast.censurfridns.nu
@@ -3245,7 +3191,6 @@ payload:
   - DOMAIN-SUFFIX,v971850.macloud.host
   - DOMAIN-SUFFIX,vadim.online
   - DOMAIN-SUFFIX,vasiliysoldatkin.ru
-  - DOMAIN-SUFFIX,vasilykumaev.ru
   - DOMAIN-SUFFIX,vasya-sad.px.i81.ru
   - DOMAIN-SUFFIX,vasya.vpn.i81.ru
   - DOMAIN-SUFFIX,vd.i81.ru
@@ -3329,7 +3274,6 @@ payload:
   - DOMAIN-SUFFIX,woc.beelstb.biz.id
   - DOMAIN-SUFFIX,workcavestl.duckdns.org
   - DOMAIN-SUFFIX,wp-test.fvds.ru
-  - DOMAIN-SUFFIX,wtbd02.solowalk.top
   - DOMAIN-SUFFIX,www.vpn.stroialliance.com
   - DOMAIN-SUFFIX,wyx.cloud
   - DOMAIN-SUFFIX,x-o-x.duckdns.org
@@ -3429,7 +3373,7 @@ payload:
   - IP-CIDR,101.236.69.43/32,no-resolve
   - IP-CIDR,101.34.229.193/32,no-resolve
   - IP-CIDR,101.6.6.6/32,no-resolve
-  - IP-CIDR,102.113.119.252/32,no-resolve
+  - IP-CIDR,102.113.66.174/32,no-resolve
   - IP-CIDR,102.202.192.108/32,no-resolve
   - IP-CIDR,102.209.21.176/32,no-resolve
   - IP-CIDR,102.216.79.237/32,no-resolve
@@ -3473,7 +3417,6 @@ payload:
   - IP-CIDR,103.230.156.210/32,no-resolve
   - IP-CIDR,103.249.238.124/32,no-resolve
   - IP-CIDR,103.28.53.16/32,no-resolve
-  - IP-CIDR,103.29.215.236/32,no-resolve
   - IP-CIDR,103.29.68.118/32,no-resolve
   - IP-CIDR,103.37.152.92/32,no-resolve
   - IP-CIDR,103.38.250.55/32,no-resolve
@@ -3492,7 +3435,6 @@ payload:
   - IP-CIDR,103.87.68.196/32,no-resolve
   - IP-CIDR,103.97.179.29/32,no-resolve
   - IP-CIDR,103.99.133.110/32,no-resolve
-  - IP-CIDR,104.128.62.173/32,no-resolve
   - IP-CIDR,104.156.154.11/32,no-resolve
   - IP-CIDR,104.16.132.229/32,no-resolve
   - IP-CIDR,104.16.133.229/32,no-resolve
@@ -3705,6 +3647,7 @@ payload:
   - IP-CIDR,144.24.182.35/32,no-resolve
   - IP-CIDR,144.76.135.223/32,no-resolve
   - IP-CIDR,144.76.199.177/32,no-resolve
+  - IP-CIDR,145.239.87.80/32,no-resolve
   - IP-CIDR,146.112.41.2/32,no-resolve
   - IP-CIDR,146.112.41.3/32,no-resolve
   - IP-CIDR,146.112.41.4/32,no-resolve
@@ -3764,7 +3707,6 @@ payload:
   - IP-CIDR,150.230.197.227/32,no-resolve
   - IP-CIDR,150.230.203.199/32,no-resolve
   - IP-CIDR,150.230.35.93/32,no-resolve
-  - IP-CIDR,150.95.255.38/32,no-resolve
   - IP-CIDR,151.145.200.30/32,no-resolve
   - IP-CIDR,151.242.74.231/32,no-resolve
   - IP-CIDR,151.243.222.94/32,no-resolve
@@ -3893,6 +3835,11 @@ payload:
   - IP-CIDR,17.132.84.7/32,no-resolve
   - IP-CIDR,17.132.84.8/32,no-resolve
   - IP-CIDR,17.132.84.9/32,no-resolve
+  - IP-CIDR,17.132.85.4/32,no-resolve
+  - IP-CIDR,17.132.85.5/32,no-resolve
+  - IP-CIDR,17.132.85.6/32,no-resolve
+  - IP-CIDR,17.132.85.8/32,no-resolve
+  - IP-CIDR,17.132.85.9/32,no-resolve
   - IP-CIDR,17.132.88.111/32,no-resolve
   - IP-CIDR,17.132.88.112/32,no-resolve
   - IP-CIDR,17.132.88.113/32,no-resolve
@@ -3993,6 +3940,14 @@ payload:
   - IP-CIDR,172.104.92.233/32,no-resolve
   - IP-CIDR,172.104.93.80/32,no-resolve
   - IP-CIDR,172.105.152.133/32,no-resolve
+  - IP-CIDR,172.224.145.131/32,no-resolve
+  - IP-CIDR,172.224.145.132/32,no-resolve
+  - IP-CIDR,172.224.145.134/32,no-resolve
+  - IP-CIDR,172.224.145.135/32,no-resolve
+  - IP-CIDR,172.224.145.137/32,no-resolve
+  - IP-CIDR,172.224.145.138/32,no-resolve
+  - IP-CIDR,172.224.145.139/32,no-resolve
+  - IP-CIDR,172.224.145.141/32,no-resolve
   - IP-CIDR,172.224.172.67/32,no-resolve
   - IP-CIDR,172.224.172.68/32,no-resolve
   - IP-CIDR,172.224.172.69/32,no-resolve
@@ -4004,6 +3959,10 @@ payload:
   - IP-CIDR,172.224.172.75/32,no-resolve
   - IP-CIDR,172.224.172.76/32,no-resolve
   - IP-CIDR,172.224.172.77/32,no-resolve
+  - IP-CIDR,172.224.71.131/32,no-resolve
+  - IP-CIDR,172.224.71.132/32,no-resolve
+  - IP-CIDR,172.224.71.133/32,no-resolve
+  - IP-CIDR,172.224.71.134/32,no-resolve
   - IP-CIDR,172.232.185.183/32,no-resolve
   - IP-CIDR,172.232.50.116/32,no-resolve
   - IP-CIDR,172.233.147.42/32,no-resolve
@@ -4039,7 +3998,7 @@ payload:
   - IP-CIDR,176.123.163.193/32,no-resolve
   - IP-CIDR,176.123.4.231/32,no-resolve
   - IP-CIDR,176.147.243.164/32,no-resolve
-  - IP-CIDR,176.164.141.214/32,no-resolve
+  - IP-CIDR,176.164.149.178/32,no-resolve
   - IP-CIDR,176.9.1.117/32,no-resolve
   - IP-CIDR,176.9.242.147/32,no-resolve
   - IP-CIDR,176.9.25.158/32,no-resolve
@@ -4081,7 +4040,7 @@ payload:
   - IP-CIDR,18.252.156.1/32,no-resolve
   - IP-CIDR,18.254.96.167/32,no-resolve
   - IP-CIDR,182.40.70.12/32,no-resolve
-  - IP-CIDR,182.8.193.166/32,no-resolve
+  - IP-CIDR,182.8.193.247/32,no-resolve
   - IP-CIDR,183.171.200.162/32,no-resolve
   - IP-CIDR,185.106.96.210/32,no-resolve
   - IP-CIDR,185.107.80.84/32,no-resolve
@@ -4119,7 +4078,6 @@ payload:
   - IP-CIDR,185.228.168.168/32,no-resolve
   - IP-CIDR,185.228.168.9/32,no-resolve
   - IP-CIDR,185.231.100.106/32,no-resolve
-  - IP-CIDR,185.231.100.108/32,no-resolve
   - IP-CIDR,185.231.100.57/32,no-resolve
   - IP-CIDR,185.234.98.39/32,no-resolve
   - IP-CIDR,185.236.104.254/32,no-resolve
@@ -4140,7 +4098,6 @@ payload:
   - IP-CIDR,185.47.221.200/32,no-resolve
   - IP-CIDR,185.49.141.38/32,no-resolve
   - IP-CIDR,185.51.200.1/32,no-resolve
-  - IP-CIDR,185.51.200.2/32,no-resolve
   - IP-CIDR,185.64.79.5/32,no-resolve
   - IP-CIDR,185.66.143.178/32,no-resolve
   - IP-CIDR,185.69.161.122/32,no-resolve
@@ -4216,6 +4173,7 @@ payload:
   - IP-CIDR,194.242.2.9/32,no-resolve
   - IP-CIDR,194.26.213.15/32,no-resolve
   - IP-CIDR,194.32.107.48/32,no-resolve
+  - IP-CIDR,194.32.107.93/32,no-resolve
   - IP-CIDR,194.36.144.87/32,no-resolve
   - IP-CIDR,194.39.205.10/32,no-resolve
   - IP-CIDR,194.50.33.11/32,no-resolve
@@ -4266,6 +4224,7 @@ payload:
   - IP-CIDR,20.239.160.119/32,no-resolve
   - IP-CIDR,20.253.254.201/32,no-resolve
   - IP-CIDR,200.1.123.46/32,no-resolve
+  - IP-CIDR,200.25.22.68/32,no-resolve
   - IP-CIDR,202.172.26.36/32,no-resolve
   - IP-CIDR,202.5.222.2/32,no-resolve
   - IP-CIDR,202.61.236.67/32,no-resolve
@@ -4309,10 +4268,10 @@ payload:
   - IP-CIDR,212.18.3.5/32,no-resolve
   - IP-CIDR,212.185.200.25/32,no-resolve
   - IP-CIDR,212.227.88.232/32,no-resolve
+  - IP-CIDR,212.32.255.84/32,no-resolve
   - IP-CIDR,212.47.228.136/32,no-resolve
   - IP-CIDR,212.60.61.246/32,no-resolve
   - IP-CIDR,212.60.63.246/32,no-resolve
-  - IP-CIDR,212.7.209.207/32,no-resolve
   - IP-CIDR,213.136.13.36/32,no-resolve
   - IP-CIDR,213.142.225.9/32,no-resolve
   - IP-CIDR,213.155.91.68/32,no-resolve
@@ -4337,7 +4296,7 @@ payload:
   - IP-CIDR,216.250.97.148/32,no-resolve
   - IP-CIDR,216.73.159.26/32,no-resolve
   - IP-CIDR,217.0.43.114/32,no-resolve
-  - IP-CIDR,217.0.43.162/32,no-resolve
+  - IP-CIDR,217.0.43.66/32,no-resolve
   - IP-CIDR,217.12.221.61/32,no-resolve
   - IP-CIDR,217.138.219.219/32,no-resolve
   - IP-CIDR,217.138.220.243/32,no-resolve
@@ -4449,6 +4408,7 @@ payload:
   - IP-CIDR,37.221.95.37/32,no-resolve
   - IP-CIDR,37.228.129.160/32,no-resolve
   - IP-CIDR,37.235.49.95/32,no-resolve
+  - IP-CIDR,37.252.251.157/32,no-resolve
   - IP-CIDR,37.27.218.33/32,no-resolve
   - IP-CIDR,37.59.122.154/32,no-resolve
   - IP-CIDR,38.107.232.115/32,no-resolve
@@ -4806,7 +4766,7 @@ payload:
   - IP-CIDR,84.33.12.158/32,no-resolve
   - IP-CIDR,85.11.167.8/32,no-resolve
   - IP-CIDR,85.195.238.15/32,no-resolve
-  - IP-CIDR,85.195.238.18/32,no-resolve
+  - IP-CIDR,85.195.238.32/32,no-resolve
   - IP-CIDR,85.214.236.96/32,no-resolve
   - IP-CIDR,85.215.153.54/32,no-resolve
   - IP-CIDR,85.215.156.33/32,no-resolve
@@ -4910,6 +4870,7 @@ payload:
   - IP-CIDR,94.198.159.3/32,no-resolve
   - IP-CIDR,94.198.41.235/32,no-resolve
   - IP-CIDR,94.23.71.64/32,no-resolve
+  - IP-CIDR,94.237.69.95/32,no-resolve
   - IP-CIDR,94.247.43.254/32,no-resolve
   - IP-CIDR,94.26.35.57/32,no-resolve
   - IP-CIDR,95.111.236.127/32,no-resolve
@@ -4922,6 +4883,7 @@ payload:
   - IP-CIDR,95.179.152.253/32,no-resolve
   - IP-CIDR,95.179.161.138/32,no-resolve
   - IP-CIDR,95.215.19.53/32,no-resolve
+  - IP-CIDR,95.216.138.141/32,no-resolve
   - IP-CIDR,95.216.187.185/32,no-resolve
   - IP-CIDR,95.216.213.181/32,no-resolve
   - IP-CIDR,95.216.74.122/32,no-resolve
@@ -4931,6 +4893,7 @@ payload:
   - IP-CIDR,95.217.25.217/32,no-resolve
   - IP-CIDR,95.217.6.67/32,no-resolve
   - IP-CIDR,95.229.168.3/32,no-resolve
+  - IP-CIDR,96.106.7.232/32,no-resolve
   - IP-CIDR,96.106.7.234/32,no-resolve
   - IP-CIDR,96.113.151.145/32,no-resolve
   - IP-CIDR,96.44.178.68/32,no-resolve
