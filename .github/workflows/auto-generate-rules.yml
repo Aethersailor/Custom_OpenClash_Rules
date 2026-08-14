@@ -18,6 +18,8 @@ on:
       - 'rule/Game_Download_CDN.list'
       - 'rule/game_rule/**/*.list'
       - 'py/generate_rules.py'
+      - 'py/generate_stash_configs.py'
+      - 'cfg/Custom_Clash*.ini'
   workflow_dispatch:
     inputs:
       source_before_sha:
@@ -77,11 +79,15 @@ jobs:
       - name: Set up pinned Mihomo
         uses: ./.github/actions/setup-mihomo
 
-      - name: Generate YAML and MRS providers
-        run: python py/generate_rules.py --mihomo mihomo
+      - name: Generate derived rules and Stash templates
+        run: |
+          python py/generate_rules.py --mihomo mihomo
+          python py/generate_stash_configs.py
 
       - name: Test generation and conversion logic
-        run: python py/generate_rules.py --check --mihomo mihomo
+        run: |
+          python py/generate_rules.py --check --mihomo mihomo
+          python py/generate_stash_configs.py --check
 
       - name: Commit and push changes
         id: publish
@@ -96,12 +102,14 @@ jobs:
             ':(glob)rule/*.mrs'
             ':(glob)rule/game_rule/**/*.yaml'
             ':(glob)rule/game_rule/**/*.mrs'
+            ':(glob)cfg/Custom_Stash*.ini'
           )
           generated_excludes=(
             ':(exclude,glob)rule/*.yaml'
             ':(exclude,glob)rule/*.mrs'
             ':(exclude,glob)rule/game_rule/**/*.yaml'
             ':(exclude,glob)rule/game_rule/**/*.mrs'
+            ':(exclude,glob)cfg/Custom_Stash*.ini'
           )
           remote_main_sha() {
             git ls-remote --exit-code origin refs/heads/main |
@@ -115,6 +123,8 @@ jobs:
             git reset --hard origin/main
             python py/generate_rules.py --mihomo mihomo
             python py/generate_rules.py --check --mihomo mihomo
+            python py/generate_stash_configs.py
+            python py/generate_stash_configs.py --check
 
             unexpected_changes="$(
               git status --short --untracked-files=all -- . \
@@ -168,7 +178,7 @@ jobs:
           echo "Final revision to publish: $publication_sha"
           echo "publication_sha=$publication_sha" >> "$GITHUB_OUTPUT"
 
-  # Generation and Mihomo validation already ran against the exact worktree that
+  # Generation and format validation already ran against the exact worktree that
   # was published. Purge its changed cache keys without re-running unrelated tests.
   purge-generated:
     needs: generate-rules

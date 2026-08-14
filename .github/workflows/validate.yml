@@ -10,6 +10,7 @@ on:
       - 'py/**'
       - 'script/**/*.js'
       - 'shell/**/*.sh'
+      - 'cfg/*.ini'
       - 'cfg/yaml/**'
   pull_request:
     branches:
@@ -25,6 +26,7 @@ on:
       - 'rule/game_rule/**/*.list'
       - 'script/**/*.js'
       - 'shell/**/*.sh'
+      - 'cfg/*.ini'
       - 'cfg/yaml/**'
   workflow_dispatch:
 
@@ -145,6 +147,7 @@ jobs:
           python py/generate_game_cdn.py --check
           python py/update_encrypted_dns.py --check
           python py/generate_rules.py --check --mihomo mihomo
+          python py/generate_stash_configs.py --check
 
       - name: Validate complete Mihomo templates
         run: |

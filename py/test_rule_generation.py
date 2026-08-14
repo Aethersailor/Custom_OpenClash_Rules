@@ -6,6 +6,7 @@ from pathlib import Path
 
 import generate_game_cdn
 import generate_rules
+import generate_stash_configs
 import extract_uu_game_routes
 import update_encrypted_dns
 
@@ -195,6 +196,123 @@ class DerivedRuleGenerationTests(unittest.TestCase):
         )
         self.assertFalse(orphan_yaml.exists())
         self.assertFalse(orphan_mrs.exists())
+
+
+class StashConfigGenerationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.root = Path(__file__).resolve().parents[1]
+        cls.outputs = generate_stash_configs.generated_outputs(cls.root)
+
+    def test_generates_nine_deterministic_outputs(self) -> None:
+        expected_paths = {
+            Path("cfg/Custom_Stash.ini"),
+            Path("cfg/Custom_Stash_Fallback.ini"),
+            Path("cfg/Custom_Stash_Lite.ini"),
+            Path("cfg/Custom_Stash_Lite_Fallback.ini"),
+            Path("cfg/Custom_Stash_GFW.ini"),
+            Path("cfg/Custom_Stash_GFW_Fallback.ini"),
+            Path("cfg/Custom_Stash_Full.ini"),
+            Path("cfg/Custom_Stash_Full_Fallback.ini"),
+            Path("cfg/Custom_Stash_Mainland.ini"),
+        }
+        self.assertEqual(set(self.outputs), expected_paths)
+        self.assertEqual(
+            self.outputs,
+            generate_stash_configs.generated_outputs(self.root),
+        )
+        self.assertEqual(
+            self.outputs[Path("cfg/Custom_Stash.ini")],
+            self.outputs[Path("cfg/Custom_Stash_Mainland.ini")],
+        )
+
+    def test_committed_outputs_are_current(self) -> None:
+        self.assertEqual(
+            generate_stash_configs.check_outputs(self.root, self.outputs),
+            (),
+        )
+
+    def test_projects_stash_rules_without_silent_unsupported_rules(self) -> None:
+        for relative_path, content in self.outputs.items():
+            with self.subTest(path=relative_path):
+                rulesets = [
+                    line for line in content.splitlines() if line.startswith("ruleset=")
+                ]
+                providers = [line for line in rulesets if ",[]" not in line]
+                self.assertEqual(
+                    len(providers),
+                    generate_stash_configs.EXPECTED_PROVIDER_COUNTS[
+                        relative_path.name
+                    ],
+                )
+                self.assertFalse(any("SRC-PORT" in line for line in rulesets))
+                self.assertFalse(
+                    any(
+                        ",[]GEOIP," in line
+                        and ",[]GEOIP,cn,no-resolve" not in line
+                        for line in rulesets
+                    )
+                )
+
+        destination_ports, omitted = (
+            generate_stash_configs.extract_direct_port_rules(
+                "DOMAIN-SUFFIX,example.com\n"
+                "IP-CIDR,192.0.2.0/24,no-resolve\n"
+                "SRC-PORT,41641\n"
+                "DST-PORT,7844\n"
+            )
+        )
+        self.assertEqual(destination_ports, ("DST-PORT,7844",))
+        self.assertEqual(omitted, ("SRC-PORT,41641",))
+        with self.assertRaisesRegex(ValueError, "unmapped Stash rule"):
+            generate_stash_configs.extract_direct_port_rules(
+                "SRC-PORT,41641\nSRC-PORT,12345\n"
+            )
+
+    def test_projects_only_portable_stash_groups(self) -> None:
+        for relative_path, content in self.outputs.items():
+            group_lines = [
+                line
+                for line in content.splitlines()
+                if line.startswith("custom_proxy_group=")
+            ]
+            with self.subTest(path=relative_path):
+                self.assertTrue(group_lines)
+                self.assertFalse(
+                    any(
+                        generate_stash_configs.BENCHMARK_URL in line
+                        or generate_stash_configs.SELECT_PSEUDO_URL in line
+                        for line in group_lines
+                    )
+                )
+                for line in group_lines:
+                    selectors = generate_stash_configs.group_dynamic_selectors(line)
+                    self.assertLessEqual(len(selectors), 1)
+                    self.assertFalse(
+                        any("," in selector or "(?<" in selector for selector in selectors)
+                    )
+
+    def test_rejects_dangling_stash_policy_references(self) -> None:
+        generate_stash_configs.validate_policy_reference_closure(
+            "ruleset=Proxy,[]FINAL\n"
+            "custom_proxy_group=Proxy`select`[]DIRECT\n"
+        )
+        with self.assertRaisesRegex(ValueError, "policy-group member"):
+            generate_stash_configs.validate_policy_reference_closure(
+                "ruleset=Proxy,[]FINAL\n"
+                "custom_proxy_group=Proxy`select`[]Missing\n"
+            )
+        with self.assertRaisesRegex(ValueError, "ruleset policy"):
+            generate_stash_configs.validate_policy_reference_closure(
+                "ruleset=Missing,[]FINAL\n"
+                "custom_proxy_group=Proxy`select`[]DIRECT\n"
+            )
+        with self.assertRaisesRegex(ValueError, "cyclic"):
+            generate_stash_configs.validate_policy_reference_closure(
+                "ruleset=A,[]FINAL\n"
+                "custom_proxy_group=A`select`[]B\n"
+                "custom_proxy_group=B`select`[]A\n"
+            )
 
 
 class UuRouteExtractionTests(unittest.TestCase):
