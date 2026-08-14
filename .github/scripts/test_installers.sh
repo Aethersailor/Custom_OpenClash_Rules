@@ -163,29 +163,63 @@ run_feed_suite() (
     source_file="$temporary/distfeeds.list"
     target_file="$temporary/distfeeds.mirror"
     DISTRO_ID=immortalwrt
-
     printf '%s\n' \
+        'https://packages.example.invalid/custom/prefix/snapshots/packages/x86_64/base/packages.adb' \
+        >"$source_file"
+    rewrite_feed_to_mirror "$source_file" "$target_file" ||
+        fail "$installer arbitrary ImmortalWrt feed normalization"
+    assert_equal \
         'https://mirrors.cernet.edu.cn/immortalwrt/snapshots/packages/x86_64/base/packages.adb' \
-        >"$source_file"
-    rewrite_feed_to_mirror "$source_file" "$target_file" ||
-        fail "$installer CERNET ImmortalWrt feed acceptance"
-    cmp -s "$source_file" "$target_file" ||
-        fail "$installer CERNET ImmortalWrt feed preservation"
+        "$(cat "$target_file")" "$installer ImmortalWrt CERNET target"
 
     printf '%s\n' \
-        'https://downloads.immortalwrt.org/snapshots/packages/x86_64/base/packages.adb' \
+        'src/gz custom_core http://mirror.example/releases/24.10.4/targets/x86/64/packages' \
+        'src/gz custom_extra https://another.example/prefix/releases/24.10.4/packages/x86_64/base' \
+        >"$source_file"
+    DISTRO_ID=openwrt
+    rewrite_feed_to_mirror "$source_file" "$target_file" ||
+        fail "$installer arbitrary OpenWrt feed normalization"
+    expected_openwrt='src/gz custom_core https://cernet.mirrors.ustc.edu.cn/openwrt/releases/24.10.4/targets/x86/64/packages
+src/gz custom_extra https://cernet.mirrors.ustc.edu.cn/openwrt/releases/24.10.4/packages/x86_64/base'
+    assert_equal "$expected_openwrt" "$(cat "$target_file")" \
+        "$installer OpenWrt CERNET targets"
+
+    printf '%s\n' \
+        '# preserve comments in the temporary feed' \
+        'https://downloads.openwrt.org/snapshots/packages/x86_64/base/packages.adb' \
+        'https://packages.example.invalid/vendor/packages.adb' \
         >"$source_file"
     rewrite_feed_to_mirror "$source_file" "$target_file" ||
-        fail "$installer official ImmortalWrt feed rewrite"
-    grep -Fq \
-        'https://mirror.nju.edu.cn/immortalwrt/snapshots/packages/x86_64/base/packages.adb' \
-        "$target_file" || fail "$installer ImmortalWrt mirror target"
+        fail "$installer OpenWrt snapshot normalization"
+    expected_snapshot='# preserve comments in the temporary feed
+https://cernet.mirrors.ustc.edu.cn/openwrt/snapshots/packages/x86_64/base/packages.adb'
+    assert_equal "$expected_snapshot" "$(cat "$target_file")" \
+        "$installer excludes unrelated temporary feeds"
 
-    printf '%s\n' 'https://packages.example.invalid/custom/packages.adb' \
+    printf '%s\n' 'https://packages.example.invalid/vendor/packages.adb' \
         >"$source_file"
     if rewrite_feed_to_mirror "$source_file" "$target_file"; then
-        fail "$installer unknown ImmortalWrt feed rejection"
+        fail "$installer feed without a standard distribution path"
     fi
+
+    live_feed="$temporary/live-distfeeds.list"
+    original_feed='https://mirror.user.example/prefix/snapshots/packages/x86_64/base/packages.adb
+https://packages.user.example/vendor/packages.adb'
+    printf '%s\n' "$original_feed" >"$live_feed"
+    TMP_DIR="$temporary/runtime"
+    mkdir -p "$TMP_DIR"
+    FEED_FILE=$live_feed
+    FEED_BACKUP=''
+    FEED_CHANGED=0
+    DISTRO_ID=immortalwrt
+    prepare_temporary_feed ||
+        fail "$installer temporary CERNET feed preparation"
+    expected_live='https://mirrors.cernet.edu.cn/immortalwrt/snapshots/packages/x86_64/base/packages.adb'
+    assert_equal "$expected_live" "$(cat "$live_feed")" \
+        "$installer temporary feed content"
+    restore_feed || fail "$installer original feed restoration"
+    assert_equal "$original_feed" "$(cat "$live_feed")" \
+        "$installer exact original feed restoration"
 )
 
 run_model_suite() (

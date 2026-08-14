@@ -305,31 +305,37 @@ rewrite_feed_to_mirror() {
     target_file=$2
 
     case "$DISTRO_ID" in
-        immortalwrt)
-            if ! grep -Fq 'https://downloads.immortalwrt.org' "$source_file" &&
-                ! grep -Fq 'https://mirrors.vsean.net/openwrt' "$source_file" &&
-                ! grep -Fq 'https://mirrors.cernet.edu.cn/immortalwrt' "$source_file" &&
-                ! grep -Fq 'https://mirror.nju.edu.cn/immortalwrt' "$source_file"; then
-                return 1
-            fi
-            sed \
-                -e 's,https://downloads\.immortalwrt\.org,https://mirror.nju.edu.cn/immortalwrt,g' \
-                -e 's,https://mirrors\.vsean\.net/openwrt,https://mirror.nju.edu.cn/immortalwrt,g' \
-                "$source_file" >"$target_file"
-            ;;
-        openwrt)
-            if ! grep -Fq 'https://downloads.openwrt.org' "$source_file" &&
-                ! grep -Fq 'https://mirrors.ustc.edu.cn/openwrt' "$source_file"; then
-                return 1
-            fi
-            sed \
-                -e 's,https://downloads\.openwrt\.org,https://mirrors.ustc.edu.cn/openwrt,g' \
-                "$source_file" >"$target_file"
-            ;;
+        immortalwrt) mirror_root='https://mirrors.cernet.edu.cn/immortalwrt' ;;
+        openwrt) mirror_root='https://cernet.mirrors.ustc.edu.cn/openwrt' ;;
         *)
             return 1
             ;;
     esac
+
+    awk -v mirror_root="$mirror_root" '
+        /^[[:space:]]*($|#)/ {
+            print
+            next
+        }
+        {
+            url_start = match($0, /https?:\/\//)
+            if (!url_start) next
+
+            url = substr($0, url_start)
+            path_start = index(url, "/releases/")
+            snapshot_start = index(url, "/snapshots/")
+            if (!path_start || (snapshot_start && snapshot_start < path_start)) {
+                path_start = snapshot_start
+            }
+            if (!path_start) next
+
+            print substr($0, 1, url_start - 1) mirror_root substr(url, path_start)
+            rewritten++
+        }
+        END {
+            if (!rewritten) exit 1
+        }
+    ' "$source_file" >"$target_file"
 }
 
 prepare_temporary_feed() {
@@ -342,14 +348,8 @@ prepare_temporary_feed() {
     rewrite_feed_to_mirror "$FEED_BACKUP" "$feed_candidate" || return 1
 
     case "$DISTRO_ID" in
-        immortalwrt)
-            if grep -Fq 'https://mirrors.cernet.edu.cn/immortalwrt' "$feed_candidate"; then
-                FEED_MIRROR_LABEL="CERNET ImmortalWrt 镜像"
-            else
-                FEED_MIRROR_LABEL="南京大学 ImmortalWrt 镜像"
-            fi
-            ;;
-        openwrt) FEED_MIRROR_LABEL="中国科学技术大学 OpenWrt 镜像" ;;
+        immortalwrt) FEED_MIRROR_LABEL="CERNET ImmortalWrt 镜像" ;;
+        openwrt) FEED_MIRROR_LABEL="CERNET OpenWrt 镜像" ;;
     esac
 
     if cmp -s "$FEED_BACKUP" "$feed_candidate"; then
