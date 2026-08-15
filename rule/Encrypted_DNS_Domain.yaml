@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3346
+# TOTAL: 3348
 
 payload:
   - '+.003153.xyz'
@@ -995,6 +995,7 @@ payload:
   - '+.dns.dyn1.de'
   - '+.dns.dynx.pro'
   - '+.dns.dzkji.cn'
+  - '+.dns.easyhns.com'
   - '+.dns.echpochmak-club.ru'
   - '+.dns.edc-pws.com'
   - '+.dns.eddi.net'
@@ -2224,6 +2225,7 @@ payload:
   - '+.hknat.ooguy.com'
   - '+.hkns.gzelvis.com'
   - '+.hkt.kozow.com'
+  - '+.hnsdoh.com'
   - '+.hockaday.synology.me'
   - '+.hole.elbschloss.xyz'
   - '+.home-server.store'
