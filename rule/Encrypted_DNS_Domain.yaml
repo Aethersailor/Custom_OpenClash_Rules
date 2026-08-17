@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3360
+# TOTAL: 3365
 
 payload:
   - '+.003153.xyz'
@@ -2210,6 +2210,7 @@ payload:
   - '+.hfgx.shop'
   - '+.hg8.asia'
   - '+.hgrps.eu'
+  - '+.himedns.com'
   - '+.himeko297.asuscomm.com'
   - '+.hitian.me'
   - '+.hk-adg.bluenight.me'
@@ -2320,6 +2321,7 @@ payload:
   - '+.httpsdns.baidu.com'
   - '+.huntllcx.cn'
   - '+.huv01.dnscry.pt'
+  - '+.hydra.plan9-ns1.com'
   - '+.i-puppy.ru'
   - '+.i.dns-over-https.tk'
   - '+.iah01.dnscry.pt'
@@ -2487,6 +2489,7 @@ payload:
   - '+.lindung.pp.ua'
   - '+.link.altapo.ru'
   - '+.lion.dns.qwer.pw'
+  - '+.lion.yazilimatolye.com'
   - '+.lis01.dnscry.pt'
   - '+.lis02.dnscry.pt'
   - '+.llk01.dnscry.pt'
@@ -2519,6 +2522,7 @@ payload:
   - '+.mask-api.fe.apple-dns.net'
   - '+.mask-canary.icloud.com'
   - '+.mask-h2.icloud.com'
+  - '+.mask.icloud.com'
   - '+.mastergad.me'
   - '+.masters-of-cloud.de'
   - '+.math.netlab.my.id'
@@ -2701,6 +2705,7 @@ payload:
   - '+.oci02.at9.eu'
   - '+.oculta.me'
   - '+.odoh-target-noads-se.alekberg.net'
+  - '+.odoh-target-noads.alekberg.net'
   - '+.odoh-target-se.alekberg.net'
   - '+.odoh-target.alekberg.net'
   - '+.odvr.nic.cz'
