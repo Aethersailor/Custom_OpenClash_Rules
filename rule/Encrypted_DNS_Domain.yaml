@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3365
+# TOTAL: 3366
 
 payload:
   - '+.003153.xyz'
@@ -2978,6 +2978,7 @@ payload:
   - '+.sg-w-p-1.nashkan.net'
   - '+.sg.101818.xyz'
   - '+.sg.rslvr.eu'
+  - '+.sg.yepdns.com'
   - '+.sg1.dnswarden.com'
   - '+.sg2.ooroot.com'
   - '+.sgd.559299366.xyz'
