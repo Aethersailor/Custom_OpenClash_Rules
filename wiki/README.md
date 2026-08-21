@@ -52,3 +52,8 @@
 ### 9️⃣ [其他说明](9.其他说明.md)
 
 > 包含 OpenClash `dev` 版本升级、个性化配置与小众域名收录说明。
+
+---
+
+> [!TIP]
+> 欢迎加入 [Custom OpenClash Rules Telegram 讨论群组](https://t.me/custom_openclash_rules_group)。本项目及相关项目的更新信息均统一在群组内发布。
