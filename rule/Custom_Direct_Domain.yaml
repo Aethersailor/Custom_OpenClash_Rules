@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 696
+# TOTAL: 697
 
 payload:
   - '*m-team*'
@@ -598,6 +598,7 @@ payload:
   - '+.vclbrokers.com'
   - '+.vcltrade.com'
   - '+.vgogbuy.com'
+  - '+.vpsjyz.com'
   - '+.vv1865.com'
   - '+.warmheart.top'
   - '+.we-stats.com'
