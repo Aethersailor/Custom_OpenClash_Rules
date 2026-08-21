@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 702
+# TOTAL: 703
 
 payload:
   - '*m-team*'
@@ -97,6 +97,7 @@ payload:
   - '+.babawar.com'
   - '+.baicaf.com'
   - '+.baiyishequ.com'
+  - '+.bajie.la'
   - '+.banban.work'
   - '+.batchat.com'
   - '+.bdcb.cc'
