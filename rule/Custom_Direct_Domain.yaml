@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 706
+# TOTAL: 707
 
 payload:
   - '*m-team*'
@@ -710,3 +710,4 @@ payload:
   - '+.zzqrgs3148.vip'
   - '+.zzr.cc'
   - '+.zzz-log-upload-os.hoyoverse.com'
+  - '+.zzzmap.com'
