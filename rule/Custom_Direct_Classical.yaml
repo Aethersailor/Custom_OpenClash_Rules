@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 719
+# TOTAL: 720
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -122,6 +122,7 @@ payload:
   - DOMAIN-SUFFIX,cangjie-lang.net
   - DOMAIN-SUFFIX,ccw.site
   - DOMAIN-SUFFIX,cdn.ist
+  - DOMAIN-SUFFIX,cdut.top
   - DOMAIN-SUFFIX,centbrowser.net
   - DOMAIN-SUFFIX,cftunnel.com
   - DOMAIN-SUFFIX,cg3da.com
