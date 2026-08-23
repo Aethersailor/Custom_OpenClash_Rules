@@ -36,6 +36,7 @@
 | [`Prevent_DNS_Leak.conf`](./Prevent_DNS_Leak.conf) | 综合降低 DNS 泄漏风险 | DNS、规则、最终策略及专用策略组 | 可选 |
 | [`Block_Encrypted_DNS.conf`](./Block_Encrypted_DNS.conf) | 阻断常见 DoH、DoT、DoQ 绕过 | Rule Provider 与前置阻断规则 | 否 |
 | [`Add_No_Resolve.conf`](./Add_No_Resolve.conf) | 为目标 IP 类规则补充 `no-resolve` | `rules` 与 `sub-rules` | 否 |
+| [`Add_Custom_Direct_Rules.conf`](./Add_Custom_Direct_Rules.conf) | 为其他规则方案附加本项目的域名与 IP 直连规则 | Rule Provider 与前置直连规则 | 否 |
 | [`Rule_Provider_Format_Fix.conf`](./Rule_Provider_Format_Fix.conf) | 根据文件扩展名补全或修正 Rule Provider 的 `format` | `rule-providers.*.format` | 否 |
 | [`Direct_Game_Download.conf`](./Direct_Game_Download.conf) | 让 Steam CDN 和游戏平台下载流量直连 | Rule Provider 与前置直连规则 | 否 |
 | [`Set_GeoIP_Database_URL.conf`](./Set_GeoIP_Database_URL.conf) | 替换 GeoIP MMDB 与 DAT 数据源 | OpenClash GEO 数据库地址 | 否 |
@@ -46,6 +47,7 @@
 - 想系统降低 DNS 泄漏风险：使用 `Prevent_DNS_Leak.conf`。
 - 只想阻止终端使用常见加密 DNS 绕过本地 DNS：使用 `Block_Encrypted_DNS.conf`。
 - 只需要给 IP 类规则补充 `no-resolve`：使用 `Add_No_Resolve.conf`。
+- 正在使用其他规则方案，只想附加本项目的域名与 IP 直连规则：使用 `Add_Custom_Direct_Rules.conf`。
 - Rule Provider 因缺少或写错 `format` 导致加载失败：使用 `Rule_Provider_Format_Fix.conf`。
 - 希望游戏下载和更新尽量走直连：使用 `Direct_Game_Download.conf`。
 - 只想替换 OpenClash 使用的数据源：选择对应的 `Set_*.conf` 模块。
@@ -54,14 +56,14 @@
 
 ## ⚙️ 通用使用方法
 
-1. 进入「服务」→「OpenClash」→「覆写设置」→「覆写模块」。
-2. 新增远程覆写模块。
-3. 模块类型选择「HTTP」。
-4. 填写便于识别的模块名称。
-5. 从本文复制 testingcf 或 GitHub Raw 订阅地址。
+1. 进入「服务」→「OpenClash」运行状态页。
+2. 点击页面顶部的「覆写模块」按钮，打开覆写编辑器。
+3. 点击模块卡片栏中的「+」，选择「Subscribe」新建远程模块。
+4. 填写便于识别的模块名称，并从本文复制 testingcf 或 GitHub Raw 订阅地址。
+5. 将匹配配置文件设置为 `all` 或当前配置文件。不要留空，否则模块不会生效。
 6. 仅在模块说明要求时填写 `EN_KEY` 参数。
-7. 启用模块并保存设置。
-8. 重新应用配置并启动 OpenClash。
+7. 添加并启用模块，然后保存设置。
+8. 重启 OpenClash，使插件重新生成运行配置。
 9. 检查 OpenClash 日志及最终运行配置，确认模块已经生效。
 
 不同 OpenClash 版本的菜单名称可能略有差异。
@@ -198,6 +200,55 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 > [!NOTE]
 > `Prevent_DNS_Leak.conf` 已经包含本模块的核心功能。启用前者时，不需要再启用本模块。
+
+---
+
+### 🎯 Add Custom Direct Rules
+
+[`Add_Custom_Direct_Rules.conf`](./Add_Custom_Direct_Rules.conf) 面向正在使用其他规则方案的用户。模块仅附加本项目维护的域名与 IP 直连规则，不要求改用本项目的完整配置、订阅转换模板或 YAML。
+
+主要操作：
+
+- 添加 `Custom_Direct_Domain.mrs` 域名 Rule Provider；
+- 添加 `Custom_Direct_IP.mrs` IP Rule Provider；
+- 将两条 `DIRECT` 规则插入现有规则列表顶部；
+- 为 IP Rule Provider 的引用规则添加 `no-resolve`；
+- 保留原有 `rules` 和 `rule-providers`。
+
+jsDelivr CDN：
+
+```text
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Add_Custom_Direct_Rules.conf
+```
+
+GitHub Raw：
+
+```text
+https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Add_Custom_Direct_Rules.conf
+```
+
+验收重点：
+
+```yaml
+rule-providers:
+  COCR-Custom-Direct-Domain:
+    behavior: domain
+    format: mrs
+  COCR-Custom-Direct-IP:
+    behavior: ipcidr
+    format: mrs
+
+rules:
+  - RULE-SET,COCR-Custom-Direct-Domain,DIRECT
+  - RULE-SET,COCR-Custom-Direct-IP,DIRECT,no-resolve
+```
+
+限制：
+
+- 不附加本项目的端口规则、代理规则或其他配置；
+- 两条规则位于原有规则之前，命中目标会优先使用 `DIRECT`；
+- 如果其他覆写模块随后改写整个 `rules` 或同名 Provider，本模块的结果可能被覆盖；
+- `no-resolve` 只阻止当前 IP 规则为匹配目标主动触发 DNS 解析。更早的规则已经完成解析时，仍可使用解析结果匹配。
 
 ---
 
@@ -348,6 +399,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 | --- | --- |
 | `Prevent_DNS_Leak.conf` 与 `Block_Encrypted_DNS.conf` | ✅ 可组合，分别处理 OpenClash 内部 DNS 路由和终端常见加密 DNS |
 | `Prevent_DNS_Leak.conf` 与 `Add_No_Resolve.conf` | ❌ 不需要组合，前者已包含 `no-resolve` 处理 |
+| `Add_Custom_Direct_Rules.conf` 与 `Add_No_Resolve.conf` | ✅ 可以组合；本模块的 IP 规则已带 `no-resolve`，后者可继续处理其他 IP 类规则 |
 | `Rule_Provider_Format_Fix.conf` 与其他单功能模块 | ✅ 通常可以组合，但需确认没有故意使用与扩展名不一致的 `format` |
 | `Direct_Game_Download.conf` 与数据源替换模块 | ✅ 通常可以组合，两者修改范围不同 |
 | `yaml/` 中的远程 YAML 模块与根目录单功能模块 | ⚠️ 可以组合，但应检查模块顺序和最终运行配置 |
