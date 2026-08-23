@@ -37,6 +37,7 @@
 | [`Block_Encrypted_DNS.conf`](./Block_Encrypted_DNS.conf) | 阻断常见 DoH、DoT、DoQ 绕过 | Rule Provider 与前置阻断规则 | 否 |
 | [`Add_No_Resolve.conf`](./Add_No_Resolve.conf) | 为目标 IP 类规则补充 `no-resolve` | `rules` 与 `sub-rules` | 否 |
 | [`Add_Custom_Direct_Rules.conf`](./Add_Custom_Direct_Rules.conf) | 为其他规则方案附加本项目的域名与 IP 直连规则 | Rule Provider 与前置直连规则 | 否 |
+| [`Replace_China_MRS_With_GeoSite.conf`](./Replace_China_MRS_With_GeoSite.conf) | 将大陆绕过自动添加的 MRS 改为 `geosite:cn` | Fake-IP Filter 与对应 Rule Provider | 否 |
 | [`Rule_Provider_Format_Fix.conf`](./Rule_Provider_Format_Fix.conf) | 根据文件扩展名补全或修正 Rule Provider 的 `format` | `rule-providers.*.format` | 否 |
 | [`Direct_Game_Download.conf`](./Direct_Game_Download.conf) | 让 Steam CDN 和游戏平台下载流量直连 | Rule Provider 与前置直连规则 | 否 |
 | [`Set_GeoIP_Database_URL.conf`](./Set_GeoIP_Database_URL.conf) | 替换 GeoIP MMDB 与 DAT 数据源 | OpenClash GEO 数据库地址 | 否 |
@@ -48,6 +49,7 @@
 - 只想阻止终端使用常见加密 DNS 绕过本地 DNS：使用 `Block_Encrypted_DNS.conf`。
 - 只需要给 IP 类规则补充 `no-resolve`：使用 `Add_No_Resolve.conf`。
 - 正在使用其他规则方案，只想附加本项目的域名与 IP 直连规则：使用 `Add_Custom_Direct_Rules.conf`。
+- 已启用 Fake-IP 与大陆 IP 绕过，希望使用本地 `geosite:cn` 代替自动添加的 `cn.mrs`：使用 `Replace_China_MRS_With_GeoSite.conf`。
 - Rule Provider 因缺少或写错 `format` 导致加载失败：使用 `Rule_Provider_Format_Fix.conf`。
 - 希望游戏下载和更新尽量走直连：使用 `Direct_Game_Download.conf`。
 - 只想替换 OpenClash 使用的数据源：选择对应的 `Set_*.conf` 模块。
@@ -252,6 +254,61 @@ rules:
 
 ---
 
+### 🇨🇳 Replace China MRS With GeoSite
+
+[`Replace_China_MRS_With_GeoSite.conf`](./Replace_China_MRS_With_GeoSite.conf) 面向已经启用 Fake-IP 模式和大陆 IP 绕过的配置。OpenClash 启动时会为默认 `blacklist` 模式自动添加 `rule-set:oc-cn-domain` 及对应的 `cn.mrs` Rule Provider。本模块在 OpenClash 完成自动修改后，将其替换为 Mihomo 本地 GeoSite 数据库中的 `geosite:cn`。
+
+主要操作：
+
+- 从现有 `dns.fake-ip-filter` 中删除 `rule-set:oc-cn-domain`；
+- 删除已有的 `geosite:cn` 后重新追加，确保最终只保留一份；
+- 删除不再使用的 `rule-providers.oc-cn-domain`；
+- 保留其他 Fake-IP Filter 和 Rule Provider。
+
+jsDelivr CDN：
+
+```text
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Replace_China_MRS_With_GeoSite.conf
+```
+
+GitHub Raw：
+
+```text
+https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Replace_China_MRS_With_GeoSite.conf
+```
+
+前置条件：
+
+- OpenClash 使用 Fake-IP 模式；
+- 已启用「绕过中国大陆 IP」或对应的 IPv6 绕过功能；
+- `fake-ip-filter-mode` 为 `blacklist` 或未设置；
+- 当前 GeoSite 数据库包含 `cn` 分类；
+- 其他路由规则没有引用 `oc-cn-domain` Provider。
+
+验收重点：
+
+```yaml
+dns:
+  fake-ip-filter:
+    - geosite:cn
+```
+
+- `dns.fake-ip-filter` 中不存在 `rule-set:oc-cn-domain`；
+- `rule-providers` 中不存在 `oc-cn-domain`；
+- 其他原有 Fake-IP Filter 保持不变；
+- OpenClash 配置校验通过，Mihomo 内核正常启动。
+
+限制：
+
+- 不会自动启用 Fake-IP 模式或大陆 IP 绕过功能；
+- 不适用于 `fake-ip-filter-mode: rule` 或 `whitelist`；
+- `geosite:cn` 使用当前本地 GeoSite 数据，内容和更新时间可能与 OpenClash 自动下载的 `cn.mrs` 不完全一致；
+- 如果其他规则仍引用 `oc-cn-domain`，删除 Provider 会导致配置校验失败；
+- OpenClash 的自动添加日志早于覆写模块执行，因此启动日志仍可能显示已添加 `rule-set:oc-cn-domain`。应以最终运行配置为准；
+- 如果其他覆写模块随后修改 `dns.fake-ip-filter` 或 `rule-providers.oc-cn-domain`，本模块结果可能被覆盖。
+
+---
+
 ### 🧩 Rule Provider Format Fix
 
 [`Rule_Provider_Format_Fix.conf`](./Rule_Provider_Format_Fix.conf) 用于根据 Rule Provider 的实际文件扩展名补全或修正 `format` 字段，以解决传统 subconverter 转换出的配置文件缺少 `format:` 字段的问题。
@@ -400,6 +457,8 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 | `Prevent_DNS_Leak.conf` 与 `Block_Encrypted_DNS.conf` | ✅ 可组合，分别处理 OpenClash 内部 DNS 路由和终端常见加密 DNS |
 | `Prevent_DNS_Leak.conf` 与 `Add_No_Resolve.conf` | ❌ 不需要组合，前者已包含 `no-resolve` 处理 |
 | `Add_Custom_Direct_Rules.conf` 与 `Add_No_Resolve.conf` | ✅ 可以组合；本模块的 IP 规则已带 `no-resolve`，后者可继续处理其他 IP 类规则 |
+| `Replace_China_MRS_With_GeoSite.conf` 与 `Set_China_IP_Route_URL.conf` | ✅ 可以组合，分别修改 Fake-IP Filter 和 Chnroute 数据源 |
+| `Replace_China_MRS_With_GeoSite.conf` 与其他 DNS/Fake-IP 覆写 | ⚠️ 检查模块顺序和最终运行配置，避免重复或重新添加 `oc-cn-domain` |
 | `Rule_Provider_Format_Fix.conf` 与其他单功能模块 | ✅ 通常可以组合，但需确认没有故意使用与扩展名不一致的 `format` |
 | `Direct_Game_Download.conf` 与数据源替换模块 | ✅ 通常可以组合，两者修改范围不同 |
 | `yaml/` 中的远程 YAML 模块与根目录单功能模块 | ⚠️ 可以组合，但应检查模块顺序和最终运行配置 |
