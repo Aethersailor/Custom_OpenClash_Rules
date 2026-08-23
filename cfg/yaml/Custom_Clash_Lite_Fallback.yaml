@@ -271,7 +271,7 @@ rule-providers:
     format: yaml
   Custom_Direct_Domain:
     behavior: domain
-    interval: 28800
+    interval: 1800
     type: http
     url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.mrs"
     format: mrs
