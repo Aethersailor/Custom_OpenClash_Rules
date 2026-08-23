@@ -3,17 +3,20 @@ site_url: https://aethersailor.github.io/Custom_OpenClash_Rules/
 docs_dir: wiki
 nav:
   - Home: README.md
-  - 配置教程:
+  - 快速开始:
       - OpenClash 设置方案: 1.OpenClash-设置方案.md
       - OpenWrt IPv6 设置方案: 2.OpenWrt-IPv6-设置方案.md
-      - OpenClash 零碎教程: 3.OpenClash-零碎教程.md
-  - 进阶与参考:
-      - 无插件广告拦截功能设置方案: 4.无插件广告拦截功能设置方案.md
-      - 故障排除: 5.故障排除.md
+  - 资源与贡献:
+      - 其他说明: 3.其他说明.md
+  - 故障排除:
+      - 常见问题与诊断: 4.故障排除.md
+  - 进阶阅读:
+      - 一些零碎的教程: 5.一些零碎的教程.md
       - 关于“旁路由”的一些吐槽: 6.关于“旁路由”的一些吐槽.md
-      - 一些零碎的教程: 7.一些零碎的教程.md
-      - 其他推荐项目: 8.其他推荐项目.md
-      - 其他说明: 9.其他说明.md
+      - 其他推荐项目: 7.其他推荐项目.md
+  - 历史归档:
+      - Smart 内核相关说明（已归档）: 8.OpenClash-零碎教程.md
+      - 无插件广告拦截方案（已归档）: 9.无插件广告拦截功能设置方案.md
 theme:
   name: material
 plugins:

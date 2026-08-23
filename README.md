@@ -110,6 +110,8 @@ Wiki 负责解释「为什么这样配置」，各资源目录负责提供可以
 
 OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包括标准版、轻量版、极简 GFW 版、重度分流版，以及文件名以 `_Fallback` 结尾的对应故障转移版。旧版如未显示对应条目，可手动填写远程模板地址，具体方法和地址见 [`cfg/`](cfg/)。
 
+内置模板名称以 OpenClash `dev` 分支的 [`sub_ini.list`](https://github.com/vernesong/OpenClash/blob/dev/luci-app-openclash/root/usr/share/openclash/res/sub_ini.list) 为准。OpenClash 后续调整内置清单时，界面显示可能与本文不同；本项目模板仍可通过远程地址手动使用。
+
 本项目提供标准版、轻量版、极简 GFW 版、重度分流版及对应的故障转移版，并提供自建节点相关 YAML。版本定位、参数、远程地址和详细操作请进入相应目录查看。
 
 **入口：**
@@ -129,12 +131,17 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 > [!IMPORTANT]
 > **本项目的直连规则由维护者与社区用户共同收集。**
 
-如需补充直连域名，可以选择以下方式：
+请根据实际需求选择提交入口：
 
-- **手动添加：** 前往 [Rule-Bot](https://t.me/asailor_rulebot)，在 Telegram 中查询并添加域名。
-- **自动添加：** 部署 [Rule-Bot Client](https://github.com/Aethersailor/Rule-Bot-Client)，自动收集 Mihomo 最终由 `MATCH` 处理的域名；用户主动启用发送后，符合 Rule-Bot 检查策略的域名会自动添加。
+| 需求 | 建议入口 |
+| --- | --- |
+| 手动查询或提交少量直连域名 | 使用 [Rule-Bot 公共实例](https://t.me/asailor_rulebot) |
+| 持续收集 Mihomo 最终由 `MATCH` 处理的域名 | 按照 [Rule-Bot Client 接入公共 Rule-Bot](https://github.com/Aethersailor/Rule-Bot-Client/wiki/%E6%8E%A5%E5%85%A5%E5%85%AC%E5%85%B1-Rule-Bot) 完成配置；客户端默认仅保存到本地，发送需要主动启用 |
+| 批量提交已经核实的域名 | 修改 [`rule/Custom_Direct.list`](rule/Custom_Direct.list) 并提交 Pull Request |
+| 无法使用 Rule-Bot，或需要附带完整证据 | 使用 [大陆直连域名 Issue 表单](https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/new?template=02_direct_domain_submission.yml) |
+| OpenClash 插件无法启动、界面异常或安装失败 | 使用 [OpenClash 官方 Issue 选择页](https://github.com/vernesong/OpenClash/issues/new/choose) |
 
-也可以通过 GitHub Issue 或 Pull Request 提交。
+提交前请先搜索现有规则、Issues 和 Pull Requests，并提供实际命中的规则、策略和可复核证据。不要在公开页面提交订阅地址、Token、节点凭据或其他敏感信息。
 
 [`rule/game_rule/`](rule/game_rule/) 另存放人工整理的独立游戏规则。目录中的 `.list` 是规则来源，工作流会自动生成 YAML 和 MRS 派生文件，但不会更新规则内容或将其加载到主配置。使用前应核对适用区服、更新时间和实际命中情况。
 
@@ -194,31 +201,26 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 > [!IMPORTANT]
 > 如排查后确认问题由 OpenClash 插件本身引起、与本项目配置或规则无关（如插件无法启动、界面异常、安装失败等），建议：
 >
-> - 前往 [OpenClash 仓库](https://github.com/vernesong/OpenClash) 提交 Issue；
+> - 前往 [OpenClash 官方 Issue 选择页](https://github.com/vernesong/OpenClash/issues/new/choose) 提交 Issue；
 > - 或加入 OpenClash 官方 Telegram 讨论群组咨询（可在插件 LuCI 首页点击 Telegram 图标进入）。
+
+普通规则、模板、脚本和文档问题可以使用[本项目 Issue 选择页](https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/new/choose)。涉及凭据泄漏、下载校验绕过或脚本执行链的安全问题，请先阅读[安全报告说明](SECURITY.md)，不要在公开 Issue 中披露细节。
 
 ---
 
-## ⚠️ 特别声明
+## ⚠️ 使用说明与责任边界
 
-> [!WARNING]
-> **使用须知：**
->
-> 1. 本项目仅用于 OpenWrt 系统及其插件 OpenClash 的技术学习与研究，相关内容属于中立性的技术实现示例与实验性资料，不涉及任何具体使用场景或用途导向。
-> 2. 使用者在访问、使用、复制本项目内容前，应自行确认其所在地及相关司法辖区的法律法规允许，且在学习和研究后于 24 小时内删除相关内容。
-> 3. 本项目内容不得用于任何违反适用法律法规的用途。使用者在使用本项目内容时，应自行遵守其所在地及相关司法辖区的法律法规，包括中华人民共和国的相关法律法规，不得在中华人民共和国境内利用本项目内容从事获取、传播依法被限制或阻断的境外违法信息等行为。
-> 4. 本项目不提供、亦不涉及设备、软件、工具、线路或服务。项目维护者不制作、不销售、不提供相关设备、软件、工具或技术服务，亦不为任何个人或组织获取、传播依法被限制或阻断的信息、规避监管制度提供技术支持、协助或其他形式的帮助。
-> 5. 任何个人或组织因直接或间接使用本项目内容所实施的行为，均由其自行负责并承担相应法律责任。项目维护者不参与使用者的具体行为，对使用者的用途、方式及其产生的后果不承担任何责任，亦不承担任何形式的连带责任。
-> 6. 基于本项目内容所进行的修改、二次开发、整合、分发或其他衍生行为，均属于相关个人或组织的独立行为，与本项目及其维护者无关，由此产生的任何法律责任由行为主体自行承担。
-> 7. 本项目不鼓励任何形式的转载、再发布或二次传播，且严禁转载、再发布或二次传播本项目内容至中国大陆境内任何平台之上。
-> 8. 任何转载、再发布或二次传播均不得暗示本项目或维护者对转载内容背书。因转载、传播或使用本项目内容所产生的法律风险，由行为主体自行承担，与本项目及其维护者无关。
-> 9. 本项目维护者保留在任何时间对本免责声明进行修订或补充的权利。任何使用、复制或访问本项目内容的个人或组织，均视为已知悉并接受本免责声明。
+本项目提供围绕 OpenWrt 和 OpenClash 的技术文档与配置资源，不是 OpenClash 官方文档，也不提供设备、线路、订阅或托管服务。项目内容按现状提供，实际兼容性、准确性和结果需要结合当前版本与使用环境自行验证。
+
+适用法律、第三方权利和各来源的许可证独立适用。使用者应自行确认其使用方式符合适用要求；本节不构成法律建议，也不在下方 CC BY-SA 4.0 许可之外增加平台、用途、期限或非商业限制。
+
+转载、修改或分发时，不得暗示本项目或维护者对相关内容、产品或服务提供支持或背书。
 
 <!-- -->
 
 > [!NOTE]
 >
-> - 本项目编写于 2024 年 4 月，为非营利性质的技术研究与经验整理项目。
+> - 本项目编写于 2024 年 4 月，由维护者以非营利方式维护；这不限制 CC BY-SA 4.0 对商业用途的许可。
 > - 本项目内容仅为维护者个人经验的总结，用于技术交流，不具权威性，亦不构成 OpenClash 的唯一或推荐使用方式。
 > - 本项目未运营任何 YouTube 频道，亦未在 YouTube 或其他视频平台发布任何形式的教学或指导视频。
 > - 本项目文档由维护者根据实际使用经验独立整理；引用或使用的第三方项目、资料与资源在对应位置或下方「感谢」中标注。如因使用其他来源的教程、模板或配置文件产生问题，请勿在本项目的 Issues 或 Discussions 中反馈。
@@ -257,9 +259,10 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 
 | 项目 | 与本项目的关系 |
 | --- | --- |
-| [Aethersailor/SubConverter-Extended](https://github.com/Aethersailor/SubConverter-Extended) | 本项目维护的增强型订阅转换后端 |
-| [Aethersailor/subconverter](https://github.com/Aethersailor/subconverter) | 本项目维护的传统订阅转换后端 |
-| [Aethersailor/Rule-Bot](https://github.com/Aethersailor/Rule-Bot) | 自定义规则提交工具 |
+| [Aethersailor/SubConverter-Extended](https://github.com/Aethersailor/SubConverter-Extended) | 可选的增强型订阅转换后端，用于读取本项目 `.ini` 模板并生成 YAML；远程 YAML 覆写模块和手动 YAML 路径不依赖它 |
+| [Aethersailor/subconverter](https://github.com/Aethersailor/subconverter) | 传统订阅转换后端，与 SubConverter-Extended 的扩展能力和维护范围不同 |
+| [Aethersailor/Rule-Bot](https://github.com/Aethersailor/Rule-Bot) | 域名检查与提交服务；项目公共实例将符合策略的域名提交到本仓库，自建实例可以使用其他目标仓库 |
+| [Aethersailor/Rule-Bot-Client](https://github.com/Aethersailor/Rule-Bot-Client) | 从 Mihomo 的 `MATCH` 连接中收集域名，默认仅保存到本地；主动启用发送后才会把候选域名交给 Rule-Bot |
 | [Aethersailor/geoip](https://github.com/Aethersailor/geoip) | GeoIP 数据库与中国大陆 IPv4、IPv6 网段来源 |
 
 <details>
@@ -292,11 +295,15 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 
 ## 📝 许可
 
-[![CC BY-SA 4.0 许可证](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)
+[![CC BY-SA 4.0 许可证](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans)
 
 ### CC BY-SA 4.0
 
-本许可证适用于本项目的原创内容；第三方项目、规则、数据、工具与子模块仍适用各自的许可证或使用条款。引用、分发或修改前，请同时核对对应来源。
+本项目有权许可的原创内容采用 [Creative Commons 署名—相同方式共享 4.0 国际许可协议](https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans)。在遵守许可条件的前提下，可以复制、分发、修改和用于任何用途，包括商业用途；需要适当署名、标明修改，并以相同方式共享演绎作品。不得施加会限制他人行使许可权利的附加条款或技术措施。本项目不在该许可之外增加平台、用途、期限或非商业限制。
+
+上述说明是便于阅读的摘要，不替代 [CC BY-SA 4.0 正式法律文本](https://creativecommons.org/licenses/by-sa/4.0/legalcode.zh-hans)。
+
+第三方项目、规则、数据、图片、工具、商标与子模块不因收录到本仓库而自动改用 CC BY-SA 4.0，仍适用对应来源的许可证、使用条款和其他权利限制。引用、修改或分发前，请核对文件标注、来源链接和上游许可。
 
 ---
 

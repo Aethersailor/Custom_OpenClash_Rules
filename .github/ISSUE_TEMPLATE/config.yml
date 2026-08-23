@@ -1,6 +1,14 @@
 blank_issues_enabled: false
 
 contact_links:
+  - name: 🤖 使用 Rule-Bot 手动提交域名
+    url: https://t.me/asailor_rulebot
+    about: 查询或提交少量直连域名时，优先使用项目公共 Rule-Bot。
+
+  - name: 📡 使用 Rule-Bot Client 持续收集域名
+    url: https://github.com/Aethersailor/Rule-Bot-Client/wiki/%E6%8E%A5%E5%85%A5%E5%85%AC%E5%85%B1-Rule-Bot
+    about: 按照接入文档配置本地收集与可选发送；客户端默认仅保存到本地。
+
   - name: 💬 其他问题与讨论
     url: https://github.com/Aethersailor/Custom_OpenClash_Rules/discussions/new/choose
     about: 使用咨询、配置讨论、个别环境问题、个性化分流需求，以及不属于 Full 模板通用扩展的其他建议，请前往 Discussions。
@@ -8,3 +16,11 @@ contact_links:
   - name: 🔄 SubConverter-Extended 后端问题
     url: https://github.com/Aethersailor/SubConverter-Extended/issues/new/choose
     about: 转换接口报错、后端无法访问、转换引擎异常或非模板文件本身导致的生成失败，请前往 SubConverter-Extended 的 Issues。
+
+  - name: 🧩 OpenClash 插件问题
+    url: https://github.com/vernesong/OpenClash/issues/new/choose
+    about: 插件无法启动、界面异常、安装失败或其他与本项目配置和规则无关的问题，请前往 OpenClash 官方 Issues。
+
+  - name: 🔒 私密报告安全漏洞
+    url: https://github.com/Aethersailor/Custom_OpenClash_Rules/security/advisories/new
+    about: 凭据泄漏、脚本执行链、下载校验绕过或供应链问题请私密报告，不要公开漏洞细节。

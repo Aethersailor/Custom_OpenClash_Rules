@@ -8,8 +8,13 @@ body:
   - type: markdown
     attributes:
       value: |
-        本模板仅用于提交适合长期收录到项目直连规则中的域名。  
-        单个用户的临时需求可优先使用 OpenClash 自定义规则；大量域名请考虑提交 Pull Request。
+        本模板仅用于提交适合长期收录到项目直连规则中的域名。
+
+        提交少量域名前，可先使用 [Rule-Bot 公共实例](https://t.me/asailor_rulebot) 查询和添加。需要持续收集 Mihomo 最终由 `MATCH` 处理的域名时，请阅读 [Rule-Bot Client 接入公共 Rule-Bot](https://github.com/Aethersailor/Rule-Bot-Client/wiki/%E6%8E%A5%E5%85%A5%E5%85%AC%E5%85%B1-Rule-Bot)；客户端默认仅保存到本地，发送需要主动启用。
+
+        单个用户的临时需求可优先使用 OpenClash 自定义规则；大量已经核实的域名请考虑提交 Pull Request。OpenClash 插件自身的问题请使用 [OpenClash 官方 Issue 选择页](https://github.com/vernesong/OpenClash/issues/new/choose)。
+
+        不要提交订阅 URL、Token、节点凭据、完整配置或未经脱敏的日志。
 
   - type: checkboxes
     id: precheck

@@ -2,6 +2,27 @@
 
 本目录提供两个 OpenClash `dev` 版安装器和一个 CPU 架构检测脚本，适用于 OpenWrt 和 ImmortalWrt，兼容 `opkg` 与 `apk` 包管理器、`fw3`（基于 `iptables`）与 `fw4`（基于 `nftables`）防火墙，以及 Meta 与 Smart 内核。
 
+## 运行前确认
+
+运行安装器前，确认以下条件：
+
+- 设备运行 OpenWrt 或 ImmortalWrt，并使用 `opkg` 或 `apk`；其他发行版和包管理器不在支持范围内。
+- 使用 `root` 用户通过 SSH 执行命令。
+- 当前 `distfeeds` 中至少包含一个标准 `/releases/` 或 `/snapshots/` 仓库路径。安装器无法据此构造临时软件源时，会在修改软件源前停止。
+- 设备能够访问安装器使用的软件源镜像、jsDelivr、代理下载源或 GitHub。内核、Geo、Chnroute 和订阅等远程资源仍受网络可用性影响。
+- 已保存重要配置，并可以在插件或网络异常时重新通过 SSH 或本地管理界面连接设备。
+
+> [!WARNING]
+> 两个安装器都会覆盖重装 OpenClash、写入少量 OpenClash UCI 设置、启用服务并重启 OpenClash。不要在无法接受服务中断时执行。
+
+## 修改范围
+
+- **完整安装或更新：** 临时切换标准发行版软件源以安装依赖，覆盖重装 OpenClash，调用内核、Geo、Chnroute、订阅和用户预设流程，然后重启 OpenClash。安装器会在依赖阶段结束或中断时恢复运行前的软件源配置。
+- **只安装或更新插件与内核：** 临时切换软件源以安装依赖，覆盖重装 OpenClash，调用内核更新流程，然后重启 OpenClash；不会执行完整安装器额外的 Geo、Chnroute、订阅和用户预设流程。
+- **只检测 CPU 架构：** 读取本机架构和 CPU 特征并输出对应的 OpenClash 内核架构，不安装软件包、不写入 UCI，也不重启服务。
+
+继续前请根据需要选择一种命令，不要同时运行两个安装器。
+
 ## 快速开始
 
 完整安装或更新（插件、内核、Smart 模型、Geo、Chnroute、订阅和用户预设）：
@@ -24,8 +45,6 @@ sh /tmp/install_openclash.sh
 wget -O /tmp/check_cpu_version.sh 'https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/shell/check_cpu_version.sh' &&
 sh /tmp/check_cpu_version.sh
 ```
-
-使用 `root` 用户运行安装器。安装器会安装软件包、写入少量 OpenClash UCI 设置并重启 OpenClash。
 
 ## 终端显示
 
