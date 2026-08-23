@@ -5,11 +5,14 @@
 > [!IMPORTANT]
 > 文件位于本目录中，不代表 OpenClash 会自动加载。是否生效取决于配置中的 `rule-providers` 和 `rules` 引用，以及规则顺序和目标策略。
 
+> [!IMPORTANT]
+> **本项目的直连规则由维护者与社区用户共同收集。** 如需补充直连域名，可通过 [Rule-Bot](https://t.me/asailor_rulebot)、[Rule-Bot Client](https://github.com/Aethersailor/Rule-Bot-Client)、GitHub Issue 或 Pull Request 提交。
+
 ## 自动生成的规则族
 
 | 来源文件 | 内容 | 更新方式 |
 | --- | --- | --- |
-| [`Custom_Direct.list`](Custom_Direct.list) | 本项目收录的补充直连规则 | 用户提交与维护者审核 |
+| [`Custom_Direct.list`](Custom_Direct.list) | 本项目收录的补充直连规则 | 维护者与社区用户共同收集，维护者审核 |
 | [`Custom_Proxy.list`](Custom_Proxy.list) | 本项目收录的补充代理规则 | 用户提交与维护者审核 |
 | [`Steam_CDN.list`](Steam_CDN.list) | Steam 下载 CDN 补充规则 | 人工维护，并参与游戏下载规则合并 |
 | [`Encrypted_DNS.list`](Encrypted_DNS.list) | HaGeZi、DNSCrypt 与 `geosite:category-doh` 汇总规则 | 工作流定期更新 |

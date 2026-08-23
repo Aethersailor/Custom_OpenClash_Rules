@@ -126,7 +126,10 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 
 目录中的 `.list` 是主要规则来源；工作流据此生成 Classical YAML、Domain YAML、IP-CIDR YAML 和 MRS，供订阅转换模板或 Mihomo Rule Provider 使用。
 
-直连规则由项目用户共同参与维护。遇到需要补充的直连域名时，可以按需求选择：
+> [!IMPORTANT]
+> **本项目的直连规则由维护者与社区用户共同收集。**
+
+如需补充直连域名，可以选择以下方式：
 
 - **手动添加：** 前往 [Rule-Bot](https://t.me/asailor_rulebot)，在 Telegram 中查询并添加域名。
 - **自动添加：** 部署 [Rule-Bot Client](https://github.com/Aethersailor/Rule-Bot-Client)，自动收集 Mihomo 最终由 `MATCH` 处理的域名；用户主动启用发送后，符合 Rule-Bot 检查策略的域名会自动添加。
