@@ -47,7 +47,7 @@ Worker 只修改这两条规则的 `enabled` 字段。Cloudflare 没有事务型
 4. jsDelivr `@main` 校验文件可以访问，并计算 SHA-256。
 5. Static Assets binding 中的快照清单、部署变量和备用校验文件身份一致。
 
-GitHub API、仓库页面和 Raw 文件均可访问，而且 Raw 与 jsDelivr 的 SHA-256 相同时，本轮记为成功。即使 GitHub `main` 已经前进而备用快照尚未部署，也不会误切到旧快照。
+GitHub 仓库页面和 Raw 文件均可访问，而且 Raw 与 jsDelivr 的 SHA-256 相同时，本轮记为成功。GitHub API `200` 可补充提交 SHA；Cloudflare 共享出口遇到 API `403` 或 `429` 时，只要公开页面、Raw 和 CDN 证据仍然一致，就不阻断恢复。即使 GitHub `main` 已经前进而备用快照尚未部署，也不会误切到旧快照。
 
 满足以下任一条件时，本轮记为失败：
 

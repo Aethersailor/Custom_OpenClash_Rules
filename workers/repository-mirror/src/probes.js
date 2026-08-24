@@ -328,12 +328,12 @@ async function probeHashedFile(name, url) {
 }
 
 function decideOutcome(snapshot, githubApi, githubPage, githubRaw, jsdelivr) {
-  const repositoryReady =
-    githubApi.status === "healthy" &&
-    githubPage.status === "healthy" &&
-    githubRaw.status === "healthy";
+  const publicRepositoryReady =
+    githubPage.status === "healthy" && githubRaw.status === "healthy";
+  const repositoryEvidenceCompatible = githubApi.status !== "unhealthy";
   const directSourcesMatch =
-    repositoryReady &&
+    publicRepositoryReady &&
+    repositoryEvidenceCompatible &&
     jsdelivr.status === "healthy" &&
     githubRaw.observedSha256 === jsdelivr.observedSha256;
 
@@ -354,7 +354,8 @@ function decideOutcome(snapshot, githubApi, githubPage, githubRaw, jsdelivr) {
     }
 
     const backupMatchesRaw =
-      repositoryReady &&
+      publicRepositoryReady &&
+      repositoryEvidenceCompatible &&
       snapshot.canary.sha256 === githubRaw.observedSha256;
     const cdnDefinitelyDiffers =
       jsdelivr.status === "unhealthy" ||
