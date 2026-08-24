@@ -228,8 +228,15 @@ class StashConfigGenerationTests(unittest.TestCase):
 
     def test_committed_outputs_are_current(self) -> None:
         self.assertEqual(
-            generate_stash_configs.check_outputs(self.root, self.outputs),
+            generate_stash_configs.check_outputs(self.root),
             (),
+        )
+
+    def test_clash_mainland_compatibility_output_matches_standard(self) -> None:
+        outputs = generate_stash_configs.compatibility_outputs(self.root)
+        self.assertEqual(
+            outputs[Path("cfg/Custom_Clash_Mainland.ini")],
+            (self.root / "cfg/Custom_Clash.ini").read_text(encoding="utf-8"),
         )
 
     def test_projects_stash_rules_without_silent_unsupported_rules(self) -> None:

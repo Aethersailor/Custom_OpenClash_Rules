@@ -14,7 +14,7 @@
 
 - **功能：** 将 `cfg/Custom_Clash.ini` 复制为 `cfg/Custom_Clash_Mainland.ini`。
 - **状态：** 已归档。
-- **原因：** 当前由 `auto-update-mainland.yml` 直接完成同步，不再需要独立 Python 脚本。
+- **原因：** 当前由 `py/generate_stash_configs.py` 通过统一兼容配置生成流程完成同步，不再需要独立脚本。
 
 > [!WARNING]
 > 归档脚本仅用于追溯旧实现，不应参与当前生成或发布流程。

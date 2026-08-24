@@ -18,6 +18,7 @@ on:
       - 'shell/**/*.sh'
       - 'cfg/*.ini'
       - 'cfg/yaml/**'
+      - 'requirements*.txt'
       - 'workers/repository-mirror/**'
   pull_request:
     branches:
@@ -35,6 +36,7 @@ on:
       - 'shell/**/*.sh'
       - 'cfg/*.ini'
       - 'cfg/yaml/**'
+      - 'requirements*.txt'
       - 'workers/repository-mirror/**'
   workflow_dispatch:
 
@@ -49,6 +51,22 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  dependency-review:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Reject newly introduced vulnerable dependencies
+        uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+        with:
+          fail-on-severity: low
+          fail-on-scopes: development, runtime, unknown
+          retry-on-snapshot-warnings: true
+          retry-on-snapshot-warnings-timeout: 120
+          show-openssf-scorecard: true
+          warn-on-openssf-scorecard-level: 5
+          show-patched-versions: true
+
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 15

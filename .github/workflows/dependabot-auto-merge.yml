@@ -4,7 +4,6 @@ on:
   workflow_run:
     workflows:
       - CodeQL Advanced
-      - Dependency Review
       - Validate repository
     types: [completed]
     branches:

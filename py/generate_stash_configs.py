@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Stash-specific subconverter templates from maintained Clash policy."""
+"""Generate tracked compatibility templates from maintained Clash policy."""
 
 from __future__ import annotations
 
@@ -395,8 +395,16 @@ def generated_outputs(root: Path) -> dict[Path, str]:
     return outputs
 
 
+def compatibility_outputs(root: Path) -> dict[Path, str]:
+    outputs = generated_outputs(root)
+    outputs[Path("cfg/Custom_Clash_Mainland.ini")] = (
+        root / "cfg" / "Custom_Clash.ini"
+    ).read_text(encoding="utf-8")
+    return outputs
+
+
 def check_outputs(root: Path, outputs: dict[Path, str] | None = None) -> tuple[Path, ...]:
-    expected = outputs if outputs is not None else generated_outputs(root)
+    expected = outputs if outputs is not None else compatibility_outputs(root)
     mismatches = []
     for relative_path, content in expected.items():
         path = root / relative_path
@@ -410,14 +418,14 @@ def main() -> int:
     parser.add_argument("--check", action="store_true", help="check committed outputs")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
-    outputs = generated_outputs(root)
+    outputs = compatibility_outputs(root)
     if args.check:
         mismatches = check_outputs(root, outputs)
         if mismatches:
             for path in mismatches:
-                print(f"outdated generated Stash template: {path.as_posix()}")
+                print(f"outdated generated compatibility template: {path.as_posix()}")
             return 1
-        print("generated Stash templates are current")
+        print("generated compatibility templates are current")
         return 0
 
     for relative_path, content in outputs.items():

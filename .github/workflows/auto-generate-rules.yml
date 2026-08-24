@@ -19,7 +19,14 @@ on:
       - 'rule/game_rule/**/*.list'
       - 'py/generate_rules.py'
       - 'py/generate_stash_configs.py'
-      - 'cfg/Custom_Clash*.ini'
+      - 'cfg/Custom_Clash.ini'
+      - 'cfg/Custom_Clash_Fallback.ini'
+      - 'cfg/Custom_Clash_Lite.ini'
+      - 'cfg/Custom_Clash_Lite_Fallback.ini'
+      - 'cfg/Custom_Clash_GFW.ini'
+      - 'cfg/Custom_Clash_GFW_Fallback.ini'
+      - 'cfg/Custom_Clash_Full.ini'
+      - 'cfg/Custom_Clash_Full_Fallback.ini'
   workflow_dispatch:
     inputs:
       source_before_sha:
@@ -102,6 +109,7 @@ jobs:
             ':(glob)rule/*.mrs'
             ':(glob)rule/game_rule/**/*.yaml'
             ':(glob)rule/game_rule/**/*.mrs'
+            'cfg/Custom_Clash_Mainland.ini'
             ':(glob)cfg/Custom_Stash*.ini'
           )
           generated_excludes=(
@@ -109,6 +117,7 @@ jobs:
             ':(exclude,glob)rule/*.mrs'
             ':(exclude,glob)rule/game_rule/**/*.yaml'
             ':(exclude,glob)rule/game_rule/**/*.mrs'
+            ':(exclude)cfg/Custom_Clash_Mainland.ini'
             ':(exclude,glob)cfg/Custom_Stash*.ini'
           )
           remote_main_sha() {
