@@ -42,7 +42,10 @@ permissions:
   contents: read
 
 concurrency:
-  group: validate-${{ github.ref }}
+  group: >-
+    validate-${{ inputs.revision && 'snapshot' || 'event' }}-${{
+      inputs.revision || github.ref
+    }}
   cancel-in-progress: true
 
 jobs:
