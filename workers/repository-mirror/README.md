@@ -13,6 +13,8 @@
 - 状态接口：`GET /__mirror/status`
 - 定时任务：每小时执行一次
 
+备用快照包含根目录的 `README.md`、`LICENCE`，以及 `cfg/`（含 `cfg/yaml/`）、`icon/`、`overwrite/`、`rule/`、`script/`、`shell/`、`wiki/` 中的全部普通文件。各目录的 README 和 archived 内容也会保留。维护脚本目录 `.github/`、`py/` 以及只保存指针的第三方 Git 子模块不属于访客发布面。
+
 Wrangler 只注册以下路由，不接管 `git.asailor.org` 根路径或其他现有内容：
 
 ```text
@@ -28,7 +30,7 @@ Static Assets 采用 assets-first。存在的备用文件不执行 Worker 脚本
 
 Dynamic Redirect 入口规则集中必须且只能各有一条以下稳定 `ref`：
 
-- `cor_main_page`：项目首页跳转到 `https://github.com/Aethersailor/Custom_OpenClash_Rules/tree/main`
+- `cor_main_page`：项目首页跳转到 jsDelivr 的 `Aethersailor/Custom_OpenClash_Rules@main` 仓库目录
 - `cor_main_files`：文件路径跳转到 jsDelivr 的 `Aethersailor/Custom_OpenClash_Rules@main` 对应仓库内路径
 
 两条规则使用 `302`。文件规则不得匹配 `/Custom_OpenClash_Rules/main/` 首页本身。
@@ -47,12 +49,12 @@ Worker 只修改这两条规则的 `enabled` 字段。Cloudflare 没有事务型
 4. jsDelivr `@main` 校验文件可以访问，并计算 SHA-256。
 5. Static Assets binding 中的快照清单、部署变量和备用校验文件身份一致。
 
-GitHub 仓库页面和 Raw 文件均可访问，而且 jsDelivr 返回成功响应时，本轮记为成功。GitHub API `200` 可补充提交 SHA；Cloudflare 共享出口遇到 API `403` 或 `429` 时，只要公开页面、Raw 和 CDN 仍可访问，就不阻断恢复。jsDelivr `@main` 可能短期返回旧内容，但内容新旧不再触发备用模式；备用模式只处理访问不可用。
+GitHub 仓库页面和 Raw 文件均可访问时，本轮记为成功，并保持项目首页和文件路径到 jsDelivr 的跳转。GitHub API `200` 可补充提交 SHA；Cloudflare 共享出口遇到 API `403` 或 `429` 时，只要公开页面和 Raw 仍可访问，就不阻断恢复。jsDelivr 的响应状态和内容哈希只用于观测，不参与切换；备用模式只处理 GitHub 仓库访问不可用。
 
 满足以下任一条件时，本轮记为失败：
 
 - 至少两项 GitHub 检查明确返回 `404`、`410` 或 `451`，并且备用快照完整可用。
-- GitHub 仓库和 Raw 文件可访问，但 jsDelivr 明确不存在；同时备用校验文件与 Raw 完全一致。
+- GitHub 的仓库 API、仓库页面和 Raw 文件中至少两项明确不可用，而且备用快照完整可用。
 
 其他情况记为未知。`403`、`429`、请求超时、`5xx`、备用快照落后以及证据不足均不会触发切换。未知状态会清空连续计数。连续 2 次失败后停用跳转规则，连续 2 次成功后重新启用，因此正常情况下最多约 2 小时完成切换或恢复。
 

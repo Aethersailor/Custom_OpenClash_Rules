@@ -11,7 +11,8 @@
     "overwrite",
     "rule",
     "script",
-    "shell"
+    "shell",
+    "wiki"
   ],
   "deferred_sources": [
     "rule/Custom_Direct.list",
@@ -66,10 +67,6 @@
   "excluded_prefixes": [
     "overwrite/OpenClash_Overwrite"
   ],
-  "excluded_path_parts": [
-    "archived"
-  ],
-  "excluded_basenames": [
-    "README.md"
-  ]
+  "excluded_path_parts": [],
+  "excluded_basenames": []
 }

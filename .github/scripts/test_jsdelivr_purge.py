@@ -23,7 +23,7 @@ def contract() -> purge.PublishContract:
         branch="main",
         ref_aliases=("main", "refs/heads/main"),
         public_roots=frozenset(
-            {"cfg", "icon", "overwrite", "rule", "script", "shell"}
+            {"cfg", "icon", "overwrite", "rule", "script", "shell", "wiki"}
         ),
         deferred_sources=frozenset(
             {
@@ -51,8 +51,8 @@ def contract() -> purge.PublishContract:
             "Classical_Port.yaml",
         ),
         excluded_prefixes=("overwrite/OpenClash_Overwrite",),
-        excluded_path_parts=frozenset({"archived"}),
-        excluded_basenames=frozenset({"readme.md"}),
+        excluded_path_parts=frozenset(),
+        excluded_basenames=frozenset(),
     )
 
 
@@ -84,10 +84,11 @@ class ContractTests(unittest.TestCase):
         self.assertTrue(purge.is_public_path("cfg/example.ini", value))
         self.assertTrue(purge.is_public_path("rule/static.yaml", value))
         self.assertTrue(purge.is_public_path("icon/match.png", value))
+        self.assertTrue(purge.is_public_path("wiki/guide.md", value))
         self.assertFalse(purge.is_public_path("py/generate_rules.py", value))
         self.assertFalse(purge.is_public_path("game_rule/legacy.list", value))
-        self.assertFalse(purge.is_public_path("rule/archived/old.yaml", value))
-        self.assertFalse(purge.is_public_path("rule/game_rule/README.md", value))
+        self.assertTrue(purge.is_public_path("rule/archived/old.yaml", value))
+        self.assertTrue(purge.is_public_path("rule/game_rule/README.md", value))
         self.assertFalse(
             purge.is_public_path("overwrite/OpenClash_Overwrite", value)
         )
@@ -306,7 +307,7 @@ class GitPlanningTests(unittest.TestCase):
             git("init", "-b", "main", cwd=repo)
             git("config", "user.name", "Test", cwd=repo)
             git("config", "user.email", "test@example.com", cwd=repo)
-            for directory in ("cfg", "rule", "py", "rule/archived"):
+            for directory in ("cfg", "rule", "py", "rule/archived", "wiki"):
                 (repo / directory).mkdir(parents=True, exist_ok=True)
             (repo / "README.md").write_text("project\n", encoding="utf-8")
             (repo / "LICENCE").write_text("license\n", encoding="utf-8")
@@ -314,6 +315,7 @@ class GitPlanningTests(unittest.TestCase):
             (repo / "rule/Custom_Direct.list").write_bytes(b"canary\n")
             (repo / "rule/README.md").write_text("excluded\n", encoding="utf-8")
             (repo / "rule/archived/old.list").write_text("old\n", encoding="utf-8")
+            (repo / "wiki/guide.md").write_text("guide\n", encoding="utf-8")
             (repo / "py/private.py").write_text("private\n", encoding="utf-8")
             git("add", ".", cwd=repo)
             git("commit", "-m", "snapshot", cwd=repo)
@@ -327,11 +329,21 @@ class GitPlanningTests(unittest.TestCase):
             prefix = output / "Custom_OpenClash_Rules" / "main"
             self.assertEqual((prefix / "cfg/example.ini").read_bytes(), b"config\n")
             self.assertEqual((prefix / "README.md").read_text(), "project\n")
-            self.assertFalse((prefix / "rule/README.md").exists())
-            self.assertFalse((prefix / "rule/archived/old.list").exists())
+            self.assertEqual(
+                (prefix / "rule/README.md").read_text(encoding="utf-8"),
+                "excluded\n",
+            )
+            self.assertEqual(
+                (prefix / "rule/archived/old.list").read_text(encoding="utf-8"),
+                "old\n",
+            )
+            self.assertEqual(
+                (prefix / "wiki/guide.md").read_text(encoding="utf-8"),
+                "guide\n",
+            )
             self.assertFalse((prefix / "py/private.py").exists())
             self.assertEqual(manifest["commit"], revision)
-            self.assertEqual(manifest["file_count"], 4)
+            self.assertEqual(manifest["file_count"], 7)
             self.assertEqual(
                 manifest["canary"]["sha256"],
                 purge.hashlib.sha256(b"canary\n").hexdigest(),

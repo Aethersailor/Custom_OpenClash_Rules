@@ -69,12 +69,17 @@ class HttpResult:
     body: bytes
 
 
-def _require_string_list(data: Mapping[str, object], key: str) -> tuple[str, ...]:
+def _require_string_list(
+    data: Mapping[str, object], key: str, *, allow_empty: bool = False
+) -> tuple[str, ...]:
     value = data.get(key)
-    if not isinstance(value, list) or not value or not all(
-        isinstance(item, str) and item for item in value
+    if (
+        not isinstance(value, list)
+        or (not value and not allow_empty)
+        or not all(isinstance(item, str) and item for item in value)
     ):
-        raise PublishError(f"Contract field {key!r} must be a non-empty string list")
+        qualifier = "a string list" if allow_empty else "a non-empty string list"
+        raise PublishError(f"Contract field {key!r} must be {qualifier}")
     if len(value) != len(set(value)):
         raise PublishError(f"Contract field {key!r} contains duplicates")
     return tuple(value)
@@ -113,8 +118,12 @@ def load_contract(path: Path) -> PublishContract:
         data, "snapshot_deferred_inputs"
     )
     prefixes = _require_string_list(data, "excluded_prefixes")
-    excluded_parts = _require_string_list(data, "excluded_path_parts")
-    excluded_names = _require_string_list(data, "excluded_basenames")
+    excluded_parts = _require_string_list(
+        data, "excluded_path_parts", allow_empty=True
+    )
+    excluded_names = _require_string_list(
+        data, "excluded_basenames", allow_empty=True
+    )
 
     generated_suffixes = _require_string_list(data, "generated_suffixes")
     if any(PurePosixPath(suffix).parts != (suffix,) for suffix in generated_suffixes):

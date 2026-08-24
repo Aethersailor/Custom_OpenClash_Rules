@@ -327,20 +327,16 @@ async function probeHashedFile(name, url) {
   }
 }
 
-function decideOutcome(snapshot, githubApi, githubPage, githubRaw, jsdelivr) {
+function decideOutcome(snapshot, githubApi, githubPage, githubRaw, _jsdelivr) {
   const publicRepositoryReady =
     githubPage.status === "healthy" && githubRaw.status === "healthy";
-  const repositoryEvidenceCompatible = githubApi.status !== "unhealthy";
-  const redirectTargetsAvailable =
-    publicRepositoryReady &&
-    repositoryEvidenceCompatible &&
-    jsdelivr.status === "healthy";
 
   // Mutable jsDelivr branch URLs can lag behind GitHub. Availability, rather
-  // than byte freshness, controls redirect mode; the exact Worker snapshot
-  // remains the fallback when either public delivery surface is unavailable.
-  if (redirectTargetsAvailable) {
-    return { outcome: "healthy", reason: "redirect_targets_available" };
+  // than byte freshness, controls redirect mode. When GitHub's public page
+  // and Raw file are reachable, visitors should use the configured jsDelivr
+  // redirect even if its current response is stale or temporarily unknown.
+  if (publicRepositoryReady) {
+    return { outcome: "healthy", reason: "github_repository_available" };
   }
 
   if (snapshot) {
@@ -353,16 +349,6 @@ function decideOutcome(snapshot, githubApi, githubPage, githubRaw, jsdelivr) {
       return { outcome: "unhealthy", reason: "repository_unavailable" };
     }
 
-    const backupMatchesRaw =
-      publicRepositoryReady &&
-      repositoryEvidenceCompatible &&
-      snapshot.canary.sha256 === githubRaw.observedSha256;
-    if (backupMatchesRaw && jsdelivr.status === "unhealthy") {
-      return {
-        outcome: "unhealthy",
-        reason: "cdn_unavailable_backup_current",
-      };
-    }
   }
 
   return { outcome: "unknown", reason: "insufficient_evidence" };
