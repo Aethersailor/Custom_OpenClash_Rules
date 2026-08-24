@@ -270,26 +270,40 @@ jobs:
           EXPECTED_SHA: ${{ needs.purge-jsdelivr.outputs.after_sha }}
         run: |
           manifest="$RUNNER_TEMP/cloudflare-mirror-main.json"
-          curl --fail --location --show-error \
-            --retry 5 --retry-delay 3 --retry-all-errors --retry-max-time 120 \
-            --connect-timeout 15 --max-time 60 \
-            --output "$manifest" \
-            "https://git.asailor.org/_mirror/Custom_OpenClash_Rules/main.json"
-          python - "$manifest" "$EXPECTED_SHA" <<'PY'
+          verified=false
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            curl --fail --location --show-error \
+              --retry 3 --retry-delay 2 --retry-all-errors --retry-max-time 60 \
+              --connect-timeout 15 --max-time 60 \
+              --output "$manifest" \
+              "https://git.asailor.org/_mirror/Custom_OpenClash_Rules/main.json"
+            if python - "$manifest" "$EXPECTED_SHA" <<'PY'
           import json
           import pathlib
           import sys
 
           payload = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
-          if payload.get("commit") != sys.argv[2]:
-              raise SystemExit(
-                  f"deployed commit {payload.get('commit')!r} != expected {sys.argv[2]}"
-              )
+          actual = payload.get("commit")
+          if actual != sys.argv[2]:
+              print(f"Cloudflare still serves {actual!r}; expected {sys.argv[2]}")
+              raise SystemExit(1)
           print(
-              f"Verified Cloudflare snapshot {payload['commit']}: "
+              f"Verified Cloudflare snapshot {actual}: "
               f"{payload['file_count']} files, {payload['total_bytes']} bytes"
           )
           PY
+            then
+              verified=true
+              break
+            fi
+            if [ "$attempt" -lt 10 ]; then
+              sleep 3
+            fi
+          done
+          if [ "$verified" != "true" ]; then
+            echo "Cloudflare snapshot did not converge to $EXPECTED_SHA" >&2
+            exit 1
+          fi
           current_sha="$(
             git ls-remote --exit-code origin refs/heads/main |
               awk 'NR == 1 { print $1 }'
