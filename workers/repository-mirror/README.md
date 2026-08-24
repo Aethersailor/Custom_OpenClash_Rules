@@ -29,7 +29,7 @@ Static Assets 采用 assets-first。存在的备用文件不执行 Worker 脚本
 Dynamic Redirect 入口规则集中必须且只能各有一条以下稳定 `ref`：
 
 - `cor_main_page`：项目首页跳转到 `https://github.com/Aethersailor/Custom_OpenClash_Rules/tree/main`
-- `cor_main_files`：文件路径跳转到 `https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/<仓库内路径>`
+- `cor_main_files`：文件路径跳转到 jsDelivr 的 `Aethersailor/Custom_OpenClash_Rules@main` 对应仓库内路径
 
 两条规则使用 `302`。文件规则不得匹配 `/Custom_OpenClash_Rules/main/` 首页本身。
 
