@@ -105,7 +105,7 @@
 jsDelivr CDN：
 
 ```text
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Prevent_DNS_Leak.conf
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Prevent_DNS_Leak.conf
 ```
 
 GitHub Raw：
@@ -143,7 +143,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 jsDelivr CDN：
 
 ```text
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Block_Encrypted_DNS.conf
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Block_Encrypted_DNS.conf
 ```
 
 GitHub Raw：
@@ -184,7 +184,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 jsDelivr CDN：
 
 ```text
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Add_No_Resolve.conf
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Add_No_Resolve.conf
 ```
 
 GitHub Raw：
@@ -220,7 +220,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 jsDelivr CDN：
 
 ```text
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Add_Custom_Direct_Rules.conf
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Add_Custom_Direct_Rules.conf
 ```
 
 GitHub Raw：
@@ -268,7 +268,7 @@ rules:
 jsDelivr CDN：
 
 ```text
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Replace_China_MRS_With_GeoSite.conf
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Replace_China_MRS_With_GeoSite.conf
 ```
 
 GitHub Raw：
@@ -332,7 +332,7 @@ dns:
 jsDelivr CDN：
 
 ```text
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Rule_Provider_Format_Fix.conf
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Rule_Provider_Format_Fix.conf
 ```
 
 GitHub Raw：
@@ -379,7 +379,7 @@ rule-providers:
 jsDelivr CDN：
 
 ```text
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Direct_Game_Download.conf
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Direct_Game_Download.conf
 ```
 
 GitHub Raw：
@@ -407,7 +407,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 jsDelivr CDN：
 
 ```text
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Set_GeoIP_Database_URL.conf
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Set_GeoIP_Database_URL.conf
 ```
 
 GitHub Raw：
@@ -434,7 +434,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 jsDelivr CDN：
 
 ```text
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Set_China_IP_Route_URL.conf
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Set_China_IP_Route_URL.conf
 ```
 
 GitHub Raw：

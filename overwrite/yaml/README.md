@@ -167,7 +167,7 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 - jsDelivr 加速链接：
 
   ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash.conf
+  https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash.conf
   ```
 
 <a id="标准-fallback-版"></a>
@@ -183,7 +183,7 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 - jsDelivr 加速链接：
 
   ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Fallback.conf
+  https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Fallback.conf
   ```
 
 ### 轻量版
@@ -197,7 +197,7 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 - jsDelivr 加速链接：
 
   ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Lite.conf
+  https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Lite.conf
   ```
 
 <a id="轻量-fallback-版"></a>
@@ -213,7 +213,7 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 - jsDelivr 加速链接：
 
   ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Lite_Fallback.conf
+  https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Lite_Fallback.conf
   ```
 
 ### 极简 GFW 版
@@ -227,7 +227,7 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 - jsDelivr 加速链接：
 
   ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_GFW.conf
+  https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_GFW.conf
   ```
 
 <a id="极简-gfw-fallback-版"></a>
@@ -243,7 +243,7 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 - jsDelivr 加速链接：
 
   ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_GFW_Fallback.conf
+  https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_GFW_Fallback.conf
   ```
 
 ### 重度分流版
@@ -257,7 +257,7 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 - jsDelivr 加速链接：
 
   ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Full.conf
+  https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Full.conf
   ```
 
 <a id="重度分流-fallback-版"></a>
@@ -273,7 +273,7 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 - jsDelivr 加速链接：
 
   ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Full_Fallback.conf
+  https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Full_Fallback.conf
   ```
 
 ### 8 合 1
@@ -287,7 +287,7 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 - jsDelivr 加速链接：
 
   ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_8in1.conf
+  https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_8in1.conf
   ```
 
 ### 自建节点 Provider 优先版
@@ -301,7 +301,7 @@ EN_KEY1=https://example.com/airport-subscription;EN_KEY2=https://example.com/sel
 - jsDelivr 加速链接：
 
   ```text
-  https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Selfhosted_Provider_Fallback.conf
+  https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Selfhosted_Provider_Fallback.conf
   ```
 
 ## ✅ 最终验收
