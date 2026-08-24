@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 723
+# TOTAL: 725
 
 payload:
   - '*m-team*'
@@ -123,6 +123,7 @@ payload:
   - '+.ca-sinfusi.com'
   - '+.canghaiip.com'
   - '+.cangjie-lang.net'
+  - '+.cc39ute.shop'
   - '+.ccw.site'
   - '+.cdn.doctor'
   - '+.cdn.ist'
@@ -494,6 +495,7 @@ payload:
   - '+.powershellgallery.com'
   - '+.ppt28.com'
   - '+.privateapi.xyz'
+  - '+.psf0404.shop'
   - '+.ptlgs.org'
   - '+.pwithe.com'
   - '+.qianfan.app'
