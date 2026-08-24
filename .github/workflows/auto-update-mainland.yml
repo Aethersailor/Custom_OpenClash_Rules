@@ -64,6 +64,7 @@ jobs:
     permissions:
       contents: read
     uses: ./.github/workflows/purge-jsdelivr.yml
+    secrets: inherit
     with:
       before_sha: ${{ needs.update-mainland.outputs.before_sha }}
       after_sha: ${{ needs.update-mainland.outputs.after_sha }}

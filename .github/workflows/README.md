@@ -25,4 +25,4 @@
 
 `purge-jsdelivr.yml` 是 jsDelivr 与 Cloudflare 热备的统一发布边界。发布器只从指定 Git 提交读取公开文件，不复制工作区内容。涉及规则来源或生成器的提交必须先完成 YAML、MRS 和 Stash 模板生成；未完成时，发布器跳过整份 Static Assets 快照，等待生成工作流携带最终提交再次调用。
 
-Cloudflare 部署使用 GitHub Environment `cloudflare-production` 中的密钥。仓库文件不保存 Cloudflare 账号 ID、区域 ID、部署令牌或运行时重定向令牌。发布任务通过 `--secrets-file` 将区域 ID 和运行时令牌写入 Cloudflare Worker Secret；运行时令牌限制为 `asailor.org` 的 Single Redirects 权限，并与部署令牌分离。
+Cloudflare 部署使用加密的 GitHub Secret。直接发布使用 Environment `cloudflare-production`；自动更新器经过多层可复用工作流时，通过同名 Repository Secret 和显式 `secrets: inherit` 逐层传递。仓库文件不保存 Cloudflare 账号 ID、区域 ID、部署令牌或运行时重定向令牌。发布任务通过 `--secrets-file` 将区域 ID 和运行时令牌写入 Cloudflare Worker Secret；运行时令牌限制为 `asailor.org` 的 Single Redirects 权限，并与部署令牌分离。

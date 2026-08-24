@@ -85,5 +85,6 @@ jobs:
     permissions:
       contents: write
     uses: ./.github/workflows/auto-generate-rules.yml
+    secrets: inherit
     with:
       source_before_sha: ${{ needs.update-game-cdn.outputs.source_before_sha }}

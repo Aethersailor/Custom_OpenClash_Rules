@@ -185,6 +185,7 @@ jobs:
     permissions:
       contents: read
     uses: ./.github/workflows/purge-jsdelivr.yml
+    secrets: inherit
     with:
       before_sha: ${{ needs.generate-rules.outputs.purge_base_sha }}
       after_sha: ${{ needs.generate-rules.outputs.publication_sha }}

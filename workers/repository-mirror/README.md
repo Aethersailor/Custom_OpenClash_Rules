@@ -60,7 +60,7 @@ GitHub 仓库页面和 Raw 文件均可访问，而且 Raw 与 jsDelivr 的 SHA-
 
 仓库统一发布器从指定 Git 提交的 blob 生成 `dist/`，并执行公开文件契约、生成顺序、文件数量和单文件大小检查。Node.js 脚本只验证已有 `dist/` 与清单完全一致，不建立第二套资产选择规则。
 
-正式发布由 `.github/workflows/purge-jsdelivr.yml` 执行。GitHub Environment `cloudflare-production` 提供以下 Secret：
+正式发布由 `.github/workflows/purge-jsdelivr.yml` 执行。直接发布从 GitHub Environment `cloudflare-production` 读取 Secret；自动更新器的嵌套可复用工作流使用同名 Repository Secret，并显式逐层继承：
 
 - `CLOUDFLARE_API_TOKEN`：只授予 Worker 脚本写入和 `asailor.org` Worker Route 写入权限；
 - `CLOUDFLARE_ACCOUNT_ID`：Cloudflare 账号 ID；
