@@ -7,6 +7,7 @@ import argparse
 import concurrent.futures
 import dataclasses
 import hashlib
+import html
 import json
 import re
 import subprocess
@@ -25,6 +26,10 @@ DEFAULT_PURGE_ATTEMPTS = 5
 DEFAULT_PURGE_WORKERS = 2
 RETRY_DELAYS = (2, 5, 10, 20, 30, 45, 60)
 USER_AGENT = "Custom_OpenClash_Rules-jsDelivr-publisher/1.0"
+WORKER_ROOT_FILES = ("README.md", "LICENCE")
+WORKER_CANARY_PATH = "rule/Custom_Direct.list"
+WORKER_MAX_ASSET_COUNT = 20_000
+WORKER_MAX_ASSET_BYTES = 25 * 1024 * 1024
 
 
 class PublishError(RuntimeError):
@@ -38,6 +43,7 @@ class PublishContract:
     ref_aliases: tuple[str, ...]
     public_roots: frozenset[str]
     deferred_sources: frozenset[str]
+    snapshot_deferred_inputs: frozenset[str]
     generated_suffixes: tuple[str, ...]
     excluded_prefixes: tuple[str, ...]
     excluded_path_parts: frozenset[str]
@@ -103,6 +109,9 @@ def load_contract(path: Path) -> PublishContract:
             raise PublishError(f"Invalid public root: {root!r}")
 
     deferred = _require_string_list(data, "deferred_sources")
+    snapshot_deferred_inputs = _require_string_list(
+        data, "snapshot_deferred_inputs"
+    )
     prefixes = _require_string_list(data, "excluded_prefixes")
     excluded_parts = _require_string_list(data, "excluded_path_parts")
     excluded_names = _require_string_list(data, "excluded_basenames")
@@ -117,6 +126,7 @@ def load_contract(path: Path) -> PublishContract:
         ref_aliases=aliases,
         public_roots=frozenset(roots),
         deferred_sources=frozenset(deferred),
+        snapshot_deferred_inputs=frozenset(snapshot_deferred_inputs),
         generated_suffixes=generated_suffixes,
         excluded_prefixes=prefixes,
         excluded_path_parts=frozenset(part.casefold() for part in excluded_parts),
@@ -125,6 +135,8 @@ def load_contract(path: Path) -> PublishContract:
     for source in contract.deferred_sources:
         if not is_public_path(source, contract):
             raise PublishError(f"Deferred source is not a public path: {source}")
+    for path in contract.snapshot_deferred_inputs:
+        normalize_repo_path(path)
     for path in deferred_publication_paths(contract):
         if not is_public_path(path, contract):
             raise PublishError(f"Deferred generated path is not public: {path}")
@@ -297,6 +309,195 @@ def build_expectations(
         AssetExpectation(path=path, content=blob_or_none(content_sha, path))
         for path in sorted(changed_paths)
     ]
+
+
+def changed_paths_between(before_sha: str, after_sha: str) -> frozenset[str]:
+    raw = run_git(
+        ["diff", "--name-status", "-z", "--find-renames", before_sha, after_sha, "--"]
+    )
+    assert isinstance(raw, bytes)
+    paths: set[str] = set()
+    for _status, changed_paths in parse_name_status_z(raw):
+        for path in changed_paths:
+            paths.add(normalize_repo_path(path))
+    return frozenset(paths)
+
+
+def worker_snapshot_generation_inputs(
+    contract: PublishContract,
+) -> frozenset[str]:
+    return contract.deferred_sources | contract.snapshot_deferred_inputs
+
+
+def plan_worker_snapshot(
+    before_sha: str,
+    after_sha: str,
+    contract: PublishContract,
+    *,
+    generation_complete: bool,
+) -> tuple[bool, tuple[str, ...]]:
+    changed = changed_paths_between(before_sha, after_sha)
+    blocked = tuple(sorted(changed & worker_snapshot_generation_inputs(contract)))
+    if blocked and not generation_complete:
+        return False, blocked
+    return True, blocked
+
+
+def worker_asset_prefix(contract: PublishContract) -> str:
+    repository_name = contract.repository.split("/", 1)[1]
+    return f"{repository_name}/{contract.branch}"
+
+
+def list_worker_snapshot_blobs(
+    revision_sha: str, contract: PublishContract
+) -> list[tuple[str, bytes]]:
+    raw = run_git(["ls-tree", "-r", "-z", "--full-tree", revision_sha])
+    assert isinstance(raw, bytes)
+    selected: list[tuple[str, bytes]] = []
+    root_files = frozenset(WORKER_ROOT_FILES)
+    for entry in raw.split(b"\0"):
+        if not entry:
+            continue
+        try:
+            metadata, encoded_path = entry.split(b"\t", 1)
+            mode, object_type, _object_sha = metadata.decode("ascii").split(" ")
+            path = encoded_path.decode("utf-8", "surrogateescape")
+        except (ValueError, UnicodeDecodeError) as exc:
+            raise PublishError("Malformed git ls-tree output") from exc
+
+        selected_path = path in root_files or is_public_path(path, contract)
+        if not selected_path:
+            continue
+        normalize_repo_path(path)
+        if object_type != "blob" or mode not in ("100644", "100755"):
+            raise PublishError(
+                f"Worker snapshot path is not a regular file: {path} "
+                f"(mode={mode}, type={object_type})"
+            )
+        content = blob_at(revision_sha, path)
+        if len(content) > WORKER_MAX_ASSET_BYTES:
+            raise PublishError(
+                f"Worker snapshot file exceeds 25 MiB: {path} ({len(content)} bytes)"
+            )
+        selected.append((path, content))
+
+    selected.sort(key=lambda item: item[0])
+    if not selected:
+        raise PublishError("Worker snapshot contains no public files")
+    if len(selected) + 2 > WORKER_MAX_ASSET_COUNT:
+        raise PublishError(
+            f"Worker snapshot exceeds the free-plan file limit: {len(selected) + 2}"
+        )
+    return selected
+
+
+def commit_timestamp(revision_sha: str) -> str:
+    output = run_git(["show", "-s", "--format=%cI", revision_sha], text=True)
+    assert isinstance(output, str)
+    value = output.strip()
+    if not value:
+        raise PublishError(f"Commit {revision_sha} has no timestamp")
+    return value
+
+
+def write_worker_snapshot(
+    revision: str, output: Path, contract: PublishContract
+) -> dict[str, object]:
+    revision_sha = resolve_commit(revision)
+    output = output.resolve()
+    if output.exists():
+        if not output.is_dir():
+            raise PublishError(f"Worker asset output path is not a directory: {output}")
+        if any(output.iterdir()):
+            raise PublishError(f"Worker asset output directory is not empty: {output}")
+    output.mkdir(parents=True, exist_ok=True)
+
+    prefix = worker_asset_prefix(contract)
+    blobs = list_worker_snapshot_blobs(revision_sha, contract)
+    file_entries: dict[str, dict[str, object]] = {}
+    total_bytes = 0
+    for path, content in blobs:
+        destination = output.joinpath(*PurePosixPath(prefix, path).parts)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(content)
+        file_entries[path] = {
+            "bytes": len(content),
+            "sha256": hashlib.sha256(content).hexdigest(),
+        }
+        total_bytes += len(content)
+
+    canary = file_entries.get(WORKER_CANARY_PATH)
+    if canary is None:
+        raise PublishError(f"Worker canary is missing: {WORKER_CANARY_PATH}")
+
+    published_at = commit_timestamp(revision_sha)
+    index = f"""<!doctype html>
+<html lang=\"zh-CN\">
+<head>
+  <meta charset=\"utf-8\">
+  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">
+  <title>Custom_OpenClash_Rules main 镜像</title>
+</head>
+<body>
+  <h1>Custom_OpenClash_Rules</h1>
+  <p>这里提供 <code>main</code> 分支最后一次完整验证并部署的只读文件快照。</p>
+  <p>快照提交：<code>{html.escape(revision_sha)}</code></p>
+  <p>提交时间：<time>{html.escape(published_at)}</time></p>
+  <ul>
+    <li><a href=\"./README.md\">README.md</a></li>
+    <li><a href=\"./rule/Custom_Direct.list\">Custom_Direct.list</a></li>
+    <li><a href=\"/_mirror/Custom_OpenClash_Rules/main.json\">快照清单</a></li>
+  </ul>
+</body>
+</html>
+"""
+    index_path = output.joinpath(*PurePosixPath(prefix, "index.html").parts)
+    index_path.write_text(index, encoding="utf-8", newline="\n")
+
+    manifest: dict[str, object] = {
+        "repository": contract.repository,
+        "branch": contract.branch,
+        "commit": revision_sha,
+        "published_at": published_at,
+        "file_count": len(file_entries),
+        "total_bytes": total_bytes,
+        "canary": {
+            "path": WORKER_CANARY_PATH,
+            "bytes": canary["bytes"],
+            "sha256": canary["sha256"],
+        },
+        "files": file_entries,
+    }
+    manifest_path = output / "_mirror" / contract.repository.split("/", 1)[1]
+    manifest_path.mkdir(parents=True, exist_ok=True)
+    (manifest_path / f"{contract.branch}.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+
+    headers = f"""/{prefix}/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+  X-Content-Type-Options: nosniff
+  X-Robots-Tag: noindex, nofollow, nosnippet
+
+/{prefix}/
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'none'
+
+/_mirror/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: no-store, max-age=0
+  X-Content-Type-Options: nosniff
+  X-Robots-Tag: noindex, nofollow, nosnippet
+"""
+    (output / "_headers").write_text(headers, encoding="utf-8", newline="\n")
+
+    print(
+        f"Built Worker snapshot {revision_sha}: "
+        f"{len(file_entries)} files, {total_bytes} bytes"
+    )
+    return manifest
 
 
 def encoded_asset_path(path: str) -> str:
@@ -476,6 +677,37 @@ def command_run(args: argparse.Namespace) -> None:
     purge_all(expectations, contract)
 
 
+def command_plan_worker_snapshot(args: argparse.Namespace) -> None:
+    contract = load_contract(args.contract)
+    before_sha, after_sha = resolve_range(args.before, args.after)
+    deployable, blocked = plan_worker_snapshot(
+        before_sha,
+        after_sha,
+        contract,
+        generation_complete=args.generation_complete,
+    )
+    reason = "ready"
+    if blocked and not args.generation_complete:
+        reason = "waiting_for_generated_outputs"
+    elif blocked:
+        reason = "generation_complete"
+    print(f"Worker snapshot plan: deployable={str(deployable).lower()}, reason={reason}")
+    if blocked:
+        print("Generation-sensitive paths in range:")
+        for path in blocked:
+            print(f"  {path}")
+    if args.github_output is not None:
+        with args.github_output.open("a", encoding="utf-8", newline="\n") as handle:
+            handle.write(f"worker_deployable={str(deployable).lower()}\n")
+            handle.write(f"worker_plan_reason={reason}\n")
+            handle.write(f"worker_after_sha={after_sha}\n")
+
+
+def command_build_worker_assets(args: argparse.Namespace) -> None:
+    contract = load_contract(args.contract)
+    write_worker_snapshot(args.revision, args.output, contract)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -499,6 +731,22 @@ def build_parser() -> argparse.ArgumentParser:
         help="Latest main snapshot used to resolve current asset state",
     )
     run.add_argument("--mode", choices=("direct", "complete"), required=True)
+
+    plan_worker = subparsers.add_parser(
+        "plan-worker-snapshot",
+        help="Decide whether an exact Worker snapshot is generation-complete",
+    )
+    plan_worker.add_argument("--before", required=True)
+    plan_worker.add_argument("--after", required=True)
+    plan_worker.add_argument("--generation-complete", action="store_true")
+    plan_worker.add_argument("--github-output", type=Path)
+
+    build_worker = subparsers.add_parser(
+        "build-worker-assets",
+        help="Build an exact Git revision as Workers Static Assets",
+    )
+    build_worker.add_argument("--revision", required=True)
+    build_worker.add_argument("--output", type=Path, required=True)
     return parser
 
 
@@ -511,6 +759,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             validate_contract_urls(contract, args.revision)
         elif args.command == "run":
             command_run(args)
+        elif args.command == "plan-worker-snapshot":
+            command_plan_worker_snapshot(args)
+        elif args.command == "build-worker-assets":
+            command_build_worker_assets(args)
         else:  # pragma: no cover - argparse enforces the command set
             parser.error(f"Unknown command: {args.command}")
     except PublishError as exc:

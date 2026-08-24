@@ -17,6 +17,11 @@ on:
         description: Published revision to verify (defaults to the selected main revision)
         required: false
         type: string
+      generation_complete:
+        description: The selected revision already contains all generated outputs
+        required: false
+        default: false
+        type: boolean
 
   workflow_call:
     inputs:
@@ -28,6 +33,11 @@ on:
         description: Exact validated revision to publish and verify
         required: true
         type: string
+      generation_complete:
+        description: The selected revision already contains all generated outputs
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -42,6 +52,11 @@ jobs:
     if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    outputs:
+      before_sha: ${{ steps.range.outputs.before }}
+      after_sha: ${{ steps.range.outputs.after }}
+      worker_deployable: ${{ steps.worker-plan.outputs.worker_deployable }}
+      worker_plan_reason: ${{ steps.worker-plan.outputs.worker_plan_reason }}
     defaults:
       run:
         shell: bash
@@ -117,3 +132,170 @@ jobs:
             --after "$AFTER_SHA" \
             --published "$PUBLISHED_SHA" \
             --mode "$PUBLICATION_MODE"
+
+      - name: Plan exact Cloudflare mirror snapshot
+        id: worker-plan
+        env:
+          BEFORE_SHA: ${{ steps.range.outputs.before }}
+          AFTER_SHA: ${{ steps.range.outputs.after }}
+          GENERATION_COMPLETE: ${{ inputs.generation_complete || false }}
+        run: |
+          generation_args=()
+          if [ "$GENERATION_COMPLETE" = "true" ]; then
+            generation_args+=(--generation-complete)
+          fi
+          python .github/scripts/jsdelivr_purge.py plan-worker-snapshot \
+            --before "$BEFORE_SHA" \
+            --after "$AFTER_SHA" \
+            --github-output "$GITHUB_OUTPUT" \
+            "${generation_args[@]}"
+
+  validate-worker-snapshot:
+    needs: purge-jsdelivr
+    if: needs.purge-jsdelivr.outputs.worker_deployable == 'true'
+    permissions:
+      contents: read
+    uses: ./.github/workflows/validate.yml
+    with:
+      revision: ${{ needs.purge-jsdelivr.outputs.after_sha }}
+
+  deploy-worker-snapshot:
+    needs:
+      - purge-jsdelivr
+      - validate-worker-snapshot
+    if: >-
+      needs.purge-jsdelivr.outputs.worker_deployable == 'true' &&
+      needs.validate-worker-snapshot.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: cloudflare-production
+    permissions:
+      contents: read
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout exact validated snapshot
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.purge-jsdelivr.outputs.after_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+
+      - name: Confirm snapshot is still current main
+        id: current-main
+        env:
+          EXPECTED_SHA: ${{ needs.purge-jsdelivr.outputs.after_sha }}
+        run: |
+          git fetch --no-tags origin main
+          current_sha="$(git rev-parse FETCH_HEAD)"
+          if [ "$current_sha" = "$EXPECTED_SHA" ]; then
+            echo "current=true" >> "$GITHUB_OUTPUT"
+            echo "Deploying current main snapshot $EXPECTED_SHA"
+          else
+            echo "current=false" >> "$GITHUB_OUTPUT"
+            echo "Skip stale snapshot $EXPECTED_SHA; current main is $current_sha"
+          fi
+
+      - name: Build exact Static Assets snapshot
+        if: steps.current-main.outputs.current == 'true'
+        env:
+          EXPECTED_SHA: ${{ needs.purge-jsdelivr.outputs.after_sha }}
+        run: |
+          python .github/scripts/jsdelivr_purge.py build-worker-assets \
+            --revision "$EXPECTED_SHA" \
+            --output workers/repository-mirror/dist
+          npm ci --prefix workers/repository-mirror
+
+      - name: Reconfirm current main immediately before deploy
+        if: steps.current-main.outputs.current == 'true'
+        id: pre-deploy-main
+        env:
+          EXPECTED_SHA: ${{ needs.purge-jsdelivr.outputs.after_sha }}
+        run: |
+          current_sha="$(
+            git ls-remote --exit-code origin refs/heads/main |
+              awk 'NR == 1 { print $1 }'
+          )"
+          if [ "$current_sha" = "$EXPECTED_SHA" ]; then
+            echo "current=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "current=false" >> "$GITHUB_OUTPUT"
+            echo "Skip stale snapshot $EXPECTED_SHA; current main is $current_sha"
+          fi
+
+      - name: Deploy Worker and Static Assets
+        if: >-
+          steps.current-main.outputs.current == 'true' &&
+          steps.pre-deploy-main.outputs.current == 'true'
+        working-directory: workers/repository-mirror
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CF_REDIRECT_API_TOKEN: ${{ secrets.CF_REDIRECT_API_TOKEN }}
+          EXPECTED_SHA: ${{ needs.purge-jsdelivr.outputs.after_sha }}
+        run: |
+          : "${CLOUDFLARE_API_TOKEN:?missing CLOUDFLARE_API_TOKEN}"
+          : "${CLOUDFLARE_ACCOUNT_ID:?missing CLOUDFLARE_ACCOUNT_ID}"
+          : "${CLOUDFLARE_ZONE_ID:?missing CLOUDFLARE_ZONE_ID}"
+          : "${CF_REDIRECT_API_TOKEN:?missing CF_REDIRECT_API_TOKEN}"
+          secrets_file="$RUNNER_TEMP/cloudflare-mirror-secrets.env"
+          umask 077
+          {
+            printf 'CF_ZONE_ID=%s\n' "$CLOUDFLARE_ZONE_ID"
+            printf 'CF_REDIRECT_API_TOKEN=%s\n' "$CF_REDIRECT_API_TOKEN"
+          } > "$secrets_file"
+          npm exec -- wrangler deploy \
+            --secrets-file "$secrets_file" \
+            --var "SNAPSHOT_SHA:$EXPECTED_SHA" \
+            --strict
+
+      - name: Verify deployed snapshot identity
+        if: >-
+          steps.current-main.outputs.current == 'true' &&
+          steps.pre-deploy-main.outputs.current == 'true'
+        env:
+          EXPECTED_SHA: ${{ needs.purge-jsdelivr.outputs.after_sha }}
+        run: |
+          manifest="$RUNNER_TEMP/cloudflare-mirror-main.json"
+          curl --fail --location --show-error \
+            --retry 5 --retry-delay 3 --retry-all-errors --retry-max-time 120 \
+            --connect-timeout 15 --max-time 60 \
+            --output "$manifest" \
+            "https://git.asailor.org/_mirror/Custom_OpenClash_Rules/main.json"
+          python - "$manifest" "$EXPECTED_SHA" <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          payload = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          if payload.get("commit") != sys.argv[2]:
+              raise SystemExit(
+                  f"deployed commit {payload.get('commit')!r} != expected {sys.argv[2]}"
+              )
+          print(
+              f"Verified Cloudflare snapshot {payload['commit']}: "
+              f"{payload['file_count']} files, {payload['total_bytes']} bytes"
+          )
+          PY
+          current_sha="$(
+            git ls-remote --exit-code origin refs/heads/main |
+              awk 'NR == 1 { print $1 }'
+          )"
+          if [ "$current_sha" != "$EXPECTED_SHA" ]; then
+            echo "main advanced to $current_sha after deploying $EXPECTED_SHA" >&2
+            echo "The queued publisher for the newer revision must replace this snapshot." >&2
+            exit 1
+          fi

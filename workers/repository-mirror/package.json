@@ -1,0 +1,14 @@
+{
+  "name": "custom-openclash-rules-repository-mirror",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check src/config.js && node --check src/probes.js && node --check src/cloudflare-rules.js && node --check src/index.js && node --check scripts/validate-dist.mjs && npm run validate:dist",
+    "validate:dist": "node scripts/validate-dist.mjs",
+    "dry-run": "npm run check && wrangler deploy --dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "4.125.0"
+  }
+}

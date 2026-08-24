@@ -34,6 +34,13 @@ def contract() -> purge.PublishContract:
                 "rule/Game_Download_CDN.list",
             }
         ),
+        snapshot_deferred_inputs=frozenset(
+            {
+                "py/generate_rules.py",
+                "py/generate_stash_configs.py",
+                "cfg/Custom_Clash.ini",
+            }
+        ),
         generated_suffixes=(
             "Domain.yaml",
             "Domain.mrs",
@@ -148,6 +155,28 @@ class ContractTests(unittest.TestCase):
                     break
         self.assertEqual(set(value.generated_suffixes), generated_suffixes)
 
+        stash_module_path = root / "py/generate_stash_configs.py"
+        stash_spec = importlib.util.spec_from_file_location(
+            "stash_generator_contract", stash_module_path
+        )
+        self.assertIsNotNone(stash_spec)
+        self.assertIsNotNone(stash_spec.loader)
+        stash_module = importlib.util.module_from_spec(stash_spec)
+        sys.modules[stash_spec.name] = stash_module
+        try:
+            stash_spec.loader.exec_module(stash_module)
+        finally:
+            sys.modules.pop(stash_spec.name, None)
+
+        expected_snapshot_inputs = {
+            "py/generate_rules.py",
+            "py/generate_stash_configs.py",
+            *(f"cfg/{source}" for source, _target in stash_module.TEMPLATE_PAIRS),
+        }
+        self.assertEqual(
+            value.snapshot_deferred_inputs, expected_snapshot_inputs
+        )
+
 
 class GitPlanningTests(unittest.TestCase):
     def test_add_delete_rename_and_deferred_source(self):
@@ -239,6 +268,74 @@ class GitPlanningTests(unittest.TestCase):
             with working_directory(repo):
                 with self.assertRaisesRegex(purge.PublishError, "not an ancestor"):
                     purge.resolve_range(first, second)
+
+    def test_worker_snapshot_waits_for_generated_outputs(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo = Path(temp_dir)
+            git("init", "-b", "main", cwd=repo)
+            git("config", "user.name", "Test", cwd=repo)
+            git("config", "user.email", "test@example.com", cwd=repo)
+            (repo / "rule").mkdir()
+            (repo / "rule/Custom_Proxy.list").write_text("old\n", encoding="utf-8")
+            git("add", ".", cwd=repo)
+            git("commit", "-m", "initial", cwd=repo)
+            before = git("rev-parse", "HEAD", cwd=repo)
+
+            (repo / "rule/Custom_Proxy.list").write_text("new\n", encoding="utf-8")
+            git("add", ".", cwd=repo)
+            git("commit", "-m", "source", cwd=repo)
+            after = git("rev-parse", "HEAD", cwd=repo)
+
+            with working_directory(repo):
+                deployable, blocked = purge.plan_worker_snapshot(
+                    before, after, contract(), generation_complete=False
+                )
+                complete, complete_blocked = purge.plan_worker_snapshot(
+                    before, after, contract(), generation_complete=True
+                )
+            self.assertFalse(deployable)
+            self.assertEqual(blocked, ("rule/Custom_Proxy.list",))
+            self.assertTrue(complete)
+            self.assertEqual(complete_blocked, blocked)
+
+    def test_worker_assets_are_built_from_exact_public_git_blobs(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo = Path(temp_dir) / "repo"
+            output = Path(temp_dir) / "assets"
+            repo.mkdir()
+            git("init", "-b", "main", cwd=repo)
+            git("config", "user.name", "Test", cwd=repo)
+            git("config", "user.email", "test@example.com", cwd=repo)
+            for directory in ("cfg", "rule", "py", "rule/archived"):
+                (repo / directory).mkdir(parents=True, exist_ok=True)
+            (repo / "README.md").write_text("project\n", encoding="utf-8")
+            (repo / "LICENCE").write_text("license\n", encoding="utf-8")
+            (repo / "cfg/example.ini").write_bytes(b"config\n")
+            (repo / "rule/Custom_Direct.list").write_bytes(b"canary\n")
+            (repo / "rule/README.md").write_text("excluded\n", encoding="utf-8")
+            (repo / "rule/archived/old.list").write_text("old\n", encoding="utf-8")
+            (repo / "py/private.py").write_text("private\n", encoding="utf-8")
+            git("add", ".", cwd=repo)
+            git("commit", "-m", "snapshot", cwd=repo)
+            revision = git("rev-parse", "HEAD", cwd=repo)
+
+            with working_directory(repo):
+                manifest = purge.write_worker_snapshot(
+                    revision, output, contract()
+                )
+
+            prefix = output / "Custom_OpenClash_Rules" / "main"
+            self.assertEqual((prefix / "cfg/example.ini").read_bytes(), b"config\n")
+            self.assertEqual((prefix / "README.md").read_text(), "project\n")
+            self.assertFalse((prefix / "rule/README.md").exists())
+            self.assertFalse((prefix / "rule/archived/old.list").exists())
+            self.assertFalse((prefix / "py/private.py").exists())
+            self.assertEqual(manifest["commit"], revision)
+            self.assertEqual(manifest["file_count"], 4)
+            self.assertEqual(
+                manifest["canary"]["sha256"],
+                purge.hashlib.sha256(b"canary\n").hexdigest(),
+            )
 
 
 class PurgeResponseTests(unittest.TestCase):

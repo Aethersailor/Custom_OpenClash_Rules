@@ -67,3 +67,4 @@ jobs:
     with:
       before_sha: ${{ needs.update-mainland.outputs.before_sha }}
       after_sha: ${{ needs.update-mainland.outputs.after_sha }}
+      generation_complete: true

@@ -188,3 +188,4 @@ jobs:
     with:
       before_sha: ${{ needs.generate-rules.outputs.purge_base_sha }}
       after_sha: ${{ needs.generate-rules.outputs.publication_sha }}
+      generation_complete: true

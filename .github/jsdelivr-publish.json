@@ -42,6 +42,18 @@
     "rule/game_rule/Microsoft-Flight-Simulator-2020/Microsoft-Flight-Simulator-2020_All-Servers.list",
     "rule/game_rule/Overwatch2/Overwatch2_Asia-Singapore.list"
   ],
+  "snapshot_deferred_inputs": [
+    "py/generate_rules.py",
+    "py/generate_stash_configs.py",
+    "cfg/Custom_Clash.ini",
+    "cfg/Custom_Clash_Fallback.ini",
+    "cfg/Custom_Clash_Lite.ini",
+    "cfg/Custom_Clash_Lite_Fallback.ini",
+    "cfg/Custom_Clash_GFW.ini",
+    "cfg/Custom_Clash_GFW_Fallback.ini",
+    "cfg/Custom_Clash_Full.ini",
+    "cfg/Custom_Clash_Full_Fallback.ini"
+  ],
   "generated_suffixes": [
     "Domain.yaml",
     "Domain.mrs",

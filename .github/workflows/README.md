@@ -17,6 +17,12 @@
 | [`dependabot-auto-merge.yml`](dependabot-auto-merge.yml) | 等待 Validate、Dependency Review 和 CodeQL 全部成功后，自动压缩合并（squash merge）带有 `automerge` 标签的 Dependabot PR | 上述检查完成 |
 | [`dependency-review.yml`](dependency-review.yml) | 阻止 PR 引入任何已知等级的漏洞依赖，并展示 OpenSSF Scorecard 信息 | Pull Request |
 | [`pages.yml`](pages.yml) | 构建并部署 MkDocs 文档站点到 GitHub Pages | `wiki/**`、`mkdocs.yml` 变更或手动触发 |
-| [`purge-jsdelivr.yml`](purge-jsdelivr.yml) | 按 [CDN 发布契约](../jsdelivr-publish.json) 精确刷新 `@main` 与 `@refs/heads/main` 缓存键；每个请求以 jsDelivr 返回 `finished` 为成功，不等待 CDN 节点传播；无公开文件变化时自动跳过刷新 | `main` 分支推送、规则生成且校验成功，或手动修复范围 |
+| [`purge-jsdelivr.yml`](purge-jsdelivr.yml) | 按 [公开发布契约](../jsdelivr-publish.json) 精确刷新 jsDelivr 缓存；生成内容完整、精确 SHA 校验成功且仍为最新 `main` 时，同步部署 Cloudflare Static Assets 热备快照 | `main` 分支推送、规则生成且校验成功，或手动修复范围 |
 | [`sync-openclash-overwrite-submodule.yml`](sync-openclash-overwrite-submodule.yml) | 将 `overwrite/OpenClash_Overwrite` 子模块同步到上游 `main` 分支 | 每 2 小时或手动触发 |
-| [`validate.yml`](validate.yml) | 校验 Shell、Python、Sub-Store、Wiki 备份、规则派生文件、MRS 和完整 Mihomo 模板；Pull Request 只改 `.list` 来源时会临时生成派生文件再校验 | 代码推送、Pull Request 或手动触发 |
+| [`validate.yml`](validate.yml) | 校验 Shell、Python、Sub-Store、Wiki 备份、规则派生文件、MRS、完整 Mihomo 模板和 Cloudflare 镜像部署包；也可由发布器校验指定提交 | 代码推送、Pull Request、发布器同步调用或手动触发 |
+
+## Cloudflare 热备发布
+
+`purge-jsdelivr.yml` 是 jsDelivr 与 Cloudflare 热备的统一发布边界。发布器只从指定 Git 提交读取公开文件，不复制工作区内容。涉及规则来源或生成器的提交必须先完成 YAML、MRS 和 Stash 模板生成；未完成时，发布器跳过整份 Static Assets 快照，等待生成工作流携带最终提交再次调用。
+
+Cloudflare 部署使用 GitHub Environment `cloudflare-production` 中的密钥。仓库文件不保存 Cloudflare 账号 ID、区域 ID、部署令牌或运行时重定向令牌。发布任务通过 `--secrets-file` 将区域 ID 和运行时令牌写入 Cloudflare Worker Secret；运行时令牌限制为 `asailor.org` 的 Single Redirects 权限，并与部署令牌分离。

@@ -1,0 +1,52 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "custom-openclash-rules-repository-mirror",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-24",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    {
+      "pattern": "git.asailor.org/Custom_OpenClash_Rules",
+      "zone_name": "asailor.org"
+    },
+    {
+      "pattern": "git.asailor.org/Custom_OpenClash_Rules/*",
+      "zone_name": "asailor.org"
+    },
+    {
+      "pattern": "git.asailor.org/_mirror/*",
+      "zone_name": "asailor.org"
+    },
+    {
+      "pattern": "git.asailor.org/__mirror/*",
+      "zone_name": "asailor.org"
+    }
+  ],
+  "triggers": {
+    "crons": [
+      "*/5 * * * *"
+    ]
+  },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": false,
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "MIRROR_STATE",
+        "class_name": "RepositoryMirrorState"
+      }
+    ]
+  },
+  "exports": {
+    "RepositoryMirrorState": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
+  }
+}
