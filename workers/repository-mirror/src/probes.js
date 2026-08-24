@@ -331,16 +331,16 @@ function decideOutcome(snapshot, githubApi, githubPage, githubRaw, jsdelivr) {
   const publicRepositoryReady =
     githubPage.status === "healthy" && githubRaw.status === "healthy";
   const repositoryEvidenceCompatible = githubApi.status !== "unhealthy";
-  const directSourcesMatch =
+  const redirectTargetsAvailable =
     publicRepositoryReady &&
     repositoryEvidenceCompatible &&
-    jsdelivr.status === "healthy" &&
-    githubRaw.observedSha256 === jsdelivr.observedSha256;
+    jsdelivr.status === "healthy";
 
-  // A newer main commit may appear before its matching backup is deployed.
-  // Direct GitHub and jsDelivr convergence is sufficient to keep redirects on.
-  if (directSourcesMatch) {
-    return { outcome: "healthy", reason: "direct_sources_converged" };
+  // Mutable jsDelivr branch URLs can lag behind GitHub. Availability, rather
+  // than byte freshness, controls redirect mode; the exact Worker snapshot
+  // remains the fallback when either public delivery surface is unavailable.
+  if (redirectTargetsAvailable) {
+    return { outcome: "healthy", reason: "redirect_targets_available" };
   }
 
   if (snapshot) {
@@ -357,14 +357,10 @@ function decideOutcome(snapshot, githubApi, githubPage, githubRaw, jsdelivr) {
       publicRepositoryReady &&
       repositoryEvidenceCompatible &&
       snapshot.canary.sha256 === githubRaw.observedSha256;
-    const cdnDefinitelyDiffers =
-      jsdelivr.status === "unhealthy" ||
-      (jsdelivr.status === "healthy" &&
-        jsdelivr.observedSha256 !== githubRaw.observedSha256);
-    if (backupMatchesRaw && cdnDefinitelyDiffers) {
+    if (backupMatchesRaw && jsdelivr.status === "unhealthy") {
       return {
         outcome: "unhealthy",
-        reason: "cdn_mismatch_backup_current",
+        reason: "cdn_unavailable_backup_current",
       };
     }
   }
