@@ -345,6 +345,8 @@ DOMAIN-SUFFIX,ahlt10010.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# add by Rule-Bot Client / Date: 2026-08-25 22:48:45
+DOMAIN-SUFFIX,loveutips.com
 # add by Rule-Bot Client / Date: 2026-08-25 20:44:01
 DOMAIN-SUFFIX,abctougu.com
 # add by Rule-Bot Client / Date: 2026-08-25 19:55:20
