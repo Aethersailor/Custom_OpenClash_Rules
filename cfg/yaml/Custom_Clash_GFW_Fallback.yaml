@@ -47,7 +47,7 @@ proxy-groups:
     expected-status: 204
 
   - name: "🎯 全球直连"
-    type: url-test
+    type: select
     url: http://wifi.vivo.com.cn/generate_204
     proxies:
       - DIRECT

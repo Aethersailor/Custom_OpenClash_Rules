@@ -231,7 +231,7 @@ proxy-groups:
     interval: 300
     tolerance: 50
   - name: "🎯 全球直连"
-    type: url-test
+    type: select
     url: http://wifi.vivo.com.cn/generate_204
     proxies:
       - DIRECT
