@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3363
+# TOTAL: 3362
 
 payload:
   - '+.003153.xyz'
@@ -620,6 +620,7 @@ payload:
   - '+.chuncheon.dnsovertor.cc'
   - '+.chungocoai.name.vn'
   - '+.chynik.duckdns.org'
+  - '+.cipherdns.co.za'
   - '+.circumitor.de'
   - '+.cleanbrowsing.org'
   - '+.clic.eu.org'
@@ -663,7 +664,6 @@ payload:
   - '+.crypto2049.store'
   - '+.cryptostorm.is'
   - '+.cryptroute.com'
-  - '+.ct1doh.cipherdns.co.za'
   - '+.cube.neubsi.at'
   - '+.cubedns.com'
   - '+.curser.dev'
@@ -2368,7 +2368,6 @@ payload:
   - '+.japan.dnsovertor.cc'
   - '+.jarvis5.ddns.net'
   - '+.jax01.dnscry.pt'
-  - '+.jb1doh.cipherdns.co.za'
   - '+.jcdns.fun'
   - '+.jen01.dnscry.pt'
   - '+.jfeoks.duckdns.org'
