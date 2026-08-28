@@ -241,7 +241,7 @@ OpenWrt 作为主路由和旁路由时的设置差异，会在相关步骤中说
 
 然后在 OpenWrt 首页检查是否已取得运营商下发的 DNS。如果计划使用其他第三方 DNS，可以跳过此步骤。
 
-<img width="651" alt="templates" src="https://github.com/user-attachments/assets/859c7ed7-81da-48a2-8665-0550c68a24a6" />
+<img width="654" alt="wan-dns" src="https://github.com/user-attachments/assets/fc8317bf-729f-4949-9dd5-5475a17b59c8" />
 
 ### 1.2 关闭 DNS 重定向功能
 
