@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 784
+# TOTAL: 785
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -513,6 +513,7 @@ payload:
   - DOMAIN-SUFFIX,passnat.com
   - DOMAIN-SUFFIX,pcwatch.com
   - DOMAIN-SUFFIX,piedaochuan.top
+  - DOMAIN-SUFFIX,pinshuxsw.com
   - DOMAIN-SUFFIX,pixcheese.com
   - DOMAIN-SUFFIX,pkghund.com
   - DOMAIN-SUFFIX,plusde1.younoyes.com
