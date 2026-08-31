@@ -187,6 +187,35 @@ jobs:
           echo "Final revision to publish: $publication_sha"
           echo "publication_sha=$publication_sha" >> "$GITHUB_OUTPUT"
 
+  sync-stash:
+    needs: generate-rules
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Request generated Stash template sync
+        env:
+          GH_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
+          SOURCE_SHA: ${{ needs.generate-rules.outputs.publication_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$GH_TOKEN" ]; then
+            echo "TARGET_REPO_TOKEN is required for cross-repository dispatch." >&2
+            exit 1
+          fi
+          jq -n \
+            --arg source_sha "$SOURCE_SHA" \
+            '{
+              event_type: "sync-generated-stash",
+              client_payload: {source_sha: $source_sha}
+            }' |
+            gh api \
+              --method POST \
+              repos/Aethersailor/Custom_Stash_Rules/dispatches \
+              --input -
+
   # Generation and format validation already ran against the exact worktree that
   # was published. Purge its changed cache keys without re-running unrelated tests.
   purge-generated:
