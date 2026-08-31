@@ -395,14 +395,6 @@ def generated_outputs(root: Path) -> dict[Path, str]:
     return outputs
 
 
-def compatibility_outputs(root: Path) -> dict[Path, str]:
-    outputs = generated_outputs(root)
-    outputs[Path("cfg/Custom_Clash_Mainland.ini")] = (
-        root / "cfg" / "Custom_Clash.ini"
-    ).read_text(encoding="utf-8")
-    return outputs
-
-
 def check_stash_outputs(
     output_dir: Path,
     outputs: dict[Path, str],
@@ -435,24 +427,14 @@ def write_stash_outputs(output_dir: Path, outputs: dict[Path, str]) -> None:
         print(f"generated {path.as_posix()}")
 
 
-def check_outputs(root: Path, outputs: dict[Path, str] | None = None) -> tuple[Path, ...]:
-    expected = outputs if outputs is not None else compatibility_outputs(root)
-    mismatches = []
-    for relative_path, content in expected.items():
-        path = root / relative_path
-        if not path.exists() or path.read_text(encoding="utf-8") != content:
-            mismatches.append(relative_path)
-    return tuple(mismatches)
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="check committed outputs")
     parser.add_argument(
         "--target",
-        choices=("all", "stash", "mainland"),
-        default="all",
-        help="select generated compatibility outputs (default: all)",
+        choices=("stash", "mainland"),
+        default="mainland",
+        help="select generated compatibility outputs (default: mainland)",
     )
     parser.add_argument(
         "--output-dir",
@@ -461,7 +443,7 @@ def main() -> int:
     )
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
-    if args.target == "mainland" and args.output_dir is not None:
+    if args.target != "stash" and args.output_dir is not None:
         parser.error("--output-dir is only valid when generating Stash templates")
 
     stash_outputs = generated_outputs(root)
@@ -474,9 +456,9 @@ def main() -> int:
     )
     if args.check:
         mismatches: list[Path] = []
-        if args.target in {"all", "stash"}:
+        if args.target == "stash":
             mismatches.extend(check_stash_outputs(stash_output_dir, stash_outputs))
-        if args.target in {"all", "mainland"} and (
+        if args.target == "mainland" and (
             not mainland_path.exists()
             or mainland_path.read_text(encoding="utf-8") != mainland_content
         ):
@@ -488,9 +470,9 @@ def main() -> int:
         print("generated compatibility templates are current")
         return 0
 
-    if args.target in {"all", "stash"}:
+    if args.target == "stash":
         write_stash_outputs(stash_output_dir, stash_outputs)
-    if args.target in {"all", "mainland"}:
+    if args.target == "mainland":
         mainland_path.write_text(mainland_content, encoding="utf-8")
         print("generated cfg/Custom_Clash_Mainland.ini")
     return 0

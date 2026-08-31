@@ -86,15 +86,15 @@ jobs:
       - name: Set up pinned Mihomo
         uses: ./.github/actions/setup-mihomo
 
-      - name: Generate derived rules and Stash templates
+      - name: Generate derived rules and Mainland compatibility template
         run: |
           python py/generate_rules.py --mihomo mihomo
-          python py/generate_stash_configs.py
+          python py/generate_stash_configs.py --target mainland
 
       - name: Test generation and conversion logic
         run: |
           python py/generate_rules.py --check --mihomo mihomo
-          python py/generate_stash_configs.py --check
+          python py/generate_stash_configs.py --check --target mainland
 
       - name: Commit and push changes
         id: publish
@@ -110,7 +110,6 @@ jobs:
             ':(glob)rule/game_rule/**/*.yaml'
             ':(glob)rule/game_rule/**/*.mrs'
             'cfg/Custom_Clash_Mainland.ini'
-            ':(glob)cfg/Custom_Stash*.ini'
           )
           generated_excludes=(
             ':(exclude,glob)rule/*.yaml'
@@ -118,7 +117,6 @@ jobs:
             ':(exclude,glob)rule/game_rule/**/*.yaml'
             ':(exclude,glob)rule/game_rule/**/*.mrs'
             ':(exclude)cfg/Custom_Clash_Mainland.ini'
-            ':(exclude,glob)cfg/Custom_Stash*.ini'
           )
           remote_main_sha() {
             git ls-remote --exit-code origin refs/heads/main |
@@ -132,8 +130,8 @@ jobs:
             git reset --hard origin/main
             python py/generate_rules.py --mihomo mihomo
             python py/generate_rules.py --check --mihomo mihomo
-            python py/generate_stash_configs.py
-            python py/generate_stash_configs.py --check
+            python py/generate_stash_configs.py --target mainland
+            python py/generate_stash_configs.py --check --target mainland
 
             unexpected_changes="$(
               git status --short --untracked-files=all -- . \

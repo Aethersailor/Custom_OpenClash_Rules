@@ -11,6 +11,7 @@
 | --- | --- | --- |
 | [`generate_game_cdn.py`](generate_game_cdn.py) | 合并 [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) 上游与 `Steam_CDN.list`，按域名和 CIDR 覆盖关系去重 | `rule/Game_Download_CDN.list` |
 | [`generate_rules.py`](generate_rules.py) | 从 `rule/` 顶层的 5 个 `.list` 来源和 `rule/game_rule/**/*.list` 递归生成 Domain、IP、Classical 和端口 YAML，清理失去 `.list` 来源的派生文件；传入 Mihomo 可执行文件时同时生成非空 MRS | `rule/*_Domain.*`、`rule/*_IP.*`、`rule/*_Classical*.yaml`、`rule/game_rule/**/*_Domain.*`、`rule/game_rule/**/*_IP.*`、`rule/game_rule/**/*_Classical*.yaml` |
+| [`generate_stash_configs.py`](generate_stash_configs.py) | 从受维护的 Clash 模板和规则来源生成 Stash 订阅转换模板；默认只同步本仓库的 Mainland 兼容文件，传入 `--target stash --output-dir <目录>` 时将 Stash 模板写入指定目录 | `cfg/Custom_Clash_Mainland.ini` 或 `Custom_Stash_Rules/cfg/Custom_Stash*.ini` |
 | [`extract_uu_game_routes.py`](extract_uu_game_routes.py) | 从 UU 路由模式虚拟网卡提取目标 IPv4 路由，过滤本地、保留和被上级网段覆盖的地址 | 指定游戏目录中的区服 `.list` |
 | [`sync_installer_common.py`](sync_installer_common.py) | 以完整安装器中的共享函数为维护来源，同步轻量安装器的对应实现 | `shell/install_openclash_dev.sh` |
 | [`test_rule_generation.py`](test_rule_generation.py) | 使用 `unittest` 验证 GeoSite 转换、域名与网段去重、派生规则生成，以及游戏 CDN 规则的转换与合并 | 测试结果，不生成仓库文件 |

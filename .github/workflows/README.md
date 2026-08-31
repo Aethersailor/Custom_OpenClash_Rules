@@ -9,7 +9,7 @@
 | 文件名 | 描述 | 触发条件 |
 | :--- | :--- | :--- |
 | [`auto-backup-wiki.yml`](auto-backup-wiki.yml) | 校验 Wiki 目录页和页面完整性后，事务式备份到仓库的 `wiki/` 目录并处理链接替换 | 每 2 小时或手动触发 |
-| [`auto-generate-rules.yml`](auto-generate-rules.yml) | 从 `.list` 规则源统一生成 `.yaml` 和 `.mrs` 派生规则，并由受维护的 Clash 模板同步生成 Mainland 与 Stash 兼容文件；完成精确 SHA 校验后调用统一 CDN 发布器 | 对应规则源、模板或生成器变更，源更新工作流同步调用，或手动触发 |
+| [`auto-generate-rules.yml`](auto-generate-rules.yml) | 从 `.list` 规则源统一生成 `.yaml` 和 `.mrs` 派生规则，同步 Mainland 兼容文件，并将最终源提交发送给 `Custom_Stash_Rules` 生成 Stash 模板；完成精确 SHA 校验后调用统一 CDN 发布器 | 对应规则源、模板或生成器变更，源更新工作流同步调用，或手动触发 |
 | [`auto-update-encrypted-dns.yml`](auto-update-encrypted-dns.yml) | 从 HaGeZi、DNSCrypt 和编译后的 `geosite:category-doh` 自动更新 `Encrypted_DNS.list`；内容变化后同步等待派生规则生成，派生失败会使本工作流失败 | 每日或手动触发 |
 | [`auto-update-game-cdn.yml`](auto-update-game-cdn.yml) | 合并 v2fly 上游与本项目 `Steam_CDN.list`，智能去重后更新 `Game_Download_CDN.list`；内容变化后同步等待派生规则生成 | `Steam_CDN.list` 或生成器变更、每日或手动触发 |
 | [`codeql.yml`](codeql.yml) | 使用扩展安全与质量查询分析 GitHub Actions 和 Python | 相关代码推送、Pull Request、每日或手动触发 |
@@ -21,6 +21,6 @@
 
 ## Cloudflare 热备发布
 
-`purge-jsdelivr.yml` 是 jsDelivr 与 Cloudflare 热备的统一发布边界。发布器只从指定 Git 提交读取公开文件，不复制工作区内容。涉及规则来源或生成器的提交必须先完成 YAML、MRS 和 Stash 模板生成；未完成时，发布器跳过整份 Static Assets 快照，等待生成工作流携带最终提交再次调用。
+`purge-jsdelivr.yml` 是 jsDelivr 与 Cloudflare 热备的统一发布边界。发布器只从指定 Git 提交读取公开文件，不复制工作区内容。涉及规则来源或生成器的提交必须先完成 YAML、MRS 和 Mainland 兼容文件生成；未完成时，发布器跳过整份 Static Assets 快照，等待生成工作流携带最终提交再次调用。Stash 模板由 `Custom_Stash_Rules` 独立校验和发布。
 
 Cloudflare 部署使用加密的 GitHub Secret。直接发布使用 Environment `cloudflare-production`；自动更新器经过多层可复用工作流时，通过同名 Repository Secret 和显式 `secrets: inherit` 逐层传递。仓库文件不保存 Cloudflare 账号 ID、区域 ID、部署令牌或运行时重定向令牌。发布任务通过 `--secrets-file` 将区域 ID 和运行时令牌写入 Cloudflare Worker Secret；运行时令牌限制为 `asailor.org` 的 Single Redirects 权限，并与部署令牌分离。

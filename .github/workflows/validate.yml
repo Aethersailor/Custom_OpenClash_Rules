@@ -177,7 +177,7 @@ jobs:
           python py/generate_game_cdn.py --check
           python py/update_encrypted_dns.py --check
           python py/generate_rules.py --check --mihomo mihomo
-          python py/generate_stash_configs.py --check
+          python py/generate_stash_configs.py --check --target mainland
 
       - name: Validate complete Mihomo templates
         run: |

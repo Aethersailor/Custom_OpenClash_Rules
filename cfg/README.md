@@ -4,7 +4,7 @@
 
 **OpenClash `dev` 版内置的 8 个模板，以及 1 个兼容文件**
 
-[使用方法](#-使用订阅转换模板) · [模板列表](#-模板列表) · [版本区别](#-版本区别) · [Stash 模板](#-在-stash-中使用模板) · [其他配置方式](#-其他配置方式) · [备用链接](#-备用远程链接)
+[使用方法](#-使用订阅转换模板) · [模板列表](#-模板列表) · [版本区别](#-版本区别) · [Stash 模板](#-stash-模板) · [其他配置方式](#-其他配置方式) · [备用链接](#-备用远程链接)
 
 </div>
 
@@ -71,43 +71,11 @@ OpenClash `dev` 分支的内置列表已收录本仓库全部 8 个模板的远�
 > [!WARNING]
 > `fallback` 只判断健康检查地址是否可达，不能判断节点是否具备流媒体、AI 服务或特定地区的解锁能力。
 
-## 📲 在 Stash 中使用模板
+## 📲 Stash 模板
 
-本目录同时提供 9 份 Stash 专用订阅转换模板。脚本从现有 OpenClash 模板投影并生成这些文件，避免两套策略独立维护。Stash 模板只供支持 `target=stash` 的 [SubConverter-Extended](https://github.com/Aethersailor/SubConverter-Extended) 后端使用，不要直接修改生成文件。
+Stash 专用订阅转换模板已经迁移到独立仓库 [`Aethersailor/Custom_Stash_Rules`](https://github.com/Aethersailor/Custom_Stash_Rules)。本目录只保存 OpenClash 模板，不再保存 `Custom_Stash*.ini` 生成文件。
 
-| 版本 | Stash 模板 | 定位 |
-| --- | --- | --- |
-| 标准版 | [`Custom_Stash.ini`](./Custom_Stash.ini) | 日常分流与复杂度均衡 |
-| 标准故障转移版 | [`Custom_Stash_Fallback.ini`](./Custom_Stash_Fallback.ini) | 标准版分流结构，主要业务组自动故障转移 |
-| 轻量版 | [`Custom_Stash_Lite.ini`](./Custom_Stash_Lite.ini) | 策略组较少，结构简洁 |
-| 轻量故障转移版 | [`Custom_Stash_Lite_Fallback.ini`](./Custom_Stash_Lite_Fallback.ini) | 轻量结构与自动故障转移结合 |
-| 极简 GFW 版 | [`Custom_Stash_GFW.ini`](./Custom_Stash_GFW.ini) | 主要处理 GFW 相关流量，其余流量默认直连 |
-| 极简 GFW 故障转移版 | [`Custom_Stash_GFW_Fallback.ini`](./Custom_Stash_GFW_Fallback.ini) | 极简分流与自动故障转移结合 |
-| 重度分流版 | [`Custom_Stash_Full.ini`](./Custom_Stash_Full.ini) | 业务、地区和节点用途分组更丰富 |
-| 重度分流故障转移版 | [`Custom_Stash_Full_Fallback.ini`](./Custom_Stash_Full_Fallback.ini) | 重度分流结构与自动故障转移结合 |
-| Mainland 兼容文件 | [`Custom_Stash_Mainland.ini`](./Custom_Stash_Mainland.ini) | 内容与标准版相同，仅保留兼容文件名 |
-
-这些 `.ini` 文件不是 Stash 运行配置，不能直接导入 Stash。转换请求必须同时提供订阅地址、`target=stash` 和一份 Stash 模板地址：
-
-```text
-https://<支持 target=stash 的后端>/sub?target=stash&url=<URL 编码后的订阅地址>&config=<URL 编码后的 Stash 模板地址>
-```
-
-当前已验收的开发实例可按下面的形式调用。将完整转换地址作为 Stash 的配置订阅地址；其中 `<订阅地址>` 必须先进行 URL 编码：
-
-```text
-https://test-api.asailor.org/sub?target=stash&url=<URL 编码后的订阅地址>&config=https%3A%2F%2Fraw.githubusercontent.com%2FAethersailor%2FCustom_OpenClash_Rules%2Fmain%2Fcfg%2FCustom_Stash.ini
-```
-
-使用前确认后端版本明确支持 `target=stash`。可以使用上述开发实例、其他明确声明支持该目标的 SubConverter-Extended 公共后端，也可以部署自建后端；其他 SubConverter 实现即使能够读取同一份 `.ini`，也不代表能够生成 Stash 配置。
-
-> [!IMPORTANT]
-> 当前公共开发实例用于 `dev` 版本和模板的端到端验证，不提供生产可用性承诺，接口与输出可能随开发版本调整。本节不承诺生产地址 `https://api.asailor.org` 已支持 `target=stash`；使用生产地址前，请以其公开版本信息和实际接口结果为准。
-
-> [!NOTE]
-> 服务端转换成功和 YAML 结构校验通过，不等于已完成 Stash 真机验收。完整验收仍需在当前版本的 Stash 中检查配置导入、Proxy Provider 与 Rule Provider 刷新、DNS 查询、规则命中和代理连通。
-
-订阅地址可能包含令牌或其他凭据。使用公共后端时，订阅地址和转换参数会发送给该后端；重视隐私时，应使用可信的自建 SubConverter-Extended 后端。
+Stash 模板仍由本项目的 `py/generate_stash_configs.py` 根据当前 Clash 模板和规则来源生成。源仓库完成校验后，新仓库会记录准确的源提交并更新自身 `cfg/` 目录。模板列表、调用示例、后端限制和真机验收边界请查看新仓库文档。
 
 ## 🧭 其他配置方式
 
