@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 802
+# TOTAL: 803
 
 payload:
   - '*m-team*'
@@ -768,6 +768,7 @@ payload:
   - '+.yooc.me'
   - '+.youqian.pro'
   - '+.youzhiyouxing.com'
+  - '+.yueti.vip'
   - '+.yunqin.online'
   - '+.yunzuoye.net'
   - '+.yyshub.top'
