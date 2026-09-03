@@ -345,6 +345,8 @@ DOMAIN-SUFFIX,ahlt10010.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 艾迈斯公司官网 / add by Telegram user: mpbizn / Date: 2026-09-03 22:07:40
+DOMAIN-SUFFIX,china-amass.com
 # add by Rule-Bot Client / Date: 2026-09-02 04:49:04
 DOMAIN-SUFFIX,yueti.vip
 # add by Rule-Bot Client / Date: 2026-09-01 11:51:02
