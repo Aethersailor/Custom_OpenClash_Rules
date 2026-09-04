@@ -575,6 +575,7 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
+      - "🎯 全球直连"
     url: https://cp.cloudflare.com/generate_204
     interval: 300
     timeout: 5000

@@ -89,6 +89,7 @@ proxy-groups:
       - "🇼🇸 台湾节点"
       - "🇰🇷 韩国节点"
       - "♻️ 自动选择"
+      - "🎯 全球直连"
     url: https://cp.cloudflare.com/generate_204
     interval: 300
     timeout: 5000
