@@ -464,6 +464,7 @@ proxy-groups:
     type: select
     proxies:
       - "🇼🇸 台湾节点"
+      - "🇭🇰 香港节点"
       - "🚀 手动选择"
       - "🎯 全球直连"
     use:

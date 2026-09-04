@@ -473,6 +473,7 @@ proxy-groups:
     type: fallback
     proxies:
       - "🇼🇸 台湾节点"
+      - "🇭🇰 香港节点"
       - "🚀 故障转移"
       - "🎯 全球直连"
     url: https://cp.cloudflare.com/generate_204

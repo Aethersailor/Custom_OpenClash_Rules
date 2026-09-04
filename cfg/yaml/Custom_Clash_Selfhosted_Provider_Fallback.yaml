@@ -357,6 +357,7 @@ proxy-groups:
     proxies:
       - "🏴‍☠️ 自建节点"
       - "🇼🇸 台湾节点"
+      - "🇭🇰 香港节点"
       - "🚀 故障转移"
       - "🎯 全球直连"
     exclude-filter: '(?i)(?:🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC)'
