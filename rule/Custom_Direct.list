@@ -345,6 +345,8 @@ DOMAIN-SUFFIX,ahlt10010.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# add by Rule-Bot Client / Date: 2026-09-05 07:01:20
+DOMAIN-SUFFIX,kwai.net
 # add by Telegram user: Evan_Mak / Date: 2026-09-04 22:24:02
 DOMAIN-SUFFIX,quanzhua.com
 # add by Rule-Bot Client / Date: 2026-09-04 15:01:59
