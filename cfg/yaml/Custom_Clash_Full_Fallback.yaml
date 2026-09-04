@@ -244,6 +244,28 @@ proxy-groups:
     timeout: 5000
     lazy: false
     expected-status: 204
+  - name: "🤖 AI国内服务"
+    type: select
+    proxies:
+      - "🎯 全球直连"
+      - "🚀 故障转移"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🇨🇦 加拿大节点"
+      - "🇬🇧 英国节点"
+      - "🇫🇷 法国节点"
+      - "🇩🇪 德国节点"
+      - "🇳🇱 荷兰节点"
+      - "🇹🇷 土耳其节点"
+      - "🇷🇺 俄罗斯节点"
+      - "🌐 其他地区"
+      - "🏠 家宽节点"
+      - "🐢 低倍率节点"
   - name: "🎶 TikTok"
     type: fallback
     proxies:
@@ -1043,6 +1065,8 @@ rules:
   - "GEOSITE,onedrive,💾 OneDrive"
   - "GEOSITE,bing,🤖 Copilot"
   - "GEOSITE,category-ai-!cn,🤖 AI服务"
+  # 国内 AI 服务默认直连，可按需切换代理；须位于 cn 兜底规则之前。
+  - "GEOSITE,category-ai-cn,🤖 AI国内服务"
   - "GEOSITE,github,🚀 GitHub"
   - "GEOSITE,category-speedtest,🚀 测速工具"
   - "GEOSITE,steam,🎮 Steam"
