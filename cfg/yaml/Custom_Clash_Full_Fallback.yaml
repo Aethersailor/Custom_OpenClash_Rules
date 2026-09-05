@@ -219,7 +219,7 @@ proxy-groups:
     timeout: 5000
     lazy: false
     expected-status: 204
-  - name: "🤖 AI服务"
+  - name: "🤖 国外AI服务"
     type: fallback
     proxies:
       - "🇸🇬 新加坡节点"
@@ -244,7 +244,7 @@ proxy-groups:
     timeout: 5000
     lazy: false
     expected-status: 204
-  - name: "🤖 AI国内服务"
+  - name: "🤖 国内AI服务"
     type: select
     proxies:
       - "🎯 全球直连"
@@ -1064,9 +1064,9 @@ rules:
   - "GEOSITE,openai,🤖 ChatGPT"
   - "GEOSITE,onedrive,💾 OneDrive"
   - "GEOSITE,bing,🤖 Copilot"
-  - "GEOSITE,category-ai-!cn,🤖 AI服务"
+  - "GEOSITE,category-ai-!cn,🤖 国外AI服务"
   # 国内 AI 服务默认直连，可按需切换代理；须位于 cn 兜底规则之前。
-  - "GEOSITE,category-ai-cn,🤖 AI国内服务"
+  - "GEOSITE,category-ai-cn,🤖 国内AI服务"
   - "GEOSITE,github,🚀 GitHub"
   - "GEOSITE,category-speedtest,🚀 测速工具"
   - "GEOSITE,steam,🎮 Steam"
