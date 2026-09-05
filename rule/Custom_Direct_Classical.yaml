@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 823
+# TOTAL: 824
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -270,6 +270,7 @@ payload:
   - DOMAIN-SUFFIX,gaojiua.com
   - DOMAIN-SUFFIX,gaze.run
   - DOMAIN-SUFFIX,gdcucc.v1.mk
+  - DOMAIN-SUFFIX,gdzhimou.com
   - DOMAIN-SUFFIX,geektool.top
   - DOMAIN-SUFFIX,gegeselect.hk
   - DOMAIN-SUFFIX,gelaiyun.net
