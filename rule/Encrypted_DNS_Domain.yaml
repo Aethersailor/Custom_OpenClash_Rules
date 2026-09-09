@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3318
+# TOTAL: 3316
 
 payload:
   - '+.003153.xyz'
@@ -2380,7 +2380,6 @@ payload:
   - '+.kakawka05.duckdns.org'
   - '+.kallemarc.de'
   - '+.kalwat.duckdns.org'
-  - '+.kams.kii.qzz.io'
   - '+.kavkaz.monster'
   - '+.kcolspacrm.ir'
   - '+.kdgnkjho4od8w40.americasnet.com.br'
@@ -2540,7 +2539,6 @@ payload:
   - '+.myatris.sbs'
   - '+.mydevpn.eu'
   - '+.mydns.ddns.me'
-  - '+.mydns.phatna.net'
   - '+.mypihole.hopto.org'
   - '+.myprivityvpn.softether.net'
   - '+.mysolod.xyz'
