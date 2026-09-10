@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3316
+# TOTAL: 3312
 
 payload:
   - '+.003153.xyz'
@@ -441,7 +441,6 @@ payload:
   - '+.alidns.51top.info'
   - '+.alidns.cb1999.top'
   - '+.alidns.com'
-  - '+.alidns.session.pub'
   - '+.alidns2.cb1999.top'
   - '+.alina.virttec.net'
   - '+.alisa.vpn.i81.ru'
@@ -1453,7 +1452,6 @@ payload:
   - '+.dns.sev.monster'
   - '+.dns.shareworx.net'
   - '+.dns.shecan.ir'
-  - '+.dns.sheggi.ch'
   - '+.dns.shimul.me'
   - '+.dns.shrike.ru'
   - '+.dns.sildom.me'
@@ -2058,7 +2056,6 @@ payload:
   - '+.fi.r5acq.com'
   - '+.fidelius.top'
   - '+.filter.badbotdev.xyz'
-  - '+.filter.das.sch.id'
   - '+.filter.myaddr.io'
   - '+.filya.vpn.i81.ru'
   - '+.fimoshinckaya-federation.site'
@@ -2771,7 +2768,6 @@ payload:
   - '+.project-evoex.de'
   - '+.protective.joindns4.eu'
   - '+.proxjdf.jamesferrand.fr'
-  - '+.proxy.srs.su'
   - '+.ps1.modr.club'
   - '+.psociety.de'
   - '+.pub.hsuan.ink'
