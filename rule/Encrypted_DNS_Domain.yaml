@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3312
+# TOTAL: 3309
 
 payload:
   - '+.003153.xyz'
@@ -1554,7 +1554,6 @@ payload:
   - '+.dns.venclous.org'
   - '+.dns.vietdns.vn'
   - '+.dns.vinnyp.xyz'
-  - '+.dns.vinokurov.tk'
   - '+.dns.vip-kingstore.xyz'
   - '+.dns.virtual-qr.ir'
   - '+.dns.vk09.ru'
@@ -3206,7 +3205,6 @@ payload:
   - '+.wallpap.eu'
   - '+.wanam.ddns.net'
   - '+.wandana.franklinfamily.au'
-  - '+.wantaquddin.com'
   - '+.waterfox-ohttp-relay.fastly-edge.com'
   - '+.waw01.dnscry.pt'
   - '+.waw02.dnscry.pt'
@@ -3254,7 +3252,6 @@ payload:
   - '+.xn--80aeak3akfgk.xn--p1acf'
   - '+.xn--80aecoigf4aatn.xn--p1ai'
   - '+.xn--durhre-yxa.de'
-  - '+.xorbiadns.com'
   - '+.xpen.ns01.info'
   - '+.xray.krnl.eu'
   - '+.xyz2.zmjflow.com'
