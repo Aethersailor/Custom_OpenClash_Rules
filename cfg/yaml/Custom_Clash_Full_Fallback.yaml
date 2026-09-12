@@ -169,6 +169,58 @@ proxy-groups:
     timeout: 5000
     lazy: false
     expected-status: 204
+  - name: "💻 开发者服务"
+    type: fallback
+    proxies:
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🇨🇦 加拿大节点"
+      - "🇬🇧 英国节点"
+      - "🇫🇷 法国节点"
+      - "🇩🇪 德国节点"
+      - "🇳🇱 荷兰节点"
+      - "🇹🇷 土耳其节点"
+      - "🇷🇺 俄罗斯节点"
+      - "🌐 其他地区"
+      - "🏠 家宽节点"
+      - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+      - "🎯 全球直连"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
+  - name: "📚 学术资源"
+    type: fallback
+    proxies:
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🇨🇦 加拿大节点"
+      - "🇬🇧 英国节点"
+      - "🇫🇷 法国节点"
+      - "🇩🇪 德国节点"
+      - "🇳🇱 荷兰节点"
+      - "🇹🇷 土耳其节点"
+      - "🇷🇺 俄罗斯节点"
+      - "🌐 其他地区"
+      - "🏠 家宽节点"
+      - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+      - "🎯 全球直连"
+    url: https://cp.cloudflare.com/generate_204
+    interval: 300
+    timeout: 5000
+    lazy: false
+    expected-status: 204
   - name: "🤖 ChatGPT"
     type: fallback
     proxies:
@@ -1068,6 +1120,10 @@ rules:
   # 国内 AI 服务默认直连，可按需切换代理；须位于 cn 兜底规则之前。
   - "GEOSITE,category-ai-cn,🤖 国内AI服务"
   - "GEOSITE,github,🚀 GitHub"
+  # GitHub 保留独立策略组，其余开发者服务在此匹配。
+  - "GEOSITE,category-dev,💻 开发者服务"
+  # 国外学术资源须先于 Google 等服务大类匹配。
+  - "GEOSITE,category-scholar-!cn,📚 学术资源"
   - "GEOSITE,category-speedtest,🚀 测速工具"
   - "GEOSITE,steam,🎮 Steam"
   - "GEOSITE,youtube,📹 YouTube"
@@ -1085,6 +1141,7 @@ rules:
   - "GEOSITE,spotify,🎻 Spotify"
   - "GEOSITE,bahamut,📺 Bahamut"
   - "GEOSITE,category-games,🎮 游戏平台"
+  - "GEOSITE,category-media,🌎 国外媒体"
   - "GEOSITE,category-entertainment,🌎 国外媒体"
   - "GEOSITE,category-pt,⏬ PT站点"
   - "GEOSITE,paypal,💳 PayPal"
