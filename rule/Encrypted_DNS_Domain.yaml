@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3309
+# TOTAL: 3306
 
 payload:
   - '+.003153.xyz'
@@ -662,7 +662,6 @@ payload:
   - '+.d.onlyjsmylord.org'
   - '+.d.toairs.com'
   - '+.d.zhanchuraevv.ru'
-  - '+.d.zscale.gq'
   - '+.d0.tada.ly'
   - '+.d1.12342345.xyz'
   - '+.d2.shabi.icu'
@@ -2564,7 +2563,6 @@ payload:
   - '+.nebula.tru.io'
   - '+.nelsonleung.org'
   - '+.net.tt6.net'
-  - '+.net01.youcef.io'
   - '+.netcup.mismat.ch'
   - '+.newd.rezyro.com'
   - '+.newlibrarian.myqnapcloud.com'
@@ -3275,7 +3273,6 @@ payload:
   - '+.yuno.truckbel.com'
   - '+.yunyun.is.my.waifu.cz'
   - '+.yuripe.ccnt.fr'
-  - '+.yuvelirtut.website'
   - '+.yvr01.dnscry.pt'
   - '+.yyc01.dnscry.pt'
   - '+.yyz01.dnscry.pt'
