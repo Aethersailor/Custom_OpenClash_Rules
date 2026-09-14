@@ -9,6 +9,6 @@
     "dry-run": "npm run check && wrangler deploy --dry-run"
   },
   "devDependencies": {
-    "wrangler": "4.125.0"
+    "wrangler": "4.131.1"
   }
 }
