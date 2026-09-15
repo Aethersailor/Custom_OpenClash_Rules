@@ -16,10 +16,12 @@
 在 Sub-Store 中新建脚本操作，粘贴脚本内容，或从下列 GitHub Raw 地址导入：
 
 ```text
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/script/sub-store/sub-store-node-name-normalizer.js
+https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/script/sub-store/sub-store-node-name-normalizer.js#noCache
 ```
 
 默认只输出简体中文地区名和序号。同一地区的节点按照该地区首次出现的位置归组，地区内保持输入顺序。未命中和存在同级文字冲突的节点会被删除。
+
+如果脚本操作中已经保存过旧版本，先在前端刷新脚本资源，或使用上方带 `#noCache` 的地址重新导入并保存。分享订阅地址上的 `noCache=true` 只影响订阅来源缓存，不能替换已经保存在脚本操作中的内容。
 
 以下参数输出「国旗 + 英文地区名」和序号：
 
