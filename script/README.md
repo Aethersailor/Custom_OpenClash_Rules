@@ -6,7 +6,7 @@
 
 | 路径 | 状态 | 用途 |
 | --- | --- | --- |
-| [`sub-store/`](sub-store/) | 维护中 | 供 Sub-Store 的 HTTP-META 运行环境使用的节点 IPv6 出站能力过滤器 |
+| [`sub-store/`](sub-store/) | 维护中 | Sub-Store 节点名称规范化器和 IPv6 出站能力过滤器 |
 | [`archived/`](archived/) | 归档 | 已停止维护的历史脚本与广告规则拉取示例，仅供查阅 |
 
 ## 使用提示
