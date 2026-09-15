@@ -9,7 +9,7 @@
 
 ## 节点名称规范化器
 
-[`sub-store-node-name-normalizer.js`](sub-store-node-name-normalizer.js) 根据节点名称中的可靠地区证据生成统一名称。脚本不会查询节点 IP 或 GeoIP；名称中没有足够证据时，默认保留原名。
+[`sub-store-node-name-normalizer.js`](sub-store-node-name-normalizer.js) 根据节点名称中的可靠地区证据生成统一名称。脚本不会查询节点 IP 或 GeoIP；名称中没有足够证据时默认删除，可以通过参数改为保留或标记。
 
 ### 导入与基本用法
 
@@ -19,12 +19,12 @@
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/script/sub-store/sub-store-node-name-normalizer.js
 ```
 
-默认输出简体中文地区名，保留已知线路标签和倍率。只有同名节点超过一个时才添加序号。未命中和存在冲突的节点保持原名。
+默认只输出简体中文地区名和序号。同一地区的节点按照该地区首次出现的位置归组，地区内保持输入顺序。未命中和存在同级文字冲突的节点会被删除。
 
-以下参数输出「国旗 + 英文地区名」，并为全部已识别节点添加序号：
+以下参数输出「国旗 + 英文地区名」和序号：
 
 ```text
-format=en&with_flag=true&number=always
+format=en&with_flag=true
 ```
 
 首次使用时，建议开启诊断并标记无法判断的节点：
@@ -38,10 +38,10 @@ unmatched=mark&ambiguous=mark&debug=true
 脚本按以下证据识别地区：
 
 1. `overrides` 提供的精确名称映射。
-2. 国旗。
-3. 完整中文或英文地区名。
-4. 本项目维护的常见城市、机场代码和地区别名。
-5. 具有完整边界的 ISO alpha-2 或 alpha-3 代码。
+2. 完整中文或英文地区名。
+3. 本项目维护的常见城市和地区别名。
+4. 具有完整边界的 ISO alpha-2、alpha-3 或机场代码。
+5. 国旗 Emoji。
 
 两字母或三字母代码默认区分大小写。代码前不能是英文字母或数字，代码后不能是英文字母。因此：
 
@@ -49,7 +49,7 @@ unmatched=mark&ambiguous=mark&debug=true
 - `VLESS` 中的 `ES`、`REALITY` 中的 `AL` 和 `RFCHost` 中的 `CH` 不会命中。
 - `100GB` 中的 `GB` 不会识别为英国。
 
-脚本会收集全部地区证据，不按词表顺序选择第一个结果。多个证据指向同一地区时正常命中；不同证据指向多个地区时，结果为 `ambiguous`。
+脚本会收集全部地区证据，不按词表顺序选择第一个结果。完整中文或英文地区名和明确城市别名优先级最高，独立 alpha-2/alpha-3 代码其次，国旗 Emoji 最低。因此，`CN台湾`、`🇨🇳台湾`、`CN Taiwan` 和 `🇨🇳 TW` 都按台湾处理。两个同级文字地区名指向不同地区时，结果为 `ambiguous`。
 
 较长的完整名称优先覆盖名称内部的短名称。例如，`Hong Kong SAR China` 识别为香港，不会同时识别为中国；`American Samoa` 识别为美属萨摩亚，不会同时识别为萨摩亚。
 
@@ -69,19 +69,19 @@ unmatched=mark&ambiguous=mark&debug=true
 | `prefix_position` | `before` | 前缀位置：`before` 或 `after`。 |
 | `separator` | 一个空格 | 前缀、国旗、地区、标签和倍率之间的分隔符。 |
 | `number_separator` | 一个空格 | 名称与序号之间的分隔符。 |
-| `number` | `duplicates` | 编号方式：`duplicates` 仅为同名节点编号，`always` 为全部已识别节点编号，`off` 不编号。 |
+| `number` | `always` | 编号方式：`always` 为全部已识别节点编号，`duplicates` 仅为同名节点编号，`off` 不编号。 |
 | `number_width` | `2` | 序号最小位数，取值限制为 1–6。 |
-| `unmatched` | `keep` | 未命中节点的处理方式：`keep`、`mark` 或 `drop`。 |
-| `ambiguous` | `keep` | 地区证据冲突节点的处理方式：`keep`、`mark` 或 `drop`。 |
+| `unmatched` | `drop` | 未命中节点的处理方式：`drop`、`keep` 或 `mark`。 |
+| `ambiguous` | `drop` | 同级地区证据冲突节点的处理方式：`drop`、`keep` 或 `mark`。 |
 | `unmatched_mark` | `[Unmatched] ` | `unmatched=mark` 使用的前缀。 |
 | `ambiguous_mark` | `[Ambiguous] ` | `ambiguous=mark` 使用的前缀。 |
-| `retain_known` | `true` | 保留并规范化脚本内置的线路和服务标签。 |
-| `retain_rate` | `true` | 保留倍率，并统一为 `数字×` 格式。 |
+| `retain_known` | `false` | 保留并规范化脚本内置的线路和服务标签。默认不保留。 |
+| `retain_rate` | `false` | 保留倍率，并统一为 `数字×` 格式。默认不保留。 |
 | `retain` | 空 | 额外保留的文字，多个值使用英文逗号分隔。 |
 | `tag_map` | 空 JSON 对象 | 标签重命名 JSON，键为内置规范标签或 `retain` 项，值为输出标签。 |
 | `rate` | `all` | 倍率过滤：`all`、`normal` 或 `high`；`high` 指倍率大于 1。 |
 | `drop_info` | `false` | 删除套餐、流量、到期、官网、客服等通知节点。 |
-| `sort` | `none` | 排序方式：`none`、`region` 或 `tag`。默认保留输入顺序。 |
+| `sort` | `group` | 排序方式：`group` 按地区首次出现顺序归组，`none` 保留输入顺序，`region` 按代码排序，`tag` 按标签排序。 |
 | `block_quic` | `preserve` | `block-quic` 属性处理方式：`preserve`、`on` 或 `off`。 |
 | `overrides` | 空 JSON 对象 | 原节点名到 ISO alpha-2 代码的精确映射。 |
 | `code_case` | `strict` | 短代码匹配方式：`strict` 区分大小写，`ignore` 忽略大小写。 |
@@ -92,7 +92,7 @@ unmatched=mark&ambiguous=mark&debug=true
 
 ### 标签与倍率
 
-`retain_known=true` 默认识别以下类别：
+显式设置 `retain_known=true` 后，脚本可以识别并保留以下类别：
 
 - `IPLC`、`IEPL`、`BGP`、`CN2` 和 `CMI`；
 - `Core`、`Edge`、`Pro`、`Standard` 和 `Experimental`；
@@ -105,7 +105,7 @@ unmatched=mark&ambiguous=mark&debug=true
 Hong Kong GPT IPLC 2.5x
 ```
 
-默认输出：
+设置 `retain_known=true&retain_rate=true` 后输出：
 
 ```text
 香港 GPT IPLC 2.5×
@@ -140,11 +140,11 @@ overrides=%7B%22RFCHost-Mihomo-VLESS-REALITY%22%3A%22US%22%7D
 ### 输出与限制
 
 - 脚本只根据节点名称判断地区。节点名称没有地区信息时，无法推断节点的真实位置。
-- `unmatched=drop` 和 `ambiguous=drop` 会删除节点。首次使用时不要直接启用这两个参数。
+- 默认删除无法识别地区或存在同级地区冲突的节点。排查识别结果时，设置 `unmatched=mark&ambiguous=mark&debug=true`。
 - `drop_info=true` 使用固定通知关键词过滤节点，默认关闭。
 - `rate=normal` 保留无倍率或倍率不大于 1 的节点；`rate=high` 只保留倍率大于 1 的节点。
-- 默认不排序。启用排序后，已识别节点排在未命中或冲突节点之前。
-- 规范化和编号不会改变输入数组顺序，除非显式设置 `sort=region` 或 `sort=tag`。
+- 默认按照地区首次出现顺序归组，地区内保持输入顺序。设置 `sort=none` 可以完全保留输入顺序。
+- `sort=region` 按地区代码排序；`sort=tag` 按保留标签排序。
 - 脚本默认只修改已识别节点的 `name`。只有显式设置 `block_quic=on` 或 `block_quic=off` 时才修改 `block-quic`。
 - 相同参数重复执行时不会持续叠加状态标记、标签、倍率或序号。
 

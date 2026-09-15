@@ -2,7 +2,8 @@
  * Sub-Store 节点名称规范化器
  *
  * 根据节点名称中的可靠地区证据生成统一名称。脚本只处理本地数据，
- * 不查询 IP、GeoIP 或远程接口。无法可靠判断时保留原名，不强行猜测。
+ * 不查询 IP、GeoIP 或远程接口。无法可靠判断时默认删除，不强行猜测；
+ * 可以通过参数改为保留或标记。
  *
  * 地区代码采用 ISO 3166-1。地区显示名和 alpha-3 映射根据 Unicode CLDR
  * 48.2.0（cldr-json 1aaabe99aa652d6f22ea488cf25baea46aa69b42）整理；
@@ -13,14 +14,14 @@
  * - with_flag: 是否在地区名称前添加国旗，默认 false
  * - prefix / prefix_position: 自定义前缀及位置，默认空 / before
  * - separator / number_separator: 名称字段及序号分隔符，默认空格
- * - number: duplicates | always | off，默认 duplicates
- * - unmatched / ambiguous: keep | mark | drop，默认 keep
- * - retain_known / retain_rate: 是否保留内置线路标签和倍率，默认 true
+ * - number: duplicates | always | off，默认 always
+ * - unmatched / ambiguous: keep | mark | drop，默认 drop
+ * - retain_known / retain_rate: 是否保留内置线路标签和倍率，默认 false
  * - retain: 额外保留的文字，多个值用英文逗号分隔
  * - tag_map: 标签重命名 JSON，例如 {"GPT":"AI"}
  * - rate: all | normal | high，默认 all
  * - drop_info: 是否删除套餐、流量、到期等通知节点，默认 false
- * - sort: none | region | tag，默认 none
+ * - sort: group | none | region | tag，默认 group
  * - block_quic: preserve | on | off，默认 preserve
  * - overrides: 原节点名到 ISO alpha-2 代码的精确映射 JSON
  * - code_case: strict | ignore，默认 strict
@@ -359,7 +360,7 @@ const COMMON_ALIAS_ROWS = [
   ['SG', ['狮城', 'SIN']],
   ['TH', ['泰國', '曼谷', 'Bangkok', 'BKK']],
   ['TR', ['伊斯坦布尔', 'Istanbul', 'IST']],
-  ['TW', ['台灣', '臺灣', '台北', '臺北', '新北', '彰化', '高雄', '台中', '臺中', 'Taipei', 'New Taipei', 'Kaohsiung', 'Taichung', 'TPE', 'TSA', 'KHH', 'ROC']],
+  ['TW', ['中国台湾', '中國台灣', '中國臺灣', '中国台北', '中國台北', '中华台北', '中華台北', '台灣', '臺灣', '台北', '臺北', '新北', '彰化', '高雄', '台中', '臺中', 'Taipei', 'New Taipei', 'Kaohsiung', 'Taichung', 'TPE', 'TSA', 'KHH', 'ROC']],
   ['US', ['美國', '美西', '美东', '美東', '洛杉矶', '洛杉磯', '旧金山', '舊金山', '硅谷', '矽谷', '西雅图', '西雅圖', '芝加哥', '纽约', '紐約', '达拉斯', '達拉斯', '阿什本', '凤凰城', '鳳凰城', '亚特兰大', '亞特蘭大', '波特兰', '波特蘭', '俄勒冈', '俄勒岡', '费利蒙', '費利蒙', '拉斯维加斯', '拉斯維加斯', '圣何塞', '聖何塞', '圣克拉拉', '聖克拉拉', '迈阿密', '邁阿密', '华盛顿', '華盛頓', 'UnitedStates', 'Los Angeles', 'San Francisco', 'Silicon Valley', 'Seattle', 'Chicago', 'New York', 'Dallas', 'Ashburn', 'Phoenix', 'Atlanta', 'Portland', 'Fremont', 'Las Vegas', 'Santa Clara', 'Miami', 'LAX', 'SFO', 'SEA', 'ORD', 'JFK', 'EWR', 'NYC', 'DFW', 'IAD', 'PHX', 'ATL', 'MIA', 'SJC']],
   ['VN', ['越南', '胡志明市', '河内', '河內', 'Ho Chi Minh City', 'Hanoi', 'SGN', 'HAN']],
   ['ZA', ['约翰内斯堡', '开普敦', 'Johannesburg', 'Cape Town', 'JNB', 'CPT']],
@@ -568,7 +569,7 @@ function parseOptions(args, warnings) {
     numberSeparator: textArg(args.number_separator, ' '),
     number: enumArg(
       args.number,
-      'duplicates',
+      'always',
       ['duplicates', 'always', 'off'],
       'number',
       warnings,
@@ -576,27 +577,33 @@ function parseOptions(args, warnings) {
     numberWidth: integerArg(args.number_width, 2, 1, 6),
     unmatched: enumArg(
       args.unmatched,
-      'keep',
+      'drop',
       ['keep', 'mark', 'drop'],
       'unmatched',
       warnings,
     ),
     ambiguous: enumArg(
       args.ambiguous,
-      'keep',
+      'drop',
       ['keep', 'mark', 'drop'],
       'ambiguous',
       warnings,
     ),
     unmatchedMark: textArg(args.unmatched_mark, '[Unmatched] '),
     ambiguousMark: textArg(args.ambiguous_mark, '[Ambiguous] '),
-    retainKnown: booleanArg(args.retain_known, true),
-    retainRate: booleanArg(args.retain_rate, true),
+    retainKnown: booleanArg(args.retain_known, false),
+    retainRate: booleanArg(args.retain_rate, false),
     retain: listArg(args.retain),
     tagMap: jsonObjectArg(args.tag_map, 'tag_map', warnings),
     rate: enumArg(args.rate, 'all', ['all', 'normal', 'high'], 'rate', warnings),
     dropInfo: booleanArg(args.drop_info, false),
-    sort: enumArg(args.sort, 'none', ['none', 'region', 'tag'], 'sort', warnings),
+    sort: enumArg(
+      args.sort,
+      'group',
+      ['group', 'none', 'region', 'tag'],
+      'sort',
+      warnings,
+    ),
     blockQuic: enumArg(
       args.block_quic,
       'preserve',
@@ -642,6 +649,7 @@ function resolveRegion(name, options) {
       evidence.push({
         code: region.code,
         kind: 'flag',
+        tier: 1,
         start: -1,
         end: -1,
         value: region.flag,
@@ -652,7 +660,7 @@ function resolveRegion(name, options) {
 
   for (const entry of PHRASE_ENTRIES) {
     for (const occurrence of findOccurrences(normalized.folded, entry.value)) {
-      evidence.push({ ...entry, ...occurrence })
+      evidence.push({ ...entry, ...occurrence, tier: 3 })
     }
   }
 
@@ -662,23 +670,28 @@ function resolveRegion(name, options) {
   for (const entry of CODE_ENTRIES) {
     if (!options.allowAmbiguousCodes && AMBIGUOUS_SHORT_CODES.has(entry.value)) continue
     for (const occurrence of findOccurrences(codeText, entry.value, true)) {
-      evidence.push({ ...entry, ...occurrence })
+      evidence.push({ ...entry, ...occurrence, tier: 2 })
     }
   }
 
   const resolvedEvidence = removeContainedEvidence(deduplicateEvidence(evidence))
-  const codes = [...new Set(resolvedEvidence.map(value => value.code))]
+  const highestTier = resolvedEvidence.reduce(
+    (highest, value) => Math.max(highest, value.tier || 0),
+    0,
+  )
+  const decisiveEvidence = resolvedEvidence.filter(value => value.tier === highestTier)
+  const codes = [...new Set(decisiveEvidence.map(value => value.code))]
 
   if (codes.length === 0) {
-    return { state: 'unmatched', region: null, evidence: resolvedEvidence }
+    return { state: 'unmatched', region: null, evidence: decisiveEvidence }
   }
   if (codes.length > 1) {
-    return { state: 'ambiguous', region: null, evidence: resolvedEvidence }
+    return { state: 'ambiguous', region: null, evidence: decisiveEvidence }
   }
   return {
     state: 'matched',
     region: REGION_BY_CODE.get(codes[0]),
-    evidence: resolvedEvidence,
+    evidence: decisiveEvidence,
   }
 }
 
@@ -893,11 +906,21 @@ function assignStableNumbers(items, options) {
 
 function sortItems(items, policy) {
   if (policy === 'none') return
+  const groupOrder = new Map()
+  if (policy === 'group') {
+    for (const item of items) {
+      if (!groupOrder.has(item.baseName)) groupOrder.set(item.baseName, groupOrder.size)
+    }
+  }
   items.sort((left, right) => {
     const leftMatched = left.state === 'matched' ? 0 : 1
     const rightMatched = right.state === 'matched' ? 0 : 1
     if (leftMatched !== rightMatched) return leftMatched - rightMatched
 
+    if (policy === 'group') {
+      const groupDifference = groupOrder.get(left.baseName) - groupOrder.get(right.baseName)
+      if (groupDifference !== 0) return groupDifference
+    }
     if (policy === 'region') {
       const regionOrder = left.regionCode.localeCompare(right.regionCode)
       if (regionOrder !== 0) return regionOrder
