@@ -51,8 +51,8 @@ DIRECT_SOURCE_PASSTHROUGH_TYPES = frozenset(
 SUPPORTED_SETTINGS = frozenset(
     {"enable_rule_generator=true", "overwrite_original_rules=true"}
 )
-BENCHMARK_URL = "https://cp.cloudflare.com/generate_204"
-SELECT_PSEUDO_URL = "http://wifi.vivo.com.cn/generate_204"
+BENCHMARK_URL = "https://www.gstatic.com/generate_204"
+SELECT_PSEUDO_URL = BENCHMARK_URL
 STASH_BUILTIN_POLICIES = frozenset({"DIRECT", "REJECT", "REJECT-DROP", "PASS"})
 
 # Every classical source is deliberately enumerated. A new source must choose an

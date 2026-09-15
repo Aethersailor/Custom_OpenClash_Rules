@@ -20,11 +20,8 @@ proxy-providers:
     header:  # 可选：自定义 HTTP 请求头
     health-check:
       enable: true
-      url: https://cp.cloudflare.com/generate_204
+      url: https://www.gstatic.com/generate_204
       interval: 300
-      timeout: 5000
-      lazy: false
-      expected-status: 204
     override:
       udp: true
       # 不建议默认跳过 TLS 证书校验；仅在明确需要兼容特定节点时启用
@@ -37,6 +34,8 @@ proxy-providers:
 proxy-groups:
   - name: "🚀 手动选择"
     type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - "♻️ 自动选择"
     use:
@@ -45,12 +44,13 @@ proxy-groups:
     type: url-test
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🎯 全球直连"
     type: select
-    url: http://wifi.vivo.com.cn/generate_204
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - DIRECT
 

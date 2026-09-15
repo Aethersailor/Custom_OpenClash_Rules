@@ -20,11 +20,8 @@ proxy-providers:
     header:  # 可选：自定义 HTTP 请求头
     health-check:
       enable: true
-      url: https://cp.cloudflare.com/generate_204
+      url: https://www.gstatic.com/generate_204
       interval: 300
-      timeout: 5000
-      lazy: false
-      expected-status: 204
     override:
       udp: true
       # 不建议默认跳过 TLS 证书校验；仅在明确需要兼容特定节点时启用
@@ -56,16 +53,13 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "♻️ 自动选择"
     type: url-test
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "💬 即时通讯"
@@ -88,11 +82,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🌐 社交媒体"
     type: fallback
     proxies:
@@ -113,11 +104,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "📞 Talkatone"
     type: fallback
     proxies:
@@ -138,11 +126,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🚀 GitHub"
     type: fallback
     proxies:
@@ -164,11 +149,8 @@ proxy-groups:
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
       - "🎯 全球直连"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "💻 开发者服务"
     type: fallback
     proxies:
@@ -190,11 +172,8 @@ proxy-groups:
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
       - "🎯 全球直连"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "📚 学术资源"
     type: fallback
     proxies:
@@ -216,11 +195,8 @@ proxy-groups:
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
       - "🎯 全球直连"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🤖 ChatGPT"
     type: fallback
     proxies:
@@ -241,11 +217,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🤖 Copilot"
     type: fallback
     proxies:
@@ -266,11 +239,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🤖 国外AI服务"
     type: fallback
     proxies:
@@ -291,13 +261,12 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🤖 国内AI服务"
     type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - "🎯 全球直连"
       - "🚀 故障转移"
@@ -338,11 +307,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "📹 YouTube"
     type: fallback
     proxies:
@@ -363,11 +329,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🎥 Netflix"
     type: fallback
     proxies:
@@ -388,11 +351,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🎥 DisneyPlus"
     type: fallback
     proxies:
@@ -413,11 +373,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🎥 HBO"
     type: fallback
     proxies:
@@ -438,11 +395,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🎥 PrimeVideo"
     type: fallback
     proxies:
@@ -463,11 +417,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🎥 AppleTV+"
     type: fallback
     proxies:
@@ -488,11 +439,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🎥 Emby"
     type: fallback
     proxies:
@@ -513,11 +461,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🎻 Spotify"
     type: fallback
     proxies:
@@ -538,11 +483,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "📺 Bahamut"
     type: fallback
     proxies:
@@ -550,11 +492,8 @@ proxy-groups:
       - "🇭🇰 香港节点"
       - "🚀 故障转移"
       - "🎯 全球直连"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🌎 国外媒体"
     type: fallback
     proxies:
@@ -575,11 +514,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🛒 国外电商"
     type: fallback
     proxies:
@@ -600,11 +536,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🪙 加密货币"
     type: fallback
     proxies:
@@ -625,11 +558,8 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "📢 谷歌FCM"
     type: fallback
     proxies:
@@ -651,11 +581,8 @@ proxy-groups:
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
       - "🎯 全球直连"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🇬 谷歌服务"
     type: fallback
     proxies:
@@ -676,13 +603,12 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🍎 苹果服务"
     type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - "🎯 全球直连"
       - "🇭🇰 香港节点"
@@ -704,6 +630,8 @@ proxy-groups:
       - "♻️ 自动选择"
   - name: "Ⓜ️ 微软服务"
     type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - "🎯 全球直连"
       - "🇭🇰 香港节点"
@@ -725,6 +653,8 @@ proxy-groups:
       - "♻️ 自动选择"
   - name: "💾 OneDrive"
     type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - "🎯 全球直连"
       - "🇭🇰 香港节点"
@@ -746,6 +676,8 @@ proxy-groups:
       - "♻️ 自动选择"
   - name: "💳 PayPal"
     type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - "🎯 全球直连"
       - "🇭🇰 香港节点"
@@ -767,6 +699,8 @@ proxy-groups:
       - "♻️ 自动选择"
   - name: "🎮 游戏平台"
     type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - "🎯 全球直连"
       - "🇭🇰 香港节点"
@@ -788,6 +722,8 @@ proxy-groups:
       - "♻️ 自动选择"
   - name: "🎮 Steam"
     type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - "🎯 全球直连"
       - "🇭🇰 香港节点"
@@ -828,13 +764,12 @@ proxy-groups:
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
       - "🎯 全球直连"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🚀 测速工具"
     type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - "🎯 全球直连"
       - "🇭🇰 香港节点"
@@ -856,6 +791,8 @@ proxy-groups:
       - "♻️ 自动选择"
   - name: "🌍 国外域名"
     type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - "🎯 全球直连"
       - "🚀 故障转移"
@@ -896,13 +833,12 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
-    timeout: 5000
-    lazy: false
-    expected-status: 204
   - name: "🔀 非标端口"
     type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - "🐟 漏网之鱼"
       - "🎯 全球直连"
@@ -911,7 +847,7 @@ proxy-groups:
     filter: '(?i)(🇭🇰|港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇺🇸 美国节点"
@@ -919,7 +855,7 @@ proxy-groups:
     filter: '(?i)(🇺🇸|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇯🇵 日本节点"
@@ -927,7 +863,7 @@ proxy-groups:
     filter: '(?i)(🇯🇵|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇸🇬 新加坡节点"
@@ -935,7 +871,7 @@ proxy-groups:
     filter: '(?i)(🇸🇬|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇼🇸 台湾节点"
@@ -943,7 +879,7 @@ proxy-groups:
     filter: '(?i)(🇹🇼|🇼🇸|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇰🇷 韩国节点"
@@ -951,7 +887,7 @@ proxy-groups:
     filter: '(?i)(🇰🇷|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇨🇦 加拿大节点"
@@ -959,7 +895,7 @@ proxy-groups:
     filter: '(?i)(🇨🇦|加拿大|\bCA(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Canada|CANADA|CAN|渥太华|温哥华|卡尔加里|蒙特利尔|Montreal|YVR|YYZ|YUL)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇬🇧 英国节点"
@@ -967,7 +903,7 @@ proxy-groups:
     filter: '(?i)(🇬🇧|英国|Britain|United Kingdom|UNITED KINGDOM|England|伦敦|曼彻斯特|Manchester|\bUK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|GBR|LHR|MAN)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇫🇷 法国节点"
@@ -975,7 +911,7 @@ proxy-groups:
     filter: '(?i)(🇫🇷|法国|\bFR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|France|FRANCE|FRA|巴黎|马赛|Marseille|CDG|MRS)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇩🇪 德国节点"
@@ -983,7 +919,7 @@ proxy-groups:
     filter: '(?i)(🇩🇪|德国|Germany|GERMANY|\bDE(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|DEU|柏林|法兰克福|慕尼黑|Munich|MUC)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇳🇱 荷兰节点"
@@ -991,7 +927,7 @@ proxy-groups:
     filter: '(?i)(🇳🇱|荷兰|Netherlands|NETHERLANDS|\bNL(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|NLD|阿姆斯特丹|AMS)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇹🇷 土耳其节点"
@@ -999,7 +935,7 @@ proxy-groups:
     filter: '(?i)(🇹🇷|土耳其|Turkey|TURKEY|Türkiye|\bTR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|TUR|IST|ANK)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🇷🇺 俄罗斯节点"
@@ -1007,7 +943,7 @@ proxy-groups:
     filter: '(?i)(🇷🇺|(?<!白)俄罗斯|(?<!白)俄|莫斯科|圣彼得堡|新西伯利亚|海参崴|符拉迪沃斯托克|哈巴罗夫斯克|伯力|\bRU(?:[-_ ]?\d+)?\b|Russia)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🌐 其他地区"
@@ -1015,7 +951,7 @@ proxy-groups:
     filter: '(?i)(^(?!.*(港|\bHK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|hk|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|🇭🇰|九龙|Kowloon|新界|沙田|荃湾|葵涌|美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|纽约|纽纽|亚特兰大|迈阿密|华盛顿|\bUS(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|United States|UnitedStates|UNITED STATES|USA|America|AMERICA|JFK|EWR|IAD|ATL|ORD|MIA|NYC|LAX|SFO|SEA|DFW|SJC|🇺🇸|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|(?<!尼|-)日|\bJP(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|🇯🇵|关西|Kansai|KANSAI|新加坡|坡|狮城|\bSG(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Singapore|SINGAPORE|SIN|🇸🇬|台|新北|彰化|\bTW(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Taiwan|TAIWAN|TWN|TPE|ROC|🇹🇼|\bKR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Korea|KOREA|KOR|首尔|韩|韓|春川|Chuncheon|ICN|🇰🇷|加拿大|\bCA(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|Canada|CANADA|CAN|渥太华|温哥华|卡尔加里|蒙特利尔|Montreal|YVR|YYZ|YUL|🇨🇦|英国|Britain|United Kingdom|UNITED KINGDOM|England|伦敦|曼彻斯特|Manchester|\bUK(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|GBR|LHR|MAN|🇬🇧|法国|\bFR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|France|FRANCE|FRA|巴黎|马赛|Marseille|CDG|MRS|🇫🇷|德国|Germany|GERMANY|\bDE(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|DEU|柏林|法兰克福|慕尼黑|Munich|MUC|🇩🇪|荷兰|Netherlands|NETHERLANDS|\bNL(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|NLD|阿姆斯特丹|AMS|🇳🇱|土耳其|Turkey|TURKEY|Türkiye|\bTR(?:[-_ ]?\d+(?:[-_ ]?[A-Za-z]{2,})?)?\b|TUR|IST|ANK|🇹🇷|🇷🇺|(?<!白)俄罗斯|(?<!白)俄|莫斯科|圣彼得堡|新西伯利亚|海参崴|符拉迪沃斯托克|哈巴罗夫斯克|伯力|\bRU(?:[-_ ]?\d+)?\b|Russia|家宽|家庭宽带|住宅|Residential|低倍率|低倍|(?<![\d\.])0?\.\d+(?![0-9])(?:x|倍)?|倍率[:： ]?0?\.\d+)).*)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🏠 家宽节点"
@@ -1023,7 +959,7 @@ proxy-groups:
     filter: '(?i)(家宽|家庭宽带|住宅|Residential)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🐢 低倍率节点"
@@ -1031,12 +967,13 @@ proxy-groups:
     filter: '(?i)(低倍率|低倍|(?<![\d\.])0?\.\d+(?![0-9])(?:x|倍)?|倍率[:： ]?0?\.\d+)'
     use:
       - provider1
-    url: https://cp.cloudflare.com/generate_204
+    url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
   - name: "🎯 全球直连"
     type: select
-    url: http://wifi.vivo.com.cn/generate_204
+    url: https://www.gstatic.com/generate_204
+    interval: 300
     proxies:
       - DIRECT
 
