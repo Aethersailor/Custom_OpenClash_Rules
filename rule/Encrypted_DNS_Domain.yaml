@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3306
+# TOTAL: 3310
 
 payload:
   - '+.003153.xyz'
@@ -132,6 +132,7 @@ payload:
   - '+.adg5yvi.ngatngay.net'
   - '+.adgaurd.lingmont.net'
   - '+.adgh.imtsui.com'
+  - '+.adgh.xrossj.top'
   - '+.adghome.charleschan.net'
   - '+.adghome.ru'
   - '+.adghs.de'
@@ -360,6 +361,7 @@ payload:
   - '+.adh.fastpacefixit.info'
   - '+.adh.olesgroup.com'
   - '+.adhome.2011101.xyz'
+  - '+.adhome.maige.fun'
   - '+.adk.qcloud.work'
   - '+.adl.adfilter.net'
   - '+.adl01.dnscry.pt'
@@ -368,6 +370,7 @@ payload:
   - '+.admir21.ru'
   - '+.adns.3am.la'
   - '+.adns.onlinetools.rocks'
+  - '+.ads.hunga1k47.com'
   - '+.ads.therman.eu'
   - '+.ads.x88.in'
   - '+.adsl.viettel.vn'
@@ -432,6 +435,7 @@ payload:
   - '+.ahoj.email'
   - '+.aicx99.shop'
   - '+.aihe.app'
+  - '+.aitkcrev.minhduc.pw'
   - '+.ajlxwk4kedu5.absq.ch'
   - '+.akari.anime.com.my'
   - '+.akhilkalwakurthy.dyndns.org'
