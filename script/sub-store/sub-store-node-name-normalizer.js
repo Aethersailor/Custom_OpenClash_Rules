@@ -1,32 +1,13 @@
 /**
  * Sub-Store 节点名称规范化器
  *
- * 根据节点名称中的可靠地区证据生成统一名称。脚本只处理本地数据，
- * 不查询 IP、GeoIP 或远程接口。无法可靠判断时默认删除，不强行猜测；
- * 可以通过参数改为保留或标记。
+ * 根据节点名称中的可靠地区证据，将已识别节点改为“中文地区名 + 编号”。
+ * 脚本只处理本地名称，不查询 IP、GeoIP 或远程接口，不删除节点，
+ * 不改变节点顺序，也不修改名称以外的节点属性。
  *
  * 地区代码采用 ISO 3166-1。地区显示名和 alpha-3 映射根据 Unicode CLDR
  * 48.2.0（cldr-json 1aaabe99aa652d6f22ea488cf25baea46aa69b42）整理；
- * 常见城市、机场代码和线路标签由本项目独立维护。
- *
- * 主要参数：
- * - format: zh | en | code | flag，默认 zh
- * - with_flag: 是否在地区名称前添加国旗，默认 false
- * - prefix / prefix_position: 自定义前缀及位置，默认空 / before
- * - separator / number_separator: 名称字段及序号分隔符，默认空格
- * - number: duplicates | always | off，默认 always
- * - unmatched / ambiguous: keep | mark | drop，默认 drop
- * - retain_known / retain_rate: 是否保留内置线路标签和倍率，默认 false
- * - retain: 额外保留的文字，多个值用英文逗号分隔
- * - tag_map: 标签重命名 JSON，例如 {"GPT":"AI"}
- * - rate: all | normal | high，默认 all
- * - drop_info: 是否删除套餐、流量、到期等通知节点，默认 false
- * - sort: group | none | region | tag，默认 group
- * - block_quic: preserve | on | off，默认 preserve
- * - overrides: 原节点名到 ISO alpha-2 代码的精确映射 JSON
- * - code_case: strict | ignore，默认 strict
- * - allow_ambiguous_codes: 是否允许容易与技术标签冲突的短代码，默认 false
- * - debug: 是否输出匹配摘要，默认 false
+ * 常见城市和机场代码由本项目独立维护。
  */
 
 /*
@@ -393,59 +374,6 @@ const AMBIGUOUS_SHORT_CODES = new Set([
   'WS',
 ])
 
-const KNOWN_TAG_ROWS = [
-  ['IPLC', ['IPLC']],
-  ['IEPL', ['IEPL']],
-  ['BGP', ['BGP']],
-  ['CN2', ['CN2']],
-  ['CMI', ['CMI']],
-  ['Core', ['Core', 'Kern', '核心']],
-  ['Edge', ['Edge', '边缘']],
-  ['Pro', ['Pro', '高级']],
-  ['Standard', ['Standard', 'Std', '标准']],
-  ['Experimental', ['Experimental', 'Exp', '实验']],
-  ['Business', ['Business', 'Biz', '商宽']],
-  ['Residential', ['Residential', 'Fam', '家宽']],
-  ['Game', ['Game', '游戏']],
-  ['Shopping', ['Shopping', 'Buy', '购物']],
-  ['Dedicated', ['Dedicated', '专线']],
-  ['LoadBalance', ['LoadBalance', 'Load Balance', 'LB']],
-  ['Cloudflare', ['Cloudflare', 'CF']],
-  ['UDP', ['UDP']],
-  ['UDPN', ['UDPN']],
-  ['GPT', ['ChatGPT', 'GPT']],
-  ['Netflix', ['Netflix', 'NF']],
-  ['Disney+', ['Disney+', 'Disney Plus']],
-  ['YouTube', ['YouTube']],
-  ['TikTok', ['TikTok']],
-]
-
-const INFO_PHRASES = [
-  '套餐',
-  '到期',
-  '有效期',
-  '剩余流量',
-  '已用流量',
-  '流量重置',
-  '过期',
-  '失联',
-  '官网',
-  '网址',
-  '客服',
-  '邮箱',
-  '工单',
-  '订阅',
-  '下次更新',
-  'expire',
-  'expired',
-  'expiration',
-  'remaining traffic',
-  'traffic reset',
-  'used traffic',
-  'official website',
-  'subscription',
-]
-
 const REGIONS = REGION_ROWS.map(row => ({
   code: row[0],
   alpha3: row[1],
@@ -460,185 +388,37 @@ const PHRASE_ENTRIES = []
 const CODE_ENTRIES = []
 
 for (const region of REGIONS) {
-  addMatchEntry(region.code, region.zh, 'name')
-  addMatchEntry(region.code, region.en, 'name')
-  for (const alias of region.aliases) addMatchEntry(region.code, alias, 'alias')
-  addCodeEntry(region.code, region.code, 'alpha2')
-  addCodeEntry(region.code, region.alpha3, 'alpha3')
+  addMatchEntry(region.code, region.zh)
+  addMatchEntry(region.code, region.en)
+  for (const alias of region.aliases) addMatchEntry(region.code, alias)
+  addCodeEntry(region.code, region.code)
+  addCodeEntry(region.code, region.alpha3)
 }
 
 for (const row of COMMON_ALIAS_ROWS) {
-  for (const alias of row[1]) addMatchEntry(row[0], alias, 'common')
+  for (const alias of row[1]) addMatchEntry(row[0], alias)
 }
 
-function operator(proxies = [], targetPlatform, context) {
+function operator(proxies = []) {
   if (!Array.isArray(proxies) || proxies.length === 0) return []
 
-  const warnings = []
-  const options = parseOptions(
-    typeof $arguments !== 'undefined' && $arguments ? $arguments : {},
-    warnings,
-  )
-  const stats = { matched: 0, unmatched: 0, ambiguous: 0, dropped: 0 }
-  const items = []
-
-  for (let index = 0; index < proxies.length; index++) {
-    const proxy = proxies[index]
+  const counters = new Map()
+  return proxies.map(proxy => {
     const originalName = String(proxy && proxy.name != null ? proxy.name : '')
-    const rate = extractRate(originalName)
+    const result = resolveRegion(originalName)
+    if (result.state !== 'matched') return proxy
 
-    if (options.dropInfo && isInformationName(originalName)) {
-      stats.dropped++
-      continue
-    }
-    if (!rateAllowed(rate, options.rate)) {
-      stats.dropped++
-      continue
-    }
-
-    const result = resolveRegion(originalName, options)
-    const tags = extractTags(originalName, options)
-    let outputName = originalName
-
-    if (result.state === 'matched') {
-      stats.matched++
-      outputName = renderMatchedName(result.region, tags, rate, options)
-    } else {
-      stats[result.state]++
-      const policy = result.state === 'ambiguous' ? options.ambiguous : options.unmatched
-      if (policy === 'drop') {
-        stats.dropped++
-        continue
-      }
-      if (policy === 'mark') {
-        const marker = result.state === 'ambiguous' ? options.ambiguousMark : options.unmatchedMark
-        outputName = `${marker}${stripOutcomeMarkers(originalName, options)}`
-      }
-    }
-
-    items.push({
-      index,
-      originalName,
-      state: result.state,
-      regionCode: result.region ? result.region.code : '',
-      evidence: result.evidence,
-      tags,
-      baseName: outputName,
-      proxy: updateProxy(proxy, outputName, options.blockQuic),
-    })
-  }
-
-  assignStableNumbers(items, options)
-  sortItems(items, options.sort)
-
-  for (const warning of warnings) logMessage('warn', `[Name Normalizer] ${warning}`)
-  if (options.debug) {
-    for (const item of items) {
-      if (item.state !== 'matched') {
-        const codes = [...new Set(item.evidence.map(value => value.code))].join(',') || 'none'
-        logMessage(
-          'info',
-          `[Name Normalizer] ${item.state}: ${item.originalName}; candidates=${codes}`,
-        )
-      }
-    }
-    logMessage(
-      'info',
-      `[Name Normalizer] input=${proxies.length}, matched=${stats.matched}, ` +
-        `unmatched=${stats.unmatched}, ambiguous=${stats.ambiguous}, ` +
-        `dropped=${stats.dropped}, output=${items.length}`,
+    const count = (counters.get(result.region.code) || 0) + 1
+    counters.set(result.region.code, count)
+    return updateProxy(
+      proxy,
+      `${result.region.zh} ${String(count).padStart(2, '0')}`,
     )
-  }
-
-  return items.map(item => item.proxy)
+  })
 }
 
-function parseOptions(args, warnings) {
-  return {
-    format: enumArg(args.format, 'zh', ['zh', 'en', 'code', 'flag'], 'format', warnings),
-    withFlag: booleanArg(args.with_flag, false),
-    prefix: textArg(args.prefix, ''),
-    prefixPosition: enumArg(
-      args.prefix_position,
-      'before',
-      ['before', 'after'],
-      'prefix_position',
-      warnings,
-    ),
-    separator: textArg(args.separator, ' '),
-    numberSeparator: textArg(args.number_separator, ' '),
-    number: enumArg(
-      args.number,
-      'always',
-      ['duplicates', 'always', 'off'],
-      'number',
-      warnings,
-    ),
-    numberWidth: integerArg(args.number_width, 2, 1, 6),
-    unmatched: enumArg(
-      args.unmatched,
-      'drop',
-      ['keep', 'mark', 'drop'],
-      'unmatched',
-      warnings,
-    ),
-    ambiguous: enumArg(
-      args.ambiguous,
-      'drop',
-      ['keep', 'mark', 'drop'],
-      'ambiguous',
-      warnings,
-    ),
-    unmatchedMark: textArg(args.unmatched_mark, '[Unmatched] '),
-    ambiguousMark: textArg(args.ambiguous_mark, '[Ambiguous] '),
-    retainKnown: booleanArg(args.retain_known, false),
-    retainRate: booleanArg(args.retain_rate, false),
-    retain: listArg(args.retain),
-    tagMap: jsonObjectArg(args.tag_map, 'tag_map', warnings),
-    rate: enumArg(args.rate, 'all', ['all', 'normal', 'high'], 'rate', warnings),
-    dropInfo: booleanArg(args.drop_info, false),
-    sort: enumArg(
-      args.sort,
-      'group',
-      ['group', 'none', 'region', 'tag'],
-      'sort',
-      warnings,
-    ),
-    blockQuic: enumArg(
-      args.block_quic,
-      'preserve',
-      ['preserve', 'on', 'off'],
-      'block_quic',
-      warnings,
-    ),
-    overrides: overrideArg(args.overrides, warnings),
-    codeCase: enumArg(
-      args.code_case,
-      'strict',
-      ['strict', 'ignore'],
-      'code_case',
-      warnings,
-    ),
-    allowAmbiguousCodes: booleanArg(args.allow_ambiguous_codes, false),
-    debug: booleanArg(args.debug, false),
-  }
-}
-
-function resolveRegion(name, options) {
-  const originalNormalized = normalizeForMatching(name)
-  const overrideCode = options.overrides.get(originalNormalized.folded)
-  if (overrideCode) {
-    return {
-      state: 'matched',
-      region: REGION_BY_CODE.get(overrideCode),
-      evidence: [{ code: overrideCode, kind: 'override', start: 0, end: originalNormalized.folded.length }],
-    }
-  }
-
-  const matchName = stripConfiguredPrefix(
-    stripOutcomeMarkers(String(name), options),
-    options,
-  )
+function resolveRegion(name) {
+  const matchName = String(name)
   const normalized = normalizeForMatching(matchName)
   const evidence = []
   for (const region of REGIONS) {
@@ -648,7 +428,6 @@ function resolveRegion(name, options) {
       if (index === -1) break
       evidence.push({
         code: region.code,
-        kind: 'flag',
         tier: 1,
         start: -1,
         end: -1,
@@ -664,11 +443,9 @@ function resolveRegion(name, options) {
     }
   }
 
-  const codeText = options.codeCase === 'ignore'
-    ? normalized.plain.toUpperCase()
-    : normalized.plain
+  const codeText = normalized.plain
   for (const entry of CODE_ENTRIES) {
-    if (!options.allowAmbiguousCodes && AMBIGUOUS_SHORT_CODES.has(entry.value)) continue
+    if (AMBIGUOUS_SHORT_CODES.has(entry.value)) continue
     for (const occurrence of findOccurrences(codeText, entry.value, true)) {
       evidence.push({ ...entry, ...occurrence, tier: 2 })
     }
@@ -683,15 +460,14 @@ function resolveRegion(name, options) {
   const codes = [...new Set(decisiveEvidence.map(value => value.code))]
 
   if (codes.length === 0) {
-    return { state: 'unmatched', region: null, evidence: decisiveEvidence }
+    return { state: 'unmatched', region: null }
   }
   if (codes.length > 1) {
-    return { state: 'ambiguous', region: null, evidence: decisiveEvidence }
+    return { state: 'ambiguous', region: null }
   }
   return {
     state: 'matched',
     region: REGION_BY_CODE.get(codes[0]),
-    evidence: decisiveEvidence,
   }
 }
 
@@ -712,24 +488,24 @@ function normalizeForMatching(value) {
   return { plain: text, folded: text.toLowerCase() }
 }
 
-function addMatchEntry(code, value, kind) {
+function addMatchEntry(code, value) {
   const normalized = normalizeForMatching(value).plain
   if (!normalized) return
   if (/^[A-Za-z]{2,3}$/.test(normalized)) {
-    addCodeEntry(code, normalized.toUpperCase(), kind)
+    addCodeEntry(code, normalized.toUpperCase())
     return
   }
   const folded = normalized.toLowerCase()
   if (!PHRASE_ENTRIES.some(entry => entry.code === code && entry.value === folded)) {
-    PHRASE_ENTRIES.push({ code, value: folded, kind })
+    PHRASE_ENTRIES.push({ code, value: folded })
   }
 }
 
-function addCodeEntry(code, value, kind) {
+function addCodeEntry(code, value) {
   const token = String(value || '').toUpperCase()
   if (!/^[A-Z]{2,3}$/.test(token)) return
   if (!CODE_ENTRIES.some(entry => entry.code === code && entry.value === token)) {
-    CODE_ENTRIES.push({ code, value: token, kind })
+    CODE_ENTRIES.push({ code, value: token })
   }
 }
 
@@ -756,7 +532,7 @@ function findOccurrences(text, needle, disallowLeadingDigit = false) {
 function deduplicateEvidence(evidence) {
   const seen = new Set()
   return evidence.filter(item => {
-    const key = `${item.code}|${item.kind}|${item.start}|${item.end}|${item.value || ''}`
+    const key = `${item.code}|${item.tier}|${item.start}|${item.end}|${item.value || ''}`
     if (seen.has(key)) return false
     seen.add(key)
     return true
@@ -779,289 +555,19 @@ function removeContainedEvidence(evidence) {
   })
 }
 
-function extractTags(name, options) {
-  const normalized = normalizeForMatching(name).folded
-  const found = []
-
-  if (options.retainKnown) {
-    for (const row of KNOWN_TAG_ROWS) {
-      for (const alias of row[1]) {
-        const value = normalizeForMatching(alias).folded
-        const occurrence = findOccurrences(normalized, value)[0]
-        if (occurrence) found.push({ label: row[0], start: occurrence.start })
-      }
-    }
-  }
-
-  for (const value of options.retain) {
-    const normalizedValue = normalizeForMatching(value).folded
-    const occurrence = findOccurrences(normalized, normalizedValue)[0]
-    if (occurrence) found.push({ label: value, start: occurrence.start })
-  }
-
-  found.sort((a, b) => a.start - b.start)
-  const tags = []
-  const seen = new Set()
-  for (const item of found) {
-    const mapped = mappedTag(item.label, options.tagMap)
-    const key = mapped.toLowerCase()
-    if (!mapped || seen.has(key)) continue
-    seen.add(key)
-    tags.push(mapped)
-  }
-  return tags
-}
-
-function mappedTag(label, tagMap) {
-  if (Object.prototype.hasOwnProperty.call(tagMap, label)) {
-    return tagMap[label] == null ? '' : String(tagMap[label])
-  }
-  const target = Object.keys(tagMap).find(key => key.toLowerCase() === label.toLowerCase())
-  return target ? (tagMap[target] == null ? '' : String(tagMap[target])) : label
-}
-
-function extractRate(name) {
-  let text = String(name == null ? '' : name)
-  try {
-    text = text.normalize('NFKC')
-  } catch {}
-
-  let match = text.match(
-    /(?:^|[^A-Za-z0-9])(\d{1,3}(?:\.\d+)?)\s*(?:x|×|倍)(?![A-Za-z0-9])/i,
-  )
-  if (!match) {
-    match = text.match(
-      /(?:^|[^A-Za-z0-9])(?:倍率|x|×)\s*(\d{1,3}(?:\.\d+)?)(?![A-Za-z0-9.])/i,
-    )
-  }
-  if (match) {
-    const value = Number(match[1])
-    if (Number.isFinite(value) && value > 0) return { value, label: `${value}×` }
-  }
-
-  const superscript = text.match(
-    /(?:^|[^A-Za-z0-9])[x×ˣ]([⁰¹²³⁴⁵⁶⁷⁸⁹]+)(?![A-Za-z0-9])/
-  )
-  if (!superscript) return null
-  const digits = [...superscript[1]]
-    .map(value => '⁰¹²³⁴⁵⁶⁷⁸⁹'.indexOf(value))
-    .join('')
-  const value = Number(digits)
-  return Number.isFinite(value) && value > 0 ? { value, label: `${value}×` } : null
-}
-
-function rateAllowed(rate, policy) {
-  if (policy === 'all') return true
-  if (policy === 'high') return Boolean(rate && rate.value > 1)
-  return !rate || rate.value <= 1
-}
-
-function isInformationName(name) {
-  const normalized = normalizeForMatching(name).folded
-  return INFO_PHRASES.some(phrase =>
-    findOccurrences(normalized, normalizeForMatching(phrase).folded).length > 0,
-  )
-}
-
-function renderMatchedName(region, tags, rate, options) {
-  const regionLabel = options.format === 'en'
-    ? region.en
-    : options.format === 'code'
-      ? region.code
-      : options.format === 'flag'
-        ? region.flag
-        : region.zh
-  const locationParts = []
-
-  if (options.prefix && options.prefixPosition === 'before') locationParts.push(options.prefix)
-  if (options.withFlag && options.format !== 'flag') locationParts.push(region.flag)
-  locationParts.push(regionLabel)
-  if (options.prefix && options.prefixPosition === 'after') locationParts.push(options.prefix)
-  if (options.retainKnown || options.retain.length > 0) locationParts.push(...tags)
-  if (options.retainRate && rate) locationParts.push(rate.label)
-
-  return locationParts.filter(value => value !== '').join(options.separator)
-}
-
-function assignStableNumbers(items, options) {
-  if (options.number === 'off') return
-  const totals = new Map()
-  for (const item of items) {
-    if (item.state !== 'matched') continue
-    totals.set(item.baseName, (totals.get(item.baseName) || 0) + 1)
-  }
-
-  const counters = new Map()
-  for (const item of items) {
-    if (item.state !== 'matched') continue
-    const shouldNumber = options.number === 'always' || totals.get(item.baseName) > 1
-    if (!shouldNumber) continue
-    const count = (counters.get(item.baseName) || 0) + 1
-    counters.set(item.baseName, count)
-    const width = Math.max(options.numberWidth, String(totals.get(item.baseName)).length)
-    const outputName = `${item.baseName}${options.numberSeparator}${String(count).padStart(width, '0')}`
-    item.proxy = updateProxy(item.proxy, outputName, 'preserve')
-  }
-}
-
-function sortItems(items, policy) {
-  if (policy === 'none') return
-  const groupOrder = new Map()
-  if (policy === 'group') {
-    for (const item of items) {
-      if (!groupOrder.has(item.baseName)) groupOrder.set(item.baseName, groupOrder.size)
-    }
-  }
-  items.sort((left, right) => {
-    const leftMatched = left.state === 'matched' ? 0 : 1
-    const rightMatched = right.state === 'matched' ? 0 : 1
-    if (leftMatched !== rightMatched) return leftMatched - rightMatched
-
-    if (policy === 'group') {
-      const groupDifference = groupOrder.get(left.baseName) - groupOrder.get(right.baseName)
-      if (groupDifference !== 0) return groupDifference
-    }
-    if (policy === 'region') {
-      const regionOrder = left.regionCode.localeCompare(right.regionCode)
-      if (regionOrder !== 0) return regionOrder
-    }
-    if (policy === 'tag') {
-      const leftTag = left.tags.join('|')
-      const rightTag = right.tags.join('|')
-      const leftTagged = leftTag ? 1 : 0
-      const rightTagged = rightTag ? 1 : 0
-      if (leftTagged !== rightTagged) return leftTagged - rightTagged
-      const tagOrder = leftTag.localeCompare(rightTag)
-      if (tagOrder !== 0) return tagOrder
-    }
-    return left.index - right.index
-  })
-}
-
-function updateProxy(proxy, name, blockQuic) {
+function updateProxy(proxy, name) {
   if (!proxy || typeof proxy !== 'object') return proxy
   const nameChanged = String(proxy.name == null ? '' : proxy.name) !== name
-  const propertyChanged = blockQuic !== 'preserve' && proxy['block-quic'] !== blockQuic
-  if (!nameChanged && !propertyChanged) return proxy
+  if (!nameChanged) return proxy
   const output = { ...proxy }
-  if (nameChanged) output.name = name
-  if (blockQuic !== 'preserve') output['block-quic'] = blockQuic
+  output.name = name
   return output
-}
-
-function stripOutcomeMarkers(name, options) {
-  let output = String(name)
-  const markers = [options.unmatchedMark, options.ambiguousMark]
-    .filter(Boolean)
-    .sort((a, b) => b.length - a.length)
-  let changed = true
-  while (changed) {
-    changed = false
-    for (const marker of markers) {
-      if (!output.startsWith(marker)) continue
-      output = output.slice(marker.length)
-      changed = true
-      break
-    }
-  }
-  return output
-}
-
-function stripConfiguredPrefix(name, options) {
-  if (!options.prefix) return name
-  const marker = options.prefixPosition === 'before'
-    ? `${options.prefix}${options.separator}`
-    : `${options.separator}${options.prefix}`
-  if (!marker) return name
-
-  if (options.prefixPosition === 'before' && name.startsWith(marker)) {
-    return name.slice(marker.length)
-  }
-  if (options.prefixPosition === 'after') {
-    const index = name.indexOf(marker)
-    if (index !== -1) return `${name.slice(0, index)}${name.slice(index + marker.length)}`
-  }
-  return name
-}
-
-function overrideArg(value, warnings) {
-  const object = jsonObjectArg(value, 'overrides', warnings)
-  const result = new Map()
-  for (const [name, codeValue] of Object.entries(object)) {
-    const code = String(codeValue).toUpperCase()
-    if (!REGION_BY_CODE.has(code)) {
-      warnings.push(`overrides 忽略未知地区代码：${code}`)
-      continue
-    }
-    const key = normalizeForMatching(name).folded
-    if (key) result.set(key, code)
-  }
-  return result
-}
-
-function jsonObjectArg(value, name, warnings) {
-  if (value == null || value === '') return {}
-  if (value && typeof value === 'object' && !Array.isArray(value)) return value
-  const text = textArg(value, '')
-  if (!text) return {}
-  try {
-    const parsed = JSON.parse(text)
-    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) return parsed
-  } catch {}
-  warnings.push(`${name} 不是有效的 JSON 对象，已忽略`)
-  return {}
-}
-
-function listArg(value) {
-  const text = textArg(value, '')
-  if (!text) return []
-  return [...new Set(text.split(',').map(item => item.trim()).filter(Boolean))]
-}
-
-function enumArg(value, fallback, allowed, name, warnings) {
-  if (value == null || value === '') return fallback
-  const normalized = String(value).trim().toLowerCase()
-  if (allowed.includes(normalized)) return normalized
-  warnings.push(`${name}=${String(value)} 无效，已使用默认值 ${fallback}`)
-  return fallback
-}
-
-function booleanArg(value, fallback) {
-  if (value == null || value === '') return fallback
-  if (typeof value === 'boolean') return value
-  return !/^(0|false|no|off)$/i.test(String(value).trim())
-}
-
-function integerArg(value, fallback, minimum, maximum) {
-  const number = Number(value)
-  if (!Number.isFinite(number)) return fallback
-  return Math.max(minimum, Math.min(maximum, Math.trunc(number)))
-}
-
-function textArg(value, fallback) {
-  if (value == null || value === '') return fallback
-  const text = String(value)
-  try {
-    return decodeURIComponent(text)
-  } catch {
-    return text
-  }
 }
 
 function flagFromCode(code) {
   return [...code]
     .map(character => String.fromCodePoint(127397 + character.charCodeAt(0)))
     .join('')
-}
-
-function logMessage(level, message) {
-  if (typeof $substore !== 'undefined' && $substore && typeof $substore[level] === 'function') {
-    $substore[level](message)
-    return
-  }
-  if (typeof console !== 'undefined' && typeof console[level] === 'function') {
-    console[level](message)
-  }
 }
 
 // Sub-Store evaluates this file directly and does not define `module`.

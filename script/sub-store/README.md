@@ -4,12 +4,12 @@
 
 | 脚本 | 用途 | 是否联网 |
 | --- | --- | --- |
-| [`sub-store-node-name-normalizer.js`](sub-store-node-name-normalizer.js) | 识别节点名称中的地区信息，统一名称、标签、倍率和序号 | 否 |
+| [`sub-store-node-name-normalizer.js`](sub-store-node-name-normalizer.js) | 识别节点名称中的地区信息，并统一为中文地区名和序号 | 否 |
 | [`sub-store-ipv6-egress-filter.js`](sub-store-ipv6-egress-filter.js) | 通过 HTTP-META 检查代理节点是否支持 IPv6 出站 | 是 |
 
 ## 节点名称规范化器
 
-[`sub-store-node-name-normalizer.js`](sub-store-node-name-normalizer.js) 根据节点名称中的可靠地区证据生成统一名称。脚本不会查询节点 IP 或 GeoIP；名称中没有足够证据时默认删除，可以通过参数改为保留或标记。
+[`sub-store-node-name-normalizer.js`](sub-store-node-name-normalizer.js) 根据节点名称中的可靠地区证据生成统一名称。脚本不会查询节点 IP 或 GeoIP，也不会删除任何节点。名称中没有足够证据或证据相互冲突时，节点保持原名。
 
 ### 导入与基本用法
 
@@ -19,33 +19,20 @@
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/script/sub-store/sub-store-node-name-normalizer.js#noCache
 ```
 
-默认只输出简体中文地区名和序号。同一地区的节点按照该地区首次出现的位置归组，地区内保持输入顺序。未命中和存在同级文字冲突的节点会被删除。
+识别成功的节点默认只输出简体中文地区名和序号。脚本保持全部节点及其原始顺序；未命中或存在同级文字冲突的节点均保留原名。
 
 如果脚本操作中已经保存过旧版本，先在前端刷新脚本资源，或使用上方带 `#noCache` 的地址重新导入并保存。分享订阅地址上的 `noCache=true` 只影响订阅来源缓存，不能替换已经保存在脚本操作中的内容。
-
-以下参数输出「国旗 + 英文地区名」和序号：
-
-```text
-format=en&with_flag=true
-```
-
-首次使用时，建议开启诊断并标记无法判断的节点：
-
-```text
-unmatched=mark&ambiguous=mark&debug=true
-```
 
 ### 匹配规则
 
 脚本按以下证据识别地区：
 
-1. `overrides` 提供的精确名称映射。
-2. 完整中文或英文地区名。
-3. 本项目维护的常见城市和地区别名。
-4. 具有完整边界的 ISO alpha-2、alpha-3 或机场代码。
-5. 国旗 Emoji。
+1. 完整中文或英文地区名。
+2. 本项目维护的常见城市和地区别名。
+3. 具有完整边界的 ISO alpha-2、alpha-3 或机场代码。
+4. 国旗 Emoji。
 
-两字母或三字母代码默认区分大小写。代码前不能是英文字母或数字，代码后不能是英文字母。因此：
+两字母或三字母代码区分大小写。代码前不能是英文字母或数字，代码后不能是英文字母。因此：
 
 - `HK01`、`HK-01` 和 `HKG-01` 可以识别为香港。
 - `VLESS` 中的 `ES`、`REALITY` 中的 `AL` 和 `RFCHost` 中的 `CH` 不会命中。
@@ -57,75 +44,11 @@ unmatched=mark&ambiguous=mark&debug=true
 
 ### 地区数据
 
-脚本内置 249 个 [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) alpha-2/alpha-3 地区条目。简体中文和英文显示名根据 [Unicode CLDR 48.2.0](https://github.com/unicode-org/cldr-json/tree/1aaabe99aa652d6f22ea488cf25baea46aa69b42) 整理。常见繁体中文名称、城市、机场代码和线路别名由本项目单独维护。CLDR 派生数据的 Unicode License v3 声明已包含在脚本中。
+脚本内置 249 个 [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) alpha-2/alpha-3 地区条目。简体中文和英文显示名根据 [Unicode CLDR 48.2.0](https://github.com/unicode-org/cldr-json/tree/1aaabe99aa652d6f22ea488cf25baea46aa69b42) 整理。常见繁体中文名称、城市和机场代码由本项目单独维护。CLDR 派生数据的 Unicode License v3 声明已包含在脚本中。
 
 国旗由 alpha-2 代码计算，不维护单独的平行映射表。脚本是单文件资源，运行时不会下载地区数据。
 
-### 参数
-
-| 参数 | 默认值 | 说明 |
-| --- | --- | --- |
-| `format` | `zh` | 地区输出格式：`zh`、`en`、`code` 或 `flag`。 |
-| `with_flag` | `false` | 在非 `flag` 格式的地区名前添加国旗。 |
-| `prefix` | 空 | 为已识别节点添加固定前缀。 |
-| `prefix_position` | `before` | 前缀位置：`before` 或 `after`。 |
-| `separator` | 一个空格 | 前缀、国旗、地区、标签和倍率之间的分隔符。 |
-| `number_separator` | 一个空格 | 名称与序号之间的分隔符。 |
-| `number` | `always` | 编号方式：`always` 为全部已识别节点编号，`duplicates` 仅为同名节点编号，`off` 不编号。 |
-| `number_width` | `2` | 序号最小位数，取值限制为 1–6。 |
-| `unmatched` | `drop` | 未命中节点的处理方式：`drop`、`keep` 或 `mark`。 |
-| `ambiguous` | `drop` | 同级地区证据冲突节点的处理方式：`drop`、`keep` 或 `mark`。 |
-| `unmatched_mark` | `[Unmatched] ` | `unmatched=mark` 使用的前缀。 |
-| `ambiguous_mark` | `[Ambiguous] ` | `ambiguous=mark` 使用的前缀。 |
-| `retain_known` | `false` | 保留并规范化脚本内置的线路和服务标签。默认不保留。 |
-| `retain_rate` | `false` | 保留倍率，并统一为 `数字×` 格式。默认不保留。 |
-| `retain` | 空 | 额外保留的文字，多个值使用英文逗号分隔。 |
-| `tag_map` | 空 JSON 对象 | 标签重命名 JSON，键为内置规范标签或 `retain` 项，值为输出标签。 |
-| `rate` | `all` | 倍率过滤：`all`、`normal` 或 `high`；`high` 指倍率大于 1。 |
-| `drop_info` | `false` | 删除套餐、流量、到期、官网、客服等通知节点。 |
-| `sort` | `group` | 排序方式：`group` 按地区首次出现顺序归组，`none` 保留输入顺序，`region` 按代码排序，`tag` 按标签排序。 |
-| `block_quic` | `preserve` | `block-quic` 属性处理方式：`preserve`、`on` 或 `off`。 |
-| `overrides` | 空 JSON 对象 | 原节点名到 ISO alpha-2 代码的精确映射。 |
-| `code_case` | `strict` | 短代码匹配方式：`strict` 区分大小写，`ignore` 忽略大小写。 |
-| `allow_ambiguous_codes` | `false` | 是否允许容易与协议、产品、平台或机场代码冲突的短代码参与匹配。 |
-| `debug` | `false` | 输出未命中、冲突候选和处理数量摘要。 |
-
-参数值由 Sub-Store 传入。JSON、空格、自定义标记或其他保留字符应当进行 URL 编码。
-
-### 标签与倍率
-
-显式设置 `retain_known=true` 后，脚本可以识别并保留以下类别：
-
-- `IPLC`、`IEPL`、`BGP`、`CN2` 和 `CMI`；
-- `Core`、`Edge`、`Pro`、`Standard` 和 `Experimental`；
-- `Business`、`Residential`、`Game`、`Shopping`、`Dedicated` 和 `LoadBalance`；
-- `Cloudflare`、`UDP`、`UDPN`、`GPT`、`Netflix`、`Disney+`、`YouTube` 和 `TikTok`。
-
-标签按照原节点名中的出现顺序输出并自动去重。例如：
-
-```text
-Hong Kong GPT IPLC 2.5x
-```
-
-设置 `retain_known=true&retain_rate=true` 后输出：
-
-```text
-香港 GPT IPLC 2.5×
-```
-
-使用 `tag_map` 可以修改标签：
-
-```text
-tag_map=%7B%22GPT%22%3A%22AI%22%7D
-```
-
-### 精确覆盖与短代码冲突
-
-`overrides` 只进行完整节点名匹配。映射目标必须是有效的 ISO alpha-2 代码。例如，将无法自行识别的节点明确指定为美国：
-
-```text
-overrides=%7B%22RFCHost-Mihomo-VLESS-REALITY%22%3A%22US%22%7D
-```
+### 短代码冲突
 
 部分短代码同时具有常见的非地区含义，默认不参与识别。例如：
 
@@ -137,18 +60,16 @@ overrides=%7B%22RFCHost-Mihomo-VLESS-REALITY%22%3A%22US%22%7D
 - `TLS`、`MAC` 可能表示协议或平台；
 - `HND`、`FRA`、`PER`、`CAN` 等可能同时表示机场或国家 alpha-3 代码。
 
-优先使用完整地区名、国旗、无冲突代码或 `overrides`。只有明确接受这些歧义时，才启用 `allow_ambiguous_codes=true`。
+这类名称只有在同时出现可靠文字地区名时才会重命名，否则保持原名。
 
 ### 输出与限制
 
 - 脚本只根据节点名称判断地区。节点名称没有地区信息时，无法推断节点的真实位置。
-- 默认删除无法识别地区或存在同级地区冲突的节点。排查识别结果时，设置 `unmatched=mark&ambiguous=mark&debug=true`。
-- `drop_info=true` 使用固定通知关键词过滤节点，默认关闭。
-- `rate=normal` 保留无倍率或倍率不大于 1 的节点；`rate=high` 只保留倍率大于 1 的节点。
-- 默认按照地区首次出现顺序归组，地区内保持输入顺序。设置 `sort=none` 可以完全保留输入顺序。
-- `sort=region` 按地区代码排序；`sort=tag` 按保留标签排序。
-- 脚本默认只修改已识别节点的 `name`。只有显式设置 `block_quic=on` 或 `block_quic=off` 时才修改 `block-quic`。
-- 相同参数重复执行时不会持续叠加状态标记、标签、倍率或序号。
+- 输入和输出节点数量始终相同。无法识别地区或存在同级地区冲突时，节点保持原名。
+- 脚本保持输入顺序，只对已识别节点按地区分别连续编号。
+- 脚本只修改节点的 `name`，不会修改其他节点属性。
+- 已识别节点固定输出为 `中文地区名 + 空格 + 两位起始序号`。节点数量超过 99 时，序号自动扩展位数。
+- 相同输入重复执行时不会持续叠加编号。
 
 ## IPv6 出站节点过滤器
 
