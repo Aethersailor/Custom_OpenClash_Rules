@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3319
+# TOTAL: 3323
 
 payload:
   - '+.003153.xyz'
@@ -2901,6 +2901,7 @@ payload:
   - '+.salvadoserver.duckdns.org'
   - '+.sams.adg.siudzinski.net'
   - '+.sanns.aniuo.com'
+  - '+.saomai.dynu.com'
   - '+.sarawut.ddns.net'
   - '+.sascha-rabold.de'
   - '+.sbdns.co.in'
@@ -2960,6 +2961,7 @@ payload:
   - '+.singy.smartq.dev'
   - '+.sink.nolo.ltd'
   - '+.sinkdns.nihatkalfazade.com'
+  - '+.sitdns.com'
   - '+.site-2.duckdns.org'
   - '+.site-3.duckdns.org'
   - '+.sjc01.dnscry.pt'
@@ -3052,6 +3054,7 @@ payload:
   - '+.tienpham.id.vn'
   - '+.tiger.dns.qwer.pw'
   - '+.tigrons.ru'
+  - '+.timedns.net'
   - '+.timmes.nl'
   - '+.tj.jamesxue.xyz'
   - '+.tk2-404-43267.vs.sakura.ne.jp'
@@ -3101,6 +3104,7 @@ payload:
   - '+.unasw.eu'
   - '+.uncensored-dot.dnswarden.com'
   - '+.uncensoreddns.org'
+  - '+.unfiltered.adguarddns.com'
   - '+.unfiltered.joindns4.eu'
   - '+.unicast.censurfridns.dk'
   - '+.unicast.uncensoreddns.dk'
