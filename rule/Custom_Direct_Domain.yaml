@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 878
+# TOTAL: 879
 
 payload:
   - '*m-team*'
@@ -187,6 +187,7 @@ payload:
   - '+.cnb.space'
   - '+.cocav.com'
   - '+.code-relay.com'
+  - '+.code.fun'
   - '+.codeloop.top'
   - '+.coffee-iot.com'
   - '+.cone-x.com'
