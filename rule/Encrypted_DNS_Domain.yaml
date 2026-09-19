@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3323
+# TOTAL: 3325
 
 payload:
   - '+.003153.xyz'
@@ -715,6 +715,7 @@ payload:
   - '+.disinformer.mooo.com'
   - '+.diskstation.alexpollard.net'
   - '+.djtesok.ddns.net'
+  - '+.dltuykfgp.top'
   - '+.dmit.wangjiaqi.store'
   - '+.dmjp.joeyl.de'
   - '+.dn.kyay006.cn'
@@ -1617,6 +1618,7 @@ payload:
   - '+.dns.youni.win'
   - '+.dns.ytpom.ru'
   - '+.dns.yu.dev'
+  - '+.dns.yunzheng.space'
   - '+.dns.yuu-g.net'
   - '+.dns.yuyz.net'
   - '+.dns.yuzia.cc'
