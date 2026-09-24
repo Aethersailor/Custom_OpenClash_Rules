@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3325
+# TOTAL: 3327
 
 payload:
   - '+.003153.xyz'
@@ -100,6 +100,7 @@ payload:
   - '+.adblock.renedis.nl'
   - '+.adblocker.institutobancario.edu.mx'
   - '+.adblockersite.com'
+  - '+.addns.886675.xyz'
   - '+.addns.jpr.space'
   - '+.addns.jujuland.net'
   - '+.addns.ovalie.ovh'
@@ -1976,6 +1977,7 @@ payload:
   - '+.dot-jp.blahdns.com'
   - '+.dot-sg.blahdns.com'
   - '+.dot.360.cn'
+  - '+.dot.886675.xyz'
   - '+.dot.asecdns.com'
   - '+.dot.centraleu.pi-dns.com'
   - '+.dot.cox.net'
