@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3327
+# TOTAL: 3328
 
 payload:
   - '+.003153.xyz'
@@ -1978,7 +1978,6 @@ payload:
   - '+.dot-sg.blahdns.com'
   - '+.dot.360.cn'
   - '+.dot.886675.xyz'
-  - '+.dot.asecdns.com'
   - '+.dot.centraleu.pi-dns.com'
   - '+.dot.cox.net'
   - '+.dot.eastas.pi-dns.com'
@@ -2052,6 +2051,7 @@ payload:
   - '+.facomunit.ddns.net'
   - '+.family.adguarddns.com'
   - '+.family.dns.doubleangels.com'
+  - '+.family.dns.dremaxx.com'
   - '+.family.dns.teknoholistik.com'
   - '+.family.dot.dns.yandex.net'
   - '+.family.mydns.network'
@@ -2683,6 +2683,7 @@ payload:
   - '+.online.zotio.ru'
   - '+.oowo.de'
   - '+.open-resolver1.unima.ac.id'
+  - '+.open.dns.dremaxx.com'
   - '+.openbld.net'
   - '+.opencdn.jomodns.com'
   - '+.opendns.com'
