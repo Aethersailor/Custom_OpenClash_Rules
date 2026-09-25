@@ -345,6 +345,8 @@ DOMAIN-SUFFIX,ahlt10010.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 重庆市教育评估院 / 重庆综合素质评价系统 / add by GitHub user: GGnqfh / Date: 2026-09-25 16:00:00
+DOMAIN-SUFFIX,cqjypg.com
 # add by Rule-Bot Client / Date: 2026-09-24 21:56:17
 DOMAIN-SUFFIX,pvz1.com
 # add by Rule-Bot Client / Date: 2026-09-24 20:20:42
