@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 902
+# TOTAL: 903
 
 payload:
   - '*m-team*'
@@ -96,6 +96,7 @@ payload:
   - '+.aistudio-app.com'
   - '+.akamaihd.net'
   - '+.akamaized.net'
+  - '+.allptt.com'
   - '+.alonginwind.eu.org'
   - '+.alonginwind.to'
   - '+.alonginwind.top'
