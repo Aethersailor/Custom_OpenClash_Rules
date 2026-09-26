@@ -345,6 +345,8 @@ DOMAIN-SUFFIX,ahlt10010.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 滔滔对讲 app 域名链路 / add by Telegram user: Solntse_332 / Date: 2026-09-26 17:27:21
+DOMAIN-SUFFIX,allptt.com
 # add by Rule-Bot Client / Date: 2026-09-25 23:34:39
 DOMAIN-SUFFIX,hnzjyw.com
 # add by Rule-Bot Client / Date: 2026-09-25 23:34:35
