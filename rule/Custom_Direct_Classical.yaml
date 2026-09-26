@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 916
+# TOTAL: 917
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -130,6 +130,7 @@ payload:
   - DOMAIN-SUFFIX,baiyishequ.com
   - DOMAIN-SUFFIX,bajie.la
   - DOMAIN-SUFFIX,banban.work
+  - DOMAIN-SUFFIX,banxueketang.com
   - DOMAIN-SUFFIX,baominggongju.com
   - DOMAIN-SUFFIX,batchat.com
   - DOMAIN-SUFFIX,bdcb.cc
