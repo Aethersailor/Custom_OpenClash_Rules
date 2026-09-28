@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3328
+# TOTAL: 3330
 
 payload:
   - '+.003153.xyz'
@@ -995,6 +995,7 @@ payload:
   - '+.dns.edgy.network'
   - '+.dns.edison42.dev'
   - '+.dns.efficientdocuments.com'
+  - '+.dns.ekinao.com'
   - '+.dns.electrotm.org'
   - '+.dns.elemental.software'
   - '+.dns.eliv.co.kr'
@@ -2668,6 +2669,7 @@ payload:
   - '+.o--o.duckdns.org'
   - '+.o.rsaikat.com'
   - '+.o1.lt'
+  - '+.obscuro.top'
   - '+.oci02.at9.eu'
   - '+.oculta.me'
   - '+.odoh-target-noads.alekberg.net'
