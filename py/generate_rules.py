@@ -68,10 +68,9 @@ def parse_list(path: Path) -> RuleFamily:
         elif rule_type == "DOMAIN-SUFFIX":
             domains.append(f"+.{parts[1]}")
             classical_non_ip.append(rule)
-        elif rule_type == "DOMAIN-KEYWORD":
-            domains.append(f"*{parts[1]}*")
-            classical_non_ip.append(rule)
-        elif rule_type == "DOMAIN-REGEX":
+        elif rule_type in {"DOMAIN-KEYWORD", "DOMAIN-REGEX"}:
+            # Domain behavior has no substring or regex form; Mihomo rejects
+            # "*keyword*" as an invalid domain, so keep these classical-only.
             classical_non_ip.append(rule)
         elif rule_type in {"IP-CIDR", "IP-CIDR6"}:
             try:
