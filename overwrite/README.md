@@ -561,12 +561,35 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 1. 模块是否已经启用；
 2. jsDelivr CDN 或 GitHub Raw 地址是否能够正常下载；
-3. 是否已保存设置并重新应用配置；
+3. 远程模块内容是否已经显式刷新；仅保存设置或重启 OpenClash 不会重新下载已保存的模块文件；
 4. 模块要求的 `EN_KEY` 参数格式是否正确；
 5. 当前 OpenClash 是否接受模块使用的 `[General]`、`[YAML]`、`[Overwrite]` 和 Ruby helper；
 6. 是否有其他模块修改同一配置项；
 7. 最终运行配置中是否出现预期结果；
 8. OpenClash 日志是否存在下载、解析、Ruby、配置校验或内核启动错误。
+
+### 日志仍显示旧版 Ruby 命令
+
+如果 `Add_No_Resolve.conf` 的警告中仍出现 `begin; add_no_resolve`，OpenClash 读取的是修复前保存在路由器上的旧模块文件，不是仓库当前版本。
+
+1. 将订阅地址替换为以下任一当前地址：
+
+   ```text
+   https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Add_No_Resolve.conf
+   https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Add_No_Resolve.conf
+   ```
+
+2. 在覆写模块编辑器中执行「刷新订阅」。如果当前版本没有刷新按钮，删除旧模块后使用新地址重新添加。
+3. 检查模块编辑器中的正文，或在路由器上执行：
+
+   ```sh
+   grep -F "transform_values!" /etc/openclash/overwrite/Add_No_Resolve.conf
+   ```
+
+   输出包含 `transform_values!` 时，表示已经加载新版模块。正文仍包含 `begin; add_no_resolve` 时，不要继续重启；先解决模块下载或缓存问题。
+4. 重新应用配置，并确认日志中不再出现「跳过不支持的覆写命令」。
+
+旧版文档曾使用 `testingcf.jsdelivr.net/...@main/...` 地址。该入口的可变分支缓存可能滞后，不再作为覆写模块订阅地址使用。
 
 排查冲突时，建议暂时停用其他覆写模块，只保留目标模块重新测试。
 
