@@ -143,6 +143,18 @@ class DerivedRuleGenerationTests(unittest.TestCase):
         self.assertEqual(family.domain, ("+.example.com",))
         self.assertIn(r"DOMAIN-REGEX,^dns[0-9]+\.example\.com$", family.classical)
 
+    def test_domain_keyword_stays_classical_only(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            source = Path(temporary) / "rules.list"
+            source.write_text(
+                "DOMAIN-SUFFIX,example.com\n"
+                "DOMAIN-KEYWORD,synology\n",
+                encoding="utf-8",
+            )
+            family = generate_rules.parse_list(source)
+        self.assertEqual(family.domain, ("+.example.com",))
+        self.assertIn("DOMAIN-KEYWORD,synology", family.classical)
+
     def test_domain_regex_is_yaml_quoted(self) -> None:
         rendered = generate_rules.render_yaml(
             Path("rule/example.list"),
