@@ -23,6 +23,7 @@
 | --- | --- |
 | 本目录直接存放的 `.conf` | 本项目维护的单功能远程覆写模块，本文重点介绍 |
 | [`yaml/`](./yaml/) | 存放用于远程调用本项目 YAML 配置文件的覆写模块；文件区别、变量和订阅地址请查看 [`yaml/`](./yaml/) |
+| [`local/`](./local/) | 存放需要读取本机 UCI 或 OpenClash 临时文件的本地自定义覆写钩子 |
 | [`OpenClash_Overwrite/`](./OpenClash_Overwrite/) | 第三方完整覆写方案，具体用法以上游 README 为准 |
 | [`archived/`](./archived/) | 已停止维护的旧版文件，仅供历史参考 |
 
@@ -33,8 +34,8 @@
 
 | 模块 | 主要作用 | 影响范围 | 是否需要参数 |
 | --- | --- | --- | :---: |
-| [`Prevent_DNS_Leak.conf`](./Prevent_DNS_Leak.conf) | 综合降低 DNS 泄漏风险 | DNS、规则、最终策略及专用策略组 | 可选 |
-| [`Use_LuCI_DNS_Only.conf`](./Use_LuCI_DNS_Only.conf) | 隔离机场 YAML 的 DNS 设置，以 OpenClash LuCI 为 DNS 来源 | `dns` 与顶层 `hosts` | 否 |
+| [`Prevent_DNS_Leak.conf`](./Prevent_DNS_Leak.conf) | 综合降低 DNS 泄漏风险 | DNS、规则、最终策略及专用策略组 | 否 |
+| [`local/Use_LuCI_DNS_Only.sh`](./local/Use_LuCI_DNS_Only.sh) | 隔离机场 YAML 的 DNS 设置，以 OpenClash LuCI 为 DNS 来源 | `dns` 与顶层 `hosts` | 本地钩子 |
 | [`Block_Encrypted_DNS.conf`](./Block_Encrypted_DNS.conf) | 阻断常见 DoH、DoT、DoQ 绕过 | Rule Provider 与前置阻断规则 | 否 |
 | [`Add_No_Resolve.conf`](./Add_No_Resolve.conf) | 为目标 IP 类规则补充 `no-resolve` | `rules` 与 `sub-rules` | 否 |
 | [`Add_Custom_Direct_Rules.conf`](./Add_Custom_Direct_Rules.conf) | 为其他规则方案附加本项目的域名与 IP 直连规则 | Rule Provider 与前置直连规则 | 否 |
@@ -47,7 +48,7 @@
 ### 按需求选择
 
 - 想系统降低 DNS 泄漏风险：使用 `Prevent_DNS_Leak.conf`。
-- 直接引用机场 YAML，希望机场 DNS 不进入最终运行配置：使用 `Use_LuCI_DNS_Only.conf`。
+- 直接引用机场 YAML，希望机场 DNS 不进入最终运行配置：使用本地钩子 `local/Use_LuCI_DNS_Only.sh`。
 - 只想阻止终端使用常见加密 DNS 绕过本地 DNS：使用 `Block_Encrypted_DNS.conf`。
 - 只需要给 IP 类规则补充 `no-resolve`：使用 `Add_No_Resolve.conf`。
 - 正在使用其他规则方案，只想附加本项目的域名与 IP 直连规则：使用 `Add_Custom_Direct_Rules.conf`。
@@ -82,11 +83,13 @@
 
 ## 📦 模块说明
 
-### 🧱 Use LuCI DNS Only
+### 🧱 Use LuCI DNS Only 本地钩子
 
-[`Use_LuCI_DNS_Only.conf`](./Use_LuCI_DNS_Only.conf) 面向直接引用机场或服务商 YAML 的用户。模块在 OpenClash 完成 `yml_change.sh` 和 `yml_rules_change.sh` 后运行，从同一次启动生成的 LuCI DNS 临时片段、UCI 开关和 OpenClash 自定义 DNS 文件原子重建 `dns` 与顶层 `hosts`。
+[`local/Use_LuCI_DNS_Only.sh`](./local/Use_LuCI_DNS_Only.sh) 面向直接引用机场或服务商 YAML 的用户。脚本在 OpenClash 完成 `yml_change.sh` 和 `yml_rules_change.sh` 后运行，从同一次启动生成的 LuCI DNS 临时片段、UCI 开关和 OpenClash 自定义 DNS 文件原子重建 `dns` 与顶层 `hosts`。
 
-模块不会先删除整个 `dns` 再让 Mihomo 使用默认值，也不会内置或选择任何 DNS 上游。模块只保留 OpenClash 已根据 LuCI 生成的基础字段，并重新读取以下来源：
+OpenClash 当前会限制远程 `[Overwrite]` 模块读取 UCI、临时文件和本地自定义文件。因此，本功能不能继续作为远程 `.conf` 模块提供。不要通过动态 Ruby、命令执行或下载可执行脚本绕过该限制。
+
+脚本不会先删除整个 `dns` 再让 Mihomo 使用默认值，也不会内置或选择任何 DNS 上游。脚本只保留 OpenClash 已根据 LuCI 生成的基础字段，并重新读取以下来源：
 
 - `/tmp/yaml_config.namedns.yaml`、`falldns`、`defaultdns`、`proxynamedns` 与 `directnamedns` 片段；
 - LuCI 中的 DNS、运行模式、Fake-IP 与大陆绕过开关；
@@ -104,18 +107,32 @@
 5. Fake-IP 模式同时启用大陆 IPv4 或 IPv6 绕过时，启用「自定义 Fake-IP-Filter」并明确选择模式。
 6. 启用 `respect-rules`、代理节点 DNS 策略，或为全部 `nameserver` 指定代理组时，在 LuCI 至少配置一个不经代理组转发的 `proxy-server-nameserver`。
 
-不满足前置条件时，模块在 OpenClash 日志中写入 `Use LuCI DNS Only refused` 并拒绝重建。此时机场 DNS 仍可能保留，不能继续使用该运行配置作为验收结果。
+不满足前置条件时，脚本在 OpenClash 日志中写入 `Use LuCI DNS Only refused` 并拒绝重建。此时机场 DNS 仍可能保留，不能继续使用该运行配置作为验收结果。
 
-jsDelivr CDN：
+安装步骤：
 
-```text
-https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Use_LuCI_DNS_Only.conf
+1. 将脚本保存为 `/etc/openclash/custom/Use_LuCI_DNS_Only.sh`，并设置可执行权限。
+2. 进入 OpenClash 覆写编辑器，打开本地 `openclash_custom_overwrite.sh`。
+3. 在脚本末尾加入以下调用：
+
+```sh
+if [ -x /etc/openclash/custom/Use_LuCI_DNS_Only.sh ]; then
+  /etc/openclash/custom/Use_LuCI_DNS_Only.sh "$CONFIG_FILE" || exit 1
+fi
 ```
 
-GitHub Raw：
+4. 保存本地脚本并重新应用配置。
+
+脚本地址（jsDelivr CDN）：
 
 ```text
-https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Use_LuCI_DNS_Only.conf
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/local/Use_LuCI_DNS_Only.sh
+```
+
+脚本地址（GitHub Raw）：
+
+```text
+https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/local/Use_LuCI_DNS_Only.sh
 ```
 
 最终运行配置验收：
@@ -129,14 +146,14 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 限制：
 
-- 模块依赖 OpenClash 当前 `yml_change.sh` 的临时文件名与 UCI 结构。升级 OpenClash 后，必须重新核对源码、日志和最终运行配置。
-- 使用域名形式的 DoH 或 DoT 上游时，仍需在 LuCI 配置可用的 `default-nameserver`；模块不会补充通用 DNS。
-- 模块只处理 Mihomo 配置内的 DNS 与 Hosts，不替代 Dnsmasq、OpenWrt DHCP、终端私有 DNS 或防火墙配置。
-- 模块不会修改节点、代理集合、策略组、规则或现有 Rule Provider。OpenClash 因大陆绕过自动创建的 `oc-cn-domain` Provider 仍由插件管理。
-- 更晚执行的 DNS 覆写仍可修改重建结果；`openclash_custom_overwrite.sh` 在远程模块之后执行，也能再次改写 `dns` 或 `hosts`。
+- 脚本依赖 OpenClash 当前 `yml_change.sh` 的临时文件名与 UCI 结构。升级 OpenClash 后，必须重新核对源码、日志和最终运行配置。
+- 使用域名形式的 DoH 或 DoT 上游时，仍需在 LuCI 配置可用的 `default-nameserver`；脚本不会补充通用 DNS。
+- 脚本只处理 Mihomo 配置内的 DNS 与 Hosts，不替代 Dnsmasq、OpenWrt DHCP、终端私有 DNS 或防火墙配置。
+- 脚本不会修改节点、代理集合、策略组、规则或现有 Rule Provider。OpenClash 因大陆绕过自动创建的 `oc-cn-domain` Provider 仍由插件管理。
+- 本地自定义覆写脚本中更晚执行的 DNS 操作仍可修改重建结果。
 
 > [!CAUTION]
-> 本模块必须是最后执行的 DNS 覆写模块。覆写模块的 `order` 值越大越先执行，因此应确保没有更晚执行的模块修改 `dns` 或 `hosts`。不要与第三方完整 DNS 覆写方案组合。
+> 不要在 `openclash_custom_overwrite.sh` 中同时调用其他修改 DNS 或 Hosts 的 Ruby helper。OpenClash 会延后执行这些 helper，仅调整脚本中的调用顺序不能保证本地钩子的结果最后生效。不要与第三方完整 DNS 覆写方案组合。
 
 ---
 
@@ -152,15 +169,10 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 - 禁止自动追加 WAN DNS 和自动补充 `default-nameserver`；
 - 清除 DNS 列表中的 `system`，关闭 DNS HTTP/3 偏好；
 - 为目标 IP 类规则补充 `no-resolve`；
-- 将最终 `MATCH` 或 `FINAL` 指向代理目标；
-- 未指定代理目标时创建 `COCR-DNS-Leak-Guard` 策略组。
+- 将最终 `MATCH` 或 `FINAL` 指向 `COCR-DNS-Leak-Guard`；
+- 创建 `COCR-DNS-Leak-Guard` 策略组，并自动引入可用代理。
 
-可选参数：
-
-| 参数 | 作用 | 留空行为 |
-| --- | --- | --- |
-| `EN_KEY1` | 指定最终规则使用的现有代理组或代理节点 | 创建并使用 `COCR-DNS-Leak-Guard` |
-| `EN_KEY2` | 指定 `proxy-server-nameserver`，多个地址用英文分号分隔 | 尝试复用有效的 `default-nameserver` |
+模块不再接收 `EN_KEY1` 或 `EN_KEY2`。缺少 `proxy-server-nameserver` 时，模块只尝试复用有效的 `default-nameserver`；最终规则固定使用 `COCR-DNS-Leak-Guard`，避免远程模块参数进入动态 Ruby 表达式。
 
 jsDelivr CDN：
 
@@ -515,9 +527,9 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 | 组合 | 建议 |
 | --- | --- |
 | `Prevent_DNS_Leak.conf` 与 `Block_Encrypted_DNS.conf` | ✅ 可组合，分别处理 OpenClash 内部 DNS 路由和终端常见加密 DNS |
-| `Use_LuCI_DNS_Only.conf` 与 `Block_Encrypted_DNS.conf` | ✅ 可以组合；后者只修改规则与 Rule Provider |
-| `Use_LuCI_DNS_Only.conf` 与 `Prevent_DNS_Leak.conf` | ❌ 不建议组合；两者都会修改最终 DNS，且后者还会改写规则和代理策略 |
-| `Use_LuCI_DNS_Only.conf` 与其他 DNS/Hosts 覆写 | ❌ 不要组合；更晚执行的模块会破坏 LuCI 唯一来源保证 |
+| `local/Use_LuCI_DNS_Only.sh` 与 `Block_Encrypted_DNS.conf` | ✅ 可以组合；后者只修改规则与 Rule Provider |
+| `local/Use_LuCI_DNS_Only.sh` 与 `Prevent_DNS_Leak.conf` | ❌ 不建议组合；两者都会修改最终 DNS，且后者还会改写规则和代理策略 |
+| `local/Use_LuCI_DNS_Only.sh` 与其他 DNS/Hosts 覆写 | ❌ 不要组合；更晚执行的操作会破坏 LuCI 唯一来源保证 |
 | `Prevent_DNS_Leak.conf` 与 `Add_No_Resolve.conf` | ❌ 不需要组合，前者已包含 `no-resolve` 处理 |
 | `Add_Custom_Direct_Rules.conf` 与 `Add_No_Resolve.conf` | ✅ 可以组合；本模块的 IP 规则已带 `no-resolve`，后者可继续处理其他 IP 类规则 |
 | `Replace_China_MRS_With_GeoSite.conf` 与 `Set_China_IP_Route_URL.conf` | ✅ 可以组合，分别修改 Fake-IP Filter 和 Chnroute 数据源 |
@@ -550,8 +562,8 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 1. 模块是否已经启用；
 2. jsDelivr CDN 或 GitHub Raw 地址是否能够正常下载；
 3. 是否已保存设置并重新应用配置；
-4. `EN_KEY` 参数格式是否正确；
-5. OpenClash 是否支持模块使用的 `[General]`、`[YAML]`、`[Overwrite]` 或 `ruby_edit`；
+4. 模块要求的 `EN_KEY` 参数格式是否正确；
+5. 当前 OpenClash 是否接受模块使用的 `[General]`、`[YAML]`、`[Overwrite]` 和 Ruby helper；
 6. 是否有其他模块修改同一配置项；
 7. 最终运行配置中是否出现预期结果；
 8. OpenClash 日志是否存在下载、解析、Ruby、配置校验或内核启动错误。
