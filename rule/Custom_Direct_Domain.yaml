@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 919
+# TOTAL: 920
 
 payload:
   - '+.00333118.com'
@@ -662,6 +662,7 @@ payload:
   - '+.qweapi.com'
   - '+.qweatherapi.com'
   - '+.qzyun.net'
+  - '+.r2s.site'
   - '+.ranwen.tw'
   - '+.rayws.top'
   - '+.redenmc.com'
