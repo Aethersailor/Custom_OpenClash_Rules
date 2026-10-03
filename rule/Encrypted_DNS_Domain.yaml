@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3310
+# TOTAL: 3307
 
 payload:
   - '+.003153.xyz'
@@ -871,7 +871,6 @@ payload:
   - '+.dns.braene.com'
   - '+.dns.brahma.world'
   - '+.dns.brembeck.cloud'
-  - '+.dns.briac-mlb.fr'
   - '+.dns.brionesserver.net'
   - '+.dns.brono.cloud'
   - '+.dns.burgas.pro'
@@ -1794,7 +1793,6 @@ payload:
   - '+.doh.asecdns.com'
   - '+.doh.asia.dnswarden.com'
   - '+.doh.asli.id'
-  - '+.doh.azoris.ovh'
   - '+.doh.beauty'
   - '+.doh.best'
   - '+.doh.blahdns.com'
@@ -2595,7 +2593,6 @@ payload:
   - '+.noads.imbuffering.com'
   - '+.noads.joindns4.eu'
   - '+.noads.jpsrvr.com'
-  - '+.node3.b4el.ru'
   - '+.node9.servernode.store'
   - '+.noip4.de'
   - '+.nop.mobi'
