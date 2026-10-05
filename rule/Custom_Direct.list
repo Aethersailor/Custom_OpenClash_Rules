@@ -347,6 +347,8 @@ DOMAIN-SUFFIX,ahlt10010.com
 # 以下是准备向 GeoSite 上游仓库提交 PR 的国内冷门域名，收录后会注释对应内容
 # ---------------------------------------
 # 以下域名待提交 PR
+# 锦州公交 / add by Telegram user: alonginwind / Date: 2026-10-05 08:48:19
+DOMAIN-SUFFIX,jzgj.com
 # add by Rule-Bot Client / Date: 2026-10-02 21:40:57
 DOMAIN-SUFFIX,maxdo.tech
 # 大童保险 / add by Telegram user: MystraGood / Date: 2026-10-01 20:23:45
