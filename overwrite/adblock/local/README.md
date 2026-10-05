@@ -11,6 +11,8 @@
 3. 使用路由器 root SSH 终端操作。组件依赖 OpenClash 已使用的 Ruby、`ruby-yaml`、curl，以及 OpenWrt 的 UCI、sort、cron 和 logger。
 4. 为规则缓存与处理保留空间和内存。每个来源最大 32 MiB；完整规则合并的内存峰值可能超过 100 MiB。建议先启用一个广告源，再根据需要添加其他模块。
 
+已在 ImmortalWrt SNAPSHOT 的 x86/64 测试设备上验证，环境为 OpenClash `v0.47.169`、Ruby `4.0.2`、dnsmasq `2.93`，dnsmasq 通过 `ujail` 运行。验证包括完整远程规则加载，以及使用受控规则测试五个模块的 32 种组合、映射冲突、hosts 热重载、下载失败回退和停用、卸载清理。
+
 首次加载 dnsmasq 配置、改变 dnsmasq 格式规则或移除加载配置时，需要重启目标 dnsmasq 实例，会短暂影响 DNS/DHCP。只有 hosts 变化时使用 `SIGHUP` 热重载。组件不接管其他插件的规则；已有本地记录和其他 DNS 服务仍需按实际查询路径核对。
 
 ## 安装共享组件
