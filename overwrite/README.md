@@ -583,13 +583,25 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 3. 检查模块编辑器中的正文，或在路由器上执行：
 
    ```sh
-   grep -F "transform_values!" /etc/openclash/overwrite/Add_No_Resolve.conf
+   grep -F "drop('3'.to_i)" /etc/openclash/overwrite/Add_No_Resolve.conf
    ```
 
-   输出包含 `transform_values!` 时，表示已经加载新版模块。正文仍包含 `begin; add_no_resolve` 时，不要继续重启；先解决模块下载或缓存问题。
+   输出包含 `drop('3'.to_i)` 时，表示已加载兼容 Ruby 4 的模块。仅包含 `transform_values!` 不能证明已加载本次修复。正文仍包含 `begin; add_no_resolve` 时，先解决模块下载或缓存问题。
 4. 重新应用配置，并确认日志中不再出现「跳过不支持的覆写命令」。
 
 旧版文档曾使用 `testingcf.jsdelivr.net/...@main/...` 地址。该入口的可变分支缓存可能滞后，不再作为覆写模块订阅地址使用。
+
+### 最新 dev 在 Ruby 4 环境中跳过覆写命令
+
+已在 OpenClash dev `0.47.169`、Ruby `4.0.2` 环境复现：旧版 `Add_No_Resolve.conf`、`Rule_Provider_Format_Fix.conf` 和 `Prevent_DNS_Leak.conf` 会被覆写命令校验跳过。Ruby 4 对整数和正则字面量使用新的语法节点，当前 OpenClash 白名单未接受这些节点。
+
+当前模块已改用字符串转整数和字符串分割，保留原有规则改写、Provider 格式识别和 DNS 配置行为。如果日志仍显示「跳过不支持的覆写命令」，先刷新这三个模块的订阅，再重新应用配置。仅更新 OpenClash、保存设置或重启服务不会刷新已下载的模块。
+
+刷新后，检查最终运行配置：
+
+- `Add_No_Resolve.conf`：目标 IP 规则和 `ipcidr` Rule Provider 引用已添加 `no-resolve`，包括 `sub-rules`。
+- `Rule_Provider_Format_Fix.conf`：`.mrs` 对应 `format: mrs`，`.yaml` 和 `.yml` 对应 `format: yaml`。
+- `Prevent_DNS_Leak.conf`：检查 `dns.respect-rules`、`proxy-server-nameserver`、`no-resolve` 和 `MATCH,COCR-DNS-Leak-Guard`。
 
 排查冲突时，建议暂时停用其他覆写模块，只保留目标模块重新测试。
 
