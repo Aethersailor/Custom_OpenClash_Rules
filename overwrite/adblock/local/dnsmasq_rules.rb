@@ -412,15 +412,24 @@ class DnsmasqRules
   end
 
   def dnsmasq_pid(context)
-    pidfile = context['pidfile']
-    return nil unless pidfile && File.file?(path(pidfile))
-    pid = Integer(File.read(path(pidfile)).strip, 10)
-    return nil unless pid > 1 && File.read(path("/proc/#{pid}/comm")).strip == 'dnsmasq'
-    arguments = File.binread(path("/proc/#{pid}/cmdline")).split("\0")
     config = context['configuration']
-    matched = arguments.each_cons(2).any? { |key, value| %w[-C --conf-file].include?(key) && value == config } || arguments.include?("--conf-file=#{config}")
-    matched ? pid : nil
-  rescue ArgumentError, Errno::ENOENT, Errno::ESRCH
+    return nil unless config
+    # ujail writes a namespace PID (often 1). Find the host PID and exclude its wrapper.
+    Dir.glob(path('/proc/[0-9]*/comm')).each do |comm|
+      pid = File.basename(File.dirname(comm)).to_i
+      next unless pid > 1
+      begin
+        next unless File.read(comm).strip == 'dnsmasq'
+        arguments = File.binread(File.join(File.dirname(comm), 'cmdline')).split("\0")
+        next unless File.basename(arguments.first.to_s) == 'dnsmasq'
+        candidates = arguments.each_cons(2).filter_map { |key, value| value if %w[-C --conf-file].include?(key) }
+        candidates += arguments.filter_map { |argument| argument.delete_prefix('--conf-file=') if argument.start_with?('--conf-file=') }
+        # OpenWrt aliases /var to /tmp; compare files, not the spelling of their paths.
+        return pid if candidates.any? { |candidate| File.identical?(path(candidate), path(config)) }
+      rescue Errno::ENOENT, Errno::ESRCH, Errno::EACCES
+        next
+      end
+    end
     nil
   end
 
