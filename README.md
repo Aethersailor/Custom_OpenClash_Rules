@@ -214,7 +214,7 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 
 - 单功能覆写模块：[`overwrite/`](overwrite/)
 - YAML 配置远程覆写模块：[`overwrite/yaml/`](overwrite/yaml/)
-- dnsmasq 广告拦截与 hosts 模块：[`overwrite/adblock/`](overwrite/adblock/)
+- 广告拦截与 hosts 格式支持说明：[`overwrite/adblock/`](overwrite/adblock/)
 
 ---
 
