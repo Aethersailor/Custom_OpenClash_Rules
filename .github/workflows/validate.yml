@@ -18,7 +18,6 @@ on:
       - 'shell/**/*.sh'
       - 'overwrite/**/*.conf'
       - 'overwrite/local/**/*.sh'
-      - 'overwrite/adblock/local/**/*.rb'
       - 'cfg/*.ini'
       - 'cfg/yaml/**'
       - 'requirements*.txt'
@@ -39,7 +38,6 @@ on:
       - 'shell/**/*.sh'
       - 'overwrite/**/*.conf'
       - 'overwrite/local/**/*.sh'
-      - 'overwrite/adblock/local/**/*.rb'
       - 'cfg/*.ini'
       - 'cfg/yaml/**'
       - 'requirements*.txt'
@@ -178,8 +176,6 @@ jobs:
           sh shell/check_cpu_version.sh --self-check
           python -m unittest discover -s py -p 'test_*.py'
           ruby py/test_overwrite_runtime.rb
-          ruby -c overwrite/adblock/local/dnsmasq_rules.rb
-          ruby py/test_dnsmasq_rules.rb
           python -m unittest discover -s .github/scripts -p 'test_*.py'
           python .github/scripts/jsdelivr_purge.py check-contract --revision HEAD
           sh .github/scripts/test_installers.sh

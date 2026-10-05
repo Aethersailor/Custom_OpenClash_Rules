@@ -146,7 +146,7 @@ class OpenClashOverwriteCompatibilityTests(unittest.TestCase):
         self.assertIn("overwrite/Add_No_Resolve.conf", relative_paths)
         self.assertIn("overwrite/Rule_Provider_Format_Fix.conf", relative_paths)
         self.assertNotIn("overwrite/Use_LuCI_DNS_Only.conf", relative_paths)
-        self.assertEqual(len(relative_paths), 24)
+        self.assertEqual(len(relative_paths), 19)
 
     def test_all_dynamic_commands_match_current_openclash_contract(self) -> None:
         failures: list[str] = []
