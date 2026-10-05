@@ -63,7 +63,7 @@ assert_equal(true, portable?("url.split('?').first.to_s.split('#').first.to_s"),
 modules = Dir.glob(File.join(ROOT, 'overwrite', '**', '*.conf')).reject do |file|
   file.include?('/archived/') || file.include?('/OpenClash_Overwrite/')
 end
-assert_equal(19, modules.length, 'module inventory')
+assert_equal(24, modules.length, 'module inventory')
 modules.each do |file|
   commands(file).each do |line|
     helper, args = parse(line)
