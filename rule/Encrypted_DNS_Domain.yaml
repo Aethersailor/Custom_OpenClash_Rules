@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3301
+# TOTAL: 3296
 
 payload:
   - '+.003153.xyz'
@@ -1001,7 +1001,6 @@ payload:
   - '+.dns.esegece.com'
   - '+.dns.esnube.es'
   - '+.dns.eu-frankfurt-1.oraclecloud.com'
-  - '+.dns.everdns.tech'
   - '+.dns.exhome.pl'
   - '+.dns.exitstat.us'
   - '+.dns.exonip.de'
@@ -1998,7 +1997,6 @@ payload:
   - '+.dvgarm.com'
   - '+.e23a.mooo.com'
   - '+.ea-dns.rubyfish.cn'
-  - '+.easyhandshake.com'
   - '+.ebpmc.diskstation.me'
   - '+.ebpmc.tplinkdns.com'
   - '+.ecs-doh.dnswarden.com'
@@ -2278,7 +2276,6 @@ payload:
   - '+.huv01.dnscry.pt'
   - '+.hydra.plan9-ns1.com'
   - '+.i-puppy.ru'
-  - '+.i.dns-over-https.tk'
   - '+.iah01.dnscry.pt'
   - '+.ib.systems'
   - '+.ibksturm.synology.me'
@@ -2350,7 +2347,6 @@ payload:
   - '+.jp.tiar.app'
   - '+.jp.tiarap.org'
   - '+.jp01.just-a-web.com'
-  - '+.jp1.f7b6h9.tk'
   - '+.jp193.flyzhouyc.win'
   - '+.jp2.ooroot.com'
   - '+.jpdns.cola16.app'
@@ -3128,7 +3124,6 @@ payload:
   - '+.usatwo.wuyouss.com'
   - '+.usxui.13142233.xyz'
   - '+.uw-dns.rubyfish.cn'
-  - '+.ux.go20.cf'
   - '+.v.dnscrypt.uk'
   - '+.v.recipes'
   - '+.v0dka.ru'
