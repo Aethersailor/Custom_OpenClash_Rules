@@ -11,9 +11,7 @@ class ProbeRequestError extends Error {
 }
 
 function classifyHttpFailure(status) {
-  return DEFINITIVE_UNAVAILABLE_STATUSES.has(status)
-    ? "unhealthy"
-    : "unknown";
+  return DEFINITIVE_UNAVAILABLE_STATUSES.has(status) ? "unhealthy" : "unknown";
 }
 
 function result(name, status, code, startedAt, extra = {}) {
@@ -26,23 +24,27 @@ function result(name, status, code, startedAt, extra = {}) {
   };
 }
 
-async function fetchWithTimeout(url, init = {}) {
+async function fetchWithTimeout(url, init, consume) {
   const controller = new AbortController();
   const timeout = setTimeout(
     () => controller.abort("probe_timeout"),
     MIRROR_CONFIG.probeTimeoutMs,
   );
 
+  let receivedHeaders = false;
   try {
-    return await fetch(url, {
+    const response = await fetch(url, {
       ...init,
       signal: controller.signal,
       redirect: "follow",
     });
+    receivedHeaders = true;
+    return await consume(response);
   } catch (error) {
     if (controller.signal.aborted || error?.name === "AbortError") {
       throw new ProbeRequestError("timeout");
     }
+    if (receivedHeaders) throw error;
     throw new ProbeRequestError("network_error");
   } finally {
     clearTimeout(timeout);
@@ -156,13 +158,9 @@ async function loadSnapshotManifest(env) {
       await response.body?.cancel();
       return {
         snapshot: null,
-        probe: result(
-          name,
-          "unknown",
-          `http_${response.status}`,
-          startedAt,
-          { httpStatus: response.status },
-        ),
+        probe: result(name, "unknown", `http_${response.status}`, startedAt, {
+          httpStatus: response.status,
+        }),
       };
     }
 
@@ -205,47 +203,51 @@ async function probeGithubApi() {
   const name = "github_api";
   const startedAt = Date.now();
   try {
-    const response = await fetchWithTimeout(MIRROR_CONFIG.githubApiUrl, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "Cache-Control": "no-cache",
-        "User-Agent": "custom-openclash-rules-repository-mirror/1.0",
-        "X-GitHub-Api-Version": "2022-11-28",
+    return await fetchWithTimeout(
+      MIRROR_CONFIG.githubApiUrl,
+      {
+        headers: {
+          Accept: "application/vnd.github+json",
+          "Cache-Control": "no-cache",
+          "User-Agent": "custom-openclash-rules-repository-mirror/1.0",
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
       },
-    });
+      async (response) => {
+        if (!response.ok) {
+          await response.body?.cancel();
+          return result(
+            name,
+            classifyHttpFailure(response.status),
+            `http_${response.status}`,
+            startedAt,
+            { httpStatus: response.status },
+          );
+        }
 
-    if (!response.ok) {
-      await response.body?.cancel();
-      return result(
-        name,
-        classifyHttpFailure(response.status),
-        `http_${response.status}`,
-        startedAt,
-        { httpStatus: response.status },
-      );
-    }
+        const bytes = await readBytes(response, 1024 * 1024);
+        let payload;
+        try {
+          payload = JSON.parse(new TextDecoder().decode(bytes));
+        } catch {
+          return result(name, "unknown", "invalid_json", startedAt, {
+            httpStatus: response.status,
+          });
+        }
 
-    const bytes = await readBytes(response, 1024 * 1024);
-    let payload;
-    try {
-      payload = JSON.parse(new TextDecoder().decode(bytes));
-    } catch {
-      return result(name, "unknown", "invalid_json", startedAt, {
-        httpStatus: response.status,
-      });
-    }
+        const observedRevision = String(payload?.sha ?? "").toLowerCase();
+        if (!/^[0-9a-f]{40}$/u.test(observedRevision)) {
+          return result(name, "unknown", "invalid_revision", startedAt, {
+            httpStatus: response.status,
+          });
+        }
 
-    const observedRevision = String(payload?.sha ?? "").toLowerCase();
-    if (!/^[0-9a-f]{40}$/u.test(observedRevision)) {
-      return result(name, "unknown", "invalid_revision", startedAt, {
-        httpStatus: response.status,
-      });
-    }
-
-    return result(name, "healthy", "ok", startedAt, {
-      httpStatus: response.status,
-      observedRevision,
-    });
+        return result(name, "healthy", "ok", startedAt, {
+          httpStatus: response.status,
+          observedRevision,
+        });
+      },
+    );
   } catch (error) {
     return requestErrorResult(name, startedAt, error);
   }
@@ -255,40 +257,44 @@ async function probeGithubPage() {
   const name = "github_page";
   const startedAt = Date.now();
   try {
-    const response = await fetchWithTimeout(MIRROR_CONFIG.githubPageUrl, {
-      method: "HEAD",
-      headers: {
-        Accept: "text/html",
-        "Cache-Control": "no-cache",
-        "User-Agent": "custom-openclash-rules-repository-mirror/1.0",
+    return await fetchWithTimeout(
+      MIRROR_CONFIG.githubPageUrl,
+      {
+        method: "HEAD",
+        headers: {
+          Accept: "text/html",
+          "Cache-Control": "no-cache",
+          "User-Agent": "custom-openclash-rules-repository-mirror/1.0",
+        },
       },
-    });
+      async (response) => {
+        if (!response.ok) {
+          await response.body?.cancel();
+          return result(
+            name,
+            classifyHttpFailure(response.status),
+            `http_${response.status}`,
+            startedAt,
+            { httpStatus: response.status },
+          );
+        }
 
-    if (!response.ok) {
-      await response.body?.cancel();
-      return result(
-        name,
-        classifyHttpFailure(response.status),
-        `http_${response.status}`,
-        startedAt,
-        { httpStatus: response.status },
-      );
-    }
+        const finalUrl = new URL(response.url);
+        const expectedPath = "/Aethersailor/Custom_OpenClash_Rules/tree/main";
+        if (
+          finalUrl.hostname.toLowerCase() !== "github.com" ||
+          finalUrl.pathname.toLowerCase() !== expectedPath.toLowerCase()
+        ) {
+          return result(name, "unknown", "unexpected_redirect", startedAt, {
+            httpStatus: response.status,
+          });
+        }
 
-    const finalUrl = new URL(response.url);
-    const expectedPath = "/Aethersailor/Custom_OpenClash_Rules/tree/main";
-    if (
-      finalUrl.hostname.toLowerCase() !== "github.com" ||
-      finalUrl.pathname.toLowerCase() !== expectedPath.toLowerCase()
-    ) {
-      return result(name, "unknown", "unexpected_redirect", startedAt, {
-        httpStatus: response.status,
-      });
-    }
-
-    return result(name, "healthy", "ok", startedAt, {
-      httpStatus: response.status,
-    });
+        return result(name, "healthy", "ok", startedAt, {
+          httpStatus: response.status,
+        });
+      },
+    );
   } catch (error) {
     return requestErrorResult(name, startedAt, error);
   }
@@ -297,31 +303,35 @@ async function probeGithubPage() {
 async function probeHashedFile(name, url) {
   const startedAt = Date.now();
   try {
-    const response = await fetchWithTimeout(url, {
-      headers: {
-        Accept: "text/plain, application/octet-stream;q=0.9, */*;q=0.1",
-        "Cache-Control": "no-cache",
-        "User-Agent": "custom-openclash-rules-repository-mirror/1.0",
+    return await fetchWithTimeout(
+      url,
+      {
+        headers: {
+          Accept: "text/plain, application/octet-stream;q=0.9, */*;q=0.1",
+          "Cache-Control": "no-cache",
+          "User-Agent": "custom-openclash-rules-repository-mirror/1.0",
+        },
       },
-    });
+      async (response) => {
+        if (!response.ok) {
+          await response.body?.cancel();
+          return result(
+            name,
+            classifyHttpFailure(response.status),
+            `http_${response.status}`,
+            startedAt,
+            { httpStatus: response.status },
+          );
+        }
 
-    if (!response.ok) {
-      await response.body?.cancel();
-      return result(
-        name,
-        classifyHttpFailure(response.status),
-        `http_${response.status}`,
-        startedAt,
-        { httpStatus: response.status },
-      );
-    }
-
-    const bytes = await readBytes(response, MIRROR_CONFIG.maxCanaryBytes);
-    return result(name, "healthy", "ok", startedAt, {
-      httpStatus: response.status,
-      bytes: bytes.byteLength,
-      observedSha256: await sha256Hex(bytes),
-    });
+        const bytes = await readBytes(response, MIRROR_CONFIG.maxCanaryBytes);
+        return result(name, "healthy", "ok", startedAt, {
+          httpStatus: response.status,
+          bytes: bytes.byteLength,
+          observedSha256: await sha256Hex(bytes),
+        });
+      },
+    );
   } catch (error) {
     return requestErrorResult(name, startedAt, error);
   }
@@ -348,7 +358,6 @@ function decideOutcome(snapshot, githubApi, githubPage, githubRaw, _jsdelivr) {
     if (definitiveRepositoryFailures >= 2) {
       return { outcome: "unhealthy", reason: "repository_unavailable" };
     }
-
   }
 
   return { outcome: "unknown", reason: "insufficient_evidence" };
@@ -374,12 +383,6 @@ export async function runHealthChecks(env) {
   return {
     ...decision,
     snapshot: manifestResult.snapshot,
-    probes: [
-      manifestResult.probe,
-      githubApi,
-      githubPage,
-      githubRaw,
-      jsdelivr,
-    ],
+    probes: [manifestResult.probe, githubApi, githubPage, githubRaw, jsdelivr],
   };
 }

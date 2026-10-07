@@ -199,6 +199,8 @@ jobs:
             --revision "$MIRROR_REVISION" \
             --output workers/repository-mirror/dist
           npm ci --prefix workers/repository-mirror
+          npm audit --prefix workers/repository-mirror --audit-level=high
+          npm run check --prefix workers/repository-mirror
           (
             cd workers/repository-mirror
             npm exec -- wrangler deploy \

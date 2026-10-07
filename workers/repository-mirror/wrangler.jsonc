@@ -5,6 +5,13 @@
   "compatibility_date": "2026-08-24",
   "workers_dev": false,
   "preview_urls": false,
+  "ratelimits": [
+    {
+      "name": "REQUEST_LIMITER",
+      "namespace_id": "10707003",
+      "simple": { "limit": 120, "period": 60 }
+    }
+  ],
   "routes": [
     {
       "pattern": "git.asailor.org/Custom_OpenClash_Rules",

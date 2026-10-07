@@ -4,11 +4,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "node --check src/config.js && node --check src/probes.js && node --check src/cloudflare-rules.js && node --check src/index.js && node --check scripts/validate-dist.mjs && npm run validate:dist",
+    "check": "node --check src/config.js && node --check src/probes.js && node --check src/cloudflare-rules.js && node --check src/index.js && node --check scripts/validate-dist.mjs && npm test && npm run validate:dist",
+    "test": "node --experimental-vm-modules --test test/*.test.mjs",
     "validate:dist": "node scripts/validate-dist.mjs",
     "dry-run": "npm run check && wrangler deploy --dry-run"
   },
+  "overrides": {
+    "sharp": "0.35.5"
+  },
   "devDependencies": {
-    "wrangler": "4.147.0"
+    "wrangler": "4.148.0"
   }
 }

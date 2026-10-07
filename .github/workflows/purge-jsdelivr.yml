@@ -217,6 +217,8 @@ jobs:
             --revision "$EXPECTED_SHA" \
             --output workers/repository-mirror/dist
           npm ci --prefix workers/repository-mirror
+          npm audit --prefix workers/repository-mirror --audit-level=high
+          npm run check --prefix workers/repository-mirror
 
       - name: Reconfirm current main immediately before deploy
         if: steps.current-main.outputs.current == 'true'

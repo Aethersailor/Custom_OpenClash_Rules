@@ -18,4 +18,5 @@ export const MIRROR_CONFIG = Object.freeze({
   probeTimeoutMs: 10_000,
   cloudflareApiTimeoutMs: 15_000,
   maxCanaryBytes: 5 * 1024 * 1024,
+  minMonitorIntervalMs: 55 * 60 * 1000,
 });

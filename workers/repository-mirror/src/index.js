@@ -295,7 +295,19 @@ export class RepositoryMirrorState extends DurableObject {
 
   async runMonitor() {
     if (!this.monitorPromise) {
-      this.monitorPromise = this.performMonitor().finally(() => {
+      this.monitorPromise = (async () => {
+        const now = Date.now();
+        const lastStartedAt = await this.ctx.storage.get("last-monitor-started-at");
+        if (
+          typeof lastStartedAt === "number" &&
+          now - lastStartedAt < MIRROR_CONFIG.minMonitorIntervalMs
+        ) {
+          return this.publicStatus();
+        }
+        // Persist before external work so failures or eviction cannot reset the guard.
+        await this.ctx.storage.put("last-monitor-started-at", now);
+        return this.performMonitor();
+      })().finally(() => {
         this.monitorPromise = null;
       });
     }
@@ -362,6 +374,20 @@ export default {
     if (url.pathname === "/__mirror/status") {
       if (request.method !== "GET" && request.method !== "HEAD") {
         return textResponse("Method Not Allowed\n", 405, { Allow: "GET, HEAD" });
+      }
+      try {
+        if (!env.REQUEST_LIMITER || typeof env.REQUEST_LIMITER.limit !== "function") {
+          return jsonResponse({ error: "request_protection_unavailable" }, 503, request.method);
+        }
+        const ip = request.headers.get("cf-connecting-ip") || "unknown";
+        const { success } = await env.REQUEST_LIMITER.limit({ key: `mirror-status:${ip}` });
+        if (!success) {
+          const response = jsonResponse({ error: "rate_limited" }, 429, request.method);
+          response.headers.set("Retry-After", "60");
+          return response;
+        }
+      } catch {
+        return jsonResponse({ error: "request_protection_unavailable" }, 503, request.method);
       }
       return servePublicStatus(request, env);
     }
