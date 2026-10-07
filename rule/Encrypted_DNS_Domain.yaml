@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3296
+# TOTAL: 3289
 
 payload:
   - '+.003153.xyz'
@@ -211,7 +211,6 @@ payload:
   - '+.adguard.haneulo.com'
   - '+.adguard.hartley.cloud'
   - '+.adguard.hoangcongchuc.com'
-  - '+.adguard.homenetmedia.stream'
   - '+.adguard.hostingsignal.in'
   - '+.adguard.ihatemy.live'
   - '+.adguard.infrapod.nl'
@@ -219,7 +218,6 @@ payload:
   - '+.adguard.jaydub.cloud'
   - '+.adguard.jfchenier.ca'
   - '+.adguard.johanliebert.top'
-  - '+.adguard.johnnypatras.org'
   - '+.adguard.k-likhachev.ru'
   - '+.adguard.kalyanmudumby.com'
   - '+.adguard.kantinyoyok.xyz'
@@ -1092,7 +1090,6 @@ payload:
   - '+.dns.home.beckett.io'
   - '+.dns.home.daniil.it'
   - '+.dns.homenet.saschagaspar.net'
-  - '+.dns.hopkinton.online'
   - '+.dns.hopsken.com'
   - '+.dns.horcrux.vip'
   - '+.dns.hostingim.com'
@@ -1163,7 +1160,6 @@ payload:
   - '+.dns.k3nny.fr'
   - '+.dns.kamilszczepanski.com'
   - '+.dns.kapite.in'
-  - '+.dns.kapoww.tk'
   - '+.dns.karadag.me'
   - '+.dns.karfamily.net'
   - '+.dns.karl.one'
@@ -1276,7 +1272,6 @@ payload:
   - '+.dns.moraru.net'
   - '+.dns.motazhakim.com'
   - '+.dns.mrkaran.dev'
-  - '+.dns.msk.hexagon1736.com'
   - '+.dns.msxnet.ru'
   - '+.dns.mtoo.vip'
   - '+.dns.muellerstech.de'
@@ -2155,7 +2150,6 @@ payload:
   - '+.han01.dnscry.pt'
   - '+.hanniel.tech'
   - '+.hdns.ksyun.com'
-  - '+.hdnsadguardhome.me'
   - '+.heavenorhell.ru'
   - '+.hebe.freedynamicdns.org'
   - '+.hel01.dnscry.pt'
@@ -2720,6 +2714,7 @@ payload:
   - '+.pi.homeanywhere.org'
   - '+.pi1.node15.com'
   - '+.pi4.jnraptor.net'
+  - '+.pidoh.mapledns.net'
   - '+.pihole.aws.ketan.dev'
   - '+.pihole.datamatter.co.za'
   - '+.pihole1.hoerli.net'
@@ -2745,7 +2740,6 @@ payload:
   - '+.positif4.cross.net.id'
   - '+.pqh.ddns.net'
   - '+.prdot.cldsrv.es'
-  - '+.premiumtier-network.instadart.net'
   - '+.prg01.dnscry.pt'
   - '+.privacy.plumedns.com'
   - '+.privatebard.com'
@@ -3172,7 +3166,6 @@ payload:
   - '+.vps.202316.xyz'
   - '+.vps.559299366.xyz'
   - '+.vps.atomix.in'
-  - '+.vps.avc.cx'
   - '+.vps.cloaknet.eu'
   - '+.vps.deckberg.de'
   - '+.vps.grussenmeyer.com'
