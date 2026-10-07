@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 921
+# TOTAL: 922
 
 payload:
   - '+.00333118.com'
@@ -922,6 +922,7 @@ payload:
   - '+.zzclass.com'
   - '+.zzqrgs3148.vip'
   - '+.zzr.cc'
+  - '+.zzz-hp.top'
   - '+.zzz-log-upload-os.hoyoverse.com'
   - '+.zzzcaculator.top'
   - '+.zzzmap.com'
