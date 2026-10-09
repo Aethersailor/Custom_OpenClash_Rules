@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 948
+# TOTAL: 952
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -155,6 +155,7 @@ payload:
   - DOMAIN-SUFFIX,boxim.online
   - DOMAIN-SUFFIX,boxkj.com
   - DOMAIN-SUFFIX,boyuemobile.com
+  - DOMAIN-SUFFIX,bs-iot.com
   - DOMAIN-SUFFIX,bsbsb.top
   - DOMAIN-SUFFIX,bunny.net
   - DOMAIN-SUFFIX,bvmlt.top
@@ -695,6 +696,7 @@ payload:
   - DOMAIN-SUFFIX,senachina.com
   - DOMAIN-SUFFIX,senmuse.com
   - DOMAIN-SUFFIX,server2.cn2gias.uk
+  - DOMAIN-SUFFIX,sgllife.com
   - DOMAIN-SUFFIX,sgtv.ii00.cc
   - DOMAIN-SUFFIX,shanghai-parking.com
   - DOMAIN-SUFFIX,shanghongbei.com
@@ -756,6 +758,7 @@ payload:
   - DOMAIN-SUFFIX,tggfl.com
   - DOMAIN-SUFFIX,tgpro.net
   - DOMAIN-SUFFIX,tgpro.top
+  - DOMAIN-SUFFIX,thejoyridegames.com
   - DOMAIN-SUFFIX,theluyuan.com
   - DOMAIN-SUFFIX,theuwa.com
   - DOMAIN-SUFFIX,thinkerride.com
@@ -886,6 +889,7 @@ payload:
   - DOMAIN-SUFFIX,ycyct.com
   - DOMAIN-SUFFIX,ydayc.com
   - DOMAIN-SUFFIX,yhxjkj.top
+  - DOMAIN-SUFFIX,yi-ll.com
   - DOMAIN-SUFFIX,yibanbianji.com
   - DOMAIN-SUFFIX,yicaiykt.com
   - DOMAIN-SUFFIX,yingshi.dog

@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 933
+# TOTAL: 937
 
 payload:
   - '+.00333118.com'
@@ -152,6 +152,7 @@ payload:
   - '+.boxim.online'
   - '+.boxkj.com'
   - '+.boyuemobile.com'
+  - '+.bs-iot.com'
   - '+.bsbsb.top'
   - '+.bunny.net'
   - '+.bvmlt.top'
@@ -692,6 +693,7 @@ payload:
   - '+.senachina.com'
   - '+.senmuse.com'
   - '+.server2.cn2gias.uk'
+  - '+.sgllife.com'
   - '+.sgtv.ii00.cc'
   - '+.shanghai-parking.com'
   - '+.shanghongbei.com'
@@ -753,6 +755,7 @@ payload:
   - '+.tggfl.com'
   - '+.tgpro.net'
   - '+.tgpro.top'
+  - '+.thejoyridegames.com'
   - '+.theluyuan.com'
   - '+.theuwa.com'
   - '+.thinkerride.com'
@@ -883,6 +886,7 @@ payload:
   - '+.ycyct.com'
   - '+.ydayc.com'
   - '+.yhxjkj.top'
+  - '+.yi-ll.com'
   - '+.yibanbianji.com'
   - '+.yicaiykt.com'
   - '+.yingshi.dog'
