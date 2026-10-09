@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 939
+# TOTAL: 947
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -113,6 +113,7 @@ payload:
   - DOMAIN-SUFFIX,anytocopy.com
   - DOMAIN-SUFFIX,aoc.com
   - DOMAIN-SUFFIX,aocdisplays.com
+  - DOMAIN-SUFFIX,aoxox.com
   - DOMAIN-SUFFIX,ap-leasing.com
   - DOMAIN-SUFFIX,api.myip.com
   - DOMAIN-SUFFIX,apm-log-upload-os.hoyoverse.com
@@ -144,6 +145,7 @@ payload:
   - DOMAIN-SUFFIX,biandangroup.com
   - DOMAIN-SUFFIX,biaoda.me
   - DOMAIN-SUFFIX,bingshandashu.com
+  - DOMAIN-SUFFIX,bitauto.hk
   - DOMAIN-SUFFIX,bjssjsyy.com
   - DOMAIN-SUFFIX,bjtzeduyun.com
   - DOMAIN-SUFFIX,bochaai.com
@@ -620,6 +622,7 @@ payload:
   - DOMAIN-SUFFIX,ourschool.cc
   - DOMAIN-SUFFIX,p01.epsonconnect.com
   - DOMAIN-SUFFIX,packertec.com
+  - DOMAIN-SUFFIX,pailedi.com
   - DOMAIN-SUFFIX,panjue.com
   - DOMAIN-SUFFIX,paperang.com
   - DOMAIN-SUFFIX,passnat.com
@@ -696,6 +699,7 @@ payload:
   - DOMAIN-SUFFIX,shanghai-parking.com
   - DOMAIN-SUFFIX,shanghongbei.com
   - DOMAIN-SUFFIX,share123.top
+  - DOMAIN-SUFFIX,shenzhendongwei.com
   - DOMAIN-SUFFIX,shineacc.com
   - DOMAIN-SUFFIX,shsw.top
   - DOMAIN-SUFFIX,shuangqingtech.com
@@ -708,6 +712,7 @@ payload:
   - DOMAIN-SUFFIX,sisiim.com
   - DOMAIN-SUFFIX,sixloy428.top
   - DOMAIN-SUFFIX,sjchess.com
+  - DOMAIN-SUFFIX,sjyywy.com
   - DOMAIN-SUFFIX,skktec.com
   - DOMAIN-SUFFIX,sksight.com
   - DOMAIN-SUFFIX,skxvc.com
@@ -731,12 +736,14 @@ payload:
   - DOMAIN-SUFFIX,sxlljm.com
   - DOMAIN-SUFFIX,sxstczx.com
   - DOMAIN-SUFFIX,sy1.top
+  - DOMAIN-SUFFIX,szfx.top
   - DOMAIN-SUFFIX,sztopten.com
   - DOMAIN-SUFFIX,taichuansmart.com
   - DOMAIN-SUFFIX,tailgdd.com
   - DOMAIN-SUFFIX,tailscale.com
   - DOMAIN-SUFFIX,tajiduo.com
   - DOMAIN-SUFFIX,talk-cloud.net
+  - DOMAIN-SUFFIX,tange365.com
   - DOMAIN-SUFFIX,tangguobaohe.com
   - DOMAIN-SUFFIX,tclai.top
   - DOMAIN-SUFFIX,tcp.mk
@@ -889,6 +896,7 @@ payload:
   - DOMAIN-SUFFIX,yooc.me
   - DOMAIN-SUFFIX,youqian.pro
   - DOMAIN-SUFFIX,youzhiyouxing.com
+  - DOMAIN-SUFFIX,yshoufa.com
   - DOMAIN-SUFFIX,yueti.vip
   - DOMAIN-SUFFIX,yunqin.online
   - DOMAIN-SUFFIX,yunzuoye.net

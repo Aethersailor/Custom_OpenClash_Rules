@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 924
+# TOTAL: 932
 
 payload:
   - '+.00333118.com'
@@ -110,6 +110,7 @@ payload:
   - '+.anytocopy.com'
   - '+.aoc.com'
   - '+.aocdisplays.com'
+  - '+.aoxox.com'
   - '+.ap-leasing.com'
   - '+.api.myip.com'
   - '+.apm-log-upload-os.hoyoverse.com'
@@ -141,6 +142,7 @@ payload:
   - '+.biandangroup.com'
   - '+.biaoda.me'
   - '+.bingshandashu.com'
+  - '+.bitauto.hk'
   - '+.bjssjsyy.com'
   - '+.bjtzeduyun.com'
   - '+.bochaai.com'
@@ -617,6 +619,7 @@ payload:
   - '+.ourschool.cc'
   - '+.p01.epsonconnect.com'
   - '+.packertec.com'
+  - '+.pailedi.com'
   - '+.panjue.com'
   - '+.paperang.com'
   - '+.passnat.com'
@@ -693,6 +696,7 @@ payload:
   - '+.shanghai-parking.com'
   - '+.shanghongbei.com'
   - '+.share123.top'
+  - '+.shenzhendongwei.com'
   - '+.shineacc.com'
   - '+.shsw.top'
   - '+.shuangqingtech.com'
@@ -705,6 +709,7 @@ payload:
   - '+.sisiim.com'
   - '+.sixloy428.top'
   - '+.sjchess.com'
+  - '+.sjyywy.com'
   - '+.skktec.com'
   - '+.sksight.com'
   - '+.skxvc.com'
@@ -728,12 +733,14 @@ payload:
   - '+.sxlljm.com'
   - '+.sxstczx.com'
   - '+.sy1.top'
+  - '+.szfx.top'
   - '+.sztopten.com'
   - '+.taichuansmart.com'
   - '+.tailgdd.com'
   - '+.tailscale.com'
   - '+.tajiduo.com'
   - '+.talk-cloud.net'
+  - '+.tange365.com'
   - '+.tangguobaohe.com'
   - '+.tclai.top'
   - '+.tcp.mk'
@@ -886,6 +893,7 @@ payload:
   - '+.yooc.me'
   - '+.youqian.pro'
   - '+.youzhiyouxing.com'
+  - '+.yshoufa.com'
   - '+.yueti.vip'
   - '+.yunqin.online'
   - '+.yunzuoye.net'
