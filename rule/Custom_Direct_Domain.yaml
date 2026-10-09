@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 939
+# TOTAL: 941
 
 payload:
   - '+.00333118.com'
@@ -453,6 +453,7 @@ payload:
   - '+.ip159.com'
   - '+.ip6.seeip.org'
   - '+.ipapi.co'
+  - '+.ipjrh.com'
   - '+.iposl.com'
   - '+.ipshu.com'
   - '+.iquantumad.com'
@@ -840,6 +841,7 @@ payload:
   - '+.xdqtech.com'
   - '+.xdtool.com'
   - '+.xesabc.com'
+  - '+.xesim.cc'
   - '+.xesim.net'
   - '+.xfltd.org'
   - '+.xgzb.top'
