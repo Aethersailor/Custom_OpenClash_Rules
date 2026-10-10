@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 957
+# TOTAL: 959
 
 payload:
   - '+.00333118.com'
@@ -621,6 +621,7 @@ payload:
   - '+.onetoken.sh'
   - '+.onetools.top'
   - '+.openappfilter.com'
+  - '+.opencool.top'
   - '+.openevai.com'
   - '+.openkylin.top'
   - '+.opentrust.net'
@@ -758,6 +759,7 @@ payload:
   - '+.taichuansmart.com'
   - '+.tailgdd.com'
   - '+.tailscale.com'
+  - '+.taiqp.com'
   - '+.tajiduo.com'
   - '+.talk-cloud.net'
   - '+.tange365.com'

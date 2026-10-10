@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 972
+# TOTAL: 974
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -624,6 +624,7 @@ payload:
   - DOMAIN-SUFFIX,onetoken.sh
   - DOMAIN-SUFFIX,onetools.top
   - DOMAIN-SUFFIX,openappfilter.com
+  - DOMAIN-SUFFIX,opencool.top
   - DOMAIN-SUFFIX,openevai.com
   - DOMAIN-SUFFIX,openkylin.top
   - DOMAIN-SUFFIX,opentrust.net
@@ -761,6 +762,7 @@ payload:
   - DOMAIN-SUFFIX,taichuansmart.com
   - DOMAIN-SUFFIX,tailgdd.com
   - DOMAIN-SUFFIX,tailscale.com
+  - DOMAIN-SUFFIX,taiqp.com
   - DOMAIN-SUFFIX,tajiduo.com
   - DOMAIN-SUFFIX,talk-cloud.net
   - DOMAIN-SUFFIX,tange365.com
