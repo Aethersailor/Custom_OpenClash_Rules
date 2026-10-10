@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3277
+# TOTAL: 3270
 
 payload:
   - '+.003153.xyz'
@@ -414,7 +414,6 @@ payload:
   - '+.agh.mihanentalpo.me'
   - '+.agh.nonocan.com'
   - '+.agh.printk.info'
-  - '+.agh.realwap.net'
   - '+.agh.srv.tenete.net'
   - '+.agh.workfordemo.co.in'
   - '+.agh.xinfeng16m.top'
@@ -1384,7 +1383,6 @@ payload:
   - '+.dns.ramsky.my.id'
   - '+.dns.rawalker.co.nz'
   - '+.dns.rayanbab.com'
-  - '+.dns.rayarksb.fun'
   - '+.dns.rbn.gr'
   - '+.dns.readlook.tk'
   - '+.dns.redhosting.com.ar'
@@ -2035,7 +2033,6 @@ payload:
   - '+.fezgate.ovh'
   - '+.fi-hel-w-f-2.nashkan.net'
   - '+.fi-hel-w-p-1.nashkan.net'
-  - '+.fi.r5acq.com'
   - '+.fidelius.top'
   - '+.filter.badbotdev.xyz'
   - '+.filter.myaddr.io'
@@ -2074,7 +2071,6 @@ payload:
   - '+.galileo.math.unipd.it'
   - '+.gammesfeld.eu'
   - '+.gateway.fomichev.cloud'
-  - '+.gauss.pp.ua'
   - '+.gb-cov-w-f-1.nashkan.net'
   - '+.gb-cov-w-f-2.nashkan.net'
   - '+.gb-cov-w-p-1.nashkan.net'
@@ -2662,7 +2658,6 @@ payload:
   - '+.oury.privado.ovh'
   - '+.outie.8ws.net'
   - '+.outiejr.8ws.net'
-  - '+.owa.pvmedia.ru'
   - '+.pad3w.pp.ua'
   - '+.padermail.net'
   - '+.panel.joosh.ru'
@@ -2872,7 +2867,6 @@ payload:
   - '+.sdns22.gkonuralp.com'
   - '+.sdvizhkov.ru'
   - '+.sea01.dnscry.pt'
-  - '+.searxng.rcxpony.name'
   - '+.sec.iamninja.ru'
   - '+.secure-dns.gridlax.com'
   - '+.secure-dns.pleumkungz.com'
@@ -2980,7 +2974,6 @@ payload:
   - '+.syd.adfilter.net'
   - '+.syd.core.access.zznet.fun'
   - '+.syd02.dnscry.pt'
-  - '+.syre.pp.ua'
   - '+.szyrzyk.pl'
   - '+.t2c.240130034.xyz'
   - '+.takhtakh.domyah.net'
