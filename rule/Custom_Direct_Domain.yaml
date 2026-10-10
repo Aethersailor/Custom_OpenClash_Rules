@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 952
+# TOTAL: 955
 
 payload:
   - '+.00333118.com'
@@ -547,6 +547,7 @@ payload:
   - '+.m-team.io'
   - '+.machtalk.net'
   - '+.manfuz.co'
+  - '+.maticooads.com'
   - '+.maxdo.tech'
   - '+.mblyun.com'
   - '+.mc-user.com'
@@ -743,6 +744,7 @@ payload:
   - '+.sunrisecontent.akamaized.net'
   - '+.suntl.com'
   - '+.susudesu.com'
+  - '+.suto.top'
   - '+.suu-fun.com'
   - '+.suyur.com'
   - '+.svyun.com'
@@ -939,6 +941,7 @@ payload:
   - '+.zjshulong.com'
   - '+.zjxhedu.com'
   - '+.zllinks.com'
+  - '+.zmaticoo.com'
   - '+.zmis.me'
   - '+.znnu.com'
   - '+.znztv.com'
