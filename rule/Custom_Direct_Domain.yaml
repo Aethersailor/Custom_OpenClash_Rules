@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 960
+# TOTAL: 966
 
 payload:
   - '+.00333118.com'
@@ -10,6 +10,8 @@ payload:
   - '+.03241119.xyz'
   - '+.0734cn.top'
   - '+.0759mall.com'
+  - '+.10fuzhu.com'
+  - '+.10laodian.com'
   - '+.112114.eu.org'
   - '+.112114.xyz'
   - '+.115cdn.de'
@@ -358,10 +360,13 @@ payload:
   - '+.gsjkjt.com'
   - '+.gsnhcg.com'
   - '+.gsstic.com'
+  - '+.gta5max.com'
+  - '+.gtakm.com'
   - '+.guaitao.cc'
   - '+.guang233.com'
   - '+.guangshiting.top'
   - '+.guangyapan.com'
+  - '+.guyuns.asia'
   - '+.gvgoo.com'
   - '+.gwmapp-w.com'
   - '+.gxcould.com'
@@ -783,6 +788,7 @@ payload:
   - '+.thispx.com'
   - '+.thmnet.com'
   - '+.threep.top'
+  - '+.threewinnersid.com'
   - '+.tianlala.com'
   - '+.tianruo.xyz'
   - '+.timbrd.com'
