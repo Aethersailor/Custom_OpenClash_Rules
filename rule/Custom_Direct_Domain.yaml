@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 973
+# TOTAL: 977
 
 payload:
   - '+.00333118.com'
@@ -362,6 +362,7 @@ payload:
   - '+.gsstic.com'
   - '+.gta5max.com'
   - '+.gta5studio.com'
+  - '+.gta5xforce.com'
   - '+.gtakm.com'
   - '+.gtazhiyu.com'
   - '+.guaitao.cc'
@@ -703,6 +704,9 @@ payload:
   - '+.rkgamingstore.com'
   - '+.royqh.net'
   - '+.rsfcxq.com'
+  - '+.rsmods.cc'
+  - '+.rsmods.me'
+  - '+.rsmods.net'
   - '+.ruijie.com'
   - '+.rxcrs.com'
   - '+.saduck.top'
