@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 957
+# TOTAL: 964
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -160,6 +160,7 @@ payload:
   - DOMAIN-SUFFIX,bunny.net
   - DOMAIN-SUFFIX,bvmlt.top
   - DOMAIN-SUFFIX,bxlsj.com
+  - DOMAIN-SUFFIX,byyang.top
   - DOMAIN-SUFFIX,byyoung.top
   - DOMAIN-SUFFIX,ca-sinfusi.com
   - DOMAIN-SUFFIX,calmate.cc
@@ -249,6 +250,9 @@ payload:
   - DOMAIN-SUFFIX,dtinsure.com
   - DOMAIN-SUFFIX,dtproj.top
   - DOMAIN-SUFFIX,dushe1.app
+  - DOMAIN-SUFFIX,dw2.co
+  - DOMAIN-SUFFIX,dw8.co
+  - DOMAIN-SUFFIX,dw9.co
   - DOMAIN-SUFFIX,dytt8.com
   - DOMAIN-SUFFIX,e0x233.com
   - DOMAIN-SUFFIX,eagsen.com
@@ -472,6 +476,7 @@ payload:
   - DOMAIN-SUFFIX,jiangningwater.com
   - DOMAIN-SUFFIX,jiaoyanyun.com
   - DOMAIN-SUFFIX,jieyoutsg.com
+  - DOMAIN-SUFFIX,jieyunwangluokeji.com
   - DOMAIN-SUFFIX,jiliuwang.net
   - DOMAIN-SUFFIX,jingheiot.com
   - DOMAIN-SUFFIX,jinsan168.com
@@ -536,6 +541,7 @@ payload:
   - DOMAIN-SUFFIX,lsposed.zip
   - DOMAIN-SUFFIX,lty02.com
   - DOMAIN-SUFFIX,lucky.gd
+  - DOMAIN-SUFFIX,lw5.co
   - DOMAIN-SUFFIX,lyihub.com
   - DOMAIN-SUFFIX,lyilife.com
   - DOMAIN-SUFFIX,m-team.cc
@@ -635,6 +641,7 @@ payload:
   - DOMAIN-SUFFIX,piedaochuan.top
   - DOMAIN-SUFFIX,pinshuxsw.com
   - DOMAIN-SUFFIX,pixcheese.com
+  - DOMAIN-SUFFIX,pjnoeru.top
   - DOMAIN-SUFFIX,pkghund.com
   - DOMAIN-SUFFIX,plusde1.younoyes.com
   - DOMAIN-SUFFIX,plushk1.younoyes.com

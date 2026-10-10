@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 942
+# TOTAL: 949
 
 payload:
   - '+.00333118.com'
@@ -157,6 +157,7 @@ payload:
   - '+.bunny.net'
   - '+.bvmlt.top'
   - '+.bxlsj.com'
+  - '+.byyang.top'
   - '+.byyoung.top'
   - '+.ca-sinfusi.com'
   - '+.calmate.cc'
@@ -246,6 +247,9 @@ payload:
   - '+.dtinsure.com'
   - '+.dtproj.top'
   - '+.dushe1.app'
+  - '+.dw2.co'
+  - '+.dw8.co'
+  - '+.dw9.co'
   - '+.dytt8.com'
   - '+.e0x233.com'
   - '+.eagsen.com'
@@ -469,6 +473,7 @@ payload:
   - '+.jiangningwater.com'
   - '+.jiaoyanyun.com'
   - '+.jieyoutsg.com'
+  - '+.jieyunwangluokeji.com'
   - '+.jiliuwang.net'
   - '+.jingheiot.com'
   - '+.jinsan168.com'
@@ -533,6 +538,7 @@ payload:
   - '+.lsposed.zip'
   - '+.lty02.com'
   - '+.lucky.gd'
+  - '+.lw5.co'
   - '+.lyihub.com'
   - '+.lyilife.com'
   - '+.m-team.cc'
@@ -632,6 +638,7 @@ payload:
   - '+.piedaochuan.top'
   - '+.pinshuxsw.com'
   - '+.pixcheese.com'
+  - '+.pjnoeru.top'
   - '+.pkghund.com'
   - '+.plusde1.younoyes.com'
   - '+.plushk1.younoyes.com'
