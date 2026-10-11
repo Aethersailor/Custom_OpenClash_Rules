@@ -24,7 +24,6 @@
 | 本目录直接存放的 `.conf` | 本项目维护的单功能远程覆写模块，本文重点介绍 |
 | [`yaml/`](./yaml/) | 存放用于远程调用本项目 YAML 配置文件的覆写模块；文件区别、变量和订阅地址请查看 [`yaml/`](./yaml/) |
 | [`local/`](./local/) | 存放需要读取本机 UCI 或 OpenClash 临时文件的本地自定义覆写钩子 |
-| [`adblock/`](./adblock/) | 广告拦截与 hosts 格式支持说明；原依赖额外组件的模块已撤回 |
 | [`OpenClash_Overwrite/`](./OpenClash_Overwrite/) | 第三方完整覆写方案，具体用法以上游 README 为准 |
 | [`archived/`](./archived/) | 已停止维护的旧版文件，仅供历史参考 |
 
@@ -57,7 +56,6 @@
 - Rule Provider 因缺少或写错 `format` 导致加载失败：使用 `Rule_Provider_Format_Fix.conf`。
 - 希望游戏下载和更新尽量走直连：使用 `Direct_Game_Download.conf`。
 - 只想替换 OpenClash 使用的数据源：选择对应的 `Set_*.conf` 模块。
-- 需要广告拦截或远程 hosts：先查看 [`adblock/`](./adblock/) 的格式支持说明。普通 hosts 文本和 dnsmasq 配置不能直接作为 Mihomo 覆写数据加载。
 
 <a id="overwrite-usage"></a>
 
