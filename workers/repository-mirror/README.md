@@ -70,7 +70,7 @@ GitHub 仓库页面和 Raw 文件均可访问时，本轮记为成功，并保�
 
 ## 构建与部署
 
-仓库统一发布器从指定 Git 提交的 blob 生成 `dist/`，并执行公开文件契约、生成顺序、文件数量和单文件大小检查。Node.js 脚本只验证已有 `dist/` 与清单完全一致，不建立第二套资产选择规则。
+仓库统一发布器从指定 Git 提交的 blob 生成 `dist/`，并执行公开文件契约、生成顺序、文件数量和单文件大小检查。
 
 正式发布由 `.github/workflows/purge-jsdelivr.yml` 执行。直接发布从 GitHub Environment `cloudflare-production` 读取 Secret；自动更新器的嵌套可复用工作流使用同名 Repository Secret，并显式逐层继承：
 
@@ -81,7 +81,7 @@ GitHub 仓库页面和 Raw 文件均可访问时，本轮记为成功，并保�
 
 发布任务通过 Wrangler `--secrets-file` 将后两项保存为 Worker Secret。密钥值不会写入仓库文件或构建日志。
 
-本地只读验证不需要 Cloudflare 凭据：
+本地构建和部署预览不需要 Cloudflare 凭据：
 
 ```powershell
 $revision = git rev-parse HEAD
@@ -89,11 +89,10 @@ py -3 ..\..\.github\scripts\jsdelivr_purge.py build-worker-assets `
   --revision $revision `
   --output dist
 npm ci
-npm run check
-npx wrangler deploy --dry-run
+npm run dry-run
 ```
 
-从 `workers/repository-mirror` 目录运行以上命令。`dist/` 不提交到 Git；每次部署前必须重新生成。正式流程只部署已经通过精确 SHA 校验、仍为最新 `main` 的完整快照。
+从 `workers/repository-mirror` 目录运行以上命令。`dist/` 不提交到 Git；每次部署前必须重新生成。正式流程只部署仍为最新 `main` 的完整快照，并在部署后确认线上快照的提交 SHA。
 
 部署后检查：
 

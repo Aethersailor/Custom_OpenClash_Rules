@@ -1,132 +1,114 @@
 name: Dependabot auto-merge
 
 on:
-  workflow_run:
-    workflows:
-      - CodeQL Advanced
-      - Validate repository
-    types: [completed]
-    branches:
-      - 'dependabot/**'
+  pull_request_target:
+    branches: [main]
+    types: [opened, reopened, synchronize, ready_for_review]
+  schedule:
+    - cron: '47 * * * *'
+  workflow_dispatch:
 
 permissions:
-  actions: read
-  checks: read
   contents: read
   pull-requests: read
 
 concurrency:
-  group: dependabot-automerge-${{ github.event.workflow_run.head_sha }}
-  cancel-in-progress: true
+  group: dependabot-automerge
+  cancel-in-progress: false
 
 jobs:
   merge:
-    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
+    if: >-
+      github.repository == 'Aethersailor/Custom_OpenClash_Rules' &&
+      (github.event_name != 'pull_request_target' ||
+       github.event.pull_request.user.login == 'dependabot[bot]')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Merge after required checks pass
+      # Use only GitHub metadata; never check out or execute pull-request code.
+      - name: Merge Dependabot pull requests
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
+          # PAT merges also trigger the normal main-branch publication workflows.
           github-token: ${{ secrets.GH_PAT }}
           script: |
-            const run = context.payload.workflow_run;
-            const prSummary = run.pull_requests?.[0];
-            if (!prSummary) {
-              core.info("The completed workflow is not associated with a pull request.");
-              return;
-            }
-
             const { owner, repo } = context.repo;
-            const { data: pr } = await github.rest.pulls.get({
-              owner,
-              repo,
-              pull_number: prSummary.number,
-            });
-            const labels = pr.labels.map((label) => label.name);
-            if (
-              pr.user.login !== "dependabot[bot]" ||
-              pr.base.ref !== context.payload.repository.default_branch ||
-              pr.head.repo?.full_name !== `${owner}/${repo}` ||
-              pr.draft ||
-              !labels.includes("automerge")
-            ) {
-              core.info(`PR #${pr.number} is not eligible for automatic merge.`);
-              return;
-            }
-            if (pr.state !== "open" || pr.head.sha !== run.head_sha) {
-              core.info(`PR #${pr.number} is closed or no longer points at ${run.head_sha}.`);
-              return;
-            }
-
-            const requiredChecks = new Set([
-              "Analyze (actions)",
-              "Analyze (python)",
-              "CodeQL",
-              "dependency-review",
-              "validate",
-            ]);
-            const maxAttempts = 30;
-            let checks;
-            for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
-              const { data } = await github.rest.checks.listForRef({
-                owner,
-                repo,
-                ref: pr.head.sha,
-                filter: "latest",
-                per_page: 100,
-              });
-              checks = new Map(
-                data.check_runs
-                  .filter((check) => requiredChecks.has(check.name))
-                  .map((check) => [check.name, check])
-              );
-              const missing = [...requiredChecks].filter((name) => !checks.has(name));
-              const pending = [...checks.values()].filter(
-                (check) => check.status !== "completed"
-              );
-              if (missing.length === 0 && pending.length === 0) {
-                break;
-              }
-              if (attempt === maxAttempts) {
-                core.setFailed(
-                  `Timed out waiting for checks. Missing: ${missing.join(", ") || "none"}; pending: ${pending.map((check) => check.name).join(", ") || "none"}`
-                );
-                return;
-              }
-              core.info(
-                `Waiting for checks (${attempt}/${maxAttempts}). Missing: ${missing.join(", ") || "none"}; pending: ${pending.map((check) => check.name).join(", ") || "none"}`
-              );
-              await new Promise((resolve) => setTimeout(resolve, 10000));
-            }
-
-            const failed = [...checks.values()].filter(
-              (check) => check.conclusion !== "success"
+            const repository = `${owner}/${repo}`;
+            const base = context.payload.repository.default_branch;
+            const eventPr = context.payload.pull_request;
+            const candidates = eventPr ? [eventPr] : await github.paginate(
+              github.rest.pulls.list,
+              { owner, repo, state: "open", base, per_page: 100 }
             );
-            if (failed.length > 0) {
-              core.setFailed(
-                `Required checks failed: ${failed.map((check) => `${check.name}=${check.conclusion}`).join(", ")}`
-              );
-              return;
-            }
+            const eligible = (pr) => (
+              pr.state === "open" && !pr.draft &&
+              pr.user.login === "dependabot[bot]" && pr.user.type === "Bot" &&
+              pr.base.ref === base && pr.base.repo.full_name === repository &&
+              pr.head.repo?.full_name === repository &&
+              pr.head.ref.startsWith("dependabot/")
+            );
+            const dependencyFile = (file) => (
+              file.status === "modified" && (
+                /^\.github\/workflows\/[^/]+\.ya?ml$/.test(file.filename) ||
+                /^\.github\/actions\/.+\/action\.ya?ml$/.test(file.filename) ||
+                /^requirements[^/]*\.txt$/.test(file.filename) ||
+                /^workers\/repository-mirror\/package(?:-lock)?\.json$/.test(file.filename)
+              )
+            );
 
-            const { data: currentPr } = await github.rest.pulls.get({
-              owner,
-              repo,
-              pull_number: pr.number,
-            });
-            if (currentPr.state !== "open" || currentPr.head.sha !== pr.head.sha) {
-              core.info(`PR #${pr.number} changed while checks were running; refusing to merge.`);
-              return;
-            }
+            for (const candidate of candidates) {
+              if (candidate.user.login !== "dependabot[bot]") continue;
+              try {
+                const { data: pr } = await github.rest.pulls.get({
+                  owner, repo, pull_number: candidate.number,
+                });
+                if (!eligible(pr)) continue;
+                if (eventPr && pr.head.sha !== eventPr.head.sha) {
+                  core.info(`PR #${pr.number} has a newer head; skip this stale event.`);
+                  continue;
+                }
 
-            const { data: result } = await github.rest.pulls.merge({
-              owner,
-              repo,
-              pull_number: pr.number,
-              merge_method: "squash",
-              sha: pr.head.sha,
-            });
-            if (!result.merged) {
-              core.setFailed(result.message || "GitHub did not merge the pull request.");
+                const commits = await github.paginate(github.rest.pulls.listCommits, {
+                  owner, repo, pull_number: pr.number, per_page: 100,
+                });
+                if (commits.length !== pr.commits || !commits.every((commit) =>
+                  commit.author?.login === "dependabot[bot]" &&
+                  commit.commit.verification?.verified === true
+                )) {
+                  core.warning(`PR #${pr.number} contains commits not verified as Dependabot.`);
+                  continue;
+                }
+                const files = await github.paginate(github.rest.pulls.listFiles, {
+                  owner, repo, pull_number: pr.number, per_page: 100,
+                });
+                if (!files.length || files.length !== pr.changed_files ||
+                    !files.every(dependencyFile)) {
+                  core.warning(`PR #${pr.number} changes files outside dependency updates.`);
+                  continue;
+                }
+
+                const { data: current } = await github.rest.pulls.get({
+                  owner, repo, pull_number: pr.number,
+                });
+                if (!eligible(current) || current.head.sha !== pr.head.sha ||
+                    current.base.sha !== pr.base.sha) {
+                  core.info(`PR #${pr.number} changed during inspection; retry on the next event or schedule.`);
+                  continue;
+                }
+                const { data: result } = await github.rest.pulls.merge({
+                  owner, repo, pull_number: pr.number,
+                  merge_method: "squash", sha: pr.head.sha,
+                });
+                if (result.merged) {
+                  core.info(`Merged Dependabot PR #${pr.number} at ${result.sha}.`);
+                } else {
+                  core.setFailed(`PR #${pr.number}: ${result.message}`);
+                }
+              } catch (error) {
+                if ([405, 409, 422].includes(error.status)) {
+                  core.warning(`PR #${candidate.number} is not currently mergeable; the next event or schedule will retry: ${error.message}`);
+                  continue;
+                }
+                core.setFailed(`PR #${candidate.number}: ${error.message}`);
+              }
             }

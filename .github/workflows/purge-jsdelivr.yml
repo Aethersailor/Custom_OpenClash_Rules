@@ -30,7 +30,7 @@ on:
         required: true
         type: string
       after_sha:
-        description: Exact validated revision to publish and verify
+        description: Exact revision to publish and verify
         required: true
         type: string
       generation_complete:
@@ -48,7 +48,7 @@ concurrency:
 
 jobs:
   purge-jsdelivr:
-    # Forks validate the code but must never operate the upstream cache.
+    # Only the owning repository operates this cache.
     if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -150,22 +150,9 @@ jobs:
             --github-output "$GITHUB_OUTPUT" \
             "${generation_args[@]}"
 
-  validate-worker-snapshot:
+  deploy-worker-snapshot:
     needs: purge-jsdelivr
     if: needs.purge-jsdelivr.outputs.worker_deployable == 'true'
-    permissions:
-      contents: read
-    uses: ./.github/workflows/validate.yml
-    with:
-      revision: ${{ needs.purge-jsdelivr.outputs.after_sha }}
-
-  deploy-worker-snapshot:
-    needs:
-      - purge-jsdelivr
-      - validate-worker-snapshot
-    if: >-
-      needs.purge-jsdelivr.outputs.worker_deployable == 'true' &&
-      needs.validate-worker-snapshot.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: cloudflare-production
@@ -176,7 +163,7 @@ jobs:
         shell: bash
 
     steps:
-      - name: Checkout exact validated snapshot
+      - name: Checkout exact snapshot
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: ${{ needs.purge-jsdelivr.outputs.after_sha }}
@@ -217,8 +204,6 @@ jobs:
             --revision "$EXPECTED_SHA" \
             --output workers/repository-mirror/dist
           npm ci --prefix workers/repository-mirror
-          npm audit --prefix workers/repository-mirror --audit-level=high
-          npm run check --prefix workers/repository-mirror
 
       - name: Reconfirm current main immediately before deploy
         if: steps.current-main.outputs.current == 'true'

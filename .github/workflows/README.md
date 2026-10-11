@@ -9,15 +9,17 @@
 | 文件名 | 描述 | 触发条件 |
 | :--- | :--- | :--- |
 | [`auto-backup-wiki.yml`](auto-backup-wiki.yml) | 校验 Wiki 目录页和页面完整性后，事务式备份到仓库的 `wiki/` 目录并处理链接替换 | 每 2 小时或手动触发 |
-| [`auto-generate-rules.yml`](auto-generate-rules.yml) | 从 `.list` 规则源统一生成 `.yaml` 和 `.mrs` 派生规则，同步 Mainland 兼容文件，并将最终源提交发送给 `Custom_Stash_Rules` 生成 Stash 模板；完成精确 SHA 校验后调用统一 CDN 发布器 | 对应规则源、模板或生成器变更，源更新工作流同步调用，或手动触发 |
+| [`auto-generate-rules.yml`](auto-generate-rules.yml) | 从 `.list` 规则源统一生成 `.yaml` 和 `.mrs` 派生规则，同步 Mainland 兼容文件，将最终源提交发送给 `Custom_Stash_Rules`，并调用统一 CDN 发布器 | 对应规则源、模板或生成器变更，源更新工作流同步调用，或手动触发 |
 | [`auto-update-encrypted-dns.yml`](auto-update-encrypted-dns.yml) | 从 HaGeZi、DNSCrypt 和编译后的 `geosite:category-doh` 自动更新 `Encrypted_DNS.list`；内容变化后同步等待派生规则生成，派生失败会使本工作流失败 | 每日或手动触发 |
 | [`auto-update-game-cdn.yml`](auto-update-game-cdn.yml) | 合并 v2fly 上游与本项目 `Steam_CDN.list`，智能去重后更新 `Game_Download_CDN.list`；内容变化后同步等待派生规则生成 | `Steam_CDN.list` 或生成器变更、每日或手动触发 |
-| [`codeql.yml`](codeql.yml) | 使用扩展安全与质量查询分析 GitHub Actions 和 Python | 相关代码推送、Pull Request、每日或手动触发 |
-| [`dependabot-auto-merge.yml`](dependabot-auto-merge.yml) | 等待 Validate（含 Dependency Review）和 CodeQL 全部成功后，自动压缩合并（squash merge）带有 `automerge` 标签的 Dependabot PR | 上述检查完成 |
+| [`dependabot-auto-merge.yml`](dependabot-auto-merge.yml) | 核对机器人身份、签名提交、依赖文件范围和当前 SHA 后，直接以 squash 合并本仓库的 Dependabot PR | PR 创建或更新、每小时补处理，或手动触发 |
 | [`pages.yml`](pages.yml) | 构建并部署 MkDocs 文档站点到 GitHub Pages | `wiki/**`、`mkdocs.yml` 变更或手动触发 |
-| [`purge-jsdelivr.yml`](purge-jsdelivr.yml) | 按 [公开发布契约](../jsdelivr-publish.json) 精确刷新 jsDelivr 缓存；生成内容完整、精确 SHA 校验成功且仍为最新 `main` 时，同步部署 Cloudflare Static Assets 热备快照 | `main` 分支推送、规则生成且校验成功，或手动修复范围 |
+| [`purge-jsdelivr.yml`](purge-jsdelivr.yml) | 按 [公开发布契约](../jsdelivr-publish.json) 精确刷新 jsDelivr 缓存；生成内容完整且仍为最新 `main` 时，同步部署 Cloudflare Static Assets 热备快照 | `main` 分支推送、规则生成完成，或手动修复范围 |
 | [`sync-openclash-overwrite-submodule.yml`](sync-openclash-overwrite-submodule.yml) | 将 `overwrite/OpenClash_Overwrite` 子模块同步到上游 `main` 分支 | 每 2 小时或手动触发 |
-| [`validate.yml`](validate.yml) | 校验 Shell、Python、Sub-Store、Wiki 备份、规则派生文件、MRS、完整 Mihomo 模板和 Cloudflare 镜像部署包；Pull Request 还会执行 Dependency Review，也可由发布器校验指定提交 | 代码推送、Pull Request、发布器同步调用或手动触发 |
+
+工作流负责内容更新、生成、备份、发布和 Dependabot 自动合并。功能由维护者人工测试；Dependabot 依赖更新自动合并，不限制更新级别，也不等待测试、CodeQL、依赖审查或人工批准。
+
+自动合并流程只读取 GitHub 元数据，不检出或执行 PR 中的代码。合并使用现有 Repository Secret `GH_PAT`，使合并后的 `main` 推送继续触发正常发布工作流；存在冲突或提交变化时，每小时自动补处理。
 
 ## Cloudflare 热备发布
 

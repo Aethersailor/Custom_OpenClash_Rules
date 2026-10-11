@@ -10,20 +10,14 @@ updates:
     rebase-strategy: "auto"
     labels:
       - "dependencies"
-      - "automerge"
     groups:
       security-updates:
         applies-to: "security-updates"
         patterns:
           - "*"
-      codeql-action:
-        patterns:
-          - "github/codeql-action/*"
       routine-updates:
         patterns:
           - "*"
-        exclude-patterns:
-          - "github/codeql-action/*"
         update-types:
           - "minor"
           - "patch"
@@ -41,7 +35,6 @@ updates:
     rebase-strategy: "auto"
     labels:
       - "dependencies"
-      - "automerge"
     groups:
       security-updates:
         applies-to: "security-updates"

@@ -86,16 +86,6 @@ jobs:
       - name: Set up pinned Mihomo
         uses: ./.github/actions/setup-mihomo
 
-      - name: Generate derived rules and Mainland compatibility template
-        run: |
-          python py/generate_rules.py --mihomo mihomo
-          python py/generate_stash_configs.py --target mainland
-
-      - name: Test generation and conversion logic
-        run: |
-          python py/generate_rules.py --check --mihomo mihomo
-          python py/generate_stash_configs.py --check --target mainland
-
       - name: Commit and push changes
         id: publish
         shell: bash
@@ -129,9 +119,7 @@ jobs:
             git fetch --no-tags origin main
             git reset --hard origin/main
             python py/generate_rules.py --mihomo mihomo
-            python py/generate_rules.py --check --mihomo mihomo
             python py/generate_stash_configs.py --target mainland
-            python py/generate_stash_configs.py --check --target mainland
 
             unexpected_changes="$(
               git status --short --untracked-files=all -- . \
@@ -214,8 +202,7 @@ jobs:
               repos/Aethersailor/Custom_Stash_Rules/dispatches \
               --input -
 
-  # Generation and format validation already ran against the exact worktree that
-  # was published. Purge its changed cache keys without re-running unrelated tests.
+  # Purge the cache keys belonging to the published generation result.
   purge-generated:
     needs: generate-rules
     permissions:

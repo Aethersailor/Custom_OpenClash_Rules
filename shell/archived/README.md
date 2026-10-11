@@ -1,6 +1,6 @@
 # 归档的 Shell 脚本
 
-本目录存放已停止维护的 OpenClash 防火墙修改脚本和早期测试脚本。它们不会被当前安装器或 GitHub Actions 调用。
+本目录存放已停止维护的 OpenClash 防火墙修改脚本。它们不会被当前安装器或 GitHub Actions 调用。
 
 ## 文件说明
 
@@ -11,7 +11,6 @@
 | `edit_custom_firewall_rules_adblockfilters-modified+github520.sh` | 写入修改版 AdblockFilters 与 GitHub520 规则 | 已归档 |
 | `edit_custom_firewall_rules_anti-ad+github520.sh` | 写入 Anti-AD 与 GitHub520 规则 | 已归档 |
 | `edit_custom_firewall_rules_github520.sh` | 写入 GitHub520 `hosts` 规则 | 已归档 |
-| `one-key-setup_test.sh` | 早期一键配置测试 | 已归档 |
 
 这些脚本会修改 OpenClash 自定义防火墙配置，并依赖旧版上游地址、规则格式以及 OpenWrt 和 OpenClash 的行为。
 
