@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3270
+# TOTAL: 3264
 
 payload:
   - '+.003153.xyz'
@@ -387,7 +387,6 @@ payload:
   - '+.ag.node15.com'
   - '+.ag.snrka.ru'
   - '+.ag.stepnew.ru'
-  - '+.ag.teqilla.tk'
   - '+.ag.wntrmute.net'
   - '+.agathe.tobkar.net'
   - '+.agent.frankutils.xyz'
@@ -1416,7 +1415,6 @@ payload:
   - '+.dns.sarakas.net'
   - '+.dns.sarilouis.com'
   - '+.dns.sark.dev'
-  - '+.dns.satellite226.cloud'
   - '+.dns.sb'
   - '+.dns.sbstructure.ir'
   - '+.dns.scapetical.com'
@@ -1640,7 +1638,6 @@ payload:
   - '+.dns1.saferbfc.org'
   - '+.dns1.sarak.as'
   - '+.dns1.sarakas.net'
-  - '+.dns1.schooldns.nl'
   - '+.dns1.server.my.id'
   - '+.dns1.slowb.ro'
   - '+.dns1.tardishost.ru'
@@ -1890,7 +1887,6 @@ payload:
   - '+.doh.syshero.org'
   - '+.doh.sz-dns.com'
   - '+.doh.technochat.in'
-  - '+.doh.thio.me'
   - '+.doh.this.web.id'
   - '+.doh.tiar.app'
   - '+.doh.tiarap.org'
@@ -2905,7 +2901,6 @@ payload:
   - '+.shinano.anime.com.my'
   - '+.shitblocker.com'
   - '+.siddeus.synology.me'
-  - '+.signsservers.ru'
   - '+.sin.core.access.zznet.fun'
   - '+.sin02.dnscry.pt'
   - '+.sin03.dnscry.pt'
@@ -2938,7 +2933,6 @@ payload:
   - '+.sorephie-dns2.ddns.net'
   - '+.spacedns.org'
   - '+.sq.trin.icu'
-  - '+.squidmall.vip'
   - '+.sradg.eastus.cloudapp.azure.com'
   - '+.srv01.dns64.de'
   - '+.srv02.dns64.de'
