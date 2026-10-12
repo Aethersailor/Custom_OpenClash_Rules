@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3264
+# TOTAL: 3262
 
 payload:
   - '+.003153.xyz'
@@ -3007,7 +3007,6 @@ payload:
   - '+.tky-dns.bitdefender.net'
   - '+.tll01.dnscry.pt'
   - '+.tls.jackyhou.idv.tw'
-  - '+.tls.vietguards.cloud'
   - '+.tls.windyvale.net'
   - '+.tlz.asia'
   - '+.tngch.mydns.jp'
@@ -3096,7 +3095,6 @@ payload:
   - '+.v.dnscrypt.uk'
   - '+.v.recipes'
   - '+.v0dka.ru'
-  - '+.v1.ufamax.eu'
   - '+.v1552270.hosted-by-vdsina.ru'
   - '+.v2-1.huwenqiang.xyz'
   - '+.v2.xx3210766.live'
