@@ -298,15 +298,15 @@ OpenWrt 作为主路由和旁路由时的设置差异，会在相关步骤中说
 
 如果页面中仍有「使用 Meta 内核」切换选项，说明 OpenClash 版本过旧，请先将插件更新到最新版本。
 
-<img width="850" alt="1" src="https://github.com/user-attachments/assets/c5a59b94-5efa-48ac-b1d6-79e233e9fa80" />
+<img width="918" alt="1" src="https://github.com/user-attachments/assets/5b9da2b3-74a6-48f4-8161-b60219cd04eb" />
 
 ### 2.2 流量控制
 
 按照图示设置。建议启用「实验性：绕过指定区域 IP」，并选择「绕过中国大陆」，以减少直连流量进入内核造成的性能损耗。
 
-启用后，GeoSite 数据库中分类为 `cn` 的域名，且解析 IP 位于「中国大陆 IP 段」范围内的流量，将不进入内核。
+启用后，对应数据源中的 `CN` 分类域名将返回真实 IP 并绕过内核直连访问，以此提升国内访问性能。  
 
-<img width="971" alt="2" src="https://github.com/user-attachments/assets/dbb56e62-a458-4dbd-b77a-bfabe77136b7" />
+<img width="1006" alt="2" src="hhttps://github.com/user-attachments/assets/0505727d-ba3e-4bff-99bf-3ba1143744a0" />
 
 如果个别站点或应用需要例外处理，可以在本页的相关黑名单中按域名添加规则。修改后，请保存设置并重启 OpenClash。
 
@@ -364,7 +364,7 @@ OpenClash 启动后，可在「运行日志」中查看探测结果与最终选�
 >
 > 如果使用的第三方远端服务不支持 IPv6 出站，或 OpenWrt 未启用 IPv6，请**禁用**「IPv6 流量代理」和「允许 IPv6 类型 DNS 解析」。
 
-<img width="941" alt="4" src="https://github.com/user-attachments/assets/7d5b45e6-d5b7-4fc9-a9a3-5d7e5c419008" />
+<img width="983" alt="4" src="https://github.com/user-attachments/assets/69f296b3-8ea1-46bb-96be-7caf84b1aef8" />
 
 如果个别站点或应用在 IPv6 环境下需要例外处理，可以在本页的相关黑名单或白名单中按域名添加规则。修改后，请保存设置并重启 OpenClash。
 
@@ -404,11 +404,11 @@ OpenClash 启动后，可在「运行日志」中查看探测结果与最终选�
 
 此页面用于更新 OpenClash 的内核以及 OpenClash 自身。
 
-优先考虑稳定性时，**建议**选择 `master` 版本。然后点击下方的一键更新，将内核和主程序更新到最新版本。可以在 OpenClash 的「运行日志」页面查看结果，并确认 OpenWrt 能否正常访问 GitHub 或此前设置的 CDN，例如 testingcf。
+优先考虑稳定性时，**建议**选择 `master` 版本。然后点击下方的版本号来触发更新流程，将内核和主程序更新到最新版本。可以在 OpenClash 的「运行日志」页面查看结果，并确认 OpenWrt 能否正常访问 GitHub 或此前设置的 CDN，例如 testingcf。
 
 如需使用新功能，可以选择更新频率较高的 `dev` 版本；使用前应接受频繁升级和偶发 Bug，并保留可回退版本。
 
-<img width="1372" alt="core" src="https://github.com/user-attachments/assets/9dc68af2-646a-4d92-8242-c76a8171c547" />
+<img width="1388" alt="core" src="https://github.com/user-attachments/assets/d604dac8-52f9-473f-85aa-130bf8b4c895" />
 
 **至此，OpenClash 中的常规设置已完成。**
 
