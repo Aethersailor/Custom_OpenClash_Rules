@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3262
+# TOTAL: 3260
 
 payload:
   - '+.003153.xyz'
@@ -2121,7 +2121,6 @@ payload:
   - '+.guard.pp.ua'
   - '+.guard.telesterion.de'
   - '+.guard.thefather.cloud'
-  - '+.guard.yps.tw'
   - '+.guidetoworld.link'
   - '+.gustamadh.dynv6.net'
   - '+.gva01.dnscry.pt'
@@ -3241,7 +3240,6 @@ payload:
   - '+.zapacasa.ddns.net'
   - '+.zapranet.my.id'
   - '+.zaziss.com'
-  - '+.zburger.top'
   - '+.zdn.ro'
   - '+.zetland.rm-ni.uk'
   - '+.zeusvps.cloudns.nz'
