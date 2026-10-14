@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 5117
+# TOTAL: 5119
 
 payload:
   - DOMAIN,dns.astracat.ru
@@ -4610,6 +4610,7 @@ payload:
   - IP-CIDR,74.57.128.83/32,no-resolve
   - IP-CIDR,74.82.42.42/32,no-resolve
   - IP-CIDR,75.119.137.239/32,no-resolve
+  - IP-CIDR,75.119.144.0/32,no-resolve
   - IP-CIDR,76.223.54.146/32,no-resolve
   - IP-CIDR,76.76.10.11/32,no-resolve
   - IP-CIDR,76.76.10.22/32,no-resolve
@@ -5028,6 +5029,7 @@ payload:
   - IP-CIDR6,2a02:6b8::feed:bad/128,no-resolve
   - IP-CIDR6,2a02:6b8::feed:ff/128,no-resolve
   - IP-CIDR6,2a02:c207:2355:6761::1/128,no-resolve
+  - IP-CIDR6,2a02:c207:3018:9101::1/128,no-resolve
   - IP-CIDR6,2a03:4000:5c:51:24b9:51ff:fe80:f3a7/128,no-resolve
   - IP-CIDR6,2a03:5840:123:8::a/128,no-resolve
   - IP-CIDR6,2a03:94e0:271f::5b1/128,no-resolve
