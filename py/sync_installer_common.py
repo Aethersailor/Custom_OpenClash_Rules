@@ -24,7 +24,6 @@ SHARED_FUNCTIONS = {
     "log_warn",
     "log_error",
     "log_ok",
-    "log_skip",
     "run_logged",
     "show_log_excerpt",
     "print_failure_summary",
@@ -75,7 +74,6 @@ SHARED_FUNCTIONS = {
 
 @dataclass(frozen=True)
 class ShellFunction:
-    name: str
     start: int
     end: int
     content: str
@@ -87,7 +85,6 @@ def extract_functions(content: str) -> dict[str, ShellFunction]:
     for index, match in enumerate(starts):
         end = starts[index + 1].start() if index + 1 < len(starts) else len(content)
         functions[match.group(1)] = ShellFunction(
-            name=match.group(1),
             start=match.start(),
             end=end,
             content=content[match.start() : end].rstrip() + "\n\n",

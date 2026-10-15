@@ -337,7 +337,7 @@ async function probeHashedFile(name, url) {
   }
 }
 
-function decideOutcome(snapshot, githubApi, githubPage, githubRaw, _jsdelivr) {
+function decideOutcome(snapshot, githubApi, githubPage, githubRaw) {
   const publicRepositoryReady =
     githubPage.status === "healthy" && githubRaw.status === "healthy";
 
@@ -377,7 +377,6 @@ export async function runHealthChecks(env) {
     githubApi,
     githubPage,
     githubRaw,
-    jsdelivr,
   );
 
   return {

@@ -569,9 +569,3 @@ function flagFromCode(code) {
     .map(character => String.fromCodePoint(127397 + character.charCodeAt(0)))
     .join('')
 }
-
-// Sub-Store evaluates this file directly and does not define `module`.
-// The conditional export keeps runtime behavior unchanged while allowing CI tests.
-if (typeof module !== 'undefined') {
-  module.exports = { operator }
-}

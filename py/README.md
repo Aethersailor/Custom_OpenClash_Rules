@@ -16,8 +16,6 @@
 | [`sync_installer_common.py`](sync_installer_common.py) | 以完整安装器中的共享函数为维护来源，同步轻量安装器的对应实现 | `shell/install_openclash_dev.sh` |
 | [`update_encrypted_dns.py`](update_encrypted_dns.py) | 汇总 HaGeZi、DNSCrypt 与编译后的 `geosite:category-doh`，生成加密 DNS 域名和 IP 规则 | `rule/Encrypted_DNS.list` |
 
-[`archived/`](archived/) 存放已停止维护或不再被工作流调用的历史脚本。
-
 ## 维护边界
 
 - 修改 `.list` 来源后，通过 `generate_rules.py` 重建派生文件，不要直接维护派生 YAML 或 MRS。

@@ -21,10 +21,8 @@ PACKAGE_MIN_BYTES="${PACKAGE_MIN_BYTES:-262144}"
 PACKAGE_REF_CONNECT_TIMEOUT="${PACKAGE_REF_CONNECT_TIMEOUT:-8}"
 PACKAGE_REF_MAX_TIME="${PACKAGE_REF_MAX_TIME:-25}"
 OPENCLASH_SHARE_DIR="${OPENCLASH_SHARE_DIR:-/usr/share/openclash}"
-OPENCLASH_ETC_DIR="${OPENCLASH_ETC_DIR:-/etc/openclash}"
 OPENCLASH_INIT="${OPENCLASH_INIT:-/etc/init.d/openclash}"
 OPENCLASH_LOG="${OPENCLASH_LOG:-/tmp/openclash.log}"
-OPENCLASH_PRESET="${OPENCLASH_PRESET:-/etc/config/openclash-set}"
 OS_RELEASE_FILE="${OS_RELEASE_FILE:-/etc/os-release}"
 OPENWRT_RELEASE_FILE="${OPENWRT_RELEASE_FILE:-/etc/openwrt_release}"
 
@@ -117,11 +115,6 @@ log_error() {
 log_ok() {
     printf '%b\n' "  ${G}[成功]${N} $1"
     append_log "成功：$1"
-}
-
-log_skip() {
-    printf '%b\n' "  ${Y}[跳过]${N} $1"
-    append_log "跳过：$1"
 }
 
 run_logged() {

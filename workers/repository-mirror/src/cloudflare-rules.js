@@ -207,8 +207,6 @@ export async function reconcileRedirectRules(env, desiredEnabled) {
     return {
       enabled: desiredEnabled,
       changed: false,
-      changedRefs: [],
-      rulesetVersion: initialRuleset.version ?? null,
     };
   }
 
@@ -242,8 +240,6 @@ export async function reconcileRedirectRules(env, desiredEnabled) {
     return {
       enabled: desiredEnabled,
       changed: true,
-      changedRefs: refsToChange,
-      rulesetVersion: readback.version ?? null,
     };
   } catch (error) {
     // Cloudflare does not expose a transactional multi-rule PATCH endpoint.

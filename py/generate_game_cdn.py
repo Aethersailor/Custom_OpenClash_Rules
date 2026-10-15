@@ -104,9 +104,7 @@ def rule_covers(covering_rule: str, candidate_rule: str) -> bool:
     candidate_type, candidate_value, *_ = candidate_rule.split(",")
 
     if covering_type == "DOMAIN-SUFFIX":
-        if candidate_type == "DOMAIN":
-            return candidate_value == covering_value or candidate_value.endswith(f".{covering_value}")
-        if candidate_type == "DOMAIN-SUFFIX":
+        if candidate_type in {"DOMAIN", "DOMAIN-SUFFIX"}:
             return candidate_value == covering_value or candidate_value.endswith(f".{covering_value}")
 
     if covering_type in {"IP-CIDR", "IP-CIDR6"} and candidate_type == covering_type:

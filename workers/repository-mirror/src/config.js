@@ -1,7 +1,6 @@
 export const MIRROR_CONFIG = Object.freeze({
   repository: "Aethersailor/Custom_OpenClash_Rules",
   branch: "main",
-  publicPrefix: "/Custom_OpenClash_Rules/main/",
   canaryPath: "rule/Custom_Direct.list",
   manifestPath: "/_mirror/Custom_OpenClash_Rules/main.json",
   githubApiUrl:
