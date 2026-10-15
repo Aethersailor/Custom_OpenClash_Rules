@@ -25,6 +25,8 @@
 
 本项目的 jsDelivr 链接统一使用短分支名，例如 `https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash.ini`。发布契约只刷新 `main` 缓存键。Git 完整引用路径仍用于 Git 命令和 GitHub Raw 地址，不用于 jsDelivr 的版本字段。
 
+jsDelivr 的[分支缓存时间为 12 小时](https://github.com/jsdelivr/jsdelivr#caching)，清缓存接口不保证分支文件立即更新。工作流成功表示刷新请求已完成；确认新版是否生效时，仍需将公开文件内容与发布提交比较。需要立即取得指定版本时，使用包含完整提交 SHA 的 GitHub Raw 或 jsDelivr 地址。
+
 ## Cloudflare 热备发布
 
 `purge-jsdelivr.yml` 是 jsDelivr 与 Cloudflare 热备的统一发布边界。发布器只从指定 Git 提交读取公开文件，不复制工作区内容。涉及规则来源或生成器的提交必须先完成 YAML、MRS 和 Mainland 兼容文件生成；未完成时，发布器跳过整份 Static Assets 快照，等待生成工作流携带最终提交再次调用。Stash 模板由 `Custom_Stash_Rules` 独立校验和发布。
