@@ -146,7 +146,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 anti-AD 广告过滤规则，规则体积较大，请耐心等候…\"
     curl -sS -4 -L --retry 10 --retry-delay 2 \\
-        \"https://testingcf.jsdelivr.net/gh/privacy-protection-tools/anti-AD@refs/heads/master/adblock-for-dnsmasq.conf\" \\
+        \"https://testingcf.jsdelivr.net/gh/privacy-protection-tools/anti-AD@master/adblock-for-dnsmasq.conf\" \\
         -o \"\$TARGET_DIR/anti-ad-for-dnsmasq.conf\" >/dev/null 2>/tmp/anti-ad-curl.log
     CURL_EXIT=\$?
 
@@ -162,7 +162,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters 广告过滤规则，规则体积较大，请耐心等候…\"
     curl -sS -4 -L --retry 10 --retry-delay 2 \\
-        \"https://testingcf.jsdelivr.net/gh/217heidai/adblockfilters@refs/heads/main/rules/adblockdnsmasq.txt\" \\
+        \"https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockdnsmasq.txt\" \\
         -o \"\$TARGET_DIR/adblockfilters-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-curl.log
     CURL_EXIT=\$?
 
@@ -178,7 +178,7 @@ if [ "$adv_choice" = "y" ] || [ "$github_choice" = "y" ]; then
                 NEW_INSERT_CONTENT="${NEW_INSERT_CONTENT}
     LOG_OUT \"[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则...\"
     curl -sS -4 -L --retry 10 --retry-delay 2 \\
-        \"https://testingcf.jsdelivr.net/gh/Aethersailor/adblockfilters-modified@refs/heads/main/rules/adblockdnsmasq.txt\" \\
+        \"https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/main/rules/adblockdnsmasq.txt\" \\
         -o \"\$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf\" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
     CURL_EXIT=\$?
 

@@ -51,7 +51,7 @@
     sed -i '/# GitHub520 Host Start/,/# GitHub520 Host End/d' /etc/hosts
 
     LOG_OUT "[广告过滤规则拉取脚本] 拉取最新的 adblockfilters-modified 广告过滤规则，规则体积较大，请耐心等候…"
-    curl -sS -4 -L --retry 5 --retry-delay 1 "https://testingcf.jsdelivr.net/gh/Aethersailor/adblockfilters-modified@refs/heads/main/rules/adblockdnsmasq.txt" -o "$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
+    curl -sS -4 -L --retry 5 --retry-delay 1 "https://raw.githubusercontent.com/Aethersailor/adblockfilters-modified/main/rules/adblockdnsmasq.txt" -o "$TARGET_DIR/adblockfilters-modified-for-dnsmasq.conf" >/dev/null 2>/tmp/adblockfilters-modified-curl.log
     CURL_EXIT=$?
 
     if [ $CURL_EXIT -eq 0 ]; then

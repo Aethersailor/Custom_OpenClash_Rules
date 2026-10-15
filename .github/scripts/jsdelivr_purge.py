@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Purge mutable jsDelivr aliases for changed public files."""
+"""Purge canonical jsDelivr branch URLs for changed public files."""
 
 from __future__ import annotations
 
@@ -102,10 +102,10 @@ def load_contract(path: Path) -> PublishContract:
         raise PublishError("Contract branch must be a non-empty string")
 
     aliases = _require_string_list(data, "ref_aliases")
-    expected_aliases = (branch, f"refs/heads/{branch}")
+    expected_aliases = (branch,)
     if aliases != expected_aliases:
         raise PublishError(
-            f"ref_aliases must be exactly {expected_aliases!r} so both mutable cache keys are covered"
+            f"ref_aliases must be exactly {expected_aliases!r}; use the branch name in jsDelivr URLs"
         )
 
     roots = _require_string_list(data, "public_roots")

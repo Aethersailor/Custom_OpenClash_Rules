@@ -21,6 +21,10 @@
 
 自动合并流程只读取 GitHub 元数据，不检出或执行 PR 中的代码。合并使用现有 Repository Secret `GH_PAT`，使合并后的 `main` 推送继续触发正常发布工作流；存在冲突或提交变化时，每小时自动补处理。
 
+## jsDelivr 链接与缓存刷新
+
+本项目的 jsDelivr 链接统一使用短分支名，例如 `https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash.ini`。发布契约只刷新 `main` 缓存键。Git 完整引用路径仍用于 Git 命令和 GitHub Raw 地址，不用于 jsDelivr 的版本字段。
+
 ## Cloudflare 热备发布
 
 `purge-jsdelivr.yml` 是 jsDelivr 与 Cloudflare 热备的统一发布边界。发布器只从指定 Git 提交读取公开文件，不复制工作区内容。涉及规则来源或生成器的提交必须先完成 YAML、MRS 和 Mainland 兼容文件生成；未完成时，发布器跳过整份 Static Assets 快照，等待生成工作流携带最终提交再次调用。Stash 模板由 `Custom_Stash_Rules` 独立校验和发布。

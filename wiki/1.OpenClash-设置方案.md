@@ -937,16 +937,16 @@ Mihomo 加载运行配置
 <br>
 
 ```text
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash.conf
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Fallback.conf
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Lite.conf
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Lite_Fallback.conf
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_GFW.conf
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_GFW_Fallback.conf
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Full.conf
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Full_Fallback.conf
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_8in1.conf
-https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/overwrite/yaml/Custom_Clash_Selfhosted_Provider_Fallback.conf
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/yaml/Custom_Clash.conf
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/yaml/Custom_Clash_Fallback.conf
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/yaml/Custom_Clash_Lite.conf
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/yaml/Custom_Clash_Lite_Fallback.conf
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/yaml/Custom_Clash_GFW.conf
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/yaml/Custom_Clash_GFW_Fallback.conf
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/yaml/Custom_Clash_Full.conf
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/yaml/Custom_Clash_Full_Fallback.conf
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/yaml/Custom_Clash_8in1.conf
+https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/yaml/Custom_Clash_Selfhosted_Provider_Fallback.conf
 ```
 
 GitHub Raw 备用地址使用相同文件名，前缀替换为：

@@ -2,8 +2,7 @@
   "repository": "Aethersailor/Custom_OpenClash_Rules",
   "branch": "main",
   "ref_aliases": [
-    "main",
-    "refs/heads/main"
+    "main"
   ],
   "public_roots": [
     "cfg",

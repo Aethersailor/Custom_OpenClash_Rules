@@ -105,7 +105,7 @@ OpenClash `dev` 版通常可直接从内置列表选择全部 8 个模板。以�
 加速地址（`cdn.jsdelivr.net`）：
 
 ```text
-https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash.ini
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash.ini
 ```
 
 GitHub Raw 地址：
@@ -121,7 +121,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 加速地址（`cdn.jsdelivr.net`）：
 
 ```text
-https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Fallback.ini
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_Fallback.ini
 ```
 
 GitHub Raw 地址：
@@ -135,7 +135,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 加速地址（`cdn.jsdelivr.net`）：
 
 ```text
-https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Lite.ini
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_Lite.ini
 ```
 
 GitHub Raw 地址：
@@ -151,7 +151,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 加速地址（`cdn.jsdelivr.net`）：
 
 ```text
-https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Lite_Fallback.ini
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_Lite_Fallback.ini
 ```
 
 GitHub Raw 地址：
@@ -165,7 +165,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 加速地址（`cdn.jsdelivr.net`）：
 
 ```text
-https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_GFW.ini
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_GFW.ini
 ```
 
 GitHub Raw 地址：
@@ -181,7 +181,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 加速地址（`cdn.jsdelivr.net`）：
 
 ```text
-https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_GFW_Fallback.ini
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_GFW_Fallback.ini
 ```
 
 GitHub Raw 地址：
@@ -195,7 +195,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 加速地址（`cdn.jsdelivr.net`）：
 
 ```text
-https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Full.ini
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_Full.ini
 ```
 
 GitHub Raw 地址：
@@ -211,7 +211,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/refs/heads
 加速地址（`cdn.jsdelivr.net`）：
 
 ```text
-https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@refs/heads/main/cfg/Custom_Clash_Full_Fallback.ini
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/cfg/Custom_Clash_Full_Fallback.ini
 ```
 
 GitHub Raw 地址：
