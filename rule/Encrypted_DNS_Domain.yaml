@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3260
+# TOTAL: 3266
 
 payload:
   - '+.003153.xyz'
@@ -106,6 +106,7 @@ payload:
   - '+.addns.ovalie.ovh'
   - '+.addns1.m-it.ro'
   - '+.adfight.ru'
+  - '+.adfiltro.fun'
   - '+.adfree.usableprivacy.net'
   - '+.adfreedns.eu'
   - '+.adfreedns.top'
@@ -127,6 +128,7 @@ payload:
   - '+.adg.lintasjrg.xyz'
   - '+.adg.proprietarypenguin.com'
   - '+.adg.rokh.biz'
+  - '+.adg.rueiliu.space'
   - '+.adg.spacework.com.mx'
   - '+.adg.tshost.no'
   - '+.adg.yybyy.wiki'
@@ -240,6 +242,7 @@ payload:
   - '+.adguard.mokocup.dev'
   - '+.adguard.myddns.org'
   - '+.adguard.nasaud.info'
+  - '+.adguard.neon0404.space'
   - '+.adguard.netmasc.services'
   - '+.adguard.nielsenhost.dk'
   - '+.adguard.niko-sem.com'
@@ -386,6 +389,7 @@ payload:
   - '+.ag.marschi.de'
   - '+.ag.node15.com'
   - '+.ag.snrka.ru'
+  - '+.ag.ssrahul96.xyz'
   - '+.ag.stepnew.ru'
   - '+.ag.wntrmute.net'
   - '+.agathe.tobkar.net'
@@ -441,6 +445,7 @@ payload:
   - '+.alisa.vpn.i81.ru'
   - '+.aliyunhttpdns.com'
   - '+.allain.com.br'
+  - '+.alleesph.online'
   - '+.alon93rus.ru'
   - '+.alpha-dns.quad9.net'
   - '+.alpha.cixy.xyz'
@@ -468,6 +473,7 @@ payload:
   - '+.ant.dns.qwer.pw'
   - '+.antivirus.bebasid.com'
   - '+.anycast.censurfridns.dk'
+  - '+.anycast.censurfridns.nu'
   - '+.anycast.uncensoreddns.dk'
   - '+.api.cloudflareclient.com'
   - '+.apidns.kwd.inkuai.com'
