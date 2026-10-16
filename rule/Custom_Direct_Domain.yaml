@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 990
+# TOTAL: 991
 
 payload:
   - '+.00333118.com'
@@ -557,6 +557,7 @@ payload:
   - '+.lw5.co'
   - '+.lyihub.com'
   - '+.lyilife.com'
+  - '+.lzgame.top'
   - '+.m-team.cc'
   - '+.m-team.io'
   - '+.machtalk.net'
