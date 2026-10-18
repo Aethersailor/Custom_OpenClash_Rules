@@ -319,7 +319,6 @@ rules:
   - "RULE-SET,Custom_Direct_Port,🎯 全球直连"
   - "RULE-SET,Custom_Proxy_Domain,🚀 故障转移"
   - "RULE-SET,Custom_Proxy_IP,🚀 故障转移,no-resolve"
-  - "GEOSITE,google-cn,🎯 全球直连"
   - "GEOSITE,category-games@cn,🎯 全球直连"
   - "RULE-SET,Game_Download_CDN_Domain,🎯 全球直连"
   - "RULE-SET,Game_Download_CDN_IP,🎯 全球直连,no-resolve"
