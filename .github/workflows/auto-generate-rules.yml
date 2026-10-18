@@ -18,15 +18,7 @@ on:
       - 'rule/Game_Download_CDN.list'
       - 'rule/game_rule/**/*.list'
       - 'py/generate_rules.py'
-      - 'py/generate_stash_configs.py'
       - 'cfg/Custom_Clash.ini'
-      - 'cfg/Custom_Clash_Fallback.ini'
-      - 'cfg/Custom_Clash_Lite.ini'
-      - 'cfg/Custom_Clash_Lite_Fallback.ini'
-      - 'cfg/Custom_Clash_GFW.ini'
-      - 'cfg/Custom_Clash_GFW_Fallback.ini'
-      - 'cfg/Custom_Clash_Full.ini'
-      - 'cfg/Custom_Clash_Full_Fallback.ini'
   workflow_dispatch:
     inputs:
       source_before_sha:
@@ -119,7 +111,7 @@ jobs:
             git fetch --no-tags origin main
             git reset --hard origin/main
             python py/generate_rules.py --mihomo mihomo
-            python py/generate_stash_configs.py --target mainland
+            cp cfg/Custom_Clash.ini cfg/Custom_Clash_Mainland.ini
 
             unexpected_changes="$(
               git status --short --untracked-files=all -- . \
@@ -172,35 +164,6 @@ jobs:
 
           echo "Final revision to publish: $publication_sha"
           echo "publication_sha=$publication_sha" >> "$GITHUB_OUTPUT"
-
-  sync-stash:
-    needs: generate-rules
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: read
-    steps:
-      - name: Request generated Stash template sync
-        env:
-          GH_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
-          SOURCE_SHA: ${{ needs.generate-rules.outputs.publication_sha }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ -z "$GH_TOKEN" ]; then
-            echo "TARGET_REPO_TOKEN is required for cross-repository dispatch." >&2
-            exit 1
-          fi
-          jq -n \
-            --arg source_sha "$SOURCE_SHA" \
-            '{
-              event_type: "sync-generated-stash",
-              client_payload: {source_sha: $source_sha}
-            }' |
-            gh api \
-              --method POST \
-              repos/Aethersailor/Custom_Stash_Rules/dispatches \
-              --input -
 
   # Purge the cache keys belonging to the published generation result.
   purge-generated:

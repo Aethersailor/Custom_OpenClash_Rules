@@ -44,15 +44,7 @@
   ],
   "snapshot_deferred_inputs": [
     "py/generate_rules.py",
-    "py/generate_stash_configs.py",
-    "cfg/Custom_Clash.ini",
-    "cfg/Custom_Clash_Fallback.ini",
-    "cfg/Custom_Clash_Lite.ini",
-    "cfg/Custom_Clash_Lite_Fallback.ini",
-    "cfg/Custom_Clash_GFW.ini",
-    "cfg/Custom_Clash_GFW_Fallback.ini",
-    "cfg/Custom_Clash_Full.ini",
-    "cfg/Custom_Clash_Full_Fallback.ini"
+    "cfg/Custom_Clash.ini"
   ],
   "generated_suffixes": [
     "Domain.yaml",
