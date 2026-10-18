@@ -21,25 +21,15 @@ TEMPLATE_PAIRS = (
 )
 
 EXPECTED_PROVIDER_COUNTS = {
-    "Custom_Stash.ini": 14,
-    "Custom_Stash_Fallback.ini": 14,
-    "Custom_Stash_Lite.ini": 10,
-    "Custom_Stash_Lite_Fallback.ini": 10,
-    "Custom_Stash_GFW.ini": 4,
-    "Custom_Stash_GFW_Fallback.ini": 4,
-    "Custom_Stash_Full.ini": 14,
-    "Custom_Stash_Full_Fallback.ini": 14,
-    "Custom_Stash_Mainland.ini": 14,
-}
-
-# Stash loads native GEOSITE categories from v2fly/domain-list-community.
-# Enhanced-only categories use explicit remote providers.
-STASH_GEOSITE_PROJECTIONS = {
-    "gfw": (
-        "clash-domain",
-        "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/"
-        "meta/geo/geosite/gfw.yaml",
-    ),
+    "Custom_Stash.ini": 13,
+    "Custom_Stash_Fallback.ini": 13,
+    "Custom_Stash_Lite.ini": 9,
+    "Custom_Stash_Lite_Fallback.ini": 9,
+    "Custom_Stash_GFW.ini": 3,
+    "Custom_Stash_GFW_Fallback.ini": 3,
+    "Custom_Stash_Full.ini": 13,
+    "Custom_Stash_Full_Fallback.ini": 13,
+    "Custom_Stash_Mainland.ini": 13,
 }
 
 META_GEOIP_URL = (
@@ -92,10 +82,9 @@ CLASSICAL_PROJECTIONS = {
 GENERATED_HEADER = (
     "; 此文件由 py/generate_stash_configs.py 生成，请勿直接修改。\n"
     "; 策略来源：{source}\n"
-    "; Stash 兼容边界：gfw 已映射为 YAML 域名规则集；非国家 GEOIP 已映射为 MRS；\n"
-    "; SRC-PORT,41641 因仅网关 SCRIPT 可实现而被显式排除；策略组仅保留 interval，\n"
-    "; 不输出无等价语义的组级 URL、timeout 与 tolerance；复杂排除正则使用可移植的\n"
-    "; 全节点回退或已有自动组。\n"
+    "; Stash 兼容边界：非国家 GEOIP 已映射为 MRS；SRC-PORT,41641 因仅网关 SCRIPT\n"
+    "; 可实现而被显式排除；策略组仅保留 interval，不输出无等价语义的组级 URL、\n"
+    "; timeout 与 tolerance；复杂排除正则使用可移植的全节点回退或已有自动组。\n"
 )
 
 
@@ -158,15 +147,6 @@ def project_ruleset_line(line: str, direct_source: str) -> tuple[str, ...]:
         if rule_type == "GEOSITE":
             if len(fields) != 2 or not fields[1]:
                 raise ValueError(f"unsupported inline GEOSITE rule: {line}")
-            name = fields[1].lower()
-            projection = STASH_GEOSITE_PROJECTIONS.get(name)
-            if projection is not None:
-                provider_type, url = projection
-                return (
-                    _remote_ruleset(
-                        policy, provider_type, url, "28800", no_resolve=False
-                    ),
-                )
             return (line,)
         if rule_type == "FINAL":
             if fields != ["FINAL"]:

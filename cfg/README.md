@@ -77,8 +77,6 @@ Stash 专用订阅转换模板已经迁移到独立仓库 [`Aethersailor/Custom_
 
 Stash 模板仍由本项目的 `py/generate_stash_configs.py` 根据当前 Clash 模板和规则来源生成。源仓库完成生成后，新仓库会记录准确的源提交并更新自身 `cfg/` 目录。模板列表、调用示例、后端限制和真机验收边界请查看新仓库文档。
 
-Stash 的 `GEOSITE` 使用 v2fly/domain-list-community 数据，分类与 OpenClash 使用的增强数据库不同。Stash 模板会将 `gfw` 转为独立的远程域名规则集，并保留原策略和匹配顺序；`google-cn` 直连规则已从源模板移除。使用 Stash 时，请同时选择 `target=stash` 和独立仓库中的 `Custom_Stash*.ini` 模板。旧订阅若仍引用本目录的 Clash 模板，需要更换模板地址、重新转换并在 Stash 中更新配置。
-
 ## 🧭 其他配置方式
 
 除订阅转换外，本项目还提供两种使用同一套配置的方式：
