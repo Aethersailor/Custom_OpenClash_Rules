@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1001
+# TOTAL: 1002
 
 payload:
   - '+.00333118.com'
@@ -171,6 +171,7 @@ payload:
   - '+.cbn.id'
   - '+.cc.ink'
   - '+.cc39ute.shop'
+  - '+.cc44dd.com'
   - '+.ccw.site'
   - '+.cdn.doctor'
   - '+.cdn.ist'
