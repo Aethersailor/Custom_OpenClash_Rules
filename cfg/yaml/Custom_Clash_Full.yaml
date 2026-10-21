@@ -1110,6 +1110,32 @@ proxy-groups:
       - "🐢 低倍率节点"
     use:
       - provider1
+  - name: "☁️ 国外网盘"
+    type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🇨🇦 加拿大节点"
+      - "🇬🇧 英国节点"
+      - "🇫🇷 法国节点"
+      - "🇩🇪 德国节点"
+      - "🇳🇱 荷兰节点"
+      - "🇹🇷 土耳其节点"
+      - "🇷🇺 俄罗斯节点"
+      - "🌐 其他地区"
+      - "🏠 家宽节点"
+      - "🐢 低倍率节点"
+      - "🎯 全球直连"
+    use:
+      - provider1
   - name: "💳 PayPal"
     type: select
     url: https://www.gstatic.com/generate_204
@@ -1584,6 +1610,7 @@ rules:
   - "GEOSITE,twitch,📺 Twitch"
   - "GEOSITE,apple-tvplus,🎥 AppleTV+"
   - "GEOSITE,apple,🍎 苹果服务"
+  - "GEOSITE,category-netdisk-!cn,☁️ 国外网盘"
   - "GEOSITE,microsoft,Ⓜ️ 微软服务"
   - "GEOSITE,googlefcm,📢 谷歌FCM"
   - "GEOSITE,google,🇬 谷歌服务"
