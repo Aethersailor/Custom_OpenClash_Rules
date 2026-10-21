@@ -416,6 +416,31 @@ proxy-groups:
       - "🐢 低倍率节点"
     use:
       - provider1
+  - name: "🤖 Grok"
+    type: select
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - "🚀 手动选择"
+      - "♻️ 自动选择"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🇨🇦 加拿大节点"
+      - "🇬🇧 英国节点"
+      - "🇫🇷 法国节点"
+      - "🇩🇪 德国节点"
+      - "🇳🇱 荷兰节点"
+      - "🇹🇷 土耳其节点"
+      - "🇷🇺 俄罗斯节点"
+      - "🌐 其他地区"
+      - "🏠 家宽节点"
+      - "🐢 低倍率节点"
+    use:
+      - provider1
   - name: "🤖 国外AI服务"
     type: select
     url: https://www.gstatic.com/generate_204
@@ -1358,6 +1383,7 @@ rules:
   - "GEOSITE,telegram,📨 Telegram"
   - "GEOSITE,discord,🎧 Discord"
   - "GEOSITE,category-communication,💬 即时通讯"
+  - "GEOSITE,xai,🤖 Grok"
   - "GEOSITE,category-social-media-!cn,🌐 社交媒体"
   - "GEOSITE,openai,🤖 ChatGPT"
   - "GEOSITE,onedrive,💾 OneDrive"
