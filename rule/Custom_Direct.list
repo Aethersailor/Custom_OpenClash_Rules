@@ -6,7 +6,7 @@
 
 
 # ImmortalWrt 相关
-DOMAIN-SUFFIX,immortalwrt.org
+#DOMAIN-SUFFIX,immortalwrt.org
 #DOMAIN-SUFFIX,kyarucloud.moe
 #DOMAIN-SUFFIX,r2s.site
 
