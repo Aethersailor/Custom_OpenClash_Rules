@@ -374,6 +374,28 @@ proxy-groups:
       - "♻️ 自动选择"
     url: https://www.gstatic.com/generate_204
     interval: 300
+  - name: "🤖 Cursor"
+    type: fallback
+    proxies:
+      - "🇸🇬 新加坡节点"
+      - "🇯🇵 日本节点"
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🇨🇦 加拿大节点"
+      - "🇬🇧 英国节点"
+      - "🇫🇷 法国节点"
+      - "🇩🇪 德国节点"
+      - "🇳🇱 荷兰节点"
+      - "🇹🇷 土耳其节点"
+      - "🇷🇺 俄罗斯节点"
+      - "🌐 其他地区"
+      - "🏠 家宽节点"
+      - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://www.gstatic.com/generate_204
+    interval: 300
   - name: "🤖 国外AI服务"
     type: fallback
     proxies:
@@ -1216,6 +1238,7 @@ rules:
   - "GEOSITE,bing,🤖 Copilot"
   - "GEOSITE,anthropic,🤖 Claude"
   - "GEOSITE,google-gemini,🤖 Gemini"
+  - "GEOSITE,cursor,🤖 Cursor"
   - "GEOSITE,category-ai-!cn,🤖 国外AI服务"
   # 国内 AI 服务默认直连，可按需切换代理；须位于 cn 兜底规则之前。
   - "GEOSITE,category-ai-cn,🤖 国内AI服务"
