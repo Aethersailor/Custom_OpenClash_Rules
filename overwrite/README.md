@@ -42,8 +42,9 @@
 | [`Replace_China_MRS_With_GeoSite.conf`](./Replace_China_MRS_With_GeoSite.conf) | 将大陆绕过自动添加的 MRS 改为 `geosite:cn` | Fake-IP Filter 与对应 Rule Provider | 否 |
 | [`Rule_Provider_Format_Fix.conf`](./Rule_Provider_Format_Fix.conf) | 根据文件扩展名补全或修正 Rule Provider 的 `format` | `rule-providers.*.format` | 否 |
 | [`Direct_Game_Download.conf`](./Direct_Game_Download.conf) | 让 Steam CDN 和游戏平台下载流量直连 | Rule Provider 与前置直连规则 | 否 |
-| [`Set_GeoIP_Database_URL.conf`](./Set_GeoIP_Database_URL.conf) | 替换 GeoIP MMDB 与 DAT 数据源 | OpenClash GEO 数据库地址 | 否 |
+| [`Set_GeoIP_Database_URL.conf`](./Set_GeoIP_Database_URL.conf) | 替换 GeoIP MMDB、DAT 与 GeoASN 数据源 | OpenClash GEO 数据库地址 | 否 |
 | [`Set_China_IP_Route_URL.conf`](./Set_China_IP_Route_URL.conf) | 替换大陆 IPv4、IPv6 白名单数据源 | OpenClash Chnroute 数据源 | 否 |
+| [`Set_IP_Data_Source_URL.conf`](./Set_IP_Data_Source_URL.conf) | 统一替换 GeoIP、GeoASN 与大陆 IPv4、IPv6 白名单数据源 | OpenClash GEO 数据库与 Chnroute 数据源 | 否 |
 
 ### 按需求选择
 
@@ -56,6 +57,7 @@
 - Rule Provider 因缺少或写错 `format` 导致加载失败：使用 `Rule_Provider_Format_Fix.conf`。
 - 希望游戏下载和更新尽量走直连：使用 `Direct_Game_Download.conf`。
 - 只想替换 OpenClash 使用的数据源：选择对应的 `Set_*.conf` 模块。
+- 希望用一个模块统一替换 GeoIP、GeoASN 与大陆 IP 白名单数据源：使用 `Set_IP_Data_Source_URL.conf`。
 
 <a id="overwrite-usage"></a>
 
@@ -474,7 +476,10 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 [`Set_GeoIP_Database_URL.conf`](./Set_GeoIP_Database_URL.conf) 用于替换 OpenClash 使用的：
 
 - GeoIP MMDB：`Country.mmdb`；
-- GeoIP DAT：`geoip.dat`。
+- GeoIP DAT：`geoip.dat`；
+- GeoASN：`Country-asn.mmdb`。
+
+以上数据库地址均使用 `cdn.jsdelivr.net`。
 
 jsDelivr CDN：
 
@@ -494,14 +499,14 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 - 不会自动启用 GeoIP DAT 模式；
 - 不会自动开启数据库定时更新；
-- 不修改 GeoSite、GeoASN、规则或策略组；
-- 会覆盖 OpenClash 页面中已有的 GeoIP MMDB 与 DAT 自定义地址。
+- 不修改 GeoSite、规则或策略组；
+- 会覆盖 OpenClash 页面中已有的 GeoIP MMDB、DAT 与 GeoASN 自定义地址。
 
 ---
 
 ### 🇨🇳 Set China IP Route URL
 
-[`Set_China_IP_Route_URL.conf`](./Set_China_IP_Route_URL.conf) 用于替换 OpenClash 大陆白名单使用的 IPv4 和 IPv6 Chnroute 数据源。
+[`Set_China_IP_Route_URL.conf`](./Set_China_IP_Route_URL.conf) 用于替换 OpenClash 大陆白名单使用的 IPv4 和 IPv6 Chnroute 数据源。两个数据源地址均使用 `cdn.jsdelivr.net`。
 
 jsDelivr CDN：
 
@@ -522,6 +527,44 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 - 不修改配置文件中的 GeoIP、GeoSite、Rule Provider 或 `geox-url`；
 - 只有相关大陆 IP 白名单功能已经启用时，新数据源才会被实际使用。
 
+---
+
+### 🌐 Set IP Data Source URL
+
+[`Set_IP_Data_Source_URL.conf`](./Set_IP_Data_Source_URL.conf) 集合前述两个数据源模块的功能，一次替换以下 5 个来源：
+
+| 数据源 | 文件 |
+| --- | --- |
+| GeoIP MMDB | `Country.mmdb` |
+| GeoIP DAT | `geoip.dat` |
+| GeoASN | `Country-asn.mmdb` |
+| 大陆 IPv4 白名单 | `text/cn-ipv4.txt` |
+| 大陆 IPv6 白名单 | `text/cn-ipv6.txt` |
+
+所有地址均使用 `cdn.jsdelivr.net/gh/Aethersailor/geoip@release/`。
+
+jsDelivr CDN：
+
+```text
+https://cdn.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/overwrite/Set_IP_Data_Source_URL.conf
+```
+
+GitHub Raw：
+
+```text
+https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overwrite/Set_IP_Data_Source_URL.conf
+```
+
+只需启用本模块，无需同时启用 `Set_GeoIP_Database_URL.conf` 和 `Set_China_IP_Route_URL.conf`。
+
+限制：
+
+- 不会自动启用 GeoIP DAT 模式、「绕过中国大陆 IP」或「回国」模式；
+- 不会自动开启数据库或大陆白名单定时更新；
+- 不修改 GeoSite、规则、策略组或 Rule Provider 数据源；
+- 只有相关大陆 IP 白名单功能已经启用时，白名单数据源才会被实际使用；
+- 会覆盖 OpenClash 页面或原配置中已有的对应数据源地址。
+
 ## 🔗 组合与冲突
 
 | 组合 | 建议 |
@@ -536,6 +579,7 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 | `Replace_China_MRS_With_GeoSite.conf` 与其他 DNS/Fake-IP 覆写 | ⚠️ 检查模块顺序和最终运行配置，避免重复或重新添加 `oc-cn-domain` |
 | `Rule_Provider_Format_Fix.conf` 与其他单功能模块 | ✅ 通常可以组合，但需确认没有故意使用与扩展名不一致的 `format` |
 | `Direct_Game_Download.conf` 与数据源替换模块 | ✅ 通常可以组合，两者修改范围不同 |
+| `Set_IP_Data_Source_URL.conf` 与另外两个数据源替换模块 | ⚠️ 功能重复，只需启用整合模块 |
 | `yaml/` 中的远程 YAML 模块与根目录单功能模块 | ⚠️ 可以组合，但应检查模块顺序和最终运行配置 |
 | 第三方完整覆写方案与本目录模块 | ⚠️ 必须逐项检查，避免重复修改 DNS、规则、策略组或数据源 |
 | 多个完整覆写方案 | ❌ 不建议同时启用 |
