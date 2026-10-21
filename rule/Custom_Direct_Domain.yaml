@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1007
+# TOTAL: 1006
 
 payload:
   - '+.00333118.com'
@@ -466,7 +466,6 @@ payload:
   - '+.ijingyi.com'
   - '+.ilucky.net'
   - '+.imacos.top'
-  - '+.immortalwrt.org'
   - '+.indeedpower.com'
   - '+.inetlab.top'
   - '+.inextos.com'
