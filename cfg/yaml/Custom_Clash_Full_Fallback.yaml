@@ -62,6 +62,28 @@ proxy-groups:
     url: https://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
+  - name: "📞 Talkatone"
+    type: fallback
+    proxies:
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🇨🇦 加拿大节点"
+      - "🇬🇧 英国节点"
+      - "🇫🇷 法国节点"
+      - "🇩🇪 德国节点"
+      - "🇳🇱 荷兰节点"
+      - "🇹🇷 土耳其节点"
+      - "🇷🇺 俄罗斯节点"
+      - "🌐 其他地区"
+      - "🏠 家宽节点"
+      - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+    url: https://www.gstatic.com/generate_204
+    interval: 300
   - name: "💬 即时通讯"
     type: fallback
     proxies:
@@ -85,28 +107,6 @@ proxy-groups:
     url: https://www.gstatic.com/generate_204
     interval: 300
   - name: "🌐 社交媒体"
-    type: fallback
-    proxies:
-      - "🇭🇰 香港节点"
-      - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
-      - "🇸🇬 新加坡节点"
-      - "🇼🇸 台湾节点"
-      - "🇰🇷 韩国节点"
-      - "🇨🇦 加拿大节点"
-      - "🇬🇧 英国节点"
-      - "🇫🇷 法国节点"
-      - "🇩🇪 德国节点"
-      - "🇳🇱 荷兰节点"
-      - "🇹🇷 土耳其节点"
-      - "🇷🇺 俄罗斯节点"
-      - "🌐 其他地区"
-      - "🏠 家宽节点"
-      - "🐢 低倍率节点"
-      - "♻️ 自动选择"
-    url: https://www.gstatic.com/generate_204
-    interval: 300
-  - name: "📞 Talkatone"
     type: fallback
     proxies:
       - "🇭🇰 香港节点"
@@ -1116,9 +1116,9 @@ rules:
   - "GEOSITE,category-public-tracker,🎯 全球直连"
   # Zoom 视频会议优先走代理，代理均不可用时回退直连。
   - "GEOSITE,zoom,📹 Zoom"
+  - "GEOSITE,talkatone,📞 Talkatone"
   - "GEOSITE,category-communication,💬 即时通讯"
   - "GEOSITE,category-social-media-!cn,🌐 社交媒体"
-  - "GEOSITE,talkatone,📞 Talkatone"
   - "GEOSITE,openai,🤖 ChatGPT"
   - "GEOSITE,onedrive,💾 OneDrive"
   - "GEOSITE,bing,🤖 Copilot"
