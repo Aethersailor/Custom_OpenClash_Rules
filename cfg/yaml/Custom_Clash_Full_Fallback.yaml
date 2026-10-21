@@ -128,6 +128,30 @@ proxy-groups:
       - "♻️ 自动选择"
     url: https://www.gstatic.com/generate_204
     interval: 300
+  - name: "📹 Zoom"
+    # 优先按地区故障转移；代理均不可用时回退直连。
+    type: fallback
+    proxies:
+      - "🇭🇰 香港节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇼🇸 台湾节点"
+      - "🇰🇷 韩国节点"
+      - "🇨🇦 加拿大节点"
+      - "🇬🇧 英国节点"
+      - "🇫🇷 法国节点"
+      - "🇩🇪 德国节点"
+      - "🇳🇱 荷兰节点"
+      - "🇹🇷 土耳其节点"
+      - "🇷🇺 俄罗斯节点"
+      - "🌐 其他地区"
+      - "🏠 家宽节点"
+      - "🐢 低倍率节点"
+      - "♻️ 自动选择"
+      - "🎯 全球直连"
+    url: https://www.gstatic.com/generate_204
+    interval: 300
   - name: "💬 即时通讯"
     type: fallback
     proxies:
@@ -1029,30 +1053,6 @@ proxy-groups:
       - "🏠 家宽节点"
       - "🐢 低倍率节点"
       - "♻️ 自动选择"
-  - name: "📹 Zoom"
-    # 优先按地区故障转移；代理均不可用时回退直连。
-    type: fallback
-    proxies:
-      - "🇭🇰 香港节点"
-      - "🇺🇸 美国节点"
-      - "🇯🇵 日本节点"
-      - "🇸🇬 新加坡节点"
-      - "🇼🇸 台湾节点"
-      - "🇰🇷 韩国节点"
-      - "🇨🇦 加拿大节点"
-      - "🇬🇧 英国节点"
-      - "🇫🇷 法国节点"
-      - "🇩🇪 德国节点"
-      - "🇳🇱 荷兰节点"
-      - "🇹🇷 土耳其节点"
-      - "🇷🇺 俄罗斯节点"
-      - "🌐 其他地区"
-      - "🏠 家宽节点"
-      - "🐢 低倍率节点"
-      - "♻️ 自动选择"
-      - "🎯 全球直连"
-    url: https://www.gstatic.com/generate_204
-    interval: 300
   - name: "🎮 游戏平台"
     type: select
     url: https://www.gstatic.com/generate_204
