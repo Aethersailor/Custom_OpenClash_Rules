@@ -7,6 +7,9 @@
 | 路径 | 内容 | 当前状态 |
 | --- | --- | --- |
 | [`ad-block/`](ad-block/) | 曾用于下载广告过滤规则并合并 GitHub520 `hosts` 加速条目的 Shell 示例 | 已归档，不再维护 |
+| [`Use_LuCI_DNS_Only.sh`](Use_LuCI_DNS_Only.sh) | 曾通过本地钩子按 OpenClash LuCI 设置重建 DNS 和 Hosts 的脚本 | 已归档，不再维护 |
+
+`Use_LuCI_DNS_Only.sh` 需要单独安装并手动接入本地自定义覆写脚本，不属于仅依托插件覆写模块功能实现的方案，因此移出 `overwrite/` 并归档。文件保留原有内容，仅供历史查阅，不再提供安装入口或作为当前方案推荐。
 
 ## 注意事项
 
