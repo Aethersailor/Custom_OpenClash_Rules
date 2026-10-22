@@ -6,6 +6,7 @@ nav:
   - 快速开始:
       - OpenClash 设置方案: 1.OpenClash-设置方案.md
       - OpenWrt IPv6 设置方案: 2.OpenWrt-IPv6-设置方案.md
+      - AdGuard Home 设置方案（可选）: 8.AdGuard-Home-设置方案.md
   - 资源与贡献:
       - 其他说明: 3.其他说明.md
   - 故障排除:
@@ -15,8 +16,8 @@ nav:
       - 关于“旁路由”的一些吐槽: 6.关于“旁路由”的一些吐槽.md
       - 其他推荐项目: 7.其他推荐项目.md
   - 历史归档:
-      - Smart 内核相关说明（已归档）: 8.OpenClash-零碎教程.md
-      - 无插件广告拦截方案（已归档）: 9.无插件广告拦截功能设置方案.md
+      - Smart 内核相关说明（已归档）: 9.OpenClash-零碎教程.md
+      - 无插件广告拦截方案（已归档）: 10.无插件广告拦截功能设置方案.md
 theme:
   name: material
 plugins:
