@@ -665,28 +665,6 @@ proxy-groups:
       - "♻️ 自动选择"
     url: https://www.gstatic.com/generate_204
     interval: 300
-  - name: "🎮 DMM"
-    type: fallback
-    proxies:
-      - "🇯🇵 日本节点"
-      - "🇭🇰 香港节点"
-      - "🇺🇸 美国节点"
-      - "🇸🇬 新加坡节点"
-      - "🇼🇸 台湾节点"
-      - "🇰🇷 韩国节点"
-      - "🇨🇦 加拿大节点"
-      - "🇬🇧 英国节点"
-      - "🇫🇷 法国节点"
-      - "🇩🇪 德国节点"
-      - "🇳🇱 荷兰节点"
-      - "🇹🇷 土耳其节点"
-      - "🇷🇺 俄罗斯节点"
-      - "🌐 其他地区"
-      - "🏠 家宽节点"
-      - "🐢 低倍率节点"
-      - "♻️ 自动选择"
-    url: https://www.gstatic.com/generate_204
-    interval: 300
   - name: "📺 Bahamut"
     type: fallback
     proxies:
@@ -1356,7 +1334,6 @@ rules:
   - "GEOSITE,category-emby,🎥 Emby"
   - "GEOSITE,spotify,🎻 Spotify"
   - "GEOSITE,bahamut,📺 Bahamut"
-  - "GEOSITE,dmm,🎮 DMM"
   - "GEOSITE,bilibili@!cn,📺 哔哩哔哩海外"
   - "GEOSITE,category-games,🎮 游戏平台"
   - "GEOSITE,category-media,📰 新闻资讯"
