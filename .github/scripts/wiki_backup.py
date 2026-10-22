@@ -10,7 +10,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit, urlunsplit
 
 
-HEADING_LINK = re.compile(r"^\s*###\s+.*?\[[^]]+]\(([^)]+)\)")
+HEADING_LINK = re.compile(r"^\s*#{3,4}\s+.*?\[[^]]+]\(([^)]+)\)")
 
 
 @dataclass(frozen=True)
@@ -67,7 +67,7 @@ def parse_home(home: str, repository: str) -> list[WikiPage]:
             )
         )
     if not pages:
-        raise ValueError("Home.md does not contain any level-three Wiki page links")
+        raise ValueError("Home.md does not contain any level-three or level-four Wiki page links")
     return pages
 
 
