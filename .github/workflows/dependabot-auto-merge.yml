@@ -4,111 +4,85 @@ on:
   pull_request_target:
     branches: [main]
     types: [opened, reopened, synchronize, ready_for_review]
+  push:
+    branches: [main]
+    paths: ['.github/workflows/dependabot-auto-merge.yml']
   schedule:
-    - cron: '47 * * * *'
+    - cron: '49 */6 * * *'
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pull-requests: read
+  contents: write
+  pull-requests: write
+  actions: write
 
 concurrency:
-  group: dependabot-automerge
+  group: dependabot-auto-merge
   cancel-in-progress: false
 
 jobs:
   merge:
-    if: >-
-      github.repository == 'Aethersailor/Custom_OpenClash_Rules' &&
-      (github.event_name != 'pull_request_target' ||
-       github.event.pull_request.user.login == 'dependabot[bot]')
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+    if: github.event_name != 'pull_request_target' || github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
-      # Use only GitHub metadata; never check out or execute pull-request code.
-      - name: Merge Dependabot pull requests
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
-        with:
-          # PAT merges also trigger the normal main-branch publication workflows.
-          github-token: ${{ secrets.GH_PAT }}
-          script: |
-            const { owner, repo } = context.repo;
-            const repository = `${owner}/${repo}`;
-            const base = context.payload.repository.default_branch;
-            const eventPr = context.payload.pull_request;
-            const candidates = eventPr ? [eventPr] : await github.paginate(
-              github.rest.pulls.list,
-              { owner, repo, state: "open", base, per_page: 100 }
-            );
-            const eligible = (pr) => (
-              pr.state === "open" && !pr.draft &&
-              pr.user.login === "dependabot[bot]" && pr.user.type === "Bot" &&
-              pr.base.ref === base && pr.base.repo.full_name === repository &&
-              pr.head.repo?.full_name === repository &&
-              pr.head.ref.startsWith("dependabot/")
-            );
-            const dependencyFile = (file) => (
-              file.status === "modified" && (
-                /^\.github\/workflows\/[^/]+\.ya?ml$/.test(file.filename) ||
-                /^\.github\/actions\/.+\/action\.ya?ml$/.test(file.filename) ||
-                /^requirements[^/]*\.txt$/.test(file.filename) ||
-                /^workers\/repository-mirror\/package(?:-lock)?\.json$/.test(file.filename)
-              )
-            );
+      - name: Merge Dependabot updates
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          BASE_BRANCH: main
+        shell: bash
+        run: |
+          set -euo pipefail
+          pull_numbers=$(gh api --paginate --method GET "repos/$REPOSITORY/pulls" \
+            -f state=open -f base="$BASE_BRANCH" -F per_page=100 \
+            --jq '.[] | select(.user.login == "dependabot[bot]") | .number')
+          before_sha=$(gh api "repos/$REPOSITORY/git/ref/heads/$BASE_BRANCH" --jq '.object.sha')
+          merged_files='[]'
+          merged=0
+          result=0
+          while IFS= read -r number; do
+            test -n "$number" || continue
+            pull=$(gh api "repos/$REPOSITORY/pulls/$number")
+            head_sha=$(jq -r '.head.sha' <<<"$pull")
+            title=$(jq -r '.title' <<<"$pull")
+            files=$(gh api --paginate --slurp "repos/$REPOSITORY/pulls/$number/files?per_page=100" \
+              --jq '[.[][] | .filename]')
+            response=''
+            for attempt in 1 2 3; do
+              if response=$(gh api --method PUT "repos/$REPOSITORY/pulls/$number/merge" \
+                -f merge_method=squash -f sha="$head_sha" \
+                -f commit_title="$title (#$number)" 2>&1); then
+                break
+              fi
+              sleep 2
+            done
+            if jq -e '.merged == true' <<<"$response" >/dev/null 2>&1; then
+              echo "Merged Dependabot PR #$number: $(jq -r '.sha' <<<"$response")"
+              merged_files=$(jq -cn --argjson previous "$merged_files" --argjson current "$files" \
+                '$previous + $current | unique')
+              merged=$((merged + 1))
+            else
+              echo "::warning::GitHub could not merge Dependabot PR #$number: $response"
+              result=1
+            fi
+          done <<< "$pull_numbers"
 
-            for (const candidate of candidates) {
-              if (candidate.user.login !== "dependabot[bot]") continue;
-              try {
-                const { data: pr } = await github.rest.pulls.get({
-                  owner, repo, pull_number: candidate.number,
-                });
-                if (!eligible(pr)) continue;
-                if (eventPr && pr.head.sha !== eventPr.head.sha) {
-                  core.info(`PR #${pr.number} has a newer head; skip this stale event.`);
-                  continue;
-                }
+          # Repository-token merges need an explicit follow-up workflow dispatch.
+          if (( merged > 0 )); then
+            if jq -e 'any(.[]; . as $path | reduce ([{"regex":"^rule/Custom_Direct\\.list$","include":true},{"regex":"^rule/Custom_Proxy\\.list$","include":true},{"regex":"^rule/Steam_CDN\\.list$","include":true},{"regex":"^rule/Encrypted_DNS\\.list$","include":true},{"regex":"^rule/Game_Download_CDN\\.list$","include":true},{"regex":"^rule/game_rule/(?:.*/)?[^/]*\\.list$","include":true},{"regex":"^py/generate_rules\\.py$","include":true},{"regex":"^cfg/Custom_Clash\\.ini$","include":true}][]) as $pattern (false; if ($path | test($pattern.regex)) then $pattern.include else . end))' <<<"$merged_files" >/dev/null; then
+              gh workflow run 'auto-generate-rules.yml' --repo "$REPOSITORY" --ref "$BASE_BRANCH" || result=1
+            fi
+            if jq -e 'any(.[]; . as $path | reduce ([{"regex":"^rule/Steam_CDN\\.list$","include":true},{"regex":"^py/generate_game_cdn\\.py$","include":true}][]) as $pattern (false; if ($path | test($pattern.regex)) then $pattern.include else . end))' <<<"$merged_files" >/dev/null; then
+              gh workflow run 'auto-update-game-cdn.yml' --repo "$REPOSITORY" --ref "$BASE_BRANCH" || result=1
+            fi
+            if jq -e 'any(.[]; . as $path | reduce ([{"regex":"^wiki/.*$","include":true},{"regex":"^mkdocs\\.yml$","include":true},{"regex":"^requirements\\-docs\\.txt$","include":true},{"regex":"^\\.github/workflows/pages\\.yml$","include":true}][]) as $pattern (false; if ($path | test($pattern.regex)) then $pattern.include else . end))' <<<"$merged_files" >/dev/null; then
+              gh workflow run 'pages.yml' --repo "$REPOSITORY" --ref "$BASE_BRANCH" || result=1
+            fi
+            if jq -e true <<<"$merged_files" >/dev/null; then
+              gh workflow run 'purge-jsdelivr.yml' --repo "$REPOSITORY" --ref "$BASE_BRANCH" -f before_sha="$before_sha" || result=1
+            fi
+          fi
 
-                const commits = await github.paginate(github.rest.pulls.listCommits, {
-                  owner, repo, pull_number: pr.number, per_page: 100,
-                });
-                if (commits.length !== pr.commits || !commits.every((commit) =>
-                  commit.author?.login === "dependabot[bot]" &&
-                  commit.commit.verification?.verified === true
-                )) {
-                  core.warning(`PR #${pr.number} contains commits not verified as Dependabot.`);
-                  continue;
-                }
-                const files = await github.paginate(github.rest.pulls.listFiles, {
-                  owner, repo, pull_number: pr.number, per_page: 100,
-                });
-                if (!files.length || files.length !== pr.changed_files ||
-                    !files.every(dependencyFile)) {
-                  core.warning(`PR #${pr.number} changes files outside dependency updates.`);
-                  continue;
-                }
-
-                const { data: current } = await github.rest.pulls.get({
-                  owner, repo, pull_number: pr.number,
-                });
-                if (!eligible(current) || current.head.sha !== pr.head.sha ||
-                    current.base.sha !== pr.base.sha) {
-                  core.info(`PR #${pr.number} changed during inspection; retry on the next event or schedule.`);
-                  continue;
-                }
-                const { data: result } = await github.rest.pulls.merge({
-                  owner, repo, pull_number: pr.number,
-                  merge_method: "squash", sha: pr.head.sha,
-                });
-                if (result.merged) {
-                  core.info(`Merged Dependabot PR #${pr.number} at ${result.sha}.`);
-                } else {
-                  core.setFailed(`PR #${pr.number}: ${result.message}`);
-                }
-              } catch (error) {
-                if ([405, 409, 422].includes(error.status)) {
-                  core.warning(`PR #${candidate.number} is not currently mergeable; the next event or schedule will retry: ${error.message}`);
-                  continue;
-                }
-                core.setFailed(`PR #${candidate.number}: ${error.message}`);
-              }
-            }
+          echo "Merged $merged Dependabot PR(s) with the repository Actions token"
+          exit "$result"
