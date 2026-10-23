@@ -13,7 +13,7 @@ nav:
   - 进阶阅读:
       - 一些零碎的教程:
           - 教程汇总: 5.一些零碎的教程.md
-          - 固件扩容（有风险）: /Custom_OpenClash_Rules/5.一些零碎的教程/#firmware-expansion
+          - 固件扩容: /Custom_OpenClash_Rules/5.一些零碎的教程/#firmware-expansion
           - Tailscale 子网互通: /Custom_OpenClash_Rules/5.一些零碎的教程/#tailscale-subnets
           - AdGuard Home 设置方案: 6.AdGuard-Home-设置方案.md
       - 关于“旁路由”的一些吐槽: 7.关于“旁路由”的一些吐槽.md
