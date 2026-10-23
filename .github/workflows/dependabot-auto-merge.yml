@@ -70,6 +70,7 @@ jobs:
 
           # Repository-token merges need an explicit follow-up workflow dispatch.
           if (( merged > 0 )); then
+            gh workflow run codeql.yml --repo "$REPOSITORY" --ref "$BASE_BRANCH" || result=1
             if jq -e 'any(.[]; . as $path | reduce ([{"regex":"^rule/Custom_Direct\\.list$","include":true},{"regex":"^rule/Custom_Proxy\\.list$","include":true},{"regex":"^rule/Steam_CDN\\.list$","include":true},{"regex":"^rule/Encrypted_DNS\\.list$","include":true},{"regex":"^rule/Game_Download_CDN\\.list$","include":true},{"regex":"^rule/game_rule/(?:.*/)?[^/]*\\.list$","include":true},{"regex":"^py/generate_rules\\.py$","include":true},{"regex":"^cfg/Custom_Clash\\.ini$","include":true}][]) as $pattern (false; if ($path | test($pattern.regex)) then $pattern.include else . end))' <<<"$merged_files" >/dev/null; then
               gh workflow run 'auto-generate-rules.yml' --repo "$REPOSITORY" --ref "$BASE_BRANCH" || result=1
             fi
