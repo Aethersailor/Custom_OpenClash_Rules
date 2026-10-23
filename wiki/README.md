@@ -67,7 +67,7 @@
 
 ### [一些零碎的教程](5.一些零碎的教程.md)
 
-包括 [固件扩容](5.一些零碎的教程.md#firmware-expansion)、[Tailscale 子网互通](5.一些零碎的教程.md#tailscale-subnets) 和 AdGuard Home 等独立教程。执行命令前，先核对每节的适用环境和风险说明。
+包括 [固件扩容](5.一些零碎的教程.md#firmware-expansion)、[Tailscale 子网互通](5.一些零碎的教程.md#tailscale-subnets) 和 AdGuard Home 等独立教程。执行命令前，先核对每节的适用环境和操作步骤。
 
 #### [AdGuard Home 设置方案](6.AdGuard-Home-设置方案.md)
 
