@@ -12,14 +12,15 @@
 | [`auto-generate-rules.yml`](auto-generate-rules.yml) | 从 `.list` 规则源统一生成 `.yaml` 和 `.mrs` 派生规则，复制标准模板以同步 Mainland 兼容文件，并调用统一 CDN 发布器 | 对应规则源、标准模板或生成器变更，源更新工作流同步调用，或手动触发 |
 | [`auto-update-encrypted-dns.yml`](auto-update-encrypted-dns.yml) | 从 HaGeZi、DNSCrypt 和编译后的 `geosite:category-doh` 自动更新 `Encrypted_DNS.list`；内容变化后同步等待派生规则生成，派生失败会使本工作流失败 | 每日或手动触发 |
 | [`auto-update-game-cdn.yml`](auto-update-game-cdn.yml) | 合并 v2fly 上游与本项目 `Steam_CDN.list`，智能去重后更新 `Game_Download_CDN.list`；内容变化后同步等待派生规则生成 | `Steam_CDN.list` 或生成器变更、每日或手动触发 |
-| [`dependabot-auto-merge.yml`](dependabot-auto-merge.yml) | 核对机器人身份、签名提交、依赖文件范围和当前 SHA 后，直接以 squash 合并本仓库的 Dependabot PR | PR 创建或更新、每小时补处理，或手动触发 |
 | [`pages.yml`](pages.yml) | 构建并部署 MkDocs 文档站点到 GitHub Pages | `wiki/**`、`mkdocs.yml` 变更或手动触发 |
 | [`purge-jsdelivr.yml`](purge-jsdelivr.yml) | 按 [公开发布契约](../jsdelivr-publish.json) 精确刷新 jsDelivr 缓存；生成内容完整且仍为最新 `main` 时，同步部署 Cloudflare Static Assets 热备快照 | `main` 分支推送、规则生成完成，或手动修复范围 |
 | [`sync-openclash-overwrite-submodule.yml`](sync-openclash-overwrite-submodule.yml) | 将 `overwrite/OpenClash_Overwrite` 子模块同步到上游 `main` 分支 | 每 2 小时或手动触发 |
 
-工作流负责内容更新、生成、备份、发布和 Dependabot 自动合并。功能由维护者人工测试；Dependabot 依赖更新自动合并，不限制更新级别，也不等待测试、CodeQL、依赖审查或人工批准。
+工作流负责内容更新、生成、备份和发布。依赖版本更新由仅安装在本仓库的 Renovate GitHub App 负责，配置见 [`renovate.json`](../renovate.json)。Renovate 自动识别支持的依赖清单，新增常规项目目录或依赖生态时无需逐项配置。
 
-自动合并流程只读取 GitHub 元数据，不检出或执行 PR 中的代码。合并使用现有 Repository Secret `GH_PAT`，使合并后的 `main` 推送继续触发正常发布工作流；存在冲突或提交变化时，每小时自动补处理。
+Renovate 不限制更新级别，主版本、次版本、补丁、预发布版本、摘要和锁文件维护更新均自动以 squash 合并，不等待测试、CodeQL、依赖审查或人工批准。更新没有时间窗口、发布等待期或仓库级 PR 数量限制；实际检查频率由托管 App 调度。功能由维护者人工测试。
+
+Renovate App 合并后的 `main` 推送直接触发现有 CodeQL、规则生成、文档部署和统一 CDN 发布流程，各工作流继续按原有路径条件执行，无需另建发布流程或使用 Repository Secret `GH_PAT` 补触发。Dependabot 仅保留安全告警，不创建版本更新或安全修复 PR。
 
 ## jsDelivr 链接与缓存刷新
 
