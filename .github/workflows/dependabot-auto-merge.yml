@@ -46,8 +46,8 @@ jobs:
             pull=$(gh api "repos/$REPOSITORY/pulls/$number")
             head_sha=$(jq -r '.head.sha' <<<"$pull")
             title=$(jq -r '.title' <<<"$pull")
-            files=$(gh api --paginate --slurp "repos/$REPOSITORY/pulls/$number/files?per_page=100" \
-              --jq '[.[][] | .filename]')
+            files=$(gh api --paginate "repos/$REPOSITORY/pulls/$number/files?per_page=100" \
+              | jq -s '[.[][] | .filename]')
             response=''
             for attempt in 1 2 3; do
               if response=$(gh api --method PUT "repos/$REPOSITORY/pulls/$number/merge" \
