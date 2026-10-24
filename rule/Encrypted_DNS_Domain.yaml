@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3277
+# TOTAL: 3278
 
 payload:
   - '+.003153.xyz'
@@ -2868,6 +2868,7 @@ payload:
   - '+.safeservedns.com'
   - '+.salvadoserver.duckdns.org'
   - '+.sams.adg.siudzinski.net'
+  - '+.sao01.dnscry.pt'
   - '+.sarawut.ddns.net'
   - '+.sascha-rabold.de'
   - '+.sbdns.co.in'
