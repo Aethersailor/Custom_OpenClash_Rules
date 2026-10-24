@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests", "group:all"],
   "timezone": "Asia/Shanghai",
   "schedule": ["at any time"],
   "automerge": true,
@@ -8,12 +8,13 @@
   "automergeStrategy": "squash",
   "platformAutomerge": true,
   "ignoreTests": true,
+  "dependencyDashboard": false,
   "dependencyDashboardApproval": false,
   "minimumReleaseAge": "0 days",
   "prCreation": "immediate",
   "prHourlyLimit": 0,
-  "prConcurrentLimit": 0,
-  "branchConcurrentLimit": 0,
+  "prConcurrentLimit": 1,
+  "branchConcurrentLimit": 1,
   "rangeStrategy": "bump",
   "ignoreUnstable": false,
   "respectLatest": false,
@@ -21,8 +22,14 @@
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps",
   "labels": ["dependencies"],
+  "vulnerabilityAlerts": {
+    "enabled": false
+  },
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["at any time"]
+    "schedule": ["at any time"],
+    "groupName": "all dependencies",
+    "groupSlug": "all",
+    "branchTopic": "all"
   }
 }

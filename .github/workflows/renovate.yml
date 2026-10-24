@@ -51,3 +51,4 @@ jobs:
           RENOVATE_ONBOARDING: 'false'
           RENOVATE_REQUIRE_CONFIG: required
           RENOVATE_BINARY_SOURCE: install
+          LOG_LEVEL: debug

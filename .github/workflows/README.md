@@ -19,9 +19,9 @@
 
 工作流负责内容更新、生成、备份和发布。依赖版本更新由 GitHub Actions 中的自托管 Renovate 负责，复用现有 Repository Secret `GH_PAT`，无需安装 GitHub App。更新策略见 [`renovate.json`](../renovate.json)。Renovate 自动识别支持的依赖清单，新增常规项目目录或依赖生态时无需逐项配置。
 
-Renovate 不限制更新级别，主版本、次版本、补丁、预发布版本、摘要和锁文件维护更新均自动以 squash 合并，不等待测试、CodeQL、依赖审查或人工批准。更新没有时间窗口、发布等待期或仓库级 PR 数量限制；工作流每 30 分钟检查一次，配置变更和手动触发也会立即运行。功能由维护者人工测试。
+Renovate 不限制更新级别，主版本、次版本、补丁、预发布版本、摘要和锁文件维护更新统一进入 `renovate/all` 汇总分支，最多保留一个更新分支和一个 PR，不再按依赖逐项创建分支。汇总更新自动以 squash 合并，不等待测试、CodeQL、依赖审查或人工批准。更新没有时间窗口或发布等待期；工作流每 30 分钟检查一次，配置变更和手动触发也会立即运行。功能由维护者人工测试。
 
-Renovate 只操作本仓库，使用 `GH_PAT` 创建和合并 PR。合并后的 `main` 推送直接触发现有 CodeQL、规则生成、文档部署和统一 CDN 发布流程，各工作流继续按原有路径条件执行，无需另建发布流程。`GH_PAT` 需要仓库写入权限；更新 GitHub Actions 文件还需要 `workflow` 权限。仓库 Actions 白名单仅增加 `renovatebot/github-action@*`。Dependabot 仅保留安全告警，不创建版本更新或安全修复 PR。
+Renovate 只操作本仓库，使用 `GH_PAT` 创建和合并 PR。合并后的 `main` 推送直接触发现有 CodeQL、规则生成、文档部署和统一 CDN 发布流程，各工作流继续按原有路径条件执行，无需另建发布流程。`GH_PAT` 需要仓库写入权限；更新 GitHub Actions 文件还需要 `workflow` 权限。仓库 Actions 白名单仅增加 `renovatebot/github-action@*`。安全告警由 Dependabot 提供；Renovate 不单独创建安全更新分支或依赖看板 Issue，依赖版本统一进入汇总更新。
 
 ## jsDelivr 链接与缓存刷新
 
