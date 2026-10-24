@@ -12,16 +12,14 @@
 | [`auto-generate-rules.yml`](auto-generate-rules.yml) | 从 `.list` 规则源统一生成 `.yaml` 和 `.mrs` 派生规则，复制标准模板以同步 Mainland 兼容文件，并调用统一 CDN 发布器 | 对应规则源、标准模板或生成器变更，源更新工作流同步调用，或手动触发 |
 | [`auto-update-encrypted-dns.yml`](auto-update-encrypted-dns.yml) | 从 HaGeZi、DNSCrypt 和编译后的 `geosite:category-doh` 自动更新 `Encrypted_DNS.list`；内容变化后同步等待派生规则生成，派生失败会使本工作流失败 | 每日或手动触发 |
 | [`auto-update-game-cdn.yml`](auto-update-game-cdn.yml) | 合并 v2fly 上游与本项目 `Steam_CDN.list`，智能去重后更新 `Game_Download_CDN.list`；内容变化后同步等待派生规则生成 | `Steam_CDN.list` 或生成器变更、每日或手动触发 |
+| [`dependabot-auto-merge.yml`](dependabot-auto-merge.yml) | 核对机器人身份、签名提交、依赖文件范围和当前 SHA 后，直接以 squash 合并本仓库的 Dependabot PR | PR 创建或更新、每小时补处理，或手动触发 |
 | [`pages.yml`](pages.yml) | 构建并部署 MkDocs 文档站点到 GitHub Pages | `wiki/**`、`mkdocs.yml` 变更或手动触发 |
 | [`purge-jsdelivr.yml`](purge-jsdelivr.yml) | 按 [公开发布契约](../jsdelivr-publish.json) 精确刷新 jsDelivr 缓存；生成内容完整且仍为最新 `main` 时，同步部署 Cloudflare Static Assets 热备快照 | `main` 分支推送、规则生成完成，或手动修复范围 |
-| [`renovate.yml`](renovate.yml) | 使用现有 `GH_PAT` 在 GitHub Actions 中运行自托管 Renovate，自动发现、更新并合并本仓库依赖 | 每 30 分钟、Renovate 配置或工作流变更，或手动触发 |
 | [`sync-openclash-overwrite-submodule.yml`](sync-openclash-overwrite-submodule.yml) | 将 `overwrite/OpenClash_Overwrite` 子模块同步到上游 `main` 分支 | 每 2 小时或手动触发 |
 
-工作流负责内容更新、生成、备份和发布。依赖版本更新由 GitHub Actions 中的自托管 Renovate 负责，复用现有 Repository Secret `GH_PAT`，无需安装 GitHub App。更新策略见 [`renovate.json`](../renovate.json)。Renovate 自动识别支持的依赖清单，新增常规项目目录或依赖生态时无需逐项配置。
+工作流负责内容更新、生成、备份、发布和 Dependabot 自动合并。功能由维护者人工测试；Dependabot 依赖更新自动合并，不限制更新级别，也不等待测试、CodeQL、依赖审查或人工批准。
 
-Renovate 不限制更新级别，主版本、次版本、补丁、预发布版本、摘要和锁文件维护更新统一进入 `renovate/all` 汇总分支，最多保留一个更新分支和一个 PR，不再按依赖逐项创建分支。汇总更新自动以 squash 合并，不等待测试、CodeQL、依赖审查或人工批准。更新没有时间窗口或发布等待期；工作流每 30 分钟检查一次，配置变更和手动触发也会立即运行。功能由维护者人工测试。
-
-Renovate 只操作本仓库，使用 `GH_PAT` 创建和合并 PR。合并后的 `main` 推送直接触发现有 CodeQL、规则生成、文档部署和统一 CDN 发布流程，各工作流继续按原有路径条件执行，无需另建发布流程。`GH_PAT` 需要仓库写入权限；更新 GitHub Actions 文件还需要 `workflow` 权限。仓库 Actions 白名单仅增加 `renovatebot/github-action@*`。安全告警由 Dependabot 提供；Renovate 不单独创建安全更新分支或依赖看板 Issue，依赖版本统一进入汇总更新。
+自动合并流程只读取 GitHub 元数据，不检出或执行 PR 中的代码。合并使用现有 Repository Secret `GH_PAT`，使合并后的 `main` 推送继续触发正常发布工作流；存在冲突或提交变化时，每小时自动补处理。
 
 ## jsDelivr 链接与缓存刷新
 

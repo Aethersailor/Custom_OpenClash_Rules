@@ -1,0 +1,89 @@
+name: Dependabot auto-merge
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, reopened, synchronize, ready_for_review]
+  push:
+    branches: [main]
+    paths: ['.github/workflows/dependabot-auto-merge.yml']
+  schedule:
+    - cron: '49 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+concurrency:
+  group: dependabot-auto-merge
+  cancel-in-progress: false
+
+jobs:
+  merge:
+    if: github.event_name != 'pull_request_target' || github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Merge Dependabot updates
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          BASE_BRANCH: main
+        shell: bash
+        run: |
+          set -euo pipefail
+          pull_numbers=$(gh api --paginate --method GET "repos/$REPOSITORY/pulls" \
+            -f state=open -f base="$BASE_BRANCH" -F per_page=100 \
+            --jq '.[] | select(.user.login == "dependabot[bot]") | .number')
+          before_sha=$(gh api "repos/$REPOSITORY/git/ref/heads/$BASE_BRANCH" --jq '.object.sha')
+          merged_files='[]'
+          merged=0
+          result=0
+          while IFS= read -r number; do
+            test -n "$number" || continue
+            pull=$(gh api "repos/$REPOSITORY/pulls/$number")
+            head_sha=$(jq -r '.head.sha' <<<"$pull")
+            title=$(jq -r '.title' <<<"$pull")
+            files=$(gh api --paginate "repos/$REPOSITORY/pulls/$number/files?per_page=100" \
+              | jq -s '[.[][] | .filename]')
+            response=''
+            for attempt in 1 2 3; do
+              if response=$(gh api --method PUT "repos/$REPOSITORY/pulls/$number/merge" \
+                -f merge_method=squash -f sha="$head_sha" \
+                -f commit_title="$title (#$number)" 2>&1); then
+                break
+              fi
+              sleep 2
+            done
+            if jq -e '.merged == true' <<<"$response" >/dev/null 2>&1; then
+              echo "Merged Dependabot PR #$number: $(jq -r '.sha' <<<"$response")"
+              merged_files=$(jq -cn --argjson previous "$merged_files" --argjson current "$files" \
+                '$previous + $current | unique')
+              merged=$((merged + 1))
+            else
+              echo "::warning::GitHub could not merge Dependabot PR #$number: $response"
+              result=1
+            fi
+          done <<< "$pull_numbers"
+
+          # Repository-token merges need an explicit follow-up workflow dispatch.
+          if (( merged > 0 )); then
+            gh workflow run codeql.yml --repo "$REPOSITORY" --ref "$BASE_BRANCH" || result=1
+            if jq -e 'any(.[]; . as $path | reduce ([{"regex":"^rule/Custom_Direct\\.list$","include":true},{"regex":"^rule/Custom_Proxy\\.list$","include":true},{"regex":"^rule/Steam_CDN\\.list$","include":true},{"regex":"^rule/Encrypted_DNS\\.list$","include":true},{"regex":"^rule/Game_Download_CDN\\.list$","include":true},{"regex":"^rule/game_rule/(?:.*/)?[^/]*\\.list$","include":true},{"regex":"^py/generate_rules\\.py$","include":true},{"regex":"^cfg/Custom_Clash\\.ini$","include":true}][]) as $pattern (false; if ($path | test($pattern.regex)) then $pattern.include else . end))' <<<"$merged_files" >/dev/null; then
+              gh workflow run 'auto-generate-rules.yml' --repo "$REPOSITORY" --ref "$BASE_BRANCH" || result=1
+            fi
+            if jq -e 'any(.[]; . as $path | reduce ([{"regex":"^rule/Steam_CDN\\.list$","include":true},{"regex":"^py/generate_game_cdn\\.py$","include":true}][]) as $pattern (false; if ($path | test($pattern.regex)) then $pattern.include else . end))' <<<"$merged_files" >/dev/null; then
+              gh workflow run 'auto-update-game-cdn.yml' --repo "$REPOSITORY" --ref "$BASE_BRANCH" || result=1
+            fi
+            if jq -e 'any(.[]; . as $path | reduce ([{"regex":"^wiki/.*$","include":true},{"regex":"^mkdocs\\.yml$","include":true},{"regex":"^requirements\\-docs\\.txt$","include":true},{"regex":"^\\.github/workflows/pages\\.yml$","include":true}][]) as $pattern (false; if ($path | test($pattern.regex)) then $pattern.include else . end))' <<<"$merged_files" >/dev/null; then
+              gh workflow run 'pages.yml' --repo "$REPOSITORY" --ref "$BASE_BRANCH" || result=1
+            fi
+            if jq -e true <<<"$merged_files" >/dev/null; then
+              gh workflow run 'purge-jsdelivr.yml' --repo "$REPOSITORY" --ref "$BASE_BRANCH" -f before_sha="$before_sha" || result=1
+            fi
+          fi
+
+          echo "Merged $merged Dependabot PR(s) with the repository Actions token"
+          exit "$result"
