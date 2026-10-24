@@ -1,0 +1,53 @@
+name: Renovate
+
+on:
+  schedule:
+    - cron: '17,47 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - '.github/renovate.json'
+      - '.github/workflows/renovate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: renovate
+  cancel-in-progress: false
+
+jobs:
+  renovate:
+    if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout current main configuration
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Verify existing GH_PAT access
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${GH_TOKEN:?missing GH_PAT}"
+          gh api user --jq '"Using existing GH_PAT for " + .login'
+          gh api "repos/$REPOSITORY" --jq '.permissions.push' | grep -qx true
+
+      - name: Run self-hosted Renovate
+        uses: renovatebot/github-action@a63d9a7bc606f7336fd20b47f2f32259a35e6213 # v46.3.9
+        with:
+          token: ${{ secrets.GH_PAT }}
+          renovate-version: latest
+        env:
+          RENOVATE_PLATFORM: github
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
+          RENOVATE_ONBOARDING: 'false'
+          RENOVATE_REQUIRE_CONFIG: required
+          RENOVATE_BINARY_SOURCE: install

@@ -14,13 +14,14 @@
 | [`auto-update-game-cdn.yml`](auto-update-game-cdn.yml) | 合并 v2fly 上游与本项目 `Steam_CDN.list`，智能去重后更新 `Game_Download_CDN.list`；内容变化后同步等待派生规则生成 | `Steam_CDN.list` 或生成器变更、每日或手动触发 |
 | [`pages.yml`](pages.yml) | 构建并部署 MkDocs 文档站点到 GitHub Pages | `wiki/**`、`mkdocs.yml` 变更或手动触发 |
 | [`purge-jsdelivr.yml`](purge-jsdelivr.yml) | 按 [公开发布契约](../jsdelivr-publish.json) 精确刷新 jsDelivr 缓存；生成内容完整且仍为最新 `main` 时，同步部署 Cloudflare Static Assets 热备快照 | `main` 分支推送、规则生成完成，或手动修复范围 |
+| [`renovate.yml`](renovate.yml) | 使用现有 `GH_PAT` 在 GitHub Actions 中运行自托管 Renovate，自动发现、更新并合并本仓库依赖 | 每 30 分钟、Renovate 配置或工作流变更，或手动触发 |
 | [`sync-openclash-overwrite-submodule.yml`](sync-openclash-overwrite-submodule.yml) | 将 `overwrite/OpenClash_Overwrite` 子模块同步到上游 `main` 分支 | 每 2 小时或手动触发 |
 
-工作流负责内容更新、生成、备份和发布。依赖版本更新由仅安装在本仓库的 Renovate GitHub App 负责，配置见 [`renovate.json`](../renovate.json)。Renovate 自动识别支持的依赖清单，新增常规项目目录或依赖生态时无需逐项配置。
+工作流负责内容更新、生成、备份和发布。依赖版本更新由 GitHub Actions 中的自托管 Renovate 负责，复用现有 Repository Secret `GH_PAT`，无需安装 GitHub App。更新策略见 [`renovate.json`](../renovate.json)。Renovate 自动识别支持的依赖清单，新增常规项目目录或依赖生态时无需逐项配置。
 
-Renovate 不限制更新级别，主版本、次版本、补丁、预发布版本、摘要和锁文件维护更新均自动以 squash 合并，不等待测试、CodeQL、依赖审查或人工批准。更新没有时间窗口、发布等待期或仓库级 PR 数量限制；实际检查频率由托管 App 调度。功能由维护者人工测试。
+Renovate 不限制更新级别，主版本、次版本、补丁、预发布版本、摘要和锁文件维护更新均自动以 squash 合并，不等待测试、CodeQL、依赖审查或人工批准。更新没有时间窗口、发布等待期或仓库级 PR 数量限制；工作流每 30 分钟检查一次，配置变更和手动触发也会立即运行。功能由维护者人工测试。
 
-Renovate App 合并后的 `main` 推送直接触发现有 CodeQL、规则生成、文档部署和统一 CDN 发布流程，各工作流继续按原有路径条件执行，无需另建发布流程或使用 Repository Secret `GH_PAT` 补触发。Dependabot 仅保留安全告警，不创建版本更新或安全修复 PR。
+Renovate 只操作本仓库，使用 `GH_PAT` 创建和合并 PR。合并后的 `main` 推送直接触发现有 CodeQL、规则生成、文档部署和统一 CDN 发布流程，各工作流继续按原有路径条件执行，无需另建发布流程。`GH_PAT` 需要仓库写入权限；更新 GitHub Actions 文件还需要 `workflow` 权限。仓库 Actions 白名单仅增加 `renovatebot/github-action@*`。Dependabot 仅保留安全告警，不创建版本更新或安全修复 PR。
 
 ## jsDelivr 链接与缓存刷新
 
