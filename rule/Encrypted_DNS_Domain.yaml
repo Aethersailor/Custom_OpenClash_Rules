@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3278
+# TOTAL: 3271
 
 payload:
   - '+.003153.xyz'
@@ -40,7 +40,6 @@ payload:
   - '+.2wired.hopto.org'
   - '+.3.11i.eu'
   - '+.3.local-dns.noridev.moe'
-  - '+.318341906.fun'
   - '+.3dcosas.xyz'
   - '+.3dns.eu'
   - '+.3jjxxl.tech'
@@ -187,7 +186,6 @@ payload:
   - '+.adguard.diylab.in'
   - '+.adguard.doranpierst.com.tr'
   - '+.adguard.dsns.cloud'
-  - '+.adguard.duongphuckhanh.dev'
   - '+.adguard.easez.net'
   - '+.adguard.ef67daisuki.club'
   - '+.adguard.eischmann.cz'
@@ -446,7 +444,6 @@ payload:
   - '+.aliyunhttpdns.com'
   - '+.allain.com.br'
   - '+.alleesph.online'
-  - '+.alon93rus.ru'
   - '+.alpha-dns.quad9.net'
   - '+.alpha.cixy.xyz'
   - '+.amgr.asuscomm.com'
@@ -465,7 +462,6 @@ payload:
   - '+.andrey93rus.ru'
   - '+.andryk111.duckdns.org'
   - '+.andrykarcew.duckdns.org'
-  - '+.andy123123.xyz'
   - '+.andybunn.onthewifi.com'
   - '+.angry.pp.ua'
   - '+.angrysky.ru'
@@ -1081,7 +1077,6 @@ payload:
   - '+.dns.hanmey.de'
   - '+.dns.hannielzhang.com'
   - '+.dns.haoxuan.xyz'
-  - '+.dns.hashemlabs.co.uk'
   - '+.dns.hee.ink'
   - '+.dns.hellozhao.com'
   - '+.dns.henek.ru'
@@ -2339,7 +2334,6 @@ payload:
   - '+.jp.rslvr.eu'
   - '+.jp.tiar.app'
   - '+.jp.tiarap.org'
-  - '+.jp01.just-a-web.com'
   - '+.jp193.flyzhouyc.win'
   - '+.jp2.ooroot.com'
   - '+.jpdns.cola16.app'
@@ -3034,7 +3028,6 @@ payload:
   - '+.tpe01.dnscry.pt'
   - '+.tr-ist-w-p-2.nashkan.net'
   - '+.tr.league1.xyz'
-  - '+.tr.skrsteam.pro'
   - '+.tran.net.vn'
   - '+.travis90x.ddns.net'
   - '+.trf01.dnscry.pt'
