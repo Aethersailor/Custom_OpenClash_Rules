@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1050
+# TOTAL: 1051
 
 payload:
   - '+.00333118.com'
@@ -685,6 +685,7 @@ payload:
   - '+.ourschool.cc'
   - '+.p01.epsonconnect.com'
   - '+.packertec.com'
+  - '+.paijitang.com'
   - '+.pailedi.com'
   - '+.panjue.com'
   - '+.paperang.com'
