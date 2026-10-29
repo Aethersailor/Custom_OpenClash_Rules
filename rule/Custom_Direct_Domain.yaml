@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1040
+# TOTAL: 1043
 
 payload:
   - '+.00333118.com'
@@ -759,6 +759,7 @@ payload:
   - '+.sct.ftqq.com'
   - '+.scyol.com'
   - '+.sdk-log-upload-os.hoyoverse.com'
+  - '+.sduc.cloud'
   - '+.seaflysoft.com'
   - '+.seedpace.com'
   - '+.senachina.com'
@@ -903,6 +904,7 @@ payload:
   - '+.wawo.cc'
   - '+.we-stats.com'
   - '+.webs.vc'
+  - '+.weiguangshanyao.com'
   - '+.weixinpcs.com'
   - '+.wenyi188.com'
   - '+.wera.eu.org'
@@ -976,6 +978,7 @@ payload:
   - '+.xxjnjd.com'
   - '+.xxrsm.com'
   - '+.xyys.com'
+  - '+.xzjykj.com'
   - '+.xzong.online'
   - '+.xzsckj.com'
   - '+.xzzhtc.com'
