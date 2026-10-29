@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1062
+# TOTAL: 1063
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -777,6 +777,7 @@ payload:
   - DOMAIN-SUFFIX,shanghai-parking.com
   - DOMAIN-SUFFIX,shanghongbei.com
   - DOMAIN-SUFFIX,share123.top
+  - DOMAIN-SUFFIX,shccywlkj.xyz
   - DOMAIN-SUFFIX,shenzhendongwei.com
   - DOMAIN-SUFFIX,shineacc.com
   - DOMAIN-SUFFIX,shrxnet.com
