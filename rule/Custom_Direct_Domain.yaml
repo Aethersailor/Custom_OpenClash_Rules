@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1056
+# TOTAL: 1059
 
 payload:
   - '+.00333118.com'
@@ -554,6 +554,7 @@ payload:
   - '+.kgithub.com'
   - '+.kit327.com'
   - '+.kiwiot.com'
+  - '+.kke.com.hk'
   - '+.kldai.vip'
   - '+.kmeila.com'
   - '+.koebpmhcce.com'
@@ -868,6 +869,8 @@ payload:
   - '+.tongkask.com'
   - '+.tongxids.com'
   - '+.tool56.com'
+  - '+.topkee.com'
+  - '+.topkee.top'
   - '+.topwd.top'
   - '+.touchgal.ink'
   - '+.touchgaloss.com'
