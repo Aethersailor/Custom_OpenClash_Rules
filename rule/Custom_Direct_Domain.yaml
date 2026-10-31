@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1067
+# TOTAL: 1068
 
 payload:
   - '+.00333118.com'
@@ -108,6 +108,7 @@ payload:
   - '+.akamaihd.net'
   - '+.akamaized.net'
   - '+.allptt.com'
+  - '+.allsaints.top'
   - '+.alonginwind.eu.org'
   - '+.alonginwind.to'
   - '+.alonginwind.top'
