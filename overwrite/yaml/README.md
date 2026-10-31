@@ -49,7 +49,7 @@
 
 启用后，模块会：
 
-1. 从 testingcf 下载对应的远程 YAML 到 `/etc/openclash/config/`；
+1. 从 `cdn.jsdelivr.net` 下载对应的远程 YAML 到 `/etc/openclash/config/`；
 2. 将该 YAML 设为模块处理的配置文件；
 3. 使用 `ruby_map_edit` 把 `EN_KEY` 写入相应 `proxy-providers.*.url`；
 4. 设置订阅信息 URL；
@@ -71,6 +71,8 @@
 
 `Custom_Clash_8in1.conf` 可以调用 8 个常规 YAML。通过 `EN_KEY2` 选择版本，留空时默认使用 `Custom_Clash`。
 
+该模块使用 `${EN_KEY2:-Custom_Clash}`，需要 OpenClash 包含 [2026 年 10 月 12 日的变量默认值解析修复](https://github.com/vernesong/OpenClash/commit/fa6fc59bdc2ffb5d0c6093010da509c855028ff7)。正式版 `v0.48.002` 不支持这一语法，会原样保留表达式，无法按预期生成下载地址和配置路径；填写 `EN_KEY2` 也不能解决该版本的解析差异。使用 `v0.48.002` 时请选择对应的单独模块。
+
 **建议：** 经常在标准、Lite、GFW、Full 及其故障转移版之间切换时选择。
 
 ### 自建节点 Provider 版
@@ -89,13 +91,17 @@
 不同 OpenClash 版本的菜单名称可能略有差异，基本流程如下：
 
 1. 先按 Wiki 完成 OpenClash LuCI 设置并备份当前可用配置。
-2. 进入 OpenClash 的「覆写设置」→「覆写模块」页面。
-3. 新增远程模块，类型选择「HTTP」。
-4. 从[全部模块订阅链接](#-全部模块订阅链接)一节复制模块地址。中国大陆网络通常优先使用 jsDelivr 加速链接，GitHub Raw 链接可作备用。
-5. 在模块变量或参数栏填写对应的 `EN_KEY`。
+2. 在 OpenClash 运行状态页点击「覆写模块」，打开覆写编辑器。
+3. 点击模块卡片栏中的「+」，选择通过订阅链接添加。
+4. 从[全部模块订阅链接](#-全部模块订阅链接)一节复制模块地址，进入模块信息填写步骤。中国大陆网络通常优先使用 jsDelivr 加速链接，GitHub Raw 链接可作备用。
+5. 确认名称、描述和匹配配置，并在模块变量或参数栏填写对应的订阅地址。
 6. 启用模块，保存并应用配置。
 7. 等待模块下载 YAML、写入 Provider 地址并触发 OpenClash 重启。
 8. 检查配置文件、Provider、策略组和日志，完成最终验收。
+
+支持元信息的 OpenClash 版本会根据模块头部的 `#!NAME`、`#!DESC`、`#!CONFIG`、`#!CRON` 和 `#!ENV` 自动回填新增表单；旧版本按页面提供的字段手动填写。默认匹配配置为 `all`，模块订阅定时更新为 `off`，环境变量会预填参数名。八个单独模块声明 `EN_KEY1`；8 合 1 声明 `EN_KEY1` 和默认值为 `Custom_Clash` 的 `EN_KEY2`；自建节点 Provider 模块声明 `EN_KEY1` 和 `EN_KEY2`，两项订阅地址均需填写。
+
+元信息只在新增模块时回填，刷新已有模块订阅不会自动修改已保存的参数。`#!ENV` 中的默认值用于填写表单，8 合 1 运行时仍通过 `${EN_KEY2:-Custom_Clash}` 处理未设置或为空的 `EN_KEY2`。`#!CRON = off` 只关闭模块订阅的定时更新，模块执行时仍按 `DOWNLOAD_FILE` 获取 YAML。
 
 > [!WARNING]
 > 模块启用后会下载并覆盖 `/etc/openclash/config/` 下的同名 YAML。不要直接在该同名文件中长期保存手动修改，否则下一次执行模块时可能被覆盖。

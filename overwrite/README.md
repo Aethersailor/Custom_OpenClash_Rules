@@ -62,8 +62,8 @@
 
 1. 进入「服务」→「OpenClash」运行状态页。
 2. 点击页面顶部的「覆写模块」按钮，打开覆写编辑器。
-3. 点击模块卡片栏中的「+」，选择「Subscribe」新建远程模块。
-4. 填写便于识别的模块名称，并从本文复制 jsDelivr CDN 或 GitHub Raw 订阅地址。
+3. 点击模块卡片栏中的「+」，选择通过订阅链接添加，并从本文复制 jsDelivr CDN 或 GitHub Raw 地址。
+4. 进入模块信息填写步骤，确认自动回填的名称和描述；旧版本按页面提供的字段手动填写。
 5. 将匹配配置文件设置为 `all` 或当前配置文件。不要留空，否则模块不会生效。
 6. 仅在模块说明要求时填写 `EN_KEY` 参数。
 7. 添加并启用模块，然后保存设置。
@@ -71,6 +71,10 @@
 9. 检查 OpenClash 日志及最终运行配置，确认模块已经生效。
 
 不同 OpenClash 版本的菜单名称可能略有差异。
+
+模块文件头部的 `#!NAME`、`#!DESC`、`#!CONFIG` 和 `#!CRON` 分别声明名称、描述、匹配配置和模块订阅更新计划。新模块默认匹配 `all`，并以 `off` 关闭模块订阅的定时更新；启用前可按需修改。`yaml/` 中的远程 YAML 模块还通过 `#!ENV` 声明环境变量，具体参数见其[使用说明](./yaml/)。
+
+元信息只在新增模块时回填表单。刷新已有模块的订阅不会自动修改其名称、描述、匹配配置、更新计划或参数。`#!CRON` 控制模块文件本身的订阅更新，Rule Provider 和模块内部 `DOWNLOAD_FILE` 的更新行为仍由各自设置决定。
 
 > [!TIP]
 > jsDelivr CDN 与 GitHub Raw 指向同一个仓库文件，只需要选择其中一个。jsDelivr CDN 通常更适合 GitHub Raw 访问质量不佳的网络环境。
@@ -498,9 +502,11 @@ https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/overw
 
 旧版文档曾使用 `testingcf.jsdelivr.net/...@main/...` 地址。该入口的可变分支缓存可能滞后，不再作为覆写模块订阅地址使用。
 
-### 最新 dev 在 Ruby 4 环境中跳过覆写命令
+### 旧版 OpenClash 在 Ruby 4 环境中跳过覆写命令
 
-已在 OpenClash dev `0.47.169`、Ruby `4.0.2` 环境复现：旧版 `Add_No_Resolve.conf`、`Rule_Provider_Format_Fix.conf` 和 `Prevent_DNS_Leak.conf` 会被覆写命令校验跳过。Ruby 4 对整数和正则字面量使用新的语法节点，当前 OpenClash 白名单未接受这些节点。
+曾在 OpenClash dev `0.47.169`、Ruby `4.0.2` 环境复现：旧版 `Add_No_Resolve.conf`、`Rule_Provider_Format_Fix.conf` 和 `Prevent_DNS_Leak.conf` 会被覆写命令校验跳过。Ruby 4 对整数和正则字面量使用新的语法节点，当时的 OpenClash 白名单未接受这些节点。
+
+OpenClash 已在 [2026 年 10 月 15 日的修复](https://github.com/vernesong/OpenClash/commit/ac3c7bf13ddc7faa6c2b82739d9bce8934c1342d)中补齐相关 AST 节点白名单。以下模块仍保留字符串转整数和字符串分割写法，以兼容尚未包含该修复的版本。
 
 当前模块已改用字符串转整数和字符串分割，保留原有规则改写、Provider 格式识别和 DNS 配置行为。如果日志仍显示「跳过不支持的覆写命令」，先刷新这三个模块的订阅，再重新应用配置。仅更新 OpenClash、保存设置或重启服务不会刷新已下载的模块。
 
