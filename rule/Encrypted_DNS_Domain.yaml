@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3499
+# TOTAL: 3500
 
 payload:
   - '+.003153.xyz'
@@ -849,6 +849,7 @@ payload:
   - '+.dns.abdullahabas.online'
   - '+.dns.abhimankolte.com'
   - '+.dns.abppro.ru'
+  - '+.dns.adfreedns.org'
   - '+.dns.adguard.com'
   - '+.dns.adguarddns.com'
   - '+.dns.adnull.com'
