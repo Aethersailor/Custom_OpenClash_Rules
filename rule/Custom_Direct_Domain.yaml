@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1069
+# TOTAL: 1070
 
 payload:
   - '+.00333118.com'
@@ -575,6 +575,7 @@ payload:
   - '+.leadweigh.com'
   - '+.leelen.com'
   - '+.letaoedu.com'
+  - '+.leux.net'
   - '+.lezuan6.com'
   - '+.lg3000.top'
   - '+.lightmake.site'
