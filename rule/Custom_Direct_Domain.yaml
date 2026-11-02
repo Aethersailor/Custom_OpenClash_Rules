@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1079
+# TOTAL: 1080
 
 payload:
   - '+.00333118.com'
@@ -892,6 +892,7 @@ payload:
   - '+.touchgal.ink'
   - '+.touchgaloss.com'
   - '+.tozi-cn.top'
+  - '+.tracker.ink'
   - '+.trjho.com'
   - '+.ts3.ink'
   - '+.ttshitu.com'
