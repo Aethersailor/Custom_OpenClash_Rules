@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3592
+# TOTAL: 3591
 
 payload:
   - '+.003153.xyz'
@@ -585,6 +585,7 @@ payload:
   - '+.be2aja.my.id'
   - '+.beacon.dog'
   - '+.beacon.fengli.love'
+  - '+.beatquantum.com'
   - '+.beautifullife.eu.org'
   - '+.beautifulthings.eu.org'
   - '+.bei01.dnscry.pt'
@@ -1592,7 +1593,6 @@ payload:
   - '+.dns.scott.ovh'
   - '+.dns.sct-pro.com'
   - '+.dns.scuola.org'
-  - '+.dns.scxrdev.co.uk'
   - '+.dns.seaotter.cc'
   - '+.dns.searom.ovh'
   - '+.dns.sec511.com'
@@ -1848,7 +1848,6 @@ payload:
   - '+.dns2.fawz.de'
   - '+.dns2.feear.se'
   - '+.dns2.gms.net.id'
-  - '+.dns2.gregoret.com.ar'
   - '+.dns2.guidocioni.it'
   - '+.dns2.gw-host.ru'
   - '+.dns2.h0schi.cloud'
