@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1099
+# TOTAL: 1100
 
 payload:
   - '+.00333118.com'
@@ -200,6 +200,7 @@ payload:
   - '+.cgicop.com'
   - '+.changjirb.com'
   - '+.changzhi.top'
+  - '+.chatlabs.net'
   - '+.chaxunjiao.com'
   - '+.chaz.fun'
   - '+.checkip.dyndns.org'
