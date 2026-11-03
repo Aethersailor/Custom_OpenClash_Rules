@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1083
+# TOTAL: 1094
 
 payload:
   - '+.00333118.com'
@@ -85,6 +85,7 @@ payload:
   - '+.acepanel.net'
   - '+.acgdraw.com'
   - '+.acggit.com'
+  - '+.adbnjg.com'
   - '+.adhuanxiao.com'
   - '+.admobile.top'
   - '+.admpv.com'
@@ -156,6 +157,7 @@ payload:
   - '+.belimked.com'
   - '+.belongme.top'
   - '+.betahub.tech'
+  - '+.bhduhs.com'
   - '+.biandangroup.com'
   - '+.biaoda.me'
   - '+.bingshandashu.com'
@@ -255,6 +257,7 @@ payload:
   - '+.dell.com'
   - '+.dfhog.com'
   - '+.dg3yy.com'
+  - '+.dhjsnx.com'
   - '+.dhub.kubesre.xyz'
   - '+.diandaojia.net'
   - '+.dingdingzn.com'
@@ -287,6 +290,7 @@ payload:
   - '+.ec766.com'
   - '+.eceshi.com'
   - '+.ectaiping.com'
+  - '+.ehdjskx.com'
   - '+.einfo-tech.com'
   - '+.emby.yun'
   - '+.englibrary.com'
@@ -315,6 +319,7 @@ payload:
   - '+.fffff.games'
   - '+.ffhome.com'
   - '+.fgaiservice.com'
+  - '+.fhendj.com'
   - '+.fileh.xyz'
   - '+.filej.xyz'
   - '+.fjdejing.com'
@@ -360,6 +365,7 @@ payload:
   - '+.gh.con.sh'
   - '+.gh.ddlc.top'
   - '+.gh.llkk.cc'
+  - '+.ghejdls.com'
   - '+.ghfast.top'
   - '+.ghoxz.com'
   - '+.ghp.ci'
@@ -495,6 +501,7 @@ payload:
   - '+.ifengmap.com'
   - '+.ifish7.com'
   - '+.igpsport.com'
+  - '+.ijdhend.com'
   - '+.ijingyi.com'
   - '+.ilucky.net'
   - '+.imacos.top'
@@ -585,6 +592,7 @@ payload:
   - '+.leux.net'
   - '+.lezuan6.com'
   - '+.lg3000.top'
+  - '+.lhndksn.com'
   - '+.lianguo-tech.com'
   - '+.lightmake.site'
   - '+.linka2a.net'
@@ -668,6 +676,7 @@ payload:
   - '+.natchecker.com'
   - '+.neihang.net'
   - '+.netzz.net'
+  - '+.nhjdixj.com'
   - '+.nicezhuanye.com'
   - '+.njlisi.top'
   - '+.njonemall.com'
@@ -684,6 +693,7 @@ payload:
   - '+.oai.sb'
   - '+.oath.com'
   - '+.oceando.cloud'
+  - '+.ohdnhxj.com'
   - '+.ok321.top'
   - '+.omq.cc'
   - '+.onebuygz.com'
@@ -713,6 +723,7 @@ payload:
   - '+.passnat.com'
   - '+.pcwatch.com'
   - '+.pdf001.com'
+  - '+.pdhnx.com'
   - '+.piedaochuan.top'
   - '+.pinshuxsw.com'
   - '+.pixcheese.com'
