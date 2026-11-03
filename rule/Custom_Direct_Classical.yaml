@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1113
+# TOTAL: 1114
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -341,6 +341,7 @@ payload:
   - DOMAIN-SUFFIX,fsytss.com
   - DOMAIN-SUFFIX,ft07.com
   - DOMAIN-SUFFIX,ftqq.com
+  - DOMAIN-SUFFIX,ftsup.com
   - DOMAIN-SUFFIX,functorz.com
   - DOMAIN-SUFFIX,funlinkads.com
   - DOMAIN-SUFFIX,funmob.top

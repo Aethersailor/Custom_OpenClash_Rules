@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1098
+# TOTAL: 1099
 
 payload:
   - '+.00333118.com'
@@ -338,6 +338,7 @@ payload:
   - '+.fsytss.com'
   - '+.ft07.com'
   - '+.ftqq.com'
+  - '+.ftsup.com'
   - '+.functorz.com'
   - '+.funlinkads.com'
   - '+.funmob.top'
