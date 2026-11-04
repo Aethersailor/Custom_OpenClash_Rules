@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1104
+# TOTAL: 1105
 
 payload:
   - '+.00333118.com'
@@ -975,6 +975,7 @@ payload:
   - '+.wlups.com'
   - '+.wologic.net'
   - '+.wpurl.cc'
+  - '+.wt2zxk.com'
   - '+.wty-yy.top'
   - '+.wuhanjijin.com'
   - '+.wwwh.eu.org'
