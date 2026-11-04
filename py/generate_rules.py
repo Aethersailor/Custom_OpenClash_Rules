@@ -19,6 +19,7 @@ BASE_NAMES = (
     "Steam_CDN",
     "Encrypted_DNS",
     "Game_Download_CDN",
+    "Tailscale_STUN",
 )
 GAME_RULE_DIRECTORY = Path("rule/game_rule")
 GENERATED_HEADER_PREFIX = "# Generated from "
@@ -146,6 +147,9 @@ def textual_outputs(root: Path) -> tuple[dict[Path, str], dict[Path, tuple[str, 
         }
         if source == Path("rule/Custom_Direct.list"):
             variants["Classical_Port"] = (family.ports, False)
+        elif source == Path("rule/Tailscale_STUN.list"):
+            # This list supplies addresses; consuming rules select protocol and port.
+            variants = {"IP": (family.ip, True)}
 
         for suffix, (payload, quoted) in variants.items():
             relative = source.parent / f"{base_name}_{suffix}.yaml"

@@ -1,6 +1,6 @@
 # 规则文件
 
-本目录存放本项目维护或保留的 OpenClash 与 Mihomo 规则文件。当前自动生成流程以本目录顶层的 5 个 `.list` 文件和 [`game_rule/`](game_rule/) 中的独立游戏规则为来源，生成 YAML 与 MRS Rule Provider；目录中另有少量人工维护或历史兼容文件。
+本目录存放本项目维护或保留的 OpenClash 与 Mihomo 规则文件。当前自动生成流程以本目录顶层的 6 个 `.list` 文件和 [`game_rule/`](game_rule/) 中的独立游戏规则为来源，生成 YAML 与 MRS Rule Provider；目录中另有少量人工维护或历史兼容文件。
 
 > [!IMPORTANT]
 > 文件位于本目录中，不代表 OpenClash 会自动加载。是否生效取决于配置中的 `rule-providers` 和 `rules` 引用，以及规则顺序和目标策略。
@@ -17,6 +17,7 @@
 | [`Steam_CDN.list`](Steam_CDN.list) | Steam 下载 CDN 补充规则 | 人工维护，并参与游戏下载规则合并 |
 | [`Encrypted_DNS.list`](Encrypted_DNS.list) | HaGeZi、DNSCrypt 与 `geosite:category-doh` 汇总规则 | 工作流定期更新 |
 | [`Game_Download_CDN.list`](Game_Download_CDN.list) | GeoSite 游戏下载规则与 `Steam_CDN.list` 的合并结果 | 工作流定期更新，保留为兼容入口 |
+| [`Tailscale_STUN.list`](Tailscale_STUN.list) | 官方默认 DERP Map 中提供标准 UDP 3478 STUN 服务的公网主机地址 | 每日北京时间 04:17 或手动更新 |
 
 `py/generate_rules.py` 根据规则类型生成下列文件：
 
@@ -31,6 +32,10 @@
 | `*_IP.mrs` | `ipcidr` | IP-CIDR MRS 规则 |
 
 MRS 当前只用于 `domain` 和 `ipcidr` Rule Provider。Classical 与端口规则继续使用 YAML。预留 Provider 暂时没有规则时，YAML 使用 `payload: []`；生成器保留已有的空 MRS 占位文件，待后续加入规则后再重建。
+
+`Tailscale_STUN` 仅生成 [`Tailscale_STUN_IP.yaml`](Tailscale_STUN_IP.yaml) 和 [`Tailscale_STUN_IP.mrs`](Tailscale_STUN_IP.mrs)，`behavior` 为 `ipcidr`。IPv4 使用 `/32`，IPv6 使用 `/128`，不扩大为上级网段。上游 `STUNPort` 缺省或为 `0` 时按 `3478` 处理；禁用 STUN 或使用其他端口的节点不收录。只提取官方图中明确给出的 IP，不额外通过 DNS 扩充地址。此规则集不包含自建 DERP 或自定义 Peer Relay 地址。
+
+此规则集仅提供地址，不指定直连策略或协议、端口条件，也不会自动加入现有模板。使用方应将地址匹配与 `NETWORK,UDP`、`DST-PORT,3478` 组合；直接将整个地址集合设为直连会同时影响这些地址的其他端口。上游下载、解析或地址校验失败时保留原文件，内容未变化时不生成更新提交。
 
 ## 其他文件
 

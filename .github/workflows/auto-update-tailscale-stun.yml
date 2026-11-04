@@ -1,0 +1,80 @@
+name: Auto update Tailscale STUN addresses
+
+on:
+  schedule:
+    # 每天北京时间 04:17 运行（UTC 20:17）
+    - cron: '17 20 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-tailscale-stun:
+    if: github.repository == 'Aethersailor/Custom_OpenClash_Rules'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: main-writers
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+      source_before_sha: ${{ steps.commit.outputs.source_before_sha }}
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.13'
+
+      - name: Update Tailscale_STUN.list
+        run: |
+          python py/update_tailscale_stun.py
+          python py/update_tailscale_stun.py --check
+
+      - name: Commit source-list changes
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            git reset --hard origin/main
+            python py/update_tailscale_stun.py
+            python py/update_tailscale_stun.py --check
+          fi
+
+          if ! git diff --quiet -- . ':(exclude)rule/Tailscale_STUN.list'; then
+            echo "Updater modified files outside rule/Tailscale_STUN.list" >&2
+            git status --short
+            exit 1
+          fi
+
+          source_before_sha="$(git rev-parse HEAD)"
+          git add -- rule/Tailscale_STUN.list
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Tailscale_STUN.list is already up to date."
+            exit 0
+          fi
+
+          git commit -m "chore(rules): refresh Tailscale STUN addresses"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "source_before_sha=$source_before_sha" >> "$GITHUB_OUTPUT"
+
+  generate-derived-rules:
+    needs: update-tailscale-stun
+    if: needs.update-tailscale-stun.outputs.changed == 'true'
+    permissions:
+      contents: write
+    uses: ./.github/workflows/auto-generate-rules.yml
+    secrets: inherit
+    with:
+      source_before_sha: ${{ needs.update-tailscale-stun.outputs.source_before_sha }}

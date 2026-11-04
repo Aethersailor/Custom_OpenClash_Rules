@@ -16,6 +16,7 @@ on:
       - 'rule/Steam_CDN.list'
       - 'rule/Encrypted_DNS.list'
       - 'rule/Game_Download_CDN.list'
+      - 'rule/Tailscale_STUN.list'
       - 'rule/game_rule/**/*.list'
       - 'py/generate_rules.py'
       - 'cfg/Custom_Clash.ini'

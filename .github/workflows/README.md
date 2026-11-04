@@ -11,6 +11,7 @@
 | [`auto-backup-wiki.yml`](auto-backup-wiki.yml) | 校验 Wiki 目录页和页面完整性后，事务式备份到仓库的 `wiki/` 目录并处理链接替换 | 每 2 小时或手动触发 |
 | [`auto-generate-rules.yml`](auto-generate-rules.yml) | 从 `.list` 规则源统一生成 `.yaml` 和 `.mrs` 派生规则，复制标准模板以同步 Mainland 兼容文件，并调用统一 CDN 发布器 | 对应规则源、标准模板或生成器变更，源更新工作流同步调用，或手动触发 |
 | [`auto-update-encrypted-dns.yml`](auto-update-encrypted-dns.yml) | 从 HaGeZi、DNSCrypt 和编译后的 `geosite:category-doh` 自动更新 `Encrypted_DNS.list`；内容变化后同步等待派生规则生成，派生失败会使本工作流失败 | 每日或手动触发 |
+| [`auto-update-tailscale-stun.yml`](auto-update-tailscale-stun.yml) | 从 Tailscale 官方默认 DERP Map 更新 `Tailscale_STUN.list`；内容变化后调用统一生成与发布流程，仅生成 IP YAML 和 MRS | 每日北京时间 04:17 或手动触发 |
 | [`auto-update-game-cdn.yml`](auto-update-game-cdn.yml) | 合并 v2fly 上游与本项目 `Steam_CDN.list`，智能去重后更新 `Game_Download_CDN.list`；内容变化后同步等待派生规则生成 | `Steam_CDN.list` 或生成器变更、每日或手动触发 |
 | [`dependabot-auto-merge.yml`](dependabot-auto-merge.yml) | 核对机器人身份、签名提交、依赖文件范围和当前 SHA 后，直接以 squash 合并本仓库的 Dependabot PR | PR 创建或更新、每小时补处理，或手动触发 |
 | [`pages.yml`](pages.yml) | 构建并部署 MkDocs 文档站点到 GitHub Pages | `wiki/**`、`mkdocs.yml` 变更或手动触发 |
