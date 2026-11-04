@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1121
+# TOTAL: 1122
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -221,6 +221,7 @@ payload:
   - DOMAIN-SUFFIX,chujingapp.com
   - DOMAIN-SUFFIX,chushi.cool
   - DOMAIN-SUFFIX,ciallo.party
+  - DOMAIN-SUFFIX,cilizhai.net
   - DOMAIN-SUFFIX,cindy.app
   - DOMAIN-SUFFIX,ciyuancenter.cc
   - DOMAIN-SUFFIX,clivia.fun
