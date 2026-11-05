@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1141
+# TOTAL: 1142
 
 payload:
   - '+.00333118.com'
@@ -34,6 +34,7 @@ payload:
   - '+.3dwhere.com'
   - '+.3gxk.net'
   - '+.419g.com'
+  - '+.43645202.com'
   - '+.4399zmxy.com'
   - '+.44nc.com'
   - '+.4942.cc'

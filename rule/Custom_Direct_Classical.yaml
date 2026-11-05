@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1156
+# TOTAL: 1157
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -37,6 +37,7 @@ payload:
   - DOMAIN-SUFFIX,3dwhere.com
   - DOMAIN-SUFFIX,3gxk.net
   - DOMAIN-SUFFIX,419g.com
+  - DOMAIN-SUFFIX,43645202.com
   - DOMAIN-SUFFIX,4399zmxy.com
   - DOMAIN-SUFFIX,44nc.com
   - DOMAIN-SUFFIX,4942.cc
