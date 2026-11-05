@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1139
+# TOTAL: 1141
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -248,6 +248,7 @@ payload:
   - DOMAIN-SUFFIX,crrcgo.cc
   - DOMAIN-SUFFIX,crtyhr.com
   - DOMAIN-SUFFIX,csqaq.com
+  - DOMAIN-SUFFIX,csrqoa.com
   - DOMAIN-SUFFIX,cyberpig.tech
   - DOMAIN-SUFFIX,cydiabc.top
   - DOMAIN-SUFFIX,cym520.top
@@ -770,6 +771,7 @@ payload:
   - DOMAIN-SUFFIX,ptlgs.org
   - DOMAIN-SUFFIX,ptxzn.com
   - DOMAIN-SUFFIX,pubsub.tech
+  - DOMAIN-SUFFIX,pupumall.cc
   - DOMAIN-SUFFIX,pvz1.com
   - DOMAIN-SUFFIX,pwithe.com
   - DOMAIN-SUFFIX,pziqna.net
