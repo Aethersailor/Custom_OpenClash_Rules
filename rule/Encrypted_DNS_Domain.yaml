@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3583
+# TOTAL: 3580
 
 payload:
   - '+.003153.xyz'
@@ -243,7 +243,6 @@ payload:
   - '+.adguard.infrapod.nl'
   - '+.adguard.itclogic.cloud'
   - '+.adguard.jaydub.cloud'
-  - '+.adguard.jfchenier.ca'
   - '+.adguard.jodatacenter.com'
   - '+.adguard.johanliebert.top'
   - '+.adguard.jvpatel.com'
@@ -401,7 +400,6 @@ payload:
   - '+.adl.adfilter.net'
   - '+.adl01.dnscry.pt'
   - '+.admin-dns.unpak.ac.id'
-  - '+.admin.homedns.uk'
   - '+.admir21.ru'
   - '+.adns.3am.la'
   - '+.adns.onlinetools.rocks'
@@ -997,6 +995,7 @@ payload:
   - '+.dns.citystars.cn'
   - '+.dns.clanless.ovh'
   - '+.dns.clanto.cloud'
+  - '+.dns.cleardns.io'
   - '+.dns.clickhost.xyz'
   - '+.dns.clickitsolutionsllc.com'
   - '+.dns.cloud.ionutl.ro'
@@ -1152,7 +1151,6 @@ payload:
   - '+.dns.gayanalysing.co.uk'
   - '+.dns.gearworks.app'
   - '+.dns.geohide.ru'
-  - '+.dns.getnoclip.link'
   - '+.dns.ghost.pm'
   - '+.dns.gi.co.id'
   - '+.dns.ginovs.nl'
@@ -1196,7 +1194,6 @@ payload:
   - '+.dns.hinet.net'
   - '+.dns.hm8.ru'
   - '+.dns.hocit.xyz'
-  - '+.dns.hoian.one'
   - '+.dns.home.beckett.io'
   - '+.dns.home.daniil.it'
   - '+.dns.home.tebinulrich.de'
@@ -1207,7 +1204,6 @@ payload:
   - '+.dns.hostux.net'
   - '+.dns.hotta.page'
   - '+.dns.housedenolf.be'
-  - '+.dns.hqdns.sarl'
   - '+.dns.hshoe.cn'
   - '+.dns.huanmave.cc'
   - '+.dns.hub.com.de'
@@ -2133,6 +2129,7 @@ payload:
   - '+.dot-sg.blahdns.com'
   - '+.dot.360.cn'
   - '+.dot.886675.xyz'
+  - '+.dot.cleardns.io'
   - '+.dot.cox.net'
   - '+.dot.ffmuc.net'
   - '+.dot.libredns.gr'
