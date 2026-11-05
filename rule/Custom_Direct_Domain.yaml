@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1128
+# TOTAL: 1129
 
 payload:
   - '+.00333118.com'
@@ -673,6 +673,7 @@ payload:
   - '+.modaiyun.com'
   - '+.modelscope.net'
   - '+.monkeyray.net'
+  - '+.montain.top'
   - '+.morefuntengyun.com'
   - '+.mrtdephoto.net'
   - '+.msftconnecttest.com'
