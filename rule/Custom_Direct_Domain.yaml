@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1118
+# TOTAL: 1119
 
 payload:
   - '+.00333118.com'
@@ -224,6 +224,7 @@ payload:
   - '+.ciyuancenter.cc'
   - '+.clivia.fun'
   - '+.cloudllll.com'
+  - '+.cloudseekr.com'
   - '+.cmbc.run'
   - '+.cmhk.com'
   - '+.cn-music.mefun.vip'
