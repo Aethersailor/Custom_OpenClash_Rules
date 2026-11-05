@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1129
+# TOTAL: 1131
 
 payload:
   - '+.00333118.com'
@@ -393,6 +393,7 @@ payload:
   - '+.github.site'
   - '+.github.store'
   - '+.giveup.top'
+  - '+.gjjwgp3n.com'
   - '+.gjtool.com'
   - '+.gmoj.net'
   - '+.gmya.net'
@@ -566,6 +567,7 @@ payload:
   - '+.julebu.co'
   - '+.jxjktzjt.com'
   - '+.jxpp.com'
+  - '+.jyg4352.cc'
   - '+.jzagile.com'
   - '+.jzgj.com'
   - '+.kaihong.com'
