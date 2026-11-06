@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1148
+# TOTAL: 1150
 
 payload:
   - '+.00333118.com'
@@ -613,6 +613,7 @@ payload:
   - '+.latexlive.com'
   - '+.laupqc.com'
   - '+.ldboost.com'
+  - '+.ldd678.com'
   - '+.leadweigh.com'
   - '+.leelen.com'
   - '+.letaoedu.com'
@@ -1140,6 +1141,7 @@ payload:
   - '+.zqin758.xyz'
   - '+.zsytit.com'
   - '+.ztytech.com'
+  - '+.zudanje.com'
   - '+.zuidazym3u8.com'
   - '+.zuobiao.press'
   - '+.zxp7.cc'
