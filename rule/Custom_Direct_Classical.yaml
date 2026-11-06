@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1169
+# TOTAL: 1170
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -995,6 +995,7 @@ payload:
   - DOMAIN-SUFFIX,vlan5.com
   - DOMAIN-SUFFIX,volcanomob.com
   - DOMAIN-SUFFIX,vpsjyz.com
+  - DOMAIN-SUFFIX,vryfh.top
   - DOMAIN-SUFFIX,vtools.online
   - DOMAIN-SUFFIX,vv1865.com
   - DOMAIN-SUFFIX,vvhan.com
