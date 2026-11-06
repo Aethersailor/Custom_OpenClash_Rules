@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1166
+# TOTAL: 1167
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -104,6 +104,7 @@ payload:
   - DOMAIN-SUFFIX,afuns.me
   - DOMAIN-SUFFIX,agentkey.app
   - DOMAIN-SUFFIX,agentscope.io
+  - DOMAIN-SUFFIX,agi2rjr.cc
   - DOMAIN-SUFFIX,ahlt10010.com
   - DOMAIN-SUFFIX,aibeike.com
   - DOMAIN-SUFFIX,aichangbaishan.com
