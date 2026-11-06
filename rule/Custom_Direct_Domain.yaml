@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1153
+# TOTAL: 1154
 
 payload:
   - '+.00333118.com'
@@ -380,6 +380,7 @@ payload:
   - '+.geektool.top'
   - '+.gegeselect.hk'
   - '+.gelaiyun.net'
+  - '+.gexuanyi.top'
   - '+.ggbond.org'
   - '+.gh-proxy.com'
   - '+.gh.con.sh'
