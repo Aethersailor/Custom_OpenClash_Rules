@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3575
+# TOTAL: 3568
 
 payload:
   - '+.003153.xyz'
@@ -279,7 +279,6 @@ payload:
   - '+.adguard.ohmhv57.org'
   - '+.adguard.onlyfriends.info'
   - '+.adguard.ota.moe'
-  - '+.adguard.pancybertronics.com'
   - '+.adguard.pangerl.it'
   - '+.adguard.peterge.de'
   - '+.adguard.pggns.de'
@@ -1533,7 +1532,6 @@ payload:
   - '+.dns.rawalker.co.nz'
   - '+.dns.rayanbab.com'
   - '+.dns.rbn.gr'
-  - '+.dns.readlook.tk'
   - '+.dns.redhosting.com.ar'
   - '+.dns.redroot.cc'
   - '+.dns.redvau.lt'
@@ -1571,7 +1569,6 @@ payload:
   - '+.dns.sark.dev'
   - '+.dns.sauvette.de'
   - '+.dns.sb'
-  - '+.dns.sbstructure.ir'
   - '+.dns.scapetical.com'
   - '+.dns.scarx.net'
   - '+.dns.scayn.com'
@@ -2313,7 +2310,6 @@ payload:
   - '+.guard.keiper.net'
   - '+.guard.lumusimc.co.uk'
   - '+.guard.miracloud.fr'
-  - '+.guard.pp.ua'
   - '+.guard.telesterion.de'
   - '+.guard.thefather.cloud'
   - '+.guidetoworld.link'
@@ -2956,9 +2952,7 @@ payload:
   - '+.plex.skin57.de'
   - '+.plichaa12.ddns.net'
   - '+.pluton.plan9-dns.com'
-  - '+.pm1239-bd.xyz'
   - '+.pm7051-br.xyz'
-  - '+.pm9352-bd.xyz'
   - '+.pns2.sadraidc.com'
   - '+.polisitogel.beauty'
   - '+.polisitogel.contractors'
@@ -3061,7 +3055,6 @@ payload:
   - '+.resolvers-cn.httpdns.aliyuncs.com'
   - '+.resov.wehao.net'
   - '+.rethinkdns.com'
-  - '+.revelio.top'
   - '+.rexdns.duckdns.org'
   - '+.rfree1.blue-shield.at'
   - '+.rfree2.blue-shield.at'
