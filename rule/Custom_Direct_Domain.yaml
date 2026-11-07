@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1159
+# TOTAL: 1160
 
 payload:
   - '+.00333118.com'
@@ -451,6 +451,7 @@ payload:
   - '+.haimaiedu.net'
   - '+.halvie.com'
   - '+.ham.xin'
+  - '+.hanbodianzi.com'
   - '+.handfree.work'
   - '+.hangnakeji.com'
   - '+.hanoking.com'
