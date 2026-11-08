@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3568
+# TOTAL: 3566
 
 payload:
   - '+.003153.xyz'
@@ -1603,6 +1603,7 @@ payload:
   - '+.dns.skous.dedyn.io'
   - '+.dns.skrep.eu'
   - '+.dns.skrep.in'
+  - '+.dns.sktr.com.tr'
   - '+.dns.skuy.co.id'
   - '+.dns.sky-plex.com'
   - '+.dns.sledge.cc'
@@ -2406,7 +2407,6 @@ payload:
   - '+.hrsm12181.duckdns.org'
   - '+.hshh.org'
   - '+.hsu.plus'
-  - '+.hsulun2000.synology.me'
   - '+.http-dns.imoim.net'
   - '+.httpdns-api.aliyuncs.com'
   - '+.httpdns-browser.platform.dbankcloud.cn'
@@ -3150,7 +3150,6 @@ payload:
   - '+.sgs02.just-a-web.com'
   - '+.shadowart.online'
   - '+.shakdns.cc'
-  - '+.shalenkov.cc'
   - '+.shalenkov.dev'
   - '+.shanghainese.uk'
   - '+.shield.afixer.app'
@@ -3285,7 +3284,6 @@ payload:
   - '+.tll01.dnscry.pt'
   - '+.tls.jackyhou.idv.tw'
   - '+.tls.windyvale.net'
-  - '+.tlz.asia'
   - '+.tlzovo.com'
   - '+.tngch.mydns.jp'
   - '+.toaster.lol'
