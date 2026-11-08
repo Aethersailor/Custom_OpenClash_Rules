@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1185
+# TOTAL: 1186
 
 payload:
   - '+.00333118.com'
@@ -187,6 +187,7 @@ payload:
   - '+.browserscan.net'
   - '+.bs-iot.com'
   - '+.bsbsb.top'
+  - '+.btgpy.com'
   - '+.btsel5g.cc'
   - '+.bunny.net'
   - '+.bvmlt.top'
