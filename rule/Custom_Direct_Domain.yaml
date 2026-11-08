@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1167
+# TOTAL: 1170
 
 payload:
   - '+.00333118.com'
@@ -22,6 +22,7 @@ payload:
   - '+.153532.com'
   - '+.17van.com'
   - '+.1996999.xyz'
+  - '+.1o057bolbb.com'
   - '+.204cloud.com'
   - '+.225284.xyz'
   - '+.25mao.com'
@@ -30,6 +31,7 @@ payload:
   - '+.365ting.com'
   - '+.365wp.top'
   - '+.3688baihuo.com'
+  - '+.37rk0rihje.com'
   - '+.3ced.top'
   - '+.3d-apollo.com'
   - '+.3dwhere.com'
@@ -327,6 +329,7 @@ payload:
   - '+.exiliumgf.com'
   - '+.eye4cloud.com'
   - '+.eyosc.com'
+  - '+.f691ax6.cc'
   - '+.faka163.com'
   - '+.fastify.cc'
   - '+.fb71ef91e1014.beer'
