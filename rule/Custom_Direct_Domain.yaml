@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1170
+# TOTAL: 1173
 
 payload:
   - '+.00333118.com'
@@ -313,6 +313,7 @@ payload:
   - '+.ec766.com'
   - '+.eceshi.com'
   - '+.ectaiping.com'
+  - '+.edyr2ip7zg.com'
   - '+.eezygoapi.com'
   - '+.ehdjskx.com'
   - '+.einfo-tech.com'
@@ -535,6 +536,7 @@ payload:
   - '+.idazhe.net'
   - '+.idphotoplus.com'
   - '+.idsduf.com'
+  - '+.ifawj9hvvl.com'
   - '+.ifconfig.co'
   - '+.ifengmap.com'
   - '+.ifish7.com'
@@ -593,6 +595,7 @@ payload:
   - '+.jyg4352.cc'
   - '+.jzagile.com'
   - '+.jzgj.com'
+  - '+.jztysg.com'
   - '+.kaihong.com'
   - '+.kaijiacloud.com'
   - '+.kaijiejinrong.com'
