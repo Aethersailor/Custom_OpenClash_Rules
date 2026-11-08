@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1179
+# TOTAL: 1180
 
 payload:
   - '+.00333118.com'
@@ -998,6 +998,7 @@ payload:
   - '+.ugediao.com'
   - '+.ugnas.cloud'
   - '+.ulife.group'
+  - '+.uploadlog.com'
   - '+.us.ci'
   - '+.v-koolsh.com'
   - '+.vanjee.net'
