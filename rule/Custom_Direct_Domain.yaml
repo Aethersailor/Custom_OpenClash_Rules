@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1187
+# TOTAL: 1189
 
 payload:
   - '+.00333118.com'
@@ -227,6 +227,7 @@ payload:
   - '+.chii.in'
   - '+.china-amass.com'
   - '+.chinatle.com'
+  - '+.chixiatech.com'
   - '+.chocolateswap.com'
   - '+.chuguansmart.com'
   - '+.chujingapp.com'
@@ -934,6 +935,7 @@ payload:
   - '+.szfx.top'
   - '+.szmtzd.com'
   - '+.sztopten.com'
+  - '+.szyrtech.com'
   - '+.taichuansmart.com'
   - '+.tailgdd.com'
   - '+.tailscale.com'
