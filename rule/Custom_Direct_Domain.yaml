@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1192
+# TOTAL: 1193
 
 payload:
   - '+.00333118.com'
@@ -1018,6 +1018,7 @@ payload:
   - '+.vclbroker.com'
   - '+.vclbrokers.com'
   - '+.vcltrade.com'
+  - '+.verdigz.com'
   - '+.vgogbuy.com'
   - '+.vip-cdn.com'
   - '+.vip666ai.com'
