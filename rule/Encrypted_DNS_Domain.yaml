@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3563
+# TOTAL: 3562
 
 payload:
   - '+.003153.xyz'
@@ -867,7 +867,6 @@ payload:
   - '+.dns.acezy.top'
   - '+.dns.adfreedns.org'
   - '+.dns.adguard.com'
-  - '+.dns.adguarddns.com'
   - '+.dns.adnull.com'
   - '+.dns.adrianlam.com'
   - '+.dns.adriason.co.uk'
@@ -1264,6 +1263,7 @@ payload:
   - '+.dns.jsd.web.id'
   - '+.dns.jstockley.com'
   - '+.dns.juancamos.com'
+  - '+.dns.jucker.engineering'
   - '+.dns.jundev.org'
   - '+.dns.jungle-im.ir'
   - '+.dns.jupitrdns.com'
@@ -2198,7 +2198,6 @@ payload:
   - '+.f4ckdns.dl4mt.dev'
   - '+.f4f.es'
   - '+.facomunit.ddns.net'
-  - '+.family.adguarddns.com'
   - '+.family.dns.doubleangels.com'
   - '+.family.dns.dremaxx.com'
   - '+.family.dns.teknoholistik.com'
@@ -2882,6 +2881,7 @@ payload:
   - '+.ore-dns.bitdefender.net'
   - '+.orjp4.lz0724.com'
   - '+.orpi.privado.ovh'
+  - '+.osefcorp.duckdns.org'
   - '+.osu.duckdns.org'
   - '+.ott01.dnscry.pt'
   - '+.oury.privado.ovh'
@@ -3326,7 +3326,6 @@ payload:
   - '+.unasw.eu'
   - '+.uncensored-dot.dnswarden.com'
   - '+.uncensoreddns.org'
-  - '+.unfiltered.adguarddns.com'
   - '+.unfiltered.joindns4.eu'
   - '+.unicast.censurfridns.dk'
   - '+.unicast.censurfridns.nu'
