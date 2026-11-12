@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3562
+# TOTAL: 3565
 
 payload:
   - '+.003153.xyz'
@@ -1010,6 +1010,7 @@ payload:
   - '+.dns.corefusion.xyz'
   - '+.dns.cryptomize.com'
   - '+.dns.crystalyx.net'
+  - '+.dns.csa-rz.de'
   - '+.dns.csaonline.de'
   - '+.dns.csswg.org'
   - '+.dns.cwlys.com'
@@ -2636,6 +2637,8 @@ payload:
   - '+.lukscasino-929-tr.xyz'
   - '+.lunar-dns.de'
   - '+.luxembourg.privacy-dns.pw'
+  - '+.mabuktogel.business'
+  - '+.mabuktogel.properties'
   - '+.mad01.dnscry.pt'
   - '+.maherhost.uk'
   - '+.mail.data.haus'
