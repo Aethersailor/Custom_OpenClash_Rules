@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1197
+# TOTAL: 1198
 
 payload:
   - '+.00333118.com'
@@ -856,6 +856,7 @@ payload:
   - '+.rewards.bing.com'
   - '+.rkgamingstore.com'
   - '+.ro1029mango.com'
+  - '+.rockchips.net'
   - '+.rocrp.net'
   - '+.royqh.net'
   - '+.rsfcxq.com'
