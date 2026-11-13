@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1209
+# TOTAL: 1211
 
 payload:
   - '+.00333118.com'
@@ -490,6 +490,7 @@ payload:
   - '+.hf-mirror.com'
   - '+.hfhs8x.info'
   - '+.hhtvc.com'
+  - '+.hi3d.ai'
   - '+.higgsweb.com'
   - '+.hijin.vip'
   - '+.hiocloud.com'
@@ -1171,6 +1172,7 @@ payload:
   - '+.yzcsoft.com'
   - '+.z-tek.com'
   - '+.z6e.com'
+  - '+.zaohaowu.net'
   - '+.zcloud.world'
   - '+.zctnet.top'
   - '+.zeekrline.com'
