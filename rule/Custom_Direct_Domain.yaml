@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1207
+# TOTAL: 1208
 
 payload:
   - '+.00333118.com'
@@ -146,6 +146,7 @@ payload:
   - '+.aqtwwx.net'
   - '+.arena-cn.com'
   - '+.argotunnel.com'
+  - '+.argslink.com'
   - '+.armvm.com'
   - '+.asgardion.space'
   - '+.astrobox.online'
