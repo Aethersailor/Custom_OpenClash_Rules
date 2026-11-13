@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1202
+# TOTAL: 1203
 
 payload:
   - '+.00333118.com'
@@ -584,6 +584,7 @@ payload:
   - '+.jfyxw.com'
   - '+.jh96095.com'
   - '+.jiangningwater.com'
+  - '+.jianzhixiaoke.net'
   - '+.jiaoyanyun.com'
   - '+.jieyoutsg.com'
   - '+.jieyunwangluokeji.com'
