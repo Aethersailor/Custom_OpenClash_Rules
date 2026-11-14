@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1218
+# TOTAL: 1219
 
 payload:
   - '+.00333118.com'
@@ -453,6 +453,7 @@ payload:
   - '+.guang233.com'
   - '+.guangshiting.top'
   - '+.guangyapan.com'
+  - '+.guazi.fun'
   - '+.guiguiya.com'
   - '+.guyuns.asia'
   - '+.gvgoo.com'
