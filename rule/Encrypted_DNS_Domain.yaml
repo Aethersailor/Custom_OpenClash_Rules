@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3566
+# TOTAL: 3568
 
 payload:
   - '+.003153.xyz'
@@ -1211,6 +1211,7 @@ payload:
   - '+.dns.hva.li'
   - '+.dns.hwtwco.uk'
   - '+.dns.hyas.com'
+  - '+.dns.iakovf1.com'
   - '+.dns.iamanuragh.in'
   - '+.dns.iamninja.ru'
   - '+.dns.iblockads.net'
@@ -2605,6 +2606,7 @@ payload:
   - '+.layer1.jnraptor.net'
   - '+.ldaman.duckdns.org'
   - '+.le-mesle.fr'
+  - '+.ledns.eu'
   - '+.leecurrylawfirm.com'
   - '+.lelux.fi'
   - '+.lena.vpn.i81.ru'
