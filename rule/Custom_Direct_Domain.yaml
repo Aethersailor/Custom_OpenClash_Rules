@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1227
+# TOTAL: 1228
 
 payload:
   - '+.00333118.com'
@@ -713,6 +713,7 @@ payload:
   - '+.meloong.com'
   - '+.members.3322.org'
   - '+.meoof-pet.com'
+  - '+.metrix.bar'
   - '+.mfdqsc.com'
   - '+.miaona.app'
   - '+.miaotixing.com'
