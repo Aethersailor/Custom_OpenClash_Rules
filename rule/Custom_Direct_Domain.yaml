@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1248
+# TOTAL: 1250
 
 payload:
   - '+.00333118.com'
@@ -159,6 +159,7 @@ payload:
   - '+.aroychmdcl.cc'
   - '+.asgardion.space'
   - '+.astrobox.online'
+  - '+.ataw.top'
   - '+.atticus.vip'
   - '+.awstme.top'
   - '+.ax1x.com'
@@ -182,6 +183,7 @@ payload:
   - '+.belongme.top'
   - '+.betahub.tech'
   - '+.betaints.com'
+  - '+.bfr2.top'
   - '+.bhduhs.com'
   - '+.biandangroup.com'
   - '+.biaoda.me'
