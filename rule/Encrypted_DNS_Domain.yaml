@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3561
+# TOTAL: 3562
 
 payload:
   - '+.003153.xyz'
@@ -240,6 +240,7 @@ payload:
   - '+.adguard.infrapod.nl'
   - '+.adguard.itclogic.cloud'
   - '+.adguard.jaydub.cloud'
+  - '+.adguard.jfchenier.ca'
   - '+.adguard.jodatacenter.com'
   - '+.adguard.johanliebert.top'
   - '+.adguard.jvpatel.com'
