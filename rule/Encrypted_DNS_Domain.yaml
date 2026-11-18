@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3562
+# TOTAL: 3564
 
 payload:
   - '+.003153.xyz'
@@ -866,6 +866,7 @@ payload:
   - '+.dns.acezy.top'
   - '+.dns.adfreedns.org'
   - '+.dns.adguard.com'
+  - '+.dns.adguarddns.com'
   - '+.dns.adnull.com'
   - '+.dns.adrianlam.com'
   - '+.dns.adriason.co.uk'
@@ -1717,7 +1718,6 @@ payload:
   - '+.dns.vps.pw'
   - '+.dns.w3ctag.org'
   - '+.dns.wael.name'
-  - '+.dns.wahr.top'
   - '+.dns.walker.id'
   - '+.dns.walshnet.co.uk'
   - '+.dns.wantfreedom.eu.org'
@@ -1779,6 +1779,7 @@ payload:
   - '+.dns.zui.lol'
   - '+.dns.zyxienn.fun'
   - '+.dns.zzuhacker.cn'
+  - '+.dns0.eu'
   - '+.dns0.permafrostmiami.com'
   - '+.dns0.tardishost.ru'
   - '+.dns01.almir1904.eu'
@@ -2199,6 +2200,7 @@ payload:
   - '+.f4ckdns.dl4mt.dev'
   - '+.f4f.es'
   - '+.facomunit.ddns.net'
+  - '+.family.adguarddns.com'
   - '+.family.dns.doubleangels.com'
   - '+.family.dns.dremaxx.com'
   - '+.family.dns.teknoholistik.com'
@@ -3326,6 +3328,7 @@ payload:
   - '+.unasw.eu'
   - '+.uncensored-dot.dnswarden.com'
   - '+.uncensoreddns.org'
+  - '+.unfiltered.adguarddns.com'
   - '+.unfiltered.joindns4.eu'
   - '+.unicast.censurfridns.dk'
   - '+.unicast.censurfridns.nu'
@@ -3565,4 +3568,3 @@ payload:
   - 'doh.qis.io'
   - 'kaitain.restena.lu'
   - 'resolver.dnsprivacy.org.uk'
-  - 'zero.dns0.eu'
