@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1282
+# TOTAL: 1274
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -151,7 +151,6 @@ payload:
   - DOMAIN-SUFFIX,aocdisplays.com
   - DOMAIN-SUFFIX,aoxox.com
   - DOMAIN-SUFFIX,ap-leasing.com
-  - DOMAIN-SUFFIX,api.myip.com
   - DOMAIN-SUFFIX,apm-log-upload-os.hoyoverse.com
   - DOMAIN-SUFFIX,appracle.com
   - DOMAIN-SUFFIX,aqtwwx.net
@@ -236,8 +235,6 @@ payload:
   - DOMAIN-SUFFIX,chatlabs.net
   - DOMAIN-SUFFIX,chaxunjiao.com
   - DOMAIN-SUFFIX,chaz.fun
-  - DOMAIN-SUFFIX,checkip.dyndns.org
-  - DOMAIN-SUFFIX,checkipv6.dyndns.org
   - DOMAIN-SUFFIX,chengguodj.com
   - DOMAIN-SUFFIX,chenyuxia.com
   - DOMAIN-SUFFIX,cheriexsky.love
@@ -437,7 +434,6 @@ payload:
   - DOMAIN-SUFFIX,github.moeyy.xyz
   - DOMAIN-SUFFIX,github.site
   - DOMAIN-SUFFIX,github.store
-  - DOMAIN-SUFFIX,giveup.top
   - DOMAIN-SUFFIX,gjjwgp3n.com
   - DOMAIN-SUFFIX,gjtool.com
   - DOMAIN-SUFFIX,gmoj.net
@@ -569,7 +565,6 @@ payload:
   - DOMAIN-SUFFIX,idphotoplus.com
   - DOMAIN-SUFFIX,idsduf.com
   - DOMAIN-SUFFIX,ifawj9hvvl.com
-  - DOMAIN-SUFFIX,ifconfig.co
   - DOMAIN-SUFFIX,ifengmap.com
   - DOMAIN-SUFFIX,ifish7.com
   - DOMAIN-SUFFIX,iflytck.com
@@ -591,8 +586,6 @@ payload:
   - DOMAIN-SUFFIX,iotrix.net
   - DOMAIN-SUFFIX,ip.plus
   - DOMAIN-SUFFIX,ip159.com
-  - DOMAIN-SUFFIX,ip6.seeip.org
-  - DOMAIN-SUFFIX,ipapi.co
   - DOMAIN-SUFFIX,ipjrh.com
   - DOMAIN-SUFFIX,iposl.com
   - DOMAIN-SUFFIX,ipshu.com
@@ -652,7 +645,6 @@ payload:
   - DOMAIN-SUFFIX,kelexuexi.com
   - DOMAIN-SUFFIX,keyoo.com
   - DOMAIN-SUFFIX,kgithub.com
-  - DOMAIN-SUFFIX,kit327.com
   - DOMAIN-SUFFIX,kiwiot.com
   - DOMAIN-SUFFIX,kke.com.hk
   - DOMAIN-SUFFIX,kkmmy.com
