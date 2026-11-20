@@ -2,6 +2,7 @@
  * Sub-Store 节点名称规范化器
  *
  * 根据节点名称中的可靠地区证据，将已识别节点改为“中文地区名 + 编号”。
+ * 设置 preferred_domain=true 可同时规范化无地区信息的优选域名节点。
  * 脚本只处理本地名称，不查询 IP、GeoIP 或远程接口，不删除节点，
  * 不改变节点顺序，也不修改名称以外的节点属性。
  *
@@ -402,10 +403,18 @@ for (const row of COMMON_ALIAS_ROWS) {
 function operator(proxies = []) {
   if (!Array.isArray(proxies) || proxies.length === 0) return []
 
+  const preferredDomain = typeof $arguments !== 'undefined' && $arguments?.preferred_domain
+  const normalizePreferredDomain = preferredDomain === true || preferredDomain === 'true'
   const counters = new Map()
   return proxies.map(proxy => {
     const originalName = String(proxy && proxy.name != null ? proxy.name : '')
     const result = resolveRegion(originalName)
+    if (result.state === 'unmatched' && normalizePreferredDomain) {
+      const preferred = /^(?:\[(?:GPT|IPv6)\]\s*)*优选域名[- ]([0-9]+)$/.exec(
+        originalName.trim(),
+      )
+      if (preferred) return updateProxy(proxy, `优选域名 ${preferred[1]}`)
+    }
     if (result.state !== 'matched') return proxy
 
     const count = (counters.get(result.region.code) || 0) + 1

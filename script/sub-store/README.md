@@ -9,7 +9,7 @@
 
 ## 节点名称规范化器
 
-[`sub-store-node-name-normalizer.js`](sub-store-node-name-normalizer.js) 根据节点名称中的可靠地区证据生成统一名称。脚本不会查询节点 IP 或 GeoIP，也不会删除任何节点。名称中没有足够证据或证据相互冲突时，节点保持原名。
+[`sub-store-node-name-normalizer.js`](sub-store-node-name-normalizer.js) 根据节点名称中的可靠地区证据生成统一名称。脚本不会查询节点 IP 或 GeoIP，也不会删除任何节点。默认情况下，名称中没有足够证据或证据相互冲突时，节点保持原名。
 
 ### 导入与基本用法
 
@@ -19,9 +19,15 @@
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/script/sub-store/sub-store-node-name-normalizer.js#noCache
 ```
 
-识别成功的节点默认只输出简体中文地区名和序号。脚本保持全部节点及其原始顺序；未命中或存在同级文字冲突的节点均保留原名。
+识别成功的节点默认只输出简体中文地区名和序号。脚本保持全部节点及其原始顺序；默认保留未命中或存在同级文字冲突的节点原名。
 
 如果脚本操作中已经保存过旧版本，先在前端刷新脚本资源，或使用上方带 `#noCache` 的地址重新导入并保存。分享订阅地址上的 `noCache=true` 只影响订阅来源缓存，不能替换已经保存在脚本操作中的内容。
+
+### 优选域名
+
+设置 `preferred_domain=true` 可规范化无地区信息的优选域名。脚本默认关闭此选项。使用上方链接导入时，在地址末尾追加 `&preferred_domain=true`。使用本地脚本时，在脚本参数中将 `preferred_domain` 设为 `true`。
+
+开启后，`[GPT] [IPv6] 优选域名-15` 会显示为 `优选域名 15`。脚本沿用上游编号。若后续运行旗标操作，可在旗标操作之后用正则重命名删除这类节点的海盗旗。
 
 ### 匹配规则
 
