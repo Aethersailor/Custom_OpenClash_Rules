@@ -19,9 +19,15 @@
 https://raw.githubusercontent.com/Aethersailor/Custom_OpenClash_Rules/main/script/sub-store/sub-store-node-name-normalizer.js#noCache
 ```
 
-识别成功的节点默认只输出简体中文地区名和序号。脚本保持全部节点及其原始顺序；默认保留未命中或存在同级文字冲突的节点原名。
+识别成功的普通节点输出简体中文地区名和序号。脚本保持全部节点及其原始顺序，默认保留未命中或存在同级文字冲突的节点原名。
 
 如果脚本操作中已经保存过旧版本，先在前端刷新脚本资源，或使用上方带 `#noCache` 的地址重新导入并保存。分享订阅地址上的 `noCache=true` 只影响订阅来源缓存，不能替换已经保存在脚本操作中的内容。
+
+### 家宽节点
+
+脚本默认保留带地区代码和编号的家宽标记。例如，`🏠 JP-家宽-01` 输出为 `日本家宽 01`。家宽节点沿用上游编号，普通地区节点单独编号。若随后添加旗标，则显示为 `🇯🇵 日本家宽 01`。
+
+在上方脚本地址末尾追加 `&preserve_residential=false` 可关闭家宽标记。使用本地脚本时，在脚本参数中将 `preserve_residential` 设为 `false`。关闭后，家宽节点按普通地区节点统一编号。
 
 ### 优选域名
 
