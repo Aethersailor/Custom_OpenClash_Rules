@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1270
+# TOTAL: 1272
 
 payload:
   - '+.00333118.com'
@@ -224,6 +224,7 @@ payload:
   - '+.cdn.doctor'
   - '+.cdn.ist'
   - '+.cdn362.cc'
+  - '+.cdqyjh.top'
   - '+.cdut.top'
   - '+.centbrowser.net'
   - '+.cftunnel.com'
@@ -1167,6 +1168,7 @@ payload:
   - '+.xixih.cc'
   - '+.xkkapk.com'
   - '+.xmearth.online'
+  - '+.xmsnh.com'
   - '+.xn--4kq62z5rby2qupq9ub.top'
   - '+.xn--cesw6hd3s99f.com'
   - '+.xn--estr6ge7tok1a.com'
