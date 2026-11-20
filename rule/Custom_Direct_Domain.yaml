@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1277
+# TOTAL: 1278
 
 payload:
   - '+.00333118.com'
@@ -155,6 +155,7 @@ payload:
   - '+.apm-log-upload-os.hoyoverse.com'
   - '+.appracle.com'
   - '+.aqtwwx.net'
+  - '+.arctime.pro'
   - '+.arena-cn.com'
   - '+.argotunnel.com'
   - '+.argslink.com'
