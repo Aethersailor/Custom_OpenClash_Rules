@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3564
+# TOTAL: 3565
 
 payload:
   - '+.003153.xyz'
@@ -2957,6 +2957,7 @@ payload:
   - '+.pns2.sadraidc.com'
   - '+.polisitogel.beauty'
   - '+.polisitogel.contractors'
+  - '+.polisitogel.green'
   - '+.polisitogel.hair'
   - '+.polisitogel.webcam'
   - '+.pooblet.co.za'
