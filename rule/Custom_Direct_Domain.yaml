@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1287
+# TOTAL: 1289
 
 payload:
   - '+.00333118.com'
@@ -757,6 +757,7 @@ payload:
   - '+.minekuai.com'
   - '+.minor-api-os.hoyoverse.com'
   - '+.miraiemby.com'
+  - '+.misoso.cc'
   - '+.mixly.org'
   - '+.mobai.sbs'
   - '+.mobbananagame.com'
@@ -838,6 +839,7 @@ payload:
   - '+.paijitang.com'
   - '+.pailedi.com'
   - '+.panjue.com'
+  - '+.panso.vip'
   - '+.paojiaoyun.com'
   - '+.paperang.com'
   - '+.passnat.com'
