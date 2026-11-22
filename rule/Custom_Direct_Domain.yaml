@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1293
+# TOTAL: 1294
 
 payload:
   - '+.00333118.com'
@@ -375,6 +375,7 @@ payload:
   - '+.fengda.me'
   - '+.fengsutb.com'
   - '+.fenno.ai'
+  - '+.fexsqz.com'
   - '+.fffff.games'
   - '+.ffhome.com'
   - '+.fgaiservice.com'
