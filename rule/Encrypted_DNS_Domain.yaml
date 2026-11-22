@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3565
+# TOTAL: 3563
 
 payload:
   - '+.003153.xyz'
@@ -584,7 +584,6 @@ payload:
   - '+.bei01.dnscry.pt'
   - '+.bella.981377612.xyz'
   - '+.berd.moe'
-  - '+.bestwon203.com'
   - '+.bg.rslvr.eu'
   - '+.bh.wael.name'
   - '+.biba.ydns.eu'
@@ -1146,7 +1145,6 @@ payload:
   - '+.dns.gamban.com'
   - '+.dns.garymarek.me'
   - '+.dns.gayanalysing.co.uk'
-  - '+.dns.gearworks.app'
   - '+.dns.geohide.ru'
   - '+.dns.ghost.pm'
   - '+.dns.gi.co.id'
@@ -1971,6 +1969,7 @@ payload:
   - '+.doh.buzz'
   - '+.doh.captnemo.in'
   - '+.doh.ccb-net.it'
+  - '+.doh.centraleu.pi-dns.com'
   - '+.doh.cippapp.com'
   - '+.doh.cnetwork.cloud'
   - '+.doh.conectarjdp.com'
@@ -2172,7 +2171,6 @@ payload:
   - '+.echooff.xyz'
   - '+.ecs-doh.dnswarden.com'
   - '+.edgar.tobkar.net'
-  - '+.edgy-dns.com'
   - '+.edns.my.id'
   - '+.egorovna.su'
   - '+.egshe.myqnapcloud.com'
@@ -2637,6 +2635,8 @@ payload:
   - '+.luxembourg.privacy-dns.pw'
   - '+.mabuktogel.business'
   - '+.mabuktogel.cards'
+  - '+.mabuktogel.enterprises'
+  - '+.mabuktogel.ltd'
   - '+.mabuktogel.marketing'
   - '+.mabuktogel.properties'
   - '+.mabuktogel.solutions'
@@ -2651,7 +2651,6 @@ payload:
   - '+.malanser.ru'
   - '+.man01.dnscry.pt'
   - '+.maqgie.xyz'
-  - '+.mask-api.fe.apple-dns.net'
   - '+.mask-canary.icloud.com'
   - '+.mask-h2.icloud.com'
   - '+.mask.icloud.com'
@@ -3241,7 +3240,6 @@ payload:
   - '+.tartanbahn.eu.org'
   - '+.tbs01.dnscry.pt'
   - '+.teamspeak.adriason.co.uk'
-  - '+.tecdrive.site'
   - '+.tecworx.at'
   - '+.teknorota.com'
   - '+.telex.app'
