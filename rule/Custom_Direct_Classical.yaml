@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1312
+# TOTAL: 1313
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -1131,6 +1131,7 @@ payload:
   - DOMAIN-SUFFIX,wewillpro.com
   - DOMAIN-SUFFIX,wget.la
   - DOMAIN-SUFFIX,wildfirechat.net
+  - DOMAIN-SUFFIX,windinput.com
   - DOMAIN-SUFFIX,wirefee.site
   - DOMAIN-SUFFIX,wisecleaner.net
   - DOMAIN-SUFFIX,wjx.top
