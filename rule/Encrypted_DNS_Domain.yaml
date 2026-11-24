@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3551
+# TOTAL: 3555
 
 payload:
   - '+.003153.xyz'
@@ -505,7 +505,6 @@ payload:
   - '+.an81dns.ru'
   - '+.ancv.sytes.net'
   - '+.andrewnw.xyz'
-  - '+.andrey93rus.ru'
   - '+.andryk111.duckdns.org'
   - '+.andrykarcew.duckdns.org'
   - '+.andybunn.onthewifi.com'
@@ -1073,6 +1072,7 @@ payload:
   - '+.dns.echpochmak-club.ru'
   - '+.dns.edc-pws.com'
   - '+.dns.eddi.net'
+  - '+.dns.edgeburnmedia.com'
   - '+.dns.edgeworkssystems.ca'
   - '+.dns.edison42.dev'
   - '+.dns.efficientdocuments.com'
@@ -1981,6 +1981,7 @@ payload:
   - '+.doh.dnswarden.com'
   - '+.doh.domreg.lt'
   - '+.doh.e7.work'
+  - '+.doh.eastau.pi-dns.com'
   - '+.doh.eddi.net'
   - '+.doh.edifiels.ru'
   - '+.doh.ersei.net'
@@ -2039,6 +2040,7 @@ payload:
   - '+.doh.phdns3.lonet.org'
   - '+.doh.phdns4.lonet.org'
   - '+.doh.phdns5.lonet.org'
+  - '+.doh.pi-dns.com'
   - '+.doh.plaawan.uk'
   - '+.doh.plop.cc'
   - '+.doh.powerdns.org'
@@ -2078,6 +2080,7 @@ payload:
   - '+.doh.valscosmos.com'
   - '+.doh.viatech.com.tw'
   - '+.doh.webnmail.de'
+  - '+.doh.westus.pi-dns.com'
   - '+.doh.wewitro.net'
   - '+.doh.xcom.pro'
   - '+.doh.xfinity.com'
@@ -2117,6 +2120,9 @@ payload:
   - '+.dot.centraleu.pi-dns.com'
   - '+.dot.cleardns.io'
   - '+.dot.cox.net'
+  - '+.dot.eastas.pi-dns.com'
+  - '+.dot.eastau.pi-dns.com'
+  - '+.dot.eastus.pi-dns.com'
   - '+.dot.libredns.gr'
   - '+.dot.pub'
   - '+.dot.quickline.ch'
@@ -3388,7 +3394,6 @@ payload:
   - '+.virmamp33.sytes.net'
   - '+.vladpro.ru'
   - '+.vm.delfini.online'
-  - '+.vm596152.eurodir.ru'
   - '+.vn.dns.abpvn.com'
   - '+.vno01.dnscry.pt'
   - '+.void.mcfly.lol'
@@ -3446,7 +3451,6 @@ payload:
   - '+.wg-ag.isgood.host'
   - '+.wg.ciepiela.org'
   - '+.wg.pastorov.ru'
-  - '+.wg.req1.fr'
   - '+.wg.thienhv.com'
   - '+.whatcaniplay.com'
   - '+.wifrousl.spdns.de'
