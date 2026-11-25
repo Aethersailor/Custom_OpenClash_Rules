@@ -1,7 +1,7 @@
 # Generated from rule/Tailscale_STUN.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Tailscale_STUN.list
-# TOTAL: 190
+# TOTAL: 192
 
 payload:
   - '102.67.165.185/32'
@@ -42,6 +42,7 @@ payload:
   - '176.58.93.147/32'
   - '176.58.93.154/32'
   - '176.58.93.248/32'
+  - '176.58.93.27/32'
   - '178.156.134.232/32'
   - '178.156.152.106/32'
   - '178.156.152.91/32'
@@ -153,6 +154,7 @@ payload:
   - '2a00:dd80:3a::b33/128'
   - '2a00:dd80:3a::dfa/128'
   - '2a00:dd80:3a::ed/128'
+  - '2a00:dd80:3c::343/128'
   - '2a00:dd80:3c::3d5/128'
   - '2a00:dd80:3c::807/128'
   - '2a00:dd80:3c::b09/128'
