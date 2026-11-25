@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3555
+# TOTAL: 3562
 
 payload:
   - '+.003153.xyz'
@@ -241,7 +241,6 @@ payload:
   - '+.adguard.jaydub.cloud'
   - '+.adguard.jfchenier.ca'
   - '+.adguard.jodatacenter.com'
-  - '+.adguard.johanliebert.top'
   - '+.adguard.jvpatel.com'
   - '+.adguard.k-likhachev.ru'
   - '+.adguard.kalyanmudumby.com'
@@ -1625,6 +1624,7 @@ payload:
   - '+.dns.surobe.com'
   - '+.dns.sv-zauner.at'
   - '+.dns.svoi.dev'
+  - '+.dns.swin.pro'
   - '+.dns.switch.ch'
   - '+.dns.sy.st'
   - '+.dns.syaifullah.com'
@@ -1981,7 +1981,9 @@ payload:
   - '+.doh.dnswarden.com'
   - '+.doh.domreg.lt'
   - '+.doh.e7.work'
+  - '+.doh.eastas.pi-dns.com'
   - '+.doh.eastau.pi-dns.com'
+  - '+.doh.eastus.pi-dns.com'
   - '+.doh.eddi.net'
   - '+.doh.edifiels.ru'
   - '+.doh.ersei.net'
@@ -2030,6 +2032,7 @@ payload:
   - '+.doh.nexen.cloud'
   - '+.doh.nic.lv'
   - '+.doh.niyawe.de'
+  - '+.doh.northeu.pi-dns.com'
   - '+.doh.ntu.ssooss.win'
   - '+.doh.nukys.ca'
   - '+.doh.oco-lae.my.id'
@@ -2080,6 +2083,7 @@ payload:
   - '+.doh.valscosmos.com'
   - '+.doh.viatech.com.tw'
   - '+.doh.webnmail.de'
+  - '+.doh.westeu.pi-dns.com'
   - '+.doh.westus.pi-dns.com'
   - '+.doh.wewitro.net'
   - '+.doh.xcom.pro'
@@ -2124,11 +2128,13 @@ payload:
   - '+.dot.eastau.pi-dns.com'
   - '+.dot.eastus.pi-dns.com'
   - '+.dot.libredns.gr'
+  - '+.dot.northeu.pi-dns.com'
   - '+.dot.pub'
   - '+.dot.quickline.ch'
   - '+.dot.seby.io'
   - '+.dot.tiar.app'
   - '+.dot.tooli.ca'
+  - '+.dot.westus.pi-dns.com'
   - '+.dot.xfinity.com'
   - '+.dot1.appliedprivacy.net'
   - '+.doth.huque.com'
@@ -2363,7 +2369,6 @@ payload:
   - '+.home-server.store'
   - '+.home.azagra.dev'
   - '+.home.basthorst.eu'
-  - '+.home.bruckmoser.it'
   - '+.home.dlinkddns.com'
   - '+.home.fc.idv.tw'
   - '+.home.fendya.com'
@@ -2949,6 +2954,7 @@ payload:
   - '+.polisitogel.contractors'
   - '+.polisitogel.green'
   - '+.polisitogel.hair'
+  - '+.polisitogel.living'
   - '+.polisitogel.webcam'
   - '+.pooblet.co.za'
   - '+.positif4.cross.net.id'
@@ -3364,6 +3370,7 @@ payload:
   - '+.usxui.13142233.xyz'
   - '+.uw-dns.rubyfish.cn'
   - '+.v.dnscrypt.uk'
+  - '+.v.qdev.cc'
   - '+.v.recipes'
   - '+.v.yuhui.eu.org'
   - '+.v0dka.ru'
