@@ -32,6 +32,21 @@
 
 本项目提供 OpenClash 设置文档、订阅转换模板、YAML 配置、规则文件、远程覆写模块及辅助脚本。各类资源可以独立使用；完整配置方案需要结合项目 Wiki 中的 OpenClash LuCI 设置。
 
+> [!WARNING]
+> 本项目提供中立的技术资料，仅供在中华人民共和国境外学习和研究 OpenWrt 与 OpenClash。
+>
+> **禁止任何组织或个人在中国大陆访问、下载或使用本项目的任何内容。身处中国大陆的访客请立即关闭本页面。**
+>
+> 任何组织或个人均不得利用本项目内容从事违反适用法律法规的活动。使用者须自行承担其使用行为产生的法律责任。
+>
+> ---
+>
+> This project provides neutral technical materials solely for the study and research of OpenWrt and OpenClash outside the People's Republic of China.
+>
+> **In mainland China, no organization or individual may access, download, or use any of this project's content. If you are in mainland China, close this page immediately.**
+>
+> No organization or individual may use this project's content to engage in activities that violate applicable laws or regulations. Users bear legal responsibility for their own actions when using this content.
+
 > [!TIP]
 > **仅需 OpenClash，无需「套娃」**
 >
