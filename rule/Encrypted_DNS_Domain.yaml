@@ -1,7 +1,7 @@
 # Generated from rule/Encrypted_DNS.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Encrypted_DNS.list
-# TOTAL: 3562
+# TOTAL: 3561
 
 payload:
   - '+.003153.xyz'
@@ -1173,7 +1173,6 @@ payload:
   - '+.dns.hahnjo.de'
   - '+.dns.haka.se'
   - '+.dns.hakim.one'
-  - '+.dns.hakutakucn.com'
   - '+.dns.hanahira.dev'
   - '+.dns.hanmey.de'
   - '+.dns.hannielzhang.com'
@@ -1709,6 +1708,7 @@ payload:
   - '+.dns.wael.name'
   - '+.dns.walker.id'
   - '+.dns.walshnet.co.uk'
+  - '+.dns.wang.art'
   - '+.dns.wantfreedom.eu.org'
   - '+.dns.wargan.io'
   - '+.dns.warma.me'
@@ -3370,7 +3370,6 @@ payload:
   - '+.usxui.13142233.xyz'
   - '+.uw-dns.rubyfish.cn'
   - '+.v.dnscrypt.uk'
-  - '+.v.qdev.cc'
   - '+.v.recipes'
   - '+.v.yuhui.eu.org'
   - '+.v0dka.ru'
