@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1323
+# TOTAL: 1328
 
 payload:
   - '+.00333118.com'
@@ -560,6 +560,7 @@ payload:
   - '+.htkgsx.com'
   - '+.huabangshou.com'
   - '+.huacheng2025.com'
+  - '+.huajian.ink'
   - '+.huangguoai.ai'
   - '+.huangyusz.space'
   - '+.hub.crdz.gq'
@@ -664,6 +665,7 @@ payload:
   - '+.kaijiacloud.com'
   - '+.kaijiejinrong.com'
   - '+.kaipanhong.com'
+  - '+.kaiqi.xin'
   - '+.kamhing.net'
   - '+.kancaibao.com'
   - '+.kanv7k.live'
@@ -1128,6 +1130,7 @@ payload:
   - '+.volcanomob.com'
   - '+.vpsjyz.com'
   - '+.vryfh.top'
+  - '+.vsoul.top'
   - '+.vtools.online'
   - '+.vv1865.com'
   - '+.vvhan.com'
@@ -1205,6 +1208,7 @@ payload:
   - '+.xingpaste.com'
   - '+.xingyaozhilian.com'
   - '+.xinstall.top'
+  - '+.xinxinlan.ink'
   - '+.xinyonghome.com'
   - '+.xiqueer.com'
   - '+.xiuxitong.com'
@@ -1239,6 +1243,7 @@ payload:
   - '+.ycyct.com'
   - '+.ydayc.com'
   - '+.ydxian.xyz'
+  - '+.yeguo-duanju.online'
   - '+.yeguodj.com'
   - '+.ygdj17.com'
   - '+.yh29798.com'

@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1338
+# TOTAL: 1343
 
 payload:
   - DOMAIN-KEYWORD,m-team
@@ -563,6 +563,7 @@ payload:
   - DOMAIN-SUFFIX,htkgsx.com
   - DOMAIN-SUFFIX,huabangshou.com
   - DOMAIN-SUFFIX,huacheng2025.com
+  - DOMAIN-SUFFIX,huajian.ink
   - DOMAIN-SUFFIX,huangguoai.ai
   - DOMAIN-SUFFIX,huangyusz.space
   - DOMAIN-SUFFIX,hub.crdz.gq
@@ -667,6 +668,7 @@ payload:
   - DOMAIN-SUFFIX,kaijiacloud.com
   - DOMAIN-SUFFIX,kaijiejinrong.com
   - DOMAIN-SUFFIX,kaipanhong.com
+  - DOMAIN-SUFFIX,kaiqi.xin
   - DOMAIN-SUFFIX,kamhing.net
   - DOMAIN-SUFFIX,kancaibao.com
   - DOMAIN-SUFFIX,kanv7k.live
@@ -1131,6 +1133,7 @@ payload:
   - DOMAIN-SUFFIX,volcanomob.com
   - DOMAIN-SUFFIX,vpsjyz.com
   - DOMAIN-SUFFIX,vryfh.top
+  - DOMAIN-SUFFIX,vsoul.top
   - DOMAIN-SUFFIX,vtools.online
   - DOMAIN-SUFFIX,vv1865.com
   - DOMAIN-SUFFIX,vvhan.com
@@ -1208,6 +1211,7 @@ payload:
   - DOMAIN-SUFFIX,xingpaste.com
   - DOMAIN-SUFFIX,xingyaozhilian.com
   - DOMAIN-SUFFIX,xinstall.top
+  - DOMAIN-SUFFIX,xinxinlan.ink
   - DOMAIN-SUFFIX,xinyonghome.com
   - DOMAIN-SUFFIX,xiqueer.com
   - DOMAIN-SUFFIX,xiuxitong.com
@@ -1242,6 +1246,7 @@ payload:
   - DOMAIN-SUFFIX,ycyct.com
   - DOMAIN-SUFFIX,ydayc.com
   - DOMAIN-SUFFIX,ydxian.xyz
+  - DOMAIN-SUFFIX,yeguo-duanju.online
   - DOMAIN-SUFFIX,yeguodj.com
   - DOMAIN-SUFFIX,ygdj17.com
   - DOMAIN-SUFFIX,yh29798.com
