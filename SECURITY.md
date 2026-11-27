@@ -24,7 +24,7 @@
 - 自动生成、发布或 GitHub Actions 流程可能泄漏凭据，或允许未授权内容进入公开资源；
 - 其他可以造成凭据泄漏、设备被控制、供应链污染或安全边界失效的问题。
 
-不要先在公开 Issue、Discussion、Pull Request、Telegram 群组或其他公开渠道披露漏洞细节。
+不要先在公开 Issue、Discussion、Pull Request 或其他公开渠道披露漏洞细节。
 
 ## 私密报告应包含的信息
 

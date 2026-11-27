@@ -635,7 +635,7 @@ Custom_Clash_Lite_Fallback.conf
 | 标准版 故障转移 | `Custom_Clash_Fallback` | 标准版规则不变，主要代理组改为按候选顺序自动故障转移 | 希望减少手动切换的用户 |
 | 轻量版 | `Custom_Clash_Lite` | 减少独立业务策略组，保留基础代理、直连和常用服务分流 | 低性能设备或偏好简洁的用户 |
 | 轻量版 故障转移 | `Custom_Clash_Lite_Fallback` | 轻量规则结构与自动故障转移 | 希望轻量且无人值守的用户 |
-| 极简版 | `Custom_Clash_GFW` | 主要匹配 GFW 域名及 Telegram、Facebook、Twitter 等相关 IP，其余流量默认直连 | 只需要最基础代理逻辑的用户 |
+| 极简版 | `Custom_Clash_GFW` | 主要匹配 GFW 域名及即时通讯和社交媒体的特定 IP，其余流量默认直连 | 只需要最基础代理逻辑的用户 |
 | 极简版 故障转移 | `Custom_Clash_GFW_Fallback` | 极简规则与自动故障转移 | 极简需求且不想手动切换的用户 |
 | 重度分流版 | `Custom_Clash_Full` | 在标准版基础上增加更多业务、国家、地区和节点用途分类 | 节点丰富、需要精确选路的进阶用户 |
 | 重度分流版 故障转移 | `Custom_Clash_Full_Fallback` | 重度分流结构与自动故障转移 | 需要复杂分流又希望自动切换的用户 |

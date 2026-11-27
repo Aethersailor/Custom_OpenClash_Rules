@@ -99,7 +99,3 @@ OpenClash 已提供当前 Smart 覆写设置；本页只保留历史说明。
 ### [无插件广告拦截方案（已归档）](10.无插件广告拦截功能设置方案.md)
 
 旧方案已经停止维护，页面中的可执行部署内容已移除。需要广告过滤时，请选择仍在维护的方案，并以其当前文档为准。
-
----
-
-项目交流与更新通知：[Custom OpenClash Rules Telegram 讨论群组](https://t.me/custom_openclash_rules_group)。

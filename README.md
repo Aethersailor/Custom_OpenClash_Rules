@@ -239,17 +239,10 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
 
 ## 💬 讨论与反馈
 
-### 本项目讨论群组
-
-欢迎加入本项目的 Telegram 讨论群组：[Custom OpenClash Rules](https://t.me/custom_openclash_rules_group)。本项目及相关项目的更新信息均统一在群组内发布。
-
-群组欢迎一切与本项目相关的讨论，包括配置使用、规则反馈、问题排查，也欢迎其他交流。
+使用咨询和配置讨论可前往 [GitHub Discussions](https://github.com/Aethersailor/Custom_OpenClash_Rules/discussions)。
 
 > [!IMPORTANT]
-> 如排查后确认问题由 OpenClash 插件本身引起、与本项目配置或规则无关（如插件无法启动、界面异常、安装失败等），建议：
->
-> - 前往 [OpenClash 官方 Issue 选择页](https://github.com/vernesong/OpenClash/issues/new/choose) 提交 Issue；
-> - 或加入 OpenClash 官方 Telegram 讨论群组咨询（可在插件 LuCI 首页点击 Telegram 图标进入）。
+> 如排查后确认问题由 OpenClash 插件本身引起，与本项目配置或规则无关（如插件无法启动、界面异常、安装失败等），请前往 [OpenClash 官方 Issue 选择页](https://github.com/vernesong/OpenClash/issues/new/choose) 反馈。
 
 普通规则、模板、脚本和文档问题可以使用[本项目 Issue 选择页](https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/new/choose)。涉及凭据泄漏、下载校验绕过或脚本执行链的安全问题，请先阅读[安全报告说明](SECURITY.md)，不要在公开 Issue 中披露细节。
 
