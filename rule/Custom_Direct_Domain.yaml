@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1322
+# TOTAL: 1323
 
 payload:
   - '+.00333118.com'
@@ -1046,6 +1046,7 @@ payload:
   - '+.tcp5.com'
   - '+.tcy365.net'
   - '+.tdrgame.top'
+  - '+.teoyouth.com'
   - '+.terra-master.com'
   - '+.terrabbs.ink'
   - '+.tggfl.com'
