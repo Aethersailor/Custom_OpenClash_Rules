@@ -142,24 +142,24 @@ DOMAIN-SUFFIX,plushk1.younoyes.com
 DOMAIN-SUFFIX,plushk2.younoyes.com
 DOMAIN-SUFFIX,plushk3.younoyes.com
 
-# 视频网站 / add by Rule-Bot user: jiro / Date:2025-07-22 12:04:55
+# 视频网站 / add by Telegram user: jiro / Date:2025-07-22 12:04:55
 DOMAIN-SUFFIX,dushe1.app
-# 视频网站 / add by Rule-Bot user: 哈Lay / Date: 2026-01-06 21:13:37
+# 视频网站 / add by Telegram user: 哈Lay / Date: 2026-01-06 21:13:37
 DOMAIN-SUFFIX,theluyuan.com
 
 # Mursor IPTV 直播源
 DOMAIN-SUFFIX,ottiptv.cc
 
-# girigirilove在线追番网站 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-23 17:26:28
+# girigirilove在线追番网站 / add by Telegram user: 真怪誕呀 / Date: 2025-08-23 17:26:28
 DOMAIN-SUFFIX,girigirilove.com
 
-# 视频网站 / add by Rule-Bot user: 哈Lay / Date: 2026-01-07 19:18:30
+# 视频网站 / add by Telegram user: 哈Lay / Date: 2026-01-07 19:18:30
 DOMAIN-SUFFIX,8kc.top
-# 视频 / add by Rule-Bot user: siri / Date: 2025-11-23 13:05:05
+# 视频 / add by Telegram user: siri / Date: 2025-11-23 13:05:05
 DOMAIN-SUFFIX,qmeng.top
-# 视频网站 / add by Rule-Bot user: sanligu / Date: 2025-08-03 10:15:19
+# 视频网站 / add by Telegram user: sanligu / Date: 2025-08-03 10:15:19
 DOMAIN-SUFFIX,657192.com
-# 影视站 / add by Rule-Bot user: Feng Ninger / Date: 2025-08-11 11:55:42
+# 影视站 / add by Telegram user: Feng Ninger / Date: 2025-08-11 11:55:42
 DOMAIN-SUFFIX,wlcdn88.com
 
 # ==============================================
@@ -185,9 +185,9 @@ DOMAIN-SUFFIX,sunrisecontent.akamaized.net
 
 # 软件类规则
 
-# 软件及服务 / add by Rule-Bot user: rl / Date: 2025-08-14 09:47:11
+# 软件及服务 / add by Telegram user: rl / Date: 2025-08-14 09:47:11
 DOMAIN-SUFFIX,adobe.com
-# easytier服务 / add by Rule-Bot user: hvccff / Date: 2025-11-17 08:22:05
+# easytier服务 / add by Telegram user: hvccff / Date: 2025-11-17 08:22:05
 DOMAIN-SUFFIX,easytier.top
 
 # 下载类
@@ -198,7 +198,7 @@ DOMAIN-SUFFIX,m-team.cc
 DOMAIN-SUFFIX,m-team.io
 DOMAIN-SUFFIX,manfuz.co
 
-# pt站劳教所 / add by Rule-Bot user: kevin / Date: 2025-09-22 14:35:53
+# pt站劳教所 / add by Telegram user: kevin / Date: 2025-09-22 14:35:53
 DOMAIN-SUFFIX,ptlgs.org
 
 # 手机淘宝临时修复
@@ -211,24 +211,24 @@ IP-CIDR,47.246.180.0/24,no-resolve
 
 # 金融类
 
-# 汇丰香港，走代理会被风控 / add by Rule-Bot user: victory / Date: 2025-09-20 08:35:06
+# 汇丰香港，走代理会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:35:06
 DOMAIN-SUFFIX,hsbc.com.hk
 
 # 汇丰银行
 DOMAIN-SUFFIX,liveperson.net
 DOMAIN-SUFFIX,we-stats.com
 
-# 中国银行香港，如果走代理，会被风控 / add by Rule-Bot user: victory / Date: 2025-09-20 08:33:44
+# 中国银行香港，如果走代理，会被风控 / add by Telegram user: victory / Date: 2025-09-20 08:33:44
 DOMAIN-SUFFIX,bochk.com
 
-# 汇丰 / add by Rule-Bot user: FengNinger / Date: 2025-12-14 10:04:00
+# 汇丰 / add by Telegram user: FengNinger / Date: 2025-12-14 10:04:00
 DOMAIN-SUFFIX,vv1865.com
 
 # ==============================================
 
 # 博客或个人网站
 
-# BLOG / add by Rule-Bot user: rl / Date: 2025-08-26 20:20:13
+# BLOG / add by Telegram user: rl / Date: 2025-08-26 20:20:13
 DOMAIN-SUFFIX,chenyuxia.com
 
 # ==============================================
@@ -237,69 +237,69 @@ DOMAIN-SUFFIX,chenyuxia.com
 
 # Server酱
 DOMAIN-SUFFIX,sct.ftqq.com
-# Server酱³ · 极简推送服务 / add by Rule-Bot user: 雪菜 / Date: 2025-10-20 18:34:08
+# Server酱³ · 极简推送服务 / add by Telegram user: 雪菜 / Date: 2025-10-20 18:34:08
 DOMAIN-SUFFIX,ft07.com
-# 个人导航网站及游戏站点 / add by Rule-Bot user: Char / Date: 2025-10-28 00:00:59
+# 个人导航网站及游戏站点 / add by Telegram user: Char / Date: 2025-10-28 00:00:59
 DOMAIN-SUFFIX,cheshire.top
 # 爱普生打印机
 DOMAIN-SUFFIX,p01.epsonconnect.com
-# 蓝宝石显卡官网 / add by Rule-Bot user: 💡💡 / Date: 2025-08-07 06:58:20
+# 蓝宝石显卡官网 / add by Telegram user: 💡💡 / Date: 2025-08-07 06:58:20
 DOMAIN-SUFFIX,sapphiretech.com
-# dnshe免费域名 / add by Rule-Bot user: r / Date: 2026-01-14 17:48:56
+# dnshe免费域名 / add by Telegram user: r / Date: 2026-01-14 17:48:56
 DOMAIN-SUFFIX,dnshe.com
-# add by Rule-Bot user:  / Date: 2026-03-10 00:12:14
+# add by Telegram user:  / Date: 2026-03-10 00:12:14
 DOMAIN-SUFFIX,xfltd.org
-# add by Rule-Bot user: Aethersailor / Date: 2026-03-05 10:48:07
+# add by Telegram user: Aethersailor / Date: 2026-03-05 10:48:07
 DOMAIN-SUFFIX,00333118.com
-# 官方云任务平台 / add by Rule-Bot user: More / Date: 2026-02-12 23:29:49
+# 官方云任务平台 / add by Telegram user: More / Date: 2026-02-12 23:29:49
 DOMAIN-SUFFIX,onetools.top
-# 自用 / add by Rule-Bot user: along / Date: 2026-01-31 19:38:38
+# 自用 / add by Telegram user: along / Date: 2026-01-31 19:38:38
 DOMAIN-SUFFIX,alonginwind.to
-# 自用 / add by Rule-Bot user: along / Date: 2026-01-31 19:37:29
+# 自用 / add by Telegram user: along / Date: 2026-01-31 19:37:29
 DOMAIN-SUFFIX,alonginwind.eu.org
 # ios 固件下载
 DOMAIN-SUFFIX,iosgujian.com
-# 复利笔记小程序 / add by Rule-Bot user: 🥝🥝🥝混个脸熟 / Date: 2026-03-31 00:28:03
+# 复利笔记小程序 / add by Telegram user: 🥝🥝🥝混个脸熟 / Date: 2026-03-31 00:28:03
 DOMAIN-SUFFIX,fuyinkeji.top
-# add by Rule-Bot user:  / Date: 2026-03-10 00:15:38
+# add by Telegram user:  / Date: 2026-03-10 00:15:38
 DOMAIN-SUFFIX,0734cn.top
-# add by Rule-Bot user:  / Date: 2026-03-10 00:15:44
+# add by Telegram user:  / Date: 2026-03-10 00:15:44
 DOMAIN-SUFFIX,hutaoyun.top
-# 先锋学霸 / add by Rule-Bot user: Mairs / Date: 2026-01-22 17:46:58
+# 先锋学霸 / add by Telegram user: Mairs / Date: 2026-01-22 17:46:58
 DOMAIN-SUFFIX,axuex.top
-# 播客 / add by Rule-Bot user: Mairs / Date: 2026-01-22 17:49:33
+# 播客 / add by Telegram user: Mairs / Date: 2026-01-22 17:49:33
 DOMAIN-SUFFIX,meiyitou.top
-# add by Rule-Bot user: 哈Lay / Date: 2026-01-14 18:11:07
+# add by Telegram user: 哈Lay / Date: 2026-01-14 18:11:07
 DOMAIN-SUFFIX,rayws.top
-# 社区 / add by Rule-Bot user: 哈Lay / Date: 2025-12-29 12:54:22
+# 社区 / add by Telegram user: 哈Lay / Date: 2025-12-29 12:54:22
 DOMAIN-SUFFIX,a0d.top
-# add by Rule-Bot user: IllIllIlIl / Date: 2026-01-05 08:54:12
+# add by Telegram user: IllIllIlIl / Date: 2026-01-05 08:54:12
 DOMAIN-SUFFIX,cmbc.run
-# add by Rule-Bot user: hlly / Date: 2026-01-06 22:51:31
+# add by Telegram user: hlly / Date: 2026-01-06 22:51:31
 DOMAIN-SUFFIX,kcbd.top
-# CDN / add by Rule-Bot user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-17 11:16:00
+# CDN / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-17 11:16:00
 DOMAIN-SUFFIX,bunny.net
-# bark默认服务器的域名 / add by Rule-Bot user: Shu / Date: 2025-11-15 18:41:59
+# bark默认服务器的域名 / add by Telegram user: Shu / Date: 2025-11-15 18:41:59
 DOMAIN-SUFFIX,day.app
-# add by Rule-Bot user: Aethersailor / Date: 2025-12-05 14:30:18
+# add by Telegram user: Aethersailor / Date: 2025-12-05 14:30:18
 DOMAIN-SUFFIX,xkkapk.com
-# add by Rule-Bot user: y / Date: 2025-10-18 22:22:04
+# add by Telegram user: y / Date: 2025-10-18 22:22:04
 DOMAIN-SUFFIX,tozi-cn.top
-# x86Pi / add by Rule-Bot user: Aethersailor / Date: 2025-09-08 12:03:12
+# x86Pi / add by Telegram user: Aethersailor / Date: 2025-09-08 12:03:12
 DOMAIN-SUFFIX,x86pi.com
-# 精准定位 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 01:47:12
+# 精准定位 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 01:47:12
 DOMAIN-SUFFIX,webs.vc
-# 牛逼云无需富强官网 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-23 17:18:18
+# 牛逼云无需富强官网 / add by Telegram user: 真怪誕呀 / Date: 2025-08-23 17:18:18
 DOMAIN-SUFFIX,idsduf.com
-# xiaomi.com / add by Rule-Bot user: r / Date: 2025-08-21 18:58:58
+# xiaomi.com / add by Telegram user: r / Date: 2025-08-21 18:58:58
 DOMAIN-SUFFIX,ok321.top
-# add by Rule-Bot user: r / Date: 2025-08-14 00:22:00
+# add by Telegram user: r / Date: 2025-08-14 00:22:00
 DOMAIN-SUFFIX,xn--4kq62z5rby2qupq9ub.top
-# add by Rule-Bot user: Aethersailor / Date: 2025-07-27 02:03:58
+# add by Telegram user: Aethersailor / Date: 2025-07-27 02:03:58
 DOMAIN-SUFFIX,afuns.me
-# sanligu home lab / add by Rule-Bot user: sanligu / Date: 2025-07-29 15:50:35
+# sanligu home lab / add by Telegram user: sanligu / Date: 2025-07-29 15:50:35
 DOMAIN-SUFFIX,sanligu.top
-# 华盛通 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 15:12:21
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:12:21
 DOMAIN-SUFFIX,vbkr.com
 
 # ==============================================
@@ -309,23 +309,23 @@ DOMAIN-SUFFIX,vbkr.com
 
 # https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/416
 DOMAIN-SUFFIX,cqjypg.com
-# add by Rule-Bot user: 嘿嘿 / Date: 2026-04-11 08:08:32
+# add by Telegram user: 嘿嘿 / Date: 2026-04-11 08:08:32
 DOMAIN-SUFFIX,jsj.top
-# add by Rule-Bot user: Evan / Date: 2026-07-05 10:09:41
+# add by Telegram user: Evan / Date: 2026-07-05 10:09:41
 DOMAIN-SUFFIX,yunqin.online
-# 操作系统网站 / add by Rule-Bot user: young / Date: 2026-06-02 18:02:31
+# 操作系统网站 / add by Telegram user: young / Date: 2026-06-02 18:02:31
 DOMAIN-SUFFIX,xiuxitong.com
-# 打印服务 / add by Rule-Bot user: Shady / Date: 2026-06-18 13:42:23
+# 打印服务 / add by Telegram user: Shady / Date: 2026-06-18 13:42:23
 DOMAIN-SUFFIX,tluyou.com
-# 个人网站 / add by Rule-Bot user: Harry / Date: 2026-07-03 22:51:54
+# 个人网站 / add by Telegram user: Harry / Date: 2026-07-03 22:51:54
 DOMAIN-SUFFIX,inetlab.top
-# 返利APP / add by Rule-Bot user: 西索 / Date: 2026-05-25 12:06:21
+# 返利APP / add by Telegram user: 西索 / Date: 2026-05-25 12:06:21
 DOMAIN-SUFFIX,haofanhuoban.com
-# add by Rule-Bot user: suiyu / Date: 2026-05-24 20:55:39
+# add by Telegram user: suiyu / Date: 2026-05-24 20:55:39
 DOMAIN-SUFFIX,terrabbs.ink
-# 视频流api / add by Rule-Bot user: Nobody / Date: 2026-05-18 00:52:48
+# 视频流api / add by Telegram user: Nobody / Date: 2026-05-18 00:52:48
 DOMAIN-SUFFIX,yingshi.dog
-# 中转api / add by Rule-Bot user: 美 / Date: 2026-05-15 21:45:11
+# 中转api / add by Telegram user: 美 / Date: 2026-05-15 21:45:11
 DOMAIN-SUFFIX,code-relay.com
 # 安徽联通
 DOMAIN-SUFFIX,ahlt10010.com
@@ -382,7 +382,7 @@ DOMAIN-SUFFIX,windinput.com
 DOMAIN-SUFFIX,nmjsjs.com
 # add by Rule-Bot Client / Date: 2026-11-23 07:38:56
 DOMAIN-SUFFIX,aibox.eu.org
-# add by Rule-Bot user: JinjerTK / Date: 2026-11-23 00:03:34
+# add by Telegram user: JinjerTK / Date: 2026-11-23 00:03:34
 DOMAIN-SUFFIX,jiaohukejian.com
 # add by Rule-Bot Client / Date: 2026-11-22 23:36:47
 DOMAIN-SUFFIX,fexsqz.com
@@ -528,7 +528,7 @@ DOMAIN-SUFFIX,jjwer.com
 DOMAIN-SUFFIX,shemen365.com
 # add by Rule-Bot Client / Date: 2026-11-16 11:44:03
 DOMAIN-SUFFIX,manbangcredit.com
-# add by Rule-Bot user: JinjerTK / Date: 2026-11-16 10:57:01
+# add by Telegram user: JinjerTK / Date: 2026-11-16 10:57:01
 DOMAIN-SUFFIX,kelexuexi.com
 # add by Rule-Bot Client / Date: 2026-11-16 00:15:36
 DOMAIN-SUFFIX,lx51ib3szv.cc
@@ -550,11 +550,11 @@ DOMAIN-SUFFIX,aroychmdcl.cc
 DOMAIN-SUFFIX,6apzfdx.com
 # add by Rule-Bot Client / Date: 2026-11-15 00:45:47
 DOMAIN-SUFFIX,nht5dbh.cc
-# add by Rule-Bot user: mpbizn / Date: 2026-11-14 21:30:35
+# add by Telegram user: mpbizn / Date: 2026-11-14 21:30:35
 DOMAIN-SUFFIX,guazi.fun
 # add by Rule-Bot Client / Date: 2026-11-14 21:16:31
 DOMAIN-SUFFIX,yishares.com
-# 天津首创供水 / add by Rule-Bot user: shmily1866 / Date: 2026-11-14 18:46:11
+# 天津首创供水 / add by Telegram user: shmily1866 / Date: 2026-11-14 18:46:11
 DOMAIN-SUFFIX,tjnhscgs.com
 # add by Rule-Bot Client / Date: 2026-11-14 11:56:47
 DOMAIN-SUFFIX,betaints.com
@@ -796,7 +796,7 @@ DOMAIN-SUFFIX,ftsup.com
 DOMAIN-SUFFIX,meimuyingxiao.com
 # add by Rule-Bot Client / Date: 2026-11-03 20:01:46
 DOMAIN-SUFFIX,qdgsny.com
-# add by Rule-Bot user: zhangzz / Date: 2026-11-03 19:21:35
+# add by Telegram user: zhangzz / Date: 2026-11-03 19:21:35
 DOMAIN-SUFFIX,arena-cn.com
 # add by Rule-Bot Client / Date: 2026-11-03 14:46:51
 DOMAIN-SUFFIX,zxp7.cc
@@ -852,13 +852,13 @@ DOMAIN-SUFFIX,tylk.cc
 DOMAIN-SUFFIX,leux.net
 # add by Rule-Bot Client / Date: 2026-11-01 14:48:08
 DOMAIN-SUFFIX,luxiangwu.com
-# add by Rule-Bot user: mpbizn / Date: 2026-11-01 13:40:04
+# add by Telegram user: mpbizn / Date: 2026-11-01 13:40:04
 DOMAIN-SUFFIX,hndk1.com
 # add by Rule-Bot Client / Date: 2026-11-01 07:16:37
 DOMAIN-SUFFIX,qpe27.top
 # add by Rule-Bot Client / Date: 2026-10-31 14:52:29
 DOMAIN-SUFFIX,allsaints.top
-# AITO汽车服务 / add by Rule-Bot user: pangxiaopang666 / Date: 2026-10-31 13:52:12
+# AITO汽车服务 / add by Telegram user: pangxiaopang666 / Date: 2026-10-31 13:52:12
 DOMAIN-SUFFIX,fgaiservice.com
 # add by Rule-Bot Client / Date: 2026-10-31 03:41:48
 DOMAIN-SUFFIX,yeguodj.com
@@ -872,7 +872,7 @@ DOMAIN-SUFFIX,sxjiabeide.com
 DOMAIN-SUFFIX,847ds.com
 # add by Rule-Bot Client / Date: 2026-10-30 17:03:53
 DOMAIN-SUFFIX,yixlab.com
-# add by Rule-Bot user: nhlzh14138 / Date: 2026-10-30 16:09:24
+# add by Telegram user: nhlzh14138 / Date: 2026-10-30 16:09:24
 DOMAIN-SUFFIX,paojiaoyun.com
 # add by Rule-Bot Client / Date: 2026-10-30 15:21:03
 DOMAIN-SUFFIX,topkee.com
@@ -944,17 +944,17 @@ DOMAIN-SUFFIX,kbser.com
 DOMAIN-SUFFIX,757abc.com
 # add by Rule-Bot Client / Date: 2026-10-29 06:40:54
 DOMAIN-SUFFIX,sun-panel.top
-# add by Rule-Bot user: JinjerTK / Date: 2026-10-28 19:20:46
+# add by Telegram user: JinjerTK / Date: 2026-10-28 19:20:46
 DOMAIN-SUFFIX,human-horizons.com
-# add by Rule-Bot user: JinjerTK / Date: 2026-10-28 15:50:32
+# add by Telegram user: JinjerTK / Date: 2026-10-28 15:50:32
 DOMAIN-SUFFIX,changzhi.top
-# add by Rule-Bot user: JinjerTK / Date: 2026-10-28 15:47:09
+# add by Telegram user: JinjerTK / Date: 2026-10-28 15:47:09
 DOMAIN-SUFFIX,xiaoyao.co
-# add by Rule-Bot user: JinjerTK / Date: 2026-10-28 15:46:09
+# add by Telegram user: JinjerTK / Date: 2026-10-28 15:46:09
 DOMAIN-SUFFIX,ldboost.com
-# add by Rule-Bot user: JinjerTK / Date: 2026-10-28 15:44:50
+# add by Telegram user: JinjerTK / Date: 2026-10-28 15:44:50
 DOMAIN-SUFFIX,qzy.xyz
-# add by Rule-Bot user: donglailin / Date: 2026-10-28 08:04:32
+# add by Telegram user: donglailin / Date: 2026-10-28 08:04:32
 DOMAIN-SUFFIX,liyunol.com
 # add by Rule-Bot Client / Date: 2026-10-26 22:14:17
 DOMAIN-SUFFIX,cindy.app
@@ -968,9 +968,9 @@ DOMAIN-SUFFIX,v-koolsh.com
 DOMAIN-SUFFIX,aitongqian.com
 # add by Rule-Bot Client / Date: 2026-10-25 12:51:17
 DOMAIN-SUFFIX,wanzd.com
-# 小说网站 / add by Rule-Bot user: cosalone / Date: 2026-10-24 17:34:10
+# 小说网站 / add by Telegram user: cosalone / Date: 2026-10-24 17:34:10
 DOMAIN-SUFFIX,77shuku.info
-# add by Rule-Bot user: mpbizn / Date: 2026-10-24 09:46:41
+# add by Telegram user: mpbizn / Date: 2026-10-24 09:46:41
 DOMAIN-SUFFIX,xingpaste.com
 # add by Rule-Bot Client / Date: 2026-10-24 04:16:58
 DOMAIN-SUFFIX,szmtzd.com
@@ -982,11 +982,11 @@ DOMAIN-SUFFIX,infistar.cc
 DOMAIN-SUFFIX,hanzhe.site
 # add by Rule-Bot Client / Date: 2026-10-20 22:46:40
 DOMAIN-SUFFIX,taotoken.net
-# 宝库一号游戏下载站 / add by Rule-Bot user: mpbizn / Date: 2026-10-20 22:01:51
+# 宝库一号游戏下载站 / add by Telegram user: mpbizn / Date: 2026-10-20 22:01:51
 DOMAIN-SUFFIX,baoku.one
 # add by Rule-Bot Client / Date: 2026-10-20 18:12:50
 DOMAIN-SUFFIX,browserscan.net
-# 瓦力UPS / add by Rule-Bot user: hwzjcofo / Date: 2026-10-19 19:02:52
+# 瓦力UPS / add by Telegram user: hwzjcofo / Date: 2026-10-19 19:02:52
 DOMAIN-SUFFIX,wallecube.com
 # add by Rule-Bot Client / Date: 2026-10-19 17:07:52
 DOMAIN-SUFFIX,laupqc.com
@@ -996,7 +996,7 @@ DOMAIN-SUFFIX,cc44dd.com
 DOMAIN-SUFFIX,vvhan.com
 # add by Rule-Bot Client / Date: 2026-10-19 08:54:16
 DOMAIN-SUFFIX,cbn.id
-# add by Rule-Bot user: mpbizn / Date: 2026-10-18 19:53:57
+# add by Telegram user: mpbizn / Date: 2026-10-18 19:53:57
 DOMAIN-SUFFIX,sollin.top
 # add by Rule-Bot Client / Date: 2026-10-18 17:26:22
 DOMAIN-SUFFIX,12zayb.com
@@ -1018,17 +1018,17 @@ DOMAIN-SUFFIX,wawo.cc
 DOMAIN-SUFFIX,lzgame.top
 # add by Rule-Bot Client / Date: 2026-10-16 20:59:14
 DOMAIN-SUFFIX,xn--estr6ge7tok1a.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-10-16 20:57:09
+# add by Telegram user: Aethersailor / Date: 2026-10-16 20:57:09
 DOMAIN-SUFFIX,bambulab.com
-# add by Rule-Bot user: donglailin / Date: 2026-10-16 15:08:07
+# add by Telegram user: donglailin / Date: 2026-10-16 15:08:07
 DOMAIN-SUFFIX,astrobox.online
-# add by Rule-Bot user: Mrhuiji / Date: 2026-10-16 12:04:36
+# add by Telegram user: Mrhuiji / Date: 2026-10-16 12:04:36
 DOMAIN-SUFFIX,onesetapp.com
-# add by Rule-Bot user: Mrhuiji / Date: 2026-10-16 11:02:42
+# add by Telegram user: Mrhuiji / Date: 2026-10-16 11:02:42
 DOMAIN-SUFFIX,handfree.work
 # add by Rule-Bot Client / Date: 2026-10-16 02:01:53
 DOMAIN-SUFFIX,ptxzn.com
-# add by Rule-Bot user: Mrhuiji / Date: 2026-10-15 16:42:10
+# add by Telegram user: Mrhuiji / Date: 2026-10-15 16:42:10
 DOMAIN-SUFFIX,yldw.net
 # add by Rule-Bot Client / Date: 2026-10-13 17:07:17
 DOMAIN-SUFFIX,xiamp.net
@@ -1036,9 +1036,9 @@ DOMAIN-SUFFIX,xiamp.net
 DOMAIN-SUFFIX,moctory.com
 # add by Rule-Bot Client / Date: 2026-10-12 13:37:46
 DOMAIN-SUFFIX,ciyuancenter.cc
-# add by Rule-Bot user: Mrhuiji / Date: 2026-10-12 13:09:25
+# add by Telegram user: Mrhuiji / Date: 2026-10-12 13:09:25
 DOMAIN-SUFFIX,minekuai.com
-# add by Rule-Bot user: duduzhazha / Date: 2026-10-12 00:34:49
+# add by Telegram user: duduzhazha / Date: 2026-10-12 00:34:49
 DOMAIN-SUFFIX,ymwfy.com
 # add by Rule-Bot Client / Date: 2026-10-11 22:35:40
 DOMAIN-SUFFIX,gta6keji.com
@@ -1154,17 +1154,17 @@ DOMAIN-SUFFIX,112114.eu.org
 DOMAIN-SUFFIX,fm-vip.com
 # add by Rule-Bot Client / Date: 2026-10-07 23:49:27
 DOMAIN-SUFFIX,zzz-hp.top
-# 锦州公交 / add by Rule-Bot user: alonginwind / Date: 2026-10-05 08:48:19
+# 锦州公交 / add by Telegram user: alonginwind / Date: 2026-10-05 08:48:19
 DOMAIN-SUFFIX,jzgj.com
 # add by Rule-Bot Client / Date: 2026-10-02 21:40:57
 DOMAIN-SUFFIX,maxdo.tech
-# 大童保险 / add by Rule-Bot user: MystraGood / Date: 2026-10-01 20:23:45
+# 大童保险 / add by Telegram user: MystraGood / Date: 2026-10-01 20:23:45
 DOMAIN-SUFFIX,dtinsure.com
-# add by Rule-Bot user: Cyboot / Date: 2026-10-01 19:49:41
+# add by Telegram user: Cyboot / Date: 2026-10-01 19:49:41
 DOMAIN-SUFFIX,4942.cc
 # add by Rule-Bot Client / Date: 2026-10-01 13:11:54
 DOMAIN-SUFFIX,gxcould.com
-# add by Rule-Bot user: alonginwind / Date: 2026-09-30 21:03:22
+# add by Telegram user: alonginwind / Date: 2026-09-30 21:03:22
 DOMAIN-SUFFIX,hclassplatform.com
 # add by Rule-Bot Client / Date: 2026-09-29 11:17:56
 DOMAIN-SUFFIX,e0x233.com
@@ -1172,7 +1172,7 @@ DOMAIN-SUFFIX,e0x233.com
 DOMAIN-SUFFIX,grz-hx.com
 # add by Rule-Bot Client / Date: 2026-09-29 09:26:45
 DOMAIN-SUFFIX,feiniugo.com
-# add by Rule-Bot user: pangxiaopang666 / Date: 2026-09-28 09:55:29
+# add by Telegram user: pangxiaopang666 / Date: 2026-09-28 09:55:29
 DOMAIN-SUFFIX,inextos.com
 # add by Rule-Bot Client / Date: 2026-09-28 08:03:29
 DOMAIN-SUFFIX,hzttwl.com
@@ -1184,15 +1184,15 @@ DOMAIN-SUFFIX,hsdxdl.com
 DOMAIN-SUFFIX,ljj233.top
 # add by Rule-Bot Client / Date: 2026-09-27 08:57:00
 DOMAIN-SUFFIX,juantui.com
-# tgpro 服务器 / add by Rule-Bot user: Solntse_332 / Date: 2026-09-26 23:48:58
+# tgpro 服务器 / add by Telegram user: Solntse_332 / Date: 2026-09-26 23:48:58
 DOMAIN-SUFFIX,tgpro.top
-# CS2 TGPRO 训练服官网 / add by Rule-Bot user: Solntse_332 / Date: 2026-09-26 23:48:11
+# CS2 TGPRO 训练服官网 / add by Telegram user: Solntse_332 / Date: 2026-09-26 23:48:11
 DOMAIN-SUFFIX,tgpro.net
 # add by Rule-Bot Client / Date: 2026-09-26 22:18:41
 DOMAIN-SUFFIX,lezuan6.com
-# 同步课堂重要的国内网站希望收录 / add by Rule-Bot user: jjxldd / Date: 2026-09-26 20:59:40
+# 同步课堂重要的国内网站希望收录 / add by Telegram user: jjxldd / Date: 2026-09-26 20:59:40
 DOMAIN-SUFFIX,banxueketang.com
-# 滔滔对讲 app 域名链路 / add by Rule-Bot user: Solntse_332 / Date: 2026-09-26 17:27:21
+# 滔滔对讲 app 域名链路 / add by Telegram user: Solntse_332 / Date: 2026-09-26 17:27:21
 DOMAIN-SUFFIX,allptt.com
 # add by Rule-Bot Client / Date: 2026-09-25 23:34:39
 DOMAIN-SUFFIX,hnzjyw.com
@@ -1200,7 +1200,7 @@ DOMAIN-SUFFIX,hnzjyw.com
 DOMAIN-SUFFIX,vipjiapu.com
 # add by Rule-Bot Client / Date: 2026-09-25 23:17:12
 DOMAIN-SUFFIX,hzssjp.com
-# 世界超高清视频产业联盟（UWA） / add by Rule-Bot user: mpbizn / Date: 2026-09-25 21:48:08
+# 世界超高清视频产业联盟（UWA） / add by Telegram user: mpbizn / Date: 2026-09-25 21:48:08
 DOMAIN-SUFFIX,theuwa.com
 # add by Rule-Bot Client / Date: 2026-09-25 17:42:33
 DOMAIN-SUFFIX,type.fun
@@ -1224,13 +1224,13 @@ DOMAIN-SUFFIX,cdn362.cc
 DOMAIN-SUFFIX,sjchess.com
 # add by Rule-Bot Client / Date: 2026-09-23 09:16:43
 DOMAIN-SUFFIX,hjgdrop.cc
-# 巧克力换电App / add by Rule-Bot user: mpbizn / Date: 2026-09-22 21:49:03
+# 巧克力换电App / add by Telegram user: mpbizn / Date: 2026-09-22 21:49:03
 DOMAIN-SUFFIX,chocolateswap.com
 # add by Rule-Bot Client / Date: 2026-09-20 20:01:59
 DOMAIN-SUFFIX,pdf001.com
-# 久久金集团（久久金管家） / add by Rule-Bot user: ClClzhu / Date: 2026-09-20 09:38:17
+# 久久金集团（久久金管家） / add by Telegram user: ClClzhu / Date: 2026-09-20 09:38:17
 DOMAIN-SUFFIX,9999jt.com
-# 德京集团有限公司 / add by Rule-Bot user: ClClzhu / Date: 2026-09-20 09:37:42
+# 德京集团有限公司 / add by Telegram user: ClClzhu / Date: 2026-09-20 09:37:42
 DOMAIN-SUFFIX,fjdejing.com
 # add by Rule-Bot Client / Date: 2026-09-19 22:13:34
 DOMAIN-SUFFIX,visionariopro.com
@@ -1246,15 +1246,15 @@ DOMAIN-SUFFIX,code.fun
 DOMAIN-SUFFIX,adsmart.cc
 # add by Rule-Bot Client / Date: 2026-09-19 00:23:08
 DOMAIN-SUFFIX,feiyujiaju.com
-# add by Rule-Bot user: llIllIIlIlIIIl / Date: 2026-09-18 22:54:59
+# add by Telegram user: llIllIIlIlIIIl / Date: 2026-09-18 22:54:59
 DOMAIN-SUFFIX,boxkj.com
-# add by Rule-Bot user: llIllIIlIlIIIl / Date: 2026-09-18 22:54:34
+# add by Telegram user: llIllIIlIlIIIl / Date: 2026-09-18 22:54:34
 DOMAIN-SUFFIX,sxstczx.com
 # add by Rule-Bot Client / Date: 2026-09-18 00:08:15
 DOMAIN-SUFFIX,shsw.top
 # add by Rule-Bot Client / Date: 2026-09-17 11:59:27
 DOMAIN-SUFFIX,kamhing.net
-# add by Rule-Bot user: Telegram user / Date: 2026-09-16 15:37:24
+# add by Telegram user: Telegram user / Date: 2026-09-16 15:37:24
 DOMAIN-SUFFIX,028zk01.net
 # add by Rule-Bot Client / Date: 2026-09-15 01:49:12
 DOMAIN-SUFFIX,taichuansmart.com
@@ -1278,7 +1278,7 @@ DOMAIN-SUFFIX,fnspeed.net
 DOMAIN-SUFFIX,91biu.work
 # add by Rule-Bot Client / Date: 2026-09-12 18:08:29
 DOMAIN-SUFFIX,tualatin.club
-# 自考网 / add by Rule-Bot user: Telegram user / Date: 2026-09-12 11:15:04
+# 自考网 / add by Telegram user: Telegram user / Date: 2026-09-12 11:15:04
 DOMAIN-SUFFIX,zhewx.com
 # add by Rule-Bot Client / Date: 2026-09-12 00:52:48
 DOMAIN-SUFFIX,gxrke1715.com
@@ -1294,13 +1294,13 @@ DOMAIN-SUFFIX,dropiy.com
 DOMAIN-SUFFIX,skxvc.com
 # add by Rule-Bot Client / Date: 2026-09-10 02:49:51
 DOMAIN-SUFFIX,iquantumad.com
-# 威视达康 / add by Rule-Bot user: ClClzhu / Date: 2026-09-09 17:08:22
+# 威视达康 / add by Telegram user: ClClzhu / Date: 2026-09-09 17:08:22
 DOMAIN-SUFFIX,eye4cloud.com
-# 今日水印相机 / add by Rule-Bot user: ClClzhu / Date: 2026-09-09 16:56:30
+# 今日水印相机 / add by Telegram user: ClClzhu / Date: 2026-09-09 16:56:30
 DOMAIN-SUFFIX,xhey.top
-# 福州教育局小程序“榕教之窗” / add by Rule-Bot user: ClClzhu / Date: 2026-09-09 16:51:33
+# 福州教育局小程序“榕教之窗” / add by Telegram user: ClClzhu / Date: 2026-09-09 16:51:33
 DOMAIN-SUFFIX,fzedu.pub
-# add by Rule-Bot user: ClClzhu / Date: 2026-09-09 16:48:15
+# add by Telegram user: ClClzhu / Date: 2026-09-09 16:48:15
 DOMAIN-SUFFIX,diandaojia.net
 # add by Rule-Bot Client / Date: 2026-09-09 11:34:44
 DOMAIN-SUFFIX,mifosy.com
@@ -1308,17 +1308,17 @@ DOMAIN-SUFFIX,mifosy.com
 DOMAIN-SUFFIX,hongyanyanbaihuo.online
 # add by Rule-Bot Client / Date: 2026-09-09 06:59:39
 DOMAIN-SUFFIX,nwiztech.com
-# add by Rule-Bot user: wink_0624 / Date: 2026-09-08 22:09:53
+# add by Telegram user: wink_0624 / Date: 2026-09-08 22:09:53
 DOMAIN-SUFFIX,618208.xyz
 # add by Rule-Bot Client / Date: 2026-09-08 21:02:05
 DOMAIN-SUFFIX,amap-cdn.com
-# add by Rule-Bot user: Gilbert / Date: 2026-09-08 20:53:10
+# add by Telegram user: Gilbert / Date: 2026-09-08 20:53:10
 DOMAIN-SUFFIX,vlan5.com
-# add by Rule-Bot user: Gilbert / Date: 2026-09-08 20:52:53
+# add by Telegram user: Gilbert / Date: 2026-09-08 20:52:53
 DOMAIN-SUFFIX,spisec.com
-# 影视服务 / add by Rule-Bot user: Gilbert / Date: 2026-09-08 20:48:04
+# 影视服务 / add by Telegram user: Gilbert / Date: 2026-09-08 20:48:04
 DOMAIN-SUFFIX,xingmojs.com
-# 影视服务 / add by Rule-Bot user: Gilbert / Date: 2026-09-08 20:47:17
+# 影视服务 / add by Telegram user: Gilbert / Date: 2026-09-08 20:47:17
 DOMAIN-SUFFIX,zuidazym3u8.com
 # add by Rule-Bot Client / Date: 2026-09-08 18:01:59
 DOMAIN-SUFFIX,shuangxiumall.com
@@ -1342,7 +1342,7 @@ DOMAIN-SUFFIX,bxlsj.com
 DOMAIN-SUFFIX,hdcm00.com
 # add by Rule-Bot Client / Date: 2026-09-07 15:38:06
 DOMAIN-SUFFIX,qmpx.net
-# 国网造价软件-博微软件的相关域名 / add by Rule-Bot user: ClClzhu / Date: 2026-09-07 13:55:05
+# 国网造价软件-博微软件的相关域名 / add by Telegram user: ClClzhu / Date: 2026-09-07 13:55:05
 DOMAIN-SUFFIX,boowayun.com
 # add by Rule-Bot Client / Date: 2026-09-07 09:27:43
 DOMAIN-SUFFIX,faka163.com
@@ -1384,13 +1384,13 @@ DOMAIN-SUFFIX,nyxcuy.com
 DOMAIN-SUFFIX,cqnbmarathon.com
 # add by Rule-Bot Client / Date: 2026-09-05 07:01:20
 DOMAIN-SUFFIX,kwai.net
-# add by Rule-Bot user: Evan_Mak / Date: 2026-09-04 22:24:02
+# add by Telegram user: Evan_Mak / Date: 2026-09-04 22:24:02
 DOMAIN-SUFFIX,quanzhua.com
 # add by Rule-Bot Client / Date: 2026-09-04 15:01:59
 DOMAIN-SUFFIX,huacheng2025.com
 # add by Rule-Bot Client / Date: 2026-09-04 10:40:16
 DOMAIN-SUFFIX,cc.ink
-# 艾迈斯公司官网 / add by Rule-Bot user: mpbizn / Date: 2026-09-03 22:07:40
+# 艾迈斯公司官网 / add by Telegram user: mpbizn / Date: 2026-09-03 22:07:40
 DOMAIN-SUFFIX,china-amass.com
 # add by Rule-Bot Client / Date: 2026-09-02 04:49:04
 DOMAIN-SUFFIX,yueti.vip
@@ -1418,7 +1418,7 @@ DOMAIN-SUFFIX,calmate.cc
 DOMAIN-SUFFIX,800686.xyz
 # add by Rule-Bot Client / Date: 2026-08-30 13:36:53
 DOMAIN-SUFFIX,wty-yy.top
-# add by Rule-Bot user: Evan_Mak / Date: 2026-08-30 12:58:59
+# add by Telegram user: Evan_Mak / Date: 2026-08-30 12:58:59
 DOMAIN-SUFFIX,baominggongju.com
 # add by Rule-Bot Client / Date: 2026-08-29 07:56:22
 DOMAIN-SUFFIX,admpv.net
@@ -1476,7 +1476,7 @@ DOMAIN-SUFFIX,xiaocaiyuan.com
 DOMAIN-SUFFIX,lsposed.zip
 # add by Rule-Bot Client / Date: 2026-08-27 16:13:56
 DOMAIN-SUFFIX,yibanbianji.com
-# add by Rule-Bot user: Evan_Mak / Date: 2026-08-27 12:41:36
+# add by Telegram user: Evan_Mak / Date: 2026-08-27 12:41:36
 DOMAIN-SUFFIX,fsjiaoyubang.com
 # add by Rule-Bot Client / Date: 2026-08-27 11:30:04
 DOMAIN-SUFFIX,orence.net
@@ -1622,21 +1622,21 @@ DOMAIN-SUFFIX,monkeyray.net
 DOMAIN-SUFFIX,hanqiuming888.com
 # add by Rule-Bot Client / Date: 2026-08-21 11:43:29
 DOMAIN-SUFFIX,yhxjkj.top
-# 建筑 / 室内设计 AI 设计平台 / add by Rule-Bot user: whsiny_1112 / Date: 2026-08-17 17:06:47
+# 建筑 / 室内设计 AI 设计平台 / add by Telegram user: whsiny_1112 / Date: 2026-08-17 17:06:47
 DOMAIN-SUFFIX,openevai.com
-# add by Rule-Bot user: duduzhazha / Date: 2026-08-08 22:17:12
+# add by Telegram user: duduzhazha / Date: 2026-08-08 22:17:12
 DOMAIN-SUFFIX,anvnjmc.com
-# add by Rule-Bot user: duduzhazha / Date: 2026-08-08 22:12:27
+# add by Telegram user: duduzhazha / Date: 2026-08-08 22:12:27
 DOMAIN-SUFFIX,56tvc.com
 # add by Rule-Bot Client / Date: 2026-08-08 12:42:47
 DOMAIN-SUFFIX,fenno.ai
 # add by Rule-Bot Client / Date: 2026-08-07 19:44:20
 DOMAIN-SUFFIX,suntl.com
-# add by Rule-Bot user: duduzhazha / Date: 2026-08-07 13:03:03
+# add by Telegram user: duduzhazha / Date: 2026-08-07 13:03:03
 DOMAIN-SUFFIX,senachina.com
 # add by Rule-Bot Client / Date: 2026-08-07 10:46:44
 DOMAIN-SUFFIX,sufe.me
-# add by Rule-Bot user: Aethersailor / Date: 2026-08-07 10:38:52
+# add by Telegram user: Aethersailor / Date: 2026-08-07 10:38:52
 DOMAIN-SUFFIX,zzqrgs3148.vip
 # add by Rule-Bot Client / Date: 2026-08-07 08:42:20
 DOMAIN-SUFFIX,hoaihe.store
@@ -1644,103 +1644,103 @@ DOMAIN-SUFFIX,hoaihe.store
 DOMAIN-SUFFIX,acgdraw.com
 # add by Rule-Bot Client / Date: 2026-08-06 08:10:01
 DOMAIN-SUFFIX,zhaiad.com
-# add by Rule-Bot user: 美 / Date: 2026-08-06 03:17:49
+# add by Telegram user: 美 / Date: 2026-08-06 03:17:49
 DOMAIN-SUFFIX,975135.xyz
 # add by Rule-Bot Client / Date: 2026-08-06 00:25:36
 DOMAIN-SUFFIX,0759mall.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-08-05 23:09:30
+# add by Telegram user: Aethersailor / Date: 2026-08-05 23:09:30
 DOMAIN-SUFFIX,8x14khzwmi.com
-# 游戏工具 / add by Rule-Bot user: Shady / Date: 2026-08-05 15:20:53
+# 游戏工具 / add by Telegram user: Shady / Date: 2026-08-05 15:20:53
 DOMAIN-SUFFIX,fffff.games
-# add by Rule-Bot user: _ / Date: 2026-08-04 13:09:23
+# add by Telegram user: _ / Date: 2026-08-04 13:09:23
 DOMAIN-SUFFIX,dircleaner.com
-# add by Rule-Bot user: _ / Date: 2026-08-04 13:08:14
+# add by Telegram user: _ / Date: 2026-08-04 13:08:14
 DOMAIN-SUFFIX,chuguansmart.com
-# 壹念视觉 / add by Rule-Bot user: Chenyu / Date: 2026-08-04 13:05:09
+# 壹念视觉 / add by Telegram user: Chenyu / Date: 2026-08-04 13:05:09
 DOMAIN-SUFFIX,ynsj001.com
-# SyServer MC服务器 / add by Rule-Bot user: 嘿嘿 / Date: 2026-08-04 10:54:09
+# SyServer MC服务器 / add by Telegram user: 嘿嘿 / Date: 2026-08-04 10:54:09
 DOMAIN-SUFFIX,xn--zfru1ggxt.fun
-# 薄荷省钱助手 / add by Rule-Bot user: XI / Date: 2026-08-02 21:00:56
+# 薄荷省钱助手 / add by Telegram user: XI / Date: 2026-08-02 21:00:56
 DOMAIN-SUFFIX,52youzai.com
-# 轻简AI智能客服 / add by Rule-Bot user: 难离难舍屌你家姐 / Date: 2026-08-01 18:11:07
+# 轻简AI智能客服 / add by Telegram user: 难离难舍屌你家姐 / Date: 2026-08-01 18:11:07
 DOMAIN-SUFFIX,qingjiansoft.com
-# 东莞市第八人民医院 / add by Rule-Bot user: 难离难舍屌你家姐 / Date: 2026-07-31 17:28:08
+# 东莞市第八人民医院 / add by Telegram user: 难离难舍屌你家姐 / Date: 2026-07-31 17:28:08
 DOMAIN-SUFFIX,ba-hospital.com
 # https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/383
 DOMAIN-SUFFIX,xiaomaicn.com
-# 科研测试网站 / add by Rule-Bot user: James / Date: 2026-07-30 20:23:43
+# 科研测试网站 / add by Telegram user: James / Date: 2026-07-30 20:23:43
 DOMAIN-SUFFIX,eceshi.com
-# 财信证券 / add by Rule-Bot user: along / Date: 2026-07-30 19:34:09
+# 财信证券 / add by Telegram user: along / Date: 2026-07-30 19:34:09
 DOMAIN-SUFFIX,hnchasing.com
-# sever酱微信通知 / add by Rule-Bot user: James / Date: 2026-07-29 02:12:51
+# sever酱微信通知 / add by Telegram user: James / Date: 2026-07-29 02:12:51
 DOMAIN-SUFFIX,ftqq.com
-# 记账软件 / add by Rule-Bot user: James / Date: 2026-07-29 01:59:37
+# 记账软件 / add by Telegram user: James / Date: 2026-07-29 01:59:37
 DOMAIN-SUFFIX,jinzanzan.com
-# 浩捷云服务器 / add by Rule-Bot user: Norma / Date: 2026-07-28 23:53:17
+# 浩捷云服务器 / add by Telegram user: Norma / Date: 2026-07-28 23:53:17
 DOMAIN-SUFFIX,haojieyun.com
-# add by Rule-Bot user: cym / Date: 2026-07-28 16:35:37
+# add by Telegram user: cym / Date: 2026-07-28 16:35:37
 DOMAIN-SUFFIX,cym520.top
-# 网课 / add by Rule-Bot user: More / Date: 2026-07-28 15:13:28
+# 网课 / add by Telegram user: More / Date: 2026-07-28 15:13:28
 DOMAIN-SUFFIX,zzclass.com
-# 搭练APP / add by Rule-Bot user: Norma / Date: 2026-07-27 04:28:39
+# 搭练APP / add by Telegram user: Norma / Date: 2026-07-27 04:28:39
 DOMAIN-SUFFIX,nlyd.club
-# add by Rule-Bot user: 当当 / Date: 2026-07-25 16:30:07
+# add by Telegram user: 当当 / Date: 2026-07-25 16:30:07
 DOMAIN-SUFFIX,erocraft.com
-# 专业网站 / add by Rule-Bot user: Aaa / Date: 2026-07-25 14:51:58
+# 专业网站 / add by Telegram user: Aaa / Date: 2026-07-25 14:51:58
 DOMAIN-SUFFIX,ca-sinfusi.com
-# add by Rule-Bot user: 当当 / Date: 2026-07-24 16:14:10
+# add by Telegram user: 当当 / Date: 2026-07-24 16:14:10
 DOMAIN-SUFFIX,susudesu.com
-# iptv / add by Rule-Bot user: More / Date: 2026-07-23 22:21:32
+# iptv / add by Telegram user: More / Date: 2026-07-23 22:21:32
 DOMAIN-SUFFIX,zzr.cc
-# add by Rule-Bot user: Aethersailor / Date: 2026-07-23 11:27:46
+# add by Telegram user: Aethersailor / Date: 2026-07-23 11:27:46
 DOMAIN-SUFFIX,hbymfswz.com
-# add by Rule-Bot user: whsiny / Date: 2026-07-21 19:43:55
+# add by Telegram user: whsiny / Date: 2026-07-21 19:43:55
 DOMAIN-SUFFIX,crrcgo.cc
-# add by Rule-Bot user: Steven / Date: 2026-07-20 17:28:38
+# add by Telegram user: Steven / Date: 2026-07-20 17:28:38
 DOMAIN-SUFFIX,ugediao.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-07-20 12:52:28
+# add by Telegram user: Aethersailor / Date: 2026-07-20 12:52:28
 DOMAIN-SUFFIX,fb71ef91e1014.beer
-# 中转api / add by Rule-Bot user: 美 / Date: 2026-07-19 03:21:43
+# 中转api / add by Telegram user: 美 / Date: 2026-07-19 03:21:43
 DOMAIN-SUFFIX,oai.sb
-# 仙宫云gpu服务器 / add by Rule-Bot user: 美 / Date: 2026-07-19 01:23:47
+# 仙宫云gpu服务器 / add by Telegram user: 美 / Date: 2026-07-19 01:23:47
 DOMAIN-SUFFIX,x-gpu.com
-# 四川青年云 / add by Rule-Bot user: 劳斯 / Date: 2026-07-18 20:27:03
+# 四川青年云 / add by Telegram user: 劳斯 / Date: 2026-07-18 20:27:03
 DOMAIN-SUFFIX,scyol.com
-# 爱库存 / add by Rule-Bot user: 美 / Date: 2026-07-17 18:50:56
+# 爱库存 / add by Telegram user: 美 / Date: 2026-07-17 18:50:56
 DOMAIN-SUFFIX,sisiim.com
-# add by Rule-Bot user: 当当 / Date: 2026-07-16 17:45:45
+# add by Telegram user: 当当 / Date: 2026-07-16 17:45:45
 DOMAIN-SUFFIX,wetolink.com
-# 视频网站 / add by Rule-Bot user: 姬 / Date: 2026-07-16 14:02:17
+# 视频网站 / add by Telegram user: 姬 / Date: 2026-07-16 14:02:17
 DOMAIN-SUFFIX,trjho.com
-# 苏州广播电视总台 / add by Rule-Bot user: whsiny / Date: 2026-07-14 19:56:47
+# 苏州广播电视总台 / add by Telegram user: whsiny / Date: 2026-07-14 19:56:47
 DOMAIN-SUFFIX,51kandianshi.com
-# 瓦力方程官方网站 / add by Rule-Bot user: More / Date: 2026-07-14 15:12:26
+# 瓦力方程官方网站 / add by Telegram user: More / Date: 2026-07-14 15:12:26
 DOMAIN-SUFFIX,wlups.com
-# 广告 / add by Rule-Bot user: morty / Date: 2026-07-12 22:34:03
+# 广告 / add by Telegram user: morty / Date: 2026-07-12 22:34:03
 DOMAIN-SUFFIX,anythinktech.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-07-12 16:52:44
+# add by Telegram user: Aethersailor / Date: 2026-07-12 16:52:44
 DOMAIN-SUFFIX,ymzec.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-07-12 14:57:19
+# add by Telegram user: Aethersailor / Date: 2026-07-12 14:57:19
 DOMAIN-SUFFIX,hfhs8x.info
-# 个人使用 / add by Rule-Bot user: super / Date: 2026-07-12 12:20:15
+# 个人使用 / add by Telegram user: super / Date: 2026-07-12 12:20:15
 DOMAIN-SUFFIX,noyer.eu.org
-# 个人使用 / add by Rule-Bot user: super / Date: 2026-07-12 12:19:36
+# 个人使用 / add by Telegram user: super / Date: 2026-07-12 12:19:36
 DOMAIN-SUFFIX,wera.eu.org
-# add by Rule-Bot user: Aethersailor / Date: 2026-07-12 00:06:24
+# add by Telegram user: Aethersailor / Date: 2026-07-12 00:06:24
 DOMAIN-SUFFIX,ibnjl.shop
-# 钱江智行 / add by Rule-Bot user: Norma / Date: 2026-07-11 04:05:54
+# 钱江智行 / add by Telegram user: Norma / Date: 2026-07-11 04:05:54
 DOMAIN-SUFFIX,qjmotorlink.com
-# add by Rule-Bot user: 林 / Date: 2026-07-10 22:11:57
+# add by Telegram user: 林 / Date: 2026-07-10 22:11:57
 DOMAIN-SUFFIX,fengda.me
-# 淘宝内置外卖 / add by Rule-Bot user: 林 / Date: 2026-07-10 17:10:57
+# 淘宝内置外卖 / add by Telegram user: 林 / Date: 2026-07-10 17:10:57
 DOMAIN-SUFFIX,idazhe.net
-# add by Rule-Bot user: 林 / Date: 2026-07-10 16:47:54
+# add by Telegram user: 林 / Date: 2026-07-10 16:47:54
 DOMAIN-SUFFIX,gelaiyun.net
-# 资源 / add by Rule-Bot user: More / Date: 2026-07-10 10:46:50
+# 资源 / add by Telegram user: More / Date: 2026-07-10 10:46:50
 DOMAIN-SUFFIX,365wp.top
-# 游戏数据查询网站 / add by Rule-Bot user: diamond / Date: 2026-07-10 03:16:44
+# 游戏数据查询网站 / add by Telegram user: diamond / Date: 2026-07-10 03:16:44
 DOMAIN-SUFFIX,csqaq.com
-# 云游戏云电脑 / add by Rule-Bot user: 林 / Date: 2026-07-09 22:45:21
+# 云游戏云电脑 / add by Telegram user: 林 / Date: 2026-07-09 22:45:21
 DOMAIN-SUFFIX,kaijiacloud.com
 
 # 2026.7.8 分类整理完毕
@@ -1767,963 +1767,963 @@ DOMAIN-SUFFIX,kaijiacloud.com
 
 # force add by Admin: Aethersailor / Date: 2026-06-01 00:27:14
 DOMAIN-SUFFIX,ugnas.cloud
-# 中转api / add by Rule-Bot user: 美 / Date: 2026-06-12 08:03:48
+# 中转api / add by Telegram user: 美 / Date: 2026-06-12 08:03:48
 DOMAIN-SUFFIX,kldai.vip
-# add by Rule-Bot user: Coco / Date: 2026-06-07 17:28:21
+# add by Telegram user: Coco / Date: 2026-06-07 17:28:21
 DOMAIN-SUFFIX,mystery0.vip
-# 专业网站 / add by Rule-Bot user: Aaa / Date: 2026-07-08 14:00:16
+# 专业网站 / add by Telegram user: Aaa / Date: 2026-07-08 14:00:16
 DOMAIN-SUFFIX,baicaf.com
-# add by Rule-Bot user: Norma / Date: 2026-07-07 23:48:49
+# add by Telegram user: Norma / Date: 2026-07-07 23:48:49
 DOMAIN-SUFFIX,thispx.com
-# Raz伴学 / add by Rule-Bot user: along / Date: 2026-06-24 22:14:45
+# Raz伴学 / add by Telegram user: along / Date: 2026-06-24 22:14:45
 DOMAIN-SUFFIX,listenai.com
-# 小程序 / add by Rule-Bot user: 哈Lay / Date: 2026-06-21 17:10:29
+# 小程序 / add by Telegram user: 哈Lay / Date: 2026-06-21 17:10:29
 DOMAIN-SUFFIX,dcshfu.com
-# 印条 / add by Rule-Bot user: Coco / Date: 2026-06-08 02:24:28
+# 印条 / add by Telegram user: Coco / Date: 2026-06-08 02:24:28
 DOMAIN-SUFFIX,hprtupgrade.com
-# add by Rule-Bot user: IllIllIlIl / Date: 2026-06-01 16:02:45
+# add by Telegram user: IllIllIlIl / Date: 2026-06-01 16:02:45
 DOMAIN-SUFFIX,iposl.com
-# 微信公众号，连锁网吧 / add by Rule-Bot user: 西索 / Date: 2026-05-25 12:05:47
+# 微信公众号，连锁网吧 / add by Telegram user: 西索 / Date: 2026-05-25 12:05:47
 DOMAIN-SUFFIX,tmwanba.com
-# add by Rule-Bot user: Evan / Date: 2026-05-24 11:30:41
+# add by Telegram user: Evan / Date: 2026-05-24 11:30:41
 DOMAIN-SUFFIX,indeedpower.com
-# 米村拌饭 / add by Rule-Bot user: along / Date: 2026-05-22 18:21:01
+# 米村拌饭 / add by Telegram user: along / Date: 2026-05-22 18:21:01
 DOMAIN-SUFFIX,micun.com
-# 奇妙快传 / add by Rule-Bot user: y / Date: 2026-05-22 12:47:34
+# 奇妙快传 / add by Telegram user: y / Date: 2026-05-22 12:47:34
 DOMAIN-SUFFIX,share123.top
-# 萨雷安科技——FF14游戏论坛 / add by Rule-Bot user: cysr214 / Date: 2026-05-17 01:24:36
+# 萨雷安科技——FF14游戏论坛 / add by Telegram user: cysr214 / Date: 2026-05-17 01:24:36
 DOMAIN-SUFFIX,tggfl.com
-# add by Rule-Bot user: FngJia / Date: 2026-05-14 15:45:19
+# add by Telegram user: FngJia / Date: 2026-05-14 15:45:19
 DOMAIN-SUFFIX,gifpay.com
-# 某个有趣的网站 / add by Rule-Bot user: Constas / Date: 2026-05-10 06:55:27
+# 某个有趣的网站 / add by Telegram user: Constas / Date: 2026-05-10 06:55:27
 DOMAIN-SUFFIX,linka2a.net
-# 企业官方域名 / add by Rule-Bot user: Constas / Date: 2026-05-10 06:54:50
+# 企业官方域名 / add by Telegram user: Constas / Date: 2026-05-10 06:54:50
 DOMAIN-SUFFIX,infini-fantasy.com
-# 个人网站 / add by Rule-Bot user: Constas / Date: 2026-05-10 06:54:19
+# 个人网站 / add by Telegram user: Constas / Date: 2026-05-10 06:54:19
 DOMAIN-SUFFIX,constasj.me
-# 应用过滤 / add by Rule-Bot user: 雪菜 / Date: 2026-05-10 01:09:19
+# 应用过滤 / add by Telegram user: 雪菜 / Date: 2026-05-10 01:09:19
 DOMAIN-SUFFIX,openappfilter.com
-# 专业网站 / add by Rule-Bot user: Aaa / Date: 2026-05-08 16:06:08
+# 专业网站 / add by Telegram user: Aaa / Date: 2026-05-08 16:06:08
 DOMAIN-SUFFIX,ap-leasing.com
-# 速方云文件中转 / add by Rule-Bot user: 花火 / Date: 2026-05-07 21:17:50
+# 速方云文件中转 / add by Telegram user: 花火 / Date: 2026-05-07 21:17:50
 DOMAIN-SUFFIX,suu-fun.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-05-07 12:27:21
+# add by Telegram user: Aethersailor / Date: 2026-05-07 12:27:21
 DOMAIN-SUFFIX,myrny.xin
-# 凯奇网络卡盟 / add by Rule-Bot user: Norma / Date: 2026-05-06 16:08:33
+# 凯奇网络卡盟 / add by Telegram user: Norma / Date: 2026-05-06 16:08:33
 DOMAIN-SUFFIX,xyys.com
-# 华网网验系统 / add by Rule-Bot user: Norma / Date: 2026-05-06 16:06:47
+# 华网网验系统 / add by Telegram user: Norma / Date: 2026-05-06 16:06:47
 DOMAIN-SUFFIX,hwwlyz.com
-# 喵提醒 / add by Rule-Bot user: Norma / Date: 2026-05-06 16:06:07
+# 喵提醒 / add by Telegram user: Norma / Date: 2026-05-06 16:06:07
 DOMAIN-SUFFIX,miaotixing.com
-# 图鉴打码 / add by Rule-Bot user: Norma / Date: 2026-05-06 16:05:32
+# 图鉴打码 / add by Telegram user: Norma / Date: 2026-05-06 16:05:32
 DOMAIN-SUFFIX,ttshitu.com
-# 这个是闲管家的客服端连接 / add by Rule-Bot user: Norma / Date: 2026-05-06 16:04:48
+# 这个是闲管家的客服端连接 / add by Telegram user: Norma / Date: 2026-05-06 16:04:48
 DOMAIN-SUFFIX,goofish.pro
-# 盛趣游戏（原盛大游戏）的服务器域名 / add by Rule-Bot user: Asaka / Date: 2026-05-05 13:47:25
+# 盛趣游戏（原盛大游戏）的服务器域名 / add by Telegram user: Asaka / Date: 2026-05-05 13:47:25
 DOMAIN-SUFFIX,zjshulong.com
-# 一叶知秋api / add by Rule-Bot user: 美 / Date: 2026-05-05 01:47:43
+# 一叶知秋api / add by Telegram user: 美 / Date: 2026-05-05 01:47:43
 DOMAIN-SUFFIX,88996api.cloud
-# 菲森科技 / add by Rule-Bot user: 雪菜 / Date: 2026-05-03 13:40:41
+# 菲森科技 / add by Telegram user: 雪菜 / Date: 2026-05-03 13:40:41
 DOMAIN-SUFFIX,yayi360.com
-# 菲森 / add by Rule-Bot user: 雪菜 / Date: 2026-05-02 13:56:42
+# 菲森 / add by Telegram user: 雪菜 / Date: 2026-05-02 13:56:42
 DOMAIN-SUFFIX,fussengroup.com
-# AI中转 / add by Rule-Bot user: 嘿嘿 / Date: 2026-05-01 19:12:29
+# AI中转 / add by Telegram user: 嘿嘿 / Date: 2026-05-01 19:12:29
 DOMAIN-SUFFIX,qweapi.com
-# 共享记账小程序 / add by Rule-Bot user: 美 / Date: 2026-05-01 18:30:08
+# 共享记账小程序 / add by Telegram user: 美 / Date: 2026-05-01 18:30:08
 DOMAIN-SUFFIX,gongxiangjizhang.com
-# polo api的充值域名 / add by Rule-Bot user: 美 / Date: 2026-04-26 22:28:41
+# polo api的充值域名 / add by Telegram user: 美 / Date: 2026-04-26 22:28:41
 DOMAIN-SUFFIX,580ai.net
-# onetoken api地址 / add by Rule-Bot user: 美 / Date: 2026-04-25 23:51:24
+# onetoken api地址 / add by Telegram user: 美 / Date: 2026-04-25 23:51:24
 DOMAIN-SUFFIX,onetoken.sh
-# 共创世界 / add by Rule-Bot user: 嘿嘿 / Date: 2026-04-25 14:07:04
+# 共创世界 / add by Telegram user: 嘿嘿 / Date: 2026-04-25 14:07:04
 DOMAIN-SUFFIX,ccw.site
-# SyServer / add by Rule-Bot user: 嘿嘿 / Date: 2026-04-21 20:36:46
+# SyServer / add by Telegram user: 嘿嘿 / Date: 2026-04-21 20:36:46
 DOMAIN-SUFFIX,sy1.top
-# add by Rule-Bot user: kaixin_321 / Date: 2026-04-20 22:35:43
+# add by Telegram user: kaixin_321 / Date: 2026-04-20 22:35:43
 DOMAIN-SUFFIX,4kgj.com
-# 塔吉多 / add by Rule-Bot user: 雪菜 / Date: 2026-04-20 00:23:55
+# 塔吉多 / add by Telegram user: 雪菜 / Date: 2026-04-20 00:23:55
 DOMAIN-SUFFIX,tajiduo.com
-# 光鸭网盘 / add by Rule-Bot user: XI / Date: 2026-04-19 01:55:14
+# 光鸭网盘 / add by Telegram user: XI / Date: 2026-04-19 01:55:14
 DOMAIN-SUFFIX,guangyapan.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-04-17 11:53:23
+# add by Telegram user: Aethersailor / Date: 2026-04-17 11:53:23
 DOMAIN-SUFFIX,acepanel.net
-# emby服务器 / add by Rule-Bot user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2026-04-17 10:47:10
+# emby服务器 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2026-04-17 10:47:10
 DOMAIN-SUFFIX,miraiemby.com
-# add by Rule-Bot user: Coco / Date: 2026-04-15 02:22:09
+# add by Telegram user: Coco / Date: 2026-04-15 02:22:09
 DOMAIN-SUFFIX,zhiexa.com
-# add by Rule-Bot user: along / Date: 2026-04-14 13:08:15
+# add by Telegram user: along / Date: 2026-04-14 13:08:15
 DOMAIN-SUFFIX,alonginwind.top
-# 少女前线2追放官方游戏论坛 / add by Rule-Bot user: cysr214 / Date: 2026-04-14 03:05:00
+# 少女前线2追放官方游戏论坛 / add by Telegram user: cysr214 / Date: 2026-04-14 03:05:00
 DOMAIN-SUFFIX,exiliumgf.com
-# skillhub的api域名 / add by Rule-Bot user: 美 / Date: 2026-04-13 14:25:07
+# skillhub的api域名 / add by Telegram user: 美 / Date: 2026-04-13 14:25:07
 DOMAIN-SUFFIX,lightmake.site
-# add by Rule-Bot user: yz / Date: 2026-04-12 21:34:46
+# add by Telegram user: yz / Date: 2026-04-12 21:34:46
 DOMAIN-SUFFIX,cone-x.com
-# 南京市江宁水务集团小程序 / add by Rule-Bot user: 法兰西 / Date: 2026-04-12 19:47:44
+# 南京市江宁水务集团小程序 / add by Telegram user: 法兰西 / Date: 2026-04-12 19:47:44
 DOMAIN-SUFFIX,jiangningwater.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-04-12 15:43:11
+# add by Telegram user: Aethersailor / Date: 2026-04-12 15:43:11
 DOMAIN-SUFFIX,tongkask.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-04-12 15:40:00
+# add by Telegram user: Aethersailor / Date: 2026-04-12 15:40:00
 DOMAIN-SUFFIX,rxcrs.com
-# 海氏烘焙 / add by Rule-Bot user: yz / Date: 2026-04-11 19:17:24
+# 海氏烘焙 / add by Telegram user: yz / Date: 2026-04-11 19:17:24
 DOMAIN-SUFFIX,shanghongbei.com
-# 表盘市场 / add by Rule-Bot user: More / Date: 2026-04-11 16:48:01
+# 表盘市场 / add by Telegram user: More / Date: 2026-04-11 16:48:01
 DOMAIN-SUFFIX,divoiotcloud.com
-# add by Rule-Bot user: 嘿嘿 / Date: 2026-04-10 20:52:28
+# add by Telegram user: 嘿嘿 / Date: 2026-04-10 20:52:28
 DOMAIN-SUFFIX,meloong.com
-# 科技传播坊 / add by Rule-Bot user: 嘿嘿 / Date: 2026-04-10 21:50:52
+# 科技传播坊 / add by Telegram user: 嘿嘿 / Date: 2026-04-10 21:50:52
 DOMAIN-SUFFIX,xn--mmz.cc
-# 石景山医院 / add by Rule-Bot user: along / Date: 2026-04-09 10:35:01
+# 石景山医院 / add by Telegram user: along / Date: 2026-04-09 10:35:01
 DOMAIN-SUFFIX,bjssjsyy.com
-# 蝙蝠聊天 / add by Rule-Bot user: 嘿嘿 / Date: 2026-04-07 19:19:26
+# 蝙蝠聊天 / add by Telegram user: 嘿嘿 / Date: 2026-04-07 19:19:26
 DOMAIN-SUFFIX,batchat.com
-# 甜啦啦微信小程序 / add by Rule-Bot user: o.O? / Date: 2026-04-07 13:10:09
+# 甜啦啦微信小程序 / add by Telegram user: o.O? / Date: 2026-04-07 13:10:09
 DOMAIN-SUFFIX,tianlala.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-04-06 12:25:08
+# add by Telegram user: Aethersailor / Date: 2026-04-06 12:25:08
 DOMAIN-SUFFIX,97973399.com
-# 视频 / add by Rule-Bot user: Man / Date: 2026-03-31 23:25:12
+# 视频 / add by Telegram user: Man / Date: 2026-03-31 23:25:12
 DOMAIN-SUFFIX,66990000.xyz
-# 视频 / add by Rule-Bot user: Man / Date: 2026-03-31 23:22:47
+# 视频 / add by Telegram user: Man / Date: 2026-03-31 23:22:47
 DOMAIN-SUFFIX,emby.yun
-# 网盘 / add by Rule-Bot user: 哈Lay / Date: 2026-03-30 17:29:28
+# 网盘 / add by Telegram user: 哈Lay / Date: 2026-03-30 17:29:28
 DOMAIN-SUFFIX,qzyun.net
-# 动漫网站 / add by Rule-Bot user: 哈Lay / Date: 2026-03-30 17:28:29
+# 动漫网站 / add by Telegram user: 哈Lay / Date: 2026-03-30 17:28:29
 DOMAIN-SUFFIX,xn--vhqr42drhf5k7b.com
-# add by Rule-Bot user: y / Date: 2026-03-29 18:08:46
+# add by Telegram user: y / Date: 2026-03-29 18:08:46
 DOMAIN-SUFFIX,cangjie-lang.net
-# add by Rule-Bot user: 当当 / Date: 2026-03-26 21:32:18
+# add by Telegram user: 当当 / Date: 2026-03-26 21:32:18
 DOMAIN-SUFFIX,cmhk.com
-# 开盘红app是大陆地区很活的股票财经软件 / add by Rule-Bot user: 🥝🥝🥝混个脸熟 / Date: 2026-03-26 15:52:39
+# 开盘红app是大陆地区很活的股票财经软件 / add by Telegram user: 🥝🥝🥝混个脸熟 / Date: 2026-03-26 15:52:39
 DOMAIN-SUFFIX,kaipanhong.com
-# campustop网课 / add by Rule-Bot user: along / Date: 2026-03-24 18:24:12
+# campustop网课 / add by Telegram user: along / Date: 2026-03-24 18:24:12
 DOMAIN-SUFFIX,talk-cloud.net
-# traderecord3680.xyz / add by Rule-Bot user: Bin / Date: 2026-03-21 22:59:08
+# traderecord3680.xyz / add by Telegram user: Bin / Date: 2026-03-21 22:59:08
 DOMAIN-SUFFIX,chessease.net
-# add by Rule-Bot user: Mairs / Date: 2026-03-21 12:00:24
+# add by Telegram user: Mairs / Date: 2026-03-21 12:00:24
 DOMAIN-SUFFIX,boxim.online
-# add by Rule-Bot user: Mairs / Date: 2026-03-17 09:33:34
+# add by Telegram user: Mairs / Date: 2026-03-17 09:33:34
 DOMAIN-SUFFIX,zhangleglobal.com
-# add by Rule-Bot user: Mairs / Date: 2026-03-17 09:21:58
+# add by Telegram user: Mairs / Date: 2026-03-17 09:21:58
 DOMAIN-SUFFIX,hongxingdl.love
-# add by Rule-Bot user: Mairs / Date: 2026-03-17 09:21:48
+# add by Telegram user: Mairs / Date: 2026-03-17 09:21:48
 DOMAIN-SUFFIX,hongxingdl.com
-# add by Rule-Bot user: Mairs / Date: 2026-03-17 09:19:16
+# add by Telegram user: Mairs / Date: 2026-03-17 09:19:16
 DOMAIN-SUFFIX,chushi.cool
-# 网盘搜索 / add by Rule-Bot user: j / Date: 2026-03-16 21:14:03
+# 网盘搜索 / add by Telegram user: j / Date: 2026-03-16 21:14:03
 DOMAIN-SUFFIX,qianfan.app
-# 游戏 / add by Rule-Bot user: j / Date: 2026-03-16 21:11:57
+# 游戏 / add by Telegram user: j / Date: 2026-03-16 21:11:57
 DOMAIN-SUFFIX,xboxfan.com
-# add by Rule-Bot user: Mairs / Date: 2026-03-16 19:00:59
+# add by Telegram user: Mairs / Date: 2026-03-16 19:00:59
 DOMAIN-SUFFIX,85sc.com
-# add by Rule-Bot user: Mairs / Date: 2026-03-16 18:39:39
+# add by Telegram user: Mairs / Date: 2026-03-16 18:39:39
 DOMAIN-SUFFIX,babawar.com
-# 物联网卡管理 / add by Rule-Bot user: More / Date: 2026-03-15 09:12:19
+# 物联网卡管理 / add by Telegram user: More / Date: 2026-03-15 09:12:19
 DOMAIN-SUFFIX,iot889.com
-# add by Rule-Bot user: shmily1866 / Date: 2026-03-14 00:14:28
+# add by Telegram user: shmily1866 / Date: 2026-03-14 00:14:28
 DOMAIN-SUFFIX,packertec.com
-# add by Rule-Bot user: Evan / Date: 2026-03-12 17:04:42
+# add by Telegram user: Evan / Date: 2026-03-12 17:04:42
 DOMAIN-SUFFIX,419g.com
-# 精易论坛 / add by Rule-Bot user: 美 / Date: 2026-03-11 10:39:10
+# 精易论坛 / add by Telegram user: 美 / Date: 2026-03-11 10:39:10
 DOMAIN-SUFFIX,ijingyi.com
-# add by Rule-Bot user: Mairs / Date: 2026-03-10 17:42:57
+# add by Telegram user: Mairs / Date: 2026-03-10 17:42:57
 DOMAIN-SUFFIX,excelbbx.net
-# add by Rule-Bot user: GSTZero / Date: 2026-03-09 20:22:59
+# add by Telegram user: GSTZero / Date: 2026-03-09 20:22:59
 DOMAIN-SUFFIX,2mcnxs.cc
-# add by Rule-Bot user: 777 / Date: 2026-03-09 18:36:42
+# add by Telegram user: 777 / Date: 2026-03-09 18:36:42
 DOMAIN-SUFFIX,zhouyiy.com
-# 瑞鹏云 / add by Rule-Bot user: 777 / Date: 2026-03-09 18:35:38
+# 瑞鹏云 / add by Telegram user: 777 / Date: 2026-03-09 18:35:38
 DOMAIN-SUFFIX,mblyun.com
-# add by Rule-Bot user: whsiny_1112 / Date: 2026-03-09 12:45:40
+# add by Telegram user: whsiny_1112 / Date: 2026-03-09 12:45:40
 DOMAIN-SUFFIX,hybiome.com
-# 资源搜索 / add by Rule-Bot user: j / Date: 2026-03-08 22:07:40
+# 资源搜索 / add by Telegram user: j / Date: 2026-03-08 22:07:40
 DOMAIN-SUFFIX,zysou.com
-# add by Rule-Bot user: shmily1866 / Date: 2026-03-08 10:13:03
+# add by Telegram user: shmily1866 / Date: 2026-03-08 10:13:03
 DOMAIN-SUFFIX,tmallyc.com
-# add by Rule-Bot user: y / Date: 2026-03-07 10:08:17
+# add by Telegram user: y / Date: 2026-03-07 10:08:17
 DOMAIN-SUFFIX,betahub.tech
-# add by Rule-Bot user: Mairs / Date: 2026-03-06 12:04:21
+# add by Telegram user: Mairs / Date: 2026-03-06 12:04:21
 DOMAIN-SUFFIX,wwwwqq.com
-# 小说网站 / add by Rule-Bot user: Zero / Date: 2026-03-05 22:37:16
+# 小说网站 / add by Telegram user: Zero / Date: 2026-03-05 22:37:16
 DOMAIN-SUFFIX,4xiaoshuo.org
-# 特力科技 / add by Rule-Bot user: Evan / Date: 2026-02-28 10:00:18
+# 特力科技 / add by Telegram user: Evan / Date: 2026-02-28 10:00:18
 DOMAIN-SUFFIX,z-tek.com
-# 小说网站 / add by Rule-Bot user: 晨曦 / Date: 2026-02-27 22:26:08
+# 小说网站 / add by Telegram user: 晨曦 / Date: 2026-02-27 22:26:08
 DOMAIN-SUFFIX,77shuku.org
-# 开鸿 / add by Rule-Bot user: y / Date: 2026-02-26 21:22:50
+# 开鸿 / add by Telegram user: y / Date: 2026-02-26 21:22:50
 DOMAIN-SUFFIX,kaihong.com
-# 视频上传 / add by Rule-Bot user: 美 / Date: 2026-02-24 18:53:14
+# 视频上传 / add by Telegram user: 美 / Date: 2026-02-24 18:53:14
 DOMAIN-SUFFIX,17van.com
-# 有知有行 / add by Rule-Bot user: Mairs / Date: 2026-02-22 15:52:24
+# 有知有行 / add by Telegram user: Mairs / Date: 2026-02-22 15:52:24
 DOMAIN-SUFFIX,youzhiyouxing.com
-# 浏阳天空剧院小程序 / add by Rule-Bot user: o.O? / Date: 2026-02-21 22:26:40
+# 浏阳天空剧院小程序 / add by Telegram user: o.O? / Date: 2026-02-21 22:26:40
 DOMAIN-SUFFIX,et0731.com
-# 烟花云小程序 / add by Rule-Bot user: o.O? / Date: 2026-02-21 22:25:27
+# 烟花云小程序 / add by Telegram user: o.O? / Date: 2026-02-21 22:25:27
 DOMAIN-SUFFIX,gvgoo.com
-# 晋江中医院 / add by Rule-Bot user: 嘿嘿 / Date: 2026-02-19 12:42:55
+# 晋江中医院 / add by Telegram user: 嘿嘿 / Date: 2026-02-19 12:42:55
 DOMAIN-SUFFIX,jjzyy.org
-# add by Rule-Bot user: Mairs / Date: 2026-02-12 17:16:27
+# add by Telegram user: Mairs / Date: 2026-02-12 17:16:27
 DOMAIN-SUFFIX,melecode.com
-# apple发票 / add by Rule-Bot user: More / Date: 2026-02-12 14:13:43
+# apple发票 / add by Telegram user: More / Date: 2026-02-12 14:13:43
 DOMAIN-SUFFIX,fdfinvoice.com
-# add by Rule-Bot user: 嘿嘿 / Date: 2026-02-11 19:11:44
+# add by Telegram user: 嘿嘿 / Date: 2026-02-11 19:11:44
 DOMAIN-SUFFIX,quanxinfu.com
-# 万集科技 / add by Rule-Bot user: 闻西 / Date: 2026-02-11 18:39:58
+# 万集科技 / add by Telegram user: 闻西 / Date: 2026-02-11 18:39:58
 DOMAIN-SUFFIX,vanjee.net
-# 长城汽车 / add by Rule-Bot user: Zuo / Date: 2026-02-11 08:47:14
+# 长城汽车 / add by Telegram user: Zuo / Date: 2026-02-11 08:47:14
 DOMAIN-SUFFIX,gwmapp-w.com
-# 独家御膳房小程序 / add by Rule-Bot user: 闻西 / Date: 2026-02-10 19:17:02
+# 独家御膳房小程序 / add by Telegram user: 闻西 / Date: 2026-02-10 19:17:02
 DOMAIN-SUFFIX,xiaolikj.online
-# add by Rule-Bot user: 嘿嘿 / Date: 2026-02-10 18:40:48
+# add by Telegram user: 嘿嘿 / Date: 2026-02-10 18:40:48
 DOMAIN-SUFFIX,beautifulcarrot.com
-# NKXingXh's的资料网站 / add by Rule-Bot user: abcd / Date: 2026-02-10 01:33:20
+# NKXingXh's的资料网站 / add by Telegram user: abcd / Date: 2026-02-10 01:33:20
 DOMAIN-SUFFIX,nkxingxh.top
-# 方正手迹 / add by Rule-Bot user: 嘿嘿 / Date: 2026-02-09 22:01:38
+# 方正手迹 / add by Telegram user: 嘿嘿 / Date: 2026-02-09 22:01:38
 DOMAIN-SUFFIX,fzshouji.com
-# add by Rule-Bot user: y / Date: 2026-02-09 19:31:31
+# add by Telegram user: y / Date: 2026-02-09 19:31:31
 DOMAIN-SUFFIX,tdrgame.top
-# 云端笔记 / add by Rule-Bot user: y / Date: 2026-02-09 19:31:06
+# 云端笔记 / add by Telegram user: y / Date: 2026-02-09 19:31:06
 DOMAIN-SUFFIX,piedaochuan.top
-# add by Rule-Bot user: Aethersailor / Date: 2026-02-07 13:37:00
+# add by Telegram user: Aethersailor / Date: 2026-02-07 13:37:00
 DOMAIN-SUFFIX,xingaochengtai.com
-# 敲敲云 / add by Rule-Bot user: Mairs / Date: 2026-02-07 11:05:23
+# 敲敲云 / add by Telegram user: Mairs / Date: 2026-02-07 11:05:23
 DOMAIN-SUFFIX,qiaoqiaoyun.com
-# 在线LaTeX公式编辑器 / add by Rule-Bot user: 真怪誕呀 / Date: 2026-02-07 01:01:20
+# 在线LaTeX公式编辑器 / add by Telegram user: 真怪誕呀 / Date: 2026-02-07 01:01:20
 DOMAIN-SUFFIX,latexlive.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-02-04 16:59:37
+# add by Telegram user: Aethersailor / Date: 2026-02-04 16:59:37
 DOMAIN-SUFFIX,giomeru.com
-# 港话通 / add by Rule-Bot user: 真怪誕呀 / Date: 2026-02-03 19:00:10
+# 港话通 / add by Telegram user: 真怪誕呀 / Date: 2026-02-03 19:00:10
 DOMAIN-SUFFIX,hkchat.app
-# 舒达app域名 / add by Rule-Bot user: 闻西 / Date: 2026-02-02 15:01:12
+# 舒达app域名 / add by Telegram user: 闻西 / Date: 2026-02-02 15:01:12
 DOMAIN-SUFFIX,aidream.website
-# 乖淘app / add by Rule-Bot user: 闻西 / Date: 2026-02-02 14:58:30
+# 乖淘app / add by Telegram user: 闻西 / Date: 2026-02-02 14:58:30
 DOMAIN-SUFFIX,guaitao.cc
-# 听书网站 / add by Rule-Bot user: 哈Lay / Date: 2026-02-01 22:51:50
+# 听书网站 / add by Telegram user: 哈Lay / Date: 2026-02-01 22:51:50
 DOMAIN-SUFFIX,365ting.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-02-01 21:20:36
+# add by Telegram user: Aethersailor / Date: 2026-02-01 21:20:36
 DOMAIN-SUFFIX,0044696.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-02-01 19:16:40
+# add by Telegram user: Aethersailor / Date: 2026-02-01 19:16:40
 DOMAIN-SUFFIX,pkghund.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-02-01 15:40:42
+# add by Telegram user: Aethersailor / Date: 2026-02-01 15:40:42
 DOMAIN-SUFFIX,htkgsx.com
-# add by Rule-Bot user: X_X233 / Date: 2026-02-01 15:36:09
+# add by Telegram user: X_X233 / Date: 2026-02-01 15:36:09
 DOMAIN-SUFFIX,hangnakeji.com
-# 云平台 / add by Rule-Bot user: along / Date: 2026-01-31 19:27:59
+# 云平台 / add by Telegram user: along / Date: 2026-01-31 19:27:59
 DOMAIN-SUFFIX,shuangqingtech.com
-# add by Rule-Bot user: Evan / Date: 2026-01-31 13:18:47
+# add by Telegram user: Evan / Date: 2026-01-31 13:18:47
 DOMAIN-SUFFIX,nanhuabx.com
-# 主机游戏模拟器软件服务器 / add by Rule-Bot user: abcd / Date: 2026-01-30 23:18:06
+# 主机游戏模拟器软件服务器 / add by Telegram user: abcd / Date: 2026-01-30 23:18:06
 DOMAIN-SUFFIX,ponyemu.com
-# 高校教务系统 / add by Rule-Bot user: abcd / Date: 2026-01-30 23:13:44
+# 高校教务系统 / add by Telegram user: abcd / Date: 2026-01-30 23:13:44
 DOMAIN-SUFFIX,xiqueer.com
-# add by Rule-Bot user: Iceberg / Date: 2026-01-30 01:56:19
+# add by Telegram user: Iceberg / Date: 2026-01-30 01:56:19
 DOMAIN-SUFFIX,jieyoutsg.com
-# add by Rule-Bot user: Iceberg / Date: 2026-01-30 01:55:40
+# add by Telegram user: Iceberg / Date: 2026-01-30 01:55:40
 DOMAIN-SUFFIX,medtechshare.com
-# add by Rule-Bot user: Iceberg / Date: 2026-01-30 01:54:58
+# add by Telegram user: Iceberg / Date: 2026-01-30 01:54:58
 DOMAIN-SUFFIX,dayilive.com
-# nat 类型检测 / add by Rule-Bot user: 一只 / Date: 2026-01-26 21:02:18
+# nat 类型检测 / add by Telegram user: 一只 / Date: 2026-01-26 21:02:18
 DOMAIN-SUFFIX,natchecker.com
-# add by Rule-Bot user: 蛋中央 / Date: 2026-01-26 20:34:21
+# add by Telegram user: 蛋中央 / Date: 2026-01-26 20:34:21
 DOMAIN-SUFFIX,mchuiji.com
-# add by Rule-Bot user: 蛋中央 / Date: 2026-01-26 20:08:51
+# add by Telegram user: 蛋中央 / Date: 2026-01-26 20:08:51
 DOMAIN-SUFFIX,mcxyzt.cc
 # 手游无期迷途官网
 DOMAIN-SUFFIX,aisnogames.com
-# 教育网站 / add by Rule-Bot user: Awt / Date: 2026-01-25 13:16:28
+# 教育网站 / add by Telegram user: Awt / Date: 2026-01-25 13:16:28
 DOMAIN-SUFFIX,harbourmooc.com
-# add by Rule-Bot user: r / Date: 2026-01-23 16:13:33
+# add by Telegram user: r / Date: 2026-01-23 16:13:33
 DOMAIN-SUFFIX,zqin758.xyz
 # https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/355
 DOMAIN-SUFFIX,nanshe-tech.com
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:59:20
+# add by Telegram user: Mairs / Date: 2026-01-22 17:59:20
 DOMAIN-SUFFIX,tcp.mk
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:58:29
+# add by Telegram user: Mairs / Date: 2026-01-22 17:58:29
 DOMAIN-SUFFIX,lucky.gd
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:58:00
+# add by Telegram user: Mairs / Date: 2026-01-22 17:58:00
 DOMAIN-SUFFIX,zhu.today
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:57:34
+# add by Telegram user: Mairs / Date: 2026-01-22 17:57:34
 DOMAIN-SUFFIX,ilucky.net
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:56:20
+# add by Telegram user: Mairs / Date: 2026-01-22 17:56:20
 DOMAIN-SUFFIX,zcloud.world
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:56:06
+# add by Telegram user: Mairs / Date: 2026-01-22 17:56:06
 DOMAIN-SUFFIX,dadateach.com
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:55:44
+# add by Telegram user: Mairs / Date: 2026-01-22 17:55:44
 DOMAIN-SUFFIX,xuepaipai.com
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:54:28
+# add by Telegram user: Mairs / Date: 2026-01-22 17:54:28
 DOMAIN-SUFFIX,jiaoyanyun.com
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:54:06
+# add by Telegram user: Mairs / Date: 2026-01-22 17:54:06
 DOMAIN-SUFFIX,aibeike.com
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:53:48
+# add by Telegram user: Mairs / Date: 2026-01-22 17:53:48
 DOMAIN-SUFFIX,dahai96.com
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:53:25
+# add by Telegram user: Mairs / Date: 2026-01-22 17:53:25
 DOMAIN-SUFFIX,xesabc.com
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:53:12
+# add by Telegram user: Mairs / Date: 2026-01-22 17:53:12
 DOMAIN-SUFFIX,tixue.net
-# 万家乐 / add by Rule-Bot user: Mairs / Date: 2026-01-22 17:52:18
+# 万家乐 / add by Telegram user: Mairs / Date: 2026-01-22 17:52:18
 DOMAIN-SUFFIX,machtalk.net
-# 一财有看投 / add by Rule-Bot user: Mairs / Date: 2026-01-22 17:52:01
+# 一财有看投 / add by Telegram user: Mairs / Date: 2026-01-22 17:52:01
 DOMAIN-SUFFIX,yicaiykt.com
-# 冰山数据 / add by Rule-Bot user: Mairs / Date: 2026-01-22 17:51:23
+# 冰山数据 / add by Telegram user: Mairs / Date: 2026-01-22 17:51:23
 DOMAIN-SUFFIX,bingshandashu.com
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:50:54
+# add by Telegram user: Mairs / Date: 2026-01-22 17:50:54
 DOMAIN-SUFFIX,wologic.net
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:50:39
+# add by Telegram user: Mairs / Date: 2026-01-22 17:50:39
 DOMAIN-SUFFIX,hiwms.com
-# 点可云 / add by Rule-Bot user: Mairs / Date: 2026-01-22 17:50:23
+# 点可云 / add by Telegram user: Mairs / Date: 2026-01-22 17:50:23
 DOMAIN-SUFFIX,nodcloud.com
-# 北京教委 / add by Rule-Bot user: Mairs / Date: 2026-01-22 17:50:02
+# 北京教委 / add by Telegram user: Mairs / Date: 2026-01-22 17:50:02
 DOMAIN-SUFFIX,bjtzeduyun.com
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:48:42
+# add by Telegram user: Mairs / Date: 2026-01-22 17:48:42
 DOMAIN-SUFFIX,enyugame.net
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:48:20
+# add by Telegram user: Mairs / Date: 2026-01-22 17:48:20
 DOMAIN-SUFFIX,kancaibao.com
-# 和风天气 API / add by Rule-Bot user: Mairs / Date: 2026-01-22 17:47:47
+# 和风天气 API / add by Telegram user: Mairs / Date: 2026-01-22 17:47:47
 DOMAIN-SUFFIX,qweatherapi.com
-# add by Rule-Bot user: Mairs / Date: 2026-01-22 17:46:08
+# add by Telegram user: Mairs / Date: 2026-01-22 17:46:08
 DOMAIN-SUFFIX,functorz.com
-# 斑斑低代码 / add by Rule-Bot user: Mairs / Date: 2026-01-22 17:45:45
+# 斑斑低代码 / add by Telegram user: Mairs / Date: 2026-01-22 17:45:45
 DOMAIN-SUFFIX,banban.work
-# add by Rule-Bot user: r / Date: 2026-01-19 16:34:38
+# add by Telegram user: r / Date: 2026-01-19 16:34:38
 DOMAIN-SUFFIX,us.ci
-# 觅凹宠物喂食器 / add by Rule-Bot user: Ping / Date: 2026-01-18 20:04:11
+# 觅凹宠物喂食器 / add by Telegram user: Ping / Date: 2026-01-18 20:04:11
 DOMAIN-SUFFIX,meoof-pet.com
-# 上海车又在信息技术有限公司 / add by Rule-Bot user: Evan / Date: 2026-01-18 14:24:13
+# 上海车又在信息技术有限公司 / add by Telegram user: Evan / Date: 2026-01-18 14:24:13
 DOMAIN-SUFFIX,cyouzai.com
-# 星耀充值 / add by Rule-Bot user: r / Date: 2026-01-13 19:50:19
+# 星耀充值 / add by Telegram user: r / Date: 2026-01-13 19:50:19
 DOMAIN-SUFFIX,xingyaozhilian.com
-# 小倍养基 / add by Rule-Bot user: Mairs / Date: 2026-01-13 17:11:39
+# 小倍养基 / add by Telegram user: Mairs / Date: 2026-01-13 17:11:39
 DOMAIN-SUFFIX,xiaobeiyangji.com
-# 小白打印 / add by Rule-Bot user: r / Date: 2026-01-13 02:29:27
+# 小白打印 / add by Telegram user: r / Date: 2026-01-13 02:29:27
 DOMAIN-SUFFIX,xbcloudprint.com
-# 轩辕的编程宇宙 / add by Rule-Bot user: Mayfly / Date: 2026-01-12 20:44:53
+# 轩辕的编程宇宙 / add by Telegram user: Mayfly / Date: 2026-01-12 20:44:53
 DOMAIN-SUFFIX,xuanyuancode.com
-# 米思齐官网 / add by Rule-Bot user: 嘿嘿 / Date: 2026-01-11 20:41:54
+# 米思齐官网 / add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:41:54
 DOMAIN-SUFFIX,mixly.org
-# 铁威马NAS远程访问服务 / add by Rule-Bot user: 嘿嘿 / Date: 2026-01-11 20:40:12
+# 铁威马NAS远程访问服务 / add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:40:12
 DOMAIN-SUFFIX,tnas.link
-# 铁威马官网 / add by Rule-Bot user: 嘿嘿 / Date: 2026-01-11 20:39:01
+# 铁威马官网 / add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:39:01
 DOMAIN-SUFFIX,terra-master.com
-# 铁威马NAS远程访问服务 / add by Rule-Bot user: 嘿嘿 / Date: 2026-01-11 20:36:32
+# 铁威马NAS远程访问服务 / add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:36:32
 DOMAIN-SUFFIX,tnas.online
-# 我的世界服务器 / add by Rule-Bot user: 💡💡 / Date: 2025-09-12 12:44:33
+# 我的世界服务器 / add by Telegram user: 💡💡 / Date: 2025-09-12 12:44:33
 DOMAIN-SUFFIX,zctnet.top
-# 金融数据 / add by Rule-Bot user: ai / Date: 2025-11-26 14:33:09
+# 金融数据 / add by Telegram user: ai / Date: 2025-11-26 14:33:09
 DOMAIN-SUFFIX,topwd.top
-# 阴阳师工具 / add by Rule-Bot user: 奶茶 / Date: 2025-11-30 15:30:08
+# 阴阳师工具 / add by Telegram user: 奶茶 / Date: 2025-11-30 15:30:08
 DOMAIN-SUFFIX,yyshub.top
-# 个人网站 / add by Rule-Bot user: Awt / Date: 2026-01-03 00:58:13
+# 个人网站 / add by Telegram user: Awt / Date: 2026-01-03 00:58:13
 DOMAIN-SUFFIX,awstme.top
-# 北京公交地铁APP："亿通行" / add by Rule-Bot user: zero / Date: 2026-01-02 23:03:30
+# 北京公交地铁APP："亿通行" / add by Telegram user: zero / Date: 2026-01-02 23:03:30
 DOMAIN-SUFFIX,easytomessage.com
-# iOS旧版App服务 / add by Rule-Bot user: 雪菜 / Date: 2025-12-27 11:39:43
+# iOS旧版App服务 / add by Telegram user: 雪菜 / Date: 2025-12-27 11:39:43
 DOMAIN-SUFFIX,timbrd.com
 # 微信小程序
 DOMAIN-SUFFIX,wxdw.top
-# 博客 / add by Rule-Bot user: 哈Lay / Date: 2026-01-13 23:37:24
+# 博客 / add by Telegram user: 哈Lay / Date: 2026-01-13 23:37:24
 DOMAIN-SUFFIX,lg3000.top
-# add by Rule-Bot user: 嘿嘿 / Date: 2026-01-11 20:42:55
+# add by Telegram user: 嘿嘿 / Date: 2026-01-11 20:42:55
 DOMAIN-SUFFIX,scratch5.com
-# HAP Store / add by Rule-Bot user: y / Date: 2026-03-07 10:06:39
+# HAP Store / add by Telegram user: y / Date: 2026-03-07 10:06:39
 DOMAIN-SUFFIX,osbdf.com
-# Astral个人博客 / add by Rule-Bot user: Astral / Date: 2026-02-04 11:15:26
+# Astral个人博客 / add by Telegram user: Astral / Date: 2026-02-04 11:15:26
 DOMAIN-SUFFIX,asgardion.space
-# 共享账号出售平台 / add by Rule-Bot user: abcd / Date: 2026-01-31 00:13:30
+# 共享账号出售平台 / add by Telegram user: abcd / Date: 2026-01-31 00:13:30
 DOMAIN-SUFFIX,hezuvip.com
-# add by Rule-Bot user: Coco / Date: 2026-03-25 01:04:28
+# add by Telegram user: Coco / Date: 2026-03-25 01:04:28
 DOMAIN-SUFFIX,anytocopy.com
-# openkylin / add by Rule-Bot user: y / Date: 2026-03-22 00:13:07
+# openkylin / add by Telegram user: y / Date: 2026-03-22 00:13:07
 DOMAIN-SUFFIX,openkylin.top
-# add by Rule-Bot user: Mairs / Date: 2026-03-21 13:18:16
+# add by Telegram user: Mairs / Date: 2026-03-21 13:18:16
 DOMAIN-SUFFIX,wildfirechat.net
-# add by Rule-Bot user: Mairs / Date: 2026-03-21 12:57:11
+# add by Telegram user: Mairs / Date: 2026-03-21 12:57:11
 DOMAIN-SUFFIX,xgzb.top
-# DaoCloud 镜像 / add by Rule-Bot user: 真怪誕呀 / Date: 2026-04-04 17:30:11
+# DaoCloud 镜像 / add by Telegram user: 真怪誕呀 / Date: 2026-04-04 17:30:11
 DOMAIN-SUFFIX,daocloud.vip
-# add by Rule-Bot user: Aethersailor / Date: 2026-04-08 21:30:53
+# add by Telegram user: Aethersailor / Date: 2026-04-08 21:30:53
 DOMAIN-SUFFIX,soulteary.com
-# 学校官网 / add by Rule-Bot user: More / Date: 2026-02-14 23:15:33
+# 学校官网 / add by Telegram user: More / Date: 2026-02-14 23:15:33
 DOMAIN-SUFFIX,jzagile.com
-# 神烦.网络验证平台 / add by Rule-Bot user: choner / Date: 2026-02-13 13:46:11
+# 神烦.网络验证平台 / add by Telegram user: choner / Date: 2026-02-13 13:46:11
 DOMAIN-SUFFIX,91shenfan.com
-# 游戏PP / add by Rule-Bot user: 雪菜 / Date: 2026-02-06 13:45:01
+# 游戏PP / add by Telegram user: 雪菜 / Date: 2026-02-06 13:45:01
 DOMAIN-SUFFIX,gamepp.com
-# 博查 AI / add by Rule-Bot user: 嘿嘿 / Date: 2026-02-13 13:59:38
+# 博查 AI / add by Telegram user: 嘿嘿 / Date: 2026-02-13 13:59:38
 DOMAIN-SUFFIX,bochaai.com
-# 软件官网 / add by Rule-Bot user: 哈Lay / Date: 2026-01-07 21:32:03
+# 软件官网 / add by Telegram user: 哈Lay / Date: 2026-01-07 21:32:03
 DOMAIN-SUFFIX,passnat.com
-# 博客 / add by Rule-Bot user: 哈Lay / Date: 2026-01-07 21:31:37
+# 博客 / add by Telegram user: 哈Lay / Date: 2026-01-07 21:31:37
 DOMAIN-SUFFIX,zmis.me
-# 公务行 / add by Rule-Bot user: 哈Lay / Date: 2026-01-06 17:37:14
+# 公务行 / add by Telegram user: 哈Lay / Date: 2026-01-06 17:37:14
 DOMAIN-SUFFIX,gpetrip.com
-# 公务网 / add by Rule-Bot user: 哈Lay / Date: 2026-01-06 17:36:23
+# 公务网 / add by Telegram user: 哈Lay / Date: 2026-01-06 17:36:23
 DOMAIN-SUFFIX,gpgwx.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-01-05 11:18:51
+# add by Telegram user: Aethersailor / Date: 2026-01-05 11:18:51
 DOMAIN-SUFFIX,scnyw.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-01-05 10:59:31
+# add by Telegram user: Aethersailor / Date: 2026-01-05 10:59:31
 DOMAIN-SUFFIX,cgicop.com
-# add by Rule-Bot user: IllIllIlIl / Date: 2026-01-05 09:31:45
+# add by Telegram user: IllIllIlIl / Date: 2026-01-05 09:31:45
 DOMAIN-SUFFIX,ts3.ink
-# add by Rule-Bot user: IllIllIlIl / Date: 2026-01-05 08:57:51
+# add by Telegram user: IllIllIlIl / Date: 2026-01-05 08:57:51
 DOMAIN-SUFFIX,xn--cesw6hd3s99f.com
-# add by Rule-Bot user: 哈Lay / Date: 2026-01-03 21:57:08
+# add by Telegram user: 哈Lay / Date: 2026-01-03 21:57:08
 DOMAIN-SUFFIX,xiaoxia.vip
-# 酷咖游戏官网 / add by Rule-Bot user: kisigrant / Date: 2026-01-03 20:40:43
+# 酷咖游戏官网 / add by Telegram user: kisigrant / Date: 2026-01-03 20:40:43
 DOMAIN-SUFFIX,cocav.com
-# 酷友社 / add by Rule-Bot user: zero / Date: 2026-01-03 12:27:09
+# 酷友社 / add by Telegram user: zero / Date: 2026-01-03 12:27:09
 DOMAIN-SUFFIX,d4ctech.com
-# add by Rule-Bot user: Aethersailor / Date: 2026-01-02 16:29:48
+# add by Telegram user: Aethersailor / Date: 2026-01-02 16:29:48
 DOMAIN-SUFFIX,shanghai-parking.com
-# 影视站 / add by Rule-Bot user: 哈Lay / Date: 2026-01-02 15:26:38
+# 影视站 / add by Telegram user: 哈Lay / Date: 2026-01-02 15:26:38
 DOMAIN-SUFFIX,aidien.fun
-# add by Rule-Bot user: kk / Date: 2026-01-02 02:54:35
+# add by Telegram user: kk / Date: 2026-01-02 02:54:35
 DOMAIN-SUFFIX,svyun.com
-# add by Rule-Bot user: h / Date: 2026-01-01 14:23:06
+# add by Telegram user: h / Date: 2026-01-01 14:23:06
 DOMAIN-SUFFIX,gegeselect.hk
-# add by Rule-Bot user: zero / Date: 2025-12-31 12:40:25
+# add by Telegram user: zero / Date: 2025-12-31 12:40:25
 DOMAIN-SUFFIX,xiwang.com
-# 视频网站 / add by Rule-Bot user: 哈Lay / Date: 2025-12-30 19:45:33
+# 视频网站 / add by Telegram user: 哈Lay / Date: 2025-12-30 19:45:33
 DOMAIN-SUFFIX,gaze.run
-# 游戏资讯网站 / add by Rule-Bot user: 麦香鸡 / Date: 2025-12-28 14:36:02
+# 游戏资讯网站 / add by Telegram user: 麦香鸡 / Date: 2025-12-28 14:36:02
 DOMAIN-SUFFIX,aqtwwx.net
-# 国内某设计类网站 / add by Rule-Bot user: 2. / Date: 2025-12-28 00:26:57
+# 国内某设计类网站 / add by Telegram user: 2. / Date: 2025-12-28 00:26:57
 DOMAIN-SUFFIX,acggit.com
-# 国内某设计类网站 / add by Rule-Bot user: 2. / Date: 2025-12-28 00:26:19
+# 国内某设计类网站 / add by Telegram user: 2. / Date: 2025-12-28 00:26:19
 DOMAIN-SUFFIX,aigodlike.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-12-22 11:49:20
+# add by Telegram user: Aethersailor / Date: 2025-12-22 11:49:20
 DOMAIN-SUFFIX,hhtvc.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-12-22 11:37:14
+# add by Telegram user: Aethersailor / Date: 2025-12-22 11:37:14
 DOMAIN-SUFFIX,dfhog.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-12-22 01:34:51
+# add by Telegram user: Aethersailor / Date: 2025-12-22 01:34:51
 DOMAIN-SUFFIX,morefuntengyun.com
-# 资源网站 / add by Rule-Bot user: 哈Lay / Date: 2025-12-21 23:07:01
+# 资源网站 / add by Telegram user: 哈Lay / Date: 2025-12-21 23:07:01
 DOMAIN-SUFFIX,51tbox.com
-# 巨正源旗下电商平台 / add by Rule-Bot user: 做一晚泥工 / Date: 2025-12-21 16:54:25
+# 巨正源旗下电商平台 / add by Telegram user: 做一晚泥工 / Date: 2025-12-21 16:54:25
 DOMAIN-SUFFIX,jduoduo.com
-# 自媒体新闻网站 / add by Rule-Bot user: 哈Lay / Date: 2025-12-18 22:29:42
+# 自媒体新闻网站 / add by Telegram user: 哈Lay / Date: 2025-12-18 22:29:42
 DOMAIN-SUFFIX,kejiweixun.com
-# 分享网站 / add by Rule-Bot user: 哈Lay / Date: 2025-12-18 22:10:39
+# 分享网站 / add by Telegram user: 哈Lay / Date: 2025-12-18 22:10:39
 DOMAIN-SUFFIX,jiliuwang.net
-# 购物网站 / add by Rule-Bot user: 哈Lay / Date: 2025-12-18 22:06:20
+# 购物网站 / add by Telegram user: 哈Lay / Date: 2025-12-18 22:06:20
 DOMAIN-SUFFIX,ximogo.com
-# 安卓车机app应用市场 / add by Rule-Bot user: 哈Lay / Date: 2025-12-18 21:59:15
+# 安卓车机app应用市场 / add by Telegram user: 哈Lay / Date: 2025-12-18 21:59:15
 DOMAIN-SUFFIX,eagsen.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-12-18 10:33:27
+# add by Telegram user: Aethersailor / Date: 2025-12-18 10:33:27
 DOMAIN-SUFFIX,ycjintou.com
-# add by Rule-Bot user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-17 21:15:29
+# add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-17 21:15:29
 DOMAIN-SUFFIX,weshape3d.com
-# 购物 / add by Rule-Bot user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-16 20:26:12
+# 购物 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-16 20:26:12
 DOMAIN-SUFFIX,epark.cc
-# 购物 / add by Rule-Bot user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-16 20:25:09
+# 购物 / add by Telegram user: 𝓚𝓮𝓵𝓿𝓲𝓷𝓟 / Date: 2025-12-16 20:25:09
 DOMAIN-SUFFIX,shuinfo.com
-# 小说网站 / add by Rule-Bot user: 楉笙 / Date: 2025-12-15 21:46:50
+# 小说网站 / add by Telegram user: 楉笙 / Date: 2025-12-15 21:46:50
 DOMAIN-SUFFIX,aaawz.cc
-# 通信厂商官网 / add by Rule-Bot user: Animi / Date: 2025-12-13 12:50:40
+# 通信厂商官网 / add by Telegram user: Animi / Date: 2025-12-13 12:50:40
 DOMAIN-SUFFIX,mifon.com
-# 深圳第一健康机构网站 / add by Rule-Bot user: Animi / Date: 2025-12-13 00:42:45
+# 深圳第一健康机构网站 / add by Telegram user: Animi / Date: 2025-12-13 00:42:45
 DOMAIN-SUFFIX,thmnet.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-12-08 14:59:40
+# add by Telegram user: Aethersailor / Date: 2025-12-08 14:59:40
 DOMAIN-SUFFIX,zhituwujie.com
-# 百度网盘解析 / add by Rule-Bot user: x / Date: 2025-12-07 18:19:35
+# 百度网盘解析 / add by Telegram user: x / Date: 2025-12-07 18:19:35
 DOMAIN-SUFFIX,wpurl.cc
-# 锐捷网络 / add by Rule-Bot user: ai / Date: 2025-12-03 20:30:34
+# 锐捷网络 / add by Telegram user: ai / Date: 2025-12-03 20:30:34
 DOMAIN-SUFFIX,ruijie.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-12-03 18:35:00
+# add by Telegram user: Aethersailor / Date: 2025-12-03 18:35:00
 DOMAIN-SUFFIX,3gxk.net
-# add by Rule-Bot user: Jack / Date: 2025-12-01 23:43:46
+# add by Telegram user: Jack / Date: 2025-12-01 23:43:46
 DOMAIN-SUFFIX,uascent-iot.com
-# 微信：智能空间Pro 小程序 / add by Rule-Bot user: 哆啦A梦 / Date: 2025-12-01 12:15:08
+# 微信：智能空间Pro 小程序 / add by Telegram user: 哆啦A梦 / Date: 2025-12-01 12:15:08
 DOMAIN-SUFFIX,jingheiot.com
-# 驱动总裁 / add by Rule-Bot user: 雪菜 / Date: 2025-12-01 00:04:13
+# 驱动总裁 / add by Telegram user: 雪菜 / Date: 2025-12-01 00:04:13
 DOMAIN-SUFFIX,drvceo.com
-# add by Rule-Bot user: Waldo / Date: 2025-11-26 09:36:29
+# add by Telegram user: Waldo / Date: 2025-11-26 09:36:29
 DOMAIN-SUFFIX,zsytit.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-11-24 00:04:50
+# add by Telegram user: Aethersailor / Date: 2025-11-24 00:04:50
 DOMAIN-SUFFIX,jh96095.com
-# 学习报名网站 / add by Rule-Bot user: 阿 / Date: 2025-11-23 11:00:14
+# 学习报名网站 / add by Telegram user: 阿 / Date: 2025-11-23 11:00:14
 DOMAIN-SUFFIX,hzqsn.com
-# 星愿浏览器官方网站 / add by Rule-Bot user: ai / Date: 2025-11-22 00:07:50
+# 星愿浏览器官方网站 / add by Telegram user: ai / Date: 2025-11-22 00:07:50
 DOMAIN-SUFFIX,twinkstar.com
-# 电费电量计算器 - 老工具 / add by Rule-Bot user: 哆啦A梦 / Date: 2025-11-21 11:06:35
+# 电费电量计算器 - 老工具 / add by Telegram user: 哆啦A梦 / Date: 2025-11-21 11:06:35
 DOMAIN-SUFFIX,laogongju.com
-# 电费计算器-在线工具 / add by Rule-Bot user: 哆啦A梦 / Date: 2025-11-21 11:05:50
+# 电费计算器-在线工具 / add by Telegram user: 哆啦A梦 / Date: 2025-11-21 11:05:50
 DOMAIN-SUFFIX,itptg.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-11-19 13:19:54
+# add by Telegram user: Aethersailor / Date: 2025-11-19 13:19:54
 DOMAIN-SUFFIX,xzzhtc.com
-# 在线 ip 工具 / add by Rule-Bot user: 哆啦A梦 / Date: 2025-11-19 11:28:46
+# 在线 ip 工具 / add by Telegram user: 哆啦A梦 / Date: 2025-11-19 11:28:46
 DOMAIN-SUFFIX,antping.com
-# HD墻紙 / add by Rule-Bot user: Joe / Date: 2025-11-19 01:23:14
+# HD墻紙 / add by Telegram user: Joe / Date: 2025-11-19 01:23:14
 DOMAIN-SUFFIX,hdbz.net
-# 夫子车 / add by Rule-Bot user: Joe / Date: 2025-11-18 23:02:59
+# 夫子车 / add by Telegram user: Joe / Date: 2025-11-18 23:02:59
 DOMAIN-SUFFIX,fuziche.com
-# 极客网站 / add by Rule-Bot user: cook / Date: 2025-11-18 19:31:59
+# 极客网站 / add by Telegram user: cook / Date: 2025-11-18 19:31:59
 DOMAIN-SUFFIX,ham.xin
-# add by Rule-Bot user: Aethersailor / Date: 2025-11-16 18:39:46
+# add by Telegram user: Aethersailor / Date: 2025-11-16 18:39:46
 DOMAIN-SUFFIX,tulipsport.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-11-16 18:28:47
+# add by Telegram user: Aethersailor / Date: 2025-11-16 18:28:47
 DOMAIN-SUFFIX,3d-apollo.com
-# add by Rule-Bot user: lu / Date: 2025-11-15 20:39:15
+# add by Telegram user: lu / Date: 2025-11-15 20:39:15
 DOMAIN-SUFFIX,ztytech.com
-# 大象駕駛 / add by Rule-Bot user: Joe / Date: 2025-11-15 15:05:31
+# 大象駕駛 / add by Telegram user: Joe / Date: 2025-11-15 15:05:31
 DOMAIN-SUFFIX,yixc.com
-# 表答 / add by Rule-Bot user: Joe / Date: 2025-11-14 21:24:45
+# 表答 / add by Telegram user: Joe / Date: 2025-11-14 21:24:45
 DOMAIN-SUFFIX,biaoda.me
-# add by Rule-Bot user: lu / Date: 2025-11-14 21:02:21
+# add by Telegram user: lu / Date: 2025-11-14 21:02:21
 DOMAIN-SUFFIX,nicezhuanye.com
-# 中国资讯门户 / add by Rule-Bot user: Joe / Date: 2025-11-14 11:14:30
+# 中国资讯门户 / add by Telegram user: Joe / Date: 2025-11-14 11:14:30
 DOMAIN-SUFFIX,chinatle.com
-# 阿里云服务 / add by Rule-Bot user: 哆啦A梦 / Date: 2025-11-14 11:00:52
+# 阿里云服务 / add by Telegram user: 哆啦A梦 / Date: 2025-11-14 11:00:52
 DOMAIN-SUFFIX,opentrust.net
-# 长白山景区网站 / add by Rule-Bot user: Coco / Date: 2025-11-13 17:55:27
+# 长白山景区网站 / add by Telegram user: Coco / Date: 2025-11-13 17:55:27
 DOMAIN-SUFFIX,aichangbaishan.com
-# add by Rule-Bot user: young / Date: 2025-11-12 18:25:51
+# add by Telegram user: young / Date: 2025-11-12 18:25:51
 DOMAIN-SUFFIX,xxir.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-11-12 09:09:28
+# add by Telegram user: Aethersailor / Date: 2025-11-12 09:09:28
 DOMAIN-SUFFIX,pwithe.com
-# 咖啡自由咖啡机 / add by Rule-Bot user: chrysaly / Date: 2025-11-10 17:53:04
+# 咖啡自由咖啡机 / add by Telegram user: chrysaly / Date: 2025-11-10 17:53:04
 DOMAIN-SUFFIX,coffee-iot.com
-# 3D模型下载网站 / add by Rule-Bot user: 哆啦A梦 / Date: 2025-11-10 13:20:28
+# 3D模型下载网站 / add by Telegram user: 哆啦A梦 / Date: 2025-11-10 13:20:28
 DOMAIN-SUFFIX,3dwhere.com
-# 个人博客 / add by Rule-Bot user: Skyllar / Date: 2025-11-07 23:43:59
+# 个人博客 / add by Telegram user: Skyllar / Date: 2025-11-07 23:43:59
 DOMAIN-SUFFIX,cheriexsky.love
-# 专业网站 / add by Rule-Bot user: Aaa / Date: 2025-11-05 16:33:52
+# 专业网站 / add by Telegram user: Aaa / Date: 2025-11-05 16:33:52
 DOMAIN-SUFFIX,kaijiejinrong.com
-# add by Rule-Bot user: young / Date: 2025-11-03 23:58:00
+# add by Telegram user: young / Date: 2025-11-03 23:58:00
 DOMAIN-SUFFIX,xiberia.net
-# add by Rule-Bot user: Blunt / Date: 2025-11-03 23:27:53
+# add by Telegram user: Blunt / Date: 2025-11-03 23:27:53
 DOMAIN-SUFFIX,jiqw.com
-# 顶晟科技 / add by Rule-Bot user: 雪菜 / Date: 2025-11-02 21:45:17
+# 顶晟科技 / add by Telegram user: 雪菜 / Date: 2025-11-02 21:45:17
 DOMAIN-SUFFIX,dskj-ops.com
-# 视频下载网站 / add by Rule-Bot user: 尼古拉斯 / Date: 2025-11-02 11:00:56
+# 视频下载网站 / add by Telegram user: 尼古拉斯 / Date: 2025-11-02 11:00:56
 DOMAIN-SUFFIX,jfjt.cc
-# add by Rule-Bot user: 尼古拉斯 / Date: 2025-11-02 10:53:57
+# add by Telegram user: 尼古拉斯 / Date: 2025-11-02 10:53:57
 DOMAIN-SUFFIX,atticus.vip
-# add by Rule-Bot user: Aethersailor / Date: 2025-10-19 12:38:07
+# add by Telegram user: Aethersailor / Date: 2025-10-19 12:38:07
 DOMAIN-SUFFIX,gootho.com
-# 小熊猫c＋＋ IDE / add by Rule-Bot user: y / Date: 2025-10-31 22:16:45
+# 小熊猫c＋＋ IDE / add by Telegram user: y / Date: 2025-10-31 22:16:45
 DOMAIN-SUFFIX,royqh.net
-# 便单APP / add by Rule-Bot user: y / Date: 2025-10-31 01:24:28
+# 便单APP / add by Telegram user: y / Date: 2025-10-31 01:24:28
 DOMAIN-SUFFIX,biandangroup.com
-# add by Rule-Bot user: lei / Date: 2025-10-29 11:18:43
+# add by Telegram user: lei / Date: 2025-10-29 11:18:43
 DOMAIN-SUFFIX,shyxhy.com
-# 在线AI生成 / add by Rule-Bot user: ecerc / Date: 2025-10-29 09:30:57
+# 在线AI生成 / add by Telegram user: ecerc / Date: 2025-10-29 09:30:57
 DOMAIN-SUFFIX,shunjing.xin
-# 灵溪网 绿色软件下载与技术分享 / add by Rule-Bot user: ecerc / Date: 2025-10-28 20:04:52
+# 灵溪网 绿色软件下载与技术分享 / add by Telegram user: ecerc / Date: 2025-10-28 20:04:52
 DOMAIN-SUFFIX,ghoxz.com
-# 像素芝士 / add by Rule-Bot user: ecerc / Date: 2025-10-26 23:22:45
+# 像素芝士 / add by Telegram user: ecerc / Date: 2025-10-26 23:22:45
 DOMAIN-SUFFIX,pixcheese.com
-# add by Rule-Bot user: young / Date: 2025-10-26 11:13:59
+# add by Telegram user: young / Date: 2025-10-26 11:13:59
 DOMAIN-SUFFIX,hijin.vip
-# add by Rule-Bot user: Yilan / Date: 2025-10-25 09:36:32
+# add by Telegram user: Yilan / Date: 2025-10-25 09:36:32
 DOMAIN-SUFFIX,goalmapapp.com
-# add by Rule-Bot user: Yilan / Date: 2025-10-24 21:56:31
+# add by Telegram user: Yilan / Date: 2025-10-24 21:56:31
 DOMAIN-SUFFIX,everdrawing.com
-# add by Rule-Bot user: Yilan / Date: 2025-10-24 21:56:04
+# add by Telegram user: Yilan / Date: 2025-10-24 21:56:04
 DOMAIN-SUFFIX,hwzuku.com
-# add by Rule-Bot user: Yilan / Date: 2025-10-24 21:54:54
+# add by Telegram user: Yilan / Date: 2025-10-24 21:54:54
 DOMAIN-SUFFIX,hwjianmo.com
-# add by Rule-Bot user: ♣️西安娱乐客服【 LuLu】 / Date: 2025-10-24 19:22:49
+# add by Telegram user: ♣️西安娱乐客服【 LuLu】 / Date: 2025-10-24 19:22:49
 DOMAIN-SUFFIX,cdn.ist
-# add by Rule-Bot user: lu / Date: 2025-10-24 18:58:10
+# add by Telegram user: lu / Date: 2025-10-24 18:58:10
 DOMAIN-SUFFIX,ifengmap.com
-# add by Rule-Bot user: lei / Date: 2025-10-24 16:21:54
+# add by Telegram user: lei / Date: 2025-10-24 16:21:54
 DOMAIN-SUFFIX,4399zmxy.com
-# 法律检索工具 / add by Rule-Bot user: Coco / Date: 2025-10-22 23:22:54
+# 法律检索工具 / add by Telegram user: Coco / Date: 2025-10-22 23:22:54
 DOMAIN-SUFFIX,zhi10.com
-# 杭州律协官网 / add by Rule-Bot user: Coco / Date: 2025-10-22 15:59:03
+# 杭州律协官网 / add by Telegram user: Coco / Date: 2025-10-22 15:59:03
 DOMAIN-SUFFIX,hzlawyer.net
-# add by Rule-Bot user: lei / Date: 2025-10-21 23:06:22
+# add by Telegram user: lei / Date: 2025-10-21 23:06:22
 DOMAIN-SUFFIX,xinghaiwaimai.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-10-20 19:15:45
+# add by Telegram user: Aethersailor / Date: 2025-10-20 19:15:45
 DOMAIN-SUFFIX,86656.net
 # 鸿蒙出境易
 DOMAIN-SUFFIX,chujingapp.com
-# add by Rule-Bot user: Coco / Date: 2025-07-23 22:58:43
+# add by Telegram user: Coco / Date: 2025-07-23 22:58:43
 DOMAIN-SUFFIX,xdqtech.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-07-23 16:31:37
+# add by Telegram user: Aethersailor / Date: 2025-07-23 16:31:37
 DOMAIN-SUFFIX,chaz.fun
-# 情侣软件suki / add by Rule-Bot user: e / Date: 2025-08-03 21:01:20
+# 情侣软件suki / add by Telegram user: e / Date: 2025-08-03 21:01:20
 DOMAIN-SUFFIX,codeloop.top
-# add by Rule-Bot user: Aethersailor / Date: 2025-07-30 18:11:46
+# add by Telegram user: Aethersailor / Date: 2025-07-30 18:11:46
 DOMAIN-SUFFIX,warmheart.top
-# add by Rule-Bot user: Aethersailor / Date: 2025-07-23 00:20:38
+# add by Telegram user: Aethersailor / Date: 2025-07-23 00:20:38
 DOMAIN-SUFFIX,jxpp.com
-# 三国杀打小抄官网 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-07-29 14:03:56
+# 三国杀打小抄官网 / add by Telegram user: 真怪誕呀 / Date: 2025-07-29 14:03:56
 DOMAIN-SUFFIX,goka.top
-# 小电视空降助手，跳过 b 站广告 / add by Rule-Bot user: chrysaly / Date: 2025-08-21 14:19:34
+# 小电视空降助手，跳过 b 站广告 / add by Telegram user: chrysaly / Date: 2025-08-21 14:19:34
 DOMAIN-SUFFIX,bsbsb.top
-# istore / add by Rule-Bot user: rl / Date: 2025-08-17 14:48:32
+# istore / add by Telegram user: rl / Date: 2025-08-17 14:48:32
 DOMAIN-SUFFIX,istoreos.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 22:04:48
+# add by Telegram user: Blunt / Date: 2025-08-30 22:04:48
 DOMAIN-SUFFIX,netzz.net
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 16:04:30
+# add by Telegram user: Blunt / Date: 2025-08-30 16:04:30
 DOMAIN-SUFFIX,xdtool.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 06:04:33
+# add by Telegram user: Blunt / Date: 2025-08-30 06:04:33
 DOMAIN-SUFFIX,ipshu.com
-# ip地址查询 / add by Rule-Bot user: Blunt / Date: 2025-08-30 03:17:50
+# ip地址查询 / add by Telegram user: Blunt / Date: 2025-08-30 03:17:50
 DOMAIN-SUFFIX,900cha.com
-# IPTV图标 / add by Rule-Bot user: sanligu / Date: 2025-08-29 18:19:15
+# IPTV图标 / add by Telegram user: sanligu / Date: 2025-08-29 18:19:15
 DOMAIN-SUFFIX,51zmt.top
-# 视频网站 / add by Rule-Bot user: Shady / Date: 2025-08-26 13:07:08
+# 视频网站 / add by Telegram user: Shady / Date: 2025-08-26 13:07:08
 DOMAIN-SUFFIX,nxog.top
-# iptv源 / add by Rule-Bot user: sanligu / Date: 2025-09-11 19:15:47
+# iptv源 / add by Telegram user: sanligu / Date: 2025-09-11 19:15:47
 DOMAIN-SUFFIX,tclai.top
-# add by Rule-Bot user: 网猫-工作时间早10-晚11 / Date: 2025-09-10 09:21:45
+# add by Telegram user: 网猫-工作时间早10-晚11 / Date: 2025-09-10 09:21:45
 DOMAIN-SUFFIX,feihengip.com
-# 脚本官网 / add by Rule-Bot user: 网猫-工作时间早10-晚11 / Date: 2025-09-08 11:32:11
+# 脚本官网 / add by Telegram user: 网猫-工作时间早10-晚11 / Date: 2025-09-08 11:32:11
 DOMAIN-SUFFIX,privateapi.xyz
-# 浩物生活 / add by Rule-Bot user: EzrAAA / Date: 2025-09-06 18:01:14
+# 浩物生活 / add by Telegram user: EzrAAA / Date: 2025-09-06 18:01:14
 DOMAIN-SUFFIX,halvie.com
-# add by Rule-Bot user: Lailin / Date: 2025-09-14 12:09:49
+# add by Telegram user: Lailin / Date: 2025-09-14 12:09:49
 DOMAIN-SUFFIX,geektool.top
-# 博客 / add by Rule-Bot user: Aloys / Date: 2025-09-18 22:38:49
+# 博客 / add by Telegram user: Aloys / Date: 2025-09-18 22:38:49
 DOMAIN-SUFFIX,aloys233.top
-# 问卷星 / add by Rule-Bot user: 法兰西 / Date: 2025-09-17 21:06:29
+# 问卷星 / add by Telegram user: 法兰西 / Date: 2025-09-17 21:06:29
 DOMAIN-SUFFIX,wjx.top
-# 黑苹果屋网站 / add by Rule-Bot user: 李白 / Date: 2025-09-20 01:20:48
+# 黑苹果屋网站 / add by Telegram user: 李白 / Date: 2025-09-20 01:20:48
 DOMAIN-SUFFIX,imacos.top
-# add by Rule-Bot user: Aethersailor / Date: 2025-10-16 18:53:47
+# add by Telegram user: Aethersailor / Date: 2025-10-16 18:53:47
 DOMAIN-SUFFIX,saduck.top
-# 财经网站 / add by Rule-Bot user: Mouton / Date: 2025-10-18 22:48:47
+# 财经网站 / add by Telegram user: Mouton / Date: 2025-10-18 22:48:47
 DOMAIN-SUFFIX,gangtise.com
-# 国内企业地址 / add by Rule-Bot user: cook / Date: 2025-10-16 17:35:12
+# 国内企业地址 / add by Telegram user: cook / Date: 2025-10-16 17:35:12
 DOMAIN-SUFFIX,shineacc.com
-# add by Rule-Bot user: lei / Date: 2025-10-16 13:27:16
+# add by Telegram user: lei / Date: 2025-10-16 13:27:16
 DOMAIN-SUFFIX,fzvcolco.com
-# 驾校学时APP / add by Rule-Bot user: lei / Date: 2025-10-16 13:26:35
+# 驾校学时APP / add by Telegram user: lei / Date: 2025-10-16 13:26:35
 DOMAIN-SUFFIX,haoxueche.com
-# add by Rule-Bot user: lu / Date: 2025-10-15 10:18:39
+# add by Telegram user: lu / Date: 2025-10-15 10:18:39
 DOMAIN-SUFFIX,liunn.com
-# 教育网站 / add by Rule-Bot user: lu / Date: 2025-10-14 20:39:39
+# 教育网站 / add by Telegram user: lu / Date: 2025-10-14 20:39:39
 DOMAIN-SUFFIX,zjxhedu.com
-# add by Rule-Bot user: Holyn / Date: 2025-10-13 23:10:34
+# add by Telegram user: Holyn / Date: 2025-10-13 23:10:34
 DOMAIN-SUFFIX,xxrsm.com
-# add by Rule-Bot user: Bin / Date: 2025-10-11 19:35:13
+# add by Telegram user: Bin / Date: 2025-10-11 19:35:13
 DOMAIN-SUFFIX,ourschool.cc
-# add by Rule-Bot user: Bin / Date: 2025-10-11 19:34:37
+# add by Telegram user: Bin / Date: 2025-10-11 19:34:37
 DOMAIN-SUFFIX,diyiedu.com
-# add by Rule-Bot user: 啥也不是 / Date: 2025-10-11 14:33:51
+# add by Telegram user: 啥也不是 / Date: 2025-10-11 14:33:51
 DOMAIN-SUFFIX,fengsutb.com
-# 6V电影网 / add by Rule-Bot user: 鱼 / Date: 2025-10-08 17:51:33
+# 6V电影网 / add by Telegram user: 鱼 / Date: 2025-10-08 17:51:33
 DOMAIN-SUFFIX,6v520.net
-# 问道手游聚宝斋app / add by Rule-Bot user: young / Date: 2025-10-08 16:43:02
+# 问道手游聚宝斋app / add by Telegram user: young / Date: 2025-10-08 16:43:02
 DOMAIN-SUFFIX,boyuemobile.com
-# 视频网站 / add by Rule-Bot user: hvccff / Date: 2025-10-06 18:30:24
+# 视频网站 / add by Telegram user: hvccff / Date: 2025-10-06 18:30:24
 DOMAIN-SUFFIX,ydayc.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-10-05 09:24:40
+# add by Telegram user: Aethersailor / Date: 2025-10-05 09:24:40
 DOMAIN-SUFFIX,xzsckj.com
-# 阿里云技术 / add by Rule-Bot user: conn / Date: 2025-10-04 23:36:18
+# 阿里云技术 / add by Telegram user: conn / Date: 2025-10-04 23:36:18
 DOMAIN-SUFFIX,modelscope.net
-# 英语训练 / add by Rule-Bot user: More / Date: 2025-10-02 17:20:22
+# 英语训练 / add by Telegram user: More / Date: 2025-10-02 17:20:22
 DOMAIN-SUFFIX,julebu.co
-# 千学云在线教育平台 / add by Rule-Bot user: 木2 / Date: 2025-10-02 15:55:10
+# 千学云在线教育平台 / add by Telegram user: 木2 / Date: 2025-10-02 15:55:10
 DOMAIN-SUFFIX,zhixingyunke.com
-# 千学云教室直播互动平台 / add by Rule-Bot user: 木2 / Date: 2025-10-02 15:52:16
+# 千学云教室直播互动平台 / add by Telegram user: 木2 / Date: 2025-10-02 15:52:16
 DOMAIN-SUFFIX,qianxuecloud.com
-# 千学教育用于教学直播、互动教学平台 / add by Rule-Bot user: 木2 / Date: 2025-10-02 15:48:43
+# 千学教育用于教学直播、互动教学平台 / add by Telegram user: 木2 / Date: 2025-10-02 15:48:43
 DOMAIN-SUFFIX,qianxueyunke.com
-# 卡商网站 / add by Rule-Bot user: ✈️ / Date: 2025-10-02 00:39:22
+# 卡商网站 / add by Telegram user: ✈️ / Date: 2025-10-02 00:39:22
 DOMAIN-SUFFIX,55555.ink
-# Online Judge System / add by Rule-Bot user: More / Date: 2025-10-01 22:48:59
+# Online Judge System / add by Telegram user: More / Date: 2025-10-01 22:48:59
 DOMAIN-SUFFIX,gmoj.net
-# 速推客后台管理 / add by Rule-Bot user: 吃吃吃吃 / Date: 2025-09-30 10:39:48
+# 速推客后台管理 / add by Telegram user: 吃吃吃吃 / Date: 2025-09-30 10:39:48
 DOMAIN-SUFFIX,stkfanli.com
-# 腾讯云CNB WebIDE / add by Rule-Bot user: y / Date: 2025-09-29 17:11:53
+# 腾讯云CNB WebIDE / add by Telegram user: y / Date: 2025-09-29 17:11:53
 DOMAIN-SUFFIX,cnb.space
-# 生死狙击2客户端域名 / add by Rule-Bot user: 花火 / Date: 2025-09-27 00:43:49
+# 生死狙击2客户端域名 / add by Telegram user: 花火 / Date: 2025-09-27 00:43:49
 DOMAIN-SUFFIX,ssjj2.com
-# 企业网站 / add by Rule-Bot user: mr. / Date: 2025-09-22 23:52:33
+# 企业网站 / add by Telegram user: mr. / Date: 2025-09-22 23:52:33
 DOMAIN-SUFFIX,einfo-tech.com
-# add by Rule-Bot user: 法兰西 / Date: 2025-09-22 20:12:53
+# add by Telegram user: 法兰西 / Date: 2025-09-22 20:12:53
 DOMAIN-SUFFIX,afeica.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-09-17 11:19:09
+# add by Telegram user: Aethersailor / Date: 2025-09-17 11:19:09
 DOMAIN-SUFFIX,shuqiandiqiu.com
-# 我的世界服务器 / add by Rule-Bot user: 💡💡 / Date: 2025-09-16 10:40:27
+# 我的世界服务器 / add by Telegram user: 💡💡 / Date: 2025-09-16 10:40:27
 DOMAIN-SUFFIX,oceando.cloud
-# 代理网站 / add by Rule-Bot user: 网猫-工作时间早10-晚11 / Date: 2025-09-15 12:34:42
+# 代理网站 / add by Telegram user: 网猫-工作时间早10-晚11 / Date: 2025-09-15 12:34:42
 DOMAIN-SUFFIX,canghaiip.com
-# 医疗门户 / add by Rule-Bot user: Evan / Date: 2025-09-21 11:45:41
+# 医疗门户 / add by Telegram user: Evan / Date: 2025-09-21 11:45:41
 DOMAIN-SUFFIX,hnxzctec.com
-# ros路由表更新 / add by Rule-Bot user: 雪菜 / Date: 2025-09-20 23:14:04
+# ros路由表更新 / add by Telegram user: 雪菜 / Date: 2025-09-20 23:14:04
 DOMAIN-SUFFIX,tcp5.com
-# 海信供应商登录系统 / add by Rule-Bot user: 雪菜 / Date: 2025-09-20 22:52:55
+# 海信供应商登录系统 / add by Telegram user: 雪菜 / Date: 2025-09-20 22:52:55
 DOMAIN-SUFFIX,qiankunshopping.com
-# 学校 / add by Rule-Bot user: lei / Date: 2025-09-20 16:48:58
+# 学校 / add by Telegram user: lei / Date: 2025-09-20 16:48:58
 DOMAIN-SUFFIX,fjpit.com
-# 学校洗衣机APP：悠洗 / add by Rule-Bot user: lei / Date: 2025-09-20 16:47:16
+# 学校洗衣机APP：悠洗 / add by Telegram user: lei / Date: 2025-09-20 16:47:16
 DOMAIN-SUFFIX,ulife.group
-# 立林全屋智能 / add by Rule-Bot user: Q / Date: 2025-09-20 05:42:29
+# 立林全屋智能 / add by Telegram user: Q / Date: 2025-09-20 05:42:29
 DOMAIN-SUFFIX,leelen.com
-# 逸掌柜电商软件 / add by Rule-Bot user: Q / Date: 2025-09-20 05:40:16
+# 逸掌柜电商软件 / add by Telegram user: Q / Date: 2025-09-20 05:40:16
 DOMAIN-SUFFIX,yzcsoft.com
-# 微信智能设备控制小程序 / add by Rule-Bot user: 李白 / Date: 2025-09-19 10:15:59
+# 微信智能设备控制小程序 / add by Telegram user: 李白 / Date: 2025-09-19 10:15:59
 DOMAIN-SUFFIX,iotrix.net
-# mc投影图下载 / add by Rule-Bot user: Aloys / Date: 2025-09-18 22:43:15
+# mc投影图下载 / add by Telegram user: Aloys / Date: 2025-09-18 22:43:15
 DOMAIN-SUFFIX,redenmc.com
-# Mc统一登陆通行证 / add by Rule-Bot user: 💡💡 / Date: 2025-09-12 12:22:24
+# Mc统一登陆通行证 / add by Telegram user: 💡💡 / Date: 2025-09-12 12:22:24
 DOMAIN-SUFFIX,mc-user.com
-# 笔袋应用 学习网站 / add by Rule-Bot user: Jiajun / Date: 2025-09-11 19:23:53
+# 笔袋应用 学习网站 / add by Telegram user: Jiajun / Date: 2025-09-11 19:23:53
 DOMAIN-SUFFIX,gaojiua.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 22:08:34
+# add by Telegram user: Blunt / Date: 2025-08-30 22:08:34
 DOMAIN-SUFFIX,tcp.pub
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 22:04:04
+# add by Telegram user: Blunt / Date: 2025-08-30 22:04:04
 DOMAIN-SUFFIX,douqq.com
-# 林亦AI排行 / add by Rule-Bot user: Lailin / Date: 2025-09-05 20:24:42
+# 林亦AI排行 / add by Telegram user: Lailin / Date: 2025-09-05 20:24:42
 DOMAIN-SUFFIX,lyihub.com
-# 观看的emby域名 / add by Rule-Bot user: Lilith / Date: 2025-09-05 01:20:55
+# 观看的emby域名 / add by Telegram user: Lilith / Date: 2025-09-05 01:20:55
 DOMAIN-SUFFIX,204cloud.com
-# add by Rule-Bot user: ♣️西安娱乐客服【 LuLu】 / Date: 2025-09-04 23:35:09
+# add by Telegram user: ♣️西安娱乐客服【 LuLu】 / Date: 2025-09-04 23:35:09
 DOMAIN-SUFFIX,mobai.sbs
-# 我的世界游戏服务器 / add by Rule-Bot user: 💡💡 / Date: 2025-09-04 22:56:13
+# 我的世界游戏服务器 / add by Telegram user: 💡💡 / Date: 2025-09-04 22:56:13
 DOMAIN-SUFFIX,meishiffx.online
-# 绿叶慧购 / add by Rule-Bot user: Neilyo / Date: 2025-09-04 11:36:34
+# 绿叶慧购 / add by Telegram user: Neilyo / Date: 2025-09-04 11:36:34
 DOMAIN-SUFFIX,lyilife.com
-# 水族用品 / add by Rule-Bot user: Shady / Date: 2025-09-03 15:39:07
+# 水族用品 / add by Telegram user: Shady / Date: 2025-09-03 15:39:07
 DOMAIN-SUFFIX,ifish7.com
-# 学习网站 / add by Rule-Bot user: Shady / Date: 2025-08-31 16:45:54
+# 学习网站 / add by Telegram user: Shady / Date: 2025-08-31 16:45:54
 DOMAIN-SUFFIX,feizhiyi.com
-# 佛山一天膳食app / add by Rule-Bot user: Evan / Date: 2025-08-31 16:39:49
+# 佛山一天膳食app / add by Telegram user: Evan / Date: 2025-08-31 16:39:49
 DOMAIN-SUFFIX,fsytss.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 22:09:47
+# add by Telegram user: Blunt / Date: 2025-08-30 22:09:47
 DOMAIN-SUFFIX,googoc.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 22:08:07
+# add by Telegram user: Blunt / Date: 2025-08-30 22:08:07
 DOMAIN-SUFFIX,ip159.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 22:06:40
+# add by Telegram user: Blunt / Date: 2025-08-30 22:06:40
 DOMAIN-SUFFIX,gjtool.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 22:06:02
+# add by Telegram user: Blunt / Date: 2025-08-30 22:06:02
 DOMAIN-SUFFIX,gseen.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 22:02:06
+# add by Telegram user: Blunt / Date: 2025-08-30 22:02:06
 DOMAIN-SUFFIX,52muban.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 22:00:35
+# add by Telegram user: Blunt / Date: 2025-08-30 22:00:35
 DOMAIN-SUFFIX,998tool.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 21:57:52
+# add by Telegram user: Blunt / Date: 2025-08-30 21:57:52
 DOMAIN-SUFFIX,neihang.net
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 16:06:21
+# add by Telegram user: Blunt / Date: 2025-08-30 16:06:21
 DOMAIN-SUFFIX,fzwqq.com
-# add by Rule-Bot user: Toby / Date: 2025-08-30 08:11:38
+# add by Telegram user: Toby / Date: 2025-08-30 08:11:38
 DOMAIN-SUFFIX,naixi.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 06:09:51
+# add by Telegram user: Blunt / Date: 2025-08-30 06:09:51
 DOMAIN-SUFFIX,chaxunjiao.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 06:05:39
+# add by Telegram user: Blunt / Date: 2025-08-30 06:05:39
 DOMAIN-SUFFIX,tool56.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 04:50:19
+# add by Telegram user: Blunt / Date: 2025-08-30 04:50:19
 DOMAIN-SUFFIX,fofuai.com
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 04:41:54
+# add by Telegram user: Blunt / Date: 2025-08-30 04:41:54
 DOMAIN-SUFFIX,qinglue.com
-# ip地址查询 / add by Rule-Bot user: Blunt / Date: 2025-08-30 04:33:30
+# ip地址查询 / add by Telegram user: Blunt / Date: 2025-08-30 04:33:30
 DOMAIN-SUFFIX,mykuaidi.com
-# 台铃电动车管理 / add by Rule-Bot user: Lailin / Date: 2025-08-28 03:37:02
+# 台铃电动车管理 / add by Telegram user: Lailin / Date: 2025-08-28 03:37:02
 DOMAIN-SUFFIX,thinkerride.com
-# 电动车管理 / add by Rule-Bot user: Lailin / Date: 2025-08-28 03:36:00
+# 电动车管理 / add by Telegram user: Lailin / Date: 2025-08-28 03:36:00
 DOMAIN-SUFFIX,tailgdd.com
-# add by Rule-Bot user: h / Date: 2025-08-27 22:24:19
+# add by Telegram user: h / Date: 2025-08-27 22:24:19
 DOMAIN-SUFFIX,115cdn.de
-# Emby客户端 / add by Rule-Bot user: Ritz / Date: 2025-08-27 21:36:58
+# Emby客户端 / add by Telegram user: Ritz / Date: 2025-08-27 21:36:58
 DOMAIN-SUFFIX,micu.hk
-# add by Rule-Bot user: Aethersailor / Date: 2025-08-26 19:16:32
+# add by Telegram user: Aethersailor / Date: 2025-08-26 19:16:32
 DOMAIN-SUFFIX,ugdocker.link
 
 # 以下域名已被收录，计划于 2025.10.6 删除
 
-# add by Rule-Bot user: Blunt / Date: 2025-08-30 06:21:51
+# add by Telegram user: Blunt / Date: 2025-08-30 06:21:51
 DOMAIN-SUFFIX,xbgjw.com
-# 论坛网站 / add by Rule-Bot user: Shady / Date: 2025-08-25 19:21:52
+# 论坛网站 / add by Telegram user: Shady / Date: 2025-08-25 19:21:52
 DOMAIN-SUFFIX,z6e.com
-# 樱花内网穿透节点域名 / add by Rule-Bot user: 花火 / Date: 2025-08-24 15:04:10
+# 樱花内网穿透节点域名 / add by Telegram user: 花火 / Date: 2025-08-24 15:04:10
 DOMAIN-SUFFIX,frp-ski.com
-# 公益open-webui / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-23 17:41:37
+# 公益open-webui / add by Telegram user: 真怪誕呀 / Date: 2025-08-23 17:41:37
 DOMAIN-SUFFIX,clivia.fun
-# 飞桨AI的base_url / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-23 17:22:59
+# 飞桨AI的base_url / add by Telegram user: 真怪誕呀 / Date: 2025-08-23 17:22:59
 DOMAIN-SUFFIX,aistudio-app.com
-# 德佟电子科技（上海）有限公司 / add by Rule-Bot user: Evan / Date: 2025-08-21 21:24:11
+# 德佟电子科技（上海）有限公司 / add by Telegram user: Evan / Date: 2025-08-21 21:24:11
 DOMAIN-SUFFIX,dothantech.com
-# 葱米APP家长版 / add by Rule-Bot user: Evan / Date: 2025-08-21 21:23:34
+# 葱米APP家长版 / add by Telegram user: Evan / Date: 2025-08-21 21:23:34
 DOMAIN-SUFFIX,congmiqq.com
-# 蜜蜂试卷APP 域名 / add by Rule-Bot user: hjxt / Date: 2025-08-21 09:44:58
+# 蜜蜂试卷APP 域名 / add by Telegram user: hjxt / Date: 2025-08-21 09:44:58
 DOMAIN-SUFFIX,mifeng.plus
-# 作业班喵喵机APP 域名 / add by Rule-Bot user: hjxt / Date: 2025-08-21 09:43:56
+# 作业班喵喵机APP 域名 / add by Telegram user: hjxt / Date: 2025-08-21 09:43:56
 DOMAIN-SUFFIX,paperang.com
-# cent浏览器论坛网站 / add by Rule-Bot user: li / Date: 2025-08-20 11:59:34
+# cent浏览器论坛网站 / add by Telegram user: li / Date: 2025-08-20 11:59:34
 DOMAIN-SUFFIX,centbrowser.net
-# 纵维立方3d打印 fmd光固化生产厂家 / add by Rule-Bot user: 芒果 / Date: 2025-08-19 03:46:55
+# 纵维立方3d打印 fmd光固化生产厂家 / add by Telegram user: 芒果 / Date: 2025-08-19 03:46:55
 DOMAIN-SUFFIX,anycubic.com
-# 一码贵州 / add by Rule-Bot user: SychO / Date: 2025-08-18 01:42:03
+# 一码贵州 / add by Telegram user: SychO / Date: 2025-08-18 01:42:03
 DOMAIN-SUFFIX,vgogbuy.com
-# 一码贵州 / add by Rule-Bot user: SychO / Date: 2025-08-18 01:41:36
+# 一码贵州 / add by Telegram user: SychO / Date: 2025-08-18 01:41:36
 DOMAIN-SUFFIX,onebuygz.com
-# add by Rule-Bot user: Yongyu / Date: 2025-08-17 01:12:13
+# add by Telegram user: Yongyu / Date: 2025-08-17 01:12:13
 DOMAIN-SUFFIX,yongyu.xyz
-# 易班网是高校教育教学等功能社区 / add by Rule-Bot user: 仔 / Date: 2025-08-16 10:02:18
+# 易班网是高校教育教学等功能社区 / add by Telegram user: 仔 / Date: 2025-08-16 10:02:18
 DOMAIN-SUFFIX,yooc.me
-# add by Rule-Bot user: Yilan / Date: 2025-08-16 09:47:19
+# add by Telegram user: Yilan / Date: 2025-08-16 09:47:19
 DOMAIN-SUFFIX,hwbim.com
-# 阿里云域名 / add by Rule-Bot user: EzrAAA / Date: 2025-08-15 22:40:29
+# 阿里云域名 / add by Telegram user: EzrAAA / Date: 2025-08-15 22:40:29
 DOMAIN-SUFFIX,03241119.xyz
-# add by Rule-Bot user: 花火 / Date: 2025-08-14 21:01:04
+# add by Telegram user: 花火 / Date: 2025-08-14 21:01:04
 DOMAIN-SUFFIX,wenyi188.com
-# 鸿蒙智行 / add by Rule-Bot user: rl / Date: 2025-08-14 19:33:16
+# 鸿蒙智行 / add by Telegram user: rl / Date: 2025-08-14 19:33:16
 DOMAIN-SUFFIX,icvcs.com
-# 提供NS工具和个人技术与爱好分享网站 / add by Rule-Bot user: 慧慧 / Date: 2025-08-14 14:09:04
+# 提供NS工具和个人技术与爱好分享网站 / add by Telegram user: 慧慧 / Date: 2025-08-14 14:09:04
 DOMAIN-SUFFIX,ffhome.com
-# 个人技术博客 / add by Rule-Bot user: 慧慧 / Date: 2025-08-14 14:02:50
+# 个人技术博客 / add by Telegram user: 慧慧 / Date: 2025-08-14 14:02:50
 DOMAIN-SUFFIX,gmya.net
-# CG相关资源分享网站 / add by Rule-Bot user: 慧慧 / Date: 2025-08-14 13:51:28
+# CG相关资源分享网站 / add by Telegram user: 慧慧 / Date: 2025-08-14 13:51:28
 DOMAIN-SUFFIX,cg3da.com
-# add by Rule-Bot user: r / Date: 2025-08-13 23:24:39
+# add by Telegram user: r / Date: 2025-08-13 23:24:39
 DOMAIN-SUFFIX,starlink.uno
-# 换汇小程序 / add by Rule-Bot user: Feng Ninger / Date: 2025-08-13 04:17:49
+# 换汇小程序 / add by Telegram user: Feng Ninger / Date: 2025-08-13 04:17:49
 DOMAIN-SUFFIX,kuaicha888.com
-# 影视站 / add by Rule-Bot user: Feng Ninger / Date: 2025-08-11 11:56:12
+# 影视站 / add by Telegram user: Feng Ninger / Date: 2025-08-11 11:56:12
 DOMAIN-SUFFIX,rsfcxq.com
-# 微信小程序 / add by Rule-Bot user: EzrAAA / Date: 2025-08-10 19:02:13
+# 微信小程序 / add by Telegram user: EzrAAA / Date: 2025-08-10 19:02:13
 DOMAIN-SUFFIX,snfox.com
-# add by Rule-Bot user: 石 / Date: 2025-08-08 22:48:01
+# add by Telegram user: 石 / Date: 2025-08-08 22:48:01
 DOMAIN-SUFFIX,wewillpro.com
-# 极氪app / add by Rule-Bot user: EzrAAA / Date: 2025-08-08 18:08:37
+# 极氪app / add by Telegram user: EzrAAA / Date: 2025-08-08 18:08:37
 DOMAIN-SUFFIX,zeekrline.com
-# 华盛通 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 15:13:34
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:13:34
 DOMAIN-SUFFIX,vbkhk.com
-# 手机系统优化工具网站 / add by Rule-Bot user: 法兰西 / Date: 2025-08-03 16:34:24
+# 手机系统优化工具网站 / add by Telegram user: 法兰西 / Date: 2025-08-03 16:34:24
 DOMAIN-SUFFIX,mtaokj.com
-# 考试培训网站 / add by Rule-Bot user: Wintermute / Date: 2025-08-03 14:50:21
+# 考试培训网站 / add by Telegram user: Wintermute / Date: 2025-08-03 14:50:21
 DOMAIN-SUFFIX,huikao8.com
-# 华盛通 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-03 12:50:59
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-03 12:50:59
 DOMAIN-SUFFIX,hszq6.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-08-02 19:05:18
+# add by Telegram user: Aethersailor / Date: 2025-08-02 19:05:18
 DOMAIN-SUFFIX,xixih.cc
-# 华盛通 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 15:15:35
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:15:35
 DOMAIN-SUFFIX,vbkrhk.com
-# 华盛通 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 15:14:53
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 15:14:53
 DOMAIN-SUFFIX,vcltrade.com
-# 华盛通 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 14:52:47
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 14:52:47
 DOMAIN-SUFFIX,hstbroker.com
-# 华盛通 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 14:46:57
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 14:46:57
 DOMAIN-SUFFIX,vclbroker.com
-# 华盛通 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 14:45:43
+# 华盛通 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 14:45:43
 DOMAIN-SUFFIX,vclbrokers.com
-# E言E语录 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 01:39:59
+# E言E语录 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 01:39:59
 DOMAIN-SUFFIX,myshopex.com
-# MET全民英语 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 01:35:49
+# MET全民英语 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 01:35:49
 DOMAIN-SUFFIX,52met.com
-# 环球英语多媒体资料库 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 01:32:58
+# 环球英语多媒体资料库 / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 01:32:58
 DOMAIN-SUFFIX,englibrary.com
-# 985宇宙盒子官网（steam离线号库） / add by Rule-Bot user: 真怪誕呀 / Date: 2025-08-01 01:20:05
+# 985宇宙盒子官网（steam离线号库） / add by Telegram user: 真怪誕呀 / Date: 2025-08-01 01:20:05
 DOMAIN-SUFFIX,985hezi.com
-# 易搜-云盘资源搜索引擎 / add by Rule-Bot user: Fruit / Date: 2025-07-31 11:05:10
+# 易搜-云盘资源搜索引擎 / add by Telegram user: Fruit / Date: 2025-07-31 11:05:10
 DOMAIN-SUFFIX,yiso.fun
-# msl官网 / add by Rule-Bot user: Giveup. / Date: 2025-07-30 22:13:02
+# msl官网 / add by Telegram user: Giveup. / Date: 2025-07-30 22:13:02
 DOMAIN-SUFFIX,mslmc.net
-# 国内网站 / add by Rule-Bot user: sanligu / Date: 2025-07-30 20:55:25
+# 国内网站 / add by Telegram user: sanligu / Date: 2025-07-30 20:55:25
 DOMAIN-SUFFIX,gzybao.com
-# 卡券交易 / add by Rule-Bot user: 闹斯特麻麻 / Date: 2025-07-30 10:08:28
+# 卡券交易 / add by Telegram user: 闹斯特麻麻 / Date: 2025-07-30 10:08:28
 DOMAIN-SUFFIX,xiankabao.com
-# 医疗健康 / add by Rule-Bot user: 闹斯特麻麻 / Date: 2025-07-30 10:07:17
+# 医疗健康 / add by Telegram user: 闹斯特麻麻 / Date: 2025-07-30 10:07:17
 DOMAIN-SUFFIX,ottai.com
-# 墨督督私域网课 / add by Rule-Bot user: Fruit / Date: 2025-07-29 19:33:49
+# 墨督督私域网课 / add by Telegram user: Fruit / Date: 2025-07-29 19:33:49
 DOMAIN-SUFFIX,sksight.com
-# 儿童学习机 / add by Rule-Bot user: sanligu / Date: 2025-07-29 15:54:04
+# 儿童学习机 / add by Telegram user: sanligu / Date: 2025-07-29 15:54:04
 DOMAIN-SUFFIX,51wanxue.com
-# 盖世童书的网址 / add by Rule-Bot user: sanligu / Date: 2025-07-29 15:52:19
+# 盖世童书的网址 / add by Telegram user: sanligu / Date: 2025-07-29 15:52:19
 DOMAIN-SUFFIX,gaishitongshu.com
-# steam离线号游戏库 / add by Rule-Bot user: 真怪誕呀 / Date: 2025-07-29 13:59:20
+# steam离线号游戏库 / add by Telegram user: 真怪誕呀 / Date: 2025-07-29 13:59:20
 DOMAIN-SUFFIX,zuobiao.press
-# 高驰手表app / add by Rule-Bot user: nmd / Date: 2025-07-28 16:21:27
+# 高驰手表app / add by Telegram user: nmd / Date: 2025-07-28 16:21:27
 DOMAIN-SUFFIX,coros.com
-# add by Rule-Bot user: 你是 / Date: 2025-07-28 14:05:38
+# add by Telegram user: 你是 / Date: 2025-07-28 14:05:38
 DOMAIN-SUFFIX,baiyishequ.com
-# add by Rule-Bot user: 你是 / Date: 2025-07-28 14:04:57
+# add by Telegram user: 你是 / Date: 2025-07-28 14:04:57
 DOMAIN-SUFFIX,bdcb.cc
-# add by Rule-Bot user: 你是 / Date: 2025-07-28 14:03:53
+# add by Telegram user: 你是 / Date: 2025-07-28 14:03:53
 DOMAIN-SUFFIX,xopenbeta.com
-# 国内某骑行设备的网站 / add by Rule-Bot user: 2. / Date: 2025-07-27 23:59:27
+# 国内某骑行设备的网站 / add by Telegram user: 2. / Date: 2025-07-27 23:59:27
 DOMAIN-SUFFIX,igpsport.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-07-27 02:04:15
+# add by Telegram user: Aethersailor / Date: 2025-07-27 02:04:15
 DOMAIN-SUFFIX,kmeila.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-07-26 16:01:18
+# add by Telegram user: Aethersailor / Date: 2025-07-26 16:01:18
 DOMAIN-SUFFIX,dcgstd.com
-# add by Rule-Bot user: P / Date: 2025-07-26 01:49:54
+# add by Telegram user: P / Date: 2025-07-26 01:49:54
 DOMAIN-SUFFIX,scbaijia.com
-# add by Rule-Bot user: P / Date: 2025-07-26 01:45:38
+# add by Telegram user: P / Date: 2025-07-26 01:45:38
 DOMAIN-SUFFIX,7sef.com
-# 专业网站 / add by Rule-Bot user: Aaa / Date: 2025-07-25 22:15:27
+# 专业网站 / add by Telegram user: Aaa / Date: 2025-07-25 22:15:27
 DOMAIN-SUFFIX,u-carloan.com
-# add by Rule-Bot user: chrysaly / Date: 2025-07-25 11:31:30
+# add by Telegram user: chrysaly / Date: 2025-07-25 11:31:30
 DOMAIN-SUFFIX,qianuni.com
 # 海翔登录
 DOMAIN-SUFFIX,seaflysoft.com
 # 希沃学习机
 DOMAIN-SUFFIX,seedpace.com
 DOMAIN-SUFFIX,qiaoxuesi.com
-# 培训网站 / add by Rule-Bot user: chrysaly / Date: 2025-07-24 20:29:33
+# 培训网站 / add by Telegram user: chrysaly / Date: 2025-07-24 20:29:33
 DOMAIN-SUFFIX,zhongancloud.com
-# add by Rule-Bot user: Coco / Date: 2025-07-23 22:57:01
+# add by Telegram user: Coco / Date: 2025-07-23 22:57:01
 DOMAIN-SUFFIX,tuxing.art
-# 律师在线办公平台 / add by Rule-Bot user: Coco / Date: 2025-07-23 22:56:02
+# 律师在线办公平台 / add by Telegram user: Coco / Date: 2025-07-23 22:56:02
 DOMAIN-SUFFIX,lsbj365.com
-# 好太太家居智能控制服务器 / add by Rule-Bot user: Coco / Date: 2025-07-23 22:54:27
+# 好太太家居智能控制服务器 / add by Telegram user: Coco / Date: 2025-07-23 22:54:27
 DOMAIN-SUFFIX,keyoo.com
-# 游戏网站 / add by Rule-Bot user: Leo / Date: 2025-07-23 17:52:55
+# 游戏网站 / add by Telegram user: Leo / Date: 2025-07-23 17:52:55
 DOMAIN-SUFFIX,tcy365.net
-# add by Rule-Bot user: Saulmini / Date: 2025-07-23 09:33:33
+# add by Telegram user: Saulmini / Date: 2025-07-23 09:33:33
 DOMAIN-SUFFIX,belimked.com
-# VPS服务商 / add by Rule-Bot user: Saulmini / Date: 2025-07-23 09:20:11
+# VPS服务商 / add by Telegram user: Saulmini / Date: 2025-07-23 09:20:11
 DOMAIN-SUFFIX,lanyun.net
-# add by Rule-Bot user: Evan / Date: 2025-07-23 08:50:23
+# add by Telegram user: Evan / Date: 2025-07-23 08:50:23
 DOMAIN-SUFFIX,52jiawei.com
-# 教育门户 / add by Rule-Bot user: Evan / Date: 2025-07-23 08:49:41
+# 教育门户 / add by Telegram user: Evan / Date: 2025-07-23 08:49:41
 DOMAIN-SUFFIX,longmenshuju.com
-# 教育门户 / add by Rule-Bot user: Evan / Date: 2025-07-23 08:49:00
+# 教育门户 / add by Telegram user: Evan / Date: 2025-07-23 08:49:00
 DOMAIN-SUFFIX,fssbcc.top
-# 民生门户 / add by Rule-Bot user: Evan / Date: 2025-07-23 08:48:17
+# 民生门户 / add by Telegram user: Evan / Date: 2025-07-23 08:48:17
 DOMAIN-SUFFIX,fowep.com
-# add by Rule-Bot user: Evan / Date: 2025-07-23 08:47:03
+# add by Telegram user: Evan / Date: 2025-07-23 08:47:03
 DOMAIN-SUFFIX,tangguobaohe.com
-# add by Rule-Bot user: Evan / Date: 2025-07-23 08:46:35
+# add by Telegram user: Evan / Date: 2025-07-23 08:46:35
 DOMAIN-SUFFIX,ddzn.tech
-# add by Rule-Bot user: Evan / Date: 2025-07-23 08:45:37
+# add by Telegram user: Evan / Date: 2025-07-23 08:45:37
 DOMAIN-SUFFIX,dingdingzn.com
-# 个人网站 / add by Rule-Bot user: Km / Date: 2025-07-23 03:31:58
+# 个人网站 / add by Telegram user: Km / Date: 2025-07-23 03:31:58
 DOMAIN-SUFFIX,737698.xyz
-# 企业博客 用的腾讯云cdn 更推荐直连 / add by Rule-Bot user: 🤗 / Date: 2025-07-23 02:33:17
+# 企业博客 用的腾讯云cdn 更推荐直连 / add by Telegram user: 🤗 / Date: 2025-07-23 02:33:17
 DOMAIN-SUFFIX,znnu.com
-# add by Rule-Bot user: Aethersailor / Date: 2025-07-22 23:46:20
+# add by Telegram user: Aethersailor / Date: 2025-07-22 23:46:20
 DOMAIN-SUFFIX,jxjktzjt.com
-# add by Rule-Bot user: kk / Date:2025-07-22 20:32:43
+# add by Telegram user: kk / Date:2025-07-22 20:32:43
 DOMAIN-SUFFIX,snltty.com
-# 设计模型网站 / add by Rule-Bot user: 石 / Date:2025-07-22 18:53:50
+# 设计模型网站 / add by Telegram user: 石 / Date:2025-07-22 18:53:50
 DOMAIN-SUFFIX,znztv.com
-# 商务 / add by Rule-Bot user: lu / Date:2025-07-22 14:02:38
+# 商务 / add by Telegram user: lu / Date:2025-07-22 14:02:38
 DOMAIN-SUFFIX,suyur.com
-# 教育 / add by Rule-Bot user: lu / Date:2025-07-22 14:00:43
+# 教育 / add by Telegram user: lu / Date:2025-07-22 14:00:43
 DOMAIN-SUFFIX,yunzuoye.net
-# 教育域名 / add by Rule-Bot user: Feng Ninger / Date:2025-07-22 13:56:06
+# 教育域名 / add by Telegram user: Feng Ninger / Date:2025-07-22 13:56:06
 DOMAIN-SUFFIX,tumukaoyan.com
-# 招聘网站 / add by Rule-Bot user: Feng Ninger / Date:2025-07-22 13:55:25
+# 招聘网站 / add by Telegram user: Feng Ninger / Date:2025-07-22 13:55:25
 DOMAIN-SUFFIX,crtyhr.com
-# 教育 / add by Rule-Bot user: lu / Date:2025-07-22 13:54:28
+# 教育 / add by Telegram user: lu / Date:2025-07-22 13:54:28
 DOMAIN-SUFFIX,letaoedu.com
-# 个人网站 / add by Rule-Bot user: Km / Date:2025-07-22 13:53:32
+# 个人网站 / add by Telegram user: Km / Date:2025-07-22 13:53:32
 DOMAIN-SUFFIX,sixloy428.top
-# add by Rule-Bot user: Aethersailor / Date:2025-07-22 11:48:39
+# add by Telegram user: Aethersailor / Date:2025-07-22 11:48:39
 DOMAIN-SUFFIX,hbctic.com
-# add by Rule-Bot user: Aethersailor / Date:2025-07-22 11:41:34
+# add by Telegram user: Aethersailor / Date:2025-07-22 11:41:34
 DOMAIN-SUFFIX,hbcof.com
-# add by Rule-Bot user: Leo / Date:2025-07-22 11:07:09
+# add by Telegram user: Leo / Date:2025-07-22 11:07:09
 DOMAIN-SUFFIX,hexiny.com
-# 云手机 / add by Rule-Bot user: hanshan / Date:2025-07-22 10:36:21
+# 云手机 / add by Telegram user: hanshan / Date:2025-07-22 10:36:21
 DOMAIN-SUFFIX,armvm.com
-# 云手机 / add by Rule-Bot user: hanshan / Date:2025-07-22 10:35:28
+# 云手机 / add by Telegram user: hanshan / Date:2025-07-22 10:35:28
 DOMAIN-SUFFIX,xiaochuanyun.com
-# add by Rule-Bot user: Aethersailor / Date:2025-07-22 04:14:28
+# add by Telegram user: Aethersailor / Date:2025-07-22 04:14:28
 DOMAIN-SUFFIX,gxnnjidingkeji.top
-# add by Rule-Bot user: Aethersailor / Date:2025-07-21 22:18:39
+# add by Telegram user: Aethersailor / Date:2025-07-21 22:18:39
 DOMAIN-SUFFIX,gsgltz.com
-# Rule-Bot user：Aethersailor / Date:2025-07-21
+# Telegram user：Aethersailor / Date:2025-07-21
 DOMAIN-SUFFIX,gsnhcg.com
-# Rule-Bot user：Aethersailor / Date:2025-07-21
+# Telegram user：Aethersailor / Date:2025-07-21
 DOMAIN-SUFFIX,gsjkjt.com
-# Rule-Bot user：Aethersailor / Date:2025-07-21
+# Telegram user：Aethersailor / Date:2025-07-21
 DOMAIN-SUFFIX,gsstic.com
-# Rule-Bot user：Aethersailor / Date:2025-07-21
+# Telegram user：Aethersailor / Date:2025-07-21
 DOMAIN-SUFFIX,sxlljm.com
 #DOMAIN-SUFFIX,guanyierp.com
 #DOMAIN-SUFFIX,chememall.com
