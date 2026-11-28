@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1328
+# TOTAL: 1331
 
 payload:
   - '+.00333118.com'
@@ -267,6 +267,7 @@ payload:
   - '+.chushi.cool'
   - '+.chyqaq.online'
   - '+.ciallo.party'
+  - '+.cilikongjian.com'
   - '+.cilizhai.net'
   - '+.cindy.app'
   - '+.ciyuancenter.cc'
@@ -378,6 +379,7 @@ payload:
   - '+.fb71ef91e1014.beer'
   - '+.fdfinvoice.com'
   - '+.feihengip.com'
+  - '+.feiniaobt.com'
   - '+.feiniugo.com'
   - '+.feiyujiaju.com'
   - '+.feizhiyi.com'
@@ -459,6 +461,7 @@ payload:
   - '+.gjtool.com'
   - '+.gmoj.net'
   - '+.gmya.net'
+  - '+.gny.net'
   - '+.goalmapapp.com'
   - '+.goka.top'
   - '+.gongxiangjizhang.com'
