@@ -2,18 +2,20 @@
   🚀 Custom_OpenClash_Rules
 </h1>
 
-<p align="center"><b>OpenClash 配置方案、订阅转换模板、YAML 配置、规则文件、实用脚本与覆写模块资源</b></p>
+<p align="center"><b>OpenClash setup guides, subscription conversion templates, YAML configurations, rule files, utility scripts, and overwrite modules</b></p>
+
+<p align="center">English · <a href="README-zh-CN.md">简体中文</a></p>
 
 <p align="center">
-  <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki">📖 项目 Wiki</a>
+  <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki">📖 Project Wiki</a>
   &nbsp;•&nbsp;
-  <a href="cfg/">🧩 配置资源</a>
+  <a href="cfg/">🧩 Configuration Resources</a>
   &nbsp;•&nbsp;
-  <a href="rule/">🗂️ 规则文件</a>
+  <a href="rule/">🗂️ Rule Files</a>
   &nbsp;•&nbsp;
-  <a href="overwrite/">⚙️ 覆写模块</a>
+  <a href="overwrite/">⚙️ Overwrite Modules</a>
   &nbsp;•&nbsp;
-  <a href="shell/">🛠️ 实用脚本</a>
+  <a href="shell/">🛠️ Utility Scripts</a>
 </p>
 
 <p align="center">
@@ -27,323 +29,323 @@
 ---
 
 > [!WARNING]
-> 本项目提供中立的技术资料，仅供在中华人民共和国境外学习和研究 OpenWrt 与 OpenClash。
+> This project provides neutral technical material solely for studying and researching OpenWrt and OpenClash outside the People's Republic of China.
 >
-> **禁止任何组织或个人在中国大陆访问、下载或使用本项目的任何内容。身处中国大陆的访客请立即关闭本页面。**
+> **Organizations and individuals are prohibited from accessing, downloading, or using any part of this project in mainland China. If you are in mainland China, close this page immediately.**
 >
-> 任何组织或个人均不得利用本项目内容从事违反适用法律法规的活动。使用者须自行承担其使用行为产生的法律责任。
+> Organizations and individuals must not use any part of this project for activities that violate applicable laws or regulations. Users are individually responsible for the legal consequences of their use.
 
-## 📖 关于本项目
+## 📖 About This Project
 
-**Custom_OpenClash_Rules** 是一个围绕 [OpenClash](https://github.com/vernesong/OpenClash) 维护的配置与扩展资源仓库。
+**Custom_OpenClash_Rules** is a repository of configuration and extension resources for [OpenClash](https://github.com/vernesong/OpenClash).
 
-本项目提供 OpenClash 设置文档、订阅转换模板、YAML 配置、规则文件、远程覆写模块及辅助脚本。各类资源可以独立使用；完整配置方案需要结合项目 Wiki 中的 OpenClash LuCI 设置。
+The project provides OpenClash setup documentation, subscription conversion templates, YAML configurations, rule files, remote overwrite modules, and supporting scripts. You can use each type of resource independently. For a complete setup, also apply the OpenClash LuCI settings documented in the project Wiki.
 
 > [!TIP]
-> **仅需 OpenClash，无需「套娃」**
+> **OpenClash is the only plugin required**
 >
-> 本项目的所有配置方案均只需 OpenClash 一个插件，无需叠加其他代理或 DNS 插件，也无需进行任何「套娃」设置。
+> Every configuration approach in this project works with OpenClash alone. There is no need to stack additional proxy or DNS plugins or use any other layered setup.
 
 > [!IMPORTANT]
-> **关于 DNS 泄漏防护**
+> **DNS leak prevention**
 >
-> 使用本项目的 OpenClash 设置方案，并选择三种订阅路径中的任意一种（订阅转换、远程 YAML 覆写或手动导入 YAML），在以下条件同时满足时，可以避免本地 DNS 泄漏：
+> You can prevent local DNS leaks by applying the project's OpenClash settings and using any of the three subscription setup methods (subscription conversion, remote YAML overwrite, or manual YAML import) when both of the following conditions are met.
 >
-> - Fake-IP、流量接管和 DNS 设置均已按 Wiki 生效；
-> - 终端 DNS 请求及相关流量均经过 OpenClash。
+> - Fake-IP, traffic interception, and DNS settings are active as documented in the Wiki.
+> - DNS queries from client devices and the related traffic pass through OpenClash.
 >
-> 实际结果必须通过检测验证，不能仅以配置完成作为结论。客户端启用私有 DNS 或 DoH、设备或部分流量未被接管、插件或固件行为与文档不一致，或自行覆写 DNS 配置时，均超出该方案的控制范围，需要单独处理并验证。
+> Test for DNS leaks to verify the actual results. Applying the settings alone is insufficient. Client-side Private DNS or DoH, devices or traffic that OpenClash does not intercept, plugin or firmware behavior that differs from the documentation, and manual DNS overrides are outside the scope of this setup. Handle and test those cases separately.
 
-根目录的 `README.md` 作为项目首页和资源导航，仅介绍各类资源的定位与入口。具体文件、版本区别、参数和使用方法，请进入对应目录查看其自动展示的 `README.md`。
+The root `README.md` is the project home page and resource index. It describes what each resource is for and where to find it. See the `README.md` displayed in the relevant directory for specific files, differences between versions, parameters, and instructions.
 
 > [!NOTE]
-> 项目 Wiki 目前仅提供中文版本。
+> The project Wiki is currently available only in Chinese.
 
 ---
 
-## ⚠️ 特别声明
+## ⚠️ Important Notices
 
 > [!IMPORTANT]
-> **项目边界声明**
+> **Project scope**
 >
-> 本项目不提供可供用户使用的代理服务器、代理节点或节点订阅，不运营「机场」等代理服务，也不提供网络接入服务。本项目及其维护者与上述服务提供者不存在合作、代理或担保关系。
+> This project provides no proxy servers, proxy nodes, or node subscriptions for users. It operates no commercial or other proxy services and provides no internet access services. Neither the project nor its maintainers partner with, represent, or act as guarantors for such providers.
 
 > [!WARNING]
-> 使用本项目前，请展开并完整阅读下方声明。
+> Before using this project, expand and read the full notice below.
 
 <details>
-<summary><strong>展开查看完整使用须知与免责声明</strong></summary>
+<summary><strong>Full Usage Notice and Disclaimer</strong></summary>
 
 <br>
 
-**使用须知：**
+**Usage notice**
 
-1. 本项目仅用于 OpenWrt 系统及其插件 OpenClash 的技术学习与研究，相关内容属于中立性的技术实现示例与实验性资料，不涉及任何具体使用场景或用途导向。
-2. 本项目不面向中华人民共和国境内提供，严禁任何个人或组织在中华人民共和国境内以任何形式访问、下载、复制、保存、安装、运行、部署、修改、传播或以其他方式使用本项目的全部或部分内容；已经取得相关内容的，应立即停止使用并彻底删除全部副本。
-3. 使用者在访问、使用、复制本项目内容前，应自行确认其所在地及相关司法辖区的法律法规允许，且在学习和研究后于 24 小时内删除相关内容。
-4. 本项目内容不得用于任何违反适用法律法规的用途。使用者在使用本项目内容时，应自行遵守其所在地及相关司法辖区的法律法规，包括中华人民共和国的相关法律法规，不得在中华人民共和国境内利用本项目内容从事获取、传播依法被限制或阻断的境外违法信息等行为。
-5. 本项目不提供、亦不涉及设备、软件、工具、线路或服务。项目维护者不制作、不销售、不提供相关设备、软件、工具或技术服务，亦不为任何个人或组织获取、传播依法被限制或阻断的信息、规避监管制度提供技术支持、协助或其他形式的帮助。
-6. 任何个人或组织因直接或间接使用本项目内容所实施的行为，均由其自行负责并承担相应法律责任。项目维护者不参与使用者的具体行为，对使用者的用途、方式及其产生的后果不承担任何责任，亦不承担任何形式的连带责任。
-7. 基于本项目内容所进行的修改、二次开发、整合、分发或其他衍生行为，均属于相关个人或组织的独立行为，与本项目及其维护者无关，由此产生的任何法律责任由行为主体自行承担。
-8. 本项目不鼓励任何形式的转载、再发布或二次传播，且严禁转载、再发布或二次传播本项目内容至中国大陆境内任何平台之上。
-9. 任何转载、再发布或二次传播均不得暗示本项目或维护者对转载内容背书。因转载、传播或使用本项目内容所产生的法律风险，由行为主体自行承担，与本项目及其维护者无关。
-10. 本项目维护者保留在任何时间对本免责声明进行修订或补充的权利。任何使用、复制或访问本项目内容的个人或组织，均视为已知悉并接受本免责声明。
+1. This project is solely for the technical study and research of OpenWrt and its OpenClash plugin. Its contents are neutral implementation examples and experimental materials, independent of any specific use case or intended application.
+2. This project is not offered within the territory of the People's Republic of China. Individuals and organizations within that territory are strictly prohibited from accessing, downloading, copying, storing, installing, running, deploying, modifying, disseminating, or otherwise using any part of this project in any form. Anyone who has already obtained the material must immediately stop using it and permanently delete all copies.
+3. Before accessing, using, or copying project material, users must determine for themselves whether the laws and regulations of their location and any relevant jurisdiction permit it. Users must delete the material within 24 hours after completing their study and research.
+4. Project material must not be used for any purpose that violates applicable laws or regulations. Users are responsible for complying with the laws and regulations of their location and any relevant jurisdiction, including applicable laws and regulations of the People's Republic of China. Users must not use project material within the territory of the People's Republic of China to obtain or disseminate unlawful information from abroad that is restricted or blocked by law, or to engage in similar activities.
+5. This project does not provide or involve equipment, software, tools, network connections, or services. The maintainers do not make, sell, or supply related equipment, software, tools, or technical services. They do not provide technical support, assistance, or any other form of help to individuals or organizations in obtaining or disseminating information restricted or blocked by law or in circumventing regulatory controls.
+6. Individuals and organizations are solely responsible for their actions involving direct or indirect use of project material and bear the associated legal liability. The maintainers take no part in users' actions and accept no responsibility for the purposes, methods, or consequences of such use. They assume no form of joint and several liability.
+7. Any modification, further development, integration, distribution, or other derivative activity based on project material is an independent act of the individual or organization carrying it out. It is unaffiliated with the project and its maintainers, and the party carrying out the activity bears any resulting legal liability.
+8. The project discourages all forms of reposting, republication, and redistribution. Reposting, republishing, or redistributing project material on any platform in mainland China is strictly prohibited.
+9. Reposting, republication, or redistribution must never imply that the project or its maintainers endorse the reposted material. The party that reposts, disseminates, or uses the project material assumes the resulting legal risks independently of the project and its maintainers.
+10. The maintainers reserve the right to revise or supplement this disclaimer at any time. Any individual or organization that uses, copies, or accesses project material is deemed to know and accept this disclaimer.
 
-**补充说明：**
+**Additional information**
 
-- 本项目编写于 2024 年 4 月，为非营利性质的技术研究与经验整理项目。
-- 本项目内容仅为维护者个人经验的总结，用于技术交流，不具权威性，亦不构成 OpenClash 的唯一或推荐使用方式。
-- 本项目未运营任何 YouTube 频道，亦未在 YouTube 或其他视频平台发布任何形式的教学或指导视频。
-- 本项目文档由维护者根据实际使用经验独立整理；引用或使用的第三方项目、资料与资源在对应位置或下方「感谢」中标注。如因使用其他来源的教程、模板或配置文件产生问题，请勿在本项目的 Issues 或 Discussions 中反馈。
-- 内容采用相对易于理解的表述，不代表对任何用户群体作出教学、指导或支持承诺。
+- The project was created in April 2024 as a nonprofit effort to conduct technical research and document practical experience.
+- The material summarizes the maintainer's personal experience for technical discussion. It is non-authoritative and does not establish a sole or recommended way to use OpenClash.
+- The project operates no YouTube channel and has published no tutorials or guidance videos on YouTube or any other video platform.
+- The maintainer independently prepared the documentation based on practical experience. Third-party projects, materials, and resources are credited where used or in the Acknowledgments below. If you encounter problems with tutorials, templates, or configuration files from other sources, do not report them in this project's Issues or Discussions.
+- The material uses straightforward language. This does not imply a commitment to teach, guide, or support any group of users.
 
 </details>
 
 ---
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-| 需求 | 建议入口 |
+| Task | Where to start |
 | --- | --- |
-| 首次配置 OpenClash 或系统了解其工作方式 | [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) |
-| 使用订阅转换模板、YAML 配置或远程 YAML 覆写模块 | [`cfg/`](cfg/) |
-| 为现有配置补充或修正规则 | [`rule/`](rule/) |
-| 使用独立游戏规则 | [`rule/game_rule/`](rule/game_rule/) |
-| 使用单功能远程覆写模块 | [`overwrite/`](overwrite/) |
-| 安装、更新或检测 OpenClash | [`shell/`](shell/) |
-| 使用 Sub-Store 扩展脚本 | [Sub-Store 脚本](script/sub-store/) |
-| 排查常见故障 | [故障排除](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4) |
+| Set up OpenClash for the first time or learn how it works in depth | [Project Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki) |
+| Use subscription conversion templates, YAML configurations, or remote YAML overwrite modules | [`cfg/`](cfg/) |
+| Add or correct rules in an existing configuration | [`rule/`](rule/) |
+| Use standalone game rules | [`rule/game_rule/`](rule/game_rule/) |
+| Use single-purpose remote overwrite modules | [`overwrite/`](overwrite/) |
+| Install, update, or run checks for OpenClash | [`shell/`](shell/) |
+| Use Sub-Store extension scripts | [Sub-Store scripts](script/sub-store/) |
+| Troubleshoot common problems | [Troubleshooting](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4) |
 
 ---
 
-## 🧭 项目资源
+## 🧭 Project Resources
 
-### 📚 配置方案与文档
+### 📚 Setup Guides and Documentation
 
-项目 Wiki 是本仓库的核心内容之一，提供一套围绕 OpenWrt 与 OpenClash 整理的完整配置思路。
+The project Wiki is a core resource in this repository. It documents a complete approach to setting up OpenWrt and OpenClash.
 
-内容重点包括：
+It covers the following topics.
 
-- **OpenClash 从准备到验收的完整配置流程：** 运行模式、流量接管、规则匹配和策略选择；
-- **DNS 策略与泄漏风险控制：** 直连与代理流量的解析路径、DNS 劫持和规则跟随；
-- **直连访问优化：** 结合中国大陆域名与 IP 绕过机制，减少不必要的代理处理；
-- **IPv6 配置与兼容：** 在保留 IPv6 连通性的同时正确完成分流与接管；
-- **故障排除与补充教程：** 覆盖启动失败、网络异常、规则命中异常等常见问题。
+- **The full OpenClash setup process, from preparation through verification**. Operating modes, traffic interception, rule matching, and policy selection.
+- **DNS policies and leak prevention**. Resolution paths for direct and proxied traffic, DNS hijacking, and DNS resolution that follows routing rules.
+- **Direct-access optimization**. Bypass rules for mainland China domains and IP addresses reduce unnecessary proxy handling.
+- **IPv6 setup and compatibility**. Preserve IPv6 connectivity while routing and intercepting traffic correctly.
+- **Troubleshooting and supplementary guides**. Common issues such as startup failures, network problems, and unexpected rule matches.
 
-Wiki 负责解释「为什么这样配置」，各资源目录负责提供可以直接使用或修改的落地文件。
+The Wiki explains the reasoning behind the setup. The resource directories contain files you can use as is or adapt.
 
-**入口：** [项目 Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki)
+See the [Project Wiki](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki).
 
 ---
 
-### 🧩 配置资源
+### 🧩 Configuration Resources
 
-[`cfg/`](cfg/) 用于将上述 Wiki 中的配置思路落实为可直接使用的完整配置资源，具体包括：
+[`cfg/`](cfg/) provides ready-to-use resources that implement the configuration design described in the Wiki.
 
-| 资源 | 所在位置 | 主要用途 |
+| Resource | Location | Main purpose |
 | --- | --- | --- |
-| **订阅转换模板** | [`cfg/`](cfg/) | 通过在线订阅转换生成完整 OpenClash 配置 |
-| **YAML 配置文件** | [`cfg/yaml/`](cfg/yaml/) | 下载后手动修改并导入 OpenClash |
-| **YAML 远程覆写模块** | [`overwrite/yaml/`](overwrite/yaml/) | 自动下载对应 YAML、写入订阅并切换配置 |
+| **Subscription conversion templates** | [`cfg/`](cfg/) | Generate a complete OpenClash configuration through online subscription conversion |
+| **YAML configuration files** | [`cfg/yaml/`](cfg/yaml/) | Download, edit, and import a configuration into OpenClash manually |
+| **Remote YAML overwrite modules** | [`overwrite/yaml/`](overwrite/yaml/) | Automatically download the corresponding YAML file, insert the subscription, and switch the active configuration |
 
 > [!IMPORTANT]
-> 本项目提供三种完整配置的使用方式：
+> The project provides three ways to use a complete configuration.
 >
-> 1. **订阅转换**；
-> 2. **远程 YAML 覆写模块**；
-> 3. **下载 YAML 后手动修改并导入**。
+> 1. **Convert a subscription**.
+> 2. **Use a remote YAML overwrite module**.
+> 3. **Download a YAML configuration, then edit and import it manually**.
 >
-> 本项目按同一套配置设计维护三种使用方式。选择相同版本且未自行修改时，策略组定位、规则顺序和分流逻辑应保持一致；文件结构和加载方式不同，实际结果还会受到订阅转换后端及 OpenClash 版本影响。
+> All three methods follow the same configuration design. If you choose the same edition and make no custom changes, the roles of the policy groups, rule order, and traffic routing logic should be consistent. File structure and loading methods differ, and the subscription conversion backend and OpenClash version can affect the results.
 
-OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包括标准版、轻量版、极简 GFW 版、重度分流版，以及文件名以 `_Fallback` 结尾的对应故障转移版。旧版如未显示对应条目，可手动填写远程模板地址，具体方法和地址见 [`cfg/`](cfg/)。
+The OpenClash `dev` version currently includes all 8 subscription conversion templates from this project. These include the Standard, Lite, Minimal GFW, and Full Routing editions, plus a corresponding failover edition for each with a filename ending in `_Fallback`. If an older version does not list the desired template, enter its remote URL manually. See [`cfg/`](cfg/) for instructions and URLs.
 
-内置模板名称以 OpenClash `dev` 分支的 [`sub_ini.list`](https://github.com/vernesong/OpenClash/blob/dev/luci-app-openclash/root/usr/share/openclash/res/sub_ini.list) 为准。OpenClash 后续调整内置清单时，界面显示可能与本文不同；本项目模板仍可通过远程地址手动使用。
+For the exact built-in template names, see [`sub_ini.list`](https://github.com/vernesong/OpenClash/blob/dev/luci-app-openclash/root/usr/share/openclash/res/sub_ini.list) on the OpenClash `dev` branch. If OpenClash changes its built-in list, the interface may differ from this README. You can still use the templates by entering their remote URLs manually.
 
-本项目提供标准版、轻量版、极简 GFW 版、重度分流版及对应的故障转移版，并提供自建节点相关 YAML。版本定位、参数、远程地址和详细操作请进入相应目录查看。
+The project provides Standard, Lite, Minimal GFW, and Full Routing editions along with their corresponding failover editions. It also provides YAML for self-hosted proxy nodes. See the respective directories for the intended use of each edition, parameters, remote URLs, and detailed instructions.
 
-**入口：**
+Browse the configuration resources.
 
-- 订阅转换模板：[`cfg/`](cfg/)
-- YAML 配置文件：[`cfg/yaml/`](cfg/yaml/)
-- YAML 远程覆写模块：[`overwrite/yaml/`](overwrite/yaml/)
+- Subscription conversion templates in [`cfg/`](cfg/)
+- YAML configuration files in [`cfg/yaml/`](cfg/yaml/)
+- Remote YAML overwrite modules in [`overwrite/yaml/`](overwrite/yaml/)
 
 ---
 
-### 🗂️ 规则文件
+### 🗂️ Rule Files
 
-[`rule/`](rule/) 存放本项目维护的补充规则及其多格式派生文件，包括自定义直连、代理、Steam CDN、游戏下载 CDN、加密 DNS 等内容。
+[`rule/`](rule/) contains supplemental rules maintained by this project and their derivatives in multiple formats. These include custom direct-routing rules, proxy rules, Steam CDN rules, game download CDN rules, and encrypted DNS rules.
 
-目录中的 `.list` 是主要规则来源；工作流据此生成 Classical YAML、Domain YAML、IP-CIDR YAML 和 MRS，供订阅转换模板或 Mihomo Rule Provider 使用。
+The `.list` files are the primary sources. Workflows generate Classical YAML, Domain YAML, IP-CIDR YAML, and MRS files from them for use by subscription conversion templates or Mihomo Rule Providers.
 
 > [!IMPORTANT]
-> **本项目的直连规则由维护者与社区用户共同收集。**
+> **The maintainers and community users collect direct-routing rules together.**
 
-请根据实际需求选择提交入口：
+Choose where to submit based on your needs.
 
-| 需求 | 建议入口 |
+| Task | Where to go |
 | --- | --- |
-| 手动查询或提交少量直连域名 | 使用 [Rule-Bot 公共实例](https://t.me/asailor_rulebot) |
-| 持续收集 Mihomo 最终由 `MATCH` 处理的域名 | 按照 [Rule-Bot Client 接入公共 Rule-Bot](https://github.com/Aethersailor/Rule-Bot-Client/wiki/%E6%8E%A5%E5%85%A5%E5%85%AC%E5%85%B1-Rule-Bot) 完成配置；客户端默认仅保存到本地，发送需要主动启用 |
-| 批量提交已经核实的域名 | 修改 [`rule/Custom_Direct.list`](rule/Custom_Direct.list) 并提交 Pull Request |
-| 无法使用 Rule-Bot，或需要附带完整证据 | 使用 [大陆直连域名 Issue 表单](https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/new?template=02_direct_domain_submission.yml) |
-| OpenClash 插件无法启动、界面异常或安装失败 | 使用 [OpenClash 官方 Issue 选择页](https://github.com/vernesong/OpenClash/issues/new/choose) |
+| Manually look up or submit a small number of domains for direct routing | Use the [public Rule-Bot instance](https://t.me/asailor_rulebot) |
+| Continuously collect domains from connections that ultimately match Mihomo's `MATCH` rule | Follow [Connect Rule-Bot Client to the public Rule-Bot instance](https://github.com/Aethersailor/Rule-Bot-Client/wiki/%E6%8E%A5%E5%85%A5%E5%85%AC%E5%85%B1-Rule-Bot) to configure the client. The client stores domains locally by default. Sending requires explicit opt-in |
+| Submit verified domains in bulk | Edit [`rule/Custom_Direct.list`](rule/Custom_Direct.list) and open a pull request |
+| Submit when Rule-Bot is unavailable to you or when you need to attach complete evidence | Use the [mainland China direct-routing domain issue form](https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/new?template=02_direct_domain_submission.yml) |
+| Report OpenClash startup failures, interface issues, or installation failures | Use the [official OpenClash issue chooser](https://github.com/vernesong/OpenClash/issues/new/choose) |
 
-提交前请先搜索现有规则、Issues 和 Pull Requests，并提供实际命中的规则、策略和可复核证据。不要在公开页面提交订阅地址、Token、节点凭据或其他敏感信息。
+Before submitting, search the existing rules, issues, and pull requests. Include the rule that actually matched, the selected policy, and verifiable evidence. Keep subscription URLs, tokens, proxy node credentials, and other sensitive information off public pages.
 
-[`rule/game_rule/`](rule/game_rule/) 另存放人工整理的独立游戏规则。目录中的 `.list` 是规则来源，工作流会自动生成 YAML 和 MRS 派生文件，但不会更新规则内容或将其加载到主配置。使用前应核对适用区服、更新时间和实际命中情况。
+[`rule/game_rule/`](rule/game_rule/) contains separate, manually curated game rules. The `.list` files are the sources. Workflows automatically generate YAML and MRS derivatives. Updates to rule contents and loading into the main configuration are outside those workflows. Before using the rules, check their intended server regions, last update date, and actual matches.
 
-**入口：** [`rule/`](rule/)
+Browse [`rule/`](rule/).
 
 > [!NOTE]
-> 维护者会根据实际情况将本项目收集到的规则内容向上游相关规则项目提交。
+> The maintainers submit rules collected by this project to relevant upstream rule projects where appropriate.
 
 ---
 
-### 🛠️ 实用脚本
+### 🛠️ Utility Scripts
 
-[`shell/`](shell/) 提供 OpenClash 安装、更新和 CPU 架构检测脚本，支持 OpenWrt、ImmortalWrt，并适配 OPKG 和 APK 包管理器。
+[`shell/`](shell/) provides scripts for installing and updating OpenClash and detecting CPU architecture. The scripts support OpenWrt and ImmortalWrt and work with both OPKG and APK package managers.
 
-脚本可能涉及软件源临时切换、插件覆盖重装、UCI 设置和 OpenClash 内置更新流程。运行前请进入目录阅读完整说明。
+The scripts may temporarily switch package feeds, reinstall the plugin over an existing installation, change UCI settings, or use the built-in OpenClash update process. Read the full instructions in the directory before running them.
 
-[Sub-Store 扩展脚本](script/sub-store/) 用于扩展 Sub-Store 的订阅处理能力。相关脚本独立于 OpenClash 安装流程，也不会被本项目配置自动加载。
+The [Sub-Store extension scripts](script/sub-store/) extend Sub-Store's subscription processing capabilities. These scripts are independent of OpenClash installation, and the project's configurations do not load them automatically.
 
-**入口：**
+Browse the scripts.
 
-- OpenClash 安装与维护脚本：[`shell/`](shell/)
-- Sub-Store 扩展脚本：[查看目录](script/sub-store/)
-
----
-
-### ⚙️ 覆写模块资源
-
-[`overwrite/`](overwrite/) 存放 OpenClash 远程覆写模块及相关资源。
-
-根目录中主要存放单功能的远程覆写模块；[`overwrite/yaml/`](overwrite/yaml/) 则存放调用本项目 YAML 配置的远程覆写模块。
-
-不同模块的修改范围、参数、组合关系和冲突风险，请进入对应目录查看。未来会不断追加其他功能的覆写模块。
-
-**入口：**
-
-- 单功能覆写模块：[`overwrite/`](overwrite/)
-- YAML 配置远程覆写模块：[`overwrite/yaml/`](overwrite/yaml/)
+- OpenClash installation and maintenance scripts in [`shell/`](shell/)
+- [Sub-Store extension script directory](script/sub-store/)
 
 ---
 
-## 🎯 项目范围
+### ⚙️ Overwrite Module Resources
 
-本仓库主要面向 OpenWrt 与 OpenClash 使用场景，不提供其他客户端或操作系统的通用配置支持。
+[`overwrite/`](overwrite/) contains OpenClash remote overwrite modules and related resources.
 
-本项目为维护者个人使用经验与技术资料的整理，不提供个性化配置、定制开发或一对一技术支持。
+The top level of that directory mainly contains single-purpose remote overwrite modules. [`overwrite/yaml/`](overwrite/yaml/) contains remote overwrite modules that use the project's YAML configurations.
+
+See the respective directories for what each module modifies, its parameters, how it combines with other modules, and potential conflicts. More overwrite modules will be added over time.
+
+Browse the overwrite modules.
+
+- Single-purpose overwrite modules in [`overwrite/`](overwrite/)
+- Remote YAML overwrite modules in [`overwrite/yaml/`](overwrite/yaml/)
 
 ---
 
-## 💬 讨论与反馈
+## 🎯 Project Scope
 
-使用咨询和配置讨论可前往 [GitHub Discussions](https://github.com/Aethersailor/Custom_OpenClash_Rules/discussions)。
+This repository primarily covers OpenWrt and OpenClash. General configuration support for other clients or operating systems falls outside its scope.
+
+The project compiles the maintainer's personal experience and technical material. It provides no personalized configuration, custom development, or one-on-one technical support.
+
+---
+
+## 💬 Discussion and Feedback
+
+Use [GitHub Discussions](https://github.com/Aethersailor/Custom_OpenClash_Rules/discussions) for usage questions and configuration discussions.
 
 > [!IMPORTANT]
-> 如排查后确认问题由 OpenClash 插件本身引起，与本项目配置或规则无关（如插件无法启动、界面异常、安装失败等），请前往 [OpenClash 官方 Issue 选择页](https://github.com/vernesong/OpenClash/issues/new/choose) 反馈。
+> If troubleshooting confirms that the OpenClash plugin itself caused the issue and this project's configurations or rules are unrelated, use the [official OpenClash issue chooser](https://github.com/vernesong/OpenClash/issues/new/choose). Examples include plugin startup failures, interface issues, and installation failures.
 
-普通规则、模板、脚本和文档问题可以使用[本项目 Issue 选择页](https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/new/choose)。涉及凭据泄漏、下载校验绕过或脚本执行链的安全问题，请先阅读[安全报告说明](SECURITY.md)，不要在公开 Issue 中披露细节。
+For general issues with rules, templates, scripts, or documentation, use [this project's issue chooser](https://github.com/Aethersailor/Custom_OpenClash_Rules/issues/new/choose). For security issues involving leaked credentials, bypassed download verification, or the script execution chain, first read the [security reporting instructions](SECURITY.md). Keep those details out of public issues.
 
 ---
 
-## ⚠️ 使用说明与责任边界
+## ⚠️ Usage and Limits of Responsibility
 
-本项目提供围绕 OpenWrt 和 OpenClash 的技术文档与配置资源，不是 OpenClash 官方文档，也不提供设备、线路、订阅或托管服务。项目内容按现状提供，实际兼容性、准确性和结果需要结合当前版本与使用环境自行验证。
+This project provides unofficial technical documentation and configuration resources for OpenWrt and OpenClash. It provides no equipment, network connections, subscriptions, or hosted services. The material is provided as is. Verify compatibility, accuracy, and results for the versions and environment you actually use.
 
-适用法律、第三方权利和各来源的许可证独立适用。使用者应自行确认其使用方式符合适用要求；本节不构成法律建议，也不在下方 CC BY-SA 4.0 许可之外增加平台、用途、期限或非商业限制。
+Applicable laws, third-party rights, and each source's license apply independently. Users are responsible for confirming that their use meets applicable requirements. This section provides no legal advice and adds no platform, purpose, time, or noncommercial restrictions beyond the CC BY-SA 4.0 license described below.
 
-转载、修改或分发时，不得暗示本项目或维护者对相关内容、产品或服务提供支持或背书。
+When reposting, modifying, or distributing the material, do not imply that the project or its maintainers support or endorse any related content, product, or service.
 
 <!-- -->
 
 > [!NOTE]
 >
-> - 本项目编写于 2024 年 4 月，由维护者以非营利方式维护；这不限制 CC BY-SA 4.0 对商业用途的许可。
-> - 本项目内容仅为维护者个人经验的总结，用于技术交流，不具权威性，亦不构成 OpenClash 的唯一或推荐使用方式。
-> - 本项目未运营任何 YouTube 频道，亦未在 YouTube 或其他视频平台发布任何形式的教学或指导视频。
-> - 本项目文档由维护者根据实际使用经验独立整理；引用或使用的第三方项目、资料与资源在对应位置或下方「感谢」中标注。如因使用其他来源的教程、模板或配置文件产生问题，请勿在本项目的 Issues 或 Discussions 中反馈。
-> - 内容采用相对易于理解的表述，不代表对任何用户群体作出教学、指导或支持承诺。
+> - The project was created in April 2024. The maintainer runs it on a nonprofit basis. This does not limit commercial use permitted by CC BY-SA 4.0.
+> - The material summarizes the maintainer's personal experience for technical discussion. It is non-authoritative and does not establish a sole or recommended way to use OpenClash.
+> - The project operates no YouTube channel and has published no tutorials or guidance videos on YouTube or any other video platform.
+> - The maintainer independently prepared the documentation based on practical experience. Third-party projects, materials, and resources are credited where used or in the Acknowledgments below. If you encounter problems with tutorials, templates, or configuration files from other sources, do not report them in this project's Issues or Discussions.
+> - The material uses straightforward language. This does not imply a commitment to teach, guide, or support any group of users.
 
 ---
 
-## 🤝 贡献者
+## 🤝 Contributors
 
 <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Aethersailor/Custom_OpenClash_Rules&anon=1&max=100" alt="贡献者列表" />
+  <img src="https://contrib.rocks/image?repo=Aethersailor/Custom_OpenClash_Rules&anon=1&max=100" alt="Contributors" />
 </a>
 
 ---
 
-## 🙏 感谢
+## 🙏 Acknowledgments
 
-感谢以下项目和资源对本项目提供基础能力、数据、工具或参考。为准确说明关系，以下内容按实际用途分类，各分类内排名不分先后；列入本节不表示相关项目对本项目提供官方支持或背书。
+The projects and resources below provide foundations, data, tools, or references. They are grouped by how this project uses them, with no ranking within each group. Inclusion does not imply official support or endorsement.
 
-### 核心上游与现行数据源
+### Core Upstream Projects and Current Data Sources
 
-| 项目或资源 | 本项目中的用途 |
+| Project or resource | How this project uses it |
 | --- | --- |
-| [vernesong/OpenClash](https://github.com/vernesong/OpenClash) | 本项目配置、覆写脚本和使用文档所面向的 OpenWrt 插件 |
-| [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo) | 规则格式、配置能力以及 MRS 生成与校验工具 |
-| [vernesong/mihomo](https://github.com/vernesong/mihomo) | 安装脚本与第三方覆写方案使用的 LightGBM 模型资源 |
-| [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) | 本项目订阅转换配置的基础模板 |
-| [Giveupmoon/OpenClash_Overwrite](https://github.com/Giveupmoon/OpenClash_Overwrite) | 以 Git 子模块保留的第三方完整覆写方案 |
-| [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) | 中国大陆 IPTV 域名规则的数据来源 |
-| [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) | 游戏下载域名与加密 DNS GeoSite 规则的数据来源 |
-| [HaGeZi DNS Blocklists](https://gitlab.com/hagezi/mirror/-/tree/main/dns-blocklists) | 加密 DNS 域名与 IP 规则的数据来源 |
-| [DNSCrypt/dnscrypt-resolvers](https://github.com/DNSCrypt/dnscrypt-resolvers) | 加密 DNS 公共解析器、Relay 与 ODoH 端点的数据来源 |
-| [dogfight360/UsbEAm](https://www.dogfight360.com/blog/18627/) | 游戏网络地址与下载节点规则的参考工具 |
+| [vernesong/OpenClash](https://github.com/vernesong/OpenClash) | The OpenWrt plugin that this project's configurations, overwrite scripts, and documentation are written for |
+| [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo) | Rule formats, configuration capabilities, and tools for generating and validating MRS files |
+| [vernesong/mihomo](https://github.com/vernesong/mihomo) | LightGBM model resources used by installation scripts and third-party overwrite configurations |
+| [ACL4SSR/ACL4SSR](https://github.com/ACL4SSR/ACL4SSR) | The base template for this project's subscription conversion configurations |
+| [Giveupmoon/OpenClash_Overwrite](https://github.com/Giveupmoon/OpenClash_Overwrite) | A third-party complete overwrite configuration retained as a Git submodule |
+| [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) | Data source for mainland China IPTV domain rules |
+| [v2fly/domain-list-community](https://github.com/v2fly/domain-list-community) | Data source for game download domains and encrypted DNS GeoSite rules |
+| [HaGeZi DNS Blocklists](https://gitlab.com/hagezi/mirror/-/tree/main/dns-blocklists) | Data source for encrypted DNS domain and IP rules |
+| [DNSCrypt/dnscrypt-resolvers](https://github.com/DNSCrypt/dnscrypt-resolvers) | Data source for public encrypted DNS resolvers, relays, and ODoH endpoints |
+| [dogfight360/UsbEAm](https://www.dogfight360.com/blog/18627/) | A reference tool for game network addresses and download endpoint rules |
 
-### 本项目关联项目
+### Related Projects
 
-| 项目 | 与本项目的关系 |
+| Project | Relationship to this project |
 | --- | --- |
-| [Aethersailor/SubConverter-Extended](https://github.com/Aethersailor/SubConverter-Extended) | 可选的增强型订阅转换后端，用于读取本项目 `.ini` 模板并生成 YAML；远程 YAML 覆写模块和手动 YAML 路径不依赖它 |
-| [Aethersailor/subconverter](https://github.com/Aethersailor/subconverter) | 传统订阅转换后端，与 SubConverter-Extended 的扩展能力和维护范围不同 |
-| [Aethersailor/Rule-Bot](https://github.com/Aethersailor/Rule-Bot) | 域名检查与提交服务；项目公共实例将符合策略的域名提交到本仓库，自建实例可以使用其他目标仓库 |
-| [Aethersailor/Rule-Bot-Client](https://github.com/Aethersailor/Rule-Bot-Client) | 从 Mihomo 的 `MATCH` 连接中收集域名，默认仅保存到本地；主动启用发送后才会把候选域名交给 Rule-Bot |
-| [Aethersailor/geoip](https://github.com/Aethersailor/geoip) | GeoIP 数据库与中国大陆 IPv4、IPv6 网段来源 |
+| [Aethersailor/SubConverter-Extended](https://github.com/Aethersailor/SubConverter-Extended) | An optional enhanced subscription conversion backend that reads this project's `.ini` templates and generates YAML. Remote YAML overwrites and manual YAML imports work independently of it |
+| [Aethersailor/subconverter](https://github.com/Aethersailor/subconverter) | The legacy subscription conversion backend. Its features and maintenance scope differ from those of SubConverter-Extended |
+| [Aethersailor/Rule-Bot](https://github.com/Aethersailor/Rule-Bot) | A domain checking and submission service. The public instance submits qualifying domains to this repository. Self-hosted instances can use other target repositories |
+| [Aethersailor/Rule-Bot-Client](https://github.com/Aethersailor/Rule-Bot-Client) | Collects domains from Mihomo connections handled by `MATCH` and stores them locally by default. The client sends candidates to Rule-Bot only after the user explicitly enables sending |
+| [Aethersailor/geoip](https://github.com/Aethersailor/geoip) | Source of GeoIP databases and mainland China IPv4 and IPv6 ranges |
 
 <details>
-<summary><strong>其他规则、工具与历史参考来源</strong></summary>
+<summary><strong>Other Rules, Tools, and Historical References</strong></summary>
 
-| 项目或资源 | 本项目中的用途 |
+| Project or resource | How this project uses it |
 | --- | --- |
-| [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list) | 补充直连域名的上游提交目标 |
-| [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) | 完整配置模板中的 GeoIP、GeoSite 数据来源 |
-| [mottzz87/crules](https://github.com/mottzz87/crules) | Talkatone 规则的原始来源；相关规则已停止更新 |
-| [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool) | 游戏服务器 IP 规则的抓取与整理工具 |
-| [alecthw/mmdb_china_ip_list](https://github.com/alecthw/mmdb_china_ip_list) | 完整配置模板及历史覆写脚本中的 MMDB 数据来源 |
-| [xishang0128/geoip](https://github.com/xishang0128/geoip) | 完整配置模板及历史覆写脚本中的 GeoASN 数据来源 |
-| [sub-store-org/Sub-Store](https://github.com/sub-store-org/Sub-Store) | 订阅处理脚本的运行平台 |
-| [网易 UU 加速器](https://uu.163.com/) | 游戏网络规则的参考来源 |
-| [217heidai/adblockfilters](https://github.com/217heidai/adblockfilters) | 已归档广告过滤脚本的数据来源 |
-| [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD) | 已归档广告过滤脚本的数据来源 |
-| [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule) | 已归档广告过滤脚本的数据来源 |
-| [Aethersailor/adblockfilters-modified](https://github.com/Aethersailor/adblockfilters-modified) | 已归档广告过滤脚本的数据来源 |
-| [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520) | 已归档 GitHub 访问加速脚本的数据来源 |
-| [TraderWukong/demo](https://github.com/TraderWukong/demo) | 项目早期保留的参考来源 |
-| [ddgksf2013/ddgksf2013](https://github.com/ddgksf2013/ddgksf2013) | 项目早期保留的参考来源 |
-| [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/) | IPv6 文档的历史参考来源 |
+| [felixonmars/dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list) | The upstream submission target for supplemental direct-routing domains |
+| [Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) | Source of GeoIP and GeoSite data for complete configuration templates |
+| [mottzz87/crules](https://github.com/mottzz87/crules) | The original source of the Talkatone rules, which are no longer updated |
+| [oooldtoy/SSTAP_ip_crawl_tool](https://github.com/oooldtoy/SSTAP_ip_crawl_tool) | A tool for collecting and organizing game server IP rules |
+| [alecthw/mmdb_china_ip_list](https://github.com/alecthw/mmdb_china_ip_list) | MMDB data source for complete configuration templates and historical overwrite scripts |
+| [xishang0128/geoip](https://github.com/xishang0128/geoip) | GeoASN data source for complete configuration templates and historical overwrite scripts |
+| [sub-store-org/Sub-Store](https://github.com/sub-store-org/Sub-Store) | Runtime platform for subscription processing scripts |
+| [NetEase UU Game Booster](https://uu.163.com/) | A reference source for game network rules |
+| [217heidai/adblockfilters](https://github.com/217heidai/adblockfilters) | Data source for archived ad-blocking scripts |
+| [privacy-protection-tools/anti-AD](https://github.com/privacy-protection-tools/anti-AD) | Data source for archived ad-blocking scripts |
+| [TG-Twilight/AWAvenue-Ads-Rule](https://github.com/TG-Twilight/AWAvenue-Ads-Rule) | Data source for archived ad-blocking scripts |
+| [Aethersailor/adblockfilters-modified](https://github.com/Aethersailor/adblockfilters-modified) | Data source for archived ad-blocking scripts |
+| [521xueweihan/GitHub520](https://github.com/521xueweihan/GitHub520) | Data source for archived scripts that accelerated access to GitHub |
+| [TraderWukong/demo](https://github.com/TraderWukong/demo) | A reference retained from the project's early days |
+| [ddgksf2013/ddgksf2013](https://github.com/ddgksf2013/ddgksf2013) | A reference retained from the project's early days |
+| [immortalwrt/user-FAQ](https://github.com/immortalwrt/user-FAQ/) | A historical reference for the IPv6 documentation |
 
 </details>
 
-“历史”或“已归档”表示相关内容不再主动维护或推荐使用，但为保留来源记录而继续列出。
+“Historical” or “archived” means the related material is no longer actively maintained or recommended. It remains listed to document its source.
 
 ---
 
-## 📝 许可
+## 📝 License
 
-[![CC BY-SA 4.0 许可证](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans)
+[![CC BY-SA 4.0 License](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 ### CC BY-SA 4.0
 
-本项目有权许可的原创内容采用 [Creative Commons 署名—相同方式共享 4.0 国际许可协议](https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans)。在遵守许可条件的前提下，可以复制、分发、修改和用于任何用途，包括商业用途；需要适当署名、标明修改，并以相同方式共享演绎作品。不得施加会限制他人行使许可权利的附加条款或技术措施。本项目不在该许可之外增加平台、用途、期限或非商业限制。
+Original material that the project has the right to license is available under the [Creative Commons Attribution-ShareAlike 4.0 International license](https://creativecommons.org/licenses/by-sa/4.0/). Subject to the license terms, you may copy, distribute, modify, and use it for any purpose, including commercial use. You must give appropriate credit, indicate any changes, and share adapted material under the same terms. Do not impose additional terms or technological measures that restrict others from exercising their rights under the license. The project adds no platform, purpose, time, or noncommercial restrictions beyond the license terms.
 
-上述说明是便于阅读的摘要，不替代 [CC BY-SA 4.0 正式法律文本](https://creativecommons.org/licenses/by-sa/4.0/legalcode.zh-hans)。
+This summary is for convenience. Refer to the [official CC BY-SA 4.0 legal code](https://creativecommons.org/licenses/by-sa/4.0/legalcode.en) for the license terms.
 
-第三方项目、规则、数据、图片、工具、商标与子模块不因收录到本仓库而自动改用 CC BY-SA 4.0，仍适用对应来源的许可证、使用条款和其他权利限制。引用、修改或分发前，请核对文件标注、来源链接和上游许可。
+Third-party projects, rules, data, images, tools, trademarks, and submodules retain their own licenses, terms of use, and other rights restrictions when included in this repository. Check the file notices, source links, and upstream licenses before referencing, modifying, or distributing them.
 
 ---
 
@@ -357,6 +359,6 @@ OpenClash `dev` 版当前已内置本项目全部 8 个订阅转换模板，包�
   </picture>
 </a>
 
-## 📊 数据统计
+## 📊 Repository Activity
 
-![仓库活动统计](https://repobeats.axiom.co/api/embed/0d7d55da94670a4766aa0fb8ccd03c7abc9e8464.svg "Repobeats analytics image")
+![Repository activity](https://repobeats.axiom.co/api/embed/0d7d55da94670a4766aa0fb8ccd03c7abc9e8464.svg "Repobeats analytics image")
