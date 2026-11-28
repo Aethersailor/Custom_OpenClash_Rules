@@ -1,7 +1,7 @@
 # Generated from rule/Custom_Direct.list
 # REPO: https://github.com/Aethersailor/Custom_OpenClash_Rules
 # SOURCE: https://github.com/Aethersailor/Custom_OpenClash_Rules/blob/main/rule/Custom_Direct.list
-# TOTAL: 1333
+# TOTAL: 1334
 
 payload:
   - '+.00333118.com'
@@ -179,6 +179,7 @@ payload:
   - '+.axuex.top'
   - '+.azpromotion.com'
   - '+.azurpromilia.com'
+  - '+.b675211.com'
   - '+.b7f3192.com'
   - '+.ba-hospital.com'
   - '+.babawar.com'
